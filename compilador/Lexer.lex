@@ -1,5 +1,8 @@
 /*AQUI PUEDEN IR LOS IMPORTS */
+
+import java_cup.runtime.Symbol;
 %%
+
 %{
 /*CODIGO USUARIO*/
 /*Pequeña funcion para imprimir en pantalla*/
