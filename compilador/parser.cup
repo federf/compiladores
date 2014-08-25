@@ -3,136 +3,146 @@ explicara mas a detalle en otra seccion del tutorial*/
 action code{::}
 parser code{::}
 
+
 /*Declaracion de variables no terminales*/
-non terminal PROGRAM,FIELD_DECL,METHOD_DECL,BLOCK,TYPE,STATEMENT,ASSIGN_OP,METHOD_CALL,LOCATION,EXPR,BIN_OP,
-ARITH_OP,REL_OP,EQ_OP,COND_OP,ID_DECL, TYPE_OR_VOID, TYPE_ID, LITERAL, ELSE_BLOCK, EXTERNINVK_ARG, BOOL_LITERAL, 
-FIELD_METHOD_DECLS, FIELD_STATEMENT_DECLS, EXPR2, ID_DECL2, LOCATION2, TYPE2;
+non terminal PROGRAM,FIELD_DECL,METHOD_DECL,BLOCK,TYPE,STATEMENT,ASSIGN_OP,METHOD_CALL,LOCATION,EXPR,EXTERNINVK_ARG,BIN_OP,
+ARITH_OP,REL_OP,EQ_OP,COND_OP,LITERAL, BOOL_LITERAL, TYPE_OR_VOID, TYPE_ID, ELSE_BLOCK;
+
+non terminal TYPE_ID2, STATEMENT2, LOCATION2, EXTERNINVK_2, EXPR2, ID_INT_LITERAL, ID_2, ID_3, EXPR3;
 
 /*DECLARACION DE VARIABLES TERMINALES */
 
 /*Terminales palabras reservadas*/
-terminal break, class, continue, else, false, for, id, if, return, true, void, while;
+terminal BREAK, CLASS, CONTINUE, ELSE, FALSE, FOR, ID, IF, RETURN, TRUE, VOID, WHILE;
 
 /*Terminales operadores aritméticos y lógicos*/
-terminal suma, resta, multiplicacion, division, asignacion, incremento, decremento, porcentaje;
+terminal SUMA, RESTA, MULTIPLICACION, DIVISION, ASIGNACION, INCREMENTO, DECREMENTO, PORCENTAJE;
 
 /*Terminales operadores lógicos*/
-terminal conjuncion, disyuncion, igualdad_logica, diferencia_logica, mayor, menor, mayor_igual, menor_igual;
+terminal CONJUNCION, DISYUNCION, IGUALDAD_LOGICA, DIFERENCIA_LOGICA, MAYOR, MENOR, MAYOR_IGUAL, MENOR_IGUAL;
 
 /*Terminales signos de puntuación*/
-terminal coma, punto_y_coma, llave_izq, llave_der, corchete_izq, corchete_der, parentesis_izq, parentesis_der, admiracion; 
+terminal  COMA, PUNTO_Y_COMA, LLAVE_IZQ, LLAVE_DER, CORCHETE_IZQ, CORCHETE_DER, PARENTESIS_IZQ, PARENTESIS_DER, ADMIRACION; 
 
 /*Terminales tipos*/
-terminal int, float, boolean;
+terminal INT, FLOAT, BOOLEAN;
 
 /*Terminales varios*/
-terminal externinvk;
+terminal EXTERNINVK;
 
 /*Terminales objetos*/
-terminal int_literal, float_literal, string_literal;
+terminal INT_LITERAL, FLOAT_LITERAL, STRING_LITERAL;
 
-PROGRAM::= class id llave_izq FIELD_METHOD_DECLS llave_der
+precedence left COMA;
+precedence left SUMA, RESTA;
+precedence left MULTIPLICACION, DIVISION;
+precedence left ID;
+precedence left PARENTESIS_IZQ;     
+
+start with PROGRAM;
+
+PROGRAM::=CLASS ID LLAVE_IZQ FIELD_DECL METHOD_DECL LLAVE_DER
        ;
 
-FIELD_METHOD_DECLS::= FIELD_DECL
-                  | METHOD_DECL
-                  | FIELD_DECL METHOD_DECL
-                  |
-                  ;
-FIELD_DECL::= TYPE ID_DECL punto_y_coma FIELD_DECL
-          | /*Lambda*/
-          ;  
+FIELD_DECL::= TYPE ID_INT_LITERAL PUNTO_Y_COMA
+          ;
 
-ID_DECL::= id ID_DECL2
-       ;
+ID_INT_LITERAL::= ID ID_2
+              ;
 
-ID_DECL2::= corchete_izq int_literal corchete_der
-        |coma ID_DECL
-        |corchete_izq int_literal corchete_der ID_DECL
-        |
-        ;
+ID_2::= COMA ID_INT_LITERAL
+    | CORCHETE_IZQ INT_LITERAL CORCHETE_DER ID_3
+    |
+    ;
 
-METHOD_DECL::= TYPE_OR_VOID id parentesis_izq TYPE_ID parentesis_der BLOCK METHOD_DECL
+ID_3::= COMA ID_INT_LITERAL
+    |
+    ;
+
+METHOD_DECL::= TYPE_OR_VOID ID PARENTESIS_IZQ TYPE_ID PARENTESIS_DER BLOCK METHOD_DECL
            |
            ;
 
 TYPE_OR_VOID::= TYPE
-            | void
+            | VOID
             ;
 
-TYPE_ID::= TYPE id TYPE2
+TYPE_ID::= TYPE ID TYPE_ID2
+       |
        ;
 
-TYPE2::= coma TYPE_ID
-     |
+TYPE_ID2::= COMA TYPE_ID
+        |
+        ;   
+
+BLOCK::= LLAVE_IZQ FIELD_DECL STATEMENT LLAVE_DER
      ;
 
-TYPE::= int 
-    | float 
-    | boolean
+TYPE::= INT 
+    | FLOAT 
+    | BOOLEAN
     ;
 
-/*NO HAY GUARNINGS*/
-
-BLOCK::= llave_izq FIELD_STATEMENT_DECLS llave_der
-     ;
-
-FIELD_STATEMENT_DECLS::= FIELD_DECL
-                     |STATEMENT
-                     |FIELD_DECL STATEMENT
-                     |
-                     ;
-
-STATEMENT::= LOCATION ASSIGN_OP EXPR  punto_y_coma STATEMENT
-         | METHOD_CALL punto_y_coma STATEMENT 
-         | if parentesis_izq EXPR parentesis_der BLOCK ELSE_BLOCK STATEMENT
-         | for id asignacion EXPR coma EXPR BLOCK STATEMENT
-         | while EXPR BLOCK STATEMENT
-         | return punto_y_coma STATEMENT
-         | return EXPR punto_y_coma
-         | break punto_y_coma STATEMENT
-         | continue punto_y_coma STATEMENT
-         | punto_y_coma STATEMENT
-         | BLOCK punto_y_coma STATEMENT
+STATEMENT::= LOCATION ASSIGN_OP EXPR  PUNTO_Y_COMA STATEMENT
+         | METHOD_CALL PUNTO_Y_COMA STATEMENT 
+         | IF PARENTESIS_IZQ EXPR PARENTESIS_DER BLOCK ELSE_BLOCK STATEMENT
+         | FOR ID ASIGNACION EXPR COMA EXPR BLOCK STATEMENT
+         | WHILE EXPR BLOCK STATEMENT
+         | RETURN STATEMENT2
+         | BREAK PUNTO_Y_COMA STATEMENT
+         | CONTINUE PUNTO_Y_COMA STATEMENT
+         | PUNTO_Y_COMA STATEMENT
+         | BLOCK PUNTO_Y_COMA STATEMENT
          |
          ;
 
-ELSE_BLOCK::= else BLOCK
+STATEMENT2::= PUNTO_Y_COMA STATEMENT
+          |EXPR PUNTO_Y_COMA
+          ;
+
+ELSE_BLOCK::= ELSE BLOCK
           |
           ;
 
-ASSIGN_OP::= asignacion 
-         | incremento 
-         | decremento
+ASSIGN_OP::= ASIGNACION 
+         | INCREMENTO 
+         | DECREMENTO
          ;
 
-METHOD_CALL::= id parentesis_izq EXPR parentesis_der
-           |  externinvk parentesis_izq string_literal coma TYPE_OR_VOID EXTERNINVK_ARG parentesis_der
+METHOD_CALL::= ID PARENTESIS_IZQ EXPR PARENTESIS_DER
+           |  EXTERNINVK PARENTESIS_IZQ STRING_LITERAL COMA TYPE_OR_VOID EXTERNINVK_ARG PARENTESIS_DER
            ;
 
-LOCATION::= id LOCATION2
+LOCATION::= ID LOCATION2
         ;
 
-LOCATION2::= corchete_izq EXPR corchete_der
+LOCATION2::= CORCHETE_IZQ EXPR CORCHETE_DER
          |
          ;
 
-EXPR::= LOCATION
-    |  METHOD_CALL
-    |  LITERAL
-    |  BIN_OP EXPR EXPR2
-    |  resta EXPR
-    |  admiracion EXPR
-    |  parentesis_izq EXPR parentesis_der
+EXPR::= LOCATION EXPR3
+    |  METHOD_CALL EXPR3
+    |  LITERAL EXPR3
+    |  BIN_OP EXPR EXPR2 EXPR3
+    |  RESTA EXPR EXPR3
+    |  ADMIRACION EXPR EXPR3
+    |  PARENTESIS_IZQ EXPR PARENTESIS_DER EXPR3
     ;
 
 EXPR2::= EXPR
      ;
-EXTERNINVK_ARG::= EXPR
-                | string_literal
-                | EXPR coma EXTERNINVK_ARG
-                | string_literal coma EXTERNINVK_ARG
+
+EXPR3::= COMA EXPR2
+     |
+     ;
+
+EXTERNINVK_ARG::= EXPR EXTERNINVK_2
+                | STRING_LITERAL EXTERNINVK_2
                 ;
+
+EXTERNINVK_2::= COMA EXTERNINVK_ARG
+            |
+            ;
 
 BIN_OP::= ARITH_OP 
       | REL_OP 
@@ -140,34 +150,33 @@ BIN_OP::= ARITH_OP
       | COND_OP
       ;
 
-ARITH_OP::= suma 
-         | resta 
-         | multiplicacion 
-         | division 
-         | porcentaje
+ARITH_OP ::= SUMA 
+         | RESTA 
+         | MULTIPLICACION 
+         | DIVISION 
+         | PORCENTAJE
          ;
 
-REL_OP::= menor 
-       | mayor 
-       | menor_igual 
-       | mayor_igual
+REL_OP ::= MENOR 
+       | MAYOR 
+       | MENOR_IGUAL 
+       | MAYOR_IGUAL
        ;
 
-EQ_OP::= igualdad_logica 
-      | diferencia_logica
+EQ_OP ::= IGUALDAD_LOGICA 
+      | DIFERENCIA_LOGICA
       ;
 
-COND_OP::= conjuncion 
-        | disyuncion
+COND_OP ::= CONJUNCION 
+        | DISYUNCION
         ;
 
-LITERAL::= int_literal 
-       | float_literal
+LITERAL::= INT_LITERAL 
+       | FLOAT_LITERAL
        | BOOL_LITERAL
        ;
 
-BOOL_LITERAL::= true 
-            | false
+BOOL_LITERAL::= TRUE 
+            | FALSE
             ;
-
 
