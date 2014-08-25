@@ -18,9 +18,7 @@ import java_cup.runtime.Symbol;
 %eofval}
 int=[-]?[0-9]+
 id=[a-zA-Z][a-zA-Z0-9]*
-string=["][! " # $ % & ' ( ) * + , - . / 0-9 : ; < = > ?
-@ A-Z [ \ ] ^ _
-` a-z { | } ~ ]*["]
+string=["][!#$%&'()*+,-./0-9:;<=>?@A-Z\_`a-z{|}~]*["]
 float=[-]?[0-9]+[.][0-9]+
 
 
