@@ -1,0 +1,150 @@
+/*Por el momento dejaremos el action code y parser code vacios esto se
+explicara mas a detalle en otra seccion del tutorial*/
+action code{::}
+parser code{::}
+
+/*Declaracion de variables no terminales*/
+non terminal PROGRAM,FIELD_DECL,METHOD_DECL,BLOCK,TYPE,STATEMENT,ASSIGN_OP,METHOD_CALL,LOCATION,EXPR,EXTERNINVK_AR,BIN_OP,
+ARITH_OP,REL_OP,EQ_OP,COND_OP,LITERAL,ALPHA_NUM,ALPHA,DIGIT, BOOL_LITERAL,STRING_LITERAL, ID_DECL, TYPE_OR_VOID, TYPE_ID, 
+ELSE_BLOCK;
+
+/*DECLARACION DE VARIABLES TERMINALES */
+
+/*Terminales palabras reservadas*/
+terminal break, class, continue, else, false, float, for, id, if, return, true, void, while;
+
+/*Terminales operadores aritméticos y lógicos*/
+terminal suma, resta, multiplicacion, division, asignacion, incremento, decremento, porcentaje;
+
+/*Terminales operadores lógicos*/
+conjuncion, disyuncion, igualdad_logica, diferencia_logica, mayor, menor, mayor_igual, menor_igual;
+
+/*Terminales signos de puntuación*/
+terminal  punto, coma, punto_y_coma, llave_izq, llave_der, corchete_izq, corchete_der, parentesis_izq, parentesis_der, admiracion; 
+
+/*Terminales tipos*/
+terminal int, real, boolean;
+
+/*Terminales varios*/
+terminal externinvk;
+
+/*Terminales objetos*/
+terminal int_literal, float_literal, string_literal;
+
+Start with PROGRAM; // start with sirve para indicarle al parser con que produccion empezar
+
+PROGRAM::=class id llave_izq FIELD_DECL METHOD_DECL llave_der
+        ;
+
+FIELD_DECL::= TYPE  id_DECL punto_y_coma FIELD_DECL
+          | /*Lambda*/
+          ;  
+
+ID_DECL:= id 
+       | id corchete_izq int_literal corchete_der
+       | id coma id_DECL
+       | id corchete_izqc int_literal corchete_der coma id_DECL
+       ;
+
+METHOD_DECL:= TYPE_OR_VOID id parentesis_izq TYPE_ID parentesis_der BLOCK METHOD_DECL
+           |
+           ;
+
+TYPE_OR_VOID:= type
+            | void
+            ;
+
+TYPE_ID:= TYPE id
+       | TYPE id coma TYPE_ID 
+       |
+       ;
+
+BLOCK:= llave_izq FIELD_DECL STATEMENT llave_der
+     ;
+
+TYPE:= int | float | boolean
+    ;
+
+STATEMENT:= LOCATION ASSIGN_OP EXPR  punto_y_coma STATEMENT
+         | METHOD_CALL punto_y_coma STATEMENT 
+         | if parentesis_izq EXPR parentesis_der BLOCK ELSE_BLOCK STATEMENT
+         | for id asignacion EXPR coma EXPR BLOCK STATEMENT
+         | while EXPR BLOCK STATEMENT
+         | return punto_y_coma STATEMENT
+         | return EXPR punto_y_coma
+         | break punto_y_coma STATEMENT
+         | continue punto_y_coma STATEMENT
+         | punto_y_coma STATEMENT
+         | BLOCK punto_y_coma STATEMENT
+         |
+         ;
+
+ELSE_BLOCK:= else BLOCK
+          |
+          ;
+
+ASSIGN_OP:= asignacion 
+         | incremento 
+         | decremento
+         ;
+
+METHOD_CALL:= id parentesis_izq EXPR parentesis_der
+           |  externinvk parentesis_izq STRING_LITERAL, TYPE_OR_VOID EXTERNINVK_ARG parentesis_der
+           ;
+
+LOCATION:= id 
+        | id corchete_izq EXPR corchete_der
+        ;
+
+EXPR:= LOCATION
+    |  METHOD_CALL
+    |  LITERAL
+    |  EXPR BIN_OP EXPR
+    |  resta EXPR
+    |  admiracion EXPR
+    |  parentesis_izq EXPR parentesis_der
+    ;
+
+EXTERNALINVK_ARG:= EXPR
+                | STRING_LITERAL
+                | EXPR coma EXTERNALINVK_ARG
+                | STRING_LITERAL coma EXTERNALINVK_ARG
+                ;
+
+BIN_OP:= ARITH_OP 
+      | REL_OP 
+      | EQ_OP 
+      | COND_OP
+      ;
+
+ARITH_OP := suma 
+         | resta 
+         | multiplicacion 
+         | division 
+         | porcentaje
+         ;
+
+REL_OP := menor 
+       | mayor 
+       | menor_igual 
+       | mayor_igual
+       ;
+
+EQ_OP := igualdad_logica 
+      | diferencia_logica
+      ;
+
+COND_OP := conjuncion 
+        | disyuncion
+        ;
+
+LITERAL:= int_literal 
+       | float_literal
+       | bool_literal
+       ;
+
+BOOL_LITERAL:= true 
+            | false
+            ;
+
+
