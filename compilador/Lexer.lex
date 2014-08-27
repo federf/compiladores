@@ -18,7 +18,7 @@ import java_cup.runtime.Symbol;
 %eofval}
 int=[0-9]+
 id=[a-zA-Z][a-zA-Z0-9]*
-string=["][!#$%&'()*+,-./0-9:;<=>?@A-Z\_`a-z{|}~]*["]
+string=[a-zA-Z0-9\_%()*$#!+-.,:;<=>@\\'´`|{}~]+
 float=[0-9]+[.][0-9]+
 
 
@@ -73,10 +73,10 @@ float=[0-9]+[.][0-9]+
 {id} {return new Symbol(sym.ID, yychar, yyline, yytext());}
 {int} {return new Symbol(sym.INT_LITERAL, yychar, yyline, yytext());}
 {float} {return new Symbol(sym.FLOAT_LITERAL, yychar, yyline, yytext());}
-{string} {return new Symbol(sym.STRING_LITERAL, yychar, yyline, yytext());}
+"\""+{string}+"\"" {return new Symbol(sym.STRING_LITERAL, yychar, yyline, yytext());}
 
 
-/*(" ") {return new Symbol(sym.ESPACIO, yychar, yyline, yytext());}*/
+(" ") {}
 
 [\t\r\n\f] {}
 

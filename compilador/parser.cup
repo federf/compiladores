@@ -1,14 +1,14 @@
 /*Por el momento dejaremos el action code y parser code vacios esto se
 explicara mas a detalle en otra seccion del tutorial*/
-action code{::}
-parser code{::}
 
 
 /*Declaracion de variables no terminales*/
-non terminal PROGRAM,FIELD_DECL,METHOD_DECL,BLOCK,TYPE,STATEMENT,ASSIGN_OP,METHOD_CALL,LOCATION,EXPR,EXTERNINVK_ARG,BIN_OP,
-ARITH_OP,REL_OP,EQ_OP,COND_OP,LITERAL, BOOL_LITERAL, TYPE_OR_VOID, TYPE_ID, ELSE_BLOCK;
+non terminal program,field_decl,method_decl,block,type,statement,assign_op,method_call,location,expr,externinvk_arg,
+literal, bool_LITERAL, type_or_void, else_block;
 
-non terminal TYPE_ID2, STATEMENT2, LOCATION2, EXTERNINVK_2, EXPR2, ID_INT_LITERAL, ID_2, ID_3, EXPR3;
+non terminal body, fieldDeclarations, fieldAndMethods, identifier, identifiers, methodDeclarations, parameters, 
+parameterDeclarations, parameterDeclaration, statements, expressions, externinvk_args, conjunction, comparison, factor, term, sum,
+relation;
 
 /*DECLARACION DE VARIABLES TERMINALES */
 
@@ -33,150 +33,181 @@ terminal EXTERNINVK;
 /*Terminales objetos*/
 terminal INT_LITERAL, FLOAT_LITERAL, STRING_LITERAL;
 
-precedence left COMA;
+precedence left LLAVE_IZQ, LLAVE_DER;
+precedence left CORCHETE_IZQ, CORCHETE_DER;
+precedence right INCREMENTO;
+precedence right DECREMENTO;
+precedence right ASIGNACION;
+precedence left DISYUNCION;
+precedence left CONJUNCION;
+precedence left DIFERENCIA_LOGICA, IGUALDAD_LOGICA;
+precedence left MENOR_IGUAL, MAYOR_IGUAL;
+precedence left MENOR, MAYOR;
 precedence left SUMA, RESTA;
-precedence left MULTIPLICACION, DIVISION;
-precedence left ID;
-precedence left PARENTESIS_IZQ;     
+precedence left MULTIPLICACION, DIVISION, PORCENTAJE;
+precedence left PARENTESIS_IZQ, PARENTESIS_DER;
+precedence left ADMIRACION;
 
-start with PROGRAM;
+start with program;
 
-PROGRAM::=CLASS ID LLAVE_IZQ FIELD_DECL METHOD_DECL LLAVE_DER
-       ;
+program::= CLASS ID body {:System.out.println("parseo exitoso");:}
+        ;
 
-FIELD_DECL::= TYPE ID_INT_LITERAL PUNTO_Y_COMA
+body::= LLAVE_IZQ LLAVE_DER
+    | LLAVE_IZQ fieldAndMethods LLAVE_DER
+    ;
+
+fieldAndMethods::= fieldDeclarations
+               | methodDeclarations
+               | fieldDeclarations methodDeclarations
+               ;
+
+fieldDeclarations::= field_decl
+                 | fieldDeclarations field_decl
+                 ;
+
+field_decl::= type identifiers PUNTO_Y_COMA
           ;
 
-ID_INT_LITERAL::= ID ID_2
-              ;
-
-ID_2::= COMA ID_INT_LITERAL
-    | CORCHETE_IZQ INT_LITERAL CORCHETE_DER ID_3
-    |
-    ;
-
-ID_3::= COMA ID_INT_LITERAL
-    |
-    ;
-
-METHOD_DECL::= TYPE_OR_VOID ID PARENTESIS_IZQ TYPE_ID PARENTESIS_DER BLOCK METHOD_DECL
-           |
-           ;
-
-TYPE_OR_VOID::= TYPE
-            | VOID
+identifiers::= identifier
+            | identifiers COMA identifier
             ;
 
-TYPE_ID::= TYPE ID TYPE_ID2
-       |
-       ;
+identifier::= ID
+  | ID CORCHETE_IZQ INT_LITERAL CORCHETE_DER
+  ;
 
-TYPE_ID2::= COMA TYPE_ID
-        |
-        ;   
+methodDeclarations::= method_decl
+                  | methodDeclarations method_decl
+                  ;
 
-BLOCK::= LLAVE_IZQ FIELD_DECL STATEMENT LLAVE_DER
+method_decl::= VOID ID parameters block
+           | type ID parameters block
+           ;
+
+block::= LLAVE_IZQ LLAVE_DER
+     | LLAVE_IZQ statements LLAVE_DER
+     | LLAVE_IZQ fieldDeclarations LLAVE_DER
+     | LLAVE_IZQ fieldDeclarations statements LLAVE_DER
      ;
 
-TYPE::= INT 
+
+parameters::= PARENTESIS_IZQ PARENTESIS_DER
+          | PARENTESIS_IZQ parameterDeclarations PARENTESIS_DER
+          ;
+            
+
+parameterDeclarations::= parameterDeclaration
+                     | parameterDeclarations COMA parameterDeclaration
+                     ;
+
+parameterDeclaration::= type ID
+                    ;
+
+statements::= statement
+          | statements statement
+          ;
+                    
+type::= INT 
     | FLOAT 
     | BOOLEAN
     ;
 
-STATEMENT::= LOCATION ASSIGN_OP EXPR  PUNTO_Y_COMA STATEMENT
-         | METHOD_CALL PUNTO_Y_COMA STATEMENT 
-         | IF PARENTESIS_IZQ EXPR PARENTESIS_DER BLOCK ELSE_BLOCK STATEMENT
-         | FOR ID ASIGNACION EXPR COMA EXPR BLOCK STATEMENT
-         | WHILE EXPR BLOCK STATEMENT
-         | RETURN STATEMENT2
-         | BREAK PUNTO_Y_COMA STATEMENT
-         | CONTINUE PUNTO_Y_COMA STATEMENT
-         | PUNTO_Y_COMA STATEMENT
-         | BLOCK PUNTO_Y_COMA STATEMENT
-         |
+statement::= location assign_op expr  PUNTO_Y_COMA
+         | method_call PUNTO_Y_COMA
+         | IF PARENTESIS_IZQ expr PARENTESIS_DER block else_block
+         | FOR ID ASIGNACION expr COMA expr block
+         | WHILE expr block
+         | RETURN PUNTO_Y_COMA
+         | RETURN expr PUNTO_Y_COMA
+         | BREAK PUNTO_Y_COMA
+         | CONTINUE PUNTO_Y_COMA
+         | PUNTO_Y_COMA
+         | block
          ;
 
-STATEMENT2::= PUNTO_Y_COMA STATEMENT
-          |EXPR PUNTO_Y_COMA
-          ;
-
-ELSE_BLOCK::= ELSE BLOCK
+else_block::= ELSE block
           |
           ;
 
-ASSIGN_OP::= ASIGNACION 
+assign_op::= ASIGNACION 
          | INCREMENTO 
          | DECREMENTO
          ;
 
-METHOD_CALL::= ID PARENTESIS_IZQ EXPR PARENTESIS_DER
-           |  EXTERNINVK PARENTESIS_IZQ STRING_LITERAL COMA TYPE_OR_VOID EXTERNINVK_ARG PARENTESIS_DER
+method_call::= ID PARENTESIS_IZQ PARENTESIS_DER
+           |  ID PARENTESIS_IZQ expressions PARENTESIS_DER
+           |  EXTERNINVK PARENTESIS_IZQ STRING_LITERAL COMA type_or_void COMA externinvk_args PARENTESIS_DER
+           |  EXTERNINVK PARENTESIS_IZQ STRING_LITERAL COMA type_or_void PARENTESIS_DER
            ;
 
-LOCATION::= ID LOCATION2
-        ;
-
-LOCATION2::= CORCHETE_IZQ EXPR CORCHETE_DER
-         |
-         ;
-
-EXPR::= LOCATION EXPR3
-    |  METHOD_CALL EXPR3
-    |  LITERAL EXPR3
-    |  BIN_OP EXPR EXPR2 EXPR3
-    |  RESTA EXPR EXPR3
-    |  ADMIRACION EXPR EXPR3
-    |  PARENTESIS_IZQ EXPR PARENTESIS_DER EXPR3
-    ;
-
-EXPR2::= EXPR
-     ;
-
-EXPR3::= COMA EXPR2
-     |
-     ;
-
-EXTERNINVK_ARG::= EXPR EXTERNINVK_2
-                | STRING_LITERAL EXTERNINVK_2
-                ;
-
-EXTERNINVK_2::= COMA EXTERNINVK_ARG
-            |
+type_or_void::= type
+            | VOID
             ;
 
-BIN_OP::= ARITH_OP 
-      | REL_OP 
-      | EQ_OP 
-      | COND_OP
-      ;
+expressions::= expr
+           | expressions COMA expr
+           ;
 
-ARITH_OP ::= SUMA 
-         | RESTA 
-         | MULTIPLICACION 
-         | DIVISION 
-         | PORCENTAJE
-         ;
+externinvk_args::= externinvk_arg
+               | externinvk_args COMA externinvk_arg 
+               ;
 
-REL_OP ::= MENOR 
-       | MAYOR 
-       | MENOR_IGUAL 
-       | MAYOR_IGUAL
-       ;
+externinvk_arg::= expr
+              | STRING_LITERAL
+              ;
 
-EQ_OP ::= IGUALDAD_LOGICA 
-      | DIFERENCIA_LOGICA
-      ;
-
-COND_OP ::= CONJUNCION 
-        | DISYUNCION
+location::= ID
+        | ID CORCHETE_IZQ expr CORCHETE_DER
         ;
 
-LITERAL::= INT_LITERAL 
+expr::= conjunction
+    | expr DISYUNCION conjunction
+    ;
+
+conjunction::= comparison
+           | conjunction CONJUNCION comparison
+           ;
+
+comparison::= relation
+          | relation IGUALDAD_LOGICA relation
+          | relation DIFERENCIA_LOGICA relation
+          ;
+
+relation::= sum
+        | sum MENOR sum
+        | sum MAYOR sum
+        | sum MAYOR_IGUAL sum
+        | sum MENOR_IGUAL sum
+        ;
+
+sum::= term
+   | sum SUMA term
+   | sum RESTA term
+   ;
+
+term::= factor
+    | term MULTIPLICACION factor
+    | term DIVISION factor
+    | term PORCENTAJE factor
+    ;
+
+factor::= literal
+      | ADMIRACION factor
+      | RESTA factor
+      ;
+
+
+literal::= INT_LITERAL
        | FLOAT_LITERAL
-       | BOOL_LITERAL
+       | bool_LITERAL
+       | ID
+       | ID CORCHETE_IZQ expr CORCHETE_DER
+       | method_call
+       | PARENTESIS_IZQ expr PARENTESIS_DER
        ;
 
-BOOL_LITERAL::= TRUE 
+bool_LITERAL::= TRUE 
             | FALSE
             ;
 
