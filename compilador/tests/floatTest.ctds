@@ -1,0 +1,30 @@
+class floatTest{
+
+float div(float a, float b){
+    return a / b;
+}
+
+float resta(float a, float b){
+    return a - b;
+}
+
+float sum(float a, float b){
+    return a + b;
+}
+
+float mult(float a, float b){
+    return a * b;
+}
+
+void main(){
+
+    float x, y, z;
+    
+    x= 1.234;
+    y= -27.5;
+    z= -70.3;
+    
+    externinvk("printf", float , "anidandoFloatTest", sum(mult(sum(y,x),div(x,z)),resta(-y,z)) );
+}
+
+}
