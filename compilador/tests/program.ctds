@@ -1,7 +1,7 @@
 class Program {
     int inc(int x) {
         return x + 1;
-    }
+    }//d
     void main() {
         int y;
         y=inc(externinvk("get_int", int));
@@ -11,4 +11,8 @@ class Program {
             externinvk("printf", void, "y==%d\n", y);
         }
     }
+/* sdnfsdjfklsdajfk
+
+*/
+
 }
