@@ -1,0 +1,410 @@
+*********************************************************************************** 
+**                                                                               ** 
+**                            Corriendo casos de prueba . . .                    ** 
+**                                                                               ** 
+**                                                                               ** 
+*********************************************************************************** 
+     
+     
+///////////////////////// TESTS CORRECTOS ////////////////////////////////////////
+---------------- Test tests/test_correctos/test_booleanos.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_break.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_comentarios2.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_comentarios.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_condiciones.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_continuebreak.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_expresiones01.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_expresiones02.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_float02.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_float03.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_float04.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_floats05.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_for01.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_for02.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_for03.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_for04.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_for05.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_if_anidados.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_if.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_logicos01.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_logicos02.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_mainSolo.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_mcd.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_metodos00.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_metodos01.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_metodos02.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_metodos03.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_metodos_externos01.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_metodos_externos02.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_mod.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_mult01.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_mult02.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_prog_simple.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_retorno.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_suma.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_sumx.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_while.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+///////////////////////// TESTS CON FALLAS ////////////////////////////////////////
+---------------- Test tests/test_errores/error_arreglos01.ctds ... -------------------
+error de sintaxis: Linea 3.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_arreglos02.ctds ... -------------------
+error de sintaxis: Linea 3.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_arreglos03.ctds ... -------------------
+error de sintaxis: Linea 7.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_arreglos04.ctds ... -------------------
+error de sintaxis: Linea 3.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_arreglos05.ctds ... -------------------
+error de sintaxis: Linea 3.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_bloques01.ctds ... -------------------
+error de sintaxis: Linea 3.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_bloques02.ctds ... -------------------
+error de sintaxis: Linea 9.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_char.ctds ... -------------------
+error de sintaxis: Linea 4.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_class01.ctds ... -------------------
+error de sintaxis: Linea 14.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_class02.ctds ... -------------------
+error de sintaxis: Linea 12.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/errores.ctds ... -------------------
+error de sintaxis: Linea 3.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_externinvk02.ctds ... -------------------
+error de sintaxis: Linea 23.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_externinvk.ctds ... -------------------
+error de sintaxis: Linea 22.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_float01.ctds ... -------------------
+error de sintaxis: Linea 9.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_float02.ctds ... -------------------
+error: 0 9 .
+error: 0 21 .
+error de sintaxis: Linea 22.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_float03.ctds ... -------------------
+error de sintaxis: Linea 29.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_float04.ctds ... -------------------
+error de sintaxis: Linea 41.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_for01.ctds ... -------------------
+error de sintaxis: Linea 13.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_for02.ctds ... -------------------
+error de sintaxis: Linea 13.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_for03.ctds ... -------------------
+error de sintaxis: Linea 13.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_for04.ctds ... -------------------
+error de sintaxis: Linea 13.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_for05.ctds ... -------------------
+error de sintaxis: Linea 18.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_if01.ctds ... -------------------
+error de sintaxis: Linea 9.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_if02.ctds ... -------------------
+error de sintaxis: Linea 8.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_lineaerror02.ctds ... -------------------
+error de sintaxis: Linea 20.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_lineaerror.ctds ... -------------------
+error de sintaxis: Linea 20.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_test_break.ctds ... -------------------
+error de sintaxis: Linea 20.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_test_logicos02.ctds ... -------------------
+error: 0 4 &
+error de sintaxis: Linea 5.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_test_logicos.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_test_main01.ctds ... -------------------
+error de sintaxis: Linea 11.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_test_main02.ctds ... -------------------
+error de sintaxis: Linea 14.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_test_metodos01.ctds ... -------------------
+error de sintaxis: Linea 4.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_test_metodos02.ctds ... -------------------
+error de sintaxis: Linea 4.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_test_metodos03.ctds ... -------------------
+error de sintaxis: Linea 19.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_test_metodos04.ctds ... -------------------
+error de sintaxis: Linea 21.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_test_metodos05.ctds ... -------------------
+error de sintaxis: Linea 15.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_test_metodos06.ctds ... -------------------
+error: 0 3 &
+error de sintaxis: Linea 4.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_test_metodos07.ctds ... -------------------
+error de sintaxis: Linea 9.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_test_multiplesMain.ctds ... -------------------
+error de sintaxis: Linea 9.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_vbles01.ctds ... -------------------
+error de sintaxis: Linea 6.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_vbles02.ctds ... -------------------
+error: 0 5 _
+error de sintaxis: Linea 7.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/error_vbles03.ctds ... -------------------
+error de sintaxis: Linea 3.
+---------------------------------------------------
+  
+  

@@ -1,3 +1,8 @@
+/*
+Proyecto: Proyecto Compiladores 2014
+Autores: Federico Franco, Bruno Isoardi
+Funcionalidad: Clase que implementa un analizador lexico
+*/
 /*AQUI PUEDEN IR LOS IMPORTS */
 
 import java_cup.runtime.Symbol;
@@ -14,8 +19,8 @@ import java_cup.runtime.Symbol;
 %cup
 %class Yylex
 int=[0-9]+
-id=[a-zA-Z][a-zA-Z0-9]*
-string=[a-zA-Z0-9\_%()*$#!+-.,:;<=>@\\'´`|{}~]+
+id=[a-zA-Z][a-zA-Z0-9_]*
+string=[^"\""]
 float=[0-9]+[.][0-9]+
 
 
@@ -67,18 +72,17 @@ float=[0-9]+[.][0-9]+
 
     "&&" {return new Symbol(sym.CONJUNCION, yychar, yyline, yytext());}
     "||" {return new Symbol(sym.DISYUNCION, yychar, yyline, yytext());}
+    
+    [\t\r\n\f] {}
 
     {id} {return new Symbol(sym.ID, yychar, yyline, yytext());}
     {int} {return new Symbol(sym.INT_LITERAL, yychar, yyline, yytext());}
     {float} {return new Symbol(sym.FLOAT_LITERAL, yychar, yyline, yytext());}
-    "\""+{string}+"\"" {return new Symbol(sym.STRING_LITERAL, yychar, yyline, yytext());}
+    "\""{string}*"\"" {return new Symbol(sym.STRING_LITERAL, yychar, yyline, yytext());}
 
+    " " {} /*espacio vacio*/
 
-    (" ") {}
-
-    [\t\r\n\f] {}
-
-    . {System.out.println("error");}
+    . {System.out.println("error: "+yychar +" "+ yyline +" "+ yytext());}
 }
 
 <COMENTARIOSIMPLE>{
