@@ -32,6 +32,7 @@ public class Node {
         padre = null;
     }
 
+    //constructor alternativo
     public Node(Node p) {
         variables = new LinkedList();
         metodos = new LinkedList();

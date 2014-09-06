@@ -74,9 +74,10 @@ public class Simbolo {
         if (!this.name.equals(other.name)) {
             return false;
         }
+        /* creo no hace falta
         if (!this.value.equals(other.value)) {
             return false;
-        }
+        }*/
         return true;
     }
 
