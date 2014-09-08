@@ -4,6 +4,10 @@ Autores: Federico Franco, Bruno Isoardi
 Funcionalidad: Clase que lleva acabo el analisis sintactico
 */
 import java_cup.runtime.Symbol;
+
+
+action code{: symbolTable TS;
+:}
 parser code{:
 
 public void syntax_error(Symbol s){
