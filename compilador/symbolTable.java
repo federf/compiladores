@@ -91,4 +91,14 @@ public class symbolTable {
         }
         return declarado;
     }
+    
+        //metodo que devuelve el ultimo metodo creado
+    public Metodo obtenerMetodo(){
+        return this.TablaDeSimbolos.corriente.metodos.getLast();
+    }
+    
+    //metodo que devuelve el ultimo simbolo creado
+    public Simbolo obtenerSimbolo(){
+        return this.TablaDeSimbolos.corriente.variables.getLast();
+    }
 }
