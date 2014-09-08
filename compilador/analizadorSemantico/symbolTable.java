@@ -52,13 +52,13 @@ public class symbolTable {
         Node nivelCorr = this.TablaDeSimbolos.getCorriente();
         //si estamos en el ambiente global (raiz del arbol) verificamos si fue declarado en dicho ambiente
         if (nivelCorr.esRaiz()) {
-            declarado = nivelCorr.existsSimbolo(s);
+            declarado = nivelCorr.getSimbolo(s)!=null;
         } else {
             //sino verificamos de forma recursiva en el nivel corriente hasta llegas a la raiz o
             //encontrar el simbolo, lo que ocurra primero
             while (nivelCorr.getPadre() != null && (!declarado)) {
                 //verificamos si el simbolo fue declarado en el nivel corriente
-                declarado = declarado || nivelCorr.existsSimbolo(s);
+                declarado = declarado || (nivelCorr.getSimbolo(s)!=null);
                 //actualizamos el nivel corriente al padre del mismo
                 nivelCorr = nivelCorr.getPadre();
             }
@@ -78,13 +78,13 @@ public class symbolTable {
         Node nivelCorr = this.TablaDeSimbolos.getCorriente();
         //si estamos en el ambiente global (raiz del arbol) verificamos si fue declarado en dicho ambiente
         if (nivelCorr.esRaiz()) {
-            declarado = nivelCorr.existsMetodo(s);
+            declarado = nivelCorr.getMetodo(s)!=null;
         } else {
             //sino verificamos de forma recursiva en el nivel corriente hasta llegas a la raiz o
             //encontrar el Metodo, lo que ocurra primero
             while (nivelCorr.getPadre() != null && (!declarado)) {
                 //verificamos si el Metodo fue declarado en el nivel corriente
-                declarado = declarado || nivelCorr.existsMetodo(s);
+                declarado = declarado || (nivelCorr.getMetodo(s)!=null);
                 //actualizamos el nivel corriente al padre del mismo
                 nivelCorr = nivelCorr.getPadre();
             }

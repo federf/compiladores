@@ -101,27 +101,27 @@ public class Node {
             this.variables.add(s);
         }
     }
-
-    //metodo que dado un simbolo verifica si existe o no en el nodo corriente
-    public boolean existsSimbolo(Simbolo s) {
-        boolean exists = false;
+    
+    //metodo que dado un simbolo verifica si existe o no en el nodo corriente, y en caso de existir lo retornar
+    public Simbolo getSimbolo(Simbolo s) {
+        Simbolo exists = null;
         for (int i = 0; i < this.variables.size(); i++) {
             Simbolo actual=this.variables.get(i);
             if(actual.equals(s)){
-                exists=true;
+                exists=actual;
                 i=this.variables.size();
             }
         }
         return exists;
     }
     
-    //metodo que dado un metodo verifica si existe o no en el nodo corriente
-    public boolean existsMetodo(Metodo m) {
-        boolean exists = false;
+    //metodo que dado un metodo verifica si existe o no en el nodo corriente, y en caso de existir lo retorna
+    public Metodo getMetodo(Metodo m) {
+        Metodo exists = null;
         for (int i = 0; i < this.metodos.size(); i++) {
             Metodo actual=this.metodos.get(i);
             if(actual.equals(m)){
-                exists=true;
+                exists=actual;
                 i=this.metodos.size();
             }
         }

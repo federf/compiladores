@@ -57,7 +57,7 @@ public class SymbolTree {
     public void addSimbolo(String type, String name, String value, int size) {
         Simbolo nuevo = new Simbolo(type, name, value, size);
         //si el simbolo no existe en el nivel corriente
-        if (!this.corriente.existsSimbolo(nuevo)) {
+        if (this.corriente.getSimbolo(nuevo)!=null) {
             //se lo agrega
             this.corriente.addVariable(nuevo);
         }//caso contrario no se realiza ninguna accion
@@ -67,7 +67,7 @@ public class SymbolTree {
     public void addMetodo(String returns, String name) {
         Metodo nuevo = new Metodo(returns, name);
         //si el metodo no existe en el nivel corriente
-        if (!this.corriente.existsMetodo(nuevo)) {
+        if (this.corriente.getMetodo(nuevo)!=null) {
             //se lo agrega
             this.corriente.addMetodo(nuevo);
         }//caso contrario no se realiza ninguna accion
