@@ -161,7 +161,7 @@ type::= INT {: tipo_corriente = Tipo.INT; :}
     | BOOLEAN {: tipo_corriente = Tipo.BOOLEAN; :}
     ;
 
-statement::= location:l assign_op:ao expr:exp PUNTO_Y_COMA 
+statement::= location assign_op expr PUNTO_Y_COMA 
          | method_call PUNTO_Y_COMA
          | IF PARENTESIS_IZQ expr PARENTESIS_DER block else_block
          | FOR ID ASIGNACION expr COMA expr block
