@@ -4,6 +4,8 @@ Autores: Federico Franco, Bruno Isoardi
 Funcionalidad: Clase que lleva acabo el analisis sintactico
 */
 import java_cup.runtime.Symbol;
+import ir.*;
+import ir.ast.*;
 
 
 action code{: 
@@ -26,12 +28,16 @@ public void unrecovered_syntax_error (Symbol s) throws java.lang.Exception{
 
 
 /*Declaracion de variables no terminales*/
-non terminal program,field_decl,method_decl,block,type,statement,assign_op,method_call,location,expr,externinvk_arg,
+non terminal program,field_decl,method_decl,block,type,statement,method_call,externinvk_arg,
 literal, bool_LITERAL, type_or_void, else_block;
 
 non terminal body, fieldDeclarations, fieldAndMethods, identifier, identifiers, methodDeclarations, parameters, 
 parameterDeclarations, parameterDeclaration, statements, expressions, externinvk_args, conjunction, comparison, factor, term, sum,
 relation;
+
+non terminal Location location;
+non terminal Expression expr;
+non terminal AssignOpType assign_op;
 
 /*DECLARACION DE VARIABLES TERMINALES */
 
@@ -161,7 +167,7 @@ type::= INT {: tipo_corriente = Tipo.INT; :}
     | BOOLEAN {: tipo_corriente = Tipo.BOOLEAN; :}
     ;
 
-statement::= location assign_op expr PUNTO_Y_COMA 
+statement::= location:l assign_op:ao expr:e PUNTO_Y_COMA {: AssignStmt a=new AssignStmt((Location)l, (AssignOpType) ao, (Expression) e); RESULT=a; :}
          | method_call PUNTO_Y_COMA
          | IF PARENTESIS_IZQ expr PARENTESIS_DER block else_block
          | FOR ID ASIGNACION expr COMA expr block
