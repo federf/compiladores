@@ -6,8 +6,14 @@ Funcionalidad: Clase que lleva acabo el analisis sintactico
 import java_cup.runtime.Symbol;
 
 
-action code{: symbolTable TS;
-:}
+action code{: 
+
+SymbolTable TS;
+
+Tipo tipo_corriente;
+
+:};
+
 parser code{:
 
 public void syntax_error(Symbol s){
@@ -70,8 +76,8 @@ start with program;
 program::= CLASS ID body {:System.out.println("parseo exitoso");:}
         ;
 
-body::= LLAVE_IZQ LLAVE_DER
-    | LLAVE_IZQ fieldAndMethods LLAVE_DER
+body::= LLAVE_IZQ LLAVE_DER 
+    | LLAVE_IZQ {: TS = new SymbolTable(); :} fieldAndMethods LLAVE_DER 
     ;
 
 fieldAndMethods::= fieldDeclarations
@@ -90,16 +96,40 @@ identifiers::= identifier
             | identifiers COMA identifier
             ;
 
-identifier::= ID
-  | ID CORCHETE_IZQ INT_LITERAL CORCHETE_DER
+identifier::= ID:s {: TS.agregarSimbolo(tipo_corriente.toString(), s.toString(), null, 0); :} 
+  | ID:s CORCHETE_IZQ INT_LITERAL:i CORCHETE_DER {: switch (tipo_corriente){
+                                                       case INT:
+                                                               TS.agregarSimbolo(Tipo.INTARRAY.toString(), s.toString(), null, (int) i);  
+                                                       case FLOAT:
+                                                               TS.agregarSimbolo(Tipo.FLOATARRAY.toString(), s.toString(), null, (int) i);  
+                                                       case BOOLEAN:
+                                                               TS.agregarSimbolo(Tipo.BOOLARRAY.toString(), s.toString(), null, (int) i); 
+                                                                           }:} 
   ;
 
 methodDeclarations::= method_decl
                   | methodDeclarations method_decl
                   ;
 
-method_decl::= VOID ID parameters block
-           | type ID parameters block
+method_decl::= VOID ID:d {: TS.agregarMetodo(Tipo.VOID.toString(), d.toString()); :} parameters {:TS.agregarNivel();
+                   Metodo e=TS.obtenerMetodo();
+                   for(int i=0; i<e.getParametros().size(); i++){
+                        Simbolo actual = e.getParametros().get(i);
+                        TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
+                   }         :} block
+           | type ID:g {: switch (tipo_corriente){
+                              case INT:
+                                      TS.agregarMetodo(Tipo.INT.toString(), g.toString());  
+                              case FLOAT:
+                                      TS.agregarMetodo(Tipo.FLOAT.toString(), g.toString());  
+                              case BOOLEAN:
+                                      TS.agregarMetodo(Tipo.BOOLEAN.toString(), g.toString()); 
+                                                 }:} parameters {:TS.agregarNivel();
+                   Metodo e=TS.obtenerMetodo();
+                   for(int i=0; i<e.getParametros().size(); i++){
+                        Simbolo actual = e.getParametros().get(i);
+                        TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
+                   }         :} block
            ;
 
 block::= LLAVE_IZQ LLAVE_DER
@@ -118,19 +148,20 @@ parameterDeclarations::= parameterDeclaration
                      | parameterDeclarations COMA parameterDeclaration
                      ;
 
-parameterDeclaration::= type ID
+parameterDeclaration::= type ID:a {: Simbolo sym = new Simbolo(tipo_corriente.toString(), a.toString(), null, 0); 
+                                      TS.obtenerMetodo().addParametro(sym); :}
                     ;
 
 statements::= statement
           | statements statement
           ;
                     
-type::= INT 
-    | FLOAT 
-    | BOOLEAN
+type::= INT {: tipo_corriente = Tipo.INT; :}
+    | FLOAT {: tipo_corriente = Tipo.FLOAT; :}
+    | BOOLEAN {: tipo_corriente = Tipo.BOOLEAN; :}
     ;
 
-statement::= location assign_op expr  PUNTO_Y_COMA
+statement::= location:l assign_op:ao expr:exp PUNTO_Y_COMA 
          | method_call PUNTO_Y_COMA
          | IF PARENTESIS_IZQ expr PARENTESIS_DER block else_block
          | FOR ID ASIGNACION expr COMA expr block
@@ -143,7 +174,7 @@ statement::= location assign_op expr  PUNTO_Y_COMA
          | block
          ;
 
-else_block::= ELSE block
+else_block::= ELSE block 
           |
           ;
 
@@ -224,7 +255,7 @@ literal::= INT_LITERAL
        | PARENTESIS_IZQ expr PARENTESIS_DER
        ;
 
-bool_LITERAL::= TRUE 
-            | FALSE
+bool_LITERAL::= TRUE {: RESULT = true;:} 
+            | FALSE {: RESULT = false;:}
             ;
 
