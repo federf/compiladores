@@ -71,14 +71,5 @@ public class SymbolTree {
             this.corriente.addMetodo(nuevo);
         }//caso contrario no se realiza ninguna accion
     }
-    
-    //metodo que devuelve el ultimo metodo creado
-    public Metodo obtenerMetodo(){
-        return this.corriente.metodos.getLast();
-    }
-    
-    //metodo que devuelve el ultimo simbolo creado
-    public Simbolo obtenerSimbolo(){
-        return this.corriente.variables.getLast();
-    }
+  
 }
