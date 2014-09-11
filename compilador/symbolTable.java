@@ -22,18 +22,18 @@ public class symbolTable {
 
     //metodo que permite agregar un simbolo nuevo dentro del nivel corriente
     public void agregarSimbolo(String type, String name, String value, int size) {
-        TablaDeSimbolos.addSimbolo(type, name, value, size);
+        this.TablaDeSimbolos.addSimbolo(type, name, value, size);
     }
 
     //metodo que permite agregar un metodo nuevo dentro del nivel corriente
     public void agregarMetodo(String returns, String name) {
-        TablaDeSimbolos.addMetodo(returns, name);
+        this.TablaDeSimbolos.addMetodo(returns, name);
     }
 
     //metodo que agrega un nuevo nivel (ya sea por la declaracion de un metodo o porque se ingreso
     // en una estructura condicional)
     public void agregarNivel() {
-        TablaDeSimbolos.agregarNivel();
+        this.TablaDeSimbolos.agregarNivel();
     }
     
     //metodo que "sube un nivel" dentro del arbol que representa la tabla de simbolos

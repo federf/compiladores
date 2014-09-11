@@ -26,7 +26,7 @@ public class Compilador {
             parser p = new parser(y);
             p.parse();
         }
-        catch(Exception e) { System.out.println("error "+e.getMessage());}
+        catch(Exception e) { System.out.println("ocurrio un error: "+e.getMessage());}
     }
     
 }

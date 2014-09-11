@@ -10,9 +10,11 @@ import ir.ast.*;
 
 action code{: 
 
-SymbolTable TS;
+symbolTable TS; //tabla de simbolos
 
-Tipo tipo_corriente;
+Tipo tipo_corriente; //ultimo tipo leido
+
+Metodo ult_metodo; //ultimo metodo creado
 
 :};
 
@@ -45,7 +47,8 @@ non terminal AssignOpType assign_op;
 terminal BREAK, CLASS, CONTINUE, ELSE, FALSE, FOR, ID, IF, RETURN, TRUE, VOID, WHILE;
 
 /*Terminales operadores aritméticos y lógicos*/
-terminal SUMA, RESTA, MULTIPLICACION, DIVISION, ASIGNACION, INCREMENTO, DECREMENTO, PORCENTAJE;
+terminal SUMA, RESTA, MULTIPLICACION, DIVISION,  PORCENTAJE;
+terminal AssignOpType ASIGNACION, INCREMENTO, DECREMENTO;
 
 /*Terminales operadores lógicos*/
 terminal CONJUNCION, DISYUNCION, IGUALDAD_LOGICA, DIFERENCIA_LOGICA, MAYOR, MENOR, MAYOR_IGUAL, MENOR_IGUAL;
@@ -83,7 +86,7 @@ program::= CLASS ID body {:System.out.println("parseo exitoso");:}
         ;
 
 body::= LLAVE_IZQ LLAVE_DER 
-    | LLAVE_IZQ {: TS = new SymbolTable(); :} fieldAndMethods LLAVE_DER 
+    | LLAVE_IZQ {: TS = new symbolTable(); :} fieldAndMethods LLAVE_DER 
     ;
 
 fieldAndMethods::= fieldDeclarations
@@ -105,10 +108,13 @@ identifiers::= identifier
 identifier::= ID:s {: TS.agregarSimbolo(tipo_corriente.toString(), s.toString(), null, 0); :} 
   | ID:s CORCHETE_IZQ INT_LITERAL:i CORCHETE_DER {: switch (tipo_corriente){
                                                        case INT:
+                                                               System.out.println("INTARRAY");
                                                                TS.agregarSimbolo(Tipo.INTARRAY.toString(), s.toString(), null, (int) i);  
                                                        case FLOAT:
+                                                               System.out.println("FLOATARRAY");
                                                                TS.agregarSimbolo(Tipo.FLOATARRAY.toString(), s.toString(), null, (int) i);  
                                                        case BOOLEAN:
+                                                               System.out.println("BOOLARRAY");
                                                                TS.agregarSimbolo(Tipo.BOOLARRAY.toString(), s.toString(), null, (int) i); 
                                                                            }:} 
   ;
@@ -117,7 +123,7 @@ methodDeclarations::= method_decl
                   | methodDeclarations method_decl
                   ;
 
-method_decl::= VOID ID:d {: TS.agregarMetodo(Tipo.VOID.toString(), d.toString()); :} parameters {:TS.agregarNivel();
+method_decl::= VOID ID:d {: TS.agregarMetodo(Tipo.VOID.toString(), d.toString()); System.out.println("metodo: void "+d.toString()); :} parameters {:TS.agregarNivel();
                    Metodo e=TS.obtenerMetodo();
                    for(int i=0; i<e.getParametros().size(); i++){
                         Simbolo actual = e.getParametros().get(i);
@@ -125,13 +131,17 @@ method_decl::= VOID ID:d {: TS.agregarMetodo(Tipo.VOID.toString(), d.toString())
                    }         :} block
            | type ID:g {: switch (tipo_corriente){
                               case INT:
-                                      TS.agregarMetodo(Tipo.INT.toString(), g.toString());  
+                                        TS.agregarMetodo(Tipo.INT.toString(), g.toString());
+                                        ult_metodo=new Metodo(Tipo.INT.toString(), g.toString());
+                                        break;
                               case FLOAT:
-                                      TS.agregarMetodo(Tipo.FLOAT.toString(), g.toString());  
+                                        TS.agregarMetodo(Tipo.FLOAT.toString(), g.toString());  
+                                        break;
                               case BOOLEAN:
-                                      TS.agregarMetodo(Tipo.BOOLEAN.toString(), g.toString()); 
-                                                 }:} parameters {:TS.agregarNivel();
-                   Metodo e=TS.obtenerMetodo();
+                                        TS.agregarMetodo(Tipo.BOOLEAN.toString(), g.toString()); 
+                                        break;
+                                                 }:} parameters {:Metodo e=TS.obtenerMetodo();
+                   TS.agregarNivel();
                    for(int i=0; i<e.getParametros().size(); i++){
                         Simbolo actual = e.getParametros().get(i);
                         TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
@@ -162,25 +172,25 @@ statements::= statement
           | statements statement
           ;
                     
-type::= INT {: tipo_corriente = Tipo.INT; :}
-    | FLOAT {: tipo_corriente = Tipo.FLOAT; :}
-    | BOOLEAN {: tipo_corriente = Tipo.BOOLEAN; :}
+type::= INT {:tipo_corriente = Tipo.INT; :} 
+    | FLOAT {:tipo_corriente = Tipo.FLOAT; :}
+    | BOOLEAN {:tipo_corriente = Tipo.BOOLEAN; :}
     ;
 
 statement::= location:l assign_op:ao expr:e PUNTO_Y_COMA {: AssignStmt a=new AssignStmt((Location)l, (AssignOpType) ao, (Expression) e); RESULT=a; :}
          | method_call PUNTO_Y_COMA
-         | IF PARENTESIS_IZQ expr PARENTESIS_DER block else_block
-         | FOR ID ASIGNACION expr COMA expr block
-         | WHILE expr block
+         | IF PARENTESIS_IZQ {: TS.agregarNivel(); :} expr PARENTESIS_DER block {: TS.SubirNivel(); :} else_block
+         | FOR ID ASIGNACION expr COMA expr {: TS.agregarNivel(); :}  block {: TS.SubirNivel(); :}
+         | WHILE expr {: TS.agregarNivel(); :}  block {: TS.SubirNivel(); :}
          | RETURN PUNTO_Y_COMA
          | RETURN expr PUNTO_Y_COMA
          | BREAK PUNTO_Y_COMA
          | CONTINUE PUNTO_Y_COMA
          | PUNTO_Y_COMA
-         | block
+         | {: TS.agregarNivel(); :}  block {: TS.SubirNivel(); :}
          ;
 
-else_block::= ELSE block 
+else_block::= ELSE {: TS.agregarNivel(); :} block {: TS.SubirNivel(); :} 
           |
           ;
 

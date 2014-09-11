@@ -77,12 +77,12 @@ public class Node {
     @Override
     public String toString() {
         String result = "Nodo: \nVariables: ";
-        for (int i = 0; i < variables.size(); i++) {
-            result = result + " " + variables.get(i).toString();
+        for (int i = 0; i < this.variables.size(); i++) {
+            result = result + " " + this.variables.get(i).toString();
         }
         result = result + "\nMetodos: ";
-        for (int i = 0; i < metodos.size(); i++) {
-            result = result + " " + metodos.get(i).toString();
+        for (int i = 0; i < this.metodos.size(); i++) {
+            result = result + " " + this.metodos.get(i).toString();
         }
         return result;
     }
@@ -90,23 +90,29 @@ public class Node {
     //metodo que permite agregar un metodo a la lista de metodos del nodo
     public void addMetodo(Metodo m) {
         if (m != null) {
-            this.metodos.add(m);
+            this.metodos.addLast(m);
+        }else{
+            System.out.println("no agrego nada");
         }
     }
 
     //metodo que permite agregar una variable a la lista de variables del nodo
     public void addVariable(Simbolo s) {
         if (s != null) {
-            this.variables.add(s);
+            this.variables.addLast(s);
         }
     }
     
     //metodo que dado un simbolo verifica si existe o no en el nodo corriente, y en caso de existir lo retornar
     public Simbolo getSimbolo(Simbolo s) {
         Simbolo exists = null;
+        System.out.println("simbolo: "+s.toString());
         for (int i = 0; i < this.variables.size(); i++) {
             Simbolo actual=this.variables.get(i);
             if(actual.equals(s)){
+                
+                System.out.println("actual: "+actual.toString());
+                
                 exists=actual;
                 i=this.variables.size();
             }

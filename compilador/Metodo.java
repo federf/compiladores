@@ -97,7 +97,8 @@ public class Metodo {
 
     @Override
     public String toString() {
-        return "Metodo{" + " name=" + name + ", return_not_void=" + return_not_void + ", typeReturn=" + typeReturn + '}';
+        System.out.println("");
+        return "Metodo{" + " name=" + this.name + ", return_not_void=" + this.return_not_void + ", typeReturn=" + this.typeReturn + '}';
     }
 
     public boolean equals(Metodo obj) {
