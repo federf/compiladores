@@ -10,6 +10,8 @@ import ir.ast.*;
 
 action code{: 
 
+AST ast;
+
 symbolTable TS; //tabla de simbolos
 
 Tipo tipo_corriente; //ultimo tipo leido

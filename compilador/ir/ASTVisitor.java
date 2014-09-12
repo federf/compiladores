@@ -19,4 +19,13 @@ public interface ASTVisitor<T> {
 	T visit(VarLocation loc);
 // visit block	
 	T visit(Block block);
+// visit Loops
+    T visit(ForStmt forStmt);
+    T visit(WhileStmt whileStmt);
+    T visit(LoopStmt loop);
+// visit break
+    T visit(BreakStmt breakStmt);
+// visit continue
+    T visit(ContinueStmt cont);
+    
 }
