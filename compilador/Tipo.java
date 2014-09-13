@@ -40,6 +40,9 @@ public enum Tipo {
                 return "undefined";
         }
         return null;
-
+    }
+            
+    public boolean equals(Tipo t){
+        return (this==t);
     }
 }

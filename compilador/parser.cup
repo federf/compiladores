@@ -115,16 +115,16 @@ identifiers::= identifier
             | identifiers COMA identifier
             ;
 
-identifier::= ID:s {: TS.agregarSimbolo(tipo_corriente.toString(), s.toString(), null, 0); :} 
+identifier::= ID:s {: TS.agregarSimbolo(tipo_corriente, s.toString(), null, 0); :} 
   | ID:s CORCHETE_IZQ INT_LITERAL:i CORCHETE_DER {: int size= Integer.valueOf((String) i); switch (tipo_corriente){
                                                        case INT:
-                                                               TS.agregarSimbolo(Tipo.INTARRAY.toString(), s.toString(), null, size);  
+                                                               TS.agregarSimbolo(Tipo.INTARRAY, s.toString(), null, size);  
                                                                break;
                                                        case FLOAT:
-                                                               TS.agregarSimbolo(Tipo.FLOATARRAY.toString(), s.toString(), null, size);  
+                                                               TS.agregarSimbolo(Tipo.FLOATARRAY, s.toString(), null, size);  
                                                                break;
                                                        case BOOLEAN:
-                                                               TS.agregarSimbolo(Tipo.BOOLARRAY.toString(), s.toString(), null, size); 
+                                                               TS.agregarSimbolo(Tipo.BOOLARRAY, s.toString(), null, size); 
                                                                break;
                                                                            }:} 
   ;
@@ -134,7 +134,7 @@ methodDeclarations::= method_decl
                   ;
 
 method_decl::= VOID ID:d {: 
-if(d.toString().equals("main")){mainDeclared=true;} TS.agregarMetodo(Tipo.VOID.toString(), d.toString());:} parameters {:
+if(d.toString().equals("main")){mainDeclared=true;} TS.agregarMetodo(Tipo.VOID, d.toString());:} parameters {:
                    Metodo e=TS.obtenerMetodo();
                    TS.agregarNivel();
                    for(int i=0; i<e.getParametros().size(); i++){
@@ -143,14 +143,14 @@ if(d.toString().equals("main")){mainDeclared=true;} TS.agregarMetodo(Tipo.VOID.t
                    }         :} block {: TS.SubirNivel(); :}
            | type ID:g {:if(g.toString().equals("main")){mainDeclared=true;} switch (tipo_corriente){
                               case INT:
-                                        TS.agregarMetodo(Tipo.INT.toString(), g.toString());
-                                        ult_metodo=new Metodo(Tipo.INT.toString(), g.toString());
+                                        TS.agregarMetodo(Tipo.INT, g.toString());
+                                        ult_metodo=new Metodo(Tipo.INT, g.toString());
                                         break;
                               case FLOAT:
-                                        TS.agregarMetodo(Tipo.FLOAT.toString(), g.toString());  
+                                        TS.agregarMetodo(Tipo.FLOAT, g.toString());  
                                         break;
                               case BOOLEAN:
-                                        TS.agregarMetodo(Tipo.BOOLEAN.toString(), g.toString()); 
+                                        TS.agregarMetodo(Tipo.BOOLEAN, g.toString()); 
                                         break;
                                                  }:} parameters {:Metodo e=TS.obtenerMetodo();
                    TS.agregarNivel();
@@ -176,7 +176,7 @@ parameterDeclarations::= parameterDeclaration
                      | parameterDeclarations COMA parameterDeclaration
                      ;
 
-parameterDeclaration::= type ID:a {: Simbolo sym = new Simbolo(tipo_corriente.toString(), a.toString(), null, 0); 
+parameterDeclaration::= type ID:a {: Simbolo sym = new Simbolo(tipo_corriente, a.toString(), null, 0); 
                                       TS.obtenerMetodo().addParametro(sym); :}
                     ;
 

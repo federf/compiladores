@@ -21,12 +21,12 @@ public class symbolTable {
     }
 
     //metodo que permite agregar un simbolo nuevo dentro del nivel corriente
-    public void agregarSimbolo(String type, String name, String value, int size) {
+    public void agregarSimbolo(Tipo type, String name, String value, int size) {
         this.TablaDeSimbolos.addSimbolo(type, name, value, size);
     }
 
     //metodo que permite agregar un metodo nuevo dentro del nivel corriente
-    public void agregarMetodo(String returns, String name) {
+    public void agregarMetodo(Tipo returns, String name) {
         this.TablaDeSimbolos.addMetodo(returns, name);
     }
 
@@ -43,7 +43,7 @@ public class symbolTable {
 
     //metodo que dado un simbolo verifica si fue declarado en el mismo o en algun nivel superior
     // (se utilizaria para ver si una variable fue declarada para poder ser usada)
-    public boolean simboloDeclarado(String type, String name, String value, int size) {
+    public boolean simboloDeclarado(Tipo type, String name, String value, int size) {
         //creamos el simbolo como tal
         Simbolo s = new Simbolo(type, name, value, size);
         //variable booleana de resultado
@@ -69,7 +69,7 @@ public class symbolTable {
     
     //metodo que dado un Metodo verifica si fue declarado en el mismo o en algun nivel superior
     // (se utilizaria para ver si una variable fue declarada para poder ser usada)
-    public boolean metodoDeclarado(String result, String name) {
+    public boolean metodoDeclarado(Tipo result, String name) {
         //creamos el Metodo como tal
         Metodo s = new Metodo(result, name);
         //variable booleana de resultado

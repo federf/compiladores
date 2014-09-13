@@ -18,13 +18,13 @@ public class Metodo {
     // nombre del metodo
     String name;
     //tipo de retorno (puede ser void o no)
-    String typeReturn;
+    Tipo typeReturn;
     //lista de parametros (simbolos) del metodo
     LinkedList<Simbolo> parametros;
 
     // constructor de clase
-    public Metodo(String returns, String name) {
-        if (returns.equals("void")) {
+    public Metodo(Tipo returns, String name) {
+        if (returns.toString().equals("void")) {
             this.return_not_void = false;
         } else {
             this.return_not_void = true;
@@ -35,7 +35,7 @@ public class Metodo {
     }
 
     //constructor alternativo
-    public Metodo(String returns, String name, LinkedList<Simbolo> param) {
+    public Metodo(Tipo returns, String name, LinkedList<Simbolo> param) {
         if (returns.equals("void")) {
             this.return_not_void = false;
         } else {
@@ -62,11 +62,11 @@ public class Metodo {
         this.name = name;
     }
 
-    public String getTypeReturn() {
+    public Tipo getTypeReturn() {
         return typeReturn;
     }
 
-    public void setTypeReturn(String typeReturn) {
+    public void setTypeReturn(Tipo typeReturn) {
         this.typeReturn = typeReturn;
     }
 
@@ -98,7 +98,7 @@ public class Metodo {
     @Override
     public String toString() {
         System.out.println("");
-        return "Metodo{" + " name=" + this.name + ", return_not_void=" + this.return_not_void + ", typeReturn=" + this.typeReturn + '}';
+        return "Metodo{" + " name=" + this.name + ", return_not_void=" + this.return_not_void + ", typeReturn=" + this.typeReturn.toString() + '}';
     }
 
     public boolean equals(Metodo obj) {

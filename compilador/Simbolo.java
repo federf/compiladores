@@ -11,25 +11,25 @@
  * @author fede
  */
 public class Simbolo {
-
-    String type;//tipo de simbolo
+ 
+   Tipo type;//tipo de simbolo
     String name;//nombre del simbolo
     String value;//valor (no estoy seguro que sea necesario)
     int size; //para el caso de arreglos
 
     // constructor de clase
-    public Simbolo(String type, String name, String value, int size) {
+    public Simbolo(Tipo type, String name, String value, int size) {
         this.type = type;
         this.name = name;
         this.value = value;
         this.size = 0;
     }
 
-    public String getType() {
+    public Tipo getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Tipo type) {
         this.type = type;
     }
 
@@ -59,7 +59,7 @@ public class Simbolo {
 
     @Override
     public String toString() {
-        return "Simbolo{" + "type=" + type + ", name=" + name + ", value=" + value + ", size=" + size + '}';
+        return "Simbolo{" + "type=" + type.toString() + ", name=" + name + ", value=" + value + ", size=" + size + '}';
     }
 
     public boolean equals(Simbolo obj) {
