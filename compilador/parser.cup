@@ -140,7 +140,7 @@ if(d.toString().equals("main")){mainDeclared=true;} TS.agregarMetodo(Tipo.VOID.t
                    for(int i=0; i<e.getParametros().size(); i++){
                         Simbolo actual = e.getParametros().get(i);
                         TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
-                   }         :} block
+                   }         :} block {: TS.SubirNivel(); :}
            | type ID:g {:if(g.toString().equals("main")){mainDeclared=true;} switch (tipo_corriente){
                               case INT:
                                         TS.agregarMetodo(Tipo.INT.toString(), g.toString());
@@ -157,7 +157,7 @@ if(d.toString().equals("main")){mainDeclared=true;} TS.agregarMetodo(Tipo.VOID.t
                    for(int i=0; i<e.getParametros().size(); i++){
                         Simbolo actual = e.getParametros().get(i);
                         TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
-                   }         :} block
+                   }         :} block {:TS.SubirNivel();:}
            ;
 
 block::= LLAVE_IZQ LLAVE_DER
