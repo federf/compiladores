@@ -133,8 +133,10 @@ methodDeclarations::= method_decl
                   | methodDeclarations method_decl
                   ;
 
-method_decl::= VOID ID:d {: if(d.toString().equals("main")){mainDeclared=true;} TS.agregarMetodo(Tipo.VOID.toString(), d.toString());:} parameters {:TS.agregarNivel();
+method_decl::= VOID ID:d {: 
+if(d.toString().equals("main")){mainDeclared=true;} TS.agregarMetodo(Tipo.VOID.toString(), d.toString());:} parameters {:
                    Metodo e=TS.obtenerMetodo();
+                   TS.agregarNivel();
                    for(int i=0; i<e.getParametros().size(); i++){
                         Simbolo actual = e.getParametros().get(i);
                         TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
