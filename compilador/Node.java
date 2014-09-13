@@ -106,13 +106,9 @@ public class Node {
     //metodo que dado un simbolo verifica si existe o no en el nodo corriente, y en caso de existir lo retornar
     public Simbolo getSimbolo(Simbolo s) {
         Simbolo exists = null;
-        System.out.println("simbolo: "+s.toString());
         for (int i = 0; i < this.variables.size(); i++) {
             Simbolo actual=this.variables.get(i);
             if(actual.equals(s)){
-                
-                System.out.println("actual: "+actual.toString());
-                
                 exists=actual;
                 i=this.variables.size();
             }

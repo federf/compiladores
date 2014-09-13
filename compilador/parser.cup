@@ -18,6 +18,8 @@ Tipo tipo_corriente; //ultimo tipo leido
 
 Metodo ult_metodo; //ultimo metodo creado
 
+boolean mainDeclared;
+
 :};
 
 parser code{:
@@ -46,14 +48,20 @@ non terminal AssignOpType assign_op;
 /*DECLARACION DE VARIABLES TERMINALES */
 
 /*Terminales palabras reservadas*/
-terminal BREAK, CLASS, CONTINUE, ELSE, FALSE, FOR, ID, IF, RETURN, TRUE, VOID, WHILE;
+terminal CLASS, ELSE, FALSE, ID, TRUE, VOID;
+terminal IfStmt IF;
+terminal BreakStmt BREAK;
+terminal ContinueStmt CONTINUE;
+terminal ForStmt FOR;
+terminal ReturnStmt RETURN;
+terminal WhileStmt WHILE;
 
 /*Terminales operadores aritméticos y lógicos*/
-terminal SUMA, RESTA, MULTIPLICACION, DIVISION,  PORCENTAJE;
+terminal BinOpType SUMA, RESTA, MULTIPLICACION, DIVISION,  PORCENTAJE;
 terminal AssignOpType ASIGNACION, INCREMENTO, DECREMENTO;
 
 /*Terminales operadores lógicos*/
-terminal CONJUNCION, DISYUNCION, IGUALDAD_LOGICA, DIFERENCIA_LOGICA, MAYOR, MENOR, MAYOR_IGUAL, MENOR_IGUAL;
+terminal BinOpType CONJUNCION, DISYUNCION, IGUALDAD_LOGICA, DIFERENCIA_LOGICA, MAYOR, MENOR, MAYOR_IGUAL, MENOR_IGUAL;
 
 /*Terminales signos de puntuación*/
 terminal  COMA, PUNTO_Y_COMA, LLAVE_IZQ, LLAVE_DER, CORCHETE_IZQ, CORCHETE_DER, PARENTESIS_IZQ, PARENTESIS_DER, ADMIRACION; 
@@ -84,7 +92,7 @@ precedence left ADMIRACION;
 
 start with program;
 
-program::= CLASS ID body {:System.out.println("parseo exitoso");:}
+program::= CLASS ID:d {: mainDeclared=false;  :} body {:if(mainDeclared){System.out.println("parseo exitoso");}else{System.out.println("Main Method Missing in Class "+d.toString());}:}
         ;
 
 body::= LLAVE_IZQ LLAVE_DER 
@@ -108,16 +116,16 @@ identifiers::= identifier
             ;
 
 identifier::= ID:s {: TS.agregarSimbolo(tipo_corriente.toString(), s.toString(), null, 0); :} 
-  | ID:s CORCHETE_IZQ INT_LITERAL:i CORCHETE_DER {: switch (tipo_corriente){
+  | ID:s CORCHETE_IZQ INT_LITERAL:i CORCHETE_DER {: int size= Integer.valueOf((String) i); switch (tipo_corriente){
                                                        case INT:
-                                                               System.out.println("INTARRAY");
-                                                               TS.agregarSimbolo(Tipo.INTARRAY.toString(), s.toString(), null, (int) i);  
+                                                               TS.agregarSimbolo(Tipo.INTARRAY.toString(), s.toString(), null, size);  
+                                                               break;
                                                        case FLOAT:
-                                                               System.out.println("FLOATARRAY");
-                                                               TS.agregarSimbolo(Tipo.FLOATARRAY.toString(), s.toString(), null, (int) i);  
+                                                               TS.agregarSimbolo(Tipo.FLOATARRAY.toString(), s.toString(), null, size);  
+                                                               break;
                                                        case BOOLEAN:
-                                                               System.out.println("BOOLARRAY");
-                                                               TS.agregarSimbolo(Tipo.BOOLARRAY.toString(), s.toString(), null, (int) i); 
+                                                               TS.agregarSimbolo(Tipo.BOOLARRAY.toString(), s.toString(), null, size); 
+                                                               break;
                                                                            }:} 
   ;
 
@@ -125,13 +133,13 @@ methodDeclarations::= method_decl
                   | methodDeclarations method_decl
                   ;
 
-method_decl::= VOID ID:d {: TS.agregarMetodo(Tipo.VOID.toString(), d.toString()); System.out.println("metodo: void "+d.toString()); :} parameters {:TS.agregarNivel();
+method_decl::= VOID ID:d {: if(d.toString().equals("main")){mainDeclared=true;} TS.agregarMetodo(Tipo.VOID.toString(), d.toString());:} parameters {:TS.agregarNivel();
                    Metodo e=TS.obtenerMetodo();
                    for(int i=0; i<e.getParametros().size(); i++){
                         Simbolo actual = e.getParametros().get(i);
                         TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
                    }         :} block
-           | type ID:g {: switch (tipo_corriente){
+           | type ID:g {:if(g.toString().equals("main")){mainDeclared=true;} switch (tipo_corriente){
                               case INT:
                                         TS.agregarMetodo(Tipo.INT.toString(), g.toString());
                                         ult_metodo=new Metodo(Tipo.INT.toString(), g.toString());

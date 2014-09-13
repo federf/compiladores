@@ -65,7 +65,6 @@ public class SymbolTree {
     //metodo que agrega un metodo al nivel corriente
     public void addMetodo(String returns, String name) {
         Metodo nuevo = new Metodo(returns, name);
-        System.out.println(nuevo.toString());
         //si el metodo no existe en el nivel corriente
         if (this.corriente.getMetodo(nuevo)==null) {
             //se lo agrega
