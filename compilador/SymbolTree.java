@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import ir.ast.*;
 /**
  *
  * @author fede
@@ -53,7 +53,7 @@ public class SymbolTree {
     }
 
     //metodo que agrega un simbolo al nivel corriente
-    public void addSimbolo(Tipo type, String name, String value, int size) {
+    public void addSimbolo(Type type, String name, String value, int size) {
         Simbolo nuevo = new Simbolo(type, name, value, size);
         //si el simbolo no existe en el nivel corriente
         if (this.corriente.getSimbolo(nuevo)==null) {
@@ -63,7 +63,7 @@ public class SymbolTree {
     }
 
     //metodo que agrega un metodo al nivel corriente
-    public void addMetodo(Tipo returns, String name) {
+    public void addMetodo(Type returns, String name) {
         Metodo nuevo = new Metodo(returns, name);
         //si el metodo no existe en el nivel corriente
         if (this.corriente.getMetodo(nuevo)==null) {

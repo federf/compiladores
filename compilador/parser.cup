@@ -14,7 +14,7 @@ AST ast;
 
 symbolTable TS; //tabla de simbolos
 
-Tipo tipo_corriente; //ultimo tipo leido
+Type tipo_corriente; //ultimo tipo leido
 
 Metodo ult_metodo; //ultimo metodo creado
 
@@ -118,13 +118,13 @@ identifiers::= identifier
 identifier::= ID:s {: TS.agregarSimbolo(tipo_corriente, s.toString(), null, 0); :} 
   | ID:s CORCHETE_IZQ INT_LITERAL:i CORCHETE_DER {: int size= Integer.valueOf((String) i); switch (tipo_corriente){
                                                        case INT:
-                                                               TS.agregarSimbolo(Tipo.INTARRAY, s.toString(), null, size);  
+                                                               TS.agregarSimbolo(Type.INTARRAY, s.toString(), null, size);  
                                                                break;
                                                        case FLOAT:
-                                                               TS.agregarSimbolo(Tipo.FLOATARRAY, s.toString(), null, size);  
+                                                               TS.agregarSimbolo(Type.FLOATARRAY, s.toString(), null, size);  
                                                                break;
                                                        case BOOLEAN:
-                                                               TS.agregarSimbolo(Tipo.BOOLARRAY, s.toString(), null, size); 
+                                                               TS.agregarSimbolo(Type.BOOLARRAY, s.toString(), null, size); 
                                                                break;
                                                                            }:} 
   ;
@@ -134,7 +134,7 @@ methodDeclarations::= method_decl
                   ;
 
 method_decl::= VOID ID:d {: 
-if(d.toString().equals("main")){mainDeclared=true;} TS.agregarMetodo(Tipo.VOID, d.toString());:} parameters {:
+if(d.toString().equals("main")){mainDeclared=true;} TS.agregarMetodo(Type.VOID, d.toString());:} parameters {:
                    Metodo e=TS.obtenerMetodo();
                    TS.agregarNivel();
                    for(int i=0; i<e.getParametros().size(); i++){
@@ -143,14 +143,14 @@ if(d.toString().equals("main")){mainDeclared=true;} TS.agregarMetodo(Tipo.VOID, 
                    }         :} block {: TS.SubirNivel(); :}
            | type ID:g {:if(g.toString().equals("main")){mainDeclared=true;} switch (tipo_corriente){
                               case INT:
-                                        TS.agregarMetodo(Tipo.INT, g.toString());
-                                        ult_metodo=new Metodo(Tipo.INT, g.toString());
+                                        TS.agregarMetodo(Type.INT, g.toString());
+                                        ult_metodo=new Metodo(Type.INT, g.toString());
                                         break;
                               case FLOAT:
-                                        TS.agregarMetodo(Tipo.FLOAT, g.toString());  
+                                        TS.agregarMetodo(Type.FLOAT, g.toString());  
                                         break;
                               case BOOLEAN:
-                                        TS.agregarMetodo(Tipo.BOOLEAN, g.toString()); 
+                                        TS.agregarMetodo(Type.BOOLEAN, g.toString()); 
                                         break;
                                                  }:} parameters {:Metodo e=TS.obtenerMetodo();
                    TS.agregarNivel();
@@ -184,9 +184,9 @@ statements::= statement
           | statements statement
           ;
                     
-type::= INT {:tipo_corriente = Tipo.INT; :} 
-    | FLOAT {:tipo_corriente = Tipo.FLOAT; :}
-    | BOOLEAN {:tipo_corriente = Tipo.BOOLEAN; :}
+type::= INT {:tipo_corriente = Type.INT; :} 
+    | FLOAT {:tipo_corriente = Type.FLOAT; :}
+    | BOOLEAN {:tipo_corriente = Type.BOOLEAN; :}
     ;
 
 statement::= location:l assign_op:ao expr:e PUNTO_Y_COMA {: AssignStmt a=new AssignStmt((Location)l, (AssignOpType) ao, (Expression) e); RESULT=a; :}
@@ -194,8 +194,8 @@ statement::= location:l assign_op:ao expr:e PUNTO_Y_COMA {: AssignStmt a=new Ass
          | IF PARENTESIS_IZQ {: TS.agregarNivel(); :} expr PARENTESIS_DER block {: TS.SubirNivel(); :} else_block
          | FOR ID ASIGNACION expr COMA expr {: TS.agregarNivel(); :}  block {: TS.SubirNivel(); :}
          | WHILE expr {: TS.agregarNivel(); :}  block {: TS.SubirNivel(); :}
-         | RETURN PUNTO_Y_COMA
-         | RETURN expr PUNTO_Y_COMA
+         | RETURN PUNTO_Y_COMA {:if(!TS.obtenerMetodo().getTypeReturn().equals(Type.VOID)){System.out.println("Error: Method "+TS.obtenerMetodo().getName()+" returns void ");} :}
+         | RETURN expr:e PUNTO_Y_COMA {:if(!e.getType().equals(TS.obtenerMetodo().getTypeReturn())){System.out.println("Error: Method "+TS.obtenerMetodo().getName()+" must return "+TS.obtenerMetodo().getTypeReturn().toString());}:}
          | BREAK PUNTO_Y_COMA
          | CONTINUE PUNTO_Y_COMA
          | PUNTO_Y_COMA

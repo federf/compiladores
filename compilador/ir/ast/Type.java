@@ -42,4 +42,8 @@ public enum Type {
 
         return false;
     }
+    
+    public boolean equals(Type t){
+        return (this==t);
+    }
 }

@@ -5,31 +5,31 @@
 
  clase que implementa los simbolos (variables/constantes) que son declaradas por el usuario
  */
-
+import ir.ast.*;
 /**
  *
  * @author fede
  */
 public class Simbolo {
  
-   Tipo type;//tipo de simbolo
+   Type type;//tipo de simbolo
     String name;//nombre del simbolo
     String value;//valor (no estoy seguro que sea necesario)
     int size; //para el caso de arreglos
 
     // constructor de clase
-    public Simbolo(Tipo type, String name, String value, int size) {
+    public Simbolo(Type type, String name, String value, int size) {
         this.type = type;
         this.name = name;
         this.value = value;
         this.size = 0;
     }
 
-    public Tipo getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(Tipo type) {
+    public void setType(Type type) {
         this.type = type;
     }
 

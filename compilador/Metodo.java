@@ -6,6 +6,7 @@
 
 
 import java.util.LinkedList;
+import ir.ast.*;
 
 /**
  *
@@ -18,12 +19,12 @@ public class Metodo {
     // nombre del metodo
     String name;
     //tipo de retorno (puede ser void o no)
-    Tipo typeReturn;
+    Type typeReturn;
     //lista de parametros (simbolos) del metodo
     LinkedList<Simbolo> parametros;
 
     // constructor de clase
-    public Metodo(Tipo returns, String name) {
+    public Metodo(Type returns, String name) {
         if (returns.toString().equals("void")) {
             this.return_not_void = false;
         } else {
@@ -35,7 +36,7 @@ public class Metodo {
     }
 
     //constructor alternativo
-    public Metodo(Tipo returns, String name, LinkedList<Simbolo> param) {
+    public Metodo(Type returns, String name, LinkedList<Simbolo> param) {
         if (returns.equals("void")) {
             this.return_not_void = false;
         } else {
@@ -62,11 +63,11 @@ public class Metodo {
         this.name = name;
     }
 
-    public Tipo getTypeReturn() {
+    public Type getTypeReturn() {
         return typeReturn;
     }
 
-    public void setTypeReturn(Tipo typeReturn) {
+    public void setTypeReturn(Type typeReturn) {
         this.typeReturn = typeReturn;
     }
 
