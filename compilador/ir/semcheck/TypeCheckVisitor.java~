@@ -9,7 +9,7 @@ import error.Error; // define class error
 
 
 // type checker, concrete visitor 
-public class TypeCheckVisitor implements ASTVisitor<Type> {
+public class TypeEvaluationVisitor implements ASTVisitor<Type> {
 	
 	private List<Error> errors;
 
