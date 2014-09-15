@@ -108,12 +108,14 @@ public class symbolTable {
         //sino verificamos de forma recursiva en el nivel corriente hasta llegas a la raiz o
         //encontrar el simbolo, lo que ocurra primero
         boolean declarado = false;
+        Simbolo result = null;
         while (!nivelCorr.esRaiz() && (!declarado)) {
             //verificamos si el simbolo fue declarado en el nivel corriente
             declarado = declarado || (nivelCorr.getSimboloByName(id) != null);
             //actualizamos el nivel corriente al padre del mismo
+            result=nivelCorr.getSimboloByName(id);
             nivelCorr = nivelCorr.getPadre();
         }
-        return nivelCorr.getSimboloByName(id);
+        return result;
     }
 }

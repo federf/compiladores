@@ -30,5 +30,6 @@ public interface ASTVisitor<T> {
     T visit(BreakStmt breakStmt);
 // visit continue
     T visit(ContinueStmt cont);
-    
+// visit operando
+    T visit(UnaryOpExpr op);
 }

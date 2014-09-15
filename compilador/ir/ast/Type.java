@@ -9,6 +9,8 @@ public enum Type {
     BOOLEAN,
     BOOLARRAY,
     VOID,
+    STRING,
+    STRINGARRAY,
     UNDEFINED;
 
     @Override
@@ -30,13 +32,17 @@ public enum Type {
                 return "boolean";
             case BOOLARRAY:
                 return "boolean[]";
+            case STRING:
+                return "string";
+            case STRINGARRAY:
+                return "string[]";
         }
 
         return null;
     }
 
     public boolean isArray() {
-        if ((this == Type.INTARRAY) || (this == Type.FLOATARRAY) || (this == Type.BOOLARRAY)) {
+        if ((this == Type.INTARRAY) || (this == Type.FLOATARRAY) || (this == Type.BOOLARRAY) || (this == Type.STRINGARRAY)) {
             return true;
         }
 

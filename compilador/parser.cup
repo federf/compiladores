@@ -44,12 +44,13 @@ relation;
 non terminal Location location;
 non terminal Expression expr;
 non terminal AssignOpType assign_op;
-non terminal Literal factor;
+non terminal Expression factor;
 
 /*DECLARACION DE VARIABLES TERMINALES */
 
 /*Terminales palabras reservadas*/
-terminal CLASS, ELSE, ID, VOID;
+terminal CLASS, ELSE, VOID;
+terminal String ID;
 terminal BoolLiteral FALSE, TRUE;
 terminal IfStmt IF;
 terminal BreakStmt BREAK;
@@ -255,7 +256,15 @@ externinvk_arg::= expr
               | STRING_LITERAL
               ;
 
-location::= ID
+location::= ID:id {: System.out.println("location "+id);
+                    Simbolo s=TS.buscarSimbolo((String)id); 
+                        if(s==null){
+                            System.out.println("variable "+id+" not declared");
+                            RESULT=null;
+                        }else{
+                            RESULT= new VarLocation((String)id,s.getType(),s.getValue(),s.getSize());
+                        }
+             :} //usos de variables
         | ID CORCHETE_IZQ expr CORCHETE_DER
         ;
 
@@ -290,15 +299,17 @@ term::= factor
     | term PORCENTAJE factor
     ;
 
-factor::= literal:l 
-      | ADMIRACION factor /*{:  System.out.println("entro admiracion !");
-                                System.out.println(f);
-                                if(f.getType().equals(Type.BOOLEAN)){ 
-                                    BoolLiteral f2=(BoolLiteral)f;
-                                    RESULT=new BoolLiteral(!f2.getValue());
+factor::=literal:l {: RESULT = (Expression)l; :} 
+      | ADMIRACION factor:f {:  
+                                System.out.println("valor factor : "+f);
+                                UnaryOpExpr f2=null;
+                                if(f.getType().equals(Type.BOOLEAN)){
+                                    f2=new UnaryOpExpr(UnaryOpType.NON, f);
+                                    System.out.println("valor de f2: "+f2 ); 
+                                    RESULT=f2;
                                 }else{
                                     System.out.println("Boolean expected but "+f.getType().toString()+" found.");
-                                } :}*/
+                                } :}
       | RESTA factor /*{:  if(f.getType().equals(Type.FLOAT)){ 
                                     FloatLiteral f2=(FloatLiteral)f;
                                     float v=f2.getValue()*-1;
@@ -318,14 +329,53 @@ factor::= literal:l
 
 literal::= INT_LITERAL:i {: RESULT= new IntLiteral((String) i); :}
        | FLOAT_LITERAL:f {:RESULT= new FloatLiteral((String) f); :}
-       | bool_LITERAL:b //{:System.out.println("entro aca (BOOL_LITERAL)"+b.toString());:}
-       | ID //{:System.out.println("entro aca (BOOL_LITERAL  id)"); :}
+       | bool_LITERAL:b {:RESULT = b; System.out.println("entro aca (BOOL_LITERAL)"+b.toString());:}
+       | ID:id {: Simbolo s=TS.buscarSimbolo(id);
+                    switch(s.getType()){
+                        case BOOLEAN:
+                            if(s.getValue()==null){
+                                System.out.println("boolean sin valor");
+                                RESULT= new BoolLiteral(false);
+                            }else{
+                                System.out.println("boolean con valor");
+                                RESULT= new BoolLiteral(Boolean.valueOf(s.getValue()));
+                            }
+                            break;
+                        case INT:
+                            if(s.getValue()==null){
+                                System.out.println("int sin valor");
+                                RESULT= new IntLiteral("0");
+                            }else{
+                                System.out.println("int con valor");
+                                RESULT= new IntLiteral(s.getValue());
+                            }
+                            break;
+                        case FLOAT:
+                            if(s.getValue()==null){
+                                System.out.println("float sin valor");
+                                RESULT= new FloatLiteral("0.0");
+                            }else{
+                                System.out.println("float con valor");
+                                RESULT= new FloatLiteral(s.getValue());
+                            }
+                            break;
+                        case STRING:
+                            if(s.getValue()==null){
+                                System.out.println("string sin valor");
+                                RESULT= new StringLiteral("");
+                            }else{
+                                System.out.println("string con valor");
+                                RESULT= new StringLiteral(s.getValue());
+                            }
+                            break;
+                    }
+                 :}
        | ID CORCHETE_IZQ expr CORCHETE_DER
        | method_call
        | PARENTESIS_IZQ expr PARENTESIS_DER
        ;
 
 bool_LITERAL::= TRUE {:RESULT= new BoolLiteral(true); :} 
-            | FALSE {: RESULT= new BoolLiteral(false);; :}
+            | FALSE {: RESULT= new BoolLiteral(false); :}
             ;
 

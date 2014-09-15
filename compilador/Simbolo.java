@@ -5,14 +5,16 @@
 
  clase que implementa los simbolos (variables/constantes) que son declaradas por el usuario
  */
+
 import ir.ast.*;
+
 /**
  *
  * @author fede
  */
 public class Simbolo {
- 
-   Type type;//tipo de simbolo
+
+    Type type;//tipo de simbolo
     String name;//nombre del simbolo
     String value;//valor (no estoy seguro que sea necesario)
     int size; //para el caso de arreglos
@@ -74,9 +76,9 @@ public class Simbolo {
             return false;
         }
         /* creo no hace falta
-        if (!this.value.equals(other.value)) {
-            return false;
-        }*/
+         if (!this.value.equals(other.value)) {
+         return false;
+         }*/
         return true;
     }
 
