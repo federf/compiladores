@@ -24,7 +24,7 @@ public class Simbolo {
         this.type = type;
         this.name = name;
         this.value = value;
-        this.size = 0;
+        this.size = size;
     }
 
     public Type getType() {
@@ -73,6 +73,9 @@ public class Simbolo {
             return false;
         }
         if (!this.name.equals(other.name)) {
+            return false;
+        }
+        if(this.size!=other.size){
             return false;
         }
         /* creo no hace falta

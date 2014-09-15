@@ -6,6 +6,7 @@ Funcionalidad: Clase que lleva acabo el analisis sintactico
 import java_cup.runtime.Symbol;
 import ir.*;
 import ir.ast.*;
+import ir.ast.UnaryOpExpr;
 
 
 action code{: 
@@ -38,11 +39,10 @@ non terminal program,field_decl,method_decl,block,type,statement,method_call,ext
 literal, bool_LITERAL, type_or_void, else_block;
 
 non terminal body, fieldDeclarations, fieldAndMethods, identifier, identifiers, methodDeclarations, parameters, 
-parameterDeclarations, parameterDeclaration, statements, expressions, externinvk_args, conjunction, comparison, term, sum,
-relation;
+parameterDeclarations, parameterDeclaration, statements, expressions, externinvk_args;
 
 non terminal Location location;
-non terminal Expression expr;
+non terminal Expression expr,conjunction, comparison, term, sum,relation;
 non terminal AssignOpType assign_op;
 non terminal Expression factor;
 
@@ -308,42 +308,102 @@ relation::= sum
         | sum MENOR_IGUAL sum
         ;
 
-sum::= term
-   | sum SUMA term
-   | sum RESTA term
+sum::= term:t {: RESULT=t; :}
+   | sum:s SUMA term:t {: if((s.getType().equals(Type.INT) && t.getType().equals(Type.INT))||(s.getType().equals(Type.FLOAT) && t.getType().equals(Type.FLOAT))||(s.getType().equals(Type.FLOAT) && t.getType().equals(Type.INT))||(s.getType().equals(Type.INT) && t.getType().equals(Type.FLOAT))){
+                                        if(s.getType().equals(Type.INT) && t.getType().equals(Type.INT)){
+                                            BinOpExpr res=new BinOpExpr(s,BinOpType.PLUS,t);
+                                            res.setType(Type.INT);
+                                            RESULT=res;
+                                        }else{
+                                            BinOpExpr res=new BinOpExpr(s,BinOpType.PLUS,t);
+                                            res.setType(Type.FLOAT);
+                                            RESULT=res;
+                                        }
+                                    }else{
+                                        System.out.println("Error "+BinOpType.PLUS.toString()+" can only be applied to Int or Float values");
+                                        RESULT=null;
+                                    }
+                                     :}
+   | sum:s RESTA term:t {: if((s.getType().equals(Type.INT) && t.getType().equals(Type.INT))||(s.getType().equals(Type.FLOAT) && t.getType().equals(Type.FLOAT))||(s.getType().equals(Type.FLOAT) && t.getType().equals(Type.INT))||(s.getType().equals(Type.INT) && t.getType().equals(Type.FLOAT))){
+                                        if(s.getType().equals(Type.INT) && t.getType().equals(Type.INT)){
+                                            BinOpExpr res=new BinOpExpr(s,BinOpType.MINUS,t);
+                                            res.setType(Type.INT);
+                                            RESULT=res;
+                                        }else{
+                                            BinOpExpr res=new BinOpExpr(s,BinOpType.MINUS,t);
+                                            res.setType(Type.FLOAT);
+                                            RESULT=res;
+                                        }
+                                    }else{
+                                        System.out.println("Error "+BinOpType.MINUS.toString()+" can only be applied to Int or Float values");
+                                        RESULT=null;
+                                    }
+                                     :}
    ;
 
-term::= factor
-    | term MULTIPLICACION factor 
-    | term DIVISION factor
-    | term PORCENTAJE factor
+term::= factor:f {: RESULT=f; :}
+    | term:t MULTIPLICACION factor:f {: if((t.getType().equals(Type.INT) && f.getType().equals(Type.INT))||(t.getType().equals(Type.FLOAT) && f.getType().equals(Type.FLOAT))||(t.getType().equals(Type.FLOAT) && f.getType().equals(Type.INT))||(t.getType().equals(Type.INT) && f.getType().equals(Type.FLOAT))){
+                                        if(t.getType().equals(Type.INT) && f.getType().equals(Type.INT)){
+                                            BinOpExpr res=new BinOpExpr(t,BinOpType.MULTIPLY,f);
+                                            res.setType(Type.INT);
+                                            RESULT=res;
+                                        }else{
+                                            BinOpExpr res=new BinOpExpr(t,BinOpType.MULTIPLY,f);
+                                            res.setType(Type.FLOAT);
+                                            RESULT=res;
+                                        }
+                                    }else{
+                                        System.out.println("Error "+BinOpType.MULTIPLY.toString()+" can only be applied to Int or Float values");
+                                        RESULT=null;
+                                    }
+                                     :}
+    | term:t DIVISION factor:f {: if((t.getType().equals(Type.INT) && f.getType().equals(Type.INT))||(t.getType().equals(Type.FLOAT) && f.getType().equals(Type.FLOAT))||(t.getType().equals(Type.FLOAT) && f.getType().equals(Type.INT))||(t.getType().equals(Type.INT) && f.getType().equals(Type.FLOAT))){
+                                        if(t.getType().equals(Type.INT) && f.getType().equals(Type.INT)){
+                                            BinOpExpr res=new BinOpExpr(t,BinOpType.DIVIDE,f);
+                                            res.setType(Type.INT);
+                                            RESULT=res;
+                                        }else{
+                                            BinOpExpr res=new BinOpExpr(t,BinOpType.DIVIDE,f);
+                                            res.setType(Type.FLOAT);
+                                            RESULT=res;
+                                        }
+                                    }else{
+                                        System.out.println("Error "+BinOpType.DIVIDE.toString()+" can only be applied to Int or Float values");
+                                        RESULT=null;
+                                    }
+                                     :}
+    | term:t PORCENTAJE factor:f {: if(t.getType().equals(Type.INT) && f.getType().equals(Type.INT)){
+                                            BinOpExpr res=new BinOpExpr(t,BinOpType.MOD,f);
+                                            res.setType(Type.INT);
+                                            RESULT=res;
+                                        }else{
+                                            System.out.println("Error "+BinOpType.MOD.toString()+" can only be applied to Int values");
+                                            RESULT=null;
+                                        }
+                                     :}
     ;
 
 factor::=literal:l {: RESULT = (Expression)l; :} 
       | ADMIRACION factor:f {:  
                                 System.out.println("valor factor : "+f);
-                                UnaryOpExpr f2=null;
+                                UnaryOpExpr f2=new UnaryOpExpr(UnaryOpType.NON, f);
                                 if(f.getType().equals(Type.BOOLEAN)){
-                                    f2=new UnaryOpExpr(UnaryOpType.NON, f);
+                                    f2.setType(Type.BOOLEAN);
                                     System.out.println("valor de f2: "+f2 ); 
                                     RESULT=f2;
                                 }else{
                                     System.out.println("Boolean expected but "+f.getType().toString()+" found.");
                                 } :}
-      | RESTA factor /*{:  if(f.getType().equals(Type.FLOAT)){ 
-                                    FloatLiteral f2=(FloatLiteral)f;
-                                    float v=f2.getValue()*-1;
-                                    RESULT=new FloatLiteral(String.valueOf(v));
+      | RESTA factor:f {:  if(f.getType().equals(Type.FLOAT)){ 
+                                    RESULT=new UnaryOpExpr(UnaryOpType.MINUS,f);
                                 }else{
                                     if(f.getType().equals(Type.INT)){
-                                        IntLiteral f2=(IntLiteral)f;
-                                        int v=f2.getValue()*-1;
-                                        RESULT=new IntLiteral(String.valueOf(v));
+                                        new UnaryOpExpr(UnaryOpType.MINUS,f);
                                     }else{
                                         System.out.println("Numeral (int or float) expected but "+f.getType().toString()+" found.");
                                     }
                                 }   
-                                 :}*/
+                                 :}
       ;
 
 
@@ -390,7 +450,27 @@ literal::= INT_LITERAL:i {: RESULT= new IntLiteral((String) i); :}
                             break;
                     }
                  :}
-       | ID CORCHETE_IZQ expr CORCHETE_DER
+       | ID:id CORCHETE_IZQ expr:e CORCHETE_DER {: 
+                Simbolo s=TS.buscarSimbolo((String)id);
+                if(s==null){
+                    System.out.println("Variable "+id+" not found");
+                }else{
+                    if(s.getType().isArray()){
+                        if(!e.getType().equals(Type.INT)){
+                            System.out.println("Error: expression in array must be int");
+                        }else{
+                            IntLiteral e2=(IntLiteral) e;
+                            if(e2.getValue()<0){
+                                System.out.println("Error: array index must be higher than zero");
+                            }else{
+                                RESULT= new ArrayLiteral((String)id, s.getSize(), s.getType());
+                            }
+                        }
+                    }else{
+                        System.out.println("Variable "+id+" is not an array");
+                    }
+                }
+             :}
        | method_call
        | PARENTESIS_IZQ expr PARENTESIS_DER
        ;

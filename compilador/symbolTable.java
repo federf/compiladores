@@ -109,13 +109,16 @@ public class symbolTable {
         //encontrar el simbolo, lo que ocurra primero
         boolean declarado = false;
         Simbolo result = null;
-        while (!nivelCorr.esRaiz() && (!declarado)) {
+        System.out.println("buscando " + id);
+        while (nivelCorr!=null && (!declarado)) {
             //verificamos si el simbolo fue declarado en el nivel corriente
             declarado = declarado || (nivelCorr.getSimboloByName(id) != null);
             //actualizamos el nivel corriente al padre del mismo
-            result=nivelCorr.getSimboloByName(id);
+            result = nivelCorr.getSimboloByName(id);
             nivelCorr = nivelCorr.getPadre();
         }
+        System.out.println("encontrado? "+declarado);
+        System.out.println("resultado: "+result);
         return result;
     }
 }
