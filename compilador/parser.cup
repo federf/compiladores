@@ -38,17 +38,19 @@ non terminal program,field_decl,method_decl,block,type,statement,method_call,ext
 literal, bool_LITERAL, type_or_void, else_block;
 
 non terminal body, fieldDeclarations, fieldAndMethods, identifier, identifiers, methodDeclarations, parameters, 
-parameterDeclarations, parameterDeclaration, statements, expressions, externinvk_args, conjunction, comparison, factor, term, sum,
+parameterDeclarations, parameterDeclaration, statements, expressions, externinvk_args, conjunction, comparison, term, sum,
 relation;
 
 non terminal Location location;
 non terminal Expression expr;
 non terminal AssignOpType assign_op;
+non terminal Literal factor;
 
 /*DECLARACION DE VARIABLES TERMINALES */
 
 /*Terminales palabras reservadas*/
-terminal CLASS, ELSE, FALSE, ID, TRUE, VOID;
+terminal CLASS, ELSE, ID, VOID;
+terminal BoolLiteral FALSE, TRUE;
 terminal IfStmt IF;
 terminal BreakStmt BREAK;
 terminal ContinueStmt CONTINUE;
@@ -73,7 +75,9 @@ terminal INT, FLOAT, BOOLEAN;
 terminal EXTERNINVK;
 
 /*Terminales objetos*/
-terminal INT_LITERAL, FLOAT_LITERAL, STRING_LITERAL;
+terminal String INT_LITERAL;
+terminal String FLOAT_LITERAL;
+terminal String STRING_LITERAL;
 
 precedence left LLAVE_IZQ, LLAVE_DER;
 precedence left CORCHETE_IZQ, CORCHETE_DER;
@@ -134,17 +138,20 @@ methodDeclarations::= method_decl
                   ;
 
 method_decl::= VOID ID:d {: 
-if(d.toString().equals("main")){mainDeclared=true;} TS.agregarMetodo(Type.VOID, d.toString());:} parameters {:
-                   Metodo e=TS.obtenerMetodo();
-                   TS.agregarNivel();
-                   for(int i=0; i<e.getParametros().size(); i++){
+                    if(d.toString().equals("main")){
+                        mainDeclared=true;
+                    } 
+                    TS.agregarMetodo(Type.VOID, d.toString()); :} parameters {:
+                    Metodo e=TS.obtenerMetodo();
+                    ult_metodo=e;
+                    TS.agregarNivel();
+                    for(int i=0; i<e.getParametros().size(); i++){
                         Simbolo actual = e.getParametros().get(i);
                         TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
                    }         :} block {: TS.SubirNivel(); :}
            | type ID:g {:if(g.toString().equals("main")){mainDeclared=true;} switch (tipo_corriente){
                               case INT:
                                         TS.agregarMetodo(Type.INT, g.toString());
-                                        ult_metodo=new Metodo(Type.INT, g.toString());
                                         break;
                               case FLOAT:
                                         TS.agregarMetodo(Type.FLOAT, g.toString());  
@@ -153,11 +160,13 @@ if(d.toString().equals("main")){mainDeclared=true;} TS.agregarMetodo(Type.VOID, 
                                         TS.agregarMetodo(Type.BOOLEAN, g.toString()); 
                                         break;
                                                  }:} parameters {:Metodo e=TS.obtenerMetodo();
-                   TS.agregarNivel();
-                   for(int i=0; i<e.getParametros().size(); i++){
+                                                 ult_metodo=TS.obtenerMetodo();   
+                    TS.agregarNivel();
+                    for(int i=0; i<e.getParametros().size(); i++){
                         Simbolo actual = e.getParametros().get(i);
                         TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
-                   }         :} block {:TS.SubirNivel();:}
+                    }
+                   :} block {:TS.SubirNivel();:}
            ;
 
 block::= LLAVE_IZQ LLAVE_DER
@@ -194,8 +203,21 @@ statement::= location:l assign_op:ao expr:e PUNTO_Y_COMA {: AssignStmt a=new Ass
          | IF PARENTESIS_IZQ {: TS.agregarNivel(); :} expr PARENTESIS_DER block {: TS.SubirNivel(); :} else_block
          | FOR ID ASIGNACION expr COMA expr {: TS.agregarNivel(); :}  block {: TS.SubirNivel(); :}
          | WHILE expr {: TS.agregarNivel(); :}  block {: TS.SubirNivel(); :}
-         | RETURN PUNTO_Y_COMA {:if(!TS.obtenerMetodo().getTypeReturn().equals(Type.VOID)){System.out.println("Error: Method "+TS.obtenerMetodo().getName()+" returns void ");} :}
-         | RETURN expr:e PUNTO_Y_COMA {:if(!e.getType().equals(TS.obtenerMetodo().getTypeReturn())){System.out.println("Error: Method "+TS.obtenerMetodo().getName()+" must return "+TS.obtenerMetodo().getTypeReturn().toString());}:}
+         | RETURN PUNTO_Y_COMA {:
+                               if(!ult_metodo.getTypeReturn().equals(Type.VOID)){
+                                        System.out.println("Error: Method "+ult_metodo.getName()+" returns void ");
+                               }else{ 
+                                    System.out.println("deberia retornar ReturnStmt con void");
+                                /*RESULT= new ResultStmt(void)*/;} :}
+         | RETURN expr:e PUNTO_Y_COMA {: 
+                                        System.out.println("EXPRESSION STATEMENT RETURN ="+e);
+                                        /*if(!e.getType().equals(ult_metodo.getTypeReturn())){
+                                            System.out.println("Error: Method "+ult_metodo.getName()+" must return "+ult_metodo.getTypeReturn().toString());
+                                        }else{
+                                            System.out.println("deberia retornar ReturnStmt con el tipo");
+                                            //RESULT= new ReturnStmt(e);
+                                        }*/
+                                        :}
          | BREAK PUNTO_Y_COMA
          | CONTINUE PUNTO_Y_COMA
          | PUNTO_Y_COMA
@@ -206,9 +228,9 @@ else_block::= ELSE {: TS.agregarNivel(); :} block {: TS.SubirNivel(); :}
           |
           ;
 
-assign_op::= ASIGNACION 
-         | INCREMENTO 
-         | DECREMENTO
+assign_op::= ASIGNACION {: RESULT= AssignOpType.ASSIGN; :}
+         | INCREMENTO {: RESULT= AssignOpType.INCREMENT; :}
+         | DECREMENTO {: RESULT= AssignOpType.DECREMENT; :}
          ;
 
 method_call::= ID PARENTESIS_IZQ PARENTESIS_DER
@@ -263,27 +285,47 @@ sum::= term
    ;
 
 term::= factor
-    | term MULTIPLICACION factor
+    | term MULTIPLICACION factor 
     | term DIVISION factor
     | term PORCENTAJE factor
     ;
 
-factor::= literal
-      | ADMIRACION factor
-      | RESTA factor
+factor::= literal:l 
+      | ADMIRACION factor /*{:  System.out.println("entro admiracion !");
+                                System.out.println(f);
+                                if(f.getType().equals(Type.BOOLEAN)){ 
+                                    BoolLiteral f2=(BoolLiteral)f;
+                                    RESULT=new BoolLiteral(!f2.getValue());
+                                }else{
+                                    System.out.println("Boolean expected but "+f.getType().toString()+" found.");
+                                } :}*/
+      | RESTA factor /*{:  if(f.getType().equals(Type.FLOAT)){ 
+                                    FloatLiteral f2=(FloatLiteral)f;
+                                    float v=f2.getValue()*-1;
+                                    RESULT=new FloatLiteral(String.valueOf(v));
+                                }else{
+                                    if(f.getType().equals(Type.INT)){
+                                        IntLiteral f2=(IntLiteral)f;
+                                        int v=f2.getValue()*-1;
+                                        RESULT=new IntLiteral(String.valueOf(v));
+                                    }else{
+                                        System.out.println("Numeral (int or float) expected but "+f.getType().toString()+" found.");
+                                    }
+                                }   
+                                 :}*/
       ;
 
 
-literal::= INT_LITERAL
-       | FLOAT_LITERAL
-       | bool_LITERAL
-       | ID
+literal::= INT_LITERAL:i {: RESULT= new IntLiteral((String) i); :}
+       | FLOAT_LITERAL:f {:RESULT= new FloatLiteral((String) f); :}
+       | bool_LITERAL:b //{:System.out.println("entro aca (BOOL_LITERAL)"+b.toString());:}
+       | ID //{:System.out.println("entro aca (BOOL_LITERAL  id)"); :}
        | ID CORCHETE_IZQ expr CORCHETE_DER
        | method_call
        | PARENTESIS_IZQ expr PARENTESIS_DER
        ;
 
-bool_LITERAL::= TRUE {: RESULT = true;:} 
-            | FALSE {: RESULT = false;:}
+bool_LITERAL::= TRUE {:RESULT= new BoolLiteral(true); :} 
+            | FALSE {: RESULT= new BoolLiteral(false);; :}
             ;
 

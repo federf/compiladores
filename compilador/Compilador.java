@@ -20,7 +20,7 @@ public class Compilador {
     public static void main(String[] args) {
         // TODO code application logic here
         Reader file;
-        try {
+        try {          
             file=new FileReader(args[0]);
             Yylex y= new Yylex(file);
             parser p = new parser(y);

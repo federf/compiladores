@@ -5,11 +5,11 @@ boolean neg(boolean b){
 }
 
 boolean and(boolean a, boolean b){
-  return a && b;
+  return a &&b;
 }
 
 boolean or(boolean a, boolean b){
-  return a || b;
+  return a||b;
 }
 void main(){
 

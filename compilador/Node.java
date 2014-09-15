@@ -128,4 +128,15 @@ public class Node {
         }
         return exists;
     }
+    
+    //metodo que dado el nombre de un simbolo lo busca en el nivel corriente y lo retorna como resultado
+    public Simbolo getSimboloByName(String id){
+        Simbolo res=null;
+        for(int i=0; i<this.variables.size(); i++){
+            if(this.variables.get(i).name.equals(id)){
+                return this.variables.get(i);
+            }
+        }
+        return res;
+    }
 }

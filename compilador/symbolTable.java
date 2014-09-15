@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 
-
 import java.util.LinkedList;
 import ir.ast.*;
+
 /**
  *
  * @author fede
@@ -35,9 +35,9 @@ public class symbolTable {
     public void agregarNivel() {
         this.TablaDeSimbolos.agregarNivel();
     }
-    
+
     //metodo que "sube un nivel" dentro del arbol que representa la tabla de simbolos
-    public void SubirNivel(){
+    public void SubirNivel() {
         this.TablaDeSimbolos.subirNivel();
     }
 
@@ -52,13 +52,13 @@ public class symbolTable {
         Node nivelCorr = this.TablaDeSimbolos.getCorriente();
         //si estamos en el ambiente global (raiz del arbol) verificamos si fue declarado en dicho ambiente
         if (nivelCorr.esRaiz()) {
-            declarado = nivelCorr.getSimbolo(s)!=null;
+            declarado = nivelCorr.getSimbolo(s) != null;
         } else {
             //sino verificamos de forma recursiva en el nivel corriente hasta llegas a la raiz o
             //encontrar el simbolo, lo que ocurra primero
             while (nivelCorr.getPadre() != null && (!declarado)) {
                 //verificamos si el simbolo fue declarado en el nivel corriente
-                declarado = declarado || (nivelCorr.getSimbolo(s)!=null);
+                declarado = declarado || (nivelCorr.getSimbolo(s) != null);
                 //actualizamos el nivel corriente al padre del mismo
                 nivelCorr = nivelCorr.getPadre();
             }
@@ -66,7 +66,6 @@ public class symbolTable {
         return declarado;
     }
 
-    
     //metodo que dado un Metodo verifica si fue declarado en el mismo o en algun nivel superior
     // (se utilizaria para ver si una variable fue declarada para poder ser usada)
     public boolean metodoDeclarado(Type result, String name) {
@@ -78,27 +77,43 @@ public class symbolTable {
         Node nivelCorr = this.TablaDeSimbolos.getCorriente();
         //si estamos en el ambiente global (raiz del arbol) verificamos si fue declarado en dicho ambiente
         if (nivelCorr.esRaiz()) {
-            declarado = nivelCorr.getMetodo(s)!=null;
+            declarado = nivelCorr.getMetodo(s) != null;
         } else {
             //sino verificamos de forma recursiva en el nivel corriente hasta llegas a la raiz o
             //encontrar el Metodo, lo que ocurra primero
             while (nivelCorr.getPadre() != null && (!declarado)) {
                 //verificamos si el Metodo fue declarado en el nivel corriente
-                declarado = declarado || (nivelCorr.getMetodo(s)!=null);
+                declarado = declarado || (nivelCorr.getMetodo(s) != null);
                 //actualizamos el nivel corriente al padre del mismo
                 nivelCorr = nivelCorr.getPadre();
             }
         }
         return declarado;
     }
-    
-        //metodo que devuelve el ultimo metodo creado
-    public Metodo obtenerMetodo(){
+
+    //metodo que devuelve el ultimo metodo creado
+    public Metodo obtenerMetodo() {
         return this.TablaDeSimbolos.corriente.metodos.getLast();
     }
-    
+
     //metodo que devuelve el ultimo simbolo creado
-    public Simbolo obtenerSimbolo(){
+    public Simbolo obtenerSimbolo() {
         return this.TablaDeSimbolos.corriente.variables.getLast();
+    }
+
+    //metodo que dado el nombre de un simbolo lo busca y retorna como resultado
+    public Simbolo buscarSimbolo(String id) {
+        //nos situamos en el nivel corriente dentro del arbol
+        Node nivelCorr = this.TablaDeSimbolos.getCorriente();
+        //sino verificamos de forma recursiva en el nivel corriente hasta llegas a la raiz o
+        //encontrar el simbolo, lo que ocurra primero
+        boolean declarado = false;
+        while (!nivelCorr.esRaiz() && (!declarado)) {
+            //verificamos si el simbolo fue declarado en el nivel corriente
+            declarado = declarado || (nivelCorr.getSimboloByName(id) != null);
+            //actualizamos el nivel corriente al padre del mismo
+            nivelCorr = nivelCorr.getPadre();
+        }
+        return nivelCorr.getSimboloByName(id);
     }
 }

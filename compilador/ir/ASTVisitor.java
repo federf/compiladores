@@ -16,6 +16,7 @@ public interface ASTVisitor<T> {
 	T visit(IntLiteral lit);
     T visit(BoolLiteral bool);
     T visit(FloatLiteral flo);
+    T visit(StringLiteral str);
 
 // visit locations	
 	T visit(VarLocation loc);
