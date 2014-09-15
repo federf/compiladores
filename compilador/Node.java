@@ -133,6 +133,7 @@ public class Node {
     public Simbolo getSimboloByName(String id){
         Simbolo res=null;
         for(int i=0; i<this.variables.size(); i++){
+            //System.out.println("actual "+this.variables.get(i).name);
             if(this.variables.get(i).name.equals(id)){
                 return this.variables.get(i);
             }
