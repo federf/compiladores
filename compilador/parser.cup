@@ -256,16 +256,36 @@ externinvk_arg::= expr
               | STRING_LITERAL
               ;
 
-location::= ID:id {: System.out.println("location "+id);
+location::= ID:id {: //System.out.println("location "+id);
                     Simbolo s=TS.buscarSimbolo((String)id); 
                         if(s==null){
-                            System.out.println("variable "+id+" not declared");
-                            RESULT=null;
+                            System.out.println("Variable "+id+" not found");
+                            //RESULT=null;
                         }else{
                             RESULT= new VarLocation((String)id,s.getType(),s.getValue(),s.getSize());
                         }
              :} //usos de variables
-        | ID CORCHETE_IZQ expr CORCHETE_DER
+        | ID:id CORCHETE_IZQ expr:e CORCHETE_DER {: 
+                Simbolo s=TS.buscarSimbolo((String)id);
+                if(s==null){
+                    System.out.println("Variable "+id+" not found");
+                }else{
+                    if(s.getType().isArray()){
+                        if(!e.getType().equals(Type.INT)){
+                            System.out.println("Error: expression in array must be int");
+                        }else{
+                            IntLiteral e2=(IntLiteral) e;
+                            if(e2.getValue()<0){
+                                System.out.println("Error: array index must be higher than zero");
+                            }else{
+                                RESULT= new VarLocation((String)id,s.getType(),s.getValue(),s.getSize());
+                            }
+                        }
+                    }else{
+                        System.out.println("Variable "+id+" is not an array");
+                    }
+                }
+             :}
         ;
 
 expr::= conjunction
