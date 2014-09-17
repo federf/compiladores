@@ -35,7 +35,7 @@ public class VarLocation extends Location {
 
     @Override
     public String toString() {
-        return "VarLocation{" +"name="+ id +"type=" + type + ", value=" + value + ", size=" + size + '}';
+        return "VarLocation{" +"name="+ id +", type=" + type + ", value=" + value + ", size=" + size + '}';
     }
 
     

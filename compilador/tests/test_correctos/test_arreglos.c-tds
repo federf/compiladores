@@ -12,7 +12,7 @@ int pruArreglos(int b, int c ){
          A[0] = 4; 
          B[55] = 2.6 + y;
          C[0] = ((b < c)) ;
-         C[1] = b >= c;
+         C[1] = (b >= c);
 	return A[0]; 
 
 }
@@ -23,7 +23,7 @@ int main(){
      B[0] = -2.6;
      C[2] = !((4 < 6)) ;
      C[3] = ( 5 >= A[ 7 -(3+3) ]) || true ;
-    externinvk("printf", int ,"%d resultado : ", pruArreglos(4, (8 * 6) / (7 % 2) ) );
+    //externinvk("printf", int ,"%d resultado : ", pruArreglos(4, (8 * 6) / (7 % 2) ) );
     
     return 1;
     

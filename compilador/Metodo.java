@@ -136,7 +136,7 @@ public class Metodo {
             for (int i = 0; i < this.parametros.size(); i++) {
                 boolean esta = false;
                 for (int j = 0; j < m.parametros.size(); j++) {
-                    esta = esta || this.parametros.get(i).equals(m.parametros.get(j));
+                    esta = esta || this.parametros.get(i).getType().equals(m.parametros.get(j).getType());
                 }
                 mismosParam = mismosParam && esta;
             }

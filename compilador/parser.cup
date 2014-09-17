@@ -199,19 +199,106 @@ type::= INT {:tipo_corriente = Type.INT; :}
     | BOOLEAN {:tipo_corriente = Type.BOOLEAN; :}
     ;
 
-statement::= location:l assign_op:ao expr:e PUNTO_Y_COMA {: AssignStmt a=new AssignStmt((Location)l, (AssignOpType) ao, (Expression) e); RESULT=a; :}
+statement::= location:l assign_op:ao expr:e PUNTO_Y_COMA {: System.out.println("expr "+e);
+                                                            System.out.println("location :"+l+", operation: "+ao.toString()+" , expr type: "+e.getType());
+                                                            
+                                                            if(l.getType().equals(e.getType()) && ao.toString().equals("=") && (!l.getType().isArray())){ //si se realiza una asignacion con tipos identicos de location y expression (no array)
+                                                                System.out.println("assing ok (=)");
+                                                                AssignStmt a=new AssignStmt((Location)l, AssignOpType.ASSIGN, (Expression) e); 
+                                                                System.out.println(a);
+                                                                RESULT=a; 
+                                                            }else{
+                                                                //si location es un array
+                                                                if(l.getType().isArray()){
+                                                                    System.out.println("location array");
+                                                                    //arreglo de enteros expresion entero
+                                                                    switch(l.getType()){
+                                                                        //caso arreglo de enteros con valor entero
+                                                                        case INTARRAY:
+                                                                            System.out.println("INTARRAY LOCATION");
+                                                                            if(e.getType().equals(Type.INT)){
+                                                                                System.out.println("assing ok "+ao);
+                                                                                System.out.println("expr "+e);
+                                                                                AssignStmt a=new AssignStmt((Location)l, ao, (Expression) e); 
+                                                                                RESULT=a; 
+                                                                            }else{
+                                                                                System.out.println("Error int expected but "+e.getType()+" found");
+                                                                            }
+                                                                            System.out.println("sale INTTARRAY LOCATION");
+                                                                            break;
+                                                                        case FLOATARRAY:
+                                                                            System.out.println("FLOATARRAY LOCATION");
+                                                                            if(e.getType().equals(Type.FLOAT)){
+                                                                                System.out.println("assing ok "+ao);
+                                                                                System.out.println("expr "+e);
+                                                                                AssignStmt a=new AssignStmt((Location)l, ao, (Expression) e); 
+                                                                                RESULT=a; 
+                                                                            }else{
+                                                                                System.out.println("Error float expected but "+e.getType()+" found");
+                                                                            }
+                                                                            System.out.println("sale FLOATARRAY LOCATION");
+                                                                            break;
+                                                                        case BOOLARRAY:
+                                                                            System.out.println("BOOLARRAY LOCATION");
+                                                                            System.out.println("expr "+e);
+                                                                            if(e.getType().equals(Type.BOOLEAN)){
+                                                                                if(ao.toString().equals("=")){
+                                                                                    System.out.println("assing ok "+ao);
+                                                                                    AssignStmt a=new AssignStmt((Location)l, AssignOpType.ASSIGN, (Expression) e); 
+                                                                                    RESULT=a;
+                                                                                }else{
+                                                                                    System.out.println("Error "+ao+" operation not valid for boolean values");
+                                                                                }
+                                                                            }else{
+                                                                                System.out.println("Error int expected but "+e.getType()+" found");
+                                                                            }
+                                                                            System.out.println("sale BOOLARRAY LOCATION");
+                                                                            break;
+                                                                    }
+                                                                }else{
+                                                                    System.out.println("Error invalid assign operation in "+l+" "+ao+" "+e);
+                                                                }
+                                                            }
+                                                            System.out.println("salio una vez");
+                                                            System.out.println("");
+                                                         :}
          | method_call PUNTO_Y_COMA
          | IF PARENTESIS_IZQ {: TS.agregarNivel(); :} expr PARENTESIS_DER block {: TS.SubirNivel(); :} else_block
          | FOR ID ASIGNACION expr COMA expr {: TS.agregarNivel(); :}  block {: TS.SubirNivel(); :}
          | WHILE expr {: TS.agregarNivel(); :}  block {: TS.SubirNivel(); :}
          | RETURN PUNTO_Y_COMA {:
-                               if(!ult_metodo.getTypeReturn().equals(Type.VOID)){
-                                        System.out.println("Error: Method "+ult_metodo.getName()+" returns void ");
-                               }else{ 
-                                    System.out.println("deberia retornar ReturnStmt con void");
-                                /*RESULT= new ResultStmt(void)*/;} :}
+                                System.out.println("RETURN;");
+                                if(!ult_metodo.getTypeReturn().equals(Type.VOID)){
+                                         System.out.println("Error: Method "+ult_metodo.getName()+" returns void ");
+                                }else{ 
+                                     System.out.println("deberia retornar ReturnStmt con void");
+                                 /*RESULT= new ResultStmt(void)*/;} :}
          | RETURN expr:e PUNTO_Y_COMA {: 
-                                        System.out.println("EXPRESSION STATEMENT RETURN ="+e);
+                                        System.out.println("RETURN expr;");
+                                        System.out.println("EXPRESSION STATEMENT RETURN ="+e.getType());
+                                        switch(e.getType()){
+                                            case INTARRAY:
+                                                if(ult_metodo.getTypeReturn().equals(Type.INT) || ult_metodo.getTypeReturn().equals(Type.INTARRAY)){
+                                                    RESULT=new ReturnStmt(e);
+                                                }else{
+                                                    System.out.println("Error: Method "+ult_metodo.getName()+" must return "+ult_metodo.getTypeReturn().toString());
+                                                }
+                                                break;
+                                            case BOOLARRAY:
+                                                if(ult_metodo.getTypeReturn().equals(Type.BOOLEAN) || ult_metodo.getTypeReturn().equals(Type.BOOLARRAY)){
+                                                    RESULT=new ReturnStmt(e);
+                                                }else{
+                                                    System.out.println("Error: Method "+ult_metodo.getName()+" must return "+ult_metodo.getTypeReturn().toString());
+                                                }
+                                                break;
+                                            case FLOATARRAY:
+                                                if(ult_metodo.getTypeReturn().equals(Type.FLOAT) || ult_metodo.getTypeReturn().equals(Type.FLOAT)){
+                                                    RESULT=new ReturnStmt(e);
+                                                }else{
+                                                    System.out.println("Error: Method "+ult_metodo.getName()+" must return "+ult_metodo.getTypeReturn().toString());
+                                                }
+                                                break;
+                                        }
                                         /*if(!e.getType().equals(ult_metodo.getTypeReturn())){
                                             System.out.println("Error: Method "+ult_metodo.getName()+" must return "+ult_metodo.getTypeReturn().toString());
                                         }else{
@@ -234,7 +321,7 @@ assign_op::= ASIGNACION {: RESULT= AssignOpType.ASSIGN; :}
          | DECREMENTO {: RESULT= AssignOpType.DECREMENT; :}
          ;
 
-method_call::= ID PARENTESIS_IZQ PARENTESIS_DER
+method_call::= ID:id PARENTESIS_IZQ PARENTESIS_DER //{: Simbolo s=TS. :}
            |  ID PARENTESIS_IZQ expressions PARENTESIS_DER
            |  EXTERNINVK PARENTESIS_IZQ STRING_LITERAL COMA type_or_void COMA externinvk_args PARENTESIS_DER
            |  EXTERNINVK PARENTESIS_IZQ STRING_LITERAL COMA type_or_void PARENTESIS_DER
@@ -256,29 +343,47 @@ externinvk_arg::= expr
               | STRING_LITERAL
               ;
 
-location::= ID:id {: //System.out.println("location "+id);
+location::= ID:id {: //System.out.println("location var "+id);
+                    System.out.println("entro por location id");
                     Simbolo s=TS.buscarSimbolo((String)id); 
                         if(s==null){
                             System.out.println("Variable "+id+" not found");
-                            //RESULT=null;
+                            ////RESULT=null;
                         }else{
-                            RESULT= new VarLocation((String)id,s.getType(),s.getValue(),s.getSize());
+                            VarLocation v=new VarLocation((String)id,s.getType(),s.getValue(),s.getSize());
+                            v.setType(s.getType());
+                            RESULT=v ;
                         }
+                        System.out.println("sale location var ");
              :} //usos de variables
         | ID:id CORCHETE_IZQ expr:e CORCHETE_DER {: 
+                System.out.println("entro por location array");
                 Simbolo s=TS.buscarSimbolo((String)id);
+                System.out.println("location array "+id+"["+e+"]");
                 if(s==null){
                     System.out.println("Variable "+id+" not found");
                 }else{
+                    
+                    System.out.println("simbolo encontrado (no nulo)");
+
                     if(s.getType().isArray()){
+                        System.out.println("es arreglo");
                         if(!e.getType().equals(Type.INT)){
                             System.out.println("Error: expression in array must be int");
                         }else{
+                            
+                            System.out.println("expresion INT");
+
                             IntLiteral e2=(IntLiteral) e;
+                            
+                            System.out.println(e2.getValue());
+                            
                             if(e2.getValue()<0){
                                 System.out.println("Error: array index must be higher than zero");
                             }else{
-                                RESULT= new VarLocation((String)id,s.getType(),s.getValue(),s.getSize());
+                                VarLocation v=new VarLocation((String)id,s.getType(),s.getValue(),s.getSize());
+                                v.setType(s.getType());
+                                RESULT=v ;
                             }
                         }
                     }else{
@@ -288,97 +393,391 @@ location::= ID:id {: //System.out.println("location "+id);
              :}
         ;
 
-expr::= conjunction
-    | expr DISYUNCION conjunction
+expr::= conjunction:c {:System.out.println("res type: "+c.getType());
+                        System.out.println("res class: "+c.getClass()); 
+                        RESULT=c; :}
+    | expr:e DISYUNCION conjunction:c {: if(e.getType().equals(Type.BOOLEAN) && c.getType().equals(Type.BOOLEAN)){
+                                            BinOpExpr res=new BinOpExpr(e,BinOpType.OR,c);
+                                            res.setType(Type.BOOLEAN);
+
+                                            System.out.println("disyuncion "+res);
+
+                                            RESULT=res;
+                                        }else{
+                                            System.out.println("Error "+BinOpType.OR+"can only be applied to Boolean operands");
+                                            //RESULT=null;
+                                        }
+                                         :}
     ;
 
-conjunction::= comparison
-           | conjunction CONJUNCION comparison
+conjunction::= comparison:c {: RESULT=c; :}
+           | conjunction:c1 CONJUNCION comparison:c2 {: if(c1.getType().equals(Type.BOOLEAN) && c2.getType().equals(Type.BOOLEAN)){
+                                            BinOpExpr res=new BinOpExpr(c1,BinOpType.AND,c2);
+                                            res.setType(Type.BOOLEAN);
+                                                
+                                            System.out.println("conjuncion "+res);
+                                            
+                                            RESULT=res;
+                                        }else{
+                                            System.out.println("Error "+BinOpType.AND+"can only be applied to Boolean operands");
+                                            //RESULT=null;
+                                        }
+                                         :}
            ;
 
-comparison::= relation
-          | relation IGUALDAD_LOGICA relation
-          | relation DIFERENCIA_LOGICA relation
+comparison::= relation:r {: RESULT=r; :}
+          | relation:r1 IGUALDAD_LOGICA relation:r2 {: if(r1.getType().equals(Type.BOOLEAN) && r2.getType().equals(Type.BOOLEAN)){
+                                            BinOpExpr res= new BinOpExpr(r1,BinOpType.CEQ,r2);
+                                            res.setType(Type.BOOLEAN);
+
+                                            System.out.println("== "+res);
+                                            
+                                            RESULT=res;
+                                        }else{
+                                            System.out.println("Error "+BinOpType.CEQ+"can only be applied to Boolean operands");
+                                            //RESULT=null;
+                                        }
+                                         :}
+          | relation:r1 DIFERENCIA_LOGICA relation:r2 {: if(r1.getType().equals(Type.BOOLEAN) && r2.getType().equals(Type.BOOLEAN)){
+                                            BinOpExpr res= new BinOpExpr(r1,BinOpType.NEQ,r2);
+
+                                            System.out.println("!= "+res);
+                                            
+                                            res.setType(Type.BOOLEAN);
+                                            RESULT=res;
+                                        }else{
+                                            System.out.println("Error "+BinOpType.NEQ+"can only be applied to Boolean operands");
+                                            //RESULT=null;
+                                        }
+                                         :}
           ;
 
-relation::= sum
-        | sum MENOR sum
-        | sum MAYOR sum
-        | sum MAYOR_IGUAL sum
-        | sum MENOR_IGUAL sum
+relation::= sum:s {:RESULT=s; :}
+        | sum:s1 MENOR sum:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
+
+
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
+
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
+                                        
+
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT))
+
+                                        ){
+                                            BinOpExpr res=new BinOpExpr(s1,BinOpType.LE,s2);
+
+                                            System.out.println("< "+res);
+                                            
+                                            res.setType(Type.BOOLEAN);
+                                            RESULT=res;
+                                        }else{
+                                            System.out.println("Error "+BinOpType.LE.toString()+" can only be applied to Int or Float values");
+                                            //RESULT=null;
+                                        }
+                                     :}
+        | sum:s1 MAYOR sum:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
+
+
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
+
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
+                                        
+
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT))
+                                        ){
+                                            BinOpExpr res=new BinOpExpr(s1,BinOpType.GE,s2);
+
+                                            System.out.println("> "+res);
+                                            
+                                            res.setType(Type.BOOLEAN);
+                                            RESULT=res;
+                                        }else{
+                                            System.out.println("Error "+BinOpType.GE.toString()+" can only be applied to Int or Float values");
+                                            //RESULT=null;
+                                        }
+                                     :}
+        | sum:s1 MAYOR_IGUAL sum:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
+
+
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
+
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
+                                        
+
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT))
+                                        ){
+                                            BinOpExpr res=new BinOpExpr(s1,BinOpType.GEQ,s2);
+
+                                            System.out.println(">= "+res);
+                                            
+                                            res.setType(Type.BOOLEAN);
+                                            RESULT=res;
+                                        }else{
+                                            System.out.println("Error "+BinOpType.GEQ.toString()+" can only be applied to Int or Float values");
+                                            //RESULT=null;
+                                        }
+                                     :}
+        | sum:s1 MENOR_IGUAL sum:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
+
+
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
+
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
+                                        
+
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT))
+                                        ){
+                                            BinOpExpr res=new BinOpExpr(s1,BinOpType.LEQ,s2);
+
+                                            System.out.println("<= "+res);
+                                            
+                                            res.setType(Type.BOOLEAN);
+                                            RESULT=res;
+                                        }else{
+                                            System.out.println("Error "+BinOpType.LEQ.toString()+" can only be applied to Int or Float values");
+                                            //RESULT=null;
+                                        }
+                                     :}
         ;
 
 sum::= term:t {: RESULT=t; :}
-   | sum:s SUMA term:t {: if((s.getType().equals(Type.INT) && t.getType().equals(Type.INT))||(s.getType().equals(Type.FLOAT) && t.getType().equals(Type.FLOAT))||(s.getType().equals(Type.FLOAT) && t.getType().equals(Type.INT))||(s.getType().equals(Type.INT) && t.getType().equals(Type.FLOAT))){
-                                        if(s.getType().equals(Type.INT) && t.getType().equals(Type.INT)){
-                                            BinOpExpr res=new BinOpExpr(s,BinOpType.PLUS,t);
-                                            res.setType(Type.INT);
-                                            RESULT=res;
-                                        }else{
-                                            BinOpExpr res=new BinOpExpr(s,BinOpType.PLUS,t);
-                                            res.setType(Type.FLOAT);
-                                            RESULT=res;
-                                        }
+   | sum:s1 SUMA term:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
+
+
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
+
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
+                                        
+
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT))
+                                        ){
+                                            if((s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
+                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
+                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))
+                                            ){
+                                                BinOpExpr res=new BinOpExpr(s1,BinOpType.PLUS,s2);
+
+                                                System.out.println("+  "+res);
+
+                                                res.setType(Type.INT);
+                                                RESULT=res;
+                                            }else{
+                                                BinOpExpr res=new BinOpExpr(s1,BinOpType.PLUS,s2);
+                                                res.setType(Type.FLOAT);
+                                                RESULT=res;
+                                            }
                                     }else{
                                         System.out.println("Error "+BinOpType.PLUS.toString()+" can only be applied to Int or Float values");
-                                        RESULT=null;
+                                        //RESULT=null;
                                     }
                                      :}
-   | sum:s RESTA term:t {: if((s.getType().equals(Type.INT) && t.getType().equals(Type.INT))||(s.getType().equals(Type.FLOAT) && t.getType().equals(Type.FLOAT))||(s.getType().equals(Type.FLOAT) && t.getType().equals(Type.INT))||(s.getType().equals(Type.INT) && t.getType().equals(Type.FLOAT))){
-                                        if(s.getType().equals(Type.INT) && t.getType().equals(Type.INT)){
-                                            BinOpExpr res=new BinOpExpr(s,BinOpType.MINUS,t);
+   | sum:s1 RESTA term:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
+
+
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
+
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
+                                        
+
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT))
+                                        ){
+                                            if((s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
+                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
+                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))
+                                            ){
+                                            BinOpExpr res=new BinOpExpr(s1,BinOpType.MINUS,s2);
+                                            
+                                            System.out.println("- (RESTA) "+res);
+                                            
                                             res.setType(Type.INT);
                                             RESULT=res;
                                         }else{
-                                            BinOpExpr res=new BinOpExpr(s,BinOpType.MINUS,t);
+                                            BinOpExpr res=new BinOpExpr(s1,BinOpType.MINUS,s2);
                                             res.setType(Type.FLOAT);
                                             RESULT=res;
                                         }
                                     }else{
                                         System.out.println("Error "+BinOpType.MINUS.toString()+" can only be applied to Int or Float values");
-                                        RESULT=null;
+                                        //RESULT=null;
                                     }
                                      :}
    ;
 
 term::= factor:f {: RESULT=f; :}
-    | term:t MULTIPLICACION factor:f {: if((t.getType().equals(Type.INT) && f.getType().equals(Type.INT))||(t.getType().equals(Type.FLOAT) && f.getType().equals(Type.FLOAT))||(t.getType().equals(Type.FLOAT) && f.getType().equals(Type.INT))||(t.getType().equals(Type.INT) && f.getType().equals(Type.FLOAT))){
-                                        if(t.getType().equals(Type.INT) && f.getType().equals(Type.INT)){
-                                            BinOpExpr res=new BinOpExpr(t,BinOpType.MULTIPLY,f);
+    | term:s1 MULTIPLICACION factor:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
+
+
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
+
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
+                                        
+
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT))
+                                        ){
+                                            if((s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
+                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
+                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))
+                                            ){
+                                            BinOpExpr res=new BinOpExpr(s1,BinOpType.MULTIPLY,s2);
+
+                                            System.out.println("*  "+res);
+                                            
                                             res.setType(Type.INT);
                                             RESULT=res;
                                         }else{
-                                            BinOpExpr res=new BinOpExpr(t,BinOpType.MULTIPLY,f);
+                                            BinOpExpr res=new BinOpExpr(s1,BinOpType.MULTIPLY,s2);
                                             res.setType(Type.FLOAT);
                                             RESULT=res;
                                         }
                                     }else{
                                         System.out.println("Error "+BinOpType.MULTIPLY.toString()+" can only be applied to Int or Float values");
-                                        RESULT=null;
+                                        //RESULT=null;
                                     }
                                      :}
-    | term:t DIVISION factor:f {: if((t.getType().equals(Type.INT) && f.getType().equals(Type.INT))||(t.getType().equals(Type.FLOAT) && f.getType().equals(Type.FLOAT))||(t.getType().equals(Type.FLOAT) && f.getType().equals(Type.INT))||(t.getType().equals(Type.INT) && f.getType().equals(Type.FLOAT))){
-                                        if(t.getType().equals(Type.INT) && f.getType().equals(Type.INT)){
-                                            BinOpExpr res=new BinOpExpr(t,BinOpType.DIVIDE,f);
+    | term:s1 DIVISION factor:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
+
+
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
+
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
+                                        
+
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
+                                        (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT))
+                                        ){
+                                            if((s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
+                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
+                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))
+                                            ){
+                                            BinOpExpr res=new BinOpExpr(s1,BinOpType.DIVIDE,s2);
+
+                                            System.out.println("/ "+res);
+                                            
                                             res.setType(Type.INT);
                                             RESULT=res;
                                         }else{
-                                            BinOpExpr res=new BinOpExpr(t,BinOpType.DIVIDE,f);
+                                            BinOpExpr res=new BinOpExpr(s1,BinOpType.DIVIDE,s2);
                                             res.setType(Type.FLOAT);
                                             RESULT=res;
                                         }
                                     }else{
                                         System.out.println("Error "+BinOpType.DIVIDE.toString()+" can only be applied to Int or Float values");
-                                        RESULT=null;
+                                        //RESULT=null;
                                     }
                                      :}
-    | term:t PORCENTAJE factor:f {: if(t.getType().equals(Type.INT) && f.getType().equals(Type.INT)){
-                                            BinOpExpr res=new BinOpExpr(t,BinOpType.MOD,f);
+    | term:s1 PORCENTAJE factor:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+                                        (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
+                                        (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))
+                                        ){
+                                            BinOpExpr res=new BinOpExpr(s1,BinOpType.MOD,s2);
+
+                                            System.out.println("%  "+res);
+                                            
                                             res.setType(Type.INT);
                                             RESULT=res;
                                         }else{
                                             System.out.println("Error "+BinOpType.MOD.toString()+" can only be applied to Int values");
-                                            RESULT=null;
+                                            //RESULT=null;
                                         }
                                      :}
     ;
@@ -388,6 +787,8 @@ factor::=literal:l {: RESULT = (Expression)l; :}
                                 System.out.println("valor factor : "+f);
                                 UnaryOpExpr f2=new UnaryOpExpr(UnaryOpType.NON, f);
                                 if(f.getType().equals(Type.BOOLEAN)){
+
+                                    System.out.println("! boolean");
                                     f2.setType(Type.BOOLEAN);
                                     System.out.println("valor de f2: "+f2 ); 
                                     RESULT=f2;
@@ -395,10 +796,21 @@ factor::=literal:l {: RESULT = (Expression)l; :}
                                     System.out.println("Boolean expected but "+f.getType().toString()+" found.");
                                 } :}
       | RESTA factor:f {:  if(f.getType().equals(Type.FLOAT)){ 
-                                    RESULT=new UnaryOpExpr(UnaryOpType.MINUS,f);
+      
+                                    System.out.println("- float");
+
+                                    UnaryOpExpr u=new UnaryOpExpr(UnaryOpType.MINUS,f);
+                                    u.setType(Type.FLOAT);
+                                    RESULT= u;
                                 }else{
                                     if(f.getType().equals(Type.INT)){
-                                        new UnaryOpExpr(UnaryOpType.MINUS,f);
+                                        
+                                        System.out.println("- int");
+                                    
+                                        UnaryOpExpr u=new UnaryOpExpr(UnaryOpType.MINUS,f);
+                                        u.setType(Type.INT);
+                                        RESULT= u;
+                                        
                                     }else{
                                         System.out.println("Numeral (int or float) expected but "+f.getType().toString()+" found.");
                                     }
@@ -407,7 +819,7 @@ factor::=literal:l {: RESULT = (Expression)l; :}
       ;
 
 
-literal::= INT_LITERAL:i {: RESULT= new IntLiteral((String) i); :}
+literal::= INT_LITERAL:i {: System.out.println("int "+i); RESULT= new IntLiteral((String) i); :}
        | FLOAT_LITERAL:f {:RESULT= new FloatLiteral((String) f); :}
        | bool_LITERAL:b {:RESULT = b; System.out.println("entro aca (BOOL_LITERAL)"+b.toString());:}
        | ID:id {: Simbolo s=TS.buscarSimbolo(id);
@@ -459,12 +871,13 @@ literal::= INT_LITERAL:i {: RESULT= new IntLiteral((String) i); :}
                         if(!e.getType().equals(Type.INT)){
                             System.out.println("Error: expression in array must be int");
                         }else{
-                            IntLiteral e2=(IntLiteral) e;
-                            if(e2.getValue()<0){
+                            System.out.println("clase expr: "+e.getClass());
+                                                       
+                            /*if(e2.getValue()<0){
                                 System.out.println("Error: array index must be higher than zero");
-                            }else{
-                                RESULT= new ArrayLiteral((String)id, s.getSize(), s.getType());
-                            }
+                            }else{*/
+                            RESULT= new ArrayLiteral((String)id, s.getSize(), s.getType());
+                            
                         }
                     }else{
                         System.out.println("Variable "+id+" is not an array");
@@ -472,7 +885,7 @@ literal::= INT_LITERAL:i {: RESULT= new IntLiteral((String) i); :}
                 }
              :}
        | method_call
-       | PARENTESIS_IZQ expr PARENTESIS_DER
+       | PARENTESIS_IZQ expr:e PARENTESIS_DER {: RESULT=e; :}
        ;
 
 bool_LITERAL::= TRUE {:RESULT= new BoolLiteral(true); :} 

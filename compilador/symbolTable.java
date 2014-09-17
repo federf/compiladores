@@ -121,4 +121,25 @@ public class symbolTable {
         System.out.println("resultado: "+result);
         return result;
     }
+    
+    //metodo que dado un metodo verifica si existe y en caso de encontrarlo lo retorna
+    public Metodo buscarMetodo(Metodo m) {
+        //nos situamos en el nivel corriente dentro del arbol
+        Node nivelCorr = this.TablaDeSimbolos.getCorriente();
+        //sino verificamos de forma recursiva en el nivel corriente hasta llegas a la raiz o
+        //encontrar el metodo, lo que ocurra primero
+        boolean declarado = false;
+        Metodo result = null;
+        System.out.println("buscando metodo" + m);
+        while (nivelCorr!=null && (!declarado)) {
+            //verificamos si el metodo fue declarado en el nivel corriente
+            declarado = declarado || (nivelCorr.buscarMetodo(m) != null);
+            //actualizamos el nivel corriente al padre del mismo
+            result = nivelCorr.buscarMetodo(m);
+            nivelCorr = nivelCorr.getPadre();
+        }
+        System.out.println("encontrado? "+declarado);
+        System.out.println("resultado: "+result);
+        return result;
+    }
 }

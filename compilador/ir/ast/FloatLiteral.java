@@ -23,7 +23,7 @@ public class FloatLiteral extends Literal{
 	 */
 	public FloatLiteral(String val){
 		rawValue = val; // Will convert to int value in semantic check
-		value = null;
+		value = Float.valueOf(val);
 	}
 
 	public String getStringValue() {
