@@ -129,13 +129,23 @@ public class Node {
         return exists;
     }
     
-    //metodo que dado el nombre de un simbolo lo busca en el nivel corriente y lo retorna como resultado
+    //metodo que dado el nombre de un simbolo lo busca en el nivel corriente y lo retorna como resultadoy lo retorna como resultado en caso de encontrarlo
     public Simbolo getSimboloByName(String id){
         Simbolo res=null;
         for(int i=0; i<this.variables.size(); i++){
-            //System.out.println("actual "+this.variables.get(i).name);
             if(this.variables.get(i).name.equals(id)){
                 return this.variables.get(i);
+            }
+        }
+        return res;
+    }
+    
+    //metodo que dada una copia de un metodo busca en el nivel corriente y lo retorna como resultado en caso de encontrarlo
+    public Metodo buscarMetodo(Metodo m){
+        Metodo res=null;
+        for(int i=0; i<this.metodos.size(); i++){
+            if(this.metodos.get(i).equals(m)){
+                return this.metodos.get(i);
             }
         }
         return res;
