@@ -33,5 +33,7 @@ public interface ASTVisitor<T> {
     T visit(ContinueStmt cont);
 // visit operacion unaria
     T visit(UnaryOpExpr op);
-//
+// visit methodCall
+    T visit(MethodCallStmt met);
+    T visit(ExternInvkExpr eie);
 }
