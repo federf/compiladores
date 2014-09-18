@@ -13,23 +13,11 @@ import java.util.LinkedList;
  *
  * @author fede
  */
-public class ExternInvkExpr extends MethodCallExpr{
+public class ExternInvkExpr extends MethodCall{
     protected LinkedList<Expression> parameters;
 	
-    //constructor de clase, metodos sin parametros y retorno VOID
-	public void InternInvkExpr (String id){
-	    this.id = id;
-	    parameters = new LinkedList();
-	}
-	
-    //constructor de clase, recibe el id y los parametros del metodo invocado (metodos que retornan VOID)
-	public void InternInvkExpr (String id, LinkedList<Expression> par){
-	    this.id = id;
-	    parameters = par;
-	}
-	
     //constructor de clase, recibe el id, los parametros del metodo invocado y el tipo que retorna
-	public void InternInvkExpr (String id, LinkedList<Expression> par, Type t){
+	public ExternInvkExpr (String id, LinkedList<Expression> par, Type t){
 	    this.id = id;	
 	    type = t;
 	    parameters = par;

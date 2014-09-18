@@ -99,7 +99,7 @@ public class Metodo {
     @Override
     public String toString() {
         System.out.println("");
-        return "Metodo{" + " name=" + this.name + ", return_not_void=" + this.return_not_void + ", typeReturn=" + this.typeReturn.toString() + '}';
+        return "Metodo{" + " name=" + this.name + ", return_not_void=" + this.return_not_void + ", typeReturn=" + this.typeReturn.toString() +", parameters "+this.parametros +'}';
     }
 
     public boolean equals(Metodo obj) {
@@ -112,10 +112,6 @@ public class Metodo {
         }
         //si no se llaman igual no son el mismo metodo
         if (!this.name.equals(other.name)) {
-            return false;
-        }
-        //si no retornan lo mismo no son el mismo metodo
-        if (!this.typeReturn.equals(other.typeReturn)) {
             return false;
         }
         //si no tienen los mismos parametros no son el mismo metodo

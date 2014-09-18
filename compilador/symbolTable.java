@@ -109,7 +109,7 @@ public class symbolTable {
         //encontrar el simbolo, lo que ocurra primero
         boolean declarado = false;
         Simbolo result = null;
-        System.out.println("buscando " + id);
+        //System.out.println("buscando " + id);
         while (nivelCorr!=null && (!declarado)) {
             //verificamos si el simbolo fue declarado en el nivel corriente
             declarado = declarado || (nivelCorr.getSimboloByName(id) != null);
@@ -117,20 +117,28 @@ public class symbolTable {
             result = nivelCorr.getSimboloByName(id);
             nivelCorr = nivelCorr.getPadre();
         }
-        System.out.println("encontrado? "+declarado);
-        System.out.println("resultado: "+result);
+        //System.out.println("encontrado? "+declarado);
+        //System.out.println("resultado: "+result);
         return result;
     }
     
-    //metodo que dado un metodo verifica si existe y en caso de encontrarlo lo retorna
-    public Metodo buscarMetodo(Metodo m) {
+    //metodo que dado un el nombre, tipo de retorno y la lista de tipos de los parametros de 
+    //un metodo verifica si existe alguna coincidencia y la retorna
+    public Metodo buscarMetodo(String name, LinkedList<Type>paramTypes) {
+        //creamos el metodo como tal para comparar
+        LinkedList<Simbolo> params=new LinkedList();
+        for(int i=0; i<paramTypes.size(); i++){
+            Simbolo actual=new Simbolo(paramTypes.get(i), ""+i+"",null, 0);
+            params.add(actual);
+        }
         //nos situamos en el nivel corriente dentro del arbol
         Node nivelCorr = this.TablaDeSimbolos.getCorriente();
         //sino verificamos de forma recursiva en el nivel corriente hasta llegas a la raiz o
         //encontrar el metodo, lo que ocurra primero
         boolean declarado = false;
+        Metodo m=new Metodo(Type.VOID, name, params);
         Metodo result = null;
-        System.out.println("buscando metodo" + m);
+        //System.out.println("{buscando metodo} " + name+", "+paramTypes);
         while (nivelCorr!=null && (!declarado)) {
             //verificamos si el metodo fue declarado en el nivel corriente
             declarado = declarado || (nivelCorr.buscarMetodo(m) != null);
@@ -138,8 +146,8 @@ public class symbolTable {
             result = nivelCorr.buscarMetodo(m);
             nivelCorr = nivelCorr.getPadre();
         }
-        System.out.println("encontrado? "+declarado);
-        System.out.println("resultado: "+result);
+        //System.out.println("encontrado? "+declarado);
+        //System.out.println("resultado: "+result);
         return result;
     }
 }
