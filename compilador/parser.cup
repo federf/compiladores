@@ -21,6 +21,9 @@ Metodo ult_metodo; //ultimo metodo creado
 
 boolean mainDeclared;
 
+boolean inIfElse; //variable booleana que indicaria que se encuentra dentro de una sentencia if - else
+
+boolean inLoop;  //variable booleana que indicaria que se encuentra dentro de un ciclo
 :};
 
 parser code{:
@@ -35,8 +38,8 @@ public void unrecovered_syntax_error (Symbol s) throws java.lang.Exception{
 
 
 /*Declaracion de variables no terminales*/
-non terminal program,field_decl,method_decl,block,type,statement,method_call,externinvk_arg,
-literal, bool_LITERAL, type_or_void, else_block;
+non terminal program,field_decl,method_decl,type,statement,method_call,externinvk_arg,
+literal, bool_LITERAL, type_or_void;
 
 non terminal body, fieldDeclarations, fieldAndMethods, identifier, identifiers, methodDeclarations, parameters, 
 parameterDeclarations, parameterDeclaration, statements, expressions, externinvk_args;
@@ -45,6 +48,7 @@ non terminal Location location;
 non terminal Expression expr,conjunction, comparison, term, sum,relation;
 non terminal AssignOpType assign_op;
 non terminal Expression factor;
+non terminal Block block, else_block;
 
 /*DECLARACION DE VARIABLES TERMINALES */
 
@@ -202,7 +206,10 @@ type::= INT {:tipo_corriente = Type.INT; :}
 statement::= location:l assign_op:ao expr:e PUNTO_Y_COMA {: System.out.println("expr "+e);
                                                             System.out.println("location :"+l+", operation: "+ao.toString()+" , expr type: "+e.getType());
                                                             
-                                                            if(l.getType().equals(e.getType()) && ao.toString().equals("=") && (!l.getType().isArray())){ //si se realiza una asignacion con tipos identicos de location y expression (no array)
+                                                            //Si el tipo de la variable y la expresion son el mismo o la variable es float o floatarray el la expresion INT o INTARRAY
+                                                            if(l.getType().equals(e.getType()) && ao.toString().equals("=") || 
+                                                                ((l.getType().equals(Type.FLOAT) || l.getType().equals(Type.FLOATARRAY)) && (e.getType().equals(Type.INT) || e.getType().equals(Type.INTARRAY) ))
+                                                            && (!l.getType().isArray())){ //si se realiza una asignacion con tipos identicos de location y expression (no array)
                                                                 System.out.println("assing ok (=)");
                                                                 AssignStmt a=new AssignStmt((Location)l, AssignOpType.ASSIGN, (Expression) e); 
                                                                 System.out.println(a);
@@ -263,9 +270,20 @@ statement::= location:l assign_op:ao expr:e PUNTO_Y_COMA {: System.out.println("
                                                             System.out.println("");
                                                          :}
          | method_call PUNTO_Y_COMA
-         | IF PARENTESIS_IZQ {: TS.agregarNivel(); :} expr PARENTESIS_DER block {: TS.SubirNivel(); :} else_block
-         | FOR ID ASIGNACION expr COMA expr {: TS.agregarNivel(); :}  block {: TS.SubirNivel(); :}
-         | WHILE expr {: TS.agregarNivel(); :}  block {: TS.SubirNivel(); :}
+         | IF PARENTESIS_IZQ {: TS.agregarNivel(); :} expr:e PARENTESIS_DER block:ifBlock {: TS.SubirNivel(); :} else_block:elseBlock {: 
+            if(e.getType().equals(Type.BOOLEAN)){ //si la expression es de tipo boolean
+                IfStmt res=null;
+                if(elseBlock!=null){ //si tiene else block
+                    res=new IfStmt(e,ifBlock,elseBlock);
+                }else{//si no tiene else block
+                    res=new IfStmt(e, ifBlock);
+                }
+                RESULT=res;
+            }else{//si la expression no es de tipo boolean se muestra un mensaje de error
+                System.out.println("Error: Expression in If-Else statement must be Boolean");
+            } :}
+         | FOR ID ASIGNACION expr COMA expr {: TS.agregarNivel(); inLoop=true;:}  block {: TS.SubirNivel(); inLoop=false;:}
+         | WHILE expr {: TS.agregarNivel(); inLoop=true;:}  block {: TS.SubirNivel(); inLoop=false;:}
          | RETURN PUNTO_Y_COMA {:
                                 System.out.println("RETURN;");
                                 if(!ult_metodo.getTypeReturn().equals(Type.VOID)){
@@ -306,7 +324,7 @@ statement::= location:l assign_op:ao expr:e PUNTO_Y_COMA {: System.out.println("
                                             //RESULT= new ReturnStmt(e);
                                         }*/
                                         :}
-         | BREAK PUNTO_Y_COMA
+         | BREAK PUNTO_Y_COMA {: if(!inLoop){ System.out.println("Error: Break statement must be in a Loop");}else{BreakStmt res=new BreakStmt(); RESULT=res; TS.SubirNivel();} :}
          | CONTINUE PUNTO_Y_COMA
          | PUNTO_Y_COMA
          | {: TS.agregarNivel(); :}  block {: TS.SubirNivel(); :}
@@ -426,19 +444,60 @@ conjunction::= comparison:c {: RESULT=c; :}
            ;
 
 comparison::= relation:r {: RESULT=r; :}
-          | relation:r1 IGUALDAD_LOGICA relation:r2 {: if(r1.getType().equals(Type.BOOLEAN) && r2.getType().equals(Type.BOOLEAN)){
+          | relation:r1 IGUALDAD_LOGICA relation:r2 {: if(r1.getType().equals(Type.BOOLEAN) && r2.getType().equals(Type.BOOLEAN) ||
+                                            (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.INT)) ||
+                                            (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.INTARRAY)) ||
+                                            (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.FLOAT))||
+                                            (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.FLOATARRAY))||
+
+                                            (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.INT)) ||
+                                            (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.INTARRAY)) ||
+                                            (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.FLOAT))||
+                                            (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.FLOATARRAY))||
+                                            
+                                            (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.INT)) ||
+                                            (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.INTARRAY)) ||
+                                            (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.FLOAT))||
+                                            (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.FLOATARRAY))||
+
+                                            (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.INT)) ||
+                                            (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.INTARRAY)) ||
+                                            (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.FLOAT))||
+                                            (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.FLOATARRAY))
+                                            ){
                                             BinOpExpr res= new BinOpExpr(r1,BinOpType.CEQ,r2);
+                                            System.out.println("expression ==     "+r1.getType()+"  "+r2.getType());
                                             res.setType(Type.BOOLEAN);
 
                                             System.out.println("== "+res);
                                             
                                             RESULT=res;
                                         }else{
-                                            System.out.println("Error "+BinOpType.CEQ+"can only be applied to Boolean operands");
+                                            System.out.println("Error "+BinOpType.CEQ+"can only be applied to Boolean/Int/Float operands");
                                             //RESULT=null;
                                         }
                                          :}
-          | relation:r1 DIFERENCIA_LOGICA relation:r2 {: if(r1.getType().equals(Type.BOOLEAN) && r2.getType().equals(Type.BOOLEAN)){
+          | relation:r1 DIFERENCIA_LOGICA relation:r2 {:if(r1.getType().equals(Type.BOOLEAN) && r2.getType().equals(Type.BOOLEAN) ||
+                                            (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.INT)) ||
+                                            (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.INTARRAY)) ||
+                                            (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.FLOAT))||
+                                            (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.FLOATARRAY))||
+
+                                            (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.INT)) ||
+                                            (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.INTARRAY)) ||
+                                            (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.FLOAT))||
+                                            (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.FLOATARRAY))||
+                                            
+                                            (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.INT)) ||
+                                            (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.INTARRAY)) ||
+                                            (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.FLOAT))||
+                                            (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.FLOATARRAY))||
+
+                                            (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.INT)) ||
+                                            (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.INTARRAY)) ||
+                                            (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.FLOAT))||
+                                            (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.FLOATARRAY))
+                                            ){
                                             BinOpExpr res= new BinOpExpr(r1,BinOpType.NEQ,r2);
 
                                             System.out.println("!= "+res);
@@ -446,7 +505,7 @@ comparison::= relation:r {: RESULT=r; :}
                                             res.setType(Type.BOOLEAN);
                                             RESULT=res;
                                         }else{
-                                            System.out.println("Error "+BinOpType.NEQ+"can only be applied to Boolean operands");
+                                            System.out.println("Error "+BinOpType.NEQ+"can only be applied to Boolean/Int/Float operands");
                                             //RESULT=null;
                                         }
                                          :}
