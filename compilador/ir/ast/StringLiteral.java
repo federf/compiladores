@@ -13,7 +13,6 @@ import ir.ASTVisitor;
  * @author fede
  */
 public class StringLiteral  extends Literal{
-    private String rawValue;
 	private String value;
 	
 	/*
@@ -21,7 +20,7 @@ public class StringLiteral  extends Literal{
 	 * @param: String integer
 	 */
 	public StringLiteral(String val){
-		value = null;
+		value = val;
 	}
 
 	public String getValue() {
