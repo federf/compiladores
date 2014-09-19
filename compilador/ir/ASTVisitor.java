@@ -37,5 +37,5 @@ public interface ASTVisitor<T> {
     T visit(MethodCallExpr met);
     T visit(ExternInvkExpr eie);
 //visit semicolon
-    T visit(SemiColon sem);
+    T visit(SemiColonStmt sem);
 }

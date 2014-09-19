@@ -8,37 +8,21 @@
      
 ///////////////////////// TESTS CORRECTOS ////////////////////////////////////////
 ---------------- Test tests/test_correctos/test_booleanos.ctds ... -------------------
-location: VarLocation{name=a, type=boolean, value=null, size=0}, assign_op: =, expresion: true
-{expression TYPE} boolean
-location: VarLocation{name=b, type=boolean, value=null, size=0}, assign_op: =, expresion: false
-{expression TYPE} boolean
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_break.ctds ... -------------------
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_comentarios2.ctds ... -------------------
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_comentarios.ctds ... -------------------
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 0 + 5
-{expression TYPE} int
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
 parseo exitoso
 ---------------------------------------------------
   
@@ -49,251 +33,76 @@ parseo exitoso
   
   
 ---------------- Test tests/test_correctos/test_continuebreak.ctds ... -------------------
-location: VarLocation{name=total, type=float, value=null, size=0}, assign_op: =, expresion: -1
-{expression TYPE} int
-location: VarLocation{name=n, type=int, value=null, size=0}, assign_op: =, expresion: 23
-{expression TYPE} int
-location: VarLocation{name=i, type=float, value=null, size=0}, assign_op: =, expresion: 23
-{expression TYPE} int
-location: VarLocation{name=i, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 - 1
-{expression TYPE} float
-location: VarLocation{name=total, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 * 0.0 * 0
-{expression TYPE} float
-location: VarLocation{name=total, type=float, value=null, size=0}, assign_op: =, expresion: -1000.2343 + 6752
-{expression TYPE} float
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_expresiones01.ctds ... -------------------
-location: VarLocation{name=g, type=int, value=null, size=0}, assign_op: =, expresion: 50
-{expression TYPE} int
-location: VarLocation{name=a, type=int, value=null, size=0}, assign_op: =, expresion: 4
-{expression TYPE} int
-location: VarLocation{name=g, type=int, value=null, size=0}, assign_op: =, expresion: 0 - 1
-{expression TYPE} int
-location: VarLocation{name=c, type=float, value=null, size=0}, assign_op: =, expresion: 0 * 2
-{expression TYPE} int
-location: VarLocation{name=a, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-location: VarLocation{name=c, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 / 2
-{expression TYPE} float
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_expresiones02.ctds ... -------------------
-location: VarLocation{name=b, type=int, value=null, size=0}, assign_op: =, expresion: 4
-{expression TYPE} int
-location: VarLocation{name=c, type=int, value=null, size=0}, assign_op: =, expresion: 5
-{expression TYPE} int
-location: VarLocation{name=a, type=int, value=null, size=0}, assign_op: =, expresion: 0 * 0
-{expression TYPE} int
-location: VarLocation{name=p, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 0
-{expression TYPE} int
-location: VarLocation{name=pi, type=float, value=null, size=0}, assign_op: =, expresion: 3.14
-{expression TYPE} float
-location: VarLocation{name=f, type=float, value=null, size=0}, assign_op: =, expresion: 2 * 0.0
-{expression TYPE} float
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float02.ctds ... -------------------
-location: VarLocation{name=total, type=float, value=null, size=0}, assign_op: =, expresion: 0.0
-{expression TYPE} float
-location: VarLocation{name=i, type=float, value=null, size=0}, assign_op: =, expresion: 0.0
-{expression TYPE} float
-location: VarLocation{name=total, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 + 0.0
-{expression TYPE} float
-location: VarLocation{name=i, type=float, value=null, size=0}, assign_op: -=, expresion: 1.0
-{expression TYPE} float
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 0.0
-{expression TYPE} float
-location: VarLocation{name=a, type=float, value=null, size=0}, assign_op: =, expresion: 8.0
-{expression TYPE} float
-ReturnStmt con void
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float03.ctds ... -------------------
-location: VarLocation{name=neg, type=boolean, value=null, size=0}, assign_op: =, expresion: false
-{expression TYPE} boolean
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 1
-{expression TYPE} int
-location: VarLocation{name=prod, type=float, value=null, size=0}, assign_op: =, expresion: 1.0
-{expression TYPE} float
-location: VarLocation{name=n, type=int, value=null, size=0}, assign_op: =, expresion: -0
-{expression TYPE} int
-location: VarLocation{name=neg, type=boolean, value=null, size=0}, assign_op: =, expresion: true
-{expression TYPE} boolean
-location: VarLocation{name=prod, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 * 0.0 * 2
-{expression TYPE} float
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-location: VarLocation{name=a, type=float, value=null, size=0}, assign_op: =, expresion: -2.0
-{expression TYPE} float
-location: VarLocation{name=b, type=int, value=null, size=0}, assign_op: =, expresion: -2
-{expression TYPE} int
-location: VarLocation{name=w, type=float, value=null, size=0}, assign_op: =, expresion: -3.0
-{expression TYPE} float
-location: VarLocation{name=z, type=float, value=null, size=0}, assign_op: =, expresion: -3.0
-{expression TYPE} float
-location: VarLocation{name=m, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 * 0.0 - 0.0
-{expression TYPE} float
-location: VarLocation{name=j, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=k, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=n, type=int, value=null, size=0}, assign_op: =, expresion: 5
-{expression TYPE} int
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 0.0
-{expression TYPE} float
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 0.0
-{expression TYPE} float
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 + 2.0
-{expression TYPE} float
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 - 10.0 / 2.0
-{expression TYPE} float
-location: VarLocation{name=k, type=int, value=null, size=0}, assign_op: +=, expresion: 1
-{expression TYPE} int
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 35.0 + 4.0 * 0.0 - 498.0
-{expression TYPE} float
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 3.2 - 0.0 - 12345.356
-{expression TYPE} float
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 * -0.0 + 23.0 * 0.0 + 2.0 / 4.0
-{expression TYPE} float
-location: VarLocation{name=j, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-location: VarLocation{name=a, type=float, value=null, size=0}, assign_op: =, expresion: 80.0
-{expression TYPE} float
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: -15.0
-{expression TYPE} float
-location: VarLocation{name=w, type=float, value=null, size=0}, assign_op: =, expresion: 4.3
-{expression TYPE} float
-location: VarLocation{name=m, type=float, value=null, size=0}, assign_op: =, expresion: -7.6
-{expression TYPE} float
-ReturnStmt con void
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float04.ctds ... -------------------
-location: VarLocation{name=neg, type=boolean, value=null, size=0}, assign_op: =, expresion: false
-{expression TYPE} boolean
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 1
-{expression TYPE} int
-location: VarLocation{name=prod, type=float, value=null, size=0}, assign_op: =, expresion: 1.0
-{expression TYPE} float
-location: VarLocation{name=n, type=int, value=null, size=0}, assign_op: =, expresion: -0
-{expression TYPE} int
-location: VarLocation{name=neg, type=boolean, value=null, size=0}, assign_op: =, expresion: true
-{expression TYPE} boolean
-location: VarLocation{name=prod, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 * 0.0 * 2.0
-{expression TYPE} float
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-location: VarLocation{name=c, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 * 0.0 * 0.0 * 0.0 * 0.0 * 0.0
-{expression TYPE} float
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: -15.0
-{expression TYPE} float
-location: VarLocation{name=w, type=float, value=null, size=0}, assign_op: =, expresion: 4.3
-{expression TYPE} float
-location: VarLocation{name=m, type=float, value=null, size=0}, assign_op: =, expresion: -7.6
-{expression TYPE} float
-location: VarLocation{name=a, type=float, value=null, size=0}, assign_op: =, expresion: 80.0
-{expression TYPE} float
-ReturnStmt con void
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_floats05.ctds ... -------------------
-location: VarLocation{name=x, type=float, value=null, size=0}, assign_op: =, expresion: 6.982
-{expression TYPE} float
-location: VarLocation{name=y, type=float, value=null, size=0}, assign_op: =, expresion: -002.5
-{expression TYPE} float
-location: VarLocation{name=z, type=float, value=null, size=0}, assign_op: =, expresion: 3.5698
-{expression TYPE} float
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for01.ctds ... -------------------
-location: VarLocation{name=A, type=int[], value=null, size=5}, assign_op: =, expresion: 2
-{expression TYPE} int
-location: VarLocation{name=A, type=int[], value=null, size=5}, assign_op: =, expresion: 0 + 2
-{expression TYPE} int
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for02.ctds ... -------------------
-location: VarLocation{name=A, type=int[], value=null, size=5}, assign_op: =, expresion: 2
-{expression TYPE} int
-location: VarLocation{name=A, type=int[], value=null, size=5}, assign_op: =, expresion: 0 + 2
-{expression TYPE} int
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for03.ctds ... -------------------
-location: VarLocation{name=A, type=int[], value=null, size=5}, assign_op: =, expresion: 2
-{expression TYPE} int
-location: VarLocation{name=A, type=int[], value=null, size=5}, assign_op: =, expresion: 0 + 2
-{expression TYPE} int
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for04.ctds ... -------------------
-location: VarLocation{name=A, type=int[], value=null, size=5}, assign_op: =, expresion: 2
-{expression TYPE} int
-location: VarLocation{name=A, type=int[], value=null, size=5}, assign_op: =, expresion: 0 + 2
-{expression TYPE} int
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for05.ctds ... -------------------
-location: VarLocation{name=A, type=int[], value=null, size=5}, assign_op: =, expresion: 2
-{expression TYPE} int
-location: VarLocation{name=A, type=int[], value=null, size=5}, assign_op: =, expresion: 0 + 2
-{expression TYPE} int
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_if_anidados.ctds ... -------------------
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 0 - 0
-{expression TYPE} int
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 0 - 0
-{expression TYPE} int
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 0 * 5
-{expression TYPE} int
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_if.ctds ... -------------------
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 0 - 0
-{expression TYPE} int
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 0 * 5
-{expression TYPE} int
-location: VarLocation{name=res, type=float, value=null, size=0}, assign_op: =, expresion: 0 - 0
-{expression TYPE} int
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_logicos01.ctds ... -------------------
-location: VarLocation{name=a, type=boolean, value=null, size=0}, assign_op: =, expresion: true
-{expression TYPE} boolean
 parseo exitoso
 ---------------------------------------------------
   
@@ -304,40 +113,16 @@ parseo exitoso
   
   
 ---------------- Test tests/test_correctos/test_mainSolo.ctds ... -------------------
-location: VarLocation{name=a, type=boolean, value=null, size=0}, assign_op: =, expresion: true
-{expression TYPE} boolean
-location: VarLocation{name=b, type=boolean, value=null, size=0}, assign_op: =, expresion: !false
-{expression TYPE} boolean
-location: VarLocation{name=c, type=boolean, value=null, size=0}, assign_op: =, expresion: false && false || !false
-{expression TYPE} boolean
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mcd.ctds ... -------------------
-location: VarLocation{name=dividendo, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=divisor, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=dividendo, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=divisor, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=resto, type=int, value=null, size=0}, assign_op: =, expresion: 1
-{expression TYPE} int
-location: VarLocation{name=resto, type=int, value=null, size=0}, assign_op: =, expresion: 0 % 0
-{expression TYPE} int
-location: VarLocation{name=dividendo, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=divisor, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_metodos00.ctds ... -------------------
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
 Error: Method alo not declared
 Error: Method alo not declared
 ocurrio un error: null
@@ -345,52 +130,21 @@ ocurrio un error: null
   
   
 ---------------- Test tests/test_correctos/test_metodos01.ctds ... -------------------
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-ReturnStmt con void
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-location: VarLocation{name=y, type=int, value=null, size=0}, assign_op: =, expresion: 7
-{expression TYPE} int
-location: VarLocation{name=c, type=float, value=null, size=0}, assign_op: =, expresion: 8.0
-{expression TYPE} float
-ReturnStmt con void
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_metodos02.ctds ... -------------------
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 - 1
-{expression TYPE} int
-ReturnStmt con void
-ReturnStmt con void
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-location: VarLocation{name=y, type=int, value=null, size=0}, assign_op: =, expresion: 7
-{expression TYPE} int
-location: VarLocation{name=c, type=float, value=null, size=0}, assign_op: =, expresion: 8.0
-{expression TYPE} float
-ReturnStmt con void
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_metodos03.ctds ... -------------------
-location: VarLocation{name=res, type=int, value=null, size=0}, assign_op: =, expresion: 0 / 3
-{expression TYPE} int
-location: VarLocation{name=res, type=int, value=null, size=0}, assign_op: =, expresion: 0 % 2
-{expression TYPE} int
-location: VarLocation{name=res, type=boolean, value=null, size=0}, assign_op: =, expresion: false
-{expression TYPE} boolean
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_metodos_externos01.ctds ... -------------------
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
 Error: Method alo not declared
 Error: Method alo not declared
 ocurrio un error: null
@@ -398,77 +152,31 @@ ocurrio un error: null
   
   
 ---------------- Test tests/test_correctos/test_metodos_externos02.ctds ... -------------------
-location: VarLocation{name=dividendo, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=divisor, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=dividendo, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=divisor, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=resto, type=int, value=null, size=0}, assign_op: =, expresion: 1
-{expression TYPE} int
-location: VarLocation{name=resto, type=int, value=null, size=0}, assign_op: =, expresion: 0 % 0
-{expression TYPE} int
-location: VarLocation{name=dividendo, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=divisor, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-ocurrio un error: null
+parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mod.ctds ... -------------------
-location: VarLocation{name=a, type=int, value=null, size=0}, assign_op: =, expresion: 90
-{expression TYPE} int
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mult01.ctds ... -------------------
-location: VarLocation{name=a, type=int, value=null, size=0}, assign_op: =, expresion: 5
-{expression TYPE} int
-location: VarLocation{name=d, type=int, value=null, size=0}, assign_op: =, expresion: 2000
-{expression TYPE} int
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mult02.ctds ... -------------------
-location: VarLocation{name=a, type=int, value=null, size=0}, assign_op: =, expresion: 5
-{expression TYPE} int
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_prog_simple.ctds ... -------------------
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
 Main Method Missing in Class prueba2
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_retorno.ctds ... -------------------
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 100
-{expression TYPE} int
-location: VarLocation{name=j, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=z, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 - 1
-{expression TYPE} int
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 - 1 + 0 * 0 - 0 * 0
-{expression TYPE} int
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=j, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
 parseo exitoso
 ---------------------------------------------------
   
@@ -479,26 +187,12 @@ parseo exitoso
   
   
 ---------------- Test tests/test_correctos/test_sumx.ctds ... -------------------
-location: VarLocation{name=aux, type=float, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=aux, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 + 0.0
-{expression TYPE} float
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_while.ctds ... -------------------
-location: VarLocation{name=resto, type=int, value=null, size=0}, assign_op: =, expresion: 1
-{expression TYPE} int
-location: VarLocation{name=resto, type=int, value=null, size=0}, assign_op: +=, expresion: 0 % 0
-{expression TYPE} int
-location: VarLocation{name=dividendo, type=int, value=null, size=0}, assign_op: -=, expresion: 0
-{expression TYPE} int
-ocurrio un error: null
+parseo exitoso
 ---------------------------------------------------
   
   
@@ -544,8 +238,6 @@ error de sintaxis: Linea 4.
   
   
 ---------------- Test tests/test_errores/error_class01.ctds ... -------------------
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
 Error: Method alo not declared
 Error: Method alo not declared
 ocurrio un error: null
@@ -553,8 +245,6 @@ ocurrio un error: null
   
   
 ---------------- Test tests/test_errores/error_class02.ctds ... -------------------
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
 Error: Method alo not declared
 Error: Method alo not declared
 ocurrio un error: null
@@ -567,28 +257,11 @@ error de sintaxis: Linea 3.
   
   
 ---------------- Test tests/test_errores/error_externinvk02.ctds ... -------------------
-location: VarLocation{name=total, type=int, value=null, size=0}, assign_op: =, expresion: 1
-{expression TYPE} int
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 4
-{expression TYPE} int
-location: VarLocation{name=total, type=int, value=null, size=0}, assign_op: +=, expresion: 0 * 0
-{expression TYPE} int
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 0 - 1
-{expression TYPE} int
-ReturnStmt con void
 error de sintaxis: Linea 23.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_externinvk.ctds ... -------------------
-location: VarLocation{name=total, type=int, value=null, size=0}, assign_op: =, expresion: 1
-{expression TYPE} int
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 4
-{expression TYPE} int
-location: VarLocation{name=total, type=int, value=null, size=0}, assign_op: +=, expresion: 0 * 0
-{expression TYPE} int
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 0 - 1
-{expression TYPE} int
 error de sintaxis: Linea 22.
 ---------------------------------------------------
   
@@ -599,95 +272,43 @@ error de sintaxis: Linea 9.
   
   
 ---------------- Test tests/test_errores/error_float02.ctds ... -------------------
-location: VarLocation{name=neg, type=boolean, value=null, size=0}, assign_op: =, expresion: false
-{expression TYPE} boolean
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 1
-{expression TYPE} int
 error: 0 9 .
-location: VarLocation{name=prod, type=float, value=null, size=0}, assign_op: =, expresion: 1
-{expression TYPE} int
-location: VarLocation{name=n, type=int, value=null, size=0}, assign_op: =, expresion: -0
-{expression TYPE} int
-location: VarLocation{name=neg, type=boolean, value=null, size=0}, assign_op: =, expresion: !false
-{expression TYPE} boolean
-location: VarLocation{name=prod, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 * 0.0
-{expression TYPE} float
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
 error: 0 21 .
 error de sintaxis: Linea 22.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_float03.ctds ... -------------------
-location: VarLocation{name=neg, type=boolean, value=null, size=0}, assign_op: =, expresion: false
-{expression TYPE} boolean
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 1
-{expression TYPE} int
-location: VarLocation{name=prod, type=float, value=null, size=0}, assign_op: =, expresion: 1.0
-{expression TYPE} float
-location: VarLocation{name=n, type=int, value=null, size=0}, assign_op: =, expresion: -0
-{expression TYPE} int
-location: VarLocation{name=neg, type=boolean, value=null, size=0}, assign_op: =, expresion: true
-{expression TYPE} boolean
-location: VarLocation{name=prod, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 * 0.0 * 2
-{expression TYPE} float
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
 error de sintaxis: Linea 29.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_float04.ctds ... -------------------
-location: VarLocation{name=neg, type=boolean, value=null, size=0}, assign_op: =, expresion: false
-{expression TYPE} boolean
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 1
-{expression TYPE} int
-location: VarLocation{name=prod, type=float, value=null, size=0}, assign_op: =, expresion: 1.0
-{expression TYPE} float
-location: VarLocation{name=n, type=int, value=null, size=0}, assign_op: =, expresion: -0
-{expression TYPE} int
-location: VarLocation{name=neg, type=boolean, value=null, size=0}, assign_op: =, expresion: true
-{expression TYPE} boolean
-location: VarLocation{name=prod, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 * 0.0 * 2.0
-{expression TYPE} float
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
 error de sintaxis: Linea 41.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_for01.ctds ... -------------------
-location: VarLocation{name=A, type=int[], value=null, size=5}, assign_op: =, expresion: 2
-{expression TYPE} int
 error de sintaxis: Linea 13.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_for02.ctds ... -------------------
-location: VarLocation{name=A, type=int[], value=null, size=5}, assign_op: =, expresion: 2
-{expression TYPE} int
 error de sintaxis: Linea 13.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_for03.ctds ... -------------------
-location: VarLocation{name=A, type=int[], value=null, size=5}, assign_op: =, expresion: 2
-{expression TYPE} int
 error de sintaxis: Linea 13.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_for04.ctds ... -------------------
-location: VarLocation{name=A, type=int[], value=null, size=5}, assign_op: =, expresion: 2
-{expression TYPE} int
 error de sintaxis: Linea 13.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_for05.ctds ... -------------------
-location: VarLocation{name=A, type=int[], value=null, size=5}, assign_op: =, expresion: 2
-{expression TYPE} int
 error de sintaxis: Linea 18.
 ---------------------------------------------------
   
@@ -703,32 +324,16 @@ error de sintaxis: Linea 8.
   
   
 ---------------- Test tests/test_errores/error_lineaerror02.ctds ... -------------------
-location: VarLocation{name=a, type=float, value=null, size=0}, assign_op: =, expresion: 3
-{expression TYPE} int
-location: VarLocation{name=a, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 + 3
-{expression TYPE} float
 error de sintaxis: Linea 20.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_lineaerror.ctds ... -------------------
-location: VarLocation{name=a, type=float, value=null, size=0}, assign_op: =, expresion: 3
-{expression TYPE} int
-location: VarLocation{name=a, type=float, value=null, size=0}, assign_op: =, expresion: 0.0 + 3
-{expression TYPE} float
 error de sintaxis: Linea 20.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_break.ctds ... -------------------
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 0
-{expression TYPE} int
-location: VarLocation{name=i, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-location: VarLocation{name=g, type=int, value=null, size=0}, assign_op: +=, expresion: 1
-{expression TYPE} int
-location: VarLocation{name=g, type=int, value=null, size=0}, assign_op: -=, expresion: 1
-{expression TYPE} int
 error de sintaxis: Linea 20.
 ---------------------------------------------------
   
@@ -746,17 +351,12 @@ ocurrio un error: null
   
 ---------------- Test tests/test_errores/error_test_main01.ctds ... -------------------
 Error: Method alo not declared
-ReturnStmt con void
 error de sintaxis: Linea 11.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_main02.ctds ... -------------------
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-ReturnStmt con void
 Error: Method alo not declared
-ReturnStmt con void
 error de sintaxis: Linea 14.
 ---------------------------------------------------
   
@@ -772,38 +372,17 @@ error de sintaxis: Linea 4.
   
   
 ---------------- Test tests/test_errores/error_test_metodos03.ctds ... -------------------
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-ReturnStmt con void
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-location: VarLocation{name=y, type=int, value=null, size=0}, assign_op: =, expresion: 7
-{expression TYPE} int
-location: VarLocation{name=c, type=float, value=null, size=0}, assign_op: =, expresion: 0 * 8
-{expression TYPE} int
 error de sintaxis: Linea 19.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_metodos04.ctds ... -------------------
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: -0 - 1
-{expression TYPE} int
-ReturnStmt con void
 Error: Method alo3 not declared
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
 error de sintaxis: Linea 21.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_metodos05.ctds ... -------------------
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 - 1
-{expression TYPE} int
-ReturnStmt con void
 error de sintaxis: Linea 15.
 ---------------------------------------------------
   
@@ -820,16 +399,11 @@ error de sintaxis: Linea 9.
   
   
 ---------------- Test tests/test_errores/error_test_multiplesMain.ctds ... -------------------
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 3
-{expression TYPE} int
-location: VarLocation{name=x, type=int, value=null, size=0}, assign_op: =, expresion: 0 + 1
-{expression TYPE} int
 error de sintaxis: Linea 9.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_vbles01.ctds ... -------------------
-ReturnStmt con void
 error de sintaxis: Linea 6.
 ---------------------------------------------------
   

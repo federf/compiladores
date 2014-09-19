@@ -7,7 +7,7 @@ int breaks(int g){
       while(i < 10){
 	i = i + 1;
 	if(g < 0){
-	     //break;
+	     break;
         }
 	else{
 	   continue;

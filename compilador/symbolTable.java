@@ -109,7 +109,6 @@ public class symbolTable {
         //encontrar el simbolo, lo que ocurra primero
         boolean declarado = false;
         Simbolo result = null;
-        //System.out.println("buscando " + id);
         while (nivelCorr!=null && (!declarado)) {
             //verificamos si el simbolo fue declarado en el nivel corriente
             declarado = declarado || (nivelCorr.getSimboloByName(id) != null);
@@ -117,8 +116,6 @@ public class symbolTable {
             result = nivelCorr.getSimboloByName(id);
             nivelCorr = nivelCorr.getPadre();
         }
-        //System.out.println("encontrado? "+declarado);
-        //System.out.println("resultado: "+result);
         return result;
     }
     
@@ -138,7 +135,6 @@ public class symbolTable {
         boolean declarado = false;
         Metodo m=new Metodo(Type.VOID, name, params);
         Metodo result = null;
-        //System.out.println("{buscando metodo} " + name+", param"+paramTypes);
         while (nivelCorr!=null && (!declarado)) {
             //verificamos si el metodo fue declarado en el nivel corriente
             declarado = declarado || (nivelCorr.buscarMetodo(m) != null);
@@ -146,8 +142,6 @@ public class symbolTable {
             result = nivelCorr.buscarMetodo(m);
             nivelCorr = nivelCorr.getPadre();
         }
-        //System.out.println("encontrado? "+declarado);
-        //System.out.println("resultado: "+result);
         return result;
     }
     
