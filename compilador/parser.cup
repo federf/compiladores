@@ -21,10 +21,12 @@
     Metodo ult_metodo; //ultimo metodo creado
 
     boolean mainDeclared;
-
-    boolean inIfElse; //variable booleana que indicaria que se encuentra dentro de una sentencia if - else
-
-    boolean inLoop;  //variable booleana que indicaria que se encuentra dentro de un ciclo
+    //variable booleana que indicaria que se encuentra dentro de una sentencia if - else
+    boolean inIfElse; 
+    //variable booleana que indicaria que se encuentra dentro de un ciclo
+    boolean inLoop;
+    //variable de tipo nodo que guarda el nivel donde comienza un ciclo para en caso de encontrar un break poder volver a su padre
+    Node ActualLoopLevel; 
     :};
 
     parser code{:
@@ -77,7 +79,8 @@
     terminal BinOpType CONJUNCION, DISYUNCION, IGUALDAD_LOGICA, DIFERENCIA_LOGICA, MAYOR, MENOR, MAYOR_IGUAL, MENOR_IGUAL;
 
     /*Terminales signos de puntuación*/
-    terminal  COMA, PUNTO_Y_COMA, LLAVE_IZQ, LLAVE_DER, CORCHETE_IZQ, CORCHETE_DER, PARENTESIS_IZQ, PARENTESIS_DER, ADMIRACION; 
+    terminal  COMA, LLAVE_IZQ, LLAVE_DER, CORCHETE_IZQ, CORCHETE_DER, PARENTESIS_IZQ, PARENTESIS_DER, ADMIRACION;
+    terminal SemiColon PUNTO_Y_COMA;
 
     /*Terminales tipos*/
     terminal INT, FLOAT, BOOLEAN;
@@ -149,18 +152,20 @@
                       ;
 
     method_decl::= VOID ID:d {: 
-                        
                         if(d.toString().equals("main")){
                             mainDeclared=true;
                         } 
-                        TS.agregarMetodo(Type.VOID, d.toString()); :} parameters {:
+                        TS.agregarMetodo(Type.VOID, d.toString());
+               :} parameters {:
                         Metodo e=TS.obtenerMetodo();
                         ult_metodo=e;
                         TS.agregarNivel();
                         for(int i=0; i<e.getParametros().size(); i++){
                             Simbolo actual = e.getParametros().get(i);
                             TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
-                       }         :} block {: TS.SubirNivel(); :}
+                       }      
+               :} block {:
+                        TS.SubirNivel(); :}
                | type:t ID:g {: 
                             if(g.toString().equals("main")){mainDeclared=true;} switch (tipo_corriente){
                                   case INT:
@@ -172,14 +177,17 @@
                                   case BOOLEAN:
                                             TS.agregarMetodo(Type.BOOLEAN, g.toString()); 
                                             break;
-                                                     }:} parameters {:Metodo e=TS.obtenerMetodo();
-                                                     ult_metodo=TS.obtenerMetodo();   
+                             }
+                             :} parameters {:
+                             Metodo e=TS.obtenerMetodo();
+                            ult_metodo=TS.obtenerMetodo();  
                         TS.agregarNivel();
                         for(int i=0; i<e.getParametros().size(); i++){
                             Simbolo actual = e.getParametros().get(i);
                             TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
                         }
-                        :} block {:TS.SubirNivel();:}
+                        :} block {:
+                                TS.SubirNivel();:}
                ;
 
     block::= LLAVE_IZQ LLAVE_DER
@@ -213,14 +221,11 @@
 
     statement::= location:l assign_op:ao expr:e PUNTO_Y_COMA {:
 
-                                                            System.out.println("location{"+l.getId()+", "+l.getType()+"}"+"operacion "+ao+" expresion: "+e);
+                                                            //System.out.println("location{"+l.getId()+", "+l.getType()+"}"+"operacion "+ao+" expresion: "+e);
                                                             if(e instanceof MethodCallExpr){ //si la expression es una llamada a un metodo
                                                                 //buscamos el metodo al cual se llama y verificamos que
                                                                 //el tipo que retorna, concuerde con el tipo de la location en donde se 
                                                                 //desea asignar
-
-
-                                                                System.out.println("[MethodCallExpr]");
 
                                                                 MethodCallExpr actual=(MethodCallExpr) e;
                                                                 LinkedList<Type> tipoArgumentos=new LinkedList();
@@ -228,12 +233,12 @@
                                                                     tipoArgumentos.addLast(actual.getArgs().get(j).getType());
                                                                 }
                                                                 Metodo m= TS.buscarMetodo(actual.getName(), tipoArgumentos);
-                                                                System.out.println("encontrado?: "+(m!=null));
+                                                                //System.out.println("encontrado?: "+(m!=null));
 
-                                                                System.out.println("[1era cond] : "+(l.getType().equals(m.getTypeReturn()) && ao.toString().equals("=") || 
+                                                                /*System.out.println("[1era cond] : "+(l.getType().equals(m.getTypeReturn()) && ao.toString().equals("=") || 
                                                                     ((l.getType().equals(Type.FLOAT) || l.getType().equals(Type.FLOATARRAY)) && 
                                                                         (m.getTypeReturn().equals(Type.INT) || m.getTypeReturn().equals(Type.INTARRAY) )) && 
-                                                                        (!l.getType().isArray())));
+                                                                        (!l.getType().isArray())));*/
 
 
                                                                 if(l.getType().equals(m.getTypeReturn()) && ao.toString().equals("=") || 
@@ -247,9 +252,6 @@
                                                                     RESULT=a; 
                                                                 }else{
                                                                     //si location es un array
-
-                                                                    System.out.println();
-
                                                                     if(l.getType().isArray()){
                                                                         //System.out.println("location array");
                                                                         //arreglo de enteros expresion entero
@@ -301,13 +303,23 @@
                                                                 }
                                                            }else{// si la expression no es una llamada a un metodo
                                                                 //Si el tipo de la variable y la expresion son el mismo o la variable es float o floatarray el la expresion INT o INTARRAY
-                                                                if(l.getType().equals(e.getType()) && ao.toString().equals("=") || 
-                                                                    ((l.getType().equals(Type.FLOAT) || l.getType().equals(Type.FLOATARRAY)) && 
-                                                                        (e.getType().equals(Type.INT) || e.getType().equals(Type.INTARRAY) )) && 
-                                                                        (!l.getType().isArray())){ //si se realiza una asignacion con tipos identicos de location y expression (no array)
+                                                                System.out.println("location: "+l+", assign_op: "+ao+", expresion: "+e);
+                                                                System.out.println("{expression TYPE} "+e.getType());
+                                                                if(
+                                                                    (
+                                                                    (l.getType().equals(e.getType()) && ao.toString().equals("="))       
+                                                                || 
+                                                                    
+                                                                    ((l.getType().equals(Type.FLOAT) || l.getType().equals(Type.INT)) && (e.getType().equals(Type.INT) || e.getType().equals(Type.INTARRAY) || e.getType().equals(Type.FLOATARRAY) || e.getType().equals(Type.FLOAT)))
+                                                                    )
+                                                                && 
+                                                                        
+                                                                    (!l.getType().isArray())
+
+                                                                ){ //si se realiza una asignacion con tipos identicos de location y expression (no array)
                                                                     //System.out.println("assing ok (=)");
                                                                     AssignStmt a=new AssignStmt((Location)l, AssignOpType.ASSIGN, (Expression) e); 
-                                                                    //System.out.println("location: "+l+", assign_op: "+ao+", expresion: "+e);
+                                                                    
                                                                     //System.out.println(a);
                                                                     RESULT=a; 
                                                                 }else{
@@ -379,7 +391,11 @@
                 }else{//si la expression no es de tipo boolean se muestra un mensaje de error
                     System.out.println("Error: Expression in If-Else statement must be Boolean");
                 } :}
-             | FOR ID:id ASIGNACION expr:e1 COMA expr:e2 {: TS.agregarNivel(); inLoop=true;:}  block:b {:
+             | FOR ID:id ASIGNACION expr:e1 COMA expr:e2 {: 
+                TS.agregarNivel(); 
+                inLoop=true; 
+                ActualLoopLevel=TS.getCorriente(); 
+                :}  block:b {:
                 //si las expresiones son de tipo entero o se accede a un arreglo de INT
                 if( ( (e1.getType().equals(Type.INT) || (e1.getType().equals(Type.INTARRAY)) ) && (e2.getType().equals(Type.INT) || (e2.getType().equals(Type.INTARRAY) ) ) ) ){
                     ForStmt forStmt=new ForStmt(id, e1, e2, b);
@@ -387,15 +403,25 @@
                 }else{
                     System.out.println("Error: Expressions in For Statement must be Int");
                 }
-                TS.SubirNivel(); inLoop=false;:}
-             | WHILE expr:e {: TS.agregarNivel(); inLoop=true;:}  block:b {:
+                if(inLoop){
+                    TS.SubirNivel();
+                    inLoop=false;
+                } :}
+             | WHILE expr:e {: 
+                TS.agregarNivel();
+                ActualLoopLevel=TS.getCorriente(); 
+                inLoop=true;
+                :} block:b {:
                 if(e.getType().equals(Type.BOOLEAN)){
                     WhileStmt whileExpr=new WhileStmt(e, b);
                     RESULT= whileExpr;
                 }else{
                     System.out.println("Error: Expression in While Statement must be Boolean");
                 }
-                TS.SubirNivel(); inLoop=false;:}
+                if(inLoop){
+                    TS.SubirNivel();
+                    inLoop=false;
+                } :}
              | RETURN PUNTO_Y_COMA {:
                                     //System.out.println("RETURN;");
                                     if(!ult_metodo.getTypeReturn().equals(Type.VOID)){
@@ -439,9 +465,22 @@
                                                 //RESULT= new ReturnStmt(e);
                                             }*/
                                             :}
-             | BREAK PUNTO_Y_COMA {: if(!inLoop){ System.out.println("Error: Break statement must be in a Loop");}else{BreakStmt res=new BreakStmt(); RESULT=res; TS.SubirNivel();} :}
-             | CONTINUE PUNTO_Y_COMA
-             | PUNTO_Y_COMA
+             | BREAK PUNTO_Y_COMA {:if(!inLoop){ 
+                                        System.out.println("Error: Break statement must be in a Loop");
+                                    }else{
+                                        BreakStmt res=new BreakStmt(); 
+                                        RESULT=res;
+                                        TS.setCorriente(ActualLoopLevel.getPadre());
+                                        //TS.SubirNivel();
+                                    } :}
+             | CONTINUE PUNTO_Y_COMA {: if(!inLoop){ 
+                                            System.out.println("Error: Continue statement must be in a Loop");
+                                        }else{
+                                            ContinueStmt res=new ContinueStmt(); 
+                                            RESULT=res; 
+                                            //TS.SubirNivel();
+                                        }  :}
+             | PUNTO_Y_COMA:pyc {: RESULT=pyc; :}
              | {: TS.agregarNivel(); :}  block {: TS.SubirNivel(); :}
              ;
 
@@ -807,7 +846,7 @@
             ;
 
     sum::= term:t {: RESULT=t; :}
-       | sum:s1 SUMA term:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+       | sum:s1 SUMA term:s2 {: if(  (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
@@ -1109,4 +1148,5 @@
     bool_LITERAL::= TRUE {:RESULT= new BoolLiteral(true); :} 
                 | FALSE {: RESULT= new BoolLiteral(false); :}
                 ;
+
 
