@@ -20,7 +20,7 @@ float pruContinue(float x, int b){
 		else {
 			total = -1000.2343 + 6752;
 			
-			break;
+			//break;
 
 		}	
 	
@@ -32,7 +32,7 @@ float pruContinue(float x, int b){
 }
 
 int main(){
-    externinvk("printf", float , pruContinue( ));
+    externinvk("printf", float , pruContinue(3.0, 2 ));
 }
 
 }

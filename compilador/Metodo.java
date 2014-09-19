@@ -107,9 +107,6 @@ public class Metodo {
             return false;
         }
         final Metodo other = (Metodo) obj;
-        if (this.return_not_void != other.return_not_void) {
-            return false;
-        }
         //si no se llaman igual no son el mismo metodo
         if (!this.name.equals(other.name)) {
             return false;

@@ -138,7 +138,7 @@ public class symbolTable {
         boolean declarado = false;
         Metodo m=new Metodo(Type.VOID, name, params);
         Metodo result = null;
-        //System.out.println("{buscando metodo} " + name+", "+paramTypes);
+        //System.out.println("{buscando metodo} " + name+", param"+paramTypes);
         while (nivelCorr!=null && (!declarado)) {
             //verificamos si el metodo fue declarado en el nivel corriente
             declarado = declarado || (nivelCorr.buscarMetodo(m) != null);
@@ -149,5 +149,15 @@ public class symbolTable {
         //System.out.println("encontrado? "+declarado);
         //System.out.println("resultado: "+result);
         return result;
+    }
+    
+    //metodo que retorna el nivel corriente en que estamos situados dentro del arbol semantico
+    public Node getCorriente(){
+        return this.TablaDeSimbolos.getCorriente();
+    }
+    
+    //metodo que permite setear el nodo (nivel) corriente
+    public void setCorriente(Node corr){
+        this.TablaDeSimbolos.setCorriente(corr);
     }
 }
