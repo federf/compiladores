@@ -133,8 +133,13 @@
                 | identifiers COMA identifier
                 ;
 
-    identifier::= ID:s {: TS.agregarSimbolo(tipo_corriente, s.toString(), null, 0); :} 
-      | ID:s CORCHETE_IZQ INT_LITERAL:i CORCHETE_DER {: int size= Integer.valueOf((String) i); switch (tipo_corriente){
+    identifier::= ID:s {: //caso identificador ID
+                        TS.agregarSimbolo(tipo_corriente, s.toString(), null, 0); :} 
+      | ID:s CORCHETE_IZQ INT_LITERAL:i CORCHETE_DER {: //caso arreglo ID[INT_LITERAL]
+                                                    //convertimos el int_literal en string
+                                                    int size= Integer.valueOf((String) i); 
+                                                    //luego segun el ultimo tipo leido creamos el simbolo que representara al arreglo
+                                                    switch (tipo_corriente){
                                                            case INT:
                                                                    TS.agregarSimbolo(Type.INTARRAY, s.toString(), null, size);  
                                                                    break;
@@ -144,30 +149,52 @@
                                                            case BOOLEAN:
                                                                    TS.agregarSimbolo(Type.BOOLARRAY, s.toString(), null, size); 
                                                                    break;
-                                                                               }:} 
+                                                    }:} 
       ;
 
     methodDeclarations::= method_decl
                       | methodDeclarations method_decl
                       ;
 
-    method_decl::= VOID ID:d {: 
+    method_decl::= VOID ID:d {: //declaracion de metodo que no retorna nada (retorna void)
+                        //si el id leido es "main"
                         if(d.toString().equals("main")){
+                            //marcamos que se encontro un metodo main (almenos)
                             mainDeclared=true;
                         } 
+                        //creamos el objeto metodo en el nivel corriente
                         TS.agregarMetodo(Type.VOID, d.toString());
-               :} parameters {:
+               :} parameters {: //luego de leer los parametros
+                        //obtenemos el ultimo metodo creado ya que son sus parametros 
                         Metodo e=TS.obtenerMetodo();
                         ult_metodo=e;
+                        //agregamos un nuevo nivel al arbol
                         TS.agregarNivel();
-                        for(int i=0; i<e.getParametros().size(); i++){
-                            Simbolo actual = e.getParametros().get(i);
-                            TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
-                       }      
-               :} block {:
+                        //si el ultimo metodo leido no es main
+                        if(!ult_metodo.getName().equals("main")){
+                            //agregamos todo parametro como variable dentro de un nuevo nivel
+                            //el cual corresponde al cuerpo del metodo leido
+                            for(int i=0; i<e.getParametros().size(); i++){
+                                Simbolo actual = e.getParametros().get(i);
+                                TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
+                            }  
+                        }else{//sino, si el metodo leido fue main
+                        //verificamos que no tiene parametros, ya que main no debe tener parametros
+                            if(ult_metodo.getParametros().size()!=0){
+                                System.out.println("Error: Method Main must not have parameters");
+                            //marcamos que el metodo leido es main pero al no ser correcto, no es valido
+                                mainDeclared=false;
+                            }
+                        }
+               :} block {://luego de terminar de procesar el cuerpo del metodo, subimos de nivel dentro del arbol
                         TS.SubirNivel(); :}
-               | type:t ID:g {: 
-                            if(g.toString().equals("main")){mainDeclared=true;} switch (tipo_corriente){
+               | type:t ID:g {:
+                            //si el metodo se llama main marcamos que leimos el metodo main
+                            if(g.toString().equals("main")){
+                                mainDeclared=true;
+                            } 
+                            //creamos el metodo correspondiente, segun el tipo leido y su nombre
+                            switch (tipo_corriente){
                                   case INT:
                                             TS.agregarMetodo(Type.INT, g.toString());
                                             break;
@@ -179,14 +206,29 @@
                                             break;
                              }
                              :} parameters {:
-                             Metodo e=TS.obtenerMetodo();
+                            //buscamos el ult metodo leido, luego de agregarle sus parametros
+                            Metodo e=TS.obtenerMetodo();
                             ult_metodo=TS.obtenerMetodo();  
-                        TS.agregarNivel();
-                        for(int i=0; i<e.getParametros().size(); i++){
-                            Simbolo actual = e.getParametros().get(i);
-                            TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
-                        }
-                        :} block {:
+                            //agregamos un nuevo nivel en el arbol, para el cuerpo del metodo
+                            TS.agregarNivel();
+                            //si el ultimo metodo leido no es main
+                            if(!ult_metodo.getName().equals("main")){
+                            //agregamos todo parametro como variable dentro de un nuevo nivel
+                            //el cual corresponde al cuerpo del metodo leido
+                                for(int i=0; i<e.getParametros().size(); i++){
+                                Simbolo actual = e.getParametros().get(i);
+                                TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
+                                }
+                            }else{//sino, si el metodo leido fue main
+                                //verificamos que no tiene parametros, ya que main no debe tener parametros
+                                if(ult_metodo.getParametros().size()!=0){
+                                    System.out.println("Error: Method Main must not have parameters");
+                                    //marcamos que el metodo leido es main pero al no ser correcto, no es valido
+                                    mainDeclared=false;
+                                }
+                            }
+                            
+                        :} block {: //al terminar de procesar el cuerpo del metodo subimos de nivel
                                 TS.SubirNivel();:}
                ;
 
@@ -206,8 +248,10 @@
                          | parameterDeclarations COMA parameterDeclaration
                          ;
 
-    parameterDeclaration::= type ID:a {: Simbolo sym = new Simbolo(tipo_corriente, a.toString(), null, 0); 
-                                          TS.obtenerMetodo().addParametro(sym); :}
+    parameterDeclaration::= type ID:a {: //creamos el nuevo simbolo con el tipo e id leidos 
+                                        Simbolo sym = new Simbolo(tipo_corriente, a.toString(), null, 0); 
+                                        //y lo agregamos como parametro al ultimo metodo leido
+                                        TS.obtenerMetodo().addParametro(sym); :}
                         ;
 
     statements::= statement
@@ -227,9 +271,11 @@
 
                                                                 MethodCallExpr actual=(MethodCallExpr) e;
                                                                 LinkedList<Type> tipoArgumentos=new LinkedList();
+                                                                //buscamos los tipos de todos los argumentos de la llamada al metodo
                                                                 for(int j=0; j<actual.getArgs().size(); j++){
                                                                     tipoArgumentos.addLast(actual.getArgs().get(j).getType());
                                                                 }
+                                                                //buscamos el metodo por su id y por los tipos de los parametros pasados
                                                                 Metodo m= TS.buscarMetodo(actual.getName(), tipoArgumentos);
                                                                 if(l.getType().equals(m.getTypeReturn()) && ao.toString().equals("=") || 
                                                                     ((l.getType().equals(Type.FLOAT) || l.getType().equals(Type.FLOATARRAY)) && 
@@ -251,6 +297,7 @@
                                                                                     System.out.println("Error int expected but "+m.getTypeReturn()+" found");
                                                                                 }
                                                                                 break;
+                                                                            //caso arreglo de reales (floatarray) con valor real (float)
                                                                             case FLOATARRAY:
                                                                                 if(m.getTypeReturn().equals(Type.FLOAT)){
                                                                                     AssignStmt a=new AssignStmt((Location)l, ao, (Expression) e); 
@@ -259,6 +306,7 @@
                                                                                     System.out.println("Error float expected but "+m.getTypeReturn()+" found");
                                                                                 }
                                                                                 break;
+                                                                            //caso arreglo de boolean con valor booleano
                                                                             case BOOLARRAY:
                                                                                 if(m.getTypeReturn().equals(Type.BOOLEAN)){
                                                                                     if(ao.toString().equals("=")){
@@ -306,6 +354,7 @@
                                                                                     System.out.println("Error int expected but "+e.getType()+" found");
                                                                                 }
                                                                                 break;
+                                                                            // caso arreglo de reales con valor real
                                                                             case FLOATARRAY:
                                                                                 if(e.getType().equals(Type.FLOAT)){
                                                                                     AssignStmt a=new AssignStmt((Location)l, ao, (Expression) e); 
@@ -314,6 +363,7 @@
                                                                                     System.out.println("Error float expected but "+e.getType()+" found");
                                                                                 }
                                                                                 break;
+                                                                            //caso arreglo de boolean con valor booleano
                                                                             case BOOLARRAY:
                                                                                 if(e.getType().equals(Type.BOOLEAN)){
                                                                                     if(ao.toString().equals("=")){
@@ -335,7 +385,9 @@
                                                                 
                                                              :}
              | method_call:m PUNTO_Y_COMA {: RESULT=m; :}
-             | IF PARENTESIS_IZQ {: TS.agregarNivel(); :} expr:e PARENTESIS_DER block:ifBlock {: TS.SubirNivel(); :} else_block:elseBlock {: 
+             | IF PARENTESIS_IZQ {://agregamos un nuevo nivel al arbol para el cuerpo del if
+                 TS.agregarNivel(); :} expr:e PARENTESIS_DER block:ifBlock {: //subimos de nivel luego del bloque if
+                        TS.SubirNivel(); :} else_block:elseBlock {: //luego de procesar el bloque else (el cual es opcional)
                 if(e.getType().equals(Type.BOOLEAN)){ //si la expression es de tipo boolean
                     IfStmt res=null;
                     if(elseBlock!=null){ //si tiene else block
@@ -364,29 +416,45 @@
                 } 
             :}
              | WHILE expr:e {: 
+                //agregamos un nuevo nivel para el cuerpo del ciclo
                 TS.agregarNivel();
+                //marcamos que nos encontramos dentro de un ciclo para habilitar el uso de sentencias 
+                // BREAK y CONTINUE
                 inLoop=true;
                 :} block:b {:
+                //si el tipo de la expression es correcto (es boolean)
                 if(e.getType().equals(Type.BOOLEAN)){
+                    //creamos el while como tal
                     WhileStmt whileExpr=new WhileStmt(e, b);
+                    //y lo retornamos como resultado
                     RESULT= whileExpr;
                 }else{
+                    //sino, mostramos un mensaje de error
                     System.out.println("Error: Expression in While Statement must be Boolean");
                 }
+                //luego de haber terminado de procesar el while por completo
                 if(inLoop){
+                    //subimos de nivel en el arbol
                     TS.SubirNivel();
+                    //marcamos que dejamos de estar en un ciclo
                     inLoop=false;
                 } 
                 :}
              | RETURN PUNTO_Y_COMA {:
+                                    //verificamos que el ultimo metodo leido (el cual se esta procesando)
+                                    // retorne void
                                     if(!ult_metodo.getTypeReturn().equals(Type.VOID)){
+                                        //si no lo hace, mostramos un mensaje de error
                                              System.out.println("Error: Method "+ult_metodo.getName()+" returns void ");
                                     }else{ 
+                                        //sino creamos un returnstmt
                                         ReturnStmt res=new ReturnStmt();
                                         RESULT= res;
                                     }
                                          :}
-             | RETURN expr:e PUNTO_Y_COMA {: 
+             | RETURN expr:e PUNTO_Y_COMA {:
+                                            //verifficamos el tipo de la expression y segun el mismo verificamos si coincide con
+                                            //el tipo retornado por el ultimo metodo leido
                                             switch(e.getType()){
                                                 case INTARRAY:
                                                     if(ult_metodo.getTypeReturn().equals(Type.INT) || ult_metodo.getTypeReturn().equals(Type.INTARRAY)){
@@ -411,13 +479,17 @@
                                                     break;
                                             }
                                             :}
-             |  BREAK PUNTO_Y_COMA {:if(!inLoop){ 
+             |  BREAK PUNTO_Y_COMA {://si nos encontramos dentro de un ciclo es valido utilizar la sentencia BREAK
+                                    if(!inLoop){ 
+                                        //si no lo estamos, mostramos un mensaje de error
                                         System.out.println("Error: Break statement must be in a Loop");
                                     }else{
                                         BreakStmt res=new BreakStmt(); 
                                         RESULT=res;
                                     } :}
-             | CONTINUE PUNTO_Y_COMA {: if(!inLoop){ 
+             | CONTINUE PUNTO_Y_COMA {: //si nos encontramos en un ciclo es valido utilizar la sentencia CONTINUE
+                                        if(!inLoop){ 
+                                            //si no lo estamos, mostramos un mensaje de error
                                             System.out.println("Error: Continue statement must be in a Loop");
                                         }else{
                                             ContinueStmt res=new ContinueStmt(); 
@@ -437,37 +509,50 @@
              ;
 
     method_call::= ID:id PARENTESIS_IZQ PARENTESIS_DER {:
-
+                    //llamada a metodo sin parametros
+                    //buscamo el metodo por su id y con su lista de parametros vacia (ya que tecnicamente no tiene parametros)
                     Metodo m=TS.buscarMetodo(id, new LinkedList());
                     if(m!= null){
+                        //si el metodo fue encontrado creamos y retornamos una nueva MethodCallExpr
                         MethodCallExpr res=new MethodCallExpr(m.getName(), new LinkedList()); 
                         res.setType(m.getTypeReturn());
                         RESULT=res;
                     }else{
+                        //sino mostramos un mensaje de error indicando que el metodo no fue declarado
                         System.out.println("Error: Method "+id+" not declared");
                     }
                     :}
                |  ID:id PARENTESIS_IZQ expressions:args PARENTESIS_DER {:
+                    //llamada a metodo con parametros
                     LinkedList<Type> argsType=new LinkedList();
+                    //obtenemos el tipo de cada parametro
                     for(int i=0; i<args.size(); i++){
+                        //si alguno de los parametros es una llamada a un metodo
                         if(args.get(i) instanceof MethodCallExpr){
                             MethodCallExpr actual=(MethodCallExpr) args.get(i);
                             LinkedList<Type> tipoArgumentos=new LinkedList();
                             for(int j=0; j<actual.getArgs().size(); j++){
                                 tipoArgumentos.addLast(actual.getArgs().get(j).getType());
                             }
+                            //y buscamos el metodo por su nombre y la lista de tipos de los parametros dados
                             Metodo m= TS.buscarMetodo(actual.getName(), tipoArgumentos);
+                            //y guardamos el tipo que retorna el metodo como tipo de parametro
                             argsType.addLast(m.getTypeReturn());
                         }else{
+                            //sino, si es una variable, buscamos su tipo y lo guardamos
                             argsType.addLast(args.get(i).getType());
                         }
                     }
+                    //buscamos el metodo por su id y la lista de tipos de parametros
                     Metodo m=TS.buscarMetodo(id, argsType);
+                    //si se encontro el metodo
                     if(m!= null){
+                        //creamos y retornamos una nueva MethodCallExpr
                         MethodCallExpr res=new MethodCallExpr(m.getName(), args); 
                         res.setType(m.getTypeReturn());
                         RESULT=res;
                     }else{
+                        //sino mostramos un mensaje de error indicando que el metodo no fue declarado
                         System.out.println("Error: Method "+id+" not declared");
                     }
                     :}
@@ -559,7 +644,8 @@
                ;
 
     comparison::= relation:r {: RESULT=r; :}
-              | relation:r1 IGUALDAD_LOGICA relation:r2 {: if(r1.getType().equals(Type.BOOLEAN) && r2.getType().equals(Type.BOOLEAN) ||
+              | relation:r1 IGUALDAD_LOGICA relation:r2 {: //verificamos que el tipo de los operandos sean validos para la operacion
+                                    if(r1.getType().equals(Type.BOOLEAN) && r2.getType().equals(Type.BOOLEAN) ||
                                                 (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.INT)) ||
                                                 (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.INTARRAY)) ||
                                                 (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.FLOAT))||
@@ -585,10 +671,12 @@
 
                                                 RESULT=res;
                                             }else{
+                                                //si no lo son mostramos un mensaje de error
                                                 System.out.println("Error "+BinOpType.CEQ+"can only be applied to Boolean/Int/Float operands");
                                             }
                                              :}
-              | relation:r1 DIFERENCIA_LOGICA relation:r2 {:if(r1.getType().equals(Type.BOOLEAN) && r2.getType().equals(Type.BOOLEAN) ||
+              | relation:r1 DIFERENCIA_LOGICA relation:r2 {://verificamos que el tipo de los operandos sean validos para la operacion
+                                            if(r1.getType().equals(Type.BOOLEAN) && r2.getType().equals(Type.BOOLEAN) ||
                                                 (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.INT)) ||
                                                 (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.INTARRAY)) ||
                                                 (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.FLOAT))||
@@ -613,13 +701,15 @@
                                                 res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
+                                                //si no lo son mostramos un mensaje de error
                                                 System.out.println("Error "+BinOpType.NEQ+"can only be applied to Boolean/Int/Float operands");
                                             }
                                              :}
               ;
 
     relation::= sum:s {:RESULT=s; :}
-            | sum:s1 MENOR sum:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+            | sum:s1 MENOR sum:s2 {: //verificamos que el tipo de los operandos sean validos para la operacion
+                                            if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
@@ -646,9 +736,11 @@
                                                 res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
+                                                //si no lo son mostramos un mensaje de error
                                                 System.out.println("Error "+BinOpType.LE.toString()+" can only be applied to Int or Float values");                                            }
                                          :}
-            | sum:s1 MAYOR sum:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+            | sum:s1 MAYOR sum:s2 {: //verificamos que el tipo de los operandos sean validos para la operacion
+                                            if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
@@ -674,10 +766,12 @@
                                                 res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
+                                                //si no lo son mostramos un mensaje de error
                                                 System.out.println("Error "+BinOpType.GE.toString()+" can only be applied to Int or Float values");
                                             }
                                          :}
-            | sum:s1 MAYOR_IGUAL sum:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+            | sum:s1 MAYOR_IGUAL sum:s2 {: //verificamos que el tipo de los operandos sean validos para la operacion
+                                            if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
@@ -703,10 +797,12 @@
                                                 res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
+                                                //si no lo son mostramos un mensaje de error
                                                 System.out.println("Error "+BinOpType.GEQ.toString()+" can only be applied to Int or Float values");
                                             }
                                          :}
-            | sum:s1 MENOR_IGUAL sum:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+            | sum:s1 MENOR_IGUAL sum:s2 {: //verificamos que el tipo de los operandos sean validos para la operacion
+                                            if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
@@ -732,13 +828,15 @@
                                                 res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
+                                                //si no lo son mostramos un mensaje de error
                                                 System.out.println("Error "+BinOpType.LEQ.toString()+" can only be applied to Int or Float values");
                                             }
                                          :}
             ;
 
     sum::= term:t {: RESULT=t; :}
-       | sum:s1 SUMA term:s2 {: if(  (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+       | sum:s1 SUMA term:s2 {: //verificamos que el tipo de los operandos sean validos para la operacion
+                                            if(  (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
@@ -774,10 +872,12 @@
                                                     RESULT=res;
                                                 }
                                         }else{
+                                            //si no lo son mostramos un mensaje de error
                                             System.out.println("Error "+BinOpType.PLUS.toString()+" can only be applied to Int or Float values");
                                         }
                                          :}
-       | sum:s1 RESTA term:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+       | sum:s1 RESTA term:s2 {: //verificamos que el tipo de los operandos sean validos para la operacion
+                                            if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
@@ -813,13 +913,15 @@
                                                 RESULT=res;
                                             }
                                         }else{
+                                            //si no lo son mostramos un mensaje de error
                                             System.out.println("Error "+BinOpType.MINUS.toString()+" can only be applied to Int or Float values");
                                         }
                                          :}
        ;
 
     term::= factor:f {: RESULT=f; :}
-        | term:s1 MULTIPLICACION factor:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+        | term:s1 MULTIPLICACION factor:s2 {: //verificamos que el tipo de los operandos sean validos para la operacion
+                                            if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
@@ -856,10 +958,12 @@
                                                 RESULT=res;
                                             }
                                         }else{
+                                            //si no lo son mostramos un mensaje de error
                                             System.out.println("Error "+BinOpType.MULTIPLY.toString()+" can only be applied to Int or Float values");
                                         }
                                          :}
-        | term:s1 DIVISION factor:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+        | term:s1 DIVISION factor:s2 {: //verificamos que el tipo de los operandos sean validos para la operacion
+                                            if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
@@ -895,10 +999,12 @@
                                                 RESULT=res;
                                             }
                                         }else{
+                                            //si no lo son mostramos un mensaje de error
                                             System.out.println("Error "+BinOpType.DIVIDE.toString()+" can only be applied to Int or Float values");
                                         }
                                          :}
-        | term:s1 PORCENTAJE factor:s2 {: if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+        | term:s1 PORCENTAJE factor:s2 {: //verificamos que el tipo de los operandos sean validos para la operacion
+                                            if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
                                             (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
                                             (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
                                             (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))
@@ -907,24 +1013,25 @@
                                                 res.setType(Type.INT);
                                                 RESULT=res;
                                             }else{
+                                                //si no lo son mostramos un mensaje de error
                                                 System.out.println("Error "+BinOpType.MOD.toString()+" can only be applied to Int values");
                                             }
                                          :}
         ;
 
     factor::=literal:l {: RESULT = (Expression)l; :} 
-          | ADMIRACION factor:f {:  
-                                    UnaryOpExpr f2=new UnaryOpExpr(UnaryOpType.NON, f);
+          | ADMIRACION factor:f {: 
+                                    //verificamos que el operando sea valido para la operacion
                                     if(f.getType().equals(Type.BOOLEAN)){
-
-                                        f2.setType(Type.BOOLEAN);
-                                        RESULT=f2;
+                                        UnaryOpExpr u=new UnaryOpExpr(UnaryOpType.NON, f);
+                                        u.setType(Type.BOOLEAN);
+                                        RESULT=u;
                                     }else{
+                                        //si no lo es mostramos un mensaje de error
                                         System.out.println("Boolean expected but "+f.getType().toString()+" found.");
                                     } :}
-          | RESTA factor:f {:  if(f.getType().equals(Type.FLOAT)){ 
-          
-
+          | RESTA factor:f {:  //verificamos que el operando sea valido para la operacion
+                                if(f.getType().equals(Type.FLOAT)){ 
                                         UnaryOpExpr u=new UnaryOpExpr(UnaryOpType.MINUS,f);
                                         u.setType(Type.FLOAT);
                                         RESULT= u;
@@ -935,6 +1042,7 @@
                                             RESULT= u;
                                             
                                         }else{
+                                            //si no lo es mostramos un mensaje de error
                                             System.out.println("Numeral (int or float) expected but "+f.getType().toString()+" found.");
                                         }
                                     }   
@@ -942,10 +1050,10 @@
           ;
 
 
-    literal::= INT_LITERAL:i {: RESULT= new IntLiteral((String) i); :}
-           | FLOAT_LITERAL:f {:RESULT= new FloatLiteral((String) f); :}
-           | bool_LITERAL:b {:RESULT = b;:}
-           | ID:id {: Simbolo s=TS.buscarSimbolo(id);
+    literal::= INT_LITERAL:i {: RESULT= new IntLiteral((String) i); :} //entero
+           | FLOAT_LITERAL:f {:RESULT= new FloatLiteral((String) f); :} //real
+           | bool_LITERAL:b {:RESULT = b;:} //boolean (valor logico)
+           | ID:id {: Simbolo s=TS.buscarSimbolo(id); //identificador
                         switch(s.getType()){
                             case BOOLEAN:
                                 if(s.getValue()==null){
@@ -978,7 +1086,7 @@
                                 break;
                         }
                      :}
-           | ID:id CORCHETE_IZQ expr:e CORCHETE_DER {: 
+           | ID:id CORCHETE_IZQ expr:e CORCHETE_DER {: //arreglo
                     Simbolo s=TS.buscarSimbolo((String)id);
                     if(s==null){
                         System.out.println("Variable "+id+" not found");
@@ -994,12 +1102,12 @@
                         }
                     }
                  :}
-           | method_call:m {:RESULT=m;:}
-           | PARENTESIS_IZQ expr:e PARENTESIS_DER {: RESULT=e; :}
+           | method_call:m {:RESULT=m;:} //llamada a metodo
+           | PARENTESIS_IZQ expr:e PARENTESIS_DER {: RESULT=e; :} //expresion entre parentesis
            ;
 
-    bool_LITERAL::= TRUE {:RESULT= new BoolLiteral(true); :} 
-                | FALSE {: RESULT= new BoolLiteral(false); :}
+    bool_LITERAL::= TRUE {:RESULT= new BoolLiteral(true); :} //true
+                | FALSE {: RESULT= new BoolLiteral(false); :} //false
                 ;
 
 

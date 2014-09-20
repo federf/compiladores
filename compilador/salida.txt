@@ -356,6 +356,7 @@ error de sintaxis: Linea 11.
   
   
 ---------------- Test tests/test_errores/error_test_main02.ctds ... -------------------
+Error: Method Main must not have parameters
 Error: Method alo not declared
 error de sintaxis: Linea 14.
 ---------------------------------------------------
