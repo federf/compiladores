@@ -471,7 +471,7 @@
                                                     }
                                                     break;
                                                 case FLOATARRAY:
-                                                    if(ult_metodo.getTypeReturn().equals(Type.FLOAT) || ult_metodo.getTypeReturn().equals(Type.FLOAT)){
+                                                    if(ult_metodo.getTypeReturn().equals(Type.FLOAT) || ult_metodo.getTypeReturn().equals(Type.FLOATARRAY)){
                                                         RESULT=new ReturnStmt(e);
                                                     }else{
                                                         System.out.println("Error: Method "+ult_metodo.getName()+" must return "+ult_metodo.getTypeReturn().toString());
