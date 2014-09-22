@@ -1,0 +1,15 @@
+class ifErrorTest{
+
+int testIf(int a, int b, int c ){
+    int i;   
+	if(b > c) 
+		res = a - c;         
+	return res;
+}
+
+int main(){
+    externinvk("printf", int);
+    externinvk("printf", int , testIf(1,2,3));
+}
+
+}

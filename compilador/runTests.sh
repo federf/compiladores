@@ -20,18 +20,6 @@ echo "     "
 
 comp=$1
 
-echo "///////////////////////// TESTS[1er entrega]////////////////////////////////////////" 
-files=`ls tests/*.c-tds`
-
-
-for file in $files ; do 
-        echo "---------------- Test $file ... -------------------" 
-        java $comp $file 
-        echo "---------------------------------------------------" 
-        echo "  "
-        echo "  "
-done
-
 echo "///////////////////////// TESTS CORRECTOS ////////////////////////////////////////" 
 files=`ls tests/test_correctos/*.ctds`
 

@@ -20,7 +20,10 @@ int maxcomdiv (int a, int b){
 }
 
 int main(){
+    int a;
+    a=10000;
     externinvk("printf", float , "%d%f", "mcd",  maxcomdiv(6,9 ), 3.5 * a - 7 / 6 );
+    
 }
 
 }

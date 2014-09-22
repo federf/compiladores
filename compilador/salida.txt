@@ -6,34 +6,23 @@
 *********************************************************************************** 
      
      
-///////////////////////// TESTS[1er entrega]////////////////////////////////////////
----------------- Test tests/floatTest.c-tds ... -------------------
-parseo exitoso
----------------------------------------------------
-  
-  
----------------- Test tests/ifErrorTest.c-tds ... -------------------
-error de sintaxis: Linea 6.
----------------------------------------------------
-  
-  
----------------- Test tests/logicTest.c-tds ... -------------------
-parseo exitoso
----------------------------------------------------
-  
-  
----------------- Test tests/program.c-tds ... -------------------
-parseo exitoso
----------------------------------------------------
-  
-  
----------------- Test tests/testAssing.c-tds ... -------------------
-parseo exitoso
----------------------------------------------------
-  
-  
 ///////////////////////// TESTS CORRECTOS ////////////////////////////////////////
 ---------------- Test tests/test_correctos/factorial.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/floatTest.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/logicTest.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/program.ctds ... -------------------
 parseo exitoso
 ---------------------------------------------------
   
@@ -50,6 +39,11 @@ ocurrio un error: ir.ast.BinOpExpr cannot be cast to ir.ast.IntLiteral
   
   
 ---------------- Test tests/test_correctos/test_Asignaciones.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/testAssing.ctds ... -------------------
 parseo exitoso
 ---------------------------------------------------
   
@@ -479,6 +473,11 @@ error de sintaxis: Linea 7.
   
 ---------------- Test tests/test_errores/error_vbles03.ctds ... -------------------
 error de sintaxis: Linea 3.
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_errores/ifErrorTest.ctds ... -------------------
+error de sintaxis: Linea 6.
 ---------------------------------------------------
   
   
