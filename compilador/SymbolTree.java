@@ -31,10 +31,6 @@ public class SymbolTree {
     public Node getCorriente() {
         return corriente;
     }
-    
-    public void setCorriente(Node corr){
-        this.corriente=corr;
-    }
 
     //metodo que agrega un nuevo nivel (ya sea por la declaracion de un metodo o porque se ingreso
     // en una estructura condicional)

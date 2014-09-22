@@ -6,7 +6,64 @@
 *********************************************************************************** 
      
      
+///////////////////////// TESTS[1er entrega]////////////////////////////////////////
+---------------- Test tests/floatTest.c-tds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/ifErrorTest.c-tds ... -------------------
+error de sintaxis: Linea 6.
+---------------------------------------------------
+  
+  
+---------------- Test tests/logicTest.c-tds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/program.c-tds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/testAssing.c-tds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
 ///////////////////////// TESTS CORRECTOS ////////////////////////////////////////
+---------------- Test tests/test_correctos/factorial.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_arreglos2.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_arreglos.ctds ... -------------------
+Error float expected but int found
+ocurrio un error: ir.ast.BinOpExpr cannot be cast to ir.ast.IntLiteral
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_Asignaciones.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_bloques02.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_bloques.ctds ... -------------------
+parseo exitoso
+---------------------------------------------------
+  
+  
 ---------------- Test tests/test_correctos/test_booleanos.ctds ... -------------------
 parseo exitoso
 ---------------------------------------------------
@@ -44,6 +101,11 @@ parseo exitoso
   
 ---------------- Test tests/test_correctos/test_expresiones02.ctds ... -------------------
 parseo exitoso
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_float01.ctds ... -------------------
+error de sintaxis: Linea 23.
 ---------------------------------------------------
   
   

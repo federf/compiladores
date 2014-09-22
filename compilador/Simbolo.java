@@ -78,10 +78,6 @@ public class Simbolo {
         if(this.size!=other.size){
             return false;
         }
-        /* creo no hace falta
-         if (!this.value.equals(other.value)) {
-         return false;
-         }*/
         return true;
     }
 

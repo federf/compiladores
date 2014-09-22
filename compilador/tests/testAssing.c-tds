@@ -1,0 +1,22 @@
+class testAssign{
+
+int aritmTest(int c){
+	
+		int a;
+		int b;
+        a = 1;
+        b = 2;
+		a = 1 + a ;
+		b = a + 2; 
+		a = ( a / c );
+		c = a % 3;
+        a += 1;
+        a -= 2;
+		return c;	
+}
+
+int main(){
+    externinvk("printf", int , aritmTest(5));
+}
+
+}

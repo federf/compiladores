@@ -2,20 +2,11 @@ Para ejectuar el programa es necesario tener instalado Jflex y Cup.
 
 Se ejecuta siguiendo los siguientes pasos:
 1°= Situarse en la carpeta donde se ubican los archivos lexer.lex parser.cup Compilador.java
-2°= jflex lexer.lex
-3°= java java_cup.Main parser.cup
-4°= javac -d . parser.java sym.java Yylex.java
-5°= javac Compilador.java
-6°= java Compilador tests/<nombreArchivo>.ctds
+2°= Ejecutar el comando "sh compilar.sh" sin las comillas ""
+3°= java Compilador tests/<nombreArchivo>.ctds
 
 reemplazar <nombreArchivo> por alguno de los archivos presentes en la subcarpeta tests.
 
-En la carpeta tests ubicada dentro de src/compilador, se hayan los siguientes test.
-Tests correctos: los siguientes test dan como resultado un parseo exitoso
-    floatTest.ctds (reales)
-    testAssign.ctds (asignaciones varias)
-    logicTest.ctds (test logico)
-    program.ctds (test programa ejemplo)
-
-Test de error: los siguientes test devuelven como resultado un error    
-    ifErrorTest.ctds (devuelve error ya que el if no comienza con una llave)
+Para verificar los casos de test realizados ejecutar el comando "sh sh runTests.sh Compilador>salida.txt"
+el resultado de la evaluacion de los test sera guardado en un archivo llamado "salida.txt" ubicado en la carpeta
+"compilador" donde se encuentran los archivos lexer.lex, parser.cup y Compilador.java

@@ -144,14 +144,4 @@ public class symbolTable {
         }
         return result;
     }
-    
-    //metodo que retorna el nivel corriente en que estamos situados dentro del arbol semantico
-    public Node getCorriente(){
-        return this.TablaDeSimbolos.getCorriente();
-    }
-    
-    //metodo que permite setear el nodo (nivel) corriente
-    public void setCorriente(Node corr){
-        this.TablaDeSimbolos.setCorriente(corr);
-    }
 }
