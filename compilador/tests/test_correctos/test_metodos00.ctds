@@ -5,8 +5,8 @@ class test_class{
    }
 
    void alo2(int x){
-      alo();//hay error ya qye alo sin parametros no existe
-      x=  alo() + 1; //y ademas no se puede sumar void con int
+      alo();
+      x=  alo() + 1;
    }
 
 }
