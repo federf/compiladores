@@ -8,177 +8,212 @@
      
 ///////////////////////// TESTS CORRECTOS ////////////////////////////////////////
 ---------------- Test tests/test_correctos/factorial.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/floatTest.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/logicTest.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/program.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_arreglos2.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_arreglos.ctds ... -------------------
+parseo iniciado
 Error: Method pruArreglos must return int
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_Asignaciones.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/testAssing.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_bloques02.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_bloques.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_booleanos.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_break.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_comentarios2.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_comentarios.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_condiciones.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_continuebreak.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_expresiones01.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_expresiones02.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float01.ctds ... -------------------
-error de sintaxis: Linea 23.
+parseo iniciado
+parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float02.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float03.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float04.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_floats05.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for01.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for02.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for03.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for04.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for05.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_if_anidados.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_if.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_logicos01.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_logicos02.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mainSolo.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mcd.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_metodos00.ctds ... -------------------
+parseo iniciado
 Error: Method alo not declared
 Error: Method alo not declared
 ocurrio un error: null
@@ -186,21 +221,27 @@ ocurrio un error: null
   
   
 ---------------- Test tests/test_correctos/test_metodos01.ctds ... -------------------
-parseo exitoso
+parseo iniciado
+Error: Method alo2 not declared
+ocurrio un error: null
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_metodos02.ctds ... -------------------
+parseo iniciado
+Error: Method alo not declared
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_metodos03.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_metodos_externos01.ctds ... -------------------
+parseo iniciado
 Error: Method alo not declared
 Error: Method alo not declared
 ocurrio un error: null
@@ -208,92 +249,110 @@ ocurrio un error: null
   
   
 ---------------- Test tests/test_correctos/test_metodos_externos02.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mod.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mult01.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mult02.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_prog_simple.ctds ... -------------------
+parseo iniciado
 Main Method Missing in Class prueba2
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_retorno.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_suma.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_sumx.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_while.ctds ... -------------------
+parseo iniciado
 parseo exitoso
 ---------------------------------------------------
   
   
 ///////////////////////// TESTS CON FALLAS ////////////////////////////////////////
 ---------------- Test tests/test_errores/error_arreglos01.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 3.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_arreglos02.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 3.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_arreglos03.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 7.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_arreglos04.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 3.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_arreglos05.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 3.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_bloques01.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 3.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_bloques02.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 9.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_char.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 4.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_class01.ctds ... -------------------
+parseo iniciado
 Error: Method alo not declared
 Error: Method alo not declared
 ocurrio un error: null
@@ -301,6 +360,7 @@ ocurrio un error: null
   
   
 ---------------- Test tests/test_errores/error_class02.ctds ... -------------------
+parseo iniciado
 Error: Method alo not declared
 Error: Method alo not declared
 ocurrio un error: null
@@ -308,26 +368,31 @@ ocurrio un error: null
   
   
 ---------------- Test tests/test_errores/errores.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 3.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_externinvk02.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 23.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_externinvk.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 22.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_float01.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 9.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_float02.ctds ... -------------------
+parseo iniciado
 error: 0 9 .
 error: 0 21 .
 error de sintaxis: Linea 22.
@@ -335,83 +400,99 @@ error de sintaxis: Linea 22.
   
   
 ---------------- Test tests/test_errores/error_float03.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 29.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_float04.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 41.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_for01.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 13.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_for02.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 13.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_for03.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 13.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_for04.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 13.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_for05.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 18.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_if01.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 9.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_if02.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 8.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_lineaerror02.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 20.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_lineaerror.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 20.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_break.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 20.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_logicos02.ctds ... -------------------
+parseo iniciado
 error: 0 4 &
 error de sintaxis: Linea 5.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_logicos.ctds ... -------------------
+parseo iniciado
 ocurrio un error: null
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_main01.ctds ... -------------------
+parseo iniciado
 Error: Method alo not declared
 error de sintaxis: Linea 11.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_main02.ctds ... -------------------
+parseo iniciado
 Error: Method Main must not have parameters
 Error: Method alo not declared
 error de sintaxis: Linea 14.
@@ -419,53 +500,63 @@ error de sintaxis: Linea 14.
   
   
 ---------------- Test tests/test_errores/error_test_metodos01.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 4.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_metodos02.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 4.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_metodos03.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 19.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_metodos04.ctds ... -------------------
+parseo iniciado
 Error: Method alo3 not declared
 error de sintaxis: Linea 21.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_metodos05.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 15.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_metodos06.ctds ... -------------------
+parseo iniciado
 error: 0 3 &
 error de sintaxis: Linea 4.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_metodos07.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 9.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_multiplesMain.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 9.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_vbles01.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 6.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_vbles02.ctds ... -------------------
+parseo iniciado
 error: 0 5 _
 error de sintaxis: Linea 7.
 ---------------------------------------------------
@@ -477,6 +568,7 @@ error de sintaxis: Linea 3.
   
   
 ---------------- Test tests/test_errores/ifErrorTest.ctds ... -------------------
+parseo iniciado
 error de sintaxis: Linea 6.
 ---------------------------------------------------
   

@@ -5,26 +5,14 @@ import ir.ASTVisitor;
 public class VarLocation extends Location {
 
     Type type;
-    String value;
+    //Expression expr;
     int size;
 
-    public VarLocation(String id, Type type, String value, int size) {
+    public VarLocation(String id, Type type, Expression expr, int size) {
         this.id=id;
         this.type = type;
-        this.value = value;
+        this.expr = expr;
         this.size = size;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public int getSize() {
-        return size;
     }
 
     public void setSize(int size) {
@@ -32,10 +20,17 @@ public class VarLocation extends Location {
     }
     
     
+    public Type getType(){
+        return this.type;
+    }
+
+    public void getType(Type t){
+        this.type=t;
+    }
 
     @Override
     public String toString() {
-        return "VarLocation{" +"name="+ id +", type=" + type + ", value=" + value + ", size=" + size + '}';
+        return "VarLocation{" +"name="+ id +", type=" + type + ", expr=" + expr + ", size=" + size + '}';
     }
 
     
