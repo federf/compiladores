@@ -5,7 +5,6 @@ import ir.ASTVisitor;
 public class VarLocation extends Location {
 
     Type type;
-    //Expression expr;
     int size;
 
     public VarLocation(String id, Type type, Expression expr, int size) {
@@ -24,7 +23,7 @@ public class VarLocation extends Location {
         return this.type;
     }
 
-    public void getType(Type t){
+    public void setType(Type t){
         this.type=t;
     }
 

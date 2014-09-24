@@ -18,5 +18,18 @@ public class TripletCode {
     VarLocation result;
     //operador
     Object operator;
+
+    public TripletCode( Object operator,Object firstDir, Object secondDir, VarLocation result) {
+        this.firstDir = firstDir;
+        this.secondDir = secondDir;
+        this.result = result;
+        this.operator = operator;
+    }
+
+    @Override
+    public String toString() {
+        return "firstDir=" + firstDir + ", secondDir=" + secondDir + ", result=" + result + ", operator=" + operator;
+    }
+    
     
 }

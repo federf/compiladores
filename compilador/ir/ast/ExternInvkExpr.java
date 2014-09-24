@@ -42,8 +42,9 @@ public class ExternInvkExpr extends MethodCall{
 	    for (Expression e: parameters) {
 			methodString += e.toString()+", ";
 		}
-		
-		if (methodString.length() > 0) methodString = methodString.substring(0, methodString.length() - 2); // remove last comma
+        if(parameters.size()>0){
+            methodString=methodString.substring(methodString.length()-2);
+        }
 		methodString += ")";
 		return methodString; 
 	}
