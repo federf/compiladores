@@ -40,4 +40,11 @@ public class StringLiteral  extends Literal{
     public Type getType() {
         return Type.STRING;
     }
+
+    @Override
+    public String toString() {
+        return "StringLiteral{" + "value=" + value + '}';
+    }
+    
+    
 }
