@@ -32,12 +32,6 @@ parseo exitoso
 ---------------------------------------------------
   
   
----------------- Test tests/test_correctos/test_arreglos.ctds ... -------------------
-Error float expected but int found
-ocurrio un error: ir.ast.BinOpExpr cannot be cast to ir.ast.IntLiteral
----------------------------------------------------
-  
-  
 ---------------- Test tests/test_correctos/test_Asignaciones.ctds ... -------------------
 parseo exitoso
 ---------------------------------------------------

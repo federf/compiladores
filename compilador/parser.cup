@@ -299,7 +299,8 @@
                                                                                 break;
                                                                             //caso arreglo de reales (floatarray) con valor real (float)
                                                                             case FLOATARRAY:
-                                                                                if(m.getTypeReturn().equals(Type.FLOAT)){
+                                                                                System.out.println("entro aca");
+                                                                                if(m.getTypeReturn().equals(Type.FLOAT) || m.getTypeReturn().equals(Type.INT)){
                                                                                     AssignStmt a=new AssignStmt((Location)l, ao, (Expression) e); 
                                                                                     RESULT=a; 
                                                                                 }else{
@@ -356,7 +357,7 @@
                                                                                 break;
                                                                             // caso arreglo de reales con valor real
                                                                             case FLOATARRAY:
-                                                                                if(e.getType().equals(Type.FLOAT)){
+                                                                                if(e.getType().equals(Type.FLOAT) || e.getType().equals(Type.INT)){
                                                                                     AssignStmt a=new AssignStmt((Location)l, ao, (Expression) e); 
                                                                                     RESULT=a; 
                                                                                 }else{
@@ -599,21 +600,33 @@
                     if(s==null){
                         System.out.println("Variable "+id+" not found");
                     }else{
-                        
+                        //si el simbolo es un arreglo
                         if(s.getType().isArray()){
-                            if(!e.getType().equals(Type.INT)){
-                                System.out.println("Error: expression in array must be int");
-                            }else{
-                                IntLiteral e2=(IntLiteral) e;
-                                if(e2.getValue()<0){
-                                    System.out.println("Error: array index must be higher than zero");
+                            //si la expression es una expresion binaria
+                            if(e instanceof BinOpExpr){
+                                if(!e.getType().equals(Type.INT)){
+                                    System.out.println("Error: expression in array must be int");
                                 }else{
                                     VarLocation v=new VarLocation((String)id,s.getType(),s.getValue(),s.getSize());
                                     v.setType(s.getType());
                                     RESULT=v ;
                                 }
+                            }else{
+                                if(!e.getType().equals(Type.INT)){
+                                    System.out.println("Error: expression in array must be int");
+                                }else{
+                                    IntLiteral e2=(IntLiteral) e;
+                                    if(e2.getValue()<0){
+                                        System.out.println("Error: array index must be higher than zero");
+                                    }else{
+                                        VarLocation v=new VarLocation((String)id,s.getType(),s.getValue(),s.getSize());
+                                        v.setType(s.getType());
+                                        RESULT=v ;
+                                    }
+                                }
                             }
                         }else{
+                            //sino mostramos un mensaje de error
                             System.out.println("Variable "+id+" is not an array");
                         }
                     }
@@ -1109,5 +1122,7 @@
     bool_LITERAL::= TRUE {:RESULT= new BoolLiteral(true); :} //true
                 | FALSE {: RESULT= new BoolLiteral(false); :} //false
                 ;
+
+
 
 
