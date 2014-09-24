@@ -32,6 +32,12 @@ parseo exitoso
 ---------------------------------------------------
   
   
+---------------- Test tests/test_correctos/test_arreglos.ctds ... -------------------
+Error: Method pruArreglos must return int
+parseo exitoso
+---------------------------------------------------
+  
+  
 ---------------- Test tests/test_correctos/test_Asignaciones.ctds ... -------------------
 parseo exitoso
 ---------------------------------------------------
