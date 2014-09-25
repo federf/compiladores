@@ -25,6 +25,8 @@
     boolean inIfElse; 
     //variable booleana que indicaria que se encuentra dentro de un ciclo
     boolean inLoop;
+    //lista de codigo de tercetos/triplas
+    LinkedList<TripletCode> TripletList;
     :};
 
     parser code{:
@@ -114,7 +116,7 @@
             ;
 
     body::= LLAVE_IZQ LLAVE_DER 
-        | LLAVE_IZQ {: TS = new symbolTable(); :} fieldAndMethods LLAVE_DER 
+        | LLAVE_IZQ {: TS = new symbolTable(); TripletList=new LinkedList(); :} fieldAndMethods LLAVE_DER 
         ;
 
     fieldAndMethods::= fieldDeclarations
