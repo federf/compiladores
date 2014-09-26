@@ -10,30 +10,65 @@
 ---------------- Test tests/test_correctos/factorial.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 3
+lista: 
+Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
+Operator: *, firstOperator: 0, secondOperator: 0, Result: MULTIPLY
+Operator: -, firstOperator: 0, secondOperator: 1, Result: MINUS
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/floatTest.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 7
+lista: 
+Operator: /, firstOperator: 0.0, secondOperator: 0.0, Result: DIVIDE
+Operator: -, firstOperator: 0.0, secondOperator: 0.0, Result: MINUS
+Operator: +, firstOperator: 0.0, secondOperator: 0.0, Result: PLUS
+Operator: *, firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY
+Operator: -, firstOperator: 27.5, secondOperator: null, Result: RESTA
+Operator: -, firstOperator: 70.3, secondOperator: null, Result: RESTA
+Operator: -, firstOperator: 0.0, secondOperator: null, Result: RESTA
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/logicTest.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 4
+lista: 
+Operator: !, firstOperator: true, secondOperator: null, Result: ADMIRACION
+Operator: &&, firstOperator: VarLocation{name=DISYUNCION, type=boolean, expr=false || false, size=0}, secondOperator: !true, Result: CONJUNCION
+Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
+Operator: &&, firstOperator: VarLocation{name=CONJUNCION, type=boolean, expr=VarLocation{name=DISYUNCION, type=boolean, expr=false || false, size=0} && !true, size=0}, secondOperator: !false, Result: CONJUNCION
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/program.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 2
+lista: 
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
+Operator: ==, firstOperator: 0, secondOperator: 1, Result: IGUALDAD_LOGICA
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_arreglos2.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 9
+lista: 
+Operator: +, firstOperator: 2.6, secondOperator: 0.0, Result: PLUS
+Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
+Operator: -, firstOperator: 6, secondOperator: null, Result: RESTA
+Operator: -, firstOperator: 58, secondOperator: VarLocation{name=RESTA, type=int, expr=-6, size=0}, Result: MINUS
+Operator: -, firstOperator: 2.6, secondOperator: null, Result: RESTA
+Operator: <, firstOperator: 4, secondOperator: 6, Result: MENOR
+Operator: !, firstOperator: VarLocation{name=factor, type=boolean, expr=VarLocation{name=MENOR, type=boolean, expr=4 < 6, size=0}, size=0}, secondOperator: null, Result: ADMIRACION
+Operator: +, firstOperator: 3, secondOperator: 3, Result: PLUS
+Operator: -, firstOperator: 7, secondOperator: VarLocation{name=PLUS, type=int, expr=3 + 3, size=0}, Result: MINUS
 ---------------------------------------------------
   
   
@@ -41,174 +76,483 @@ parseo exitoso
 parseo iniciado
 Error: Method pruArreglos must return int
 parseo exitoso
+tamaño lista de codigo tercetos: 18
+lista: 
+Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
+Operator: -, firstOperator: 1, secondOperator: 0, Result: MINUS
+Operator: ==, firstOperator: 0, secondOperator: 0, Result: IGUALDAD_LOGICA
+Operator: -, firstOperator: 1, secondOperator: 1, Result: MINUS
+Operator: *, firstOperator: 0, secondOperator: 5, Result: MULTIPLY
+Operator: -, firstOperator: 0, secondOperator: 0, Result: MINUS
+Operator: <, firstOperator: 0, secondOperator: 589, Result: MENOR
+Operator: *, firstOperator: 0, secondOperator: 2, Result: MULTIPLY
+Operator: *, firstOperator: 0, secondOperator: 2, Result: MULTIPLY
+Operator: +, firstOperator: 0 * 2, secondOperator: 8, Result: PLUS
+Operator: +, firstOperator: ir.ast.ArrayLiteral@126cb1a, secondOperator: 3, Result: PLUS
+Operator: *, firstOperator: 5, secondOperator: 9, Result: MULTIPLY
+Operator: -, firstOperator: VarLocation{name=MULTIPLY, type=int, expr=5 * 9, size=0}, secondOperator: 40, Result: MINUS
+Operator: <=, firstOperator: 0, secondOperator: VarLocation{name=MULTIPLY, type=int, expr=5 * 9, size=0} - 40, Result: MENOR_IGUAL
+Operator: *, firstOperator: 0, secondOperator: 2, Result: MULTIPLY
+Operator: +, firstOperator: 0 * 2, secondOperator: 8, Result: PLUS
+Operator: >, firstOperator: ir.ast.ArrayLiteral@1e0312b, secondOperator: ir.ast.ArrayLiteral@1bc345a, Result: MAYOR
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_Asignaciones.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 6
+lista: 
+Operator: +, firstOperator: 699, secondOperator: 0, Result: PLUS
+Operator: +, firstOperator: 0, secondOperator: 2, Result: PLUS
+Operator: /, firstOperator: 0, secondOperator: 0, Result: DIVIDE
+Operator: /, firstOperator: 0 / 0, secondOperator: 0, Result: DIVIDE
+Operator: /, firstOperator: 0 / 0 / 0, secondOperator: 2, Result: DIVIDE
+Operator: %, firstOperator: 0, secondOperator: 2, Result: PORCENTAJE
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/testAssing.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 4
+lista: 
+Operator: +, firstOperator: 1, secondOperator: 0, Result: PLUS
+Operator: +, firstOperator: 0, secondOperator: 2, Result: PLUS
+Operator: /, firstOperator: 0, secondOperator: 0, Result: DIVIDE
+Operator: %, firstOperator: 0, secondOperator: 3, Result: PORCENTAJE
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_bloques02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 3
+lista: 
+Operator: <, firstOperator: 0, secondOperator: 10, Result: MENOR
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
+Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_bloques.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 3
+lista: 
+Operator: <, firstOperator: 0, secondOperator: 10, Result: MENOR
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
+Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_booleanos.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 2
+lista: 
+Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
+Operator: &&, firstOperator: false, secondOperator: false, Result: CONJUNCION
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_break.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 3
+lista: 
+Operator: <, firstOperator: 0, secondOperator: 10, Result: MENOR
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
+Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_comentarios2.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 1
+lista: 
+Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_comentarios.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 2
+lista: 
+Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
+Operator: +, firstOperator: 0, secondOperator: 5, Result: PLUS
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_condiciones.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 52
+lista: 
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
+Operator: &&, firstOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
+Operator: &&, firstOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
+Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
+Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: &&, firstOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
+Operator: &&, firstOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
+Operator: &&, firstOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: &&, firstOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
+Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
+Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: &&, firstOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: &&, firstOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
+Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
+Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_continuebreak.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 10
+lista: 
+Operator: -, firstOperator: 1, secondOperator: null, Result: RESTA
+Operator: -, firstOperator: 0.0, secondOperator: 1, Result: MINUS
+Operator: <, firstOperator: 0.0, secondOperator: 0, Result: MENOR
+Operator: !=, firstOperator: 0.0, secondOperator: 0, Result: DIFERENCIA_LOGICA
+Operator: *, firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY
+Operator: *, firstOperator: 0.0 * 0.0, secondOperator: 0, Result: MULTIPLY
+Operator: -, firstOperator: 1000.2343, secondOperator: null, Result: RESTA
+Operator: +, firstOperator: -1000.2343, secondOperator: 6752, Result: PLUS
+Operator: -, firstOperator: 2, secondOperator: null, Result: RESTA
+Operator: *, firstOperator: -2, secondOperator: 0.0, Result: MULTIPLY
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_expresiones01.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 8
+lista: 
+Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
+Operator: ==, firstOperator: 0, secondOperator: 4, Result: IGUALDAD_LOGICA
+Operator: <, firstOperator: 0, secondOperator: 4, Result: MENOR
+Operator: >, firstOperator: 0, secondOperator: 4, Result: MAYOR
+Operator: -, firstOperator: 0, secondOperator: 1, Result: MINUS
+Operator: *, firstOperator: 0, secondOperator: 2, Result: MULTIPLY
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
+Operator: /, firstOperator: 0.0, secondOperator: 2, Result: DIVIDE
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_expresiones02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 5
+lista: 
+Operator: *, firstOperator: 0, secondOperator: 0, Result: MULTIPLY
+Operator: +, firstOperator: 0, secondOperator: 0, Result: PLUS
+Operator: *, firstOperator: 2, secondOperator: 0.0, Result: MULTIPLY
+Operator: /, firstOperator: 0, secondOperator: 0.0, Result: DIVIDE
+Operator: >, firstOperator: VarLocation{name=DIVIDE, type=float, expr=VarLocation{name=factor, type=int, expr=0, size=0} / VarLocation{name=factor, type=float, expr=0.0, size=0}, size=0}, secondOperator: 5, Result: MAYOR
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float01.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 10
+lista: 
+Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
+Operator: -, firstOperator: 0, secondOperator: null, Result: RESTA
+Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
+Operator: <=, firstOperator: 0, secondOperator: 0, Result: MENOR_IGUAL
+Operator: *, firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
+Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
+Operator: !, firstOperator: VarLocation{name=ADMIRACION, type=boolean, expr=!false, size=0}, secondOperator: null, Result: ADMIRACION
+Operator: /, firstOperator: 1.0, secondOperator: 0.0, Result: DIVIDE
+Operator: -, firstOperator: 100.1, secondOperator: null, Result: RESTA
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 4
+lista: 
+Operator: >, firstOperator: 0.0, secondOperator: 0, Result: MAYOR
+Operator: >, firstOperator: 0.0, secondOperator: 0, Result: MAYOR
+Operator: >, firstOperator: 0.0, secondOperator: 0, Result: MAYOR
+Operator: +, firstOperator: 0.0, secondOperator: 0.0, Result: PLUS
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float03.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 47
+lista: 
+Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
+Operator: -, firstOperator: 0, secondOperator: null, Result: RESTA
+Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
+Operator: ==, firstOperator: 0, secondOperator: 0, Result: IGUALDAD_LOGICA
+Operator: *, firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY
+Operator: *, firstOperator: 0.0 * 0.0, secondOperator: 2, Result: MULTIPLY
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
+Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
+Operator: !, firstOperator: VarLocation{name=ADMIRACION, type=boolean, expr=!false, size=0}, secondOperator: null, Result: ADMIRACION
+Operator: /, firstOperator: 1.0, secondOperator: 0.0, Result: DIVIDE
+Operator: -, firstOperator: 100.1, secondOperator: null, Result: RESTA
+Operator: -, firstOperator: 2.0, secondOperator: null, Result: RESTA
+Operator: -, firstOperator: 2, secondOperator: null, Result: RESTA
+Operator: -, firstOperator: 3.0, secondOperator: null, Result: RESTA
+Operator: -, firstOperator: 3.0, secondOperator: null, Result: RESTA
+Operator: *, firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY
+Operator: -, firstOperator: 0.0 * 0.0, secondOperator: 0.0, Result: MINUS
+Operator: >, firstOperator: 0.0, secondOperator: 0.0, Result: MAYOR
+Operator: <, firstOperator: 0.0, secondOperator: 0.0, Result: MENOR
+Operator: <=, firstOperator: 0, secondOperator: 0, Result: MENOR_IGUAL
+Operator: <=, firstOperator: 0, secondOperator: 0, Result: MENOR_IGUAL
+Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
+Operator: ==, firstOperator: 0, secondOperator: 0, Result: IGUALDAD_LOGICA
+Operator: ==, firstOperator: 0, secondOperator: 3, Result: IGUALDAD_LOGICA
+Operator: +, firstOperator: 0.0, secondOperator: 2.0, Result: PLUS
+Operator: /, firstOperator: 10.0, secondOperator: 2.0, Result: DIVIDE
+Operator: -, firstOperator: 0.0, secondOperator: VarLocation{name=DIVIDE, type=float, expr=VarLocation{name=factor, type=float, expr=10.0, size=0} / VarLocation{name=factor, type=float, expr=2.0, size=0}, size=0}, Result: MINUS
+Operator: <, firstOperator: 0.0, secondOperator: 0.0, Result: MENOR
+Operator: <, firstOperator: 0.0, secondOperator: 0.0, Result: MENOR
+Operator: &&, firstOperator: 0.0 < 0.0, secondOperator: 0.0 < 0.0, Result: CONJUNCION
+Operator: *, firstOperator: 4.0, secondOperator: 0.0, Result: MULTIPLY
+Operator: +, firstOperator: 35.0, secondOperator: 4.0 * 0.0, Result: PLUS
+Operator: -, firstOperator: 35.0 + 4.0 * 0.0, secondOperator: 498.0, Result: MINUS
+Operator: -, firstOperator: 3.2, secondOperator: 0.0, Result: MINUS
+Operator: -, firstOperator: 3.2 - 0.0, secondOperator: 12345.356, Result: MINUS
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
+Operator: -, firstOperator: 0.0, secondOperator: null, Result: RESTA
+Operator: *, firstOperator: 0.0, secondOperator: -0.0, Result: MULTIPLY
+Operator: *, firstOperator: 23.0, secondOperator: 0.0, Result: MULTIPLY
+Operator: +, firstOperator: 0.0 * -0.0, secondOperator: 23.0 * 0.0, Result: PLUS
+Operator: /, firstOperator: 2.0, secondOperator: 4.0, Result: DIVIDE
+Operator: +, firstOperator: 0.0 * -0.0 + 23.0 * 0.0, secondOperator: VarLocation{name=factor, type=float, expr=2.0, size=0} / VarLocation{name=factor, type=float, expr=4.0, size=0}, Result: PLUS
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
+Operator: -, firstOperator: 0.0, secondOperator: null, Result: RESTA
+Operator: -, firstOperator: 15.0, secondOperator: null, Result: RESTA
+Operator: -, firstOperator: 7.6, secondOperator: null, Result: RESTA
+Operator: +, firstOperator: 0.0, secondOperator: 2.0, Result: PLUS
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float04.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 18
+lista: 
+Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
+Operator: -, firstOperator: 0, secondOperator: null, Result: RESTA
+Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
+Operator: ==, firstOperator: 0, secondOperator: 0, Result: IGUALDAD_LOGICA
+Operator: *, firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY
+Operator: *, firstOperator: 0.0 * 0.0, secondOperator: 2.0, Result: MULTIPLY
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
+Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
+Operator: !, firstOperator: VarLocation{name=ADMIRACION, type=boolean, expr=!false, size=0}, secondOperator: null, Result: ADMIRACION
+Operator: /, firstOperator: 1.0, secondOperator: 0.0, Result: DIVIDE
+Operator: -, firstOperator: 100.1, secondOperator: null, Result: RESTA
+Operator: *, firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY
+Operator: *, firstOperator: 0.0 * 0.0, secondOperator: 0.0, Result: MULTIPLY
+Operator: *, firstOperator: 0.0 * 0.0 * 0.0, secondOperator: 0.0, Result: MULTIPLY
+Operator: *, firstOperator: 0.0 * 0.0 * 0.0 * 0.0, secondOperator: 0.0, Result: MULTIPLY
+Operator: *, firstOperator: 0.0 * 0.0 * 0.0 * 0.0 * 0.0, secondOperator: 0.0, Result: MULTIPLY
+Operator: -, firstOperator: 15.0, secondOperator: null, Result: RESTA
+Operator: -, firstOperator: 7.6, secondOperator: null, Result: RESTA
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_floats05.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 4
+lista: 
+Operator: /, firstOperator: 0.0, secondOperator: 0.0, Result: DIVIDE
+Operator: -, firstOperator: 0.0, secondOperator: 0.0, Result: MINUS
+Operator: +, firstOperator: 0.0, secondOperator: 0.0, Result: PLUS
+Operator: -, firstOperator: 002.5, secondOperator: null, Result: RESTA
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for01.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 2
+lista: 
+Operator: *, firstOperator: 0, secondOperator: 10, Result: MULTIPLY
+Operator: +, firstOperator: 0, secondOperator: 2, Result: PLUS
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 1
+lista: 
+Operator: +, firstOperator: 0, secondOperator: 2, Result: PLUS
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for03.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 2
+lista: 
+Operator: -, firstOperator: 10, secondOperator: null, Result: RESTA
+Operator: +, firstOperator: 0, secondOperator: 2, Result: PLUS
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for04.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 4
+lista: 
+Operator: -, firstOperator: 10, secondOperator: null, Result: RESTA
+Operator: *, firstOperator: 11, secondOperator: 2, Result: MULTIPLY
+Operator: +, firstOperator: -10, secondOperator: 11 * 2, Result: PLUS
+Operator: +, firstOperator: 0, secondOperator: 2, Result: PLUS
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for05.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 2
+lista: 
+Operator: +, firstOperator: MethodCallExpr{name=par, args=[]}, secondOperator: 5, Result: PLUS
+Operator: +, firstOperator: 0, secondOperator: 2, Result: PLUS
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_if_anidados.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 5
+lista: 
+Operator: !=, firstOperator: 0, secondOperator: 0, Result: DIFERENCIA_LOGICA
+Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
+Operator: -, firstOperator: 0, secondOperator: 0, Result: MINUS
+Operator: -, firstOperator: 0, secondOperator: 0, Result: MINUS
+Operator: *, firstOperator: 0, secondOperator: 5, Result: MULTIPLY
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_if.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 5
+lista: 
+Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
+Operator: -, firstOperator: 0, secondOperator: 0, Result: MINUS
+Operator: ==, firstOperator: 0, secondOperator: 0, Result: IGUALDAD_LOGICA
+Operator: *, firstOperator: 0, secondOperator: 5, Result: MULTIPLY
+Operator: -, firstOperator: 0, secondOperator: 0, Result: MINUS
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_logicos01.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 4
+lista: 
+Operator: !, firstOperator: true, secondOperator: null, Result: ADMIRACION
+Operator: &&, firstOperator: VarLocation{name=DISYUNCION, type=boolean, expr=false || false, size=0}, secondOperator: !true, Result: CONJUNCION
+Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
+Operator: &&, firstOperator: VarLocation{name=CONJUNCION, type=boolean, expr=VarLocation{name=DISYUNCION, type=boolean, expr=false || false, size=0} && !true, size=0}, secondOperator: !false, Result: CONJUNCION
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_logicos02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 20
+lista: 
+Operator: >, firstOperator: 0.0, secondOperator: 0.0, Result: MAYOR
+Operator: >, firstOperator: 0.0, secondOperator: 0.0, Result: MAYOR
+Operator: &&, firstOperator: VarLocation{name=MAYOR, type=boolean, expr=0.0 > 0.0, size=0}, secondOperator: VarLocation{name=MAYOR, type=boolean, expr=0.0 > 0.0, size=0}, Result: CONJUNCION
+Operator: +, firstOperator: 0.0, secondOperator: 0.0, Result: PLUS
+Operator: /, firstOperator: VarLocation{name=PLUS, type=float, expr=0.0 + 0.0, size=0}, secondOperator: 2.0, Result: DIVIDE
+Operator: >, firstOperator: 0.0, secondOperator: 0.0, Result: MAYOR
+Operator: >, firstOperator: 0.0, secondOperator: 0.0, Result: MAYOR
+Operator: &&, firstOperator: VarLocation{name=MAYOR, type=boolean, expr=0.0 > 0.0, size=0}, secondOperator: VarLocation{name=MAYOR, type=boolean, expr=0.0 > 0.0, size=0}, Result: CONJUNCION
+Operator: +, firstOperator: 0.0, secondOperator: 0.0, Result: PLUS
+Operator: /, firstOperator: VarLocation{name=PLUS, type=float, expr=0.0 + 0.0, size=0}, secondOperator: 2.0, Result: DIVIDE
+Operator: >, firstOperator: 0.0, secondOperator: 0.0, Result: MAYOR
+Operator: >, firstOperator: 0.0, secondOperator: 0.0, Result: MAYOR
+Operator: &&, firstOperator: VarLocation{name=MAYOR, type=boolean, expr=0.0 > 0.0, size=0}, secondOperator: VarLocation{name=MAYOR, type=boolean, expr=0.0 > 0.0, size=0}, Result: CONJUNCION
+Operator: +, firstOperator: 0.0, secondOperator: 0.0, Result: PLUS
+Operator: /, firstOperator: VarLocation{name=PLUS, type=float, expr=0.0 + 0.0, size=0}, secondOperator: 2.0, Result: DIVIDE
+Operator: ==, firstOperator: 0.0, secondOperator: 0.0, Result: IGUALDAD_LOGICA
+Operator: ==, firstOperator: 0.0, secondOperator: 0.0, Result: IGUALDAD_LOGICA
+Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0.0 == 0.0, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0.0 == 0.0, size=0}, Result: CONJUNCION
+Operator: ==, firstOperator: 0.0, secondOperator: 0.0, Result: IGUALDAD_LOGICA
+Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0.0 == 0.0, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0.0 == 0.0, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0.0 == 0.0, size=0}, Result: CONJUNCION
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mainSolo.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 3
+lista: 
+Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
+Operator: &&, firstOperator: false, secondOperator: false, Result: CONJUNCION
+Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mcd.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 3
+lista: 
+Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
+Operator: !=, firstOperator: 0, secondOperator: 0, Result: DIFERENCIA_LOGICA
+Operator: %, firstOperator: 0, secondOperator: 0, Result: PORCENTAJE
 ---------------------------------------------------
   
   
@@ -231,12 +575,25 @@ ocurrio un error: null
 parseo iniciado
 Error: Method alo not declared
 parseo exitoso
+tamaño lista de codigo tercetos: 4
+lista: 
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
+Operator: -, firstOperator: 0, secondOperator: 1, Result: MINUS
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
+Operator: *, firstOperator: VarLocation{name=factor, type=int, expr=3, size=0}, secondOperator: 0, Result: MULTIPLY
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_metodos03.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 5
+lista: 
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
+Operator: *, firstOperator: 3, secondOperator: 2, Result: MULTIPLY
+Operator: >, firstOperator: 0, secondOperator: 3 * 2, Result: MAYOR
+Operator: /, firstOperator: 0, secondOperator: 3, Result: DIVIDE
+Operator: %, firstOperator: 0, secondOperator: 2, Result: PORCENTAJE
 ---------------------------------------------------
   
   
@@ -251,54 +608,111 @@ ocurrio un error: null
 ---------------- Test tests/test_correctos/test_metodos_externos02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 6
+lista: 
+Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
+Operator: !=, firstOperator: 0, secondOperator: 0, Result: DIFERENCIA_LOGICA
+Operator: %, firstOperator: 0, secondOperator: 0, Result: PORCENTAJE
+Operator: *, firstOperator: 3.5, secondOperator: 0, Result: MULTIPLY
+Operator: /, firstOperator: 7, secondOperator: 6, Result: DIVIDE
+Operator: -, firstOperator: 3.5 * 0, secondOperator: 7 / 6, Result: MINUS
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mod.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 1
+lista: 
+Operator: %, firstOperator: 0, secondOperator: 7, Result: PORCENTAJE
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mult01.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 3
+lista: 
+Operator: *, firstOperator: 0, secondOperator: 1000, Result: MULTIPLY
+Operator: *, firstOperator: 0 * 1000, secondOperator: 0, Result: MULTIPLY
+Operator: *, firstOperator: 0 * 1000 * 0, secondOperator: 0, Result: MULTIPLY
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mult02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 1
+lista: 
+Operator: *, firstOperator: 0, secondOperator: 7, Result: MULTIPLY
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_prog_simple.ctds ... -------------------
 parseo iniciado
 Main Method Missing in Class prueba2
+tamaño lista de codigo tercetos: 1
+lista: 
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_retorno.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 17
+lista: 
+Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
+Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
+Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
+Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
+Operator: -, firstOperator: 0, secondOperator: 1, Result: MINUS
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
+Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
+Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
+Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
+Operator: ==, firstOperator: 0, secondOperator: 0, Result: IGUALDAD_LOGICA
+Operator: -, firstOperator: 0, secondOperator: 1, Result: MINUS
+Operator: *, firstOperator: 0, secondOperator: 0, Result: MULTIPLY
+Operator: *, firstOperator: 0, secondOperator: 0, Result: MULTIPLY
+Operator: -, firstOperator: 0 * 0, secondOperator: 0 * 0, Result: MINUS
+Operator: +, firstOperator: 0 - 1, secondOperator: VarLocation{name=MINUS, type=int, expr=0 * 0 - 0 * 0, size=0}, Result: PLUS
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_suma.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 3
+lista: 
+Operator: ==, firstOperator: 0, secondOperator: 0, Result: IGUALDAD_LOGICA
+Operator: ==, firstOperator: 0, secondOperator: 0, Result: IGUALDAD_LOGICA
+Operator: +, firstOperator: 0, secondOperator: 0, Result: PLUS
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_sumx.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 3
+lista: 
+Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
+Operator: +, firstOperator: 0.0, secondOperator: 0.0, Result: PLUS
+Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_while.ctds ... -------------------
 parseo iniciado
 parseo exitoso
+tamaño lista de codigo tercetos: 4
+lista: 
+Operator: !=, firstOperator: 0, secondOperator: 0, Result: DIFERENCIA_LOGICA
+Operator: %, firstOperator: 0, secondOperator: 0, Result: PORCENTAJE
+Operator: !=, firstOperator: 0, secondOperator: 0, Result: DIFERENCIA_LOGICA
+Operator: !=, firstOperator: 0, secondOperator: 0, Result: DIFERENCIA_LOGICA
 ---------------------------------------------------
   
   

@@ -112,7 +112,17 @@
 
     start with program;
 
-    program::= CLASS ID:d {: mainDeclared=false; System.out.println("parseo iniciado"); :} body {:if(mainDeclared){System.out.println("parseo exitoso");}else{System.out.println("Main Method Missing in Class "+d.toString());}:}
+    program::= CLASS ID:d {: mainDeclared=false; System.out.println("parseo iniciado"); :} body {:if(mainDeclared){
+                System.out.println("parseo exitoso");
+            }else{
+                System.out.println("Main Method Missing in Class "+d.toString());
+            }
+            System.out.println("tamaño lista de codigo tercetos: "+TripletList.size());
+            System.out.println("lista: ");
+            for(TripletCode t : TripletList){
+                System.out.println(t);
+            }
+            :}
             ;
 
     body::= LLAVE_IZQ LLAVE_DER 
@@ -655,6 +665,10 @@
                                                 
                                                 BinOpExpr exp=new BinOpExpr(c1.getExpr(),BinOpType.AND,c2.getExpr());
                                                 VarLocation res=new VarLocation("CONJUNCION",Type.BOOLEAN,exp,0);
+                                                //CODIGO DE TERCETOS
+                                                TripletList.addLast(new TripletCode(BinOpType.AND, c1.getExpr(), c2.getExpr(), res));
+
+
                                                 //res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
@@ -690,6 +704,8 @@
                                                 
                                                 BinOpExpr exp= new BinOpExpr(r1.getExpr(),BinOpType.CEQ,r2.getExpr());
                                                 VarLocation res=new VarLocation("IGUALDAD_LOGICA",Type.BOOLEAN,exp,0);
+                                                //CODIGO DE TERCETOS
+                                                TripletList.addLast(new TripletCode(BinOpType.CEQ, r1.getExpr(), r2.getExpr(), res));
                                                 //res.setType(Type.BOOLEAN);
 
                                                 RESULT=res;
@@ -724,6 +740,8 @@
                                                 
                                                 BinOpExpr exp= new BinOpExpr(r1.getExpr(),BinOpType.NEQ,r2.getExpr());
                                                 VarLocation res=new VarLocation("DIFERENCIA_LOGICA",Type.BOOLEAN,exp,0);
+                                                //CODIGO DE TERCETOS
+                                                TripletList.addLast(new TripletCode(BinOpType.NEQ, r1.getExpr(), r2.getExpr(), res));
                                                 //res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
@@ -762,6 +780,8 @@
                                                 
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.LE,s2.getExpr());
                                                 VarLocation res=new VarLocation("MENOR",Type.BOOLEAN,exp,0);
+                                                //CODIGO DE TERCETOS
+                                                TripletList.addLast(new TripletCode(BinOpType.LE, s1.getExpr(), s2.getExpr(), res));
                                                 //res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
@@ -795,6 +815,8 @@
                                                 
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.GE,s2.getExpr());
                                                 VarLocation res=new VarLocation("MAYOR",Type.BOOLEAN,exp,0);
+                                                //CODIGO DE TERCETOS
+                                                TripletList.addLast(new TripletCode(BinOpType.GE, s1.getExpr(), s2.getExpr(), res));
                                                 //res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
@@ -863,6 +885,8 @@
                                                 
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.LEQ,s2.getExpr());
                                                 VarLocation res=new VarLocation("MENOR_IGUAL",Type.BOOLEAN,exp,0);
+                                                //CODIGO DE TERCETOS
+                                                TripletList.addLast(new TripletCode(BinOpType.LEQ, s1.getExpr(), s2.getExpr(), res));
                                                 //res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
@@ -904,11 +928,15 @@
                                                     
                                                     BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.PLUS,s2.getExpr());
                                                     VarLocation res=new VarLocation("PLUS",Type.INT,exp,0);
+                                                    //CODIGO DE TERCETOS
+                                                    TripletList.addLast(new TripletCode(BinOpType.PLUS, s1.getExpr(), s2.getExpr(), res));
                                                     //res.setType(Type.INT);
                                                     RESULT=res;
                                                 }else{
                                                     BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.PLUS,s2.getExpr());
                                                     VarLocation res=new VarLocation("PLUS",Type.FLOAT,exp,0);
+                                                    //CODIGO DE TERCETOS
+                                                    TripletList.addLast(new TripletCode(BinOpType.PLUS, s1.getExpr(), s2.getExpr(), res));
                                                     //res.setType(Type.FLOAT);
                                                     RESULT=res;
                                                 }
@@ -949,11 +977,15 @@
                                                 ){
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MINUS,s2.getExpr());
                                                 VarLocation res=new VarLocation("MINUS",Type.INT,exp,0);
+                                                //CODIGO DE TERCETOS
+                                                TripletList.addLast(new TripletCode(BinOpType.MINUS, s1.getExpr(), s2.getExpr(), res));
                                                 //res.setType(Type.INT);
                                                 RESULT=res;
                                             }else{
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MINUS,s2.getExpr());
                                                 VarLocation res=new VarLocation("MINUS",Type.FLOAT,exp,0);
+                                                //CODIGO DE TERCETOS
+                                                TripletList.addLast(new TripletCode(BinOpType.MINUS, s1.getExpr(), s2.getExpr(), res));
                                                 //res.setType(Type.FLOAT);
                                                 RESULT=res;
                                             }
@@ -997,11 +1029,15 @@
                                                 ){
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MULTIPLY,s2.getExpr());
                                                 VarLocation res=new VarLocation("MULTIPLY",Type.INT,exp,0);
+                                                //CODIGO DE TERCETOS
+                                                TripletList.addLast(new TripletCode(BinOpType.MULTIPLY, s1.getExpr(), s2.getExpr(), res));
                                                 //res.setType(Type.INT);
                                                 RESULT=res;
                                             }else{
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MULTIPLY,s2.getExpr());
                                                 VarLocation res=new VarLocation("MULTIPLY",Type.INT,exp,0);
+                                                //CODIGO DE TERCETOS
+                                                TripletList.addLast(new TripletCode(BinOpType.MULTIPLY, s1.getExpr(), s2.getExpr(), res));
                                                 //res.setType(Type.FLOAT);
                                                 RESULT=res;
                                             }
@@ -1042,12 +1078,16 @@
                                                 ){
                                                 
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.DIVIDE,s2.getExpr());     
-                                                VarLocation res=new VarLocation("DIVIDE",Type.INT,exp,0);                                           
+                                                VarLocation res=new VarLocation("DIVIDE",Type.INT,exp,0);                                 
+                                                //CODIGO DE TERCETOS
+                                                TripletList.addLast(new TripletCode(BinOpType.DIVIDE, s1.getExpr(), s2.getExpr(), res));          
                                                 //res.setType(Type.INT);
                                                 RESULT=res;
                                             }else{
                                                 BinOpExpr exp=new BinOpExpr(s1,BinOpType.DIVIDE,s2);
                                                 VarLocation res=new VarLocation("DIVIDE",Type.FLOAT,exp,0);
+                                                //CODIGO DE TERCETOS
+                                                TripletList.addLast(new TripletCode(BinOpType.DIVIDE, s1.getExpr(), s2.getExpr(), res));          
                                                 //res.setType(Type.FLOAT);
                                                 RESULT=res;
                                             }
@@ -1065,7 +1105,9 @@
                                             ){
                                                
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MOD,s2.getExpr());  
-                                                VarLocation res=new VarLocation("PORCENTAJE",Type.INT,exp,0);                                              
+                                                VarLocation res=new VarLocation("PORCENTAJE",Type.INT,exp,0);                                     
+                                                //CODIGO DE TERCETOS
+                                                TripletList.addLast(new TripletCode(BinOpType.MOD, s1.getExpr(), s2.getExpr(), res));                   
                                                 //res.setType(Type.INT);
                                                 RESULT=res;
                                             }else{
@@ -1080,8 +1122,10 @@
                                     //verificamos que el operando sea valido para la operacion
                                     if(f.getType().equals(Type.BOOLEAN)){
                                         
-                                        UnaryOpExpr u=new UnaryOpExpr(UnaryOpType.NON, f);
+                                        UnaryOpExpr u=new UnaryOpExpr(UnaryOpType.NON, f.getExpr());
                                         VarLocation res=new VarLocation("ADMIRACION",Type.BOOLEAN,u,0);
+                                        //CODIGO DE TERCETOS
+                                        TripletList.addLast(new TripletCode(UnaryOpType.NON, f.getExpr(), null, res));
                                         //u.setType(Type.BOOLEAN);
                                         RESULT=res;
                                     }else{
@@ -1094,12 +1138,16 @@
                                        
                                         UnaryOpExpr u=new UnaryOpExpr(UnaryOpType.MINUS,f.getExpr());
                                         VarLocation res=new VarLocation("RESTA",Type.FLOAT,u,0);
+                                        //CODIGO DE TERCETOS
+                                        TripletList.addLast(new TripletCode(UnaryOpType.MINUS, f.getExpr(), null, res));
                                         //u.setType(Type.FLOAT);
                                         RESULT= res;
                                     }else{
                                         if(f.getType().equals(Type.INT)){                                        
                                             UnaryOpExpr u=new UnaryOpExpr(UnaryOpType.MINUS,f.getExpr());
                                             VarLocation res=new VarLocation("RESTA",Type.INT,u,0);
+                                            //CODIGO DE TERCETOS
+                                            TripletList.addLast(new TripletCode(UnaryOpType.MINUS, f.getExpr(), null, res));
                                             //u.setType(Type.INT);
                                             RESULT= res;
                                             

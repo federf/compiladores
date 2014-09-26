@@ -33,7 +33,7 @@ public TripletCode(Object op, Object fD, Object sD, VarLocation res) {
 @Override
 public String toString() {
  	
- 	return "Operator: "+operator + ", firstOperator: "+ firstDir+", secondOperator: "+ secondDir + ", Result: "+ result;
+ 	return "Operator: "+operator + ", firstOperator: "+ firstDir+", secondOperator: "+ secondDir + ", Result: "+ result.getId();
  
  }
 
