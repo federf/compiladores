@@ -36,5 +36,11 @@ public class ArrayLiteral extends Literal{
     public <T> T accept(ASTVisitor<T> v) {
         return v.visit(this);
     }
+
+    @Override
+    public String toString() {
+        return "ArrayLiteral{" + "id=" + id + ", size=" + size + '}';
+    }
+    
     
 }

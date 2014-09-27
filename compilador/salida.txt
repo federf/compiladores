@@ -12,13 +12,13 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 7
 lista: 
-Operator: =, firstOperator: 0, secondOperator: null, Result: i
-Operator: =, firstOperator: 1, secondOperator: null, Result: total
-Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
-Operator: *, firstOperator: 0, secondOperator: 0, Result: MULTIPLY
-Operator: =, firstOperator: 0 * 0, secondOperator: null, Result: total
-Operator: -, firstOperator: 0, secondOperator: 1, Result: MINUS
-Operator: =, firstOperator: 0 - 1, secondOperator: null, Result: i
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
+Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: total
+Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 1
+Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 0, Result: MULTIPLY Label 2
+Operator: ASSIGN(=), firstOperator: 0 * 0, secondOperator: null, Result: total
+Operator: MINUS(-), firstOperator: 0, secondOperator: 1, Result: MINUS Label 3
+Operator: ASSIGN(=), firstOperator: 0 - 1, secondOperator: null, Result: i
 ---------------------------------------------------
   
   
@@ -27,16 +27,16 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 10
 lista: 
-Operator: /, firstOperator: 0.0, secondOperator: 0.0, Result: DIVIDE
-Operator: -, firstOperator: 0.0, secondOperator: 0.0, Result: MINUS
-Operator: +, firstOperator: 0.0, secondOperator: 0.0, Result: PLUS
-Operator: *, firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY
-Operator: =, firstOperator: 1.234, secondOperator: null, Result: x
-Operator: -, firstOperator: 27.5, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: -27.5, secondOperator: null, Result: y
-Operator: -, firstOperator: 70.3, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: -70.3, secondOperator: null, Result: z
-Operator: -, firstOperator: 0.0, secondOperator: null, Result: RESTA
+Operator: DIVIDE(/), firstOperator: 0.0, secondOperator: 0.0, Result: DIVIDE Label 1
+Operator: MINUS(-), firstOperator: 0.0, secondOperator: 0.0, Result: MINUS Label 2
+Operator: PLUS(+), firstOperator: 0.0, secondOperator: 0.0, Result: PLUS Label 3
+Operator: MULTIPLY(*), firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY Label 4
+Operator: ASSIGN(=), firstOperator: 1.234, secondOperator: null, Result: x
+Operator: UNARYMINUS(-expr), firstOperator: 27.5, secondOperator: null, Result: UNARYMINUS Label 5
+Operator: ASSIGN(=), firstOperator: -27.5, secondOperator: null, Result: y
+Operator: UNARYMINUS(-expr), firstOperator: 70.3, secondOperator: null, Result: UNARYMINUS Label 6
+Operator: ASSIGN(=), firstOperator: -70.3, secondOperator: null, Result: z
+Operator: UNARYMINUS(-expr), firstOperator: 0.0, secondOperator: null, Result: UNARYMINUS Label 7
 ---------------------------------------------------
   
   
@@ -45,12 +45,12 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 6
 lista: 
-Operator: =, firstOperator: true, secondOperator: null, Result: bool
-Operator: ||, firstOperator: false, secondOperator: false, Result: DISYUNCION
-Operator: !, firstOperator: true, secondOperator: null, Result: ADMIRACION
-Operator: &&, firstOperator: VarLocation{name=DISYUNCION, type=boolean, expr=false || false, size=0}, secondOperator: !true, Result: CONJUNCION
-Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
-Operator: &&, firstOperator: VarLocation{name=CONJUNCION, type=boolean, expr=VarLocation{name=DISYUNCION, type=boolean, expr=false || false, size=0} && !true, size=0}, secondOperator: !false, Result: CONJUNCION
+Operator: ASSIGN(=), firstOperator: true, secondOperator: null, Result: bool
+Operator: null, firstOperator: false, secondOperator: false, Result: DISYUNCION Label 1
+Operator: NON(!), firstOperator: true, secondOperator: null, Result: NON Label 2
+Operator: AND(&&), firstOperator: VarLocation{name=DISYUNCION Label 1, type=boolean, expr=false || false, size=0}, secondOperator: !true, Result: CONJUNCION Label 3
+Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 4
+Operator: AND(&&), firstOperator: VarLocation{name=CONJUNCION Label 3, type=boolean, expr=VarLocation{name=DISYUNCION Label 1, type=boolean, expr=false || false, size=0} && !true, size=0}, secondOperator: !false, Result: CONJUNCION Label 5
 ---------------------------------------------------
   
   
@@ -59,9 +59,9 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 3
 lista: 
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: MethodCallExpr{name=inc, args=["get_int"()]}, secondOperator: null, Result: y
-Operator: ==, firstOperator: 0, secondOperator: 1, Result: IGUALDAD_LOGICA
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 1
+Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=inc, args=["get_int"()]}, secondOperator: null, Result: y
+Operator: CEQ(==), firstOperator: 0, secondOperator: 1, Result: CEQ Label 2
 ---------------------------------------------------
   
   
@@ -70,28 +70,28 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 22
 lista: 
-Operator: =, firstOperator: 8.87, secondOperator: null, Result: y
-Operator: =, firstOperator: 4, secondOperator: null, Result: A
-Operator: +, firstOperator: 2.6, secondOperator: 0.0, Result: PLUS
-Operator: =, firstOperator: 2.6 + 0.0, secondOperator: null, Result: B
-Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
-Operator: =, firstOperator: VarLocation{name=factor, type=boolean, expr=VarLocation{name=MENOR, type=boolean, expr=0 < 0, size=0}, size=0}, secondOperator: null, Result: C
-Operator: >=, firstOperator: 0, secondOperator: 0, Result: MAYOR_IGUAL
-Operator: =, firstOperator: VarLocation{name=MAYOR_IGUAL, type=boolean, expr=0 >= 0, size=0}, secondOperator: null, Result: C
-Operator: =, firstOperator: true, secondOperator: null, Result: y
-Operator: -, firstOperator: 6, secondOperator: null, Result: RESTA
-Operator: -, firstOperator: 58, secondOperator: VarLocation{name=RESTA, type=int, expr=-6, size=0}, Result: MINUS
-Operator: =, firstOperator: 58 - VarLocation{name=RESTA, type=int, expr=-6, size=0}, secondOperator: null, Result: A
-Operator: -, firstOperator: 2.6, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: -2.6, secondOperator: null, Result: B
-Operator: <, firstOperator: 4, secondOperator: 6, Result: MENOR
-Operator: !, firstOperator: VarLocation{name=factor, type=boolean, expr=VarLocation{name=MENOR, type=boolean, expr=4 < 6, size=0}, size=0}, secondOperator: null, Result: ADMIRACION
-Operator: =, firstOperator: !VarLocation{name=factor, type=boolean, expr=VarLocation{name=MENOR, type=boolean, expr=4 < 6, size=0}, size=0}, secondOperator: null, Result: C
-Operator: +, firstOperator: 3, secondOperator: 3, Result: PLUS
-Operator: -, firstOperator: 7, secondOperator: VarLocation{name=PLUS, type=int, expr=3 + 3, size=0}, Result: MINUS
-Operator: >=, firstOperator: 5, secondOperator: ir.ast.ArrayLiteral@d90727, Result: MAYOR_IGUAL
-Operator: ||, firstOperator: VarLocation{name=MAYOR_IGUAL, type=boolean, expr=5 >= ir.ast.ArrayLiteral@d90727, size=0}, secondOperator: true, Result: DISYUNCION
-Operator: =, firstOperator: VarLocation{name=MAYOR_IGUAL, type=boolean, expr=5 >= ir.ast.ArrayLiteral@d90727, size=0} || true, secondOperator: null, Result: C
+Operator: ASSIGN(=), firstOperator: 8.87, secondOperator: null, Result: y
+Operator: ASSIGN(=), firstOperator: 4, secondOperator: null, Result: A
+Operator: PLUS(+), firstOperator: 2.6, secondOperator: 0.0, Result: PLUS Label 1
+Operator: ASSIGN(=), firstOperator: 2.6 + 0.0, secondOperator: null, Result: B
+Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 2
+Operator: ASSIGN(=), firstOperator: VarLocation{name=factor, type=boolean, expr=VarLocation{name=LE Label 2, type=boolean, expr=0 < 0, size=0}, size=0}, secondOperator: null, Result: C
+Operator: GEQ(>=), firstOperator: 0, secondOperator: 0, Result: GEQ Label 3
+Operator: ASSIGN(=), firstOperator: VarLocation{name=GEQ Label 3, type=boolean, expr=0 >= 0, size=0}, secondOperator: null, Result: C
+Operator: ASSIGN(=), firstOperator: true, secondOperator: null, Result: y
+Operator: UNARYMINUS(-expr), firstOperator: 6, secondOperator: null, Result: UNARYMINUS Label 4
+Operator: MINUS(-), firstOperator: 58, secondOperator: VarLocation{name=UNARYMINUS Label 4, type=int, expr=-6, size=0}, Result: MINUS Label 5
+Operator: ASSIGN(=), firstOperator: 58 - VarLocation{name=UNARYMINUS Label 4, type=int, expr=-6, size=0}, secondOperator: null, Result: A
+Operator: UNARYMINUS(-expr), firstOperator: 2.6, secondOperator: null, Result: UNARYMINUS Label 6
+Operator: ASSIGN(=), firstOperator: -2.6, secondOperator: null, Result: B
+Operator: LE(<), firstOperator: 4, secondOperator: 6, Result: LE Label 7
+Operator: NON(!), firstOperator: VarLocation{name=factor, type=boolean, expr=VarLocation{name=LE Label 7, type=boolean, expr=4 < 6, size=0}, size=0}, secondOperator: null, Result: NON Label 8
+Operator: ASSIGN(=), firstOperator: !VarLocation{name=factor, type=boolean, expr=VarLocation{name=LE Label 7, type=boolean, expr=4 < 6, size=0}, size=0}, secondOperator: null, Result: C
+Operator: PLUS(+), firstOperator: 3, secondOperator: 3, Result: PLUS Label 9
+Operator: MINUS(-), firstOperator: 7, secondOperator: VarLocation{name=PLUS Label 9, type=int, expr=3 + 3, size=0}, Result: MINUS Label 10
+Operator: GEQ(>=), firstOperator: 5, secondOperator: ArrayLiteral{id=A, size=5}, Result: GEQ Label 11
+Operator: null, firstOperator: VarLocation{name=GEQ Label 11, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0}, secondOperator: true, Result: DISYUNCION Label 12
+Operator: ASSIGN(=), firstOperator: VarLocation{name=GEQ Label 11, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0} || true, secondOperator: null, Result: C
 ---------------------------------------------------
   
   
@@ -101,37 +101,37 @@ Error: Method pruArreglos must return int
 parseo exitoso
 tamaño lista de codigo tercetos: 31
 lista: 
-Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
-Operator: -, firstOperator: 1, secondOperator: 0, Result: MINUS
-Operator: =, firstOperator: 1 - 0, secondOperator: null, Result: res
-Operator: ==, firstOperator: 0, secondOperator: 0, Result: IGUALDAD_LOGICA
-Operator: -, firstOperator: 1, secondOperator: 1, Result: MINUS
-Operator: *, firstOperator: 0, secondOperator: 5, Result: MULTIPLY
-Operator: =, firstOperator: 0 * 5, secondOperator: null, Result: res
-Operator: -, firstOperator: 0, secondOperator: 0, Result: MINUS
-Operator: =, firstOperator: 0, secondOperator: null, Result: res
-Operator: =, firstOperator: 0, secondOperator: null, Result: i
-Operator: <, firstOperator: 0, secondOperator: 589, Result: MENOR
-Operator: *, firstOperator: 0, secondOperator: 2, Result: MULTIPLY
-Operator: =, firstOperator: 0 * 2, secondOperator: null, Result: A
-Operator: =, firstOperator: 1, secondOperator: null, Result: i
-Operator: =, firstOperator: 8, secondOperator: null, Result: i
-Operator: >=, firstOperator: 0, secondOperator: 0, Result: MAYOR_IGUAL
-Operator: *, firstOperator: 0, secondOperator: 2, Result: MULTIPLY
-Operator: +, firstOperator: 0 * 2, secondOperator: 8, Result: PLUS
-Operator: +, firstOperator: ir.ast.ArrayLiteral@126cb1a, secondOperator: 3, Result: PLUS
-Operator: =, firstOperator: ir.ast.ArrayLiteral@126cb1a + 3, secondOperator: null, Result: B
-Operator: =, firstOperator: 1, secondOperator: null, Result: i
-Operator: =, firstOperator: 0, secondOperator: null, Result: i
-Operator: *, firstOperator: 5, secondOperator: 9, Result: MULTIPLY
-Operator: -, firstOperator: VarLocation{name=MULTIPLY, type=int, expr=5 * 9, size=0}, secondOperator: 40, Result: MINUS
-Operator: <=, firstOperator: 0, secondOperator: VarLocation{name=MULTIPLY, type=int, expr=5 * 9, size=0} - 40, Result: MENOR_IGUAL
-Operator: *, firstOperator: 0, secondOperator: 2, Result: MULTIPLY
-Operator: +, firstOperator: 0 * 2, secondOperator: 8, Result: PLUS
-Operator: >, firstOperator: ir.ast.ArrayLiteral@1e0312b, secondOperator: ir.ast.ArrayLiteral@1bc345a, Result: MAYOR
-Operator: =, firstOperator: ir.ast.ArrayLiteral@1e0312b > ir.ast.ArrayLiteral@1bc345a, secondOperator: null, Result: C
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: i
+Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 1
+Operator: MINUS(-), firstOperator: 1, secondOperator: 0, Result: MINUS Label 2
+Operator: ASSIGN(=), firstOperator: 1 - 0, secondOperator: null, Result: res
+Operator: CEQ(==), firstOperator: 0, secondOperator: 0, Result: CEQ Label 3
+Operator: MINUS(-), firstOperator: 1, secondOperator: 1, Result: MINUS Label 4
+Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 5, Result: MULTIPLY Label 5
+Operator: ASSIGN(=), firstOperator: 0 * 5, secondOperator: null, Result: res
+Operator: MINUS(-), firstOperator: 0, secondOperator: 0, Result: MINUS Label 6
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: res
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
+Operator: LE(<), firstOperator: 0, secondOperator: 589, Result: LE Label 7
+Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 2, Result: MULTIPLY Label 8
+Operator: ASSIGN(=), firstOperator: 0 * 2, secondOperator: null, Result: A
+Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: i
+Operator: ASSIGN(=), firstOperator: 8, secondOperator: null, Result: i
+Operator: GEQ(>=), firstOperator: 0, secondOperator: 0, Result: GEQ Label 9
+Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 2, Result: MULTIPLY Label 10
+Operator: PLUS(+), firstOperator: 0 * 2, secondOperator: 8, Result: PLUS Label 11
+Operator: PLUS(+), firstOperator: ArrayLiteral{id=A, size=589}, secondOperator: 3, Result: PLUS Label 12
+Operator: ASSIGN(=), firstOperator: ArrayLiteral{id=A, size=589} + 3, secondOperator: null, Result: B
+Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: i
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
+Operator: MULTIPLY(*), firstOperator: 5, secondOperator: 9, Result: MULTIPLY Label 13
+Operator: MINUS(-), firstOperator: VarLocation{name=MULTIPLY Label 13, type=int, expr=5 * 9, size=0}, secondOperator: 40, Result: MINUS Label 14
+Operator: LEQ(<=), firstOperator: 0, secondOperator: VarLocation{name=MULTIPLY Label 13, type=int, expr=5 * 9, size=0} - 40, Result: LEQ Label 15
+Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 2, Result: MULTIPLY Label 16
+Operator: PLUS(+), firstOperator: 0 * 2, secondOperator: 8, Result: PLUS Label 17
+Operator: GE(>), firstOperator: ArrayLiteral{id=A, size=589}, secondOperator: ArrayLiteral{id=B, size=56}, Result: GE Label 18
+Operator: ASSIGN(=), firstOperator: ArrayLiteral{id=A, size=589} > ArrayLiteral{id=B, size=56}, secondOperator: null, Result: C
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 19
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
 ---------------------------------------------------
   
   
@@ -140,18 +140,18 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 12
 lista: 
-Operator: =, firstOperator: 1, secondOperator: null, Result: a
-Operator: =, firstOperator: 8, secondOperator: null, Result: b
-Operator: +, firstOperator: 699, secondOperator: 0, Result: PLUS
-Operator: =, firstOperator: 699 + 0, secondOperator: null, Result: a
-Operator: +, firstOperator: 0, secondOperator: 2, Result: PLUS
-Operator: =, firstOperator: 0 + 2, secondOperator: null, Result: b
-Operator: /, firstOperator: 0, secondOperator: 0, Result: DIVIDE
-Operator: /, firstOperator: 0 / 0, secondOperator: 0, Result: DIVIDE
-Operator: /, firstOperator: 0 / 0 / 0, secondOperator: 2, Result: DIVIDE
-Operator: =, firstOperator: VarLocation{name=DIVIDE, type=int, expr=0 / 0 / 0 / 2, size=0}, secondOperator: null, Result: a
-Operator: %, firstOperator: 0, secondOperator: 2, Result: PORCENTAJE
-Operator: =, firstOperator: 0 % 2, secondOperator: null, Result: c
+Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: a
+Operator: ASSIGN(=), firstOperator: 8, secondOperator: null, Result: b
+Operator: PLUS(+), firstOperator: 699, secondOperator: 0, Result: PLUS Label 1
+Operator: ASSIGN(=), firstOperator: 699 + 0, secondOperator: null, Result: a
+Operator: PLUS(+), firstOperator: 0, secondOperator: 2, Result: PLUS Label 2
+Operator: ASSIGN(=), firstOperator: 0 + 2, secondOperator: null, Result: b
+Operator: DIVIDE(/), firstOperator: 0, secondOperator: 0, Result: DIVIDE Label 3
+Operator: DIVIDE(/), firstOperator: 0 / 0, secondOperator: 0, Result: DIVIDE Label 4
+Operator: DIVIDE(/), firstOperator: 0 / 0 / 0, secondOperator: 2, Result: DIVIDE Label 5
+Operator: ASSIGN(=), firstOperator: VarLocation{name=DIVIDE Label 5, type=int, expr=0 / 0 / 0 / 2, size=0}, secondOperator: null, Result: a
+Operator: MOD(%), firstOperator: 0, secondOperator: 2, Result: MOD Label 6
+Operator: ASSIGN(=), firstOperator: 0 % 2, secondOperator: null, Result: c
 ---------------------------------------------------
   
   
@@ -160,18 +160,18 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 12
 lista: 
-Operator: =, firstOperator: 1, secondOperator: null, Result: a
-Operator: =, firstOperator: 2, secondOperator: null, Result: b
-Operator: +, firstOperator: 1, secondOperator: 0, Result: PLUS
-Operator: =, firstOperator: 1 + 0, secondOperator: null, Result: a
-Operator: +, firstOperator: 0, secondOperator: 2, Result: PLUS
-Operator: =, firstOperator: 0 + 2, secondOperator: null, Result: b
-Operator: /, firstOperator: 0, secondOperator: 0, Result: DIVIDE
-Operator: =, firstOperator: VarLocation{name=DIVIDE, type=int, expr=0 / 0, size=0}, secondOperator: null, Result: a
-Operator: %, firstOperator: 0, secondOperator: 3, Result: PORCENTAJE
-Operator: =, firstOperator: 0 % 3, secondOperator: null, Result: c
-Operator: =, firstOperator: 1, secondOperator: null, Result: a
-Operator: =, firstOperator: 2, secondOperator: null, Result: a
+Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: a
+Operator: ASSIGN(=), firstOperator: 2, secondOperator: null, Result: b
+Operator: PLUS(+), firstOperator: 1, secondOperator: 0, Result: PLUS Label 1
+Operator: ASSIGN(=), firstOperator: 1 + 0, secondOperator: null, Result: a
+Operator: PLUS(+), firstOperator: 0, secondOperator: 2, Result: PLUS Label 2
+Operator: ASSIGN(=), firstOperator: 0 + 2, secondOperator: null, Result: b
+Operator: DIVIDE(/), firstOperator: 0, secondOperator: 0, Result: DIVIDE Label 3
+Operator: ASSIGN(=), firstOperator: VarLocation{name=DIVIDE Label 3, type=int, expr=0 / 0, size=0}, secondOperator: null, Result: a
+Operator: MOD(%), firstOperator: 0, secondOperator: 3, Result: MOD Label 4
+Operator: ASSIGN(=), firstOperator: 0 % 3, secondOperator: null, Result: c
+Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: a
+Operator: ASSIGN(=), firstOperator: 2, secondOperator: null, Result: a
 ---------------------------------------------------
   
   
@@ -180,12 +180,12 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 6
 lista: 
-Operator: =, firstOperator: 0, secondOperator: null, Result: i
-Operator: <, firstOperator: 0, secondOperator: 10, Result: MENOR
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: i
-Operator: =, firstOperator: 2.3, secondOperator: null, Result: j
-Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
+Operator: LE(<), firstOperator: 0, secondOperator: 10, Result: LE Label 1
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 2
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
+Operator: ASSIGN(=), firstOperator: 2.3, secondOperator: null, Result: j
+Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 3
 ---------------------------------------------------
   
   
@@ -194,11 +194,11 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 5
 lista: 
-Operator: =, firstOperator: 0, secondOperator: null, Result: i
-Operator: <, firstOperator: 0, secondOperator: 10, Result: MENOR
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: i
-Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
+Operator: LE(<), firstOperator: 0, secondOperator: 10, Result: LE Label 1
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 2
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
+Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 3
 ---------------------------------------------------
   
   
@@ -207,13 +207,13 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 7
 lista: 
-Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
-Operator: &&, firstOperator: false, secondOperator: false, Result: CONJUNCION
-Operator: ||, firstOperator: false, secondOperator: false, Result: DISYUNCION
-Operator: =, firstOperator: true, secondOperator: null, Result: a
-Operator: =, firstOperator: false, secondOperator: null, Result: b
-Operator: =, firstOperator: MethodCallExpr{name=neg, args=[false]}, secondOperator: null, Result: b
-Operator: =, firstOperator: MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}, secondOperator: null, Result: c
+Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 1
+Operator: AND(&&), firstOperator: false, secondOperator: false, Result: CONJUNCION Label 2
+Operator: null, firstOperator: false, secondOperator: false, Result: DISYUNCION Label 3
+Operator: ASSIGN(=), firstOperator: true, secondOperator: null, Result: a
+Operator: ASSIGN(=), firstOperator: false, secondOperator: null, Result: b
+Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=neg, args=[false]}, secondOperator: null, Result: b
+Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}, secondOperator: null, Result: c
 ---------------------------------------------------
   
   
@@ -222,11 +222,11 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 5
 lista: 
-Operator: =, firstOperator: 0, secondOperator: null, Result: i
-Operator: <, firstOperator: 0, secondOperator: 10, Result: MENOR
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: i
-Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
+Operator: LE(<), firstOperator: 0, secondOperator: 10, Result: LE Label 1
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 2
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
+Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 3
 ---------------------------------------------------
   
   
@@ -235,9 +235,9 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 3
 lista: 
-Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
-Operator: =, firstOperator: 0, secondOperator: null, Result: res
-Operator: =, firstOperator: 0, secondOperator: null, Result: res
+Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 1
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: res
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: res
 ---------------------------------------------------
   
   
@@ -246,10 +246,10 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 4
 lista: 
-Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
-Operator: +, firstOperator: 0, secondOperator: 5, Result: PLUS
-Operator: =, firstOperator: 0 + 5, secondOperator: null, Result: res
-Operator: =, firstOperator: 0, secondOperator: null, Result: res
+Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 1
+Operator: PLUS(+), firstOperator: 0, secondOperator: 5, Result: PLUS Label 2
+Operator: ASSIGN(=), firstOperator: 0 + 5, secondOperator: null, Result: res
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: res
 ---------------------------------------------------
   
   
@@ -258,62 +258,62 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 56
 lista: 
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
-Operator: &&, firstOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
-Operator: &&, firstOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
-Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
-Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: &&, firstOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
-Operator: &&, firstOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
-Operator: ||, firstOperator: VarLocation{name=CONJUNCION, type=boolean, expr=VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, size=0}, secondOperator: VarLocation{name=CONJUNCION, type=boolean, expr=!VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, size=0}, Result: DISYUNCION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
-Operator: &&, firstOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: &&, firstOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
-Operator: ||, firstOperator: VarLocation{name=CONJUNCION, type=boolean, expr=VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION, type=boolean, expr=!VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, size=0}, secondOperator: VarLocation{name=CONJUNCION, type=boolean, expr=!VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, size=0}, Result: DISYUNCION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
-Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
-Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
-Operator: ||, firstOperator: VarLocation{name=CONJUNCION, type=boolean, expr=VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, size=0}, secondOperator: VarLocation{name=CONJUNCION, type=boolean, expr=VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, size=0}, Result: DISYUNCION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: !, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: ADMIRACION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: &&, firstOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: &&, firstOperator: !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
-Operator: ||, firstOperator: VarLocation{name=CONJUNCION, type=boolean, expr=VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION, type=boolean, expr=VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, size=0}, secondOperator: VarLocation{name=CONJUNCION, type=boolean, expr=!VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, size=0}, Result: DISYUNCION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
-Operator: ==, firstOperator: 0, secondOperator: 6, Result: IGUALDAD_LOGICA
-Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 1
+Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 1, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 2
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 3
+Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 4
+Operator: AND(&&), firstOperator: !VarLocation{name=CEQ Label 1, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 5
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 6
+Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 6, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 7
+Operator: AND(&&), firstOperator: !VarLocation{name=CEQ Label 1, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=CEQ Label 6, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 8
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 9
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 10
+Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 11
+Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 9, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 12
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 13
+Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 13, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 14
+Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 9, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=CEQ Label 13, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 15
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 16
+Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 16, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 17
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 18
+Operator: AND(&&), firstOperator: !VarLocation{name=CEQ Label 16, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=CEQ Label 18, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 19
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 20
+Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 20, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 21
+Operator: AND(&&), firstOperator: !VarLocation{name=CEQ Label 16, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 18, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=CEQ Label 20, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 22
+Operator: null, firstOperator: VarLocation{name=CONJUNCION Label 15, type=boolean, expr=VarLocation{name=CEQ Label 9, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 13, type=boolean, expr=0 == 6, size=0}, size=0}, secondOperator: VarLocation{name=CONJUNCION Label 22, type=boolean, expr=!VarLocation{name=CEQ Label 16, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 18, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 20, type=boolean, expr=0 == 6, size=0}, size=0}, Result: DISYUNCION Label 23
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 24
+Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 24, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 25
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 26
+Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 26, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 27
+Operator: AND(&&), firstOperator: !VarLocation{name=CEQ Label 24, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=CEQ Label 26, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 28
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 29
+Operator: AND(&&), firstOperator: !VarLocation{name=CEQ Label 24, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 26, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=CEQ Label 29, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 30
+Operator: null, firstOperator: VarLocation{name=CONJUNCION Label 15, type=boolean, expr=VarLocation{name=CEQ Label 9, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 13, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 22, type=boolean, expr=!VarLocation{name=CEQ Label 16, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 18, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 20, type=boolean, expr=0 == 6, size=0}, size=0}, secondOperator: VarLocation{name=CONJUNCION Label 30, type=boolean, expr=!VarLocation{name=CEQ Label 24, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 26, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 29, type=boolean, expr=0 == 6, size=0}, size=0}, Result: DISYUNCION Label 31
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 32
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 33
+Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 32, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 34
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 35
+Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 35, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 36
+Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 32, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=CEQ Label 35, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 37
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 38
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 39
+Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 39, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 40
+Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=CEQ Label 39, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 41
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 42
+Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 39, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=CEQ Label 42, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 43
+Operator: null, firstOperator: VarLocation{name=CONJUNCION Label 37, type=boolean, expr=VarLocation{name=CEQ Label 32, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 35, type=boolean, expr=0 == 6, size=0}, size=0}, secondOperator: VarLocation{name=CONJUNCION Label 43, type=boolean, expr=VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 39, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 42, type=boolean, expr=0 == 6, size=0}, size=0}, Result: DISYUNCION Label 44
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 45
+Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 45, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 46
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 47
+Operator: AND(&&), firstOperator: !VarLocation{name=CEQ Label 45, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=CEQ Label 47, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 48
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 49
+Operator: AND(&&), firstOperator: !VarLocation{name=CEQ Label 45, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 47, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=CEQ Label 49, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 50
+Operator: null, firstOperator: VarLocation{name=CONJUNCION Label 37, type=boolean, expr=VarLocation{name=CEQ Label 32, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 35, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 43, type=boolean, expr=VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 39, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 42, type=boolean, expr=0 == 6, size=0}, size=0}, secondOperator: VarLocation{name=CONJUNCION Label 50, type=boolean, expr=!VarLocation{name=CEQ Label 45, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 47, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 49, type=boolean, expr=0 == 6, size=0}, size=0}, Result: DISYUNCION Label 51
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 52
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 53
+Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 52, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=CEQ Label 53, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 54
+Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 55
+Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 52, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 53, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=CEQ Label 55, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 56
 ---------------------------------------------------
   
   
@@ -322,23 +322,23 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 17
 lista: 
-Operator: -, firstOperator: 1, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: -1, secondOperator: null, Result: total
-Operator: =, firstOperator: 23, secondOperator: null, Result: n
-Operator: =, firstOperator: 23, secondOperator: null, Result: i
-Operator: >=, firstOperator: 0.0, secondOperator: 0, Result: MAYOR_IGUAL
-Operator: -, firstOperator: 0.0, secondOperator: 1, Result: MINUS
-Operator: =, firstOperator: 0.0 - 1, secondOperator: null, Result: i
-Operator: <, firstOperator: 0.0, secondOperator: 0, Result: MENOR
-Operator: !=, firstOperator: 0.0, secondOperator: 0, Result: DIFERENCIA_LOGICA
-Operator: *, firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY
-Operator: *, firstOperator: 0.0 * 0.0, secondOperator: 0, Result: MULTIPLY
-Operator: =, firstOperator: 0.0 * 0.0 * 0, secondOperator: null, Result: total
-Operator: -, firstOperator: 1000.2343, secondOperator: null, Result: RESTA
-Operator: +, firstOperator: -1000.2343, secondOperator: 6752, Result: PLUS
-Operator: =, firstOperator: -1000.2343 + 6752, secondOperator: null, Result: total
-Operator: -, firstOperator: 2, secondOperator: null, Result: RESTA
-Operator: *, firstOperator: -2, secondOperator: 0.0, Result: MULTIPLY
+Operator: UNARYMINUS(-expr), firstOperator: 1, secondOperator: null, Result: UNARYMINUS Label 1
+Operator: ASSIGN(=), firstOperator: -1, secondOperator: null, Result: total
+Operator: ASSIGN(=), firstOperator: 23, secondOperator: null, Result: n
+Operator: ASSIGN(=), firstOperator: 23, secondOperator: null, Result: i
+Operator: GEQ(>=), firstOperator: 0.0, secondOperator: 0, Result: GEQ Label 2
+Operator: MINUS(-), firstOperator: 0.0, secondOperator: 1, Result: MINUS Label 3
+Operator: ASSIGN(=), firstOperator: 0.0 - 1, secondOperator: null, Result: i
+Operator: LE(<), firstOperator: 0.0, secondOperator: 0, Result: LE Label 4
+Operator: NEQ(!=), firstOperator: 0.0, secondOperator: 0, Result: NEQ Label 5
+Operator: MULTIPLY(*), firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY Label 6
+Operator: MULTIPLY(*), firstOperator: 0.0 * 0.0, secondOperator: 0, Result: MULTIPLY Label 7
+Operator: ASSIGN(=), firstOperator: 0.0 * 0.0 * 0, secondOperator: null, Result: total
+Operator: UNARYMINUS(-expr), firstOperator: 1000.2343, secondOperator: null, Result: UNARYMINUS Label 8
+Operator: PLUS(+), firstOperator: -1000.2343, secondOperator: 6752, Result: PLUS Label 9
+Operator: ASSIGN(=), firstOperator: -1000.2343 + 6752, secondOperator: null, Result: total
+Operator: UNARYMINUS(-expr), firstOperator: 2, secondOperator: null, Result: UNARYMINUS Label 10
+Operator: MULTIPLY(*), firstOperator: -2, secondOperator: 0.0, Result: MULTIPLY Label 11
 ---------------------------------------------------
   
   
@@ -347,20 +347,20 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 14
 lista: 
-Operator: =, firstOperator: 50, secondOperator: null, Result: g
-Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
-Operator: =, firstOperator: 4, secondOperator: null, Result: a
-Operator: ==, firstOperator: 0, secondOperator: 4, Result: IGUALDAD_LOGICA
-Operator: <, firstOperator: 0, secondOperator: 4, Result: MENOR
-Operator: >, firstOperator: 0, secondOperator: 4, Result: MAYOR
-Operator: -, firstOperator: 0, secondOperator: 1, Result: MINUS
-Operator: =, firstOperator: 0 - 1, secondOperator: null, Result: g
-Operator: *, firstOperator: 0, secondOperator: 2, Result: MULTIPLY
-Operator: =, firstOperator: 0 * 2, secondOperator: null, Result: c
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: a
-Operator: /, firstOperator: 0.0, secondOperator: 2, Result: DIVIDE
-Operator: =, firstOperator: VarLocation{name=factor, type=float, expr=0.0, size=0} / VarLocation{name=factor, type=int, expr=2, size=0}, secondOperator: null, Result: c
+Operator: ASSIGN(=), firstOperator: 50, secondOperator: null, Result: g
+Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 1
+Operator: ASSIGN(=), firstOperator: 4, secondOperator: null, Result: a
+Operator: CEQ(==), firstOperator: 0, secondOperator: 4, Result: CEQ Label 2
+Operator: LE(<), firstOperator: 0, secondOperator: 4, Result: LE Label 3
+Operator: GE(>), firstOperator: 0, secondOperator: 4, Result: GE Label 4
+Operator: MINUS(-), firstOperator: 0, secondOperator: 1, Result: MINUS Label 5
+Operator: ASSIGN(=), firstOperator: 0 - 1, secondOperator: null, Result: g
+Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 2, Result: MULTIPLY Label 6
+Operator: ASSIGN(=), firstOperator: 0 * 2, secondOperator: null, Result: c
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 7
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: a
+Operator: DIVIDE(/), firstOperator: 0.0, secondOperator: 2, Result: DIVIDE Label 8
+Operator: ASSIGN(=), firstOperator: VarLocation{name=factor, type=float, expr=0.0, size=0} / VarLocation{name=factor, type=int, expr=2, size=0}, secondOperator: null, Result: c
 ---------------------------------------------------
   
   
@@ -369,17 +369,17 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 11
 lista: 
-Operator: =, firstOperator: 4, secondOperator: null, Result: b
-Operator: =, firstOperator: 5, secondOperator: null, Result: c
-Operator: *, firstOperator: 0, secondOperator: 0, Result: MULTIPLY
-Operator: =, firstOperator: 0 * 0, secondOperator: null, Result: a
-Operator: +, firstOperator: 0, secondOperator: 0, Result: PLUS
-Operator: =, firstOperator: 0 + 0, secondOperator: null, Result: p
-Operator: =, firstOperator: 3.14, secondOperator: null, Result: pi
-Operator: *, firstOperator: 2, secondOperator: 0.0, Result: MULTIPLY
-Operator: =, firstOperator: 2 * 0.0, secondOperator: null, Result: f
-Operator: /, firstOperator: 0, secondOperator: 0.0, Result: DIVIDE
-Operator: >, firstOperator: VarLocation{name=DIVIDE, type=float, expr=VarLocation{name=factor, type=int, expr=0, size=0} / VarLocation{name=factor, type=float, expr=0.0, size=0}, size=0}, secondOperator: 5, Result: MAYOR
+Operator: ASSIGN(=), firstOperator: 4, secondOperator: null, Result: b
+Operator: ASSIGN(=), firstOperator: 5, secondOperator: null, Result: c
+Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 0, Result: MULTIPLY Label 1
+Operator: ASSIGN(=), firstOperator: 0 * 0, secondOperator: null, Result: a
+Operator: PLUS(+), firstOperator: 0, secondOperator: 0, Result: PLUS Label 2
+Operator: ASSIGN(=), firstOperator: 0 + 0, secondOperator: null, Result: p
+Operator: ASSIGN(=), firstOperator: 3.14, secondOperator: null, Result: pi
+Operator: MULTIPLY(*), firstOperator: 2, secondOperator: 0.0, Result: MULTIPLY Label 3
+Operator: ASSIGN(=), firstOperator: 2 * 0.0, secondOperator: null, Result: f
+Operator: DIVIDE(/), firstOperator: 0, secondOperator: 0.0, Result: DIVIDE Label 4
+Operator: GE(>), firstOperator: VarLocation{name=DIVIDE Label 4, type=float, expr=VarLocation{name=factor, type=int, expr=0, size=0} / VarLocation{name=factor, type=float, expr=0.0, size=0}, size=0}, secondOperator: 5, Result: GE Label 5
 ---------------------------------------------------
   
   
@@ -388,25 +388,25 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 19
 lista: 
-Operator: =, firstOperator: false, secondOperator: null, Result: neg
-Operator: =, firstOperator: 1, secondOperator: null, Result: i
-Operator: =, firstOperator: 1.0, secondOperator: null, Result: prod
-Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
-Operator: -, firstOperator: 0, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: -0, secondOperator: null, Result: n
-Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
-Operator: =, firstOperator: !false, secondOperator: null, Result: neg
-Operator: <=, firstOperator: 0, secondOperator: 0, Result: MENOR_IGUAL
-Operator: *, firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY
-Operator: =, firstOperator: 0.0 * 0.0, secondOperator: null, Result: prod
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: i
-Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
-Operator: !, firstOperator: VarLocation{name=ADMIRACION, type=boolean, expr=!false, size=0}, secondOperator: null, Result: ADMIRACION
-Operator: /, firstOperator: 1.0, secondOperator: 0.0, Result: DIVIDE
-Operator: -, firstOperator: 100.1, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: 8.0, secondOperator: null, Result: a
-Operator: =, firstOperator: MethodCallExpr{name=potencia, args=[0.0, 2]}, secondOperator: null, Result: f
+Operator: ASSIGN(=), firstOperator: false, secondOperator: null, Result: neg
+Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: i
+Operator: ASSIGN(=), firstOperator: 1.0, secondOperator: null, Result: prod
+Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 1
+Operator: UNARYMINUS(-expr), firstOperator: 0, secondOperator: null, Result: UNARYMINUS Label 2
+Operator: ASSIGN(=), firstOperator: -0, secondOperator: null, Result: n
+Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 3
+Operator: ASSIGN(=), firstOperator: !false, secondOperator: null, Result: neg
+Operator: LEQ(<=), firstOperator: 0, secondOperator: 0, Result: LEQ Label 4
+Operator: MULTIPLY(*), firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY Label 5
+Operator: ASSIGN(=), firstOperator: 0.0 * 0.0, secondOperator: null, Result: prod
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 6
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
+Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 7
+Operator: NON(!), firstOperator: VarLocation{name=NON Label 7, type=boolean, expr=!false, size=0}, secondOperator: null, Result: NON Label 8
+Operator: DIVIDE(/), firstOperator: 1.0, secondOperator: 0.0, Result: DIVIDE Label 9
+Operator: UNARYMINUS(-expr), firstOperator: 100.1, secondOperator: null, Result: UNARYMINUS Label 10
+Operator: ASSIGN(=), firstOperator: 8.0, secondOperator: null, Result: a
+Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=potencia, args=[0.0, 2]}, secondOperator: null, Result: f
 ---------------------------------------------------
   
   
@@ -415,18 +415,18 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 12
 lista: 
-Operator: =, firstOperator: 0.0, secondOperator: null, Result: total
-Operator: =, firstOperator: 0.0, secondOperator: null, Result: i
-Operator: >, firstOperator: 0.0, secondOperator: 0, Result: MAYOR
-Operator: >, firstOperator: 0.0, secondOperator: 0, Result: MAYOR
-Operator: ||, firstOperator: 0.0 > 0, secondOperator: 0.0 > 0, Result: DISYUNCION
-Operator: >, firstOperator: 0.0, secondOperator: 0, Result: MAYOR
-Operator: +, firstOperator: 0.0, secondOperator: 0.0, Result: PLUS
-Operator: =, firstOperator: 0.0 + 0.0, secondOperator: null, Result: total
-Operator: =, firstOperator: 1.0, secondOperator: null, Result: i
-Operator: =, firstOperator: 0.0, secondOperator: null, Result: res
-Operator: =, firstOperator: 8.0, secondOperator: null, Result: a
-Operator: =, firstOperator: MethodCallExpr{name=sumatoria, args=[0.0]}, secondOperator: null, Result: f
+Operator: ASSIGN(=), firstOperator: 0.0, secondOperator: null, Result: total
+Operator: ASSIGN(=), firstOperator: 0.0, secondOperator: null, Result: i
+Operator: GE(>), firstOperator: 0.0, secondOperator: 0, Result: GE Label 1
+Operator: GE(>), firstOperator: 0.0, secondOperator: 0, Result: GE Label 2
+Operator: null, firstOperator: 0.0 > 0, secondOperator: 0.0 > 0, Result: DISYUNCION Label 3
+Operator: GE(>), firstOperator: 0.0, secondOperator: 0, Result: GE Label 4
+Operator: PLUS(+), firstOperator: 0.0, secondOperator: 0.0, Result: PLUS Label 5
+Operator: ASSIGN(=), firstOperator: 0.0 + 0.0, secondOperator: null, Result: total
+Operator: ASSIGN(=), firstOperator: 1.0, secondOperator: null, Result: i
+Operator: ASSIGN(=), firstOperator: 0.0, secondOperator: null, Result: res
+Operator: ASSIGN(=), firstOperator: 8.0, secondOperator: null, Result: a
+Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=sumatoria, args=[0.0]}, secondOperator: null, Result: f
 ---------------------------------------------------
   
   
@@ -435,86 +435,86 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 80
 lista: 
-Operator: =, firstOperator: false, secondOperator: null, Result: neg
-Operator: =, firstOperator: 1, secondOperator: null, Result: i
-Operator: =, firstOperator: 1.0, secondOperator: null, Result: prod
-Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
-Operator: -, firstOperator: 0, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: -0, secondOperator: null, Result: n
-Operator: =, firstOperator: true, secondOperator: null, Result: neg
-Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
-Operator: ==, firstOperator: 0, secondOperator: 0, Result: IGUALDAD_LOGICA
-Operator: ||, firstOperator: 0 < 0, secondOperator: 0 == 0, Result: DISYUNCION
-Operator: *, firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY
-Operator: *, firstOperator: 0.0 * 0.0, secondOperator: 2, Result: MULTIPLY
-Operator: =, firstOperator: 0.0 * 0.0 * 2, secondOperator: null, Result: prod
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: i
-Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
-Operator: !, firstOperator: VarLocation{name=ADMIRACION, type=boolean, expr=!false, size=0}, secondOperator: null, Result: ADMIRACION
-Operator: /, firstOperator: 1.0, secondOperator: 0.0, Result: DIVIDE
-Operator: -, firstOperator: 100.1, secondOperator: null, Result: RESTA
-Operator: -, firstOperator: 2.0, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: -2.0, secondOperator: null, Result: a
-Operator: -, firstOperator: 2, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: -2, secondOperator: null, Result: b
-Operator: -, firstOperator: 3.0, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: -3.0, secondOperator: null, Result: w
-Operator: -, firstOperator: 3.0, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: -3.0, secondOperator: null, Result: z
-Operator: *, firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY
-Operator: -, firstOperator: 0.0 * 0.0, secondOperator: 0.0, Result: MINUS
-Operator: =, firstOperator: 0.0 * 0.0 - 0.0, secondOperator: null, Result: m
-Operator: =, firstOperator: 0, secondOperator: null, Result: j
-Operator: =, firstOperator: 0, secondOperator: null, Result: i
-Operator: =, firstOperator: 0, secondOperator: null, Result: k
-Operator: =, firstOperator: 5, secondOperator: null, Result: n
-Operator: >, firstOperator: 0.0, secondOperator: 0.0, Result: MAYOR
-Operator: <, firstOperator: 0.0, secondOperator: 0.0, Result: MENOR
-Operator: =, firstOperator: 0.0, secondOperator: null, Result: res
-Operator: =, firstOperator: 0.0, secondOperator: null, Result: res
-Operator: <=, firstOperator: 0, secondOperator: 0, Result: MENOR_IGUAL
-Operator: <=, firstOperator: 0, secondOperator: 0, Result: MENOR_IGUAL
-Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
-Operator: ==, firstOperator: 0, secondOperator: 0, Result: IGUALDAD_LOGICA
-Operator: ||, firstOperator: 0 < 0, secondOperator: 0 == 0, Result: DISYUNCION
-Operator: ==, firstOperator: 0, secondOperator: 3, Result: IGUALDAD_LOGICA
-Operator: +, firstOperator: 0.0, secondOperator: 2.0, Result: PLUS
-Operator: =, firstOperator: 0.0 + 2.0, secondOperator: null, Result: res
-Operator: /, firstOperator: 10.0, secondOperator: 2.0, Result: DIVIDE
-Operator: -, firstOperator: 0.0, secondOperator: VarLocation{name=DIVIDE, type=float, expr=VarLocation{name=factor, type=float, expr=10.0, size=0} / VarLocation{name=factor, type=float, expr=2.0, size=0}, size=0}, Result: MINUS
-Operator: =, firstOperator: 0.0 - VarLocation{name=DIVIDE, type=float, expr=VarLocation{name=factor, type=float, expr=10.0, size=0} / VarLocation{name=factor, type=float, expr=2.0, size=0}, size=0}, secondOperator: null, Result: res
-Operator: =, firstOperator: 1, secondOperator: null, Result: k
-Operator: <, firstOperator: 0.0, secondOperator: 0.0, Result: MENOR
-Operator: <, firstOperator: 0.0, secondOperator: 0.0, Result: MENOR
-Operator: &&, firstOperator: 0.0 < 0.0, secondOperator: 0.0 < 0.0, Result: CONJUNCION
-Operator: *, firstOperator: 4.0, secondOperator: 0.0, Result: MULTIPLY
-Operator: +, firstOperator: 35.0, secondOperator: 4.0 * 0.0, Result: PLUS
-Operator: -, firstOperator: 35.0 + 4.0 * 0.0, secondOperator: 498.0, Result: MINUS
-Operator: =, firstOperator: 35.0 + 4.0 * 0.0 - 498.0, secondOperator: null, Result: res
-Operator: -, firstOperator: 3.2, secondOperator: 0.0, Result: MINUS
-Operator: -, firstOperator: 3.2 - 0.0, secondOperator: 12345.356, Result: MINUS
-Operator: =, firstOperator: 3.2 - 0.0 - 12345.356, secondOperator: null, Result: res
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: i
-Operator: -, firstOperator: 0.0, secondOperator: null, Result: RESTA
-Operator: *, firstOperator: 0.0, secondOperator: -0.0, Result: MULTIPLY
-Operator: *, firstOperator: 23.0, secondOperator: 0.0, Result: MULTIPLY
-Operator: +, firstOperator: 0.0 * -0.0, secondOperator: 23.0 * 0.0, Result: PLUS
-Operator: /, firstOperator: 2.0, secondOperator: 4.0, Result: DIVIDE
-Operator: +, firstOperator: 0.0 * -0.0 + 23.0 * 0.0, secondOperator: VarLocation{name=factor, type=float, expr=2.0, size=0} / VarLocation{name=factor, type=float, expr=4.0, size=0}, Result: PLUS
-Operator: =, firstOperator: 0.0 * -0.0 + 23.0 * 0.0 + VarLocation{name=factor, type=float, expr=2.0, size=0} / VarLocation{name=factor, type=float, expr=4.0, size=0}, secondOperator: null, Result: res
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: j
-Operator: -, firstOperator: 0.0, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: 80.0, secondOperator: null, Result: a
-Operator: -, firstOperator: 15.0, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: -15.0, secondOperator: null, Result: res
-Operator: =, firstOperator: 4.3, secondOperator: null, Result: w
-Operator: -, firstOperator: 7.6, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: -7.6, secondOperator: null, Result: m
-Operator: =, firstOperator: MethodCallExpr{name=potencia, args=[0.0, 2]}, secondOperator: null, Result: f
-Operator: +, firstOperator: 0.0, secondOperator: 2.0, Result: PLUS
+Operator: ASSIGN(=), firstOperator: false, secondOperator: null, Result: neg
+Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: i
+Operator: ASSIGN(=), firstOperator: 1.0, secondOperator: null, Result: prod
+Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 1
+Operator: UNARYMINUS(-expr), firstOperator: 0, secondOperator: null, Result: UNARYMINUS Label 2
+Operator: ASSIGN(=), firstOperator: -0, secondOperator: null, Result: n
+Operator: ASSIGN(=), firstOperator: true, secondOperator: null, Result: neg
+Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 3
+Operator: CEQ(==), firstOperator: 0, secondOperator: 0, Result: CEQ Label 4
+Operator: null, firstOperator: 0 < 0, secondOperator: 0 == 0, Result: DISYUNCION Label 5
+Operator: MULTIPLY(*), firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY Label 6
+Operator: MULTIPLY(*), firstOperator: 0.0 * 0.0, secondOperator: 2, Result: MULTIPLY Label 7
+Operator: ASSIGN(=), firstOperator: 0.0 * 0.0 * 2, secondOperator: null, Result: prod
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 8
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
+Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 9
+Operator: NON(!), firstOperator: VarLocation{name=NON Label 9, type=boolean, expr=!false, size=0}, secondOperator: null, Result: NON Label 10
+Operator: DIVIDE(/), firstOperator: 1.0, secondOperator: 0.0, Result: DIVIDE Label 11
+Operator: UNARYMINUS(-expr), firstOperator: 100.1, secondOperator: null, Result: UNARYMINUS Label 12
+Operator: UNARYMINUS(-expr), firstOperator: 2.0, secondOperator: null, Result: UNARYMINUS Label 13
+Operator: ASSIGN(=), firstOperator: -2.0, secondOperator: null, Result: a
+Operator: UNARYMINUS(-expr), firstOperator: 2, secondOperator: null, Result: UNARYMINUS Label 14
+Operator: ASSIGN(=), firstOperator: -2, secondOperator: null, Result: b
+Operator: UNARYMINUS(-expr), firstOperator: 3.0, secondOperator: null, Result: UNARYMINUS Label 15
+Operator: ASSIGN(=), firstOperator: -3.0, secondOperator: null, Result: w
+Operator: UNARYMINUS(-expr), firstOperator: 3.0, secondOperator: null, Result: UNARYMINUS Label 16
+Operator: ASSIGN(=), firstOperator: -3.0, secondOperator: null, Result: z
+Operator: MULTIPLY(*), firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY Label 17
+Operator: MINUS(-), firstOperator: 0.0 * 0.0, secondOperator: 0.0, Result: MINUS Label 18
+Operator: ASSIGN(=), firstOperator: 0.0 * 0.0 - 0.0, secondOperator: null, Result: m
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: j
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: k
+Operator: ASSIGN(=), firstOperator: 5, secondOperator: null, Result: n
+Operator: GE(>), firstOperator: 0.0, secondOperator: 0.0, Result: GE Label 19
+Operator: LE(<), firstOperator: 0.0, secondOperator: 0.0, Result: LE Label 20
+Operator: ASSIGN(=), firstOperator: 0.0, secondOperator: null, Result: res
+Operator: ASSIGN(=), firstOperator: 0.0, secondOperator: null, Result: res
+Operator: LEQ(<=), firstOperator: 0, secondOperator: 0, Result: LEQ Label 21
+Operator: LEQ(<=), firstOperator: 0, secondOperator: 0, Result: LEQ Label 22
+Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 23
+Operator: CEQ(==), firstOperator: 0, secondOperator: 0, Result: CEQ Label 24
+Operator: null, firstOperator: 0 < 0, secondOperator: 0 == 0, Result: DISYUNCION Label 25
+Operator: CEQ(==), firstOperator: 0, secondOperator: 3, Result: CEQ Label 26
+Operator: PLUS(+), firstOperator: 0.0, secondOperator: 2.0, Result: PLUS Label 27
+Operator: ASSIGN(=), firstOperator: 0.0 + 2.0, secondOperator: null, Result: res
+Operator: DIVIDE(/), firstOperator: 10.0, secondOperator: 2.0, Result: DIVIDE Label 28
+Operator: MINUS(-), firstOperator: 0.0, secondOperator: VarLocation{name=DIVIDE Label 28, type=float, expr=VarLocation{name=factor, type=float, expr=10.0, size=0} / VarLocation{name=factor, type=float, expr=2.0, size=0}, size=0}, Result: MINUS Label 29
+Operator: ASSIGN(=), firstOperator: 0.0 - VarLocation{name=DIVIDE Label 28, type=float, expr=VarLocation{name=factor, type=float, expr=10.0, size=0} / VarLocation{name=factor, type=float, expr=2.0, size=0}, size=0}, secondOperator: null, Result: res
+Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: k
+Operator: LE(<), firstOperator: 0.0, secondOperator: 0.0, Result: LE Label 30
+Operator: LE(<), firstOperator: 0.0, secondOperator: 0.0, Result: LE Label 31
+Operator: AND(&&), firstOperator: 0.0 < 0.0, secondOperator: 0.0 < 0.0, Result: CONJUNCION Label 32
+Operator: MULTIPLY(*), firstOperator: 4.0, secondOperator: 0.0, Result: MULTIPLY Label 33
+Operator: PLUS(+), firstOperator: 35.0, secondOperator: 4.0 * 0.0, Result: PLUS Label 34
+Operator: MINUS(-), firstOperator: 35.0 + 4.0 * 0.0, secondOperator: 498.0, Result: MINUS Label 35
+Operator: ASSIGN(=), firstOperator: 35.0 + 4.0 * 0.0 - 498.0, secondOperator: null, Result: res
+Operator: MINUS(-), firstOperator: 3.2, secondOperator: 0.0, Result: MINUS Label 36
+Operator: MINUS(-), firstOperator: 3.2 - 0.0, secondOperator: 12345.356, Result: MINUS Label 37
+Operator: ASSIGN(=), firstOperator: 3.2 - 0.0 - 12345.356, secondOperator: null, Result: res
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 38
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
+Operator: UNARYMINUS(-expr), firstOperator: 0.0, secondOperator: null, Result: UNARYMINUS Label 39
+Operator: MULTIPLY(*), firstOperator: 0.0, secondOperator: -0.0, Result: MULTIPLY Label 40
+Operator: MULTIPLY(*), firstOperator: 23.0, secondOperator: 0.0, Result: MULTIPLY Label 41
+Operator: PLUS(+), firstOperator: 0.0 * -0.0, secondOperator: 23.0 * 0.0, Result: PLUS Label 42
+Operator: DIVIDE(/), firstOperator: 2.0, secondOperator: 4.0, Result: DIVIDE Label 43
+Operator: PLUS(+), firstOperator: 0.0 * -0.0 + 23.0 * 0.0, secondOperator: VarLocation{name=factor, type=float, expr=2.0, size=0} / VarLocation{name=factor, type=float, expr=4.0, size=0}, Result: PLUS Label 44
+Operator: ASSIGN(=), firstOperator: 0.0 * -0.0 + 23.0 * 0.0 + VarLocation{name=factor, type=float, expr=2.0, size=0} / VarLocation{name=factor, type=float, expr=4.0, size=0}, secondOperator: null, Result: res
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 45
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: j
+Operator: UNARYMINUS(-expr), firstOperator: 0.0, secondOperator: null, Result: UNARYMINUS Label 46
+Operator: ASSIGN(=), firstOperator: 80.0, secondOperator: null, Result: a
+Operator: UNARYMINUS(-expr), firstOperator: 15.0, secondOperator: null, Result: UNARYMINUS Label 47
+Operator: ASSIGN(=), firstOperator: -15.0, secondOperator: null, Result: res
+Operator: ASSIGN(=), firstOperator: 4.3, secondOperator: null, Result: w
+Operator: UNARYMINUS(-expr), firstOperator: 7.6, secondOperator: null, Result: UNARYMINUS Label 48
+Operator: ASSIGN(=), firstOperator: -7.6, secondOperator: null, Result: m
+Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=potencia, args=[0.0, 2]}, secondOperator: null, Result: f
+Operator: PLUS(+), firstOperator: 0.0, secondOperator: 2.0, Result: PLUS Label 49
 ---------------------------------------------------
   
   
@@ -523,38 +523,38 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 32
 lista: 
-Operator: =, firstOperator: false, secondOperator: null, Result: neg
-Operator: =, firstOperator: 1, secondOperator: null, Result: i
-Operator: =, firstOperator: 1.0, secondOperator: null, Result: prod
-Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
-Operator: -, firstOperator: 0, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: -0, secondOperator: null, Result: n
-Operator: =, firstOperator: true, secondOperator: null, Result: neg
-Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
-Operator: ==, firstOperator: 0, secondOperator: 0, Result: IGUALDAD_LOGICA
-Operator: ||, firstOperator: 0 < 0, secondOperator: 0 == 0, Result: DISYUNCION
-Operator: *, firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY
-Operator: *, firstOperator: 0.0 * 0.0, secondOperator: 2.0, Result: MULTIPLY
-Operator: =, firstOperator: 0.0 * 0.0 * 2.0, secondOperator: null, Result: prod
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: i
-Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
-Operator: !, firstOperator: VarLocation{name=ADMIRACION, type=boolean, expr=!false, size=0}, secondOperator: null, Result: ADMIRACION
-Operator: /, firstOperator: 1.0, secondOperator: 0.0, Result: DIVIDE
-Operator: -, firstOperator: 100.1, secondOperator: null, Result: RESTA
-Operator: *, firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY
-Operator: *, firstOperator: 0.0 * 0.0, secondOperator: 0.0, Result: MULTIPLY
-Operator: *, firstOperator: 0.0 * 0.0 * 0.0, secondOperator: 0.0, Result: MULTIPLY
-Operator: *, firstOperator: 0.0 * 0.0 * 0.0 * 0.0, secondOperator: 0.0, Result: MULTIPLY
-Operator: *, firstOperator: 0.0 * 0.0 * 0.0 * 0.0 * 0.0, secondOperator: 0.0, Result: MULTIPLY
-Operator: =, firstOperator: 0.0 * 0.0 * 0.0 * 0.0 * 0.0 * 0.0, secondOperator: null, Result: c
-Operator: -, firstOperator: 15.0, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: -15.0, secondOperator: null, Result: res
-Operator: =, firstOperator: 4.3, secondOperator: null, Result: w
-Operator: -, firstOperator: 7.6, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: -7.6, secondOperator: null, Result: m
-Operator: =, firstOperator: 80.0, secondOperator: null, Result: a
-Operator: =, firstOperator: MethodCallExpr{name=potencia, args=[0.0, 2]}, secondOperator: null, Result: f
+Operator: ASSIGN(=), firstOperator: false, secondOperator: null, Result: neg
+Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: i
+Operator: ASSIGN(=), firstOperator: 1.0, secondOperator: null, Result: prod
+Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 1
+Operator: UNARYMINUS(-expr), firstOperator: 0, secondOperator: null, Result: UNARYMINUS Label 2
+Operator: ASSIGN(=), firstOperator: -0, secondOperator: null, Result: n
+Operator: ASSIGN(=), firstOperator: true, secondOperator: null, Result: neg
+Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 3
+Operator: CEQ(==), firstOperator: 0, secondOperator: 0, Result: CEQ Label 4
+Operator: null, firstOperator: 0 < 0, secondOperator: 0 == 0, Result: DISYUNCION Label 5
+Operator: MULTIPLY(*), firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY Label 6
+Operator: MULTIPLY(*), firstOperator: 0.0 * 0.0, secondOperator: 2.0, Result: MULTIPLY Label 7
+Operator: ASSIGN(=), firstOperator: 0.0 * 0.0 * 2.0, secondOperator: null, Result: prod
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 8
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
+Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 9
+Operator: NON(!), firstOperator: VarLocation{name=NON Label 9, type=boolean, expr=!false, size=0}, secondOperator: null, Result: NON Label 10
+Operator: DIVIDE(/), firstOperator: 1.0, secondOperator: 0.0, Result: DIVIDE Label 11
+Operator: UNARYMINUS(-expr), firstOperator: 100.1, secondOperator: null, Result: UNARYMINUS Label 12
+Operator: MULTIPLY(*), firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY Label 13
+Operator: MULTIPLY(*), firstOperator: 0.0 * 0.0, secondOperator: 0.0, Result: MULTIPLY Label 14
+Operator: MULTIPLY(*), firstOperator: 0.0 * 0.0 * 0.0, secondOperator: 0.0, Result: MULTIPLY Label 15
+Operator: MULTIPLY(*), firstOperator: 0.0 * 0.0 * 0.0 * 0.0, secondOperator: 0.0, Result: MULTIPLY Label 16
+Operator: MULTIPLY(*), firstOperator: 0.0 * 0.0 * 0.0 * 0.0 * 0.0, secondOperator: 0.0, Result: MULTIPLY Label 17
+Operator: ASSIGN(=), firstOperator: 0.0 * 0.0 * 0.0 * 0.0 * 0.0 * 0.0, secondOperator: null, Result: c
+Operator: UNARYMINUS(-expr), firstOperator: 15.0, secondOperator: null, Result: UNARYMINUS Label 18
+Operator: ASSIGN(=), firstOperator: -15.0, secondOperator: null, Result: res
+Operator: ASSIGN(=), firstOperator: 4.3, secondOperator: null, Result: w
+Operator: UNARYMINUS(-expr), firstOperator: 7.6, secondOperator: null, Result: UNARYMINUS Label 19
+Operator: ASSIGN(=), firstOperator: -7.6, secondOperator: null, Result: m
+Operator: ASSIGN(=), firstOperator: 80.0, secondOperator: null, Result: a
+Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=potencia, args=[0.0, 2]}, secondOperator: null, Result: f
 ---------------------------------------------------
   
   
@@ -563,13 +563,13 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 7
 lista: 
-Operator: /, firstOperator: 0.0, secondOperator: 0.0, Result: DIVIDE
-Operator: -, firstOperator: 0.0, secondOperator: 0.0, Result: MINUS
-Operator: +, firstOperator: 0.0, secondOperator: 0.0, Result: PLUS
-Operator: =, firstOperator: 6.982, secondOperator: null, Result: x
-Operator: -, firstOperator: 002.5, secondOperator: null, Result: RESTA
-Operator: =, firstOperator: -002.5, secondOperator: null, Result: y
-Operator: =, firstOperator: 3.5698, secondOperator: null, Result: z
+Operator: DIVIDE(/), firstOperator: 0.0, secondOperator: 0.0, Result: DIVIDE Label 1
+Operator: MINUS(-), firstOperator: 0.0, secondOperator: 0.0, Result: MINUS Label 2
+Operator: PLUS(+), firstOperator: 0.0, secondOperator: 0.0, Result: PLUS Label 3
+Operator: ASSIGN(=), firstOperator: 6.982, secondOperator: null, Result: x
+Operator: UNARYMINUS(-expr), firstOperator: 002.5, secondOperator: null, Result: UNARYMINUS Label 4
+Operator: ASSIGN(=), firstOperator: -002.5, secondOperator: null, Result: y
+Operator: ASSIGN(=), firstOperator: 3.5698, secondOperator: null, Result: z
 ---------------------------------------------------
   
   
@@ -578,10 +578,10 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 4
 lista: 
-Operator: =, firstOperator: 2, secondOperator: null, Result: A
-Operator: *, firstOperator: 0, secondOperator: 10, Result: MULTIPLY
-Operator: +, firstOperator: 0, secondOperator: 2, Result: PLUS
-Operator: =, firstOperator: 0 + 2, secondOperator: null, Result: A
+Operator: ASSIGN(=), firstOperator: 2, secondOperator: null, Result: A
+Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 10, Result: MULTIPLY Label 1
+Operator: PLUS(+), firstOperator: 0, secondOperator: 2, Result: PLUS Label 2
+Operator: ASSIGN(=), firstOperator: 0 + 2, secondOperator: null, Result: A
 ---------------------------------------------------
   
   
@@ -590,9 +590,9 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 3
 lista: 
-Operator: =, firstOperator: 2, secondOperator: null, Result: A
-Operator: +, firstOperator: 0, secondOperator: 2, Result: PLUS
-Operator: =, firstOperator: 0 + 2, secondOperator: null, Result: A
+Operator: ASSIGN(=), firstOperator: 2, secondOperator: null, Result: A
+Operator: PLUS(+), firstOperator: 0, secondOperator: 2, Result: PLUS Label 1
+Operator: ASSIGN(=), firstOperator: 0 + 2, secondOperator: null, Result: A
 ---------------------------------------------------
   
   
@@ -601,10 +601,10 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 4
 lista: 
-Operator: =, firstOperator: 2, secondOperator: null, Result: A
-Operator: -, firstOperator: 10, secondOperator: null, Result: RESTA
-Operator: +, firstOperator: 0, secondOperator: 2, Result: PLUS
-Operator: =, firstOperator: 0 + 2, secondOperator: null, Result: A
+Operator: ASSIGN(=), firstOperator: 2, secondOperator: null, Result: A
+Operator: UNARYMINUS(-expr), firstOperator: 10, secondOperator: null, Result: UNARYMINUS Label 1
+Operator: PLUS(+), firstOperator: 0, secondOperator: 2, Result: PLUS Label 2
+Operator: ASSIGN(=), firstOperator: 0 + 2, secondOperator: null, Result: A
 ---------------------------------------------------
   
   
@@ -613,12 +613,12 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 6
 lista: 
-Operator: =, firstOperator: 2, secondOperator: null, Result: A
-Operator: -, firstOperator: 10, secondOperator: null, Result: RESTA
-Operator: *, firstOperator: 11, secondOperator: 2, Result: MULTIPLY
-Operator: +, firstOperator: -10, secondOperator: 11 * 2, Result: PLUS
-Operator: +, firstOperator: 0, secondOperator: 2, Result: PLUS
-Operator: =, firstOperator: 0 + 2, secondOperator: null, Result: A
+Operator: ASSIGN(=), firstOperator: 2, secondOperator: null, Result: A
+Operator: UNARYMINUS(-expr), firstOperator: 10, secondOperator: null, Result: UNARYMINUS Label 1
+Operator: MULTIPLY(*), firstOperator: 11, secondOperator: 2, Result: MULTIPLY Label 2
+Operator: PLUS(+), firstOperator: -10, secondOperator: 11 * 2, Result: PLUS Label 3
+Operator: PLUS(+), firstOperator: 0, secondOperator: 2, Result: PLUS Label 4
+Operator: ASSIGN(=), firstOperator: 0 + 2, secondOperator: null, Result: A
 ---------------------------------------------------
   
   
@@ -627,10 +627,10 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 4
 lista: 
-Operator: =, firstOperator: 2, secondOperator: null, Result: A
-Operator: +, firstOperator: MethodCallExpr{name=par, args=[]}, secondOperator: 5, Result: PLUS
-Operator: +, firstOperator: 0, secondOperator: 2, Result: PLUS
-Operator: =, firstOperator: 0 + 2, secondOperator: null, Result: A
+Operator: ASSIGN(=), firstOperator: 2, secondOperator: null, Result: A
+Operator: PLUS(+), firstOperator: MethodCallExpr{name=par, args=[]}, secondOperator: 5, Result: PLUS Label 1
+Operator: PLUS(+), firstOperator: 0, secondOperator: 2, Result: PLUS Label 2
+Operator: ASSIGN(=), firstOperator: 0 + 2, secondOperator: null, Result: A
 ---------------------------------------------------
   
   
@@ -639,14 +639,14 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 8
 lista: 
-Operator: !=, firstOperator: 0, secondOperator: 0, Result: DIFERENCIA_LOGICA
-Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
-Operator: -, firstOperator: 0, secondOperator: 0, Result: MINUS
-Operator: =, firstOperator: 0 - 0, secondOperator: null, Result: res
-Operator: -, firstOperator: 0, secondOperator: 0, Result: MINUS
-Operator: =, firstOperator: 0 - 0, secondOperator: null, Result: res
-Operator: *, firstOperator: 0, secondOperator: 5, Result: MULTIPLY
-Operator: =, firstOperator: 0 * 5, secondOperator: null, Result: res
+Operator: NEQ(!=), firstOperator: 0, secondOperator: 0, Result: NEQ Label 1
+Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 2
+Operator: MINUS(-), firstOperator: 0, secondOperator: 0, Result: MINUS Label 3
+Operator: ASSIGN(=), firstOperator: 0 - 0, secondOperator: null, Result: res
+Operator: MINUS(-), firstOperator: 0, secondOperator: 0, Result: MINUS Label 4
+Operator: ASSIGN(=), firstOperator: 0 - 0, secondOperator: null, Result: res
+Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 5, Result: MULTIPLY Label 5
+Operator: ASSIGN(=), firstOperator: 0 * 5, secondOperator: null, Result: res
 ---------------------------------------------------
   
   
@@ -655,14 +655,14 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 8
 lista: 
-Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
-Operator: -, firstOperator: 0, secondOperator: 0, Result: MINUS
-Operator: =, firstOperator: 0 - 0, secondOperator: null, Result: res
-Operator: ==, firstOperator: 0, secondOperator: 0, Result: IGUALDAD_LOGICA
-Operator: *, firstOperator: 0, secondOperator: 5, Result: MULTIPLY
-Operator: =, firstOperator: 0 * 5, secondOperator: null, Result: res
-Operator: -, firstOperator: 0, secondOperator: 0, Result: MINUS
-Operator: =, firstOperator: 0 - 0, secondOperator: null, Result: res
+Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 1
+Operator: MINUS(-), firstOperator: 0, secondOperator: 0, Result: MINUS Label 2
+Operator: ASSIGN(=), firstOperator: 0 - 0, secondOperator: null, Result: res
+Operator: CEQ(==), firstOperator: 0, secondOperator: 0, Result: CEQ Label 3
+Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 5, Result: MULTIPLY Label 4
+Operator: ASSIGN(=), firstOperator: 0 * 5, secondOperator: null, Result: res
+Operator: MINUS(-), firstOperator: 0, secondOperator: 0, Result: MINUS Label 5
+Operator: ASSIGN(=), firstOperator: 0 - 0, secondOperator: null, Result: res
 ---------------------------------------------------
   
   
@@ -671,12 +671,12 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 6
 lista: 
-Operator: =, firstOperator: true, secondOperator: null, Result: a
-Operator: ||, firstOperator: false, secondOperator: false, Result: DISYUNCION
-Operator: !, firstOperator: true, secondOperator: null, Result: ADMIRACION
-Operator: &&, firstOperator: VarLocation{name=DISYUNCION, type=boolean, expr=false || false, size=0}, secondOperator: !true, Result: CONJUNCION
-Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
-Operator: &&, firstOperator: VarLocation{name=CONJUNCION, type=boolean, expr=VarLocation{name=DISYUNCION, type=boolean, expr=false || false, size=0} && !true, size=0}, secondOperator: !false, Result: CONJUNCION
+Operator: ASSIGN(=), firstOperator: true, secondOperator: null, Result: a
+Operator: null, firstOperator: false, secondOperator: false, Result: DISYUNCION Label 1
+Operator: NON(!), firstOperator: true, secondOperator: null, Result: NON Label 2
+Operator: AND(&&), firstOperator: VarLocation{name=DISYUNCION Label 1, type=boolean, expr=false || false, size=0}, secondOperator: !true, Result: CONJUNCION Label 3
+Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 4
+Operator: AND(&&), firstOperator: VarLocation{name=CONJUNCION Label 3, type=boolean, expr=VarLocation{name=DISYUNCION Label 1, type=boolean, expr=false || false, size=0} && !true, size=0}, secondOperator: !false, Result: CONJUNCION Label 5
 ---------------------------------------------------
   
   
@@ -685,26 +685,26 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 20
 lista: 
-Operator: >, firstOperator: 0.0, secondOperator: 0.0, Result: MAYOR
-Operator: >, firstOperator: 0.0, secondOperator: 0.0, Result: MAYOR
-Operator: &&, firstOperator: VarLocation{name=MAYOR, type=boolean, expr=0.0 > 0.0, size=0}, secondOperator: VarLocation{name=MAYOR, type=boolean, expr=0.0 > 0.0, size=0}, Result: CONJUNCION
-Operator: +, firstOperator: 0.0, secondOperator: 0.0, Result: PLUS
-Operator: /, firstOperator: VarLocation{name=PLUS, type=float, expr=0.0 + 0.0, size=0}, secondOperator: 2.0, Result: DIVIDE
-Operator: >, firstOperator: 0.0, secondOperator: 0.0, Result: MAYOR
-Operator: >, firstOperator: 0.0, secondOperator: 0.0, Result: MAYOR
-Operator: &&, firstOperator: VarLocation{name=MAYOR, type=boolean, expr=0.0 > 0.0, size=0}, secondOperator: VarLocation{name=MAYOR, type=boolean, expr=0.0 > 0.0, size=0}, Result: CONJUNCION
-Operator: +, firstOperator: 0.0, secondOperator: 0.0, Result: PLUS
-Operator: /, firstOperator: VarLocation{name=PLUS, type=float, expr=0.0 + 0.0, size=0}, secondOperator: 2.0, Result: DIVIDE
-Operator: >, firstOperator: 0.0, secondOperator: 0.0, Result: MAYOR
-Operator: >, firstOperator: 0.0, secondOperator: 0.0, Result: MAYOR
-Operator: &&, firstOperator: VarLocation{name=MAYOR, type=boolean, expr=0.0 > 0.0, size=0}, secondOperator: VarLocation{name=MAYOR, type=boolean, expr=0.0 > 0.0, size=0}, Result: CONJUNCION
-Operator: +, firstOperator: 0.0, secondOperator: 0.0, Result: PLUS
-Operator: /, firstOperator: VarLocation{name=PLUS, type=float, expr=0.0 + 0.0, size=0}, secondOperator: 2.0, Result: DIVIDE
-Operator: ==, firstOperator: 0.0, secondOperator: 0.0, Result: IGUALDAD_LOGICA
-Operator: ==, firstOperator: 0.0, secondOperator: 0.0, Result: IGUALDAD_LOGICA
-Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0.0 == 0.0, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0.0 == 0.0, size=0}, Result: CONJUNCION
-Operator: ==, firstOperator: 0.0, secondOperator: 0.0, Result: IGUALDAD_LOGICA
-Operator: &&, firstOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0.0 == 0.0, size=0} && VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0.0 == 0.0, size=0}, secondOperator: VarLocation{name=IGUALDAD_LOGICA, type=boolean, expr=0.0 == 0.0, size=0}, Result: CONJUNCION
+Operator: GE(>), firstOperator: 0.0, secondOperator: 0.0, Result: GE Label 1
+Operator: GE(>), firstOperator: 0.0, secondOperator: 0.0, Result: GE Label 2
+Operator: AND(&&), firstOperator: VarLocation{name=GE Label 1, type=boolean, expr=0.0 > 0.0, size=0}, secondOperator: VarLocation{name=GE Label 2, type=boolean, expr=0.0 > 0.0, size=0}, Result: CONJUNCION Label 3
+Operator: PLUS(+), firstOperator: 0.0, secondOperator: 0.0, Result: PLUS Label 4
+Operator: DIVIDE(/), firstOperator: VarLocation{name=PLUS Label 4, type=float, expr=0.0 + 0.0, size=0}, secondOperator: 2.0, Result: DIVIDE Label 5
+Operator: GE(>), firstOperator: 0.0, secondOperator: 0.0, Result: GE Label 6
+Operator: GE(>), firstOperator: 0.0, secondOperator: 0.0, Result: GE Label 7
+Operator: AND(&&), firstOperator: VarLocation{name=GE Label 6, type=boolean, expr=0.0 > 0.0, size=0}, secondOperator: VarLocation{name=GE Label 7, type=boolean, expr=0.0 > 0.0, size=0}, Result: CONJUNCION Label 8
+Operator: PLUS(+), firstOperator: 0.0, secondOperator: 0.0, Result: PLUS Label 9
+Operator: DIVIDE(/), firstOperator: VarLocation{name=PLUS Label 9, type=float, expr=0.0 + 0.0, size=0}, secondOperator: 2.0, Result: DIVIDE Label 10
+Operator: GE(>), firstOperator: 0.0, secondOperator: 0.0, Result: GE Label 11
+Operator: GE(>), firstOperator: 0.0, secondOperator: 0.0, Result: GE Label 12
+Operator: AND(&&), firstOperator: VarLocation{name=GE Label 11, type=boolean, expr=0.0 > 0.0, size=0}, secondOperator: VarLocation{name=GE Label 12, type=boolean, expr=0.0 > 0.0, size=0}, Result: CONJUNCION Label 13
+Operator: PLUS(+), firstOperator: 0.0, secondOperator: 0.0, Result: PLUS Label 14
+Operator: DIVIDE(/), firstOperator: VarLocation{name=PLUS Label 14, type=float, expr=0.0 + 0.0, size=0}, secondOperator: 2.0, Result: DIVIDE Label 15
+Operator: CEQ(==), firstOperator: 0.0, secondOperator: 0.0, Result: CEQ Label 16
+Operator: CEQ(==), firstOperator: 0.0, secondOperator: 0.0, Result: CEQ Label 17
+Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 16, type=boolean, expr=0.0 == 0.0, size=0}, secondOperator: VarLocation{name=CEQ Label 17, type=boolean, expr=0.0 == 0.0, size=0}, Result: CONJUNCION Label 18
+Operator: CEQ(==), firstOperator: 0.0, secondOperator: 0.0, Result: CEQ Label 19
+Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 16, type=boolean, expr=0.0 == 0.0, size=0} && VarLocation{name=CEQ Label 17, type=boolean, expr=0.0 == 0.0, size=0}, secondOperator: VarLocation{name=CEQ Label 19, type=boolean, expr=0.0 == 0.0, size=0}, Result: CONJUNCION Label 20
 ---------------------------------------------------
   
   
@@ -713,13 +713,13 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 7
 lista: 
-Operator: =, firstOperator: true, secondOperator: null, Result: a
-Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
-Operator: =, firstOperator: !false, secondOperator: null, Result: b
-Operator: &&, firstOperator: false, secondOperator: false, Result: CONJUNCION
-Operator: !, firstOperator: false, secondOperator: null, Result: ADMIRACION
-Operator: ||, firstOperator: VarLocation{name=CONJUNCION, type=boolean, expr=false && false, size=0}, secondOperator: !false, Result: DISYUNCION
-Operator: =, firstOperator: VarLocation{name=CONJUNCION, type=boolean, expr=false && false, size=0} || !false, secondOperator: null, Result: c
+Operator: ASSIGN(=), firstOperator: true, secondOperator: null, Result: a
+Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 1
+Operator: ASSIGN(=), firstOperator: !false, secondOperator: null, Result: b
+Operator: AND(&&), firstOperator: false, secondOperator: false, Result: CONJUNCION Label 2
+Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 3
+Operator: null, firstOperator: VarLocation{name=CONJUNCION Label 2, type=boolean, expr=false && false, size=0}, secondOperator: !false, Result: DISYUNCION Label 4
+Operator: ASSIGN(=), firstOperator: VarLocation{name=CONJUNCION Label 2, type=boolean, expr=false && false, size=0} || !false, secondOperator: null, Result: c
 ---------------------------------------------------
   
   
@@ -728,17 +728,17 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 11
 lista: 
-Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
-Operator: =, firstOperator: 0, secondOperator: null, Result: dividendo
-Operator: =, firstOperator: 0, secondOperator: null, Result: divisor
-Operator: =, firstOperator: 0, secondOperator: null, Result: dividendo
-Operator: =, firstOperator: 0, secondOperator: null, Result: divisor
-Operator: =, firstOperator: 1, secondOperator: null, Result: resto
-Operator: !=, firstOperator: 0, secondOperator: 0, Result: DIFERENCIA_LOGICA
-Operator: %, firstOperator: 0, secondOperator: 0, Result: PORCENTAJE
-Operator: =, firstOperator: 0 % 0, secondOperator: null, Result: resto
-Operator: =, firstOperator: 0, secondOperator: null, Result: dividendo
-Operator: =, firstOperator: 0, secondOperator: null, Result: divisor
+Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 1
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: dividendo
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: divisor
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: dividendo
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: divisor
+Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: resto
+Operator: NEQ(!=), firstOperator: 0, secondOperator: 0, Result: NEQ Label 2
+Operator: MOD(%), firstOperator: 0, secondOperator: 0, Result: MOD Label 3
+Operator: ASSIGN(=), firstOperator: 0 % 0, secondOperator: null, Result: resto
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: dividendo
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: divisor
 ---------------------------------------------------
   
   
@@ -763,16 +763,16 @@ Error: Method alo not declared
 parseo exitoso
 tamaño lista de codigo tercetos: 10
 lista: 
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: x
-Operator: -, firstOperator: 0, secondOperator: 1, Result: MINUS
-Operator: =, firstOperator: 0 - 1, secondOperator: null, Result: x
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: x
-Operator: =, firstOperator: 7, secondOperator: null, Result: y
-Operator: =, firstOperator: 8.0, secondOperator: null, Result: c
-Operator: =, firstOperator: MethodCallExpr{name=alo2, args=[0]}, secondOperator: null, Result: y
-Operator: *, firstOperator: VarLocation{name=factor, type=int, expr=3, size=0}, secondOperator: 0, Result: MULTIPLY
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 1
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: x
+Operator: MINUS(-), firstOperator: 0, secondOperator: 1, Result: MINUS Label 2
+Operator: ASSIGN(=), firstOperator: 0 - 1, secondOperator: null, Result: x
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 3
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: x
+Operator: ASSIGN(=), firstOperator: 7, secondOperator: null, Result: y
+Operator: ASSIGN(=), firstOperator: 8.0, secondOperator: null, Result: c
+Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=alo2, args=[0]}, secondOperator: null, Result: y
+Operator: MULTIPLY(*), firstOperator: VarLocation{name=factor, type=int, expr=3, size=0}, secondOperator: 0, Result: MULTIPLY Label 4
 ---------------------------------------------------
   
   
@@ -781,15 +781,15 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 9
 lista: 
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: *, firstOperator: 3, secondOperator: 2, Result: MULTIPLY
-Operator: >, firstOperator: 0, secondOperator: 3 * 2, Result: MAYOR
-Operator: /, firstOperator: 0, secondOperator: 3, Result: DIVIDE
-Operator: =, firstOperator: 0 / 3, secondOperator: null, Result: res
-Operator: %, firstOperator: 0, secondOperator: 2, Result: PORCENTAJE
-Operator: =, firstOperator: 0 % 2, secondOperator: null, Result: res
-Operator: =, firstOperator: false, secondOperator: null, Result: res
-Operator: =, firstOperator: MethodCallExpr{name=resto, args=[MethodCallExpr{name=inc, args=[5]}, 10.2]}, secondOperator: null, Result: A
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 1
+Operator: MULTIPLY(*), firstOperator: 3, secondOperator: 2, Result: MULTIPLY Label 2
+Operator: GE(>), firstOperator: 0, secondOperator: 3 * 2, Result: GE Label 3
+Operator: DIVIDE(/), firstOperator: 0, secondOperator: 3, Result: DIVIDE Label 4
+Operator: ASSIGN(=), firstOperator: 0 / 3, secondOperator: null, Result: res
+Operator: MOD(%), firstOperator: 0, secondOperator: 2, Result: MOD Label 5
+Operator: ASSIGN(=), firstOperator: 0 % 2, secondOperator: null, Result: res
+Operator: ASSIGN(=), firstOperator: false, secondOperator: null, Result: res
+Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=resto, args=[MethodCallExpr{name=inc, args=[5]}, 10.2]}, secondOperator: null, Result: A
 ---------------------------------------------------
   
   
@@ -806,21 +806,21 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 15
 lista: 
-Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
-Operator: =, firstOperator: 0, secondOperator: null, Result: dividendo
-Operator: =, firstOperator: 0, secondOperator: null, Result: divisor
-Operator: =, firstOperator: 0, secondOperator: null, Result: dividendo
-Operator: =, firstOperator: 0, secondOperator: null, Result: divisor
-Operator: =, firstOperator: 1, secondOperator: null, Result: resto
-Operator: !=, firstOperator: 0, secondOperator: 0, Result: DIFERENCIA_LOGICA
-Operator: %, firstOperator: 0, secondOperator: 0, Result: PORCENTAJE
-Operator: =, firstOperator: 0 % 0, secondOperator: null, Result: resto
-Operator: =, firstOperator: 0, secondOperator: null, Result: dividendo
-Operator: =, firstOperator: 0, secondOperator: null, Result: divisor
-Operator: =, firstOperator: 10000, secondOperator: null, Result: a
-Operator: *, firstOperator: 3.5, secondOperator: 0, Result: MULTIPLY
-Operator: /, firstOperator: 7, secondOperator: 6, Result: DIVIDE
-Operator: -, firstOperator: 3.5 * 0, secondOperator: 7 / 6, Result: MINUS
+Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 1
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: dividendo
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: divisor
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: dividendo
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: divisor
+Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: resto
+Operator: NEQ(!=), firstOperator: 0, secondOperator: 0, Result: NEQ Label 2
+Operator: MOD(%), firstOperator: 0, secondOperator: 0, Result: MOD Label 3
+Operator: ASSIGN(=), firstOperator: 0 % 0, secondOperator: null, Result: resto
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: dividendo
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: divisor
+Operator: ASSIGN(=), firstOperator: 10000, secondOperator: null, Result: a
+Operator: MULTIPLY(*), firstOperator: 3.5, secondOperator: 0, Result: MULTIPLY Label 4
+Operator: DIVIDE(/), firstOperator: 7, secondOperator: 6, Result: DIVIDE Label 5
+Operator: MINUS(-), firstOperator: 3.5 * 0, secondOperator: 7 / 6, Result: MINUS Label 6
 ---------------------------------------------------
   
   
@@ -829,8 +829,8 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 2
 lista: 
-Operator: =, firstOperator: 90, secondOperator: null, Result: a
-Operator: %, firstOperator: 0, secondOperator: 7, Result: PORCENTAJE
+Operator: ASSIGN(=), firstOperator: 90, secondOperator: null, Result: a
+Operator: MOD(%), firstOperator: 0, secondOperator: 7, Result: MOD Label 1
 ---------------------------------------------------
   
   
@@ -839,11 +839,11 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 5
 lista: 
-Operator: =, firstOperator: 5, secondOperator: null, Result: a
-Operator: =, firstOperator: 2000, secondOperator: null, Result: d
-Operator: *, firstOperator: 0, secondOperator: 1000, Result: MULTIPLY
-Operator: *, firstOperator: 0 * 1000, secondOperator: 0, Result: MULTIPLY
-Operator: *, firstOperator: 0 * 1000 * 0, secondOperator: 0, Result: MULTIPLY
+Operator: ASSIGN(=), firstOperator: 5, secondOperator: null, Result: a
+Operator: ASSIGN(=), firstOperator: 2000, secondOperator: null, Result: d
+Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 1000, Result: MULTIPLY Label 1
+Operator: MULTIPLY(*), firstOperator: 0 * 1000, secondOperator: 0, Result: MULTIPLY Label 2
+Operator: MULTIPLY(*), firstOperator: 0 * 1000 * 0, secondOperator: 0, Result: MULTIPLY Label 3
 ---------------------------------------------------
   
   
@@ -852,8 +852,8 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 2
 lista: 
-Operator: =, firstOperator: 5, secondOperator: null, Result: a
-Operator: *, firstOperator: 0, secondOperator: 7, Result: MULTIPLY
+Operator: ASSIGN(=), firstOperator: 5, secondOperator: null, Result: a
+Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 7, Result: MULTIPLY Label 1
 ---------------------------------------------------
   
   
@@ -862,8 +862,8 @@ parseo iniciado
 Main Method Missing in Class prueba2
 tamaño lista de codigo tercetos: 2
 lista: 
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: x
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 1
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: x
 ---------------------------------------------------
   
   
@@ -872,35 +872,35 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 29
 lista: 
-Operator: =, firstOperator: 100, secondOperator: null, Result: i
-Operator: =, firstOperator: 0, secondOperator: null, Result: j
-Operator: =, firstOperator: 0, secondOperator: null, Result: z
-Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
-Operator: =, firstOperator: 0, secondOperator: null, Result: i
-Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
-Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
-Operator: ||, firstOperator: VarLocation{name=MAYOR, type=boolean, expr=0 > 0, size=0}, secondOperator: VarLocation{name=MENOR, type=boolean, expr=0 < 0, size=0}, Result: DISYUNCION
-Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
-Operator: -, firstOperator: 0, secondOperator: 1, Result: MINUS
-Operator: =, firstOperator: 0 - 1, secondOperator: null, Result: x
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: x
-Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
-Operator: >, firstOperator: 0, secondOperator: 0, Result: MAYOR
-Operator: ||, firstOperator: VarLocation{name=MENOR, type=boolean, expr=0 < 0, size=0}, secondOperator: VarLocation{name=MAYOR, type=boolean, expr=0 > 0, size=0}, Result: DISYUNCION
-Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: x
-Operator: ==, firstOperator: 0, secondOperator: 0, Result: IGUALDAD_LOGICA
-Operator: -, firstOperator: 0, secondOperator: 1, Result: MINUS
-Operator: *, firstOperator: 0, secondOperator: 0, Result: MULTIPLY
-Operator: *, firstOperator: 0, secondOperator: 0, Result: MULTIPLY
-Operator: -, firstOperator: 0 * 0, secondOperator: 0 * 0, Result: MINUS
-Operator: +, firstOperator: 0 - 1, secondOperator: VarLocation{name=MINUS, type=int, expr=0 * 0 - 0 * 0, size=0}, Result: PLUS
-Operator: =, firstOperator: 0 - 1 + VarLocation{name=MINUS, type=int, expr=0 * 0 - 0 * 0, size=0}, secondOperator: null, Result: x
-Operator: =, firstOperator: 0, secondOperator: null, Result: x
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: j
+Operator: ASSIGN(=), firstOperator: 100, secondOperator: null, Result: i
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: j
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: z
+Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 1
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
+Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 2
+Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 3
+Operator: null, firstOperator: VarLocation{name=GE Label 2, type=boolean, expr=0 > 0, size=0}, secondOperator: VarLocation{name=LE Label 3, type=boolean, expr=0 < 0, size=0}, Result: DISYUNCION Label 4
+Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 5
+Operator: MINUS(-), firstOperator: 0, secondOperator: 1, Result: MINUS Label 6
+Operator: ASSIGN(=), firstOperator: 0 - 1, secondOperator: null, Result: x
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 7
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: x
+Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 8
+Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 9
+Operator: null, firstOperator: VarLocation{name=LE Label 8, type=boolean, expr=0 < 0, size=0}, secondOperator: VarLocation{name=GE Label 9, type=boolean, expr=0 > 0, size=0}, Result: DISYUNCION Label 10
+Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 11
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 12
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: x
+Operator: CEQ(==), firstOperator: 0, secondOperator: 0, Result: CEQ Label 13
+Operator: MINUS(-), firstOperator: 0, secondOperator: 1, Result: MINUS Label 14
+Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 0, Result: MULTIPLY Label 15
+Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 0, Result: MULTIPLY Label 16
+Operator: MINUS(-), firstOperator: 0 * 0, secondOperator: 0 * 0, Result: MINUS Label 17
+Operator: PLUS(+), firstOperator: 0 - 1, secondOperator: VarLocation{name=MINUS Label 17, type=int, expr=0 * 0 - 0 * 0, size=0}, Result: PLUS Label 18
+Operator: ASSIGN(=), firstOperator: 0 - 1 + VarLocation{name=MINUS Label 17, type=int, expr=0 * 0 - 0 * 0, size=0}, secondOperator: null, Result: x
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: x
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 19
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: j
 ---------------------------------------------------
   
   
@@ -909,9 +909,9 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 3
 lista: 
-Operator: ==, firstOperator: 0, secondOperator: 0, Result: IGUALDAD_LOGICA
-Operator: ==, firstOperator: 0, secondOperator: 0, Result: IGUALDAD_LOGICA
-Operator: +, firstOperator: 0, secondOperator: 0, Result: PLUS
+Operator: CEQ(==), firstOperator: 0, secondOperator: 0, Result: CEQ Label 1
+Operator: CEQ(==), firstOperator: 0, secondOperator: 0, Result: CEQ Label 2
+Operator: PLUS(+), firstOperator: 0, secondOperator: 0, Result: PLUS Label 3
 ---------------------------------------------------
   
   
@@ -920,13 +920,13 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 7
 lista: 
-Operator: =, firstOperator: 0, secondOperator: null, Result: aux
-Operator: =, firstOperator: 0, secondOperator: null, Result: i
-Operator: <, firstOperator: 0, secondOperator: 0, Result: MENOR
-Operator: +, firstOperator: 0.0, secondOperator: 0.0, Result: PLUS
-Operator: =, firstOperator: 0.0 + 0.0, secondOperator: null, Result: aux
-Operator: +, firstOperator: 0, secondOperator: 1, Result: PLUS
-Operator: =, firstOperator: 0 + 1, secondOperator: null, Result: i
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: aux
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
+Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 1
+Operator: PLUS(+), firstOperator: 0.0, secondOperator: 0.0, Result: PLUS Label 2
+Operator: ASSIGN(=), firstOperator: 0.0 + 0.0, secondOperator: null, Result: aux
+Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 3
+Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
 ---------------------------------------------------
   
   
@@ -935,13 +935,13 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 7
 lista: 
-Operator: =, firstOperator: 1, secondOperator: null, Result: resto
-Operator: !=, firstOperator: 0, secondOperator: 0, Result: DIFERENCIA_LOGICA
-Operator: %, firstOperator: 0, secondOperator: 0, Result: PORCENTAJE
-Operator: =, firstOperator: 0 % 0, secondOperator: null, Result: resto
-Operator: =, firstOperator: 0, secondOperator: null, Result: dividendo
-Operator: !=, firstOperator: 0, secondOperator: 0, Result: DIFERENCIA_LOGICA
-Operator: !=, firstOperator: 0, secondOperator: 0, Result: DIFERENCIA_LOGICA
+Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: resto
+Operator: NEQ(!=), firstOperator: 0, secondOperator: 0, Result: NEQ Label 1
+Operator: MOD(%), firstOperator: 0, secondOperator: 0, Result: MOD Label 2
+Operator: ASSIGN(=), firstOperator: 0 % 0, secondOperator: null, Result: resto
+Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: dividendo
+Operator: NEQ(!=), firstOperator: 0, secondOperator: 0, Result: NEQ Label 3
+Operator: NEQ(!=), firstOperator: 0, secondOperator: 0, Result: NEQ Label 4
 ---------------------------------------------------
   
   
