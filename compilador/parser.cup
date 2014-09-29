@@ -27,6 +27,9 @@
     boolean inLoop;
     //lista de codigo de tercetos/triplas
     LinkedList<TripletCode> TripletList;
+
+    //pila de labels
+    LinkedList<String> LabelsStack;
     :};
 
     parser code{:
@@ -126,7 +129,7 @@
             ;
 
     body::= LLAVE_IZQ LLAVE_DER 
-        | LLAVE_IZQ {: TS = new symbolTable(); TripletList=new LinkedList(); :} fieldAndMethods LLAVE_DER 
+        | LLAVE_IZQ {: TS = new symbolTable(); TripletList=new LinkedList(); LabelsStack=new LinkedList(); :} fieldAndMethods LLAVE_DER 
         ;
 
     fieldAndMethods::= fieldDeclarations
@@ -472,8 +475,24 @@
                                                              :}
              | method_call:m PUNTO_Y_COMA {: RESULT=m; :}
              | IF PARENTESIS_IZQ {://agregamos un nuevo nivel al arbol para el cuerpo del if
-                 TS.agregarNivel(); :} expr:e PARENTESIS_DER block:ifBlock {: //subimos de nivel luego del bloque if
-                        TS.SubirNivel(); :} else_block:elseBlock {: //luego de procesar el bloque else (el cual es opcional)
+                 TS.agregarNivel(); :} expr:e {: 
+                    //creamos y agregamos los label de salto por falso y fin de if
+                    String labelElse = "falseCond "+Labels.getLabel(); 
+                    LabelsStack.addLast(labelElse); //top -1
+                    String labelEndIf = "endIf "+Labels.getLabel();
+                    LabelsStack.addLast(labelEndIf); //top
+                    //agrego la comparacion de la cond (expr) con true
+                    TripletList.addLast(new TripletCode(TripletOperator.CMP, e, "true", null));
+                    //si la condicion es falsa salto al else
+                    TripletList.addLast(new TripletCode(TripletOperator.JNE, null, null, labelElse));
+
+                :} PARENTESIS_DER block:ifBlock {: /*subimos de nivel luego del bloque if*/TS.SubirNivel(); 
+                    //saltamos al final del if
+                    TripletList.addLast(new TripletCode(TripletOperator.JMP, null, null, LabelsStack.getLast()));
+                    //agregamos un label para el salto a else
+                    TripletList.addLast(new TripletCode(TripletOperator.LABEL, null,null, LabelsStack.get(LabelsStack.size()-2)));
+                :} else_block:elseBlock {: 
+                //luego de procesar el bloque else (el cual es opcional)
                 if(e.getType().equals(Type.BOOLEAN)){ //si la expression es de tipo boolean
                     IfStmt res=null;
                     if(elseBlock!=null){ //si tiene else block
@@ -481,6 +500,13 @@
                     }else{//si no tiene else block
                         res=new IfStmt(e.getExpr(), ifBlock);
                     }
+                    //agregamos el label del fin del if
+                    TripletList.addLast(new TripletCode(TripletOperator.LABEL, null,null, LabelsStack.getLast()));
+                    //removemos los labels creados al principio ya que no son de utilidad
+                    LabelsStack.removeLast();
+                    LabelsStack.removeLast();
+                    
+
                     RESULT=res;
                 }else{//si la expression no es de tipo boolean se muestra un mensaje de error
                     System.out.println("Error: Expression in If-Else statement must be Boolean");
