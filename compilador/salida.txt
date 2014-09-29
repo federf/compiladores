@@ -10,88 +10,101 @@
 ---------------- Test tests/test_correctos/factorial.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 7
+tamaño lista de codigo tercetos: 9
 lista: 
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
-Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: total
-Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 1
-Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 0, Result: MULTIPLY Label 2
-Operator: ASSIGN(=), firstOperator: 0 * 0, secondOperator: null, Result: total
-Operator: MINUS(-), firstOperator: 0, secondOperator: 1, Result: MINUS Label 3
-Operator: ASSIGN(=), firstOperator: 0 - 1, secondOperator: null, Result: i
+{LABEL, int, null, Result: i}
+{LABEL, int, null, Result: total}
+{ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{ASSIGN(=), 1, null, Result: VarLocation{name=total, type=int, expr=null, size=0}}
+{GE(>), 0, 0, Result: VarLocation{name=GE Label 5, type=boolean, expr=0 > 0, size=0}}
+{MULTIPLY(*), 0, 0, Result: VarLocation{name=MULTIPLY Label 9, type=int, expr=0 * 0, size=0}}
+{ASSIGN(=), 0 * 0, null, Result: VarLocation{name=total, type=int, expr=null, size=0}}
+{MINUS(-), 0, 1, Result: VarLocation{name=MINUS Label 12, type=int, expr=0 - 1, size=0}}
+{ASSIGN(=), 0 - 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/floatTest.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 10
+tamaño lista de codigo tercetos: 13
 lista: 
-Operator: DIVIDE(/), firstOperator: 0.0, secondOperator: 0.0, Result: DIVIDE Label 1
-Operator: MINUS(-), firstOperator: 0.0, secondOperator: 0.0, Result: MINUS Label 2
-Operator: PLUS(+), firstOperator: 0.0, secondOperator: 0.0, Result: PLUS Label 3
-Operator: MULTIPLY(*), firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY Label 4
-Operator: ASSIGN(=), firstOperator: 1.234, secondOperator: null, Result: x
-Operator: UNARYMINUS(-expr), firstOperator: 27.5, secondOperator: null, Result: UNARYMINUS Label 5
-Operator: ASSIGN(=), firstOperator: -27.5, secondOperator: null, Result: y
-Operator: UNARYMINUS(-expr), firstOperator: 70.3, secondOperator: null, Result: UNARYMINUS Label 6
-Operator: ASSIGN(=), firstOperator: -70.3, secondOperator: null, Result: z
-Operator: UNARYMINUS(-expr), firstOperator: 0.0, secondOperator: null, Result: UNARYMINUS Label 7
+{DIVIDE(/), 0.0, 0.0, Result: VarLocation{name=DIVIDE Label 3, type=float, expr=VarLocation{name=factor Label 1, type=float, expr=0.0, size=0} / VarLocation{name=factor Label 2, type=float, expr=0.0, size=0}, size=0}}
+{MINUS(-), 0.0, 0.0, Result: VarLocation{name=MINUS Label 6, type=float, expr=0.0 - 0.0, size=0}}
+{PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 9, type=float, expr=0.0 + 0.0, size=0}}
+{MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 12, type=int, expr=0.0 * 0.0, size=0}}
+{LABEL, float, null, Result: x}
+{LABEL, float, null, Result: y}
+{LABEL, float, null, Result: z}
+{ASSIGN(=), 1.234, null, Result: VarLocation{name=x, type=float, expr=null, size=0}}
+{UNARYMINUS(-expr), 27.5, null, Result: VarLocation{name=UNARYMINUS Label 15, type=float, expr=-27.5, size=0}}
+{ASSIGN(=), -27.5, null, Result: VarLocation{name=y, type=float, expr=null, size=0}}
+{UNARYMINUS(-expr), 70.3, null, Result: VarLocation{name=UNARYMINUS Label 17, type=float, expr=-70.3, size=0}}
+{ASSIGN(=), -70.3, null, Result: VarLocation{name=z, type=float, expr=null, size=0}}
+{UNARYMINUS(-expr), 0.0, null, Result: VarLocation{name=UNARYMINUS Label 26, type=float, expr=-0.0, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/logicTest.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 6
+tamaño lista de codigo tercetos: 7
 lista: 
-Operator: ASSIGN(=), firstOperator: true, secondOperator: null, Result: bool
-Operator: null, firstOperator: false, secondOperator: false, Result: DISYUNCION Label 1
-Operator: NON(!), firstOperator: true, secondOperator: null, Result: NON Label 2
-Operator: AND(&&), firstOperator: VarLocation{name=DISYUNCION Label 1, type=boolean, expr=false || false, size=0}, secondOperator: !true, Result: CONJUNCION Label 3
-Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 4
-Operator: AND(&&), firstOperator: VarLocation{name=CONJUNCION Label 3, type=boolean, expr=VarLocation{name=DISYUNCION Label 1, type=boolean, expr=false || false, size=0} && !true, size=0}, secondOperator: !false, Result: CONJUNCION Label 5
+{LABEL, boolean, null, Result: bool}
+{ASSIGN(=), true, null, Result: VarLocation{name=bool, type=boolean, expr=null, size=0}}
+{OR(||), false, false, Result: VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0}}
+{NON(!), true, null, Result: VarLocation{name=NON Label 7, type=boolean, expr=!true, size=0}}
+{AND(&&), VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0}, !true, Result: VarLocation{name=CONJUNCION Label 8, type=boolean, expr=VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0} && !true, size=0}}
+{NON(!), false, null, Result: VarLocation{name=NON Label 11, type=boolean, expr=!false, size=0}}
+{AND(&&), VarLocation{name=CONJUNCION Label 8, type=boolean, expr=VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0} && !true, size=0}, !false, Result: VarLocation{name=CONJUNCION Label 12, type=boolean, expr=VarLocation{name=CONJUNCION Label 8, type=boolean, expr=VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0} && !true, size=0} && !false, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/program.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 3
+tamaño lista de codigo tercetos: 4
 lista: 
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 1
-Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=inc, args=["get_int"()]}, secondOperator: null, Result: y
-Operator: CEQ(==), firstOperator: 0, secondOperator: 1, Result: CEQ Label 2
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 3, type=int, expr=0 + 1, size=0}}
+{LABEL, int, null, Result: y}
+{ASSIGN(=), MethodCallExpr{name=inc, args=["get_int"()]}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
+{CEQ(==), 0, 1, Result: VarLocation{name=CEQ Label 8, type=boolean, expr=0 == 1, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_arreglos2.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 22
+tamaño lista de codigo tercetos: 28
 lista: 
-Operator: ASSIGN(=), firstOperator: 8.87, secondOperator: null, Result: y
-Operator: ASSIGN(=), firstOperator: 4, secondOperator: null, Result: A
-Operator: PLUS(+), firstOperator: 2.6, secondOperator: 0.0, Result: PLUS Label 1
-Operator: ASSIGN(=), firstOperator: 2.6 + 0.0, secondOperator: null, Result: B
-Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 2
-Operator: ASSIGN(=), firstOperator: VarLocation{name=factor, type=boolean, expr=VarLocation{name=LE Label 2, type=boolean, expr=0 < 0, size=0}, size=0}, secondOperator: null, Result: C
-Operator: GEQ(>=), firstOperator: 0, secondOperator: 0, Result: GEQ Label 3
-Operator: ASSIGN(=), firstOperator: VarLocation{name=GEQ Label 3, type=boolean, expr=0 >= 0, size=0}, secondOperator: null, Result: C
-Operator: ASSIGN(=), firstOperator: true, secondOperator: null, Result: y
-Operator: UNARYMINUS(-expr), firstOperator: 6, secondOperator: null, Result: UNARYMINUS Label 4
-Operator: MINUS(-), firstOperator: 58, secondOperator: VarLocation{name=UNARYMINUS Label 4, type=int, expr=-6, size=0}, Result: MINUS Label 5
-Operator: ASSIGN(=), firstOperator: 58 - VarLocation{name=UNARYMINUS Label 4, type=int, expr=-6, size=0}, secondOperator: null, Result: A
-Operator: UNARYMINUS(-expr), firstOperator: 2.6, secondOperator: null, Result: UNARYMINUS Label 6
-Operator: ASSIGN(=), firstOperator: -2.6, secondOperator: null, Result: B
-Operator: LE(<), firstOperator: 4, secondOperator: 6, Result: LE Label 7
-Operator: NON(!), firstOperator: VarLocation{name=factor, type=boolean, expr=VarLocation{name=LE Label 7, type=boolean, expr=4 < 6, size=0}, size=0}, secondOperator: null, Result: NON Label 8
-Operator: ASSIGN(=), firstOperator: !VarLocation{name=factor, type=boolean, expr=VarLocation{name=LE Label 7, type=boolean, expr=4 < 6, size=0}, size=0}, secondOperator: null, Result: C
-Operator: PLUS(+), firstOperator: 3, secondOperator: 3, Result: PLUS Label 9
-Operator: MINUS(-), firstOperator: 7, secondOperator: VarLocation{name=PLUS Label 9, type=int, expr=3 + 3, size=0}, Result: MINUS Label 10
-Operator: GEQ(>=), firstOperator: 5, secondOperator: ArrayLiteral{id=A, size=5}, Result: GEQ Label 11
-Operator: null, firstOperator: VarLocation{name=GEQ Label 11, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0}, secondOperator: true, Result: DISYUNCION Label 12
-Operator: ASSIGN(=), firstOperator: VarLocation{name=GEQ Label 11, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0} || true, secondOperator: null, Result: C
+{array[], int[], 5, Result: A}
+{array[], float[], 56, Result: B}
+{array[], boolean[], 10, Result: C}
+{LABEL, boolean, null, Result: y}
+{LABEL, float, null, Result: y}
+{ASSIGN(=), 8.87, null, Result: VarLocation{name=y, type=float, expr=null, size=0}}
+{ASSIGN(=), 4, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
+{PLUS(+), 2.6, 0.0, Result: VarLocation{name=PLUS Label 7, type=float, expr=2.6 + 0.0, size=0}}
+{ASSIGN(=), 2.6 + 0.0, null, Result: VarLocation{name=B, type=float[], expr=null, size=56}}
+{LE(<), 0, 0, Result: VarLocation{name=LE Label 11, type=boolean, expr=0 < 0, size=0}}
+{ASSIGN(=), VarLocation{name=factor Label 12, type=boolean, expr=VarLocation{name=LE Label 11, type=boolean, expr=0 < 0, size=0}, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=10}}
+{GEQ(>=), 0, 0, Result: VarLocation{name=GEQ Label 17, type=boolean, expr=0 >= 0, size=0}}
+{ASSIGN(=), VarLocation{name=GEQ Label 17, type=boolean, expr=0 >= 0, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=10}}
+{RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
+{ASSIGN(=), true, null, Result: VarLocation{name=y, type=boolean, expr=null, size=0}}
+{UNARYMINUS(-expr), 6, null, Result: VarLocation{name=UNARYMINUS Label 25, type=int, expr=-6, size=0}}
+{MINUS(-), 58, VarLocation{name=UNARYMINUS Label 25, type=int, expr=-6, size=0}, Result: VarLocation{name=MINUS Label 27, type=int, expr=58 - VarLocation{name=UNARYMINUS Label 25, type=int, expr=-6, size=0}, size=0}}
+{ASSIGN(=), 58 - VarLocation{name=UNARYMINUS Label 25, type=int, expr=-6, size=0}, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
+{UNARYMINUS(-expr), 2.6, null, Result: VarLocation{name=UNARYMINUS Label 30, type=float, expr=-2.6, size=0}}
+{ASSIGN(=), -2.6, null, Result: VarLocation{name=B, type=float[], expr=null, size=56}}
+{LE(<), 4, 6, Result: VarLocation{name=LE Label 34, type=boolean, expr=4 < 6, size=0}}
+{NON(!), VarLocation{name=factor Label 35, type=boolean, expr=VarLocation{name=LE Label 34, type=boolean, expr=4 < 6, size=0}, size=0}, null, Result: VarLocation{name=NON Label 37, type=boolean, expr=!VarLocation{name=factor Label 35, type=boolean, expr=VarLocation{name=LE Label 34, type=boolean, expr=4 < 6, size=0}, size=0}, size=0}}
+{ASSIGN(=), !VarLocation{name=factor Label 35, type=boolean, expr=VarLocation{name=LE Label 34, type=boolean, expr=4 < 6, size=0}, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=10}}
+{PLUS(+), 3, 3, Result: VarLocation{name=PLUS Label 43, type=int, expr=3 + 3, size=0}}
+{MINUS(-), 7, VarLocation{name=PLUS Label 43, type=int, expr=3 + 3, size=0}, Result: VarLocation{name=MINUS Label 45, type=int, expr=7 - VarLocation{name=PLUS Label 43, type=int, expr=3 + 3, size=0}, size=0}}
+{GEQ(>=), 5, ArrayLiteral{id=A, size=5}, Result: VarLocation{name=GEQ Label 47, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0}}
+{OR(||), VarLocation{name=GEQ Label 47, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0}, true, Result: VarLocation{name=DISYUNCION Label 50, type=boolean, expr=VarLocation{name=GEQ Label 47, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0} || true, size=0}}
+{ASSIGN(=), VarLocation{name=GEQ Label 47, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0} || true, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=10}}
 ---------------------------------------------------
   
   
@@ -99,157 +112,177 @@ Operator: ASSIGN(=), firstOperator: VarLocation{name=GEQ Label 11, type=boolean,
 parseo iniciado
 Error: Method pruArreglos must return int
 parseo exitoso
-tamaño lista de codigo tercetos: 31
+tamaño lista de codigo tercetos: 36
 lista: 
-Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 1
-Operator: MINUS(-), firstOperator: 1, secondOperator: 0, Result: MINUS Label 2
-Operator: ASSIGN(=), firstOperator: 1 - 0, secondOperator: null, Result: res
-Operator: CEQ(==), firstOperator: 0, secondOperator: 0, Result: CEQ Label 3
-Operator: MINUS(-), firstOperator: 1, secondOperator: 1, Result: MINUS Label 4
-Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 5, Result: MULTIPLY Label 5
-Operator: ASSIGN(=), firstOperator: 0 * 5, secondOperator: null, Result: res
-Operator: MINUS(-), firstOperator: 0, secondOperator: 0, Result: MINUS Label 6
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: res
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
-Operator: LE(<), firstOperator: 0, secondOperator: 589, Result: LE Label 7
-Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 2, Result: MULTIPLY Label 8
-Operator: ASSIGN(=), firstOperator: 0 * 2, secondOperator: null, Result: A
-Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: i
-Operator: ASSIGN(=), firstOperator: 8, secondOperator: null, Result: i
-Operator: GEQ(>=), firstOperator: 0, secondOperator: 0, Result: GEQ Label 9
-Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 2, Result: MULTIPLY Label 10
-Operator: PLUS(+), firstOperator: 0 * 2, secondOperator: 8, Result: PLUS Label 11
-Operator: PLUS(+), firstOperator: ArrayLiteral{id=A, size=589}, secondOperator: 3, Result: PLUS Label 12
-Operator: ASSIGN(=), firstOperator: ArrayLiteral{id=A, size=589} + 3, secondOperator: null, Result: B
-Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: i
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
-Operator: MULTIPLY(*), firstOperator: 5, secondOperator: 9, Result: MULTIPLY Label 13
-Operator: MINUS(-), firstOperator: VarLocation{name=MULTIPLY Label 13, type=int, expr=5 * 9, size=0}, secondOperator: 40, Result: MINUS Label 14
-Operator: LEQ(<=), firstOperator: 0, secondOperator: VarLocation{name=MULTIPLY Label 13, type=int, expr=5 * 9, size=0} - 40, Result: LEQ Label 15
-Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 2, Result: MULTIPLY Label 16
-Operator: PLUS(+), firstOperator: 0 * 2, secondOperator: 8, Result: PLUS Label 17
-Operator: GE(>), firstOperator: ArrayLiteral{id=A, size=589}, secondOperator: ArrayLiteral{id=B, size=56}, Result: GE Label 18
-Operator: ASSIGN(=), firstOperator: ArrayLiteral{id=A, size=589} > ArrayLiteral{id=B, size=56}, secondOperator: null, Result: C
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 19
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
+{array[], int[], 589, Result: A}
+{array[], float[], 56, Result: B}
+{array[], boolean[], 5, Result: C}
+{array[], float[], 8, Result: res}
+{LABEL, int, null, Result: i}
+{GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
+{MINUS(-), 1, 0, Result: VarLocation{name=MINUS Label 7, type=int, expr=1 - 0, size=0}}
+{ASSIGN(=), 1 - 0, null, Result: VarLocation{name=res, type=float[], expr=null, size=8}}
+{CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 0, size=0}}
+{MINUS(-), 1, 1, Result: VarLocation{name=MINUS Label 13, type=int, expr=1 - 1, size=0}}
+{MULTIPLY(*), 0, 5, Result: VarLocation{name=MULTIPLY Label 16, type=int, expr=0 * 5, size=0}}
+{ASSIGN(=), 0 * 5, null, Result: VarLocation{name=res, type=float[], expr=null, size=8}}
+{MINUS(-), 0, 0, Result: VarLocation{name=MINUS Label 19, type=int, expr=0 - 0, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=res, type=float[], expr=null, size=8}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{LE(<), 0, 589, Result: VarLocation{name=LE Label 24, type=boolean, expr=0 < 589, size=0}}
+{MULTIPLY(*), 0, 2, Result: VarLocation{name=MULTIPLY Label 29, type=int, expr=0 * 2, size=0}}
+{ASSIGN(=), 0 * 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=589}}
+{ASSIGN(=), 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{ASSIGN(=), 8, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{GEQ(>=), 0, 0, Result: VarLocation{name=GEQ Label 34, type=boolean, expr=0 >= 0, size=0}}
+{MULTIPLY(*), 0, 2, Result: VarLocation{name=MULTIPLY Label 38, type=int, expr=0 * 2, size=0}}
+{PLUS(+), 0 * 2, 8, Result: VarLocation{name=PLUS Label 40, type=int, expr=0 * 2 + 8, size=0}}
+{PLUS(+), ArrayLiteral{id=A, size=589}, 3, Result: VarLocation{name=PLUS Label 43, type=int, expr=ArrayLiteral{id=A, size=589} + 3, size=0}}
+{ASSIGN(=), ArrayLiteral{id=A, size=589} + 3, null, Result: VarLocation{name=B, type=float[], expr=null, size=56}}
+{ASSIGN(=), 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{MULTIPLY(*), 5, 9, Result: VarLocation{name=MULTIPLY Label 49, type=int, expr=5 * 9, size=0}}
+{MINUS(-), VarLocation{name=MULTIPLY Label 49, type=int, expr=5 * 9, size=0}, 40, Result: VarLocation{name=MINUS Label 52, type=int, expr=VarLocation{name=MULTIPLY Label 49, type=int, expr=5 * 9, size=0} - 40, size=0}}
+{LEQ(<=), 0, VarLocation{name=MULTIPLY Label 49, type=int, expr=5 * 9, size=0} - 40, Result: VarLocation{name=LEQ Label 53, type=boolean, expr=0 <= VarLocation{name=MULTIPLY Label 49, type=int, expr=5 * 9, size=0} - 40, size=0}}
+{MULTIPLY(*), 0, 2, Result: VarLocation{name=MULTIPLY Label 57, type=int, expr=0 * 2, size=0}}
+{PLUS(+), 0 * 2, 8, Result: VarLocation{name=PLUS Label 59, type=int, expr=0 * 2 + 8, size=0}}
+{GE(>), ArrayLiteral{id=A, size=589}, ArrayLiteral{id=B, size=56}, Result: VarLocation{name=GE Label 63, type=boolean, expr=ArrayLiteral{id=A, size=589} > ArrayLiteral{id=B, size=56}, size=0}}
+{ASSIGN(=), ArrayLiteral{id=A, size=589} > ArrayLiteral{id=B, size=56}, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=5}}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 66, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_Asignaciones.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 12
+tamaño lista de codigo tercetos: 14
 lista: 
-Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: a
-Operator: ASSIGN(=), firstOperator: 8, secondOperator: null, Result: b
-Operator: PLUS(+), firstOperator: 699, secondOperator: 0, Result: PLUS Label 1
-Operator: ASSIGN(=), firstOperator: 699 + 0, secondOperator: null, Result: a
-Operator: PLUS(+), firstOperator: 0, secondOperator: 2, Result: PLUS Label 2
-Operator: ASSIGN(=), firstOperator: 0 + 2, secondOperator: null, Result: b
-Operator: DIVIDE(/), firstOperator: 0, secondOperator: 0, Result: DIVIDE Label 3
-Operator: DIVIDE(/), firstOperator: 0 / 0, secondOperator: 0, Result: DIVIDE Label 4
-Operator: DIVIDE(/), firstOperator: 0 / 0 / 0, secondOperator: 2, Result: DIVIDE Label 5
-Operator: ASSIGN(=), firstOperator: VarLocation{name=DIVIDE Label 5, type=int, expr=0 / 0 / 0 / 2, size=0}, secondOperator: null, Result: a
-Operator: MOD(%), firstOperator: 0, secondOperator: 2, Result: MOD Label 6
-Operator: ASSIGN(=), firstOperator: 0 % 2, secondOperator: null, Result: c
+{LABEL, int, null, Result: a}
+{LABEL, int, null, Result: b}
+{ASSIGN(=), 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{ASSIGN(=), 8, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
+{PLUS(+), 699, 0, Result: VarLocation{name=PLUS Label 5, type=int, expr=699 + 0, size=0}}
+{ASSIGN(=), 699 + 0, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 8, type=int, expr=0 + 2, size=0}}
+{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
+{DIVIDE(/), 0, 0, Result: VarLocation{name=DIVIDE Label 11, type=int, expr=0 / 0, size=0}}
+{DIVIDE(/), 0 / 0, 0, Result: VarLocation{name=DIVIDE Label 13, type=int, expr=0 / 0 / 0, size=0}}
+{DIVIDE(/), 0 / 0 / 0, 2, Result: VarLocation{name=DIVIDE Label 15, type=int, expr=0 / 0 / 0 / 2, size=0}}
+{ASSIGN(=), VarLocation{name=DIVIDE Label 15, type=int, expr=0 / 0 / 0 / 2, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{MOD(%), 0, 2, Result: VarLocation{name=MOD Label 19, type=int, expr=0 % 2, size=0}}
+{ASSIGN(=), 0 % 2, null, Result: VarLocation{name=c, type=int, expr=null, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/testAssing.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 12
+tamaño lista de codigo tercetos: 14
 lista: 
-Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: a
-Operator: ASSIGN(=), firstOperator: 2, secondOperator: null, Result: b
-Operator: PLUS(+), firstOperator: 1, secondOperator: 0, Result: PLUS Label 1
-Operator: ASSIGN(=), firstOperator: 1 + 0, secondOperator: null, Result: a
-Operator: PLUS(+), firstOperator: 0, secondOperator: 2, Result: PLUS Label 2
-Operator: ASSIGN(=), firstOperator: 0 + 2, secondOperator: null, Result: b
-Operator: DIVIDE(/), firstOperator: 0, secondOperator: 0, Result: DIVIDE Label 3
-Operator: ASSIGN(=), firstOperator: VarLocation{name=DIVIDE Label 3, type=int, expr=0 / 0, size=0}, secondOperator: null, Result: a
-Operator: MOD(%), firstOperator: 0, secondOperator: 3, Result: MOD Label 4
-Operator: ASSIGN(=), firstOperator: 0 % 3, secondOperator: null, Result: c
-Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: a
-Operator: ASSIGN(=), firstOperator: 2, secondOperator: null, Result: a
+{LABEL, int, null, Result: a}
+{LABEL, int, null, Result: b}
+{ASSIGN(=), 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{ASSIGN(=), 2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
+{PLUS(+), 1, 0, Result: VarLocation{name=PLUS Label 5, type=int, expr=1 + 0, size=0}}
+{ASSIGN(=), 1 + 0, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 8, type=int, expr=0 + 2, size=0}}
+{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
+{DIVIDE(/), 0, 0, Result: VarLocation{name=DIVIDE Label 11, type=int, expr=0 / 0, size=0}}
+{ASSIGN(=), VarLocation{name=DIVIDE Label 11, type=int, expr=0 / 0, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{MOD(%), 0, 3, Result: VarLocation{name=MOD Label 15, type=int, expr=0 % 3, size=0}}
+{ASSIGN(=), 0 % 3, null, Result: VarLocation{name=c, type=int, expr=null, size=0}}
+{ASSIGN(=), 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{ASSIGN(=), 2, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_bloques02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 6
+tamaño lista de codigo tercetos: 8
 lista: 
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
-Operator: LE(<), firstOperator: 0, secondOperator: 10, Result: LE Label 1
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 2
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
-Operator: ASSIGN(=), firstOperator: 2.3, secondOperator: null, Result: j
-Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 3
+{LABEL, int, null, Result: i}
+{ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{LE(<), 0, 10, Result: VarLocation{name=LE Label 4, type=boolean, expr=0 < 10, size=0}}
+{LABEL, float, null, Result: j}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 8, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{ASSIGN(=), 2.3, null, Result: VarLocation{name=j, type=float, expr=null, size=0}}
+{LE(<), 0, 0, Result: VarLocation{name=LE Label 12, type=boolean, expr=0 < 0, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_bloques.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 5
+tamaño lista de codigo tercetos: 6
 lista: 
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
-Operator: LE(<), firstOperator: 0, secondOperator: 10, Result: LE Label 1
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 2
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
-Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 3
+{LABEL, int, null, Result: i}
+{ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{LE(<), 0, 10, Result: VarLocation{name=LE Label 4, type=boolean, expr=0 < 10, size=0}}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 8, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{LE(<), 0, 0, Result: VarLocation{name=LE Label 11, type=boolean, expr=0 < 0, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_booleanos.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 7
+tamaño lista de codigo tercetos: 12
 lista: 
-Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 1
-Operator: AND(&&), firstOperator: false, secondOperator: false, Result: CONJUNCION Label 2
-Operator: null, firstOperator: false, secondOperator: false, Result: DISYUNCION Label 3
-Operator: ASSIGN(=), firstOperator: true, secondOperator: null, Result: a
-Operator: ASSIGN(=), firstOperator: false, secondOperator: null, Result: b
-Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=neg, args=[false]}, secondOperator: null, Result: b
-Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}, secondOperator: null, Result: c
+{NON(!), false, null, Result: VarLocation{name=NON Label 2, type=boolean, expr=!false, size=0}}
+{AND(&&), false, false, Result: VarLocation{name=CONJUNCION Label 5, type=boolean, expr=false && false, size=0}}
+{OR(||), false, false, Result: VarLocation{name=DISYUNCION Label 8, type=boolean, expr=false || false, size=0}}
+{LABEL, boolean, null, Result: a}
+{LABEL, boolean, null, Result: b}
+{LABEL, boolean, null, Result: c}
+{LABEL, int, null, Result: x}
+{LABEL, int, null, Result: y}
+{ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
+{ASSIGN(=), false, null, Result: VarLocation{name=b, type=boolean, expr=null, size=0}}
+{ASSIGN(=), MethodCallExpr{name=neg, args=[false]}, null, Result: VarLocation{name=b, type=boolean, expr=null, size=0}}
+{ASSIGN(=), MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_break.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 5
+tamaño lista de codigo tercetos: 6
 lista: 
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
-Operator: LE(<), firstOperator: 0, secondOperator: 10, Result: LE Label 1
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 2
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
-Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 3
+{LABEL, int, null, Result: i}
+{ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{LE(<), 0, 10, Result: VarLocation{name=LE Label 4, type=boolean, expr=0 < 10, size=0}}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 8, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{LE(<), 0, 0, Result: VarLocation{name=LE Label 11, type=boolean, expr=0 < 0, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_comentarios2.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 3
+tamaño lista de codigo tercetos: 4
 lista: 
-Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 1
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: res
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: res
+{LABEL, float, null, Result: res}
+{GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_comentarios.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 4
+tamaño lista de codigo tercetos: 5
 lista: 
-Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 1
-Operator: PLUS(+), firstOperator: 0, secondOperator: 5, Result: PLUS Label 2
-Operator: ASSIGN(=), firstOperator: 0 + 5, secondOperator: null, Result: res
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: res
+{LABEL, float, null, Result: res}
+{GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
+{PLUS(+), 0, 5, Result: VarLocation{name=PLUS Label 6, type=int, expr=0 + 5, size=0}}
+{ASSIGN(=), 0 + 5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 ---------------------------------------------------
   
   
@@ -258,425 +291,504 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 56
 lista: 
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 1
-Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 1, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 2
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 3
-Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 4
-Operator: AND(&&), firstOperator: !VarLocation{name=CEQ Label 1, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 5
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 6
-Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 6, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 7
-Operator: AND(&&), firstOperator: !VarLocation{name=CEQ Label 1, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=CEQ Label 6, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 8
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 9
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 10
-Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 11
-Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 9, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 12
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 13
-Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 13, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 14
-Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 9, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=CEQ Label 13, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 15
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 16
-Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 16, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 17
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 18
-Operator: AND(&&), firstOperator: !VarLocation{name=CEQ Label 16, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=CEQ Label 18, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 19
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 20
-Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 20, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 21
-Operator: AND(&&), firstOperator: !VarLocation{name=CEQ Label 16, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 18, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=CEQ Label 20, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 22
-Operator: null, firstOperator: VarLocation{name=CONJUNCION Label 15, type=boolean, expr=VarLocation{name=CEQ Label 9, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 13, type=boolean, expr=0 == 6, size=0}, size=0}, secondOperator: VarLocation{name=CONJUNCION Label 22, type=boolean, expr=!VarLocation{name=CEQ Label 16, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 18, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 20, type=boolean, expr=0 == 6, size=0}, size=0}, Result: DISYUNCION Label 23
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 24
-Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 24, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 25
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 26
-Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 26, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 27
-Operator: AND(&&), firstOperator: !VarLocation{name=CEQ Label 24, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=CEQ Label 26, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 28
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 29
-Operator: AND(&&), firstOperator: !VarLocation{name=CEQ Label 24, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 26, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=CEQ Label 29, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 30
-Operator: null, firstOperator: VarLocation{name=CONJUNCION Label 15, type=boolean, expr=VarLocation{name=CEQ Label 9, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 13, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 22, type=boolean, expr=!VarLocation{name=CEQ Label 16, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 18, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 20, type=boolean, expr=0 == 6, size=0}, size=0}, secondOperator: VarLocation{name=CONJUNCION Label 30, type=boolean, expr=!VarLocation{name=CEQ Label 24, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 26, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 29, type=boolean, expr=0 == 6, size=0}, size=0}, Result: DISYUNCION Label 31
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 32
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 33
-Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 32, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 34
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 35
-Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 35, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 36
-Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 32, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=CEQ Label 35, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 37
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 38
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 39
-Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 39, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 40
-Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0}, secondOperator: !VarLocation{name=CEQ Label 39, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 41
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 42
-Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 39, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=CEQ Label 42, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 43
-Operator: null, firstOperator: VarLocation{name=CONJUNCION Label 37, type=boolean, expr=VarLocation{name=CEQ Label 32, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 35, type=boolean, expr=0 == 6, size=0}, size=0}, secondOperator: VarLocation{name=CONJUNCION Label 43, type=boolean, expr=VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 39, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 42, type=boolean, expr=0 == 6, size=0}, size=0}, Result: DISYUNCION Label 44
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 45
-Operator: NON(!), firstOperator: VarLocation{name=CEQ Label 45, type=boolean, expr=0 == 6, size=0}, secondOperator: null, Result: NON Label 46
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 47
-Operator: AND(&&), firstOperator: !VarLocation{name=CEQ Label 45, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=CEQ Label 47, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 48
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 49
-Operator: AND(&&), firstOperator: !VarLocation{name=CEQ Label 45, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 47, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=CEQ Label 49, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 50
-Operator: null, firstOperator: VarLocation{name=CONJUNCION Label 37, type=boolean, expr=VarLocation{name=CEQ Label 32, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 35, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 43, type=boolean, expr=VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 39, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 42, type=boolean, expr=0 == 6, size=0}, size=0}, secondOperator: VarLocation{name=CONJUNCION Label 50, type=boolean, expr=!VarLocation{name=CEQ Label 45, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 47, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 49, type=boolean, expr=0 == 6, size=0}, size=0}, Result: DISYUNCION Label 51
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 52
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 53
-Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 52, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=CEQ Label 53, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 54
-Operator: CEQ(==), firstOperator: 0, secondOperator: 6, Result: CEQ Label 55
-Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 52, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 53, type=boolean, expr=0 == 6, size=0}, secondOperator: VarLocation{name=CEQ Label 55, type=boolean, expr=0 == 6, size=0}, Result: CONJUNCION Label 56
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 6, size=0}}
+{NON(!), VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 5, type=boolean, expr=!VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 6, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 8, type=boolean, expr=0 == 6, size=0}}
+{NON(!), VarLocation{name=CEQ Label 8, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 10, type=boolean, expr=!VarLocation{name=CEQ Label 8, type=boolean, expr=0 == 6, size=0}, size=0}}
+{AND(&&), !VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 6, size=0}, !VarLocation{name=CEQ Label 8, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 11, type=boolean, expr=!VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 8, type=boolean, expr=0 == 6, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 14, type=boolean, expr=0 == 6, size=0}}
+{NON(!), VarLocation{name=CEQ Label 14, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 16, type=boolean, expr=!VarLocation{name=CEQ Label 14, type=boolean, expr=0 == 6, size=0}, size=0}}
+{AND(&&), !VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 8, type=boolean, expr=0 == 6, size=0}, !VarLocation{name=CEQ Label 14, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 17, type=boolean, expr=!VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 8, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 14, type=boolean, expr=0 == 6, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 21, type=boolean, expr=0 == 6, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 25, type=boolean, expr=0 == 6, size=0}}
+{NON(!), VarLocation{name=CEQ Label 25, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 27, type=boolean, expr=!VarLocation{name=CEQ Label 25, type=boolean, expr=0 == 6, size=0}, size=0}}
+{AND(&&), VarLocation{name=CEQ Label 21, type=boolean, expr=0 == 6, size=0}, !VarLocation{name=CEQ Label 25, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 28, type=boolean, expr=VarLocation{name=CEQ Label 21, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 25, type=boolean, expr=0 == 6, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 31, type=boolean, expr=0 == 6, size=0}}
+{NON(!), VarLocation{name=CEQ Label 31, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 33, type=boolean, expr=!VarLocation{name=CEQ Label 31, type=boolean, expr=0 == 6, size=0}, size=0}}
+{AND(&&), VarLocation{name=CEQ Label 21, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 25, type=boolean, expr=0 == 6, size=0}, !VarLocation{name=CEQ Label 31, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 34, type=boolean, expr=VarLocation{name=CEQ Label 21, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 25, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 31, type=boolean, expr=0 == 6, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0}}
+{NON(!), VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 40, type=boolean, expr=!VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 43, type=boolean, expr=0 == 6, size=0}}
+{AND(&&), !VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0}, VarLocation{name=CEQ Label 43, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 45, type=boolean, expr=!VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 43, type=boolean, expr=0 == 6, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0}}
+{NON(!), VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 50, type=boolean, expr=!VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0}, size=0}}
+{AND(&&), !VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 43, type=boolean, expr=0 == 6, size=0}, !VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 51, type=boolean, expr=!VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 43, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0}, size=0}}
+{OR(||), VarLocation{name=CONJUNCION Label 34, type=boolean, expr=VarLocation{name=CEQ Label 21, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 25, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 31, type=boolean, expr=0 == 6, size=0}, size=0}, VarLocation{name=CONJUNCION Label 51, type=boolean, expr=!VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 43, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0}, size=0}, Result: VarLocation{name=DISYUNCION Label 53, type=boolean, expr=VarLocation{name=CONJUNCION Label 34, type=boolean, expr=VarLocation{name=CEQ Label 21, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 25, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 31, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 51, type=boolean, expr=!VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 43, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0}, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 56, type=boolean, expr=0 == 6, size=0}}
+{NON(!), VarLocation{name=CEQ Label 56, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 58, type=boolean, expr=!VarLocation{name=CEQ Label 56, type=boolean, expr=0 == 6, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 61, type=boolean, expr=0 == 6, size=0}}
+{NON(!), VarLocation{name=CEQ Label 61, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 63, type=boolean, expr=!VarLocation{name=CEQ Label 61, type=boolean, expr=0 == 6, size=0}, size=0}}
+{AND(&&), !VarLocation{name=CEQ Label 56, type=boolean, expr=0 == 6, size=0}, !VarLocation{name=CEQ Label 61, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 64, type=boolean, expr=!VarLocation{name=CEQ Label 56, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 61, type=boolean, expr=0 == 6, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 67, type=boolean, expr=0 == 6, size=0}}
+{AND(&&), !VarLocation{name=CEQ Label 56, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 61, type=boolean, expr=0 == 6, size=0}, VarLocation{name=CEQ Label 67, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 69, type=boolean, expr=!VarLocation{name=CEQ Label 56, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 61, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 67, type=boolean, expr=0 == 6, size=0}, size=0}}
+{OR(||), VarLocation{name=CONJUNCION Label 34, type=boolean, expr=VarLocation{name=CEQ Label 21, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 25, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 31, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 51, type=boolean, expr=!VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 43, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0}, size=0}, VarLocation{name=CONJUNCION Label 69, type=boolean, expr=!VarLocation{name=CEQ Label 56, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 61, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 67, type=boolean, expr=0 == 6, size=0}, size=0}, Result: VarLocation{name=DISYUNCION Label 71, type=boolean, expr=VarLocation{name=CONJUNCION Label 34, type=boolean, expr=VarLocation{name=CEQ Label 21, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 25, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 31, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 51, type=boolean, expr=!VarLocation{name=CEQ Label 38, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 43, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 69, type=boolean, expr=!VarLocation{name=CEQ Label 56, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 61, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 67, type=boolean, expr=0 == 6, size=0}, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 79, type=boolean, expr=0 == 6, size=0}}
+{AND(&&), VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0}, VarLocation{name=CEQ Label 79, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 81, type=boolean, expr=VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 79, type=boolean, expr=0 == 6, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 84, type=boolean, expr=0 == 6, size=0}}
+{NON(!), VarLocation{name=CEQ Label 84, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 86, type=boolean, expr=!VarLocation{name=CEQ Label 84, type=boolean, expr=0 == 6, size=0}, size=0}}
+{AND(&&), VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 79, type=boolean, expr=0 == 6, size=0}, !VarLocation{name=CEQ Label 84, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 87, type=boolean, expr=VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 79, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 84, type=boolean, expr=0 == 6, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 91, type=boolean, expr=0 == 6, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 95, type=boolean, expr=0 == 6, size=0}}
+{NON(!), VarLocation{name=CEQ Label 95, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 97, type=boolean, expr=!VarLocation{name=CEQ Label 95, type=boolean, expr=0 == 6, size=0}, size=0}}
+{AND(&&), VarLocation{name=CEQ Label 91, type=boolean, expr=0 == 6, size=0}, !VarLocation{name=CEQ Label 95, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 98, type=boolean, expr=VarLocation{name=CEQ Label 91, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 95, type=boolean, expr=0 == 6, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 101, type=boolean, expr=0 == 6, size=0}}
+{AND(&&), VarLocation{name=CEQ Label 91, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 95, type=boolean, expr=0 == 6, size=0}, VarLocation{name=CEQ Label 101, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 103, type=boolean, expr=VarLocation{name=CEQ Label 91, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 95, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 101, type=boolean, expr=0 == 6, size=0}, size=0}}
+{OR(||), VarLocation{name=CONJUNCION Label 87, type=boolean, expr=VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 79, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 84, type=boolean, expr=0 == 6, size=0}, size=0}, VarLocation{name=CONJUNCION Label 103, type=boolean, expr=VarLocation{name=CEQ Label 91, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 95, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 101, type=boolean, expr=0 == 6, size=0}, size=0}, Result: VarLocation{name=DISYUNCION Label 105, type=boolean, expr=VarLocation{name=CONJUNCION Label 87, type=boolean, expr=VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 79, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 84, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 103, type=boolean, expr=VarLocation{name=CEQ Label 91, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 95, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 101, type=boolean, expr=0 == 6, size=0}, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 108, type=boolean, expr=0 == 6, size=0}}
+{NON(!), VarLocation{name=CEQ Label 108, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 110, type=boolean, expr=!VarLocation{name=CEQ Label 108, type=boolean, expr=0 == 6, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0}}
+{AND(&&), !VarLocation{name=CEQ Label 108, type=boolean, expr=0 == 6, size=0}, VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 115, type=boolean, expr=!VarLocation{name=CEQ Label 108, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0}}
+{AND(&&), !VarLocation{name=CEQ Label 108, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0}, VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 120, type=boolean, expr=!VarLocation{name=CEQ Label 108, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0}, size=0}}
+{OR(||), VarLocation{name=CONJUNCION Label 87, type=boolean, expr=VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 79, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 84, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 103, type=boolean, expr=VarLocation{name=CEQ Label 91, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 95, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 101, type=boolean, expr=0 == 6, size=0}, size=0}, VarLocation{name=CONJUNCION Label 120, type=boolean, expr=!VarLocation{name=CEQ Label 108, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0}, size=0}, Result: VarLocation{name=DISYUNCION Label 122, type=boolean, expr=VarLocation{name=CONJUNCION Label 87, type=boolean, expr=VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 79, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 84, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 103, type=boolean, expr=VarLocation{name=CEQ Label 91, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 95, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 101, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 120, type=boolean, expr=!VarLocation{name=CEQ Label 108, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0}, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 126, type=boolean, expr=0 == 6, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 130, type=boolean, expr=0 == 6, size=0}}
+{AND(&&), VarLocation{name=CEQ Label 126, type=boolean, expr=0 == 6, size=0}, VarLocation{name=CEQ Label 130, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 132, type=boolean, expr=VarLocation{name=CEQ Label 126, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 130, type=boolean, expr=0 == 6, size=0}, size=0}}
+{CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 135, type=boolean, expr=0 == 6, size=0}}
+{AND(&&), VarLocation{name=CEQ Label 126, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 130, type=boolean, expr=0 == 6, size=0}, VarLocation{name=CEQ Label 135, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 137, type=boolean, expr=VarLocation{name=CEQ Label 126, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 130, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 135, type=boolean, expr=0 == 6, size=0}, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_continuebreak.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 17
+tamaño lista de codigo tercetos: 20
 lista: 
-Operator: UNARYMINUS(-expr), firstOperator: 1, secondOperator: null, Result: UNARYMINUS Label 1
-Operator: ASSIGN(=), firstOperator: -1, secondOperator: null, Result: total
-Operator: ASSIGN(=), firstOperator: 23, secondOperator: null, Result: n
-Operator: ASSIGN(=), firstOperator: 23, secondOperator: null, Result: i
-Operator: GEQ(>=), firstOperator: 0.0, secondOperator: 0, Result: GEQ Label 2
-Operator: MINUS(-), firstOperator: 0.0, secondOperator: 1, Result: MINUS Label 3
-Operator: ASSIGN(=), firstOperator: 0.0 - 1, secondOperator: null, Result: i
-Operator: LE(<), firstOperator: 0.0, secondOperator: 0, Result: LE Label 4
-Operator: NEQ(!=), firstOperator: 0.0, secondOperator: 0, Result: NEQ Label 5
-Operator: MULTIPLY(*), firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY Label 6
-Operator: MULTIPLY(*), firstOperator: 0.0 * 0.0, secondOperator: 0, Result: MULTIPLY Label 7
-Operator: ASSIGN(=), firstOperator: 0.0 * 0.0 * 0, secondOperator: null, Result: total
-Operator: UNARYMINUS(-expr), firstOperator: 1000.2343, secondOperator: null, Result: UNARYMINUS Label 8
-Operator: PLUS(+), firstOperator: -1000.2343, secondOperator: 6752, Result: PLUS Label 9
-Operator: ASSIGN(=), firstOperator: -1000.2343 + 6752, secondOperator: null, Result: total
-Operator: UNARYMINUS(-expr), firstOperator: 2, secondOperator: null, Result: UNARYMINUS Label 10
-Operator: MULTIPLY(*), firstOperator: -2, secondOperator: 0.0, Result: MULTIPLY Label 11
+{LABEL, float, null, Result: i}
+{LABEL, int, null, Result: n}
+{LABEL, float, null, Result: total}
+{UNARYMINUS(-expr), 1, null, Result: VarLocation{name=UNARYMINUS Label 2, type=int, expr=-1, size=0}}
+{ASSIGN(=), -1, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
+{ASSIGN(=), 23, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
+{ASSIGN(=), 23, null, Result: VarLocation{name=i, type=float, expr=null, size=0}}
+{GEQ(>=), 0.0, 0, Result: VarLocation{name=GEQ Label 7, type=boolean, expr=0.0 >= 0, size=0}}
+{MINUS(-), 0.0, 1, Result: VarLocation{name=MINUS Label 11, type=float, expr=0.0 - 1, size=0}}
+{ASSIGN(=), 0.0 - 1, null, Result: VarLocation{name=i, type=float, expr=null, size=0}}
+{LE(<), 0.0, 0, Result: VarLocation{name=LE Label 14, type=boolean, expr=0.0 < 0, size=0}}
+{NEQ(!=), 0.0, 0, Result: VarLocation{name=NEQ Label 17, type=boolean, expr=0.0 != 0, size=0}}
+{MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 20, type=int, expr=0.0 * 0.0, size=0}}
+{MULTIPLY(*), 0.0 * 0.0, 0, Result: VarLocation{name=MULTIPLY Label 22, type=int, expr=0.0 * 0.0 * 0, size=0}}
+{ASSIGN(=), 0.0 * 0.0 * 0, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
+{UNARYMINUS(-expr), 1000.2343, null, Result: VarLocation{name=UNARYMINUS Label 24, type=float, expr=-1000.2343, size=0}}
+{PLUS(+), -1000.2343, 6752, Result: VarLocation{name=PLUS Label 26, type=float, expr=-1000.2343 + 6752, size=0}}
+{ASSIGN(=), -1000.2343 + 6752, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
+{UNARYMINUS(-expr), 2, null, Result: VarLocation{name=UNARYMINUS Label 28, type=int, expr=-2, size=0}}
+{MULTIPLY(*), -2, 0.0, Result: VarLocation{name=MULTIPLY Label 30, type=int, expr=-2 * 0.0, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_expresiones01.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 14
+tamaño lista de codigo tercetos: 17
 lista: 
-Operator: ASSIGN(=), firstOperator: 50, secondOperator: null, Result: g
-Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 1
-Operator: ASSIGN(=), firstOperator: 4, secondOperator: null, Result: a
-Operator: CEQ(==), firstOperator: 0, secondOperator: 4, Result: CEQ Label 2
-Operator: LE(<), firstOperator: 0, secondOperator: 4, Result: LE Label 3
-Operator: GE(>), firstOperator: 0, secondOperator: 4, Result: GE Label 4
-Operator: MINUS(-), firstOperator: 0, secondOperator: 1, Result: MINUS Label 5
-Operator: ASSIGN(=), firstOperator: 0 - 1, secondOperator: null, Result: g
-Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 2, Result: MULTIPLY Label 6
-Operator: ASSIGN(=), firstOperator: 0 * 2, secondOperator: null, Result: c
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 7
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: a
-Operator: DIVIDE(/), firstOperator: 0.0, secondOperator: 2, Result: DIVIDE Label 8
-Operator: ASSIGN(=), firstOperator: VarLocation{name=factor, type=float, expr=0.0, size=0} / VarLocation{name=factor, type=int, expr=2, size=0}, secondOperator: null, Result: c
+{LABEL, int, null, Result: a}
+{LABEL, float, null, Result: c}
+{LABEL, int, null, Result: g}
+{ASSIGN(=), 50, null, Result: VarLocation{name=g, type=int, expr=null, size=0}}
+{GE(>), 0, 0, Result: VarLocation{name=GE Label 4, type=boolean, expr=0 > 0, size=0}}
+{ASSIGN(=), 4, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{CEQ(==), 0, 4, Result: VarLocation{name=CEQ Label 8, type=boolean, expr=0 == 4, size=0}}
+{LE(<), 0, 4, Result: VarLocation{name=LE Label 11, type=boolean, expr=0 < 4, size=0}}
+{GE(>), 0, 4, Result: VarLocation{name=GE Label 15, type=boolean, expr=0 > 4, size=0}}
+{MINUS(-), 0, 1, Result: VarLocation{name=MINUS Label 19, type=int, expr=0 - 1, size=0}}
+{ASSIGN(=), 0 - 1, null, Result: VarLocation{name=g, type=int, expr=null, size=0}}
+{MULTIPLY(*), 0, 2, Result: VarLocation{name=MULTIPLY Label 22, type=int, expr=0 * 2, size=0}}
+{ASSIGN(=), 0 * 2, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 25, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{DIVIDE(/), 0.0, 2, Result: VarLocation{name=DIVIDE Label 28, type=float, expr=VarLocation{name=factor Label 26, type=float, expr=0.0, size=0} / VarLocation{name=factor Label 27, type=int, expr=2, size=0}, size=0}}
+{ASSIGN(=), VarLocation{name=factor Label 26, type=float, expr=0.0, size=0} / VarLocation{name=factor Label 27, type=int, expr=2, size=0}, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_expresiones02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 11
+tamaño lista de codigo tercetos: 16
 lista: 
-Operator: ASSIGN(=), firstOperator: 4, secondOperator: null, Result: b
-Operator: ASSIGN(=), firstOperator: 5, secondOperator: null, Result: c
-Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 0, Result: MULTIPLY Label 1
-Operator: ASSIGN(=), firstOperator: 0 * 0, secondOperator: null, Result: a
-Operator: PLUS(+), firstOperator: 0, secondOperator: 0, Result: PLUS Label 2
-Operator: ASSIGN(=), firstOperator: 0 + 0, secondOperator: null, Result: p
-Operator: ASSIGN(=), firstOperator: 3.14, secondOperator: null, Result: pi
-Operator: MULTIPLY(*), firstOperator: 2, secondOperator: 0.0, Result: MULTIPLY Label 3
-Operator: ASSIGN(=), firstOperator: 2 * 0.0, secondOperator: null, Result: f
-Operator: DIVIDE(/), firstOperator: 0, secondOperator: 0.0, Result: DIVIDE Label 4
-Operator: GE(>), firstOperator: VarLocation{name=DIVIDE Label 4, type=float, expr=VarLocation{name=factor, type=int, expr=0, size=0} / VarLocation{name=factor, type=float, expr=0.0, size=0}, size=0}, secondOperator: 5, Result: GE Label 5
+{LABEL, int, null, Result: a}
+{LABEL, float, null, Result: f}
+{LABEL, int, null, Result: b}
+{LABEL, int, null, Result: c}
+{ASSIGN(=), 4, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
+{ASSIGN(=), 5, null, Result: VarLocation{name=c, type=int, expr=null, size=0}}
+{MULTIPLY(*), 0, 0, Result: VarLocation{name=MULTIPLY Label 5, type=int, expr=0 * 0, size=0}}
+{ASSIGN(=), 0 * 0, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{PLUS(+), 0, 0, Result: VarLocation{name=PLUS Label 8, type=int, expr=0 + 0, size=0}}
+{ASSIGN(=), 0 + 0, null, Result: VarLocation{name=p, type=int, expr=null, size=0}}
+{LABEL, float, null, Result: pi}
+{ASSIGN(=), 3.14, null, Result: VarLocation{name=pi, type=float, expr=null, size=0}}
+{MULTIPLY(*), 2, 0.0, Result: VarLocation{name=MULTIPLY Label 12, type=int, expr=2 * 0.0, size=0}}
+{ASSIGN(=), 2 * 0.0, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
+{DIVIDE(/), 0, 0.0, Result: VarLocation{name=DIVIDE Label 15, type=float, expr=VarLocation{name=factor Label 13, type=int, expr=0, size=0} / VarLocation{name=factor Label 14, type=float, expr=0.0, size=0}, size=0}}
+{GE(>), VarLocation{name=DIVIDE Label 15, type=float, expr=VarLocation{name=factor Label 13, type=int, expr=0, size=0} / VarLocation{name=factor Label 14, type=float, expr=0.0, size=0}, size=0}, 5, Result: VarLocation{name=GE Label 18, type=boolean, expr=VarLocation{name=DIVIDE Label 15, type=float, expr=VarLocation{name=factor Label 13, type=int, expr=0, size=0} / VarLocation{name=factor Label 14, type=float, expr=0.0, size=0}, size=0} > 5, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float01.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 19
+tamaño lista de codigo tercetos: 24
 lista: 
-Operator: ASSIGN(=), firstOperator: false, secondOperator: null, Result: neg
-Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: i
-Operator: ASSIGN(=), firstOperator: 1.0, secondOperator: null, Result: prod
-Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 1
-Operator: UNARYMINUS(-expr), firstOperator: 0, secondOperator: null, Result: UNARYMINUS Label 2
-Operator: ASSIGN(=), firstOperator: -0, secondOperator: null, Result: n
-Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 3
-Operator: ASSIGN(=), firstOperator: !false, secondOperator: null, Result: neg
-Operator: LEQ(<=), firstOperator: 0, secondOperator: 0, Result: LEQ Label 4
-Operator: MULTIPLY(*), firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY Label 5
-Operator: ASSIGN(=), firstOperator: 0.0 * 0.0, secondOperator: null, Result: prod
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 6
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
-Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 7
-Operator: NON(!), firstOperator: VarLocation{name=NON Label 7, type=boolean, expr=!false, size=0}, secondOperator: null, Result: NON Label 8
-Operator: DIVIDE(/), firstOperator: 1.0, secondOperator: 0.0, Result: DIVIDE Label 9
-Operator: UNARYMINUS(-expr), firstOperator: 100.1, secondOperator: null, Result: UNARYMINUS Label 10
-Operator: ASSIGN(=), firstOperator: 8.0, secondOperator: null, Result: a
-Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=potencia, args=[0.0, 2]}, secondOperator: null, Result: f
+{LABEL, int, null, Result: i}
+{LABEL, boolean, null, Result: neg}
+{LABEL, float, null, Result: prod}
+{ASSIGN(=), false, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
+{ASSIGN(=), 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{ASSIGN(=), 1.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
+{LE(<), 0, 0, Result: VarLocation{name=LE Label 6, type=boolean, expr=0 < 0, size=0}}
+{UNARYMINUS(-expr), 0, null, Result: VarLocation{name=UNARYMINUS Label 8, type=int, expr=-0, size=0}}
+{ASSIGN(=), -0, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
+{NON(!), false, null, Result: VarLocation{name=NON Label 10, type=boolean, expr=!false, size=0}}
+{ASSIGN(=), !false, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
+{LEQ(<=), 0, 0, Result: VarLocation{name=LEQ Label 13, type=boolean, expr=0 <= 0, size=0}}
+{MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 17, type=int, expr=0.0 * 0.0, size=0}}
+{ASSIGN(=), 0.0 * 0.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 20, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{NON(!), false, null, Result: VarLocation{name=NON Label 22, type=boolean, expr=!false, size=0}}
+{NON(!), VarLocation{name=NON Label 22, type=boolean, expr=!false, size=0}, null, Result: VarLocation{name=NON Label 24, type=boolean, expr=!VarLocation{name=NON Label 22, type=boolean, expr=!false, size=0}, size=0}}
+{DIVIDE(/), 1.0, 0.0, Result: VarLocation{name=DIVIDE Label 27, type=float, expr=VarLocation{name=factor Label 25, type=float, expr=1.0, size=0} / VarLocation{name=factor Label 26, type=float, expr=0.0, size=0}, size=0}}
+{UNARYMINUS(-expr), 100.1, null, Result: VarLocation{name=UNARYMINUS Label 30, type=float, expr=-100.1, size=0}}
+{LABEL, float, null, Result: f}
+{LABEL, float, null, Result: a}
+{ASSIGN(=), 8.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
+{ASSIGN(=), MethodCallExpr{name=potencia, args=[0.0, 2]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 12
+tamaño lista de codigo tercetos: 17
 lista: 
-Operator: ASSIGN(=), firstOperator: 0.0, secondOperator: null, Result: total
-Operator: ASSIGN(=), firstOperator: 0.0, secondOperator: null, Result: i
-Operator: GE(>), firstOperator: 0.0, secondOperator: 0, Result: GE Label 1
-Operator: GE(>), firstOperator: 0.0, secondOperator: 0, Result: GE Label 2
-Operator: null, firstOperator: 0.0 > 0, secondOperator: 0.0 > 0, Result: DISYUNCION Label 3
-Operator: GE(>), firstOperator: 0.0, secondOperator: 0, Result: GE Label 4
-Operator: PLUS(+), firstOperator: 0.0, secondOperator: 0.0, Result: PLUS Label 5
-Operator: ASSIGN(=), firstOperator: 0.0 + 0.0, secondOperator: null, Result: total
-Operator: ASSIGN(=), firstOperator: 1.0, secondOperator: null, Result: i
-Operator: ASSIGN(=), firstOperator: 0.0, secondOperator: null, Result: res
-Operator: ASSIGN(=), firstOperator: 8.0, secondOperator: null, Result: a
-Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=sumatoria, args=[0.0]}, secondOperator: null, Result: f
+{LABEL, float, null, Result: total}
+{LABEL, float, null, Result: i}
+{LABEL, float, null, Result: res}
+{ASSIGN(=), 0.0, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
+{ASSIGN(=), 0.0, null, Result: VarLocation{name=i, type=float, expr=null, size=0}}
+{GE(>), 0.0, 0, Result: VarLocation{name=GE Label 5, type=boolean, expr=0.0 > 0, size=0}}
+{GE(>), 0.0, 0, Result: VarLocation{name=GE Label 8, type=boolean, expr=0.0 > 0, size=0}}
+{OR(||), 0.0 > 0, 0.0 > 0, Result: VarLocation{name=DISYUNCION Label 9, type=boolean, expr=0.0 > 0 || 0.0 > 0, size=0}}
+{GE(>), 0.0, 0, Result: VarLocation{name=GE Label 13, type=boolean, expr=0.0 > 0, size=0}}
+{PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 16, type=float, expr=0.0 + 0.0, size=0}}
+{ASSIGN(=), 0.0 + 0.0, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
+{ASSIGN(=), 1.0, null, Result: VarLocation{name=i, type=float, expr=null, size=0}}
+{ASSIGN(=), 0.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
+{LABEL, float, null, Result: f}
+{LABEL, float, null, Result: a}
+{ASSIGN(=), 8.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
+{ASSIGN(=), MethodCallExpr{name=sumatoria, args=[0.0]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float03.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 80
+tamaño lista de codigo tercetos: 98
 lista: 
-Operator: ASSIGN(=), firstOperator: false, secondOperator: null, Result: neg
-Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: i
-Operator: ASSIGN(=), firstOperator: 1.0, secondOperator: null, Result: prod
-Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 1
-Operator: UNARYMINUS(-expr), firstOperator: 0, secondOperator: null, Result: UNARYMINUS Label 2
-Operator: ASSIGN(=), firstOperator: -0, secondOperator: null, Result: n
-Operator: ASSIGN(=), firstOperator: true, secondOperator: null, Result: neg
-Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 3
-Operator: CEQ(==), firstOperator: 0, secondOperator: 0, Result: CEQ Label 4
-Operator: null, firstOperator: 0 < 0, secondOperator: 0 == 0, Result: DISYUNCION Label 5
-Operator: MULTIPLY(*), firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY Label 6
-Operator: MULTIPLY(*), firstOperator: 0.0 * 0.0, secondOperator: 2, Result: MULTIPLY Label 7
-Operator: ASSIGN(=), firstOperator: 0.0 * 0.0 * 2, secondOperator: null, Result: prod
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 8
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
-Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 9
-Operator: NON(!), firstOperator: VarLocation{name=NON Label 9, type=boolean, expr=!false, size=0}, secondOperator: null, Result: NON Label 10
-Operator: DIVIDE(/), firstOperator: 1.0, secondOperator: 0.0, Result: DIVIDE Label 11
-Operator: UNARYMINUS(-expr), firstOperator: 100.1, secondOperator: null, Result: UNARYMINUS Label 12
-Operator: UNARYMINUS(-expr), firstOperator: 2.0, secondOperator: null, Result: UNARYMINUS Label 13
-Operator: ASSIGN(=), firstOperator: -2.0, secondOperator: null, Result: a
-Operator: UNARYMINUS(-expr), firstOperator: 2, secondOperator: null, Result: UNARYMINUS Label 14
-Operator: ASSIGN(=), firstOperator: -2, secondOperator: null, Result: b
-Operator: UNARYMINUS(-expr), firstOperator: 3.0, secondOperator: null, Result: UNARYMINUS Label 15
-Operator: ASSIGN(=), firstOperator: -3.0, secondOperator: null, Result: w
-Operator: UNARYMINUS(-expr), firstOperator: 3.0, secondOperator: null, Result: UNARYMINUS Label 16
-Operator: ASSIGN(=), firstOperator: -3.0, secondOperator: null, Result: z
-Operator: MULTIPLY(*), firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY Label 17
-Operator: MINUS(-), firstOperator: 0.0 * 0.0, secondOperator: 0.0, Result: MINUS Label 18
-Operator: ASSIGN(=), firstOperator: 0.0 * 0.0 - 0.0, secondOperator: null, Result: m
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: j
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: k
-Operator: ASSIGN(=), firstOperator: 5, secondOperator: null, Result: n
-Operator: GE(>), firstOperator: 0.0, secondOperator: 0.0, Result: GE Label 19
-Operator: LE(<), firstOperator: 0.0, secondOperator: 0.0, Result: LE Label 20
-Operator: ASSIGN(=), firstOperator: 0.0, secondOperator: null, Result: res
-Operator: ASSIGN(=), firstOperator: 0.0, secondOperator: null, Result: res
-Operator: LEQ(<=), firstOperator: 0, secondOperator: 0, Result: LEQ Label 21
-Operator: LEQ(<=), firstOperator: 0, secondOperator: 0, Result: LEQ Label 22
-Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 23
-Operator: CEQ(==), firstOperator: 0, secondOperator: 0, Result: CEQ Label 24
-Operator: null, firstOperator: 0 < 0, secondOperator: 0 == 0, Result: DISYUNCION Label 25
-Operator: CEQ(==), firstOperator: 0, secondOperator: 3, Result: CEQ Label 26
-Operator: PLUS(+), firstOperator: 0.0, secondOperator: 2.0, Result: PLUS Label 27
-Operator: ASSIGN(=), firstOperator: 0.0 + 2.0, secondOperator: null, Result: res
-Operator: DIVIDE(/), firstOperator: 10.0, secondOperator: 2.0, Result: DIVIDE Label 28
-Operator: MINUS(-), firstOperator: 0.0, secondOperator: VarLocation{name=DIVIDE Label 28, type=float, expr=VarLocation{name=factor, type=float, expr=10.0, size=0} / VarLocation{name=factor, type=float, expr=2.0, size=0}, size=0}, Result: MINUS Label 29
-Operator: ASSIGN(=), firstOperator: 0.0 - VarLocation{name=DIVIDE Label 28, type=float, expr=VarLocation{name=factor, type=float, expr=10.0, size=0} / VarLocation{name=factor, type=float, expr=2.0, size=0}, size=0}, secondOperator: null, Result: res
-Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: k
-Operator: LE(<), firstOperator: 0.0, secondOperator: 0.0, Result: LE Label 30
-Operator: LE(<), firstOperator: 0.0, secondOperator: 0.0, Result: LE Label 31
-Operator: AND(&&), firstOperator: 0.0 < 0.0, secondOperator: 0.0 < 0.0, Result: CONJUNCION Label 32
-Operator: MULTIPLY(*), firstOperator: 4.0, secondOperator: 0.0, Result: MULTIPLY Label 33
-Operator: PLUS(+), firstOperator: 35.0, secondOperator: 4.0 * 0.0, Result: PLUS Label 34
-Operator: MINUS(-), firstOperator: 35.0 + 4.0 * 0.0, secondOperator: 498.0, Result: MINUS Label 35
-Operator: ASSIGN(=), firstOperator: 35.0 + 4.0 * 0.0 - 498.0, secondOperator: null, Result: res
-Operator: MINUS(-), firstOperator: 3.2, secondOperator: 0.0, Result: MINUS Label 36
-Operator: MINUS(-), firstOperator: 3.2 - 0.0, secondOperator: 12345.356, Result: MINUS Label 37
-Operator: ASSIGN(=), firstOperator: 3.2 - 0.0 - 12345.356, secondOperator: null, Result: res
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 38
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
-Operator: UNARYMINUS(-expr), firstOperator: 0.0, secondOperator: null, Result: UNARYMINUS Label 39
-Operator: MULTIPLY(*), firstOperator: 0.0, secondOperator: -0.0, Result: MULTIPLY Label 40
-Operator: MULTIPLY(*), firstOperator: 23.0, secondOperator: 0.0, Result: MULTIPLY Label 41
-Operator: PLUS(+), firstOperator: 0.0 * -0.0, secondOperator: 23.0 * 0.0, Result: PLUS Label 42
-Operator: DIVIDE(/), firstOperator: 2.0, secondOperator: 4.0, Result: DIVIDE Label 43
-Operator: PLUS(+), firstOperator: 0.0 * -0.0 + 23.0 * 0.0, secondOperator: VarLocation{name=factor, type=float, expr=2.0, size=0} / VarLocation{name=factor, type=float, expr=4.0, size=0}, Result: PLUS Label 44
-Operator: ASSIGN(=), firstOperator: 0.0 * -0.0 + 23.0 * 0.0 + VarLocation{name=factor, type=float, expr=2.0, size=0} / VarLocation{name=factor, type=float, expr=4.0, size=0}, secondOperator: null, Result: res
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 45
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: j
-Operator: UNARYMINUS(-expr), firstOperator: 0.0, secondOperator: null, Result: UNARYMINUS Label 46
-Operator: ASSIGN(=), firstOperator: 80.0, secondOperator: null, Result: a
-Operator: UNARYMINUS(-expr), firstOperator: 15.0, secondOperator: null, Result: UNARYMINUS Label 47
-Operator: ASSIGN(=), firstOperator: -15.0, secondOperator: null, Result: res
-Operator: ASSIGN(=), firstOperator: 4.3, secondOperator: null, Result: w
-Operator: UNARYMINUS(-expr), firstOperator: 7.6, secondOperator: null, Result: UNARYMINUS Label 48
-Operator: ASSIGN(=), firstOperator: -7.6, secondOperator: null, Result: m
-Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=potencia, args=[0.0, 2]}, secondOperator: null, Result: f
-Operator: PLUS(+), firstOperator: 0.0, secondOperator: 2.0, Result: PLUS Label 49
+{LABEL, float, null, Result: w}
+{LABEL, float, null, Result: m}
+{LABEL, float, null, Result: res}
+{LABEL, int, null, Result: i}
+{LABEL, boolean, null, Result: neg}
+{LABEL, float, null, Result: prod}
+{ASSIGN(=), false, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
+{ASSIGN(=), 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{ASSIGN(=), 1.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
+{LE(<), 0, 0, Result: VarLocation{name=LE Label 6, type=boolean, expr=0 < 0, size=0}}
+{UNARYMINUS(-expr), 0, null, Result: VarLocation{name=UNARYMINUS Label 8, type=int, expr=-0, size=0}}
+{ASSIGN(=), -0, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
+{ASSIGN(=), true, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
+{LE(<), 0, 0, Result: VarLocation{name=LE Label 12, type=boolean, expr=0 < 0, size=0}}
+{CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 15, type=boolean, expr=0 == 0, size=0}}
+{OR(||), 0 < 0, 0 == 0, Result: VarLocation{name=DISYUNCION Label 16, type=boolean, expr=0 < 0 || 0 == 0, size=0}}
+{MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 20, type=int, expr=0.0 * 0.0, size=0}}
+{MULTIPLY(*), 0.0 * 0.0, 2, Result: VarLocation{name=MULTIPLY Label 22, type=int, expr=0.0 * 0.0 * 2, size=0}}
+{ASSIGN(=), 0.0 * 0.0 * 2, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 25, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{NON(!), false, null, Result: VarLocation{name=NON Label 27, type=boolean, expr=!false, size=0}}
+{NON(!), VarLocation{name=NON Label 27, type=boolean, expr=!false, size=0}, null, Result: VarLocation{name=NON Label 29, type=boolean, expr=!VarLocation{name=NON Label 27, type=boolean, expr=!false, size=0}, size=0}}
+{DIVIDE(/), 1.0, 0.0, Result: VarLocation{name=DIVIDE Label 32, type=float, expr=VarLocation{name=factor Label 30, type=float, expr=1.0, size=0} / VarLocation{name=factor Label 31, type=float, expr=0.0, size=0}, size=0}}
+{UNARYMINUS(-expr), 100.1, null, Result: VarLocation{name=UNARYMINUS Label 35, type=float, expr=-100.1, size=0}}
+{LABEL, float, null, Result: a}
+{LABEL, float, null, Result: z}
+{LABEL, int, null, Result: b}
+{LABEL, float, null, Result: w}
+{LABEL, float, null, Result: m}
+{LABEL, float, null, Result: res}
+{LABEL, int, null, Result: j}
+{LABEL, int, null, Result: i}
+{LABEL, int, null, Result: k}
+{LABEL, int, null, Result: n}
+{UNARYMINUS(-expr), 2.0, null, Result: VarLocation{name=UNARYMINUS Label 37, type=float, expr=-2.0, size=0}}
+{ASSIGN(=), -2.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
+{UNARYMINUS(-expr), 2, null, Result: VarLocation{name=UNARYMINUS Label 39, type=int, expr=-2, size=0}}
+{ASSIGN(=), -2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
+{UNARYMINUS(-expr), 3.0, null, Result: VarLocation{name=UNARYMINUS Label 41, type=float, expr=-3.0, size=0}}
+{ASSIGN(=), -3.0, null, Result: VarLocation{name=w, type=float, expr=null, size=0}}
+{UNARYMINUS(-expr), 3.0, null, Result: VarLocation{name=UNARYMINUS Label 43, type=float, expr=-3.0, size=0}}
+{ASSIGN(=), -3.0, null, Result: VarLocation{name=z, type=float, expr=null, size=0}}
+{MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 46, type=int, expr=0.0 * 0.0, size=0}}
+{MINUS(-), 0.0 * 0.0, 0.0, Result: VarLocation{name=MINUS Label 48, type=float, expr=0.0 * 0.0 - 0.0, size=0}}
+{ASSIGN(=), 0.0 * 0.0 - 0.0, null, Result: VarLocation{name=m, type=float, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=k, type=int, expr=null, size=0}}
+{ASSIGN(=), 5, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
+{GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 55, type=boolean, expr=0.0 > 0.0, size=0}}
+{LE(<), 0.0, 0.0, Result: VarLocation{name=LE Label 58, type=boolean, expr=0.0 < 0.0, size=0}}
+{ASSIGN(=), 0.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
+{ASSIGN(=), 0.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
+{LEQ(<=), 0, 0, Result: VarLocation{name=LEQ Label 63, type=boolean, expr=0 <= 0, size=0}}
+{LEQ(<=), 0, 0, Result: VarLocation{name=LEQ Label 67, type=boolean, expr=0 <= 0, size=0}}
+{LE(<), 0, 0, Result: VarLocation{name=LE Label 70, type=boolean, expr=0 < 0, size=0}}
+{CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 73, type=boolean, expr=0 == 0, size=0}}
+{OR(||), 0 < 0, 0 == 0, Result: VarLocation{name=DISYUNCION Label 74, type=boolean, expr=0 < 0 || 0 == 0, size=0}}
+{CEQ(==), 0, 3, Result: VarLocation{name=CEQ Label 80, type=boolean, expr=0 == 3, size=0}}
+{PLUS(+), 0.0, 2.0, Result: VarLocation{name=PLUS Label 83, type=float, expr=0.0 + 2.0, size=0}}
+{ASSIGN(=), 0.0 + 2.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
+{DIVIDE(/), 10.0, 2.0, Result: VarLocation{name=DIVIDE Label 87, type=float, expr=VarLocation{name=factor Label 85, type=float, expr=10.0, size=0} / VarLocation{name=factor Label 86, type=float, expr=2.0, size=0}, size=0}}
+{MINUS(-), 0.0, VarLocation{name=DIVIDE Label 87, type=float, expr=VarLocation{name=factor Label 85, type=float, expr=10.0, size=0} / VarLocation{name=factor Label 86, type=float, expr=2.0, size=0}, size=0}, Result: VarLocation{name=MINUS Label 89, type=float, expr=0.0 - VarLocation{name=DIVIDE Label 87, type=float, expr=VarLocation{name=factor Label 85, type=float, expr=10.0, size=0} / VarLocation{name=factor Label 86, type=float, expr=2.0, size=0}, size=0}, size=0}}
+{ASSIGN(=), 0.0 - VarLocation{name=DIVIDE Label 87, type=float, expr=VarLocation{name=factor Label 85, type=float, expr=10.0, size=0} / VarLocation{name=factor Label 86, type=float, expr=2.0, size=0}, size=0}, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
+{ASSIGN(=), 1, null, Result: VarLocation{name=k, type=int, expr=null, size=0}}
+{LE(<), 0.0, 0.0, Result: VarLocation{name=LE Label 93, type=boolean, expr=0.0 < 0.0, size=0}}
+{LE(<), 0.0, 0.0, Result: VarLocation{name=LE Label 96, type=boolean, expr=0.0 < 0.0, size=0}}
+{AND(&&), 0.0 < 0.0, 0.0 < 0.0, Result: VarLocation{name=CONJUNCION Label 97, type=boolean, expr=0.0 < 0.0 && 0.0 < 0.0, size=0}}
+{MULTIPLY(*), 4.0, 0.0, Result: VarLocation{name=MULTIPLY Label 101, type=int, expr=4.0 * 0.0, size=0}}
+{PLUS(+), 35.0, 4.0 * 0.0, Result: VarLocation{name=PLUS Label 102, type=float, expr=35.0 + 4.0 * 0.0, size=0}}
+{MINUS(-), 35.0 + 4.0 * 0.0, 498.0, Result: VarLocation{name=MINUS Label 104, type=float, expr=35.0 + 4.0 * 0.0 - 498.0, size=0}}
+{ASSIGN(=), 35.0 + 4.0 * 0.0 - 498.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
+{MINUS(-), 3.2, 0.0, Result: VarLocation{name=MINUS Label 107, type=float, expr=3.2 - 0.0, size=0}}
+{MINUS(-), 3.2 - 0.0, 12345.356, Result: VarLocation{name=MINUS Label 109, type=float, expr=3.2 - 0.0 - 12345.356, size=0}}
+{ASSIGN(=), 3.2 - 0.0 - 12345.356, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 112, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{UNARYMINUS(-expr), 0.0, null, Result: VarLocation{name=UNARYMINUS Label 115, type=float, expr=-0.0, size=0}}
+{MULTIPLY(*), 0.0, -0.0, Result: VarLocation{name=MULTIPLY Label 116, type=int, expr=0.0 * -0.0, size=0}}
+{MULTIPLY(*), 23.0, 0.0, Result: VarLocation{name=MULTIPLY Label 119, type=int, expr=23.0 * 0.0, size=0}}
+{PLUS(+), 0.0 * -0.0, 23.0 * 0.0, Result: VarLocation{name=PLUS Label 120, type=int, expr=0.0 * -0.0 + 23.0 * 0.0, size=0}}
+{DIVIDE(/), 2.0, 4.0, Result: VarLocation{name=DIVIDE Label 123, type=float, expr=VarLocation{name=factor Label 121, type=float, expr=2.0, size=0} / VarLocation{name=factor Label 122, type=float, expr=4.0, size=0}, size=0}}
+{PLUS(+), 0.0 * -0.0 + 23.0 * 0.0, VarLocation{name=factor Label 121, type=float, expr=2.0, size=0} / VarLocation{name=factor Label 122, type=float, expr=4.0, size=0}, Result: VarLocation{name=PLUS Label 124, type=float, expr=0.0 * -0.0 + 23.0 * 0.0 + VarLocation{name=factor Label 121, type=float, expr=2.0, size=0} / VarLocation{name=factor Label 122, type=float, expr=4.0, size=0}, size=0}}
+{ASSIGN(=), 0.0 * -0.0 + 23.0 * 0.0 + VarLocation{name=factor Label 121, type=float, expr=2.0, size=0} / VarLocation{name=factor Label 122, type=float, expr=4.0, size=0}, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 127, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
+{UNARYMINUS(-expr), 0.0, null, Result: VarLocation{name=UNARYMINUS Label 129, type=float, expr=-0.0, size=0}}
+{LABEL, float, null, Result: f}
+{LABEL, float, null, Result: a}
+{ASSIGN(=), 80.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
+{UNARYMINUS(-expr), 15.0, null, Result: VarLocation{name=UNARYMINUS Label 132, type=float, expr=-15.0, size=0}}
+{ASSIGN(=), -15.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
+{ASSIGN(=), 4.3, null, Result: VarLocation{name=w, type=float, expr=null, size=0}}
+{UNARYMINUS(-expr), 7.6, null, Result: VarLocation{name=UNARYMINUS Label 135, type=float, expr=-7.6, size=0}}
+{ASSIGN(=), -7.6, null, Result: VarLocation{name=m, type=float, expr=null, size=0}}
+{ASSIGN(=), MethodCallExpr{name=potencia, args=[0.0, 2]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
+{PLUS(+), 0.0, 2.0, Result: VarLocation{name=PLUS Label 142, type=float, expr=0.0 + 2.0, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float04.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 32
+tamaño lista de codigo tercetos: 41
 lista: 
-Operator: ASSIGN(=), firstOperator: false, secondOperator: null, Result: neg
-Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: i
-Operator: ASSIGN(=), firstOperator: 1.0, secondOperator: null, Result: prod
-Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 1
-Operator: UNARYMINUS(-expr), firstOperator: 0, secondOperator: null, Result: UNARYMINUS Label 2
-Operator: ASSIGN(=), firstOperator: -0, secondOperator: null, Result: n
-Operator: ASSIGN(=), firstOperator: true, secondOperator: null, Result: neg
-Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 3
-Operator: CEQ(==), firstOperator: 0, secondOperator: 0, Result: CEQ Label 4
-Operator: null, firstOperator: 0 < 0, secondOperator: 0 == 0, Result: DISYUNCION Label 5
-Operator: MULTIPLY(*), firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY Label 6
-Operator: MULTIPLY(*), firstOperator: 0.0 * 0.0, secondOperator: 2.0, Result: MULTIPLY Label 7
-Operator: ASSIGN(=), firstOperator: 0.0 * 0.0 * 2.0, secondOperator: null, Result: prod
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 8
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
-Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 9
-Operator: NON(!), firstOperator: VarLocation{name=NON Label 9, type=boolean, expr=!false, size=0}, secondOperator: null, Result: NON Label 10
-Operator: DIVIDE(/), firstOperator: 1.0, secondOperator: 0.0, Result: DIVIDE Label 11
-Operator: UNARYMINUS(-expr), firstOperator: 100.1, secondOperator: null, Result: UNARYMINUS Label 12
-Operator: MULTIPLY(*), firstOperator: 0.0, secondOperator: 0.0, Result: MULTIPLY Label 13
-Operator: MULTIPLY(*), firstOperator: 0.0 * 0.0, secondOperator: 0.0, Result: MULTIPLY Label 14
-Operator: MULTIPLY(*), firstOperator: 0.0 * 0.0 * 0.0, secondOperator: 0.0, Result: MULTIPLY Label 15
-Operator: MULTIPLY(*), firstOperator: 0.0 * 0.0 * 0.0 * 0.0, secondOperator: 0.0, Result: MULTIPLY Label 16
-Operator: MULTIPLY(*), firstOperator: 0.0 * 0.0 * 0.0 * 0.0 * 0.0, secondOperator: 0.0, Result: MULTIPLY Label 17
-Operator: ASSIGN(=), firstOperator: 0.0 * 0.0 * 0.0 * 0.0 * 0.0 * 0.0, secondOperator: null, Result: c
-Operator: UNARYMINUS(-expr), firstOperator: 15.0, secondOperator: null, Result: UNARYMINUS Label 18
-Operator: ASSIGN(=), firstOperator: -15.0, secondOperator: null, Result: res
-Operator: ASSIGN(=), firstOperator: 4.3, secondOperator: null, Result: w
-Operator: UNARYMINUS(-expr), firstOperator: 7.6, secondOperator: null, Result: UNARYMINUS Label 19
-Operator: ASSIGN(=), firstOperator: -7.6, secondOperator: null, Result: m
-Operator: ASSIGN(=), firstOperator: 80.0, secondOperator: null, Result: a
-Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=potencia, args=[0.0, 2]}, secondOperator: null, Result: f
+{LABEL, float, null, Result: w}
+{LABEL, float, null, Result: m}
+{LABEL, float, null, Result: res}
+{LABEL, int, null, Result: i}
+{LABEL, boolean, null, Result: neg}
+{LABEL, float, null, Result: prod}
+{ASSIGN(=), false, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
+{ASSIGN(=), 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{ASSIGN(=), 1.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
+{LE(<), 0, 0, Result: VarLocation{name=LE Label 6, type=boolean, expr=0 < 0, size=0}}
+{UNARYMINUS(-expr), 0, null, Result: VarLocation{name=UNARYMINUS Label 8, type=int, expr=-0, size=0}}
+{ASSIGN(=), -0, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
+{ASSIGN(=), true, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
+{LE(<), 0, 0, Result: VarLocation{name=LE Label 12, type=boolean, expr=0 < 0, size=0}}
+{CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 15, type=boolean, expr=0 == 0, size=0}}
+{OR(||), 0 < 0, 0 == 0, Result: VarLocation{name=DISYUNCION Label 16, type=boolean, expr=0 < 0 || 0 == 0, size=0}}
+{MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 20, type=int, expr=0.0 * 0.0, size=0}}
+{MULTIPLY(*), 0.0 * 0.0, 2.0, Result: VarLocation{name=MULTIPLY Label 22, type=int, expr=0.0 * 0.0 * 2.0, size=0}}
+{ASSIGN(=), 0.0 * 0.0 * 2.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 25, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{NON(!), false, null, Result: VarLocation{name=NON Label 27, type=boolean, expr=!false, size=0}}
+{NON(!), VarLocation{name=NON Label 27, type=boolean, expr=!false, size=0}, null, Result: VarLocation{name=NON Label 29, type=boolean, expr=!VarLocation{name=NON Label 27, type=boolean, expr=!false, size=0}, size=0}}
+{DIVIDE(/), 1.0, 0.0, Result: VarLocation{name=DIVIDE Label 32, type=float, expr=VarLocation{name=factor Label 30, type=float, expr=1.0, size=0} / VarLocation{name=factor Label 31, type=float, expr=0.0, size=0}, size=0}}
+{UNARYMINUS(-expr), 100.1, null, Result: VarLocation{name=UNARYMINUS Label 35, type=float, expr=-100.1, size=0}}
+{LABEL, float, null, Result: c}
+{MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 38, type=int, expr=0.0 * 0.0, size=0}}
+{MULTIPLY(*), 0.0 * 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 40, type=int, expr=0.0 * 0.0 * 0.0, size=0}}
+{MULTIPLY(*), 0.0 * 0.0 * 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 42, type=int, expr=0.0 * 0.0 * 0.0 * 0.0, size=0}}
+{MULTIPLY(*), 0.0 * 0.0 * 0.0 * 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 44, type=int, expr=0.0 * 0.0 * 0.0 * 0.0 * 0.0, size=0}}
+{MULTIPLY(*), 0.0 * 0.0 * 0.0 * 0.0 * 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 46, type=int, expr=0.0 * 0.0 * 0.0 * 0.0 * 0.0 * 0.0, size=0}}
+{ASSIGN(=), 0.0 * 0.0 * 0.0 * 0.0 * 0.0 * 0.0, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
+{LABEL, float, null, Result: f}
+{LABEL, float, null, Result: a}
+{UNARYMINUS(-expr), 15.0, null, Result: VarLocation{name=UNARYMINUS Label 49, type=float, expr=-15.0, size=0}}
+{ASSIGN(=), -15.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
+{ASSIGN(=), 4.3, null, Result: VarLocation{name=w, type=float, expr=null, size=0}}
+{UNARYMINUS(-expr), 7.6, null, Result: VarLocation{name=UNARYMINUS Label 52, type=float, expr=-7.6, size=0}}
+{ASSIGN(=), -7.6, null, Result: VarLocation{name=m, type=float, expr=null, size=0}}
+{ASSIGN(=), 80.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
+{ASSIGN(=), MethodCallExpr{name=potencia, args=[0.0, 2]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_floats05.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 7
+tamaño lista de codigo tercetos: 10
 lista: 
-Operator: DIVIDE(/), firstOperator: 0.0, secondOperator: 0.0, Result: DIVIDE Label 1
-Operator: MINUS(-), firstOperator: 0.0, secondOperator: 0.0, Result: MINUS Label 2
-Operator: PLUS(+), firstOperator: 0.0, secondOperator: 0.0, Result: PLUS Label 3
-Operator: ASSIGN(=), firstOperator: 6.982, secondOperator: null, Result: x
-Operator: UNARYMINUS(-expr), firstOperator: 002.5, secondOperator: null, Result: UNARYMINUS Label 4
-Operator: ASSIGN(=), firstOperator: -002.5, secondOperator: null, Result: y
-Operator: ASSIGN(=), firstOperator: 3.5698, secondOperator: null, Result: z
+{DIVIDE(/), 0.0, 0.0, Result: VarLocation{name=DIVIDE Label 3, type=float, expr=VarLocation{name=factor Label 1, type=float, expr=0.0, size=0} / VarLocation{name=factor Label 2, type=float, expr=0.0, size=0}, size=0}}
+{MINUS(-), 0.0, 0.0, Result: VarLocation{name=MINUS Label 6, type=float, expr=0.0 - 0.0, size=0}}
+{PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 9, type=float, expr=0.0 + 0.0, size=0}}
+{LABEL, float, null, Result: x}
+{LABEL, float, null, Result: y}
+{LABEL, float, null, Result: z}
+{ASSIGN(=), 6.982, null, Result: VarLocation{name=x, type=float, expr=null, size=0}}
+{UNARYMINUS(-expr), 002.5, null, Result: VarLocation{name=UNARYMINUS Label 12, type=float, expr=-002.5, size=0}}
+{ASSIGN(=), -002.5, null, Result: VarLocation{name=y, type=float, expr=null, size=0}}
+{ASSIGN(=), 3.5698, null, Result: VarLocation{name=z, type=float, expr=null, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for01.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 4
+tamaño lista de codigo tercetos: 9
 lista: 
-Operator: ASSIGN(=), firstOperator: 2, secondOperator: null, Result: A
-Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 10, Result: MULTIPLY Label 1
-Operator: PLUS(+), firstOperator: 0, secondOperator: 2, Result: PLUS Label 2
-Operator: ASSIGN(=), firstOperator: 0 + 2, secondOperator: null, Result: A
+{array[], int[], 5, Result: A}
+{array[], float[], 56, Result: B}
+{array[], boolean[], 10, Result: C}
+{LABEL, int, null, Result: i}
+{ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
+{RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
+{MULTIPLY(*), 0, 10, Result: VarLocation{name=MULTIPLY Label 8, type=int, expr=0 * 10, size=0}}
+{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 12, type=int, expr=0 + 2, size=0}}
+{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 3
+tamaño lista de codigo tercetos: 8
 lista: 
-Operator: ASSIGN(=), firstOperator: 2, secondOperator: null, Result: A
-Operator: PLUS(+), firstOperator: 0, secondOperator: 2, Result: PLUS Label 1
-Operator: ASSIGN(=), firstOperator: 0 + 2, secondOperator: null, Result: A
+{array[], int[], 5, Result: A}
+{array[], float[], 56, Result: B}
+{array[], boolean[], 10, Result: C}
+{LABEL, int, null, Result: i}
+{ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
+{RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
+{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 10, type=int, expr=0 + 2, size=0}}
+{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for03.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 4
+tamaño lista de codigo tercetos: 9
 lista: 
-Operator: ASSIGN(=), firstOperator: 2, secondOperator: null, Result: A
-Operator: UNARYMINUS(-expr), firstOperator: 10, secondOperator: null, Result: UNARYMINUS Label 1
-Operator: PLUS(+), firstOperator: 0, secondOperator: 2, Result: PLUS Label 2
-Operator: ASSIGN(=), firstOperator: 0 + 2, secondOperator: null, Result: A
+{array[], int[], 5, Result: A}
+{array[], float[], 56, Result: B}
+{array[], boolean[], 10, Result: C}
+{LABEL, int, null, Result: i}
+{ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
+{RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
+{UNARYMINUS(-expr), 10, null, Result: VarLocation{name=UNARYMINUS Label 7, type=int, expr=-10, size=0}}
+{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 11, type=int, expr=0 + 2, size=0}}
+{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for04.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 6
+tamaño lista de codigo tercetos: 11
 lista: 
-Operator: ASSIGN(=), firstOperator: 2, secondOperator: null, Result: A
-Operator: UNARYMINUS(-expr), firstOperator: 10, secondOperator: null, Result: UNARYMINUS Label 1
-Operator: MULTIPLY(*), firstOperator: 11, secondOperator: 2, Result: MULTIPLY Label 2
-Operator: PLUS(+), firstOperator: -10, secondOperator: 11 * 2, Result: PLUS Label 3
-Operator: PLUS(+), firstOperator: 0, secondOperator: 2, Result: PLUS Label 4
-Operator: ASSIGN(=), firstOperator: 0 + 2, secondOperator: null, Result: A
+{array[], int[], 5, Result: A}
+{array[], float[], 56, Result: B}
+{array[], boolean[], 10, Result: C}
+{LABEL, int, null, Result: i}
+{ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
+{RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
+{UNARYMINUS(-expr), 10, null, Result: VarLocation{name=UNARYMINUS Label 7, type=int, expr=-10, size=0}}
+{MULTIPLY(*), 11, 2, Result: VarLocation{name=MULTIPLY Label 10, type=int, expr=11 * 2, size=0}}
+{PLUS(+), -10, 11 * 2, Result: VarLocation{name=PLUS Label 11, type=int, expr=-10 + 11 * 2, size=0}}
+{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 16, type=int, expr=0 + 2, size=0}}
+{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for05.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 4
+tamaño lista de codigo tercetos: 9
 lista: 
-Operator: ASSIGN(=), firstOperator: 2, secondOperator: null, Result: A
-Operator: PLUS(+), firstOperator: MethodCallExpr{name=par, args=[]}, secondOperator: 5, Result: PLUS Label 1
-Operator: PLUS(+), firstOperator: 0, secondOperator: 2, Result: PLUS Label 2
-Operator: ASSIGN(=), firstOperator: 0 + 2, secondOperator: null, Result: A
+{array[], int[], 5, Result: A}
+{array[], float[], 56, Result: B}
+{array[], boolean[], 10, Result: C}
+{LABEL, int, null, Result: i}
+{ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
+{RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
+{PLUS(+), MethodCallExpr{name=par, args=[]}, 5, Result: VarLocation{name=PLUS Label 9, type=int, expr=MethodCallExpr{name=par, args=[]} + 5, size=0}}
+{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 13, type=int, expr=0 + 2, size=0}}
+{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_if_anidados.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 8
+tamaño lista de codigo tercetos: 9
 lista: 
-Operator: NEQ(!=), firstOperator: 0, secondOperator: 0, Result: NEQ Label 1
-Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 2
-Operator: MINUS(-), firstOperator: 0, secondOperator: 0, Result: MINUS Label 3
-Operator: ASSIGN(=), firstOperator: 0 - 0, secondOperator: null, Result: res
-Operator: MINUS(-), firstOperator: 0, secondOperator: 0, Result: MINUS Label 4
-Operator: ASSIGN(=), firstOperator: 0 - 0, secondOperator: null, Result: res
-Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 5, Result: MULTIPLY Label 5
-Operator: ASSIGN(=), firstOperator: 0 * 5, secondOperator: null, Result: res
+{LABEL, float, null, Result: res}
+{NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 3, type=boolean, expr=0 != 0, size=0}}
+{GE(>), 0, 0, Result: VarLocation{name=GE Label 6, type=boolean, expr=0 > 0, size=0}}
+{MINUS(-), 0, 0, Result: VarLocation{name=MINUS Label 9, type=int, expr=0 - 0, size=0}}
+{ASSIGN(=), 0 - 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
+{MINUS(-), 0, 0, Result: VarLocation{name=MINUS Label 12, type=int, expr=0 - 0, size=0}}
+{ASSIGN(=), 0 - 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
+{MULTIPLY(*), 0, 5, Result: VarLocation{name=MULTIPLY Label 15, type=int, expr=0 * 5, size=0}}
+{ASSIGN(=), 0 * 5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_if.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 8
+tamaño lista de codigo tercetos: 9
 lista: 
-Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 1
-Operator: MINUS(-), firstOperator: 0, secondOperator: 0, Result: MINUS Label 2
-Operator: ASSIGN(=), firstOperator: 0 - 0, secondOperator: null, Result: res
-Operator: CEQ(==), firstOperator: 0, secondOperator: 0, Result: CEQ Label 3
-Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 5, Result: MULTIPLY Label 4
-Operator: ASSIGN(=), firstOperator: 0 * 5, secondOperator: null, Result: res
-Operator: MINUS(-), firstOperator: 0, secondOperator: 0, Result: MINUS Label 5
-Operator: ASSIGN(=), firstOperator: 0 - 0, secondOperator: null, Result: res
+{LABEL, float, null, Result: res}
+{GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
+{MINUS(-), 0, 0, Result: VarLocation{name=MINUS Label 6, type=int, expr=0 - 0, size=0}}
+{ASSIGN(=), 0 - 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
+{CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 9, type=boolean, expr=0 == 0, size=0}}
+{MULTIPLY(*), 0, 5, Result: VarLocation{name=MULTIPLY Label 12, type=int, expr=0 * 5, size=0}}
+{ASSIGN(=), 0 * 5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
+{MINUS(-), 0, 0, Result: VarLocation{name=MINUS Label 15, type=int, expr=0 - 0, size=0}}
+{ASSIGN(=), 0 - 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_logicos01.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 6
+tamaño lista de codigo tercetos: 7
 lista: 
-Operator: ASSIGN(=), firstOperator: true, secondOperator: null, Result: a
-Operator: null, firstOperator: false, secondOperator: false, Result: DISYUNCION Label 1
-Operator: NON(!), firstOperator: true, secondOperator: null, Result: NON Label 2
-Operator: AND(&&), firstOperator: VarLocation{name=DISYUNCION Label 1, type=boolean, expr=false || false, size=0}, secondOperator: !true, Result: CONJUNCION Label 3
-Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 4
-Operator: AND(&&), firstOperator: VarLocation{name=CONJUNCION Label 3, type=boolean, expr=VarLocation{name=DISYUNCION Label 1, type=boolean, expr=false || false, size=0} && !true, size=0}, secondOperator: !false, Result: CONJUNCION Label 5
+{LABEL, boolean, null, Result: a}
+{ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
+{OR(||), false, false, Result: VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0}}
+{NON(!), true, null, Result: VarLocation{name=NON Label 7, type=boolean, expr=!true, size=0}}
+{AND(&&), VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0}, !true, Result: VarLocation{name=CONJUNCION Label 8, type=boolean, expr=VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0} && !true, size=0}}
+{NON(!), false, null, Result: VarLocation{name=NON Label 11, type=boolean, expr=!false, size=0}}
+{AND(&&), VarLocation{name=CONJUNCION Label 8, type=boolean, expr=VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0} && !true, size=0}, !false, Result: VarLocation{name=CONJUNCION Label 12, type=boolean, expr=VarLocation{name=CONJUNCION Label 8, type=boolean, expr=VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0} && !true, size=0} && !false, size=0}}
 ---------------------------------------------------
   
   
@@ -685,60 +797,68 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 20
 lista: 
-Operator: GE(>), firstOperator: 0.0, secondOperator: 0.0, Result: GE Label 1
-Operator: GE(>), firstOperator: 0.0, secondOperator: 0.0, Result: GE Label 2
-Operator: AND(&&), firstOperator: VarLocation{name=GE Label 1, type=boolean, expr=0.0 > 0.0, size=0}, secondOperator: VarLocation{name=GE Label 2, type=boolean, expr=0.0 > 0.0, size=0}, Result: CONJUNCION Label 3
-Operator: PLUS(+), firstOperator: 0.0, secondOperator: 0.0, Result: PLUS Label 4
-Operator: DIVIDE(/), firstOperator: VarLocation{name=PLUS Label 4, type=float, expr=0.0 + 0.0, size=0}, secondOperator: 2.0, Result: DIVIDE Label 5
-Operator: GE(>), firstOperator: 0.0, secondOperator: 0.0, Result: GE Label 6
-Operator: GE(>), firstOperator: 0.0, secondOperator: 0.0, Result: GE Label 7
-Operator: AND(&&), firstOperator: VarLocation{name=GE Label 6, type=boolean, expr=0.0 > 0.0, size=0}, secondOperator: VarLocation{name=GE Label 7, type=boolean, expr=0.0 > 0.0, size=0}, Result: CONJUNCION Label 8
-Operator: PLUS(+), firstOperator: 0.0, secondOperator: 0.0, Result: PLUS Label 9
-Operator: DIVIDE(/), firstOperator: VarLocation{name=PLUS Label 9, type=float, expr=0.0 + 0.0, size=0}, secondOperator: 2.0, Result: DIVIDE Label 10
-Operator: GE(>), firstOperator: 0.0, secondOperator: 0.0, Result: GE Label 11
-Operator: GE(>), firstOperator: 0.0, secondOperator: 0.0, Result: GE Label 12
-Operator: AND(&&), firstOperator: VarLocation{name=GE Label 11, type=boolean, expr=0.0 > 0.0, size=0}, secondOperator: VarLocation{name=GE Label 12, type=boolean, expr=0.0 > 0.0, size=0}, Result: CONJUNCION Label 13
-Operator: PLUS(+), firstOperator: 0.0, secondOperator: 0.0, Result: PLUS Label 14
-Operator: DIVIDE(/), firstOperator: VarLocation{name=PLUS Label 14, type=float, expr=0.0 + 0.0, size=0}, secondOperator: 2.0, Result: DIVIDE Label 15
-Operator: CEQ(==), firstOperator: 0.0, secondOperator: 0.0, Result: CEQ Label 16
-Operator: CEQ(==), firstOperator: 0.0, secondOperator: 0.0, Result: CEQ Label 17
-Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 16, type=boolean, expr=0.0 == 0.0, size=0}, secondOperator: VarLocation{name=CEQ Label 17, type=boolean, expr=0.0 == 0.0, size=0}, Result: CONJUNCION Label 18
-Operator: CEQ(==), firstOperator: 0.0, secondOperator: 0.0, Result: CEQ Label 19
-Operator: AND(&&), firstOperator: VarLocation{name=CEQ Label 16, type=boolean, expr=0.0 == 0.0, size=0} && VarLocation{name=CEQ Label 17, type=boolean, expr=0.0 == 0.0, size=0}, secondOperator: VarLocation{name=CEQ Label 19, type=boolean, expr=0.0 == 0.0, size=0}, Result: CONJUNCION Label 20
+{GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0.0 > 0.0, size=0}}
+{GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 7, type=boolean, expr=0.0 > 0.0, size=0}}
+{AND(&&), VarLocation{name=GE Label 3, type=boolean, expr=0.0 > 0.0, size=0}, VarLocation{name=GE Label 7, type=boolean, expr=0.0 > 0.0, size=0}, Result: VarLocation{name=CONJUNCION Label 9, type=boolean, expr=VarLocation{name=GE Label 3, type=boolean, expr=0.0 > 0.0, size=0} && VarLocation{name=GE Label 7, type=boolean, expr=0.0 > 0.0, size=0}, size=0}}
+{PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 12, type=float, expr=0.0 + 0.0, size=0}}
+{DIVIDE(/), VarLocation{name=PLUS Label 12, type=float, expr=0.0 + 0.0, size=0}, 2.0, Result: VarLocation{name=DIVIDE Label 15, type=float, expr=VarLocation{name=factor Label 13, type=float, expr=VarLocation{name=PLUS Label 12, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factor Label 14, type=float, expr=2.0, size=0}, size=0}}
+{GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 18, type=boolean, expr=0.0 > 0.0, size=0}}
+{GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 22, type=boolean, expr=0.0 > 0.0, size=0}}
+{AND(&&), VarLocation{name=GE Label 18, type=boolean, expr=0.0 > 0.0, size=0}, VarLocation{name=GE Label 22, type=boolean, expr=0.0 > 0.0, size=0}, Result: VarLocation{name=CONJUNCION Label 24, type=boolean, expr=VarLocation{name=GE Label 18, type=boolean, expr=0.0 > 0.0, size=0} && VarLocation{name=GE Label 22, type=boolean, expr=0.0 > 0.0, size=0}, size=0}}
+{PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 27, type=float, expr=0.0 + 0.0, size=0}}
+{DIVIDE(/), VarLocation{name=PLUS Label 27, type=float, expr=0.0 + 0.0, size=0}, 2.0, Result: VarLocation{name=DIVIDE Label 30, type=float, expr=VarLocation{name=factor Label 28, type=float, expr=VarLocation{name=PLUS Label 27, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factor Label 29, type=float, expr=2.0, size=0}, size=0}}
+{GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 33, type=boolean, expr=0.0 > 0.0, size=0}}
+{GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 37, type=boolean, expr=0.0 > 0.0, size=0}}
+{AND(&&), VarLocation{name=GE Label 33, type=boolean, expr=0.0 > 0.0, size=0}, VarLocation{name=GE Label 37, type=boolean, expr=0.0 > 0.0, size=0}, Result: VarLocation{name=CONJUNCION Label 39, type=boolean, expr=VarLocation{name=GE Label 33, type=boolean, expr=0.0 > 0.0, size=0} && VarLocation{name=GE Label 37, type=boolean, expr=0.0 > 0.0, size=0}, size=0}}
+{PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 42, type=float, expr=0.0 + 0.0, size=0}}
+{DIVIDE(/), VarLocation{name=PLUS Label 42, type=float, expr=0.0 + 0.0, size=0}, 2.0, Result: VarLocation{name=DIVIDE Label 45, type=float, expr=VarLocation{name=factor Label 43, type=float, expr=VarLocation{name=PLUS Label 42, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factor Label 44, type=float, expr=2.0, size=0}, size=0}}
+{CEQ(==), 0.0, 0.0, Result: VarLocation{name=CEQ Label 48, type=boolean, expr=0.0 == 0.0, size=0}}
+{CEQ(==), 0.0, 0.0, Result: VarLocation{name=CEQ Label 52, type=boolean, expr=0.0 == 0.0, size=0}}
+{AND(&&), VarLocation{name=CEQ Label 48, type=boolean, expr=0.0 == 0.0, size=0}, VarLocation{name=CEQ Label 52, type=boolean, expr=0.0 == 0.0, size=0}, Result: VarLocation{name=CONJUNCION Label 54, type=boolean, expr=VarLocation{name=CEQ Label 48, type=boolean, expr=0.0 == 0.0, size=0} && VarLocation{name=CEQ Label 52, type=boolean, expr=0.0 == 0.0, size=0}, size=0}}
+{CEQ(==), 0.0, 0.0, Result: VarLocation{name=CEQ Label 57, type=boolean, expr=0.0 == 0.0, size=0}}
+{AND(&&), VarLocation{name=CEQ Label 48, type=boolean, expr=0.0 == 0.0, size=0} && VarLocation{name=CEQ Label 52, type=boolean, expr=0.0 == 0.0, size=0}, VarLocation{name=CEQ Label 57, type=boolean, expr=0.0 == 0.0, size=0}, Result: VarLocation{name=CONJUNCION Label 59, type=boolean, expr=VarLocation{name=CEQ Label 48, type=boolean, expr=0.0 == 0.0, size=0} && VarLocation{name=CEQ Label 52, type=boolean, expr=0.0 == 0.0, size=0} && VarLocation{name=CEQ Label 57, type=boolean, expr=0.0 == 0.0, size=0}, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mainSolo.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 7
+tamaño lista de codigo tercetos: 12
 lista: 
-Operator: ASSIGN(=), firstOperator: true, secondOperator: null, Result: a
-Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 1
-Operator: ASSIGN(=), firstOperator: !false, secondOperator: null, Result: b
-Operator: AND(&&), firstOperator: false, secondOperator: false, Result: CONJUNCION Label 2
-Operator: NON(!), firstOperator: false, secondOperator: null, Result: NON Label 3
-Operator: null, firstOperator: VarLocation{name=CONJUNCION Label 2, type=boolean, expr=false && false, size=0}, secondOperator: !false, Result: DISYUNCION Label 4
-Operator: ASSIGN(=), firstOperator: VarLocation{name=CONJUNCION Label 2, type=boolean, expr=false && false, size=0} || !false, secondOperator: null, Result: c
+{LABEL, boolean, null, Result: a}
+{LABEL, boolean, null, Result: b}
+{LABEL, boolean, null, Result: c}
+{LABEL, int, null, Result: x}
+{LABEL, int, null, Result: y}
+{ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
+{NON(!), false, null, Result: VarLocation{name=NON Label 3, type=boolean, expr=!false, size=0}}
+{ASSIGN(=), !false, null, Result: VarLocation{name=b, type=boolean, expr=null, size=0}}
+{AND(&&), false, false, Result: VarLocation{name=CONJUNCION Label 6, type=boolean, expr=false && false, size=0}}
+{NON(!), false, null, Result: VarLocation{name=NON Label 9, type=boolean, expr=!false, size=0}}
+{OR(||), VarLocation{name=CONJUNCION Label 6, type=boolean, expr=false && false, size=0}, !false, Result: VarLocation{name=DISYUNCION Label 10, type=boolean, expr=VarLocation{name=CONJUNCION Label 6, type=boolean, expr=false && false, size=0} || !false, size=0}}
+{ASSIGN(=), VarLocation{name=CONJUNCION Label 6, type=boolean, expr=false && false, size=0} || !false, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mcd.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 11
+tamaño lista de codigo tercetos: 14
 lista: 
-Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 1
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: dividendo
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: divisor
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: dividendo
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: divisor
-Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: resto
-Operator: NEQ(!=), firstOperator: 0, secondOperator: 0, Result: NEQ Label 2
-Operator: MOD(%), firstOperator: 0, secondOperator: 0, Result: MOD Label 3
-Operator: ASSIGN(=), firstOperator: 0 % 0, secondOperator: null, Result: resto
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: dividendo
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: divisor
+{LABEL, int, null, Result: dividendo}
+{LABEL, int, null, Result: divisor}
+{LABEL, int, null, Result: resto}
+{GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
+{ASSIGN(=), 1, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
+{NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 11, type=boolean, expr=0 != 0, size=0}}
+{MOD(%), 0, 0, Result: VarLocation{name=MOD Label 16, type=int, expr=0 % 0, size=0}}
+{ASSIGN(=), 0 % 0, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
 ---------------------------------------------------
   
   
@@ -761,35 +881,40 @@ ocurrio un error: null
 parseo iniciado
 Error: Method alo not declared
 parseo exitoso
-tamaño lista de codigo tercetos: 10
+tamaño lista de codigo tercetos: 12
 lista: 
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 1
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: x
-Operator: MINUS(-), firstOperator: 0, secondOperator: 1, Result: MINUS Label 2
-Operator: ASSIGN(=), firstOperator: 0 - 1, secondOperator: null, Result: x
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 3
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: x
-Operator: ASSIGN(=), firstOperator: 7, secondOperator: null, Result: y
-Operator: ASSIGN(=), firstOperator: 8.0, secondOperator: null, Result: c
-Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=alo2, args=[0]}, secondOperator: null, Result: y
-Operator: MULTIPLY(*), firstOperator: VarLocation{name=factor, type=int, expr=3, size=0}, secondOperator: 0, Result: MULTIPLY Label 4
+{LABEL, float, null, Result: c}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 4, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{MINUS(-), 0, 1, Result: VarLocation{name=MINUS Label 7, type=int, expr=0 - 1, size=0}}
+{ASSIGN(=), 0 - 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 12, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{LABEL, int, null, Result: y}
+{ASSIGN(=), 7, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
+{ASSIGN(=), 8.0, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
+{ASSIGN(=), MethodCallExpr{name=alo2, args=[0]}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
+{MULTIPLY(*), VarLocation{name=factor Label 19, type=int, expr=3, size=0}, 0, Result: VarLocation{name=MULTIPLY Label 22, type=int, expr=VarLocation{name=factor Label 19, type=int, expr=3, size=0} * 0, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_metodos03.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 9
+tamaño lista de codigo tercetos: 12
 lista: 
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 1
-Operator: MULTIPLY(*), firstOperator: 3, secondOperator: 2, Result: MULTIPLY Label 2
-Operator: GE(>), firstOperator: 0, secondOperator: 3 * 2, Result: GE Label 3
-Operator: DIVIDE(/), firstOperator: 0, secondOperator: 3, Result: DIVIDE Label 4
-Operator: ASSIGN(=), firstOperator: 0 / 3, secondOperator: null, Result: res
-Operator: MOD(%), firstOperator: 0, secondOperator: 2, Result: MOD Label 5
-Operator: ASSIGN(=), firstOperator: 0 % 2, secondOperator: null, Result: res
-Operator: ASSIGN(=), firstOperator: false, secondOperator: null, Result: res
-Operator: ASSIGN(=), firstOperator: MethodCallExpr{name=resto, args=[MethodCallExpr{name=inc, args=[5]}, 10.2]}, secondOperator: null, Result: A
+{LABEL, boolean, null, Result: res}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 3, type=int, expr=0 + 1, size=0}}
+{LABEL, int, null, Result: res}
+{MULTIPLY(*), 3, 2, Result: VarLocation{name=MULTIPLY Label 7, type=int, expr=3 * 2, size=0}}
+{GE(>), 0, 3 * 2, Result: VarLocation{name=GE Label 8, type=boolean, expr=0 > 3 * 2, size=0}}
+{DIVIDE(/), 0, 3, Result: VarLocation{name=DIVIDE Label 11, type=int, expr=0 / 3, size=0}}
+{ASSIGN(=), 0 / 3, null, Result: VarLocation{name=res, type=int, expr=null, size=0}}
+{MOD(%), 0, 2, Result: VarLocation{name=MOD Label 14, type=int, expr=0 % 2, size=0}}
+{ASSIGN(=), 0 % 2, null, Result: VarLocation{name=res, type=int, expr=null, size=0}}
+{array[], int[], 1, Result: A}
+{ASSIGN(=), false, null, Result: VarLocation{name=res, type=boolean, expr=null, size=0}}
+{ASSIGN(=), MethodCallExpr{name=resto, args=[MethodCallExpr{name=inc, args=[5]}, 10.2]}, null, Result: VarLocation{name=A, type=int[], expr=null, size=1}}
 ---------------------------------------------------
   
   
@@ -804,103 +929,116 @@ ocurrio un error: null
 ---------------- Test tests/test_correctos/test_metodos_externos02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 15
+tamaño lista de codigo tercetos: 19
 lista: 
-Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 1
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: dividendo
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: divisor
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: dividendo
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: divisor
-Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: resto
-Operator: NEQ(!=), firstOperator: 0, secondOperator: 0, Result: NEQ Label 2
-Operator: MOD(%), firstOperator: 0, secondOperator: 0, Result: MOD Label 3
-Operator: ASSIGN(=), firstOperator: 0 % 0, secondOperator: null, Result: resto
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: dividendo
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: divisor
-Operator: ASSIGN(=), firstOperator: 10000, secondOperator: null, Result: a
-Operator: MULTIPLY(*), firstOperator: 3.5, secondOperator: 0, Result: MULTIPLY Label 4
-Operator: DIVIDE(/), firstOperator: 7, secondOperator: 6, Result: DIVIDE Label 5
-Operator: MINUS(-), firstOperator: 3.5 * 0, secondOperator: 7 / 6, Result: MINUS Label 6
+{LABEL, int, null, Result: dividendo}
+{LABEL, int, null, Result: divisor}
+{LABEL, int, null, Result: resto}
+{GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
+{ASSIGN(=), 1, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
+{NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 11, type=boolean, expr=0 != 0, size=0}}
+{MOD(%), 0, 0, Result: VarLocation{name=MOD Label 16, type=int, expr=0 % 0, size=0}}
+{ASSIGN(=), 0 % 0, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
+{LABEL, int, null, Result: a}
+{ASSIGN(=), 10000, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{MULTIPLY(*), 3.5, 0, Result: VarLocation{name=MULTIPLY Label 26, type=int, expr=3.5 * 0, size=0}}
+{DIVIDE(/), 7, 6, Result: VarLocation{name=DIVIDE Label 29, type=int, expr=7 / 6, size=0}}
+{MINUS(-), 3.5 * 0, 7 / 6, Result: VarLocation{name=MINUS Label 30, type=int, expr=3.5 * 0 - 7 / 6, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mod.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 2
+tamaño lista de codigo tercetos: 3
 lista: 
-Operator: ASSIGN(=), firstOperator: 90, secondOperator: null, Result: a
-Operator: MOD(%), firstOperator: 0, secondOperator: 7, Result: MOD Label 1
+{LABEL, int, null, Result: a}
+{ASSIGN(=), 90, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{MOD(%), 0, 7, Result: VarLocation{name=MOD Label 4, type=int, expr=0 % 7, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mult01.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 5
+tamaño lista de codigo tercetos: 7
 lista: 
-Operator: ASSIGN(=), firstOperator: 5, secondOperator: null, Result: a
-Operator: ASSIGN(=), firstOperator: 2000, secondOperator: null, Result: d
-Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 1000, Result: MULTIPLY Label 1
-Operator: MULTIPLY(*), firstOperator: 0 * 1000, secondOperator: 0, Result: MULTIPLY Label 2
-Operator: MULTIPLY(*), firstOperator: 0 * 1000 * 0, secondOperator: 0, Result: MULTIPLY Label 3
+{LABEL, int, null, Result: a}
+{LABEL, int, null, Result: d}
+{ASSIGN(=), 5, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{ASSIGN(=), 2000, null, Result: VarLocation{name=d, type=int, expr=null, size=0}}
+{MULTIPLY(*), 0, 1000, Result: VarLocation{name=MULTIPLY Label 5, type=int, expr=0 * 1000, size=0}}
+{MULTIPLY(*), 0 * 1000, 0, Result: VarLocation{name=MULTIPLY Label 7, type=int, expr=0 * 1000 * 0, size=0}}
+{MULTIPLY(*), 0 * 1000 * 0, 0, Result: VarLocation{name=MULTIPLY Label 9, type=int, expr=0 * 1000 * 0 * 0, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mult02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 2
+tamaño lista de codigo tercetos: 3
 lista: 
-Operator: ASSIGN(=), firstOperator: 5, secondOperator: null, Result: a
-Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 7, Result: MULTIPLY Label 1
+{LABEL, int, null, Result: a}
+{ASSIGN(=), 5, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{MULTIPLY(*), 0, 7, Result: VarLocation{name=MULTIPLY Label 4, type=int, expr=0 * 7, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_prog_simple.ctds ... -------------------
 parseo iniciado
 Main Method Missing in Class prueba2
-tamaño lista de codigo tercetos: 2
+tamaño lista de codigo tercetos: 3
 lista: 
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 1
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: x
+{LABEL, float, null, Result: c}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 3, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_retorno.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 29
+tamaño lista de codigo tercetos: 33
 lista: 
-Operator: ASSIGN(=), firstOperator: 100, secondOperator: null, Result: i
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: j
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: z
-Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 1
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
-Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 2
-Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 3
-Operator: null, firstOperator: VarLocation{name=GE Label 2, type=boolean, expr=0 > 0, size=0}, secondOperator: VarLocation{name=LE Label 3, type=boolean, expr=0 < 0, size=0}, Result: DISYUNCION Label 4
-Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 5
-Operator: MINUS(-), firstOperator: 0, secondOperator: 1, Result: MINUS Label 6
-Operator: ASSIGN(=), firstOperator: 0 - 1, secondOperator: null, Result: x
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 7
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: x
-Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 8
-Operator: GE(>), firstOperator: 0, secondOperator: 0, Result: GE Label 9
-Operator: null, firstOperator: VarLocation{name=LE Label 8, type=boolean, expr=0 < 0, size=0}, secondOperator: VarLocation{name=GE Label 9, type=boolean, expr=0 > 0, size=0}, Result: DISYUNCION Label 10
-Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 11
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 12
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: x
-Operator: CEQ(==), firstOperator: 0, secondOperator: 0, Result: CEQ Label 13
-Operator: MINUS(-), firstOperator: 0, secondOperator: 1, Result: MINUS Label 14
-Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 0, Result: MULTIPLY Label 15
-Operator: MULTIPLY(*), firstOperator: 0, secondOperator: 0, Result: MULTIPLY Label 16
-Operator: MINUS(-), firstOperator: 0 * 0, secondOperator: 0 * 0, Result: MINUS Label 17
-Operator: PLUS(+), firstOperator: 0 - 1, secondOperator: VarLocation{name=MINUS Label 17, type=int, expr=0 * 0 - 0 * 0, size=0}, Result: PLUS Label 18
-Operator: ASSIGN(=), firstOperator: 0 - 1 + VarLocation{name=MINUS Label 17, type=int, expr=0 * 0 - 0 * 0, size=0}, secondOperator: null, Result: x
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: x
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 19
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: j
+{LABEL, int, null, Result: i}
+{LABEL, int, null, Result: j}
+{LABEL, int, null, Result: z}
+{ASSIGN(=), 100, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=z, type=int, expr=null, size=0}}
+{LE(<), 0, 0, Result: VarLocation{name=LE Label 6, type=boolean, expr=0 < 0, size=0}}
+{LABEL, int, null, Result: i}
+{ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{GE(>), 0, 0, Result: VarLocation{name=GE Label 11, type=boolean, expr=0 > 0, size=0}}
+{LE(<), 0, 0, Result: VarLocation{name=LE Label 15, type=boolean, expr=0 < 0, size=0}}
+{OR(||), VarLocation{name=GE Label 11, type=boolean, expr=0 > 0, size=0}, VarLocation{name=LE Label 15, type=boolean, expr=0 < 0, size=0}, Result: VarLocation{name=DISYUNCION Label 17, type=boolean, expr=VarLocation{name=GE Label 11, type=boolean, expr=0 > 0, size=0} || VarLocation{name=LE Label 15, type=boolean, expr=0 < 0, size=0}, size=0}}
+{GE(>), 0, 0, Result: VarLocation{name=GE Label 21, type=boolean, expr=0 > 0, size=0}}
+{MINUS(-), 0, 1, Result: VarLocation{name=MINUS Label 24, type=int, expr=0 - 1, size=0}}
+{ASSIGN(=), 0 - 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 27, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{LE(<), 0, 0, Result: VarLocation{name=LE Label 30, type=boolean, expr=0 < 0, size=0}}
+{GE(>), 0, 0, Result: VarLocation{name=GE Label 34, type=boolean, expr=0 > 0, size=0}}
+{OR(||), VarLocation{name=LE Label 30, type=boolean, expr=0 < 0, size=0}, VarLocation{name=GE Label 34, type=boolean, expr=0 > 0, size=0}, Result: VarLocation{name=DISYUNCION Label 36, type=boolean, expr=VarLocation{name=LE Label 30, type=boolean, expr=0 < 0, size=0} || VarLocation{name=GE Label 34, type=boolean, expr=0 > 0, size=0}, size=0}}
+{LE(<), 0, 0, Result: VarLocation{name=LE Label 40, type=boolean, expr=0 < 0, size=0}}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 43, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 46, type=boolean, expr=0 == 0, size=0}}
+{MINUS(-), 0, 1, Result: VarLocation{name=MINUS Label 49, type=int, expr=0 - 1, size=0}}
+{MULTIPLY(*), 0, 0, Result: VarLocation{name=MULTIPLY Label 52, type=int, expr=0 * 0, size=0}}
+{MULTIPLY(*), 0, 0, Result: VarLocation{name=MULTIPLY Label 55, type=int, expr=0 * 0, size=0}}
+{MINUS(-), 0 * 0, 0 * 0, Result: VarLocation{name=MINUS Label 56, type=int, expr=0 * 0 - 0 * 0, size=0}}
+{PLUS(+), 0 - 1, VarLocation{name=MINUS Label 56, type=int, expr=0 * 0 - 0 * 0, size=0}, Result: VarLocation{name=PLUS Label 58, type=int, expr=0 - 1 + VarLocation{name=MINUS Label 56, type=int, expr=0 * 0 - 0 * 0, size=0}, size=0}}
+{ASSIGN(=), 0 - 1 + VarLocation{name=MINUS Label 56, type=int, expr=0 * 0 - 0 * 0, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 62, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
 ---------------------------------------------------
   
   
@@ -909,39 +1047,44 @@ parseo iniciado
 parseo exitoso
 tamaño lista de codigo tercetos: 3
 lista: 
-Operator: CEQ(==), firstOperator: 0, secondOperator: 0, Result: CEQ Label 1
-Operator: CEQ(==), firstOperator: 0, secondOperator: 0, Result: CEQ Label 2
-Operator: PLUS(+), firstOperator: 0, secondOperator: 0, Result: PLUS Label 3
+{CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 0, size=0}}
+{CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 7, type=boolean, expr=0 == 0, size=0}}
+{PLUS(+), 0, 0, Result: VarLocation{name=PLUS Label 11, type=int, expr=0 + 0, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_sumx.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 7
+tamaño lista de codigo tercetos: 9
 lista: 
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: aux
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: i
-Operator: LE(<), firstOperator: 0, secondOperator: 0, Result: LE Label 1
-Operator: PLUS(+), firstOperator: 0.0, secondOperator: 0.0, Result: PLUS Label 2
-Operator: ASSIGN(=), firstOperator: 0.0 + 0.0, secondOperator: null, Result: aux
-Operator: PLUS(+), firstOperator: 0, secondOperator: 1, Result: PLUS Label 3
-Operator: ASSIGN(=), firstOperator: 0 + 1, secondOperator: null, Result: i
+{LABEL, float, null, Result: aux}
+{LABEL, int, null, Result: i}
+{ASSIGN(=), 0, null, Result: VarLocation{name=aux, type=float, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
+{LE(<), 0, 0, Result: VarLocation{name=LE Label 5, type=boolean, expr=0 < 0, size=0}}
+{PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 9, type=float, expr=0.0 + 0.0, size=0}}
+{ASSIGN(=), 0.0 + 0.0, null, Result: VarLocation{name=aux, type=float, expr=null, size=0}}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 12, type=int, expr=0 + 1, size=0}}
+{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_while.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 7
+tamaño lista de codigo tercetos: 10
 lista: 
-Operator: ASSIGN(=), firstOperator: 1, secondOperator: null, Result: resto
-Operator: NEQ(!=), firstOperator: 0, secondOperator: 0, Result: NEQ Label 1
-Operator: MOD(%), firstOperator: 0, secondOperator: 0, Result: MOD Label 2
-Operator: ASSIGN(=), firstOperator: 0 % 0, secondOperator: null, Result: resto
-Operator: ASSIGN(=), firstOperator: 0, secondOperator: null, Result: dividendo
-Operator: NEQ(!=), firstOperator: 0, secondOperator: 0, Result: NEQ Label 3
-Operator: NEQ(!=), firstOperator: 0, secondOperator: 0, Result: NEQ Label 4
+{LABEL, int, null, Result: dividendo}
+{LABEL, int, null, Result: divisor}
+{LABEL, int, null, Result: resto}
+{ASSIGN(=), 1, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
+{NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 4, type=boolean, expr=0 != 0, size=0}}
+{MOD(%), 0, 0, Result: VarLocation{name=MOD Label 12, type=int, expr=0 % 0, size=0}}
+{ASSIGN(=), 0 % 0, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
+{ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
+{NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 16, type=boolean, expr=0 != 0, size=0}}
+{NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 19, type=boolean, expr=0 != 0, size=0}}
 ---------------------------------------------------
   
   

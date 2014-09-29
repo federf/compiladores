@@ -146,7 +146,12 @@
                 ;
 
     identifier::= ID:s {: //caso identificador ID
-                        TS.agregarSimbolo(tipo_corriente, s.toString(), null, 0); :} 
+                        TS.agregarSimbolo(tipo_corriente, s.toString(), null, 0);
+                        //CODIGO DE TRES DIRECCIONES  - guardamos la variable declarada y su tipo
+                        TripletList.addLast(new TripletCode(TripletOperator.LABEL, tipo_corriente,null,s.toString())); 
+                        //FIN CODIGO TRES DIRECCIONES
+                        :} 
+                        
       | ID:s CORCHETE_IZQ INT_LITERAL:i CORCHETE_DER {: //caso arreglo ID[INT_LITERAL]
                                                     //convertimos el int_literal en string
                                                     int size= Integer.valueOf((String) i); 
@@ -161,7 +166,12 @@
                                                            case BOOLEAN:
                                                                    TS.agregarSimbolo(Type.BOOLARRAY, s.toString(), null, size); 
                                                                    break;
-                                                    }:} 
+                                                    }
+                                                    //CODIGO DE TRES DIRECCIONES  - guardamos la variable declarada y su tipo}
+                                                    Simbolo ultimo=TS.obtenerSimbolo();
+                                                    TripletList.addLast(new TripletCode(TripletOperator.ARRAYLABEL, ultimo.getType(),i,s.toString()));
+                                                    //FIN CODIGO TRES DIRECCIONES
+                                                    :} 
       ;
 
     methodDeclarations::= method_decl
@@ -292,7 +302,9 @@
                                                                     ((l.getType().equals(Type.FLOAT) || l.getType().equals(Type.FLOATARRAY)) && 
                                                                         (m.getTypeReturn().equals(Type.INT) || m.getTypeReturn().equals(Type.INTARRAY) )) && 
                                                                         (!l.getType().isArray())){ //si se realiza una asignacion con tipos identicos de location y expression (no array)
-                                                                    AssignStmt a=new AssignStmt((Location)l, AssignOpType.ASSIGN, (Expression) e.getExpr()); 
+                                                                    AssignStmt a=new AssignStmt((Location)l, AssignOpType.ASSIGN, (Expression) e.getExpr());
+                                                                    //l.setExpr(e.getExpr());
+                                                                    //System.out.println("{id} "+l+", expression: "+e.getExpr());
                                                                     //CODIGO DE TRES DIRECCIONES
                                                                     TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e.getExpr(), null,(VarLocation)l));
                                                                     //FIN CODIGO TRES DIRECCIONES
@@ -301,11 +313,13 @@
                                                                     //si location es un array
                                                                     if(l.getType().isArray()){
                                                                         //arreglo de enteros expresion entero
+                                                                        //System.out.println("{array} "+l+", expression: "+e.getExpr());
                                                                         switch(l.getType()){
                                                                             //caso arreglo de enteros con valor entero
                                                                             case INTARRAY:
                                                                                 if(m.getTypeReturn().equals(Type.INT)){
                                                                                     AssignStmt a=new AssignStmt((Location)l, ao, (Expression) e.getExpr()); 
+                                                                                    //l.setExpr(e.getExpr());
                                                                                     //CODIGO DE TRES DIRECCIONES
                                                                                     switch(ao){
                                                                                         case ASSIGN:TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e.getExpr(), null,(VarLocation)l));
@@ -318,13 +332,14 @@
                                                                                     //FIN CODIGO TRES DIRECCIONES
                                                                                     RESULT=a; 
                                                                                 }else{
-                                                                                    System.out.println("Error int expected but "+m.getTypeReturn()+" found");
+                                                                                    System.out.println("Error: int expected but "+m.getTypeReturn()+" found");
                                                                                 }
                                                                                 break;
                                                                             //caso arreglo de reales (floatarray) con valor real (float)
                                                                             case FLOATARRAY:
                                                                                 if(m.getTypeReturn().equals(Type.FLOAT) || m.getTypeReturn().equals(Type.INT)){
                                                                                     AssignStmt a=new AssignStmt((Location)l, ao, (Expression) e.getExpr()); 
+                                                                                    //l.setExpr(e.getExpr());
                                                                                     //CODIGO DE TRES DIRECCIONES
                                                                                     switch(ao){
                                                                                         case ASSIGN:TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e.getExpr(), null,(VarLocation)l));
@@ -337,7 +352,7 @@
                                                                                     //FIN CODIGO TRES DIRECCIONES
                                                                                     RESULT=a; 
                                                                                 }else{
-                                                                                    System.out.println("Error float expected but "+m.getTypeReturn()+" found");
+                                                                                    System.out.println("Error: float expected but "+m.getTypeReturn()+" found");
                                                                                 }
                                                                                 break;
                                                                             //caso arreglo de boolean con valor booleano
@@ -345,20 +360,21 @@
                                                                                 if(m.getTypeReturn().equals(Type.BOOLEAN)){
                                                                                     if(ao.toString().equals("=")){
                                                                                         AssignStmt a=new AssignStmt((Location)l, AssignOpType.ASSIGN, (Expression) e.getExpr()); 
+                                                                                        //l.setExpr(e.getExpr());
                                                                                         //CODIGO DE TRES DIRECCIONES
                                                                                         TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e.getExpr(), null,(VarLocation)l));
                                                                                         //FIN CODIGO TRES DIRECCIONES
                                                                                         RESULT=a;
                                                                                     }else{
-                                                                                        System.out.println("Error "+ao+" operation not valid for boolean values");
+                                                                                        System.out.println("Error: "+ao+" operation not valid for boolean values");
                                                                                     }
                                                                                 }else{
-                                                                                    System.out.println("Error int expected but "+m.getTypeReturn()+" found");
+                                                                                    System.out.println("Error: int expected but "+m.getTypeReturn()+" found");
                                                                                 }
                                                                                 break;
                                                                             }
                                                                     }else{
-                                                                        System.out.println("{MethodCallExpr} Error invalid assign operation in "+l.getId()+", "+l.getType()+" "+ao+" "+m.getTypeReturn());
+                                                                        System.out.println("{MethodCallExpr} Error: invalid assign operation in "+l.getId()+", "+l.getType()+" "+ao+" "+m.getTypeReturn());
                                                                     }
                                                                 }
                                                            }else{// si la expression no es una llamada a un metodo
@@ -376,6 +392,8 @@
 
                                                                 ){ //si se realiza una asignacion con tipos identicos de location y expression (no array)
                                                                     AssignStmt a=new AssignStmt((Location)l, AssignOpType.ASSIGN, (Expression) e.getExpr()); 
+                                                                    //l.setExpr(e.getExpr());
+                                                                    //System.out.println("{id} "+l+", expression: "+e.getExpr());
                                                                     //CODIGO DE TRES DIRECCIONES
                                                                     TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e.getExpr(), null,(VarLocation)l));
                                                                     //FIN CODIGO TRES DIRECCIONES
@@ -383,6 +401,7 @@
                                                                 }else{
                                                                     
                                                                     //si location es un array
+                                                                    //System.out.println("{array} "+l+", expression: "+e.getExpr());
                                                                     if(l.getType().isArray()){
                                                                         //arreglo de enteros expresion entero
                                                                         switch(l.getType()){
@@ -390,6 +409,7 @@
                                                                             case INTARRAY:
                                                                                 if(e.getType().equals(Type.INT)){
                                                                                     AssignStmt a=new AssignStmt((Location)l, ao, (Expression) e.getExpr()); 
+                                                                                    //l.setExpr(e.getExpr());
                                                                                     //CODIGO DE TRES DIRECCIONES
                                                                                     switch(ao){
                                                                                         case ASSIGN:TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e.getExpr(), null,(VarLocation)l));
@@ -402,13 +422,14 @@
                                                                                     //FIN CODIGO TRES DIRECCIONES
                                                                                     RESULT=a; 
                                                                                 }else{
-                                                                                    System.out.println("Error int expected but "+e.getType()+" found");
+                                                                                    System.out.println("Error: int expected but "+e.getType()+" found");
                                                                                 }
                                                                                 break;
                                                                             // caso arreglo de reales con valor real
                                                                             case FLOATARRAY:
                                                                                 if(e.getType().equals(Type.FLOAT) || e.getType().equals(Type.INT)){
                                                                                     AssignStmt a=new AssignStmt((Location)l, ao, (Expression) e.getExpr()); 
+                                                                                    //l.setExpr(e.getExpr());
                                                                                     //CODIGO DE TRES DIRECCIONES
                                                                                     switch(ao){
                                                                                         case ASSIGN:TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e.getExpr(), null,(VarLocation)l));
@@ -421,7 +442,7 @@
                                                                                     //FIN CODIGO TRES DIRECCIONES
                                                                                     RESULT=a; 
                                                                                 }else{
-                                                                                    System.out.println("Error float expected but "+e.getType()+" found");
+                                                                                    System.out.println("Error: float expected but "+e.getType()+" found");
                                                                                 }
                                                                                 break;
                                                                             //caso arreglo de boolean con valor booleano
@@ -429,20 +450,21 @@
                                                                                 if(e.getType().equals(Type.BOOLEAN)){
                                                                                     if(ao.toString().equals("=")){
                                                                                         AssignStmt a=new AssignStmt((Location)l, AssignOpType.ASSIGN, (Expression) e.getExpr()); 
+                                                                                        //l.setExpr(e.getExpr());
                                                                                         //CODIGO DE TRES DIRECCIONES
                                                                                         TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e.getExpr(), null,(VarLocation)l));
                                                                                         //FIN CODIGO TRES DIRECCIONES
                                                                                         RESULT=a;
                                                                                     }else{
-                                                                                        System.out.println("Error "+ao+" operation not valid for boolean values");
+                                                                                        System.out.println("Error: "+ao+" operation not valid for boolean values");
                                                                                     }
                                                                                 }else{
-                                                                                    System.out.println("Error int expected but "+e.getType()+" found");
+                                                                                    System.out.println("Error: int expected but "+e.getType()+" found");
                                                                                 }
                                                                                 break;
                                                                             }
                                                                     }else{
-                                                                        System.out.println("Error invalid assign operation in "+l+" "+ao+" "+e.getExpr());
+                                                                        System.out.println("Error: invalid assign operation in "+l+" "+ao+" "+e.getExpr());
                                                                     }
                                                                 }
                                                            }
@@ -522,6 +544,9 @@
                                             switch(e.getType()){
                                                 case INTARRAY:
                                                     if(ult_metodo.getTypeReturn().equals(Type.INT) || ult_metodo.getTypeReturn().equals(Type.INTARRAY)){
+                                                        //CODIGO TRES DIRECCIONES
+                                                        TripletList.addLast(new TripletCode(TripletOperator.RETURN,null,null,e.getExpr()));
+                                                        //FIN CODIGO TRES DIRECCIONES
                                                         RESULT=new ReturnStmt(e.getExpr());
                                                     }else{
                                                         System.out.println("Error: Method "+ult_metodo.getName()+" must return "+ult_metodo.getTypeReturn().toString());
@@ -529,6 +554,9 @@
                                                     break;
                                                 case BOOLARRAY:
                                                     if(ult_metodo.getTypeReturn().equals(Type.BOOLEAN) || ult_metodo.getTypeReturn().equals(Type.BOOLARRAY)){
+                                                        //CODIGO TRES DIRECCIONES
+                                                        TripletList.addLast(new TripletCode(TripletOperator.RETURN,null,null,e.getExpr()));
+                                                        //FIN CODIGO TRES DIRECCIONES
                                                         RESULT=new ReturnStmt(e.getExpr());
                                                     }else{
                                                         System.out.println("Error: Method "+ult_metodo.getName()+" must return "+ult_metodo.getTypeReturn().toString());
@@ -536,6 +564,9 @@
                                                     break;
                                                 case FLOATARRAY:
                                                     if(ult_metodo.getTypeReturn().equals(Type.FLOAT) || ult_metodo.getTypeReturn().equals(Type.FLOATARRAY)){
+                                                        //CODIGO TRES DIRECCIONES
+                                                        TripletList.addLast(new TripletCode(TripletOperator.RETURN,null,null,e.getExpr()));
+                                                        //FIN CODIGO TRES DIRECCIONES
                                                         RESULT=new ReturnStmt(e.getExpr());
                                                     }else{
                                                         System.out.println("Error: Method "+ult_metodo.getName()+" must return "+ult_metodo.getTypeReturn().toString());
@@ -649,7 +680,7 @@
     location::= ID:id {:
                         Simbolo s=TS.buscarSimbolo((String)id); 
                             if(s==null){
-                                System.out.println("Variable "+id+" not found");
+                                System.out.println("Error: Variable "+id+" not found");
                                 ////RESULT=null;
                             }else{
                                 VarLocation v=new VarLocation((String)id,s.getType(),null,s.getSize());
@@ -661,7 +692,7 @@
 
                     Simbolo s=TS.buscarSimbolo((String)id);
                     if(s==null){
-                        System.out.println("Variable "+id+" not found");
+                        System.out.println("Error: Variable "+id+" not found");
                     }else{
                         //si el simbolo es un arreglo
                         if(s.getType().isArray()){
@@ -690,7 +721,7 @@
                             }
                         }else{
                             //sino mostramos un mensaje de error
-                            System.out.println("Variable "+id+" is not an array");
+                            System.out.println("Error: Variable "+id+" is not an array");
                         }
                     }
                  :}
@@ -709,7 +740,7 @@
                                                 //res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
-                                                System.out.println("Error "+BinOpType.OR+"can only be applied to Boolean operands");
+                                                System.out.println("Error: "+BinOpType.OR+"can only be applied to Boolean operands");
                                             }
                                              :}
         ;
@@ -726,7 +757,7 @@
                                                 //res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
-                                                System.out.println("Error "+BinOpType.AND+"can only be applied to Boolean operands");
+                                                System.out.println("Error: "+BinOpType.AND+"can only be applied to Boolean operands");
                                             }
                                              :}
                ;
@@ -766,7 +797,7 @@
                                                 RESULT=res;
                                             }else{
                                                 //si no lo son mostramos un mensaje de error
-                                                System.out.println("Error "+BinOpType.CEQ+"can only be applied to Boolean/Int/Float operands");
+                                                System.out.println("Error: "+BinOpType.CEQ+"can only be applied to Boolean/Int/Float operands");
                                             }
                                              :}
               | relation:r1 DIFERENCIA_LOGICA relation:r2 {:
@@ -802,7 +833,7 @@
                                                 RESULT=res;
                                             }else{
                                                 //si no lo son mostramos un mensaje de error
-                                                System.out.println("Error "+BinOpType.NEQ+"can only be applied to Boolean/Int/Float operands");
+                                                System.out.println("Error: "+BinOpType.NEQ+"can only be applied to Boolean/Int/Float operands");
                                             }
                                              :}
               ;
@@ -843,7 +874,7 @@
                                                 RESULT=res;
                                             }else{
                                                 //si no lo son mostramos un mensaje de error
-                                                System.out.println("Error "+BinOpType.LE.toString()+" can only be applied to Int or Float values");                                            }
+                                                System.out.println("Error: "+BinOpType.LE.toString()+" can only be applied to Int or Float values");                                            }
                                          :}
             | sum:s1 MAYOR sum:s2 {: 
                                      //verificamos que el tipo de los operandos sean validos para la operacion
@@ -879,7 +910,7 @@
                                                 RESULT=res;
                                             }else{
                                                 //si no lo son mostramos un mensaje de error
-                                                System.out.println("Error "+BinOpType.GE.toString()+" can only be applied to Int or Float values");
+                                                System.out.println("Error: "+BinOpType.GE.toString()+" can only be applied to Int or Float values");
                                             }
                                          :}
             | sum:s1 MAYOR_IGUAL sum:s2 {:
@@ -916,7 +947,7 @@
                                                 RESULT=res;
                                             }else{
                                                 //si no lo son mostramos un mensaje de error
-                                                System.out.println("Error "+BinOpType.GEQ.toString()+" can only be applied to Int or Float values");
+                                                System.out.println("Error: "+BinOpType.GEQ.toString()+" can only be applied to Int or Float values");
                                             }
                                          :}
             | sum:s1 MENOR_IGUAL sum:s2 {: 
@@ -953,7 +984,7 @@
                                                 RESULT=res;
                                             }else{
                                                 //si no lo son mostramos un mensaje de error
-                                                System.out.println("Error "+BinOpType.LEQ.toString()+" can only be applied to Int or Float values");
+                                                System.out.println("Error: "+BinOpType.LEQ.toString()+" can only be applied to Int or Float values");
                                             }
                                          :}
             ;
@@ -1006,7 +1037,7 @@
                                                 }
                                         }else{
                                             //si no lo son mostramos un mensaje de error
-                                            System.out.println("Error "+BinOpType.PLUS.toString()+" can only be applied to Int or Float values");
+                                            System.out.println("Error: "+BinOpType.PLUS.toString()+" can only be applied to Int or Float values");
                                         }
                                          :}
        | sum:s1 RESTA term:s2 {:
@@ -1057,7 +1088,7 @@
                                             }
                                         }else{
                                             //si no lo son mostramos un mensaje de error
-                                            System.out.println("Error "+BinOpType.MINUS.toString()+" can only be applied to Int or Float values");
+                                            System.out.println("Error: "+BinOpType.MINUS.toString()+" can only be applied to Int or Float values");
                                         }
                                          :}
        ;
@@ -1111,7 +1142,7 @@
                                             }
                                         }else{
                                             //si no lo son mostramos un mensaje de error
-                                            System.out.println("Error "+BinOpType.MULTIPLY.toString()+" can only be applied to Int or Float values");
+                                            System.out.println("Error: "+BinOpType.MULTIPLY.toString()+" can only be applied to Int or Float values");
                                         }
                                          :}
         | term:s1 DIVISION factor:s2 {:
@@ -1163,7 +1194,7 @@
                                             }
                                         }else{
                                             //si no lo son mostramos un mensaje de error
-                                            System.out.println("Error "+BinOpType.DIVIDE.toString()+" can only be applied to Int or Float values");
+                                            System.out.println("Error: "+BinOpType.DIVIDE.toString()+" can only be applied to Int or Float values");
                                         }
                                          :}
         | term:s1 PORCENTAJE factor:s2 {: 
@@ -1183,12 +1214,12 @@
                                                 RESULT=res;
                                             }else{
                                                 //si no lo son mostramos un mensaje de error
-                                                System.out.println("Error "+BinOpType.MOD.toString()+" can only be applied to Int values");
+                                                System.out.println("Error: "+BinOpType.MOD.toString()+" can only be applied to Int values");
                                             }
                                          :}
         ;
 
-    factor::=literal:l {: VarLocation res=new VarLocation("factor",l.getType(),l,0); RESULT = res; :} 
+    factor::=literal:l {: VarLocation res=new VarLocation("factor "+Labels.getLabel(),l.getType(),l,0); RESULT = res; :} 
           | ADMIRACION factor:f {: 
                                     //verificamos que el operando sea valido para la operacion
                                     if(f.getType().equals(Type.BOOLEAN)){
@@ -1202,7 +1233,7 @@
                                         RESULT=res;
                                     }else{
                                         //si no lo es mostramos un mensaje de error
-                                        System.out.println("Boolean expected but "+f.getType().toString()+" found.");
+                                        System.out.println("Error: Boolean expected but "+f.getType().toString()+" found.");
                                     } :}
           | RESTA factor:f {: 
                                 //verificamos que el operando sea valido para la operacion
@@ -1226,7 +1257,7 @@
                                             
                                         }else{
                                             //si no lo es mostramos un mensaje de error
-                                            System.out.println("Numeral (int or float) expected but "+f.getType().toString()+" found.");
+                                            System.out.println("Error: Numeral (int or float) expected but "+f.getType().toString()+" found.");
                                         }
                                     }   
                                      :}
@@ -1271,7 +1302,7 @@
            | ID:id CORCHETE_IZQ expr:e CORCHETE_DER {: //arreglo
                     Simbolo s=TS.buscarSimbolo((String)id);
                     if(s==null){
-                        System.out.println("Variable "+id+" not found");
+                        System.out.println("Error: Variable "+id+" not found");
                     }else{
                         if(s.getType().isArray()){
                             if(!e.getType().equals(Type.INT)){
@@ -1280,7 +1311,7 @@
                                 RESULT= new ArrayLiteral((String)id, s.getSize(), s.getType());
                             }
                         }else{
-                            System.out.println("Variable "+id+" is not an array");
+                            System.out.println("Error: Variable "+id+" is not an array");
                         }
                     }
                  :}

@@ -15,13 +15,13 @@ public class TripletCode {
     //primer y segunda direccion
     protected Object firstDir, secondDir;
     //direccion de retorno
-    protected VarLocation result;
+    protected Object result;
     //operador
     protected TripletOperator operator;
 
     
  
-public TripletCode(TripletOperator op, Object fD, Object sD, VarLocation res) {
+public TripletCode(TripletOperator op, Object fD, Object sD, Object res) {
 
  	operator = op;
  	firstDir = fD;
@@ -33,7 +33,7 @@ public TripletCode(TripletOperator op, Object fD, Object sD, VarLocation res) {
 @Override
 public String toString() {
  	
- 	return "Operator: "+operator.toString() + ", firstOperator: "+ firstDir+", secondOperator: "+ secondDir + ", Result: "+ result.getId();
+ 	return "{"+operator.toString() + ", "+ firstDir+", "+ secondDir + ", Result: "+ result+"}";
  
  }
 

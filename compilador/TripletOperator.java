@@ -9,12 +9,13 @@ public enum TripletOperator{
 		Tercer parametro: Variable para resultado -OPERACIONES BINARIAS*/
  	, NON, UNARYMINUS /* Primer parametro: operando. Tercer parametro: Variable para resultado  - OPERACION UNARIA*/
  	, ASSIGN,INCREMENT,DECREMENT/* Primer parametro: Valor a asignar. Tercer parametro: Variable a ser asignada - ASIGNACIONES*/
- 	, LABEL		  /* Tercer parametro: Nombre del label a crear */	
+ 	, LABEL		  /* Tercer parametro: Nombre del label a crear (para las variables declaradas como "Tipo ID") */	
  	, RETURN 	  /* Tercer parametro: Variable con valor a retornar - RETURN*/
  	, PARAM 	  /* Tercer parametro: Variable con valor del parametro - PARAMETRO */
  	, CMP 		  /* Primer parametro: valor a comparar. Segundo parametro: valor a comparar*/
- 	, JMP, JNE, JNL /* Tercer parametro: Label a saltar - SALTO */;
-
+ 	, GOTO /* Tercer parametro: Label a saltar - SALTO (GOTO salto incondicional) */
+ 	, ARRAYLABEL /*Primero parametro: tipo arreglo. Segundo parametro: tamaño. Tercer Parametro: nombre del arreglo.(para las var. declaradas como "Tipo ID[expr]") */;
+ 	//CREO DEBERIAMOS TENER PARA LAS LLAMADAS A METODOS TANTO EXTERNOS COMO INTERNOS 
  	@Override
 	public String toString() {
 		switch(this) {
@@ -60,12 +61,12 @@ public enum TripletOperator{
 		    	return "PARAM";
 		    case CMP:
 		    	return "CMP";
-		    case JMP:
-		    	return "JMP";
-		    case JNL: 
-		    	return "JNL";
-		    case JNE:
-		    	return "JNE";
+		    case GOTO:
+		    	return "GOTO";
+		    case OR:
+		    	return "OR(||)";
+		    case ARRAYLABEL:
+		    	return "array[]";
 
 		}
 		return null;

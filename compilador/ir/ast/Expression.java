@@ -15,4 +15,8 @@ public abstract class Expression extends AST {
 	public Expression getExpr() {
         return this.expr;
     }
+    
+    /*public void setExpr(Expression e){
+        this.expr=e;
+    }*/
 }
