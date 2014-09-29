@@ -13,7 +13,7 @@ public enum TripletOperator{
  	, RETURN 	  /* Tercer parametro: Variable con valor a retornar - RETURN*/
  	, PARAM 	  /* Tercer parametro: Variable con valor del parametro - PARAMETRO */
  	, CMP 		  /* Primer parametro: expr a comparar. Segundo parametro: valor a comparar*/
- 	, JMP, JNE /* Tercer parametro: Label a saltar - SALTO (JMP salto incondicional) */
+ 	, JMP, JNE, JNL /* Tercer parametro: Label a saltar - SALTO (JMP salto incondicional) */
  	, ARRAYLABEL /*Primero parametro: tipo arreglo. Segundo parametro: tamaño. Tercer Parametro: nombre del arreglo.(para las var. declaradas como "Tipo ID[expr]") */;
  	//CREO DEBERIAMOS TENER PARA LAS LLAMADAS A METODOS TANTO EXTERNOS COMO INTERNOS 
  	@Override
@@ -69,6 +69,8 @@ public enum TripletOperator{
 		    	return "array[]";
 		   	case JNE:
 		   		return "JNE";
+		   	case JNL:
+		   		return "JNL";
 
 		}
 		return null;
