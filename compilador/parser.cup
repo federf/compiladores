@@ -32,8 +32,13 @@
     String LastBeginWhileLabel;
     String LastEndWhileLabel;
 
-    //pila de labels
-    LinkedList<String> LabelsStack;
+    //pilas de labels
+    //para whiles
+    LinkedList<String> WhilesStack;
+    //para fors
+    LinkedList<String> ForsStack;
+    //para ifs
+    LinkedList<String> IfsStack;
     :};
 
     parser code{:
@@ -133,7 +138,7 @@
             ;
 
     body::= LLAVE_IZQ LLAVE_DER 
-        | LLAVE_IZQ {: TS = new symbolTable(); TripletList=new LinkedList(); LabelsStack=new LinkedList(); :} fieldAndMethods LLAVE_DER 
+        | LLAVE_IZQ {: TS = new symbolTable(); TripletList=new LinkedList(); ForsStack=new LinkedList(); WhilesStack=new LinkedList(); IfsStack=new LinkedList();:} fieldAndMethods LLAVE_DER 
         ;
 
     fieldAndMethods::= fieldDeclarations
@@ -481,10 +486,10 @@
              | IF PARENTESIS_IZQ {://agregamos un nuevo nivel al arbol para el cuerpo del if
                  TS.agregarNivel(); :} expr:e {: 
                     //creamos y agregamos los label de salto por falso y fin de if
-                    String labelElse = "falseCond "+Labels.getLabel(); 
-                    LabelsStack.addLast(labelElse); //top -1
+                    String labelElse = "elseCond "+Labels.getLabel(); 
+                    IfsStack.addLast(labelElse); //get(size-2)
                     String labelEndIf = "endIf "+Labels.getLabel();
-                    LabelsStack.addLast(labelEndIf); //top
+                    IfsStack.addLast(labelEndIf); //getLast
                     //agrego la comparacion de la cond (expr) con true
                     TripletList.addLast(new TripletCode(TripletOperator.CMP, e, "true", null));
                     //si la condicion es falsa salto al else
@@ -492,9 +497,9 @@
 
                 :} PARENTESIS_DER block:ifBlock {: /*subimos de nivel luego del bloque if*/TS.SubirNivel(); 
                     //saltamos al final del if
-                    TripletList.addLast(new TripletCode(TripletOperator.JMP, null, null, LabelsStack.getLast()));
+                    TripletList.addLast(new TripletCode(TripletOperator.JMP, null, null, IfsStack.getLast()));
                     //agregamos un label para el salto a else
-                    TripletList.addLast(new TripletCode(TripletOperator.LABEL, null,null, LabelsStack.get(LabelsStack.size()-2)));
+                    TripletList.addLast(new TripletCode(TripletOperator.LABEL, null,null, IfsStack.get(IfsStack.size()-2)));
                 :} else_block:elseBlock {: 
                 //luego de procesar el bloque else (el cual es opcional)
                 if(e.getType().equals(Type.BOOLEAN)){ //si la expression es de tipo boolean
@@ -505,10 +510,10 @@
                         res=new IfStmt(e.getExpr(), ifBlock);
                     }
                     //agregamos el label del fin del if
-                    TripletList.addLast(new TripletCode(TripletOperator.LABEL, null,null, LabelsStack.getLast()));
+                    TripletList.addLast(new TripletCode(TripletOperator.LABEL, null,null, IfsStack.getLast()));
                     //removemos los labels creados al principio ya que no son de utilidad
-                    LabelsStack.removeLast();
-                    LabelsStack.removeLast();
+                    IfsStack.removeLast();
+                    IfsStack.removeLast();
                     
 
                     RESULT=res;
@@ -516,10 +521,12 @@
                     System.out.println("Error: Expression in If-Else statement must be Boolean");
                 } :}
              | FOR ID:id ASIGNACION expr:e1 COMA expr:e2 {: 
-                String EndFor = "EndFor "+Labels.getLabel();
-                LabelsStack.addLast(EndFor);
-                String BeginFor = "BeginFor "+Labels.getLabel();
-                LabelsStack.addLast(BeginFor);
+                String BeginFor = "BeginFor "+Labels.getLabel(); //get(size-2)
+                ForsStack.addLast(BeginFor);
+
+                String EndFor = "EndFor "+Labels.getLabel(); //getLast()
+                ForsStack.addLast(EndFor);
+                
                 //creamos LABEL para el Begin del for
                 TripletList.addLast(new TripletCode(TripletOperator.LABEL, null, null, BeginFor));
                 //comparamos las dos expresiones
@@ -532,10 +539,10 @@
 
                 // Incrementa el contador
                 TripletList.addLast(new TripletCode(TripletOperator.PLUS, e1, "1", e1));
-                //vuelve al inicio del ciclo
-                TripletList.addLast(new TripletCode(TripletOperator.JMP, null, null, LabelsStack.getLast()));
+                //vuelve al inicio del ciclo (antes de la evaluacion de la condicion)
+                TripletList.addLast(new TripletCode(TripletOperator.JMP, null, null, ForsStack.get(ForsStack.size()-2)));
                 //agregamos el label de fin del for
-                TripletList.addLast(new TripletCode(TripletOperator.LABEL, null, null, LabelsStack.get(LabelsStack.size()-2)));
+                TripletList.addLast(new TripletCode(TripletOperator.LABEL, null, null, ForsStack.getLast()));
 
                 //si las expresiones son de tipo entero o se accede a un arreglo de INT
                 if( ( (e1.getType().equals(Type.INT) || (e1.getType().equals(Type.INTARRAY)) ) && (e2.getType().equals(Type.INT) || (e2.getType().equals(Type.INTARRAY) ) ) ) ){
@@ -547,17 +554,15 @@
                 if(inLoop){
                     TS.SubirNivel();
                     inLoop=false;
-                } 
+                }
+                ForsStack.removeLast();
+                ForsStack.removeLast();
             :}
              | WHILE expr:e {: 
-                String LabelEndWhile="EndWhile "+Labels.getLabel();
-                //actualizamos el label del ultimo end while
-                LastEndWhileLabel=LabelEndWhile;
-                LabelsStack.addLast(LabelEndWhile);
                 String LabelBegin="BeginWhile "+Labels.getLabel();
-                //actualizamos el label del ultimo end while
-                LastBeginWhileLabel=LabelBegin;
-                LabelsStack.addLast(LabelBegin);
+                WhilesStack.addLast(LabelBegin);//get(size-2)
+                String LabelEndWhile="EndWhile "+Labels.getLabel();
+                WhilesStack.addLast(LabelEndWhile);//getLast
                 //agregamos un nuevo nivel para el cuerpo del ciclo
                 TS.agregarNivel();
                 //agregamos el Label de Begin While
@@ -588,12 +593,13 @@
                     //marcamos que dejamos de estar en un ciclo
                     inLoop=false;
                 }
-                TripletList.addLast(new TripletCode(TripletOperator.JMP, null, null, LabelsStack.getLast()));
+                //salto al inicio del while(antes de evaluar la condicion)
+                TripletList.addLast(new TripletCode(TripletOperator.JMP, null, null, WhilesStack.get(WhilesStack.size()-2)));
 
                 //agregamos el LABEL de fin de While
-                TripletList.addLast(new TripletCode(TripletOperator.LABEL,null,null, LabelsStack.get(LabelsStack.size()-2))); 
-                LabelsStack.removeLast();
-                LabelsStack.removeLast();
+                TripletList.addLast(new TripletCode(TripletOperator.LABEL,null,null, WhilesStack.getLast())); 
+                WhilesStack.removeLast();
+                WhilesStack.removeLast();
                 :}
              | RETURN PUNTO_Y_COMA {:
                                     //verificamos que el ultimo metodo leido (el cual se esta procesando)
@@ -648,7 +654,8 @@
                                         //si no lo estamos, mostramos un mensaje de error
                                         System.out.println("Error: Break statement must be in a Loop");
                                     }else{
-                                        TripletList.addLast(new TripletCode(TripletOperator.JMP,null,null, LastEndWhileLabel));
+                                        //en presencia de un break se salta al final del ciclo while en que nos situamos actualmente
+                                        TripletList.addLast(new TripletCode(TripletOperator.JMP,null,null, WhilesStack.getLast()));
                                         BreakStmt res=new BreakStmt(); 
                                         RESULT=res;
                                     } :}
@@ -657,7 +664,7 @@
                                             //si no lo estamos, mostramos un mensaje de error
                                             System.out.println("Error: Continue statement must be in a Loop");
                                         }else{
-                                            TripletList.addLast(new TripletCode(TripletOperator.JMP,null,null, LastBeginWhileLabel));
+                                            TripletList.addLast(new TripletCode(TripletOperator.JMP,null,null, WhilesStack.get(WhilesStack.size()-2)));
                                             ContinueStmt res=new ContinueStmt(); 
                                             RESULT=res;
                                         }  :}
