@@ -689,6 +689,10 @@
                         //si el metodo fue encontrado creamos y retornamos una nueva MethodCallExpr
                         MethodCallExpr res=new MethodCallExpr(m.getName(), new LinkedList()); 
                         res.setType(m.getTypeReturn());
+                        //CODIGO DE 3 DIRECCIONES //!!VERIFICAR 
+                        String resultLabel="RESULT "+Labels.getLabel();
+                        TripletList.addLast(new TripletCode(TripletOperator.METHODCALL, m.getName(), 0,resultLabel));
+                        //FIN CODIGO 3 DIRECCIONES
                         RESULT=res;
                     }else{
                         //sino mostramos un mensaje de error indicando que el metodo no fue declarado
@@ -715,6 +719,7 @@
                             //sino, si es una variable, buscamos su tipo y lo guardamos
                             argsType.addLast(args.get(i).getType());
                         }
+
                     }
                     //buscamos el metodo por su id y la lista de tipos de parametros
                     Metodo m=TS.buscarMetodo(id, argsType);
@@ -723,6 +728,14 @@
                         //creamos y retornamos una nueva MethodCallExpr
                         MethodCallExpr res=new MethodCallExpr(m.getName(), args); 
                         res.setType(m.getTypeReturn());
+                        //CODIGO DE 3 DIRECCIONES //!!VERIFICAR 
+                        String resultLabel="RESULT "+Labels.getLabel();
+                        TripletList.addLast(new TripletCode(TripletOperator.METHODCALL, m.getName(), argsType.size(),resultLabel));
+                        //agregamos los parametros del metodo a la pila
+                        for(int i=0; i<args.size(); i++){
+                            TripletList.addLast(new TripletCode(TripletOperator.PARAM, null,null,args.get(i)));
+                        }
+                        //FIN CODIGO 3 DIRECCIONES
                         RESULT=res;
                     }else{
                         //sino mostramos un mensaje de error indicando que el metodo no fue declarado
@@ -731,10 +744,18 @@
                     :}
                |  EXTERNINVK PARENTESIS_IZQ STRING_LITERAL:s COMA type_or_void:t COMA externinvk_args:args PARENTESIS_DER {:
                         ExternInvkExpr res=new ExternInvkExpr(s,args,t);
+                        //CODIGO DE 3 DIRECCIONES
+                        String resultLabel="EXTERNINVK "+Labels.getLabel();
+                        TripletList.addLast(new TripletCode(TripletOperator.EXTERNINVK, res,null,null));//!!VERIFICAR 
+                        //FIN CODIGO 3 DIRECCIONES
                         RESULT=res;
                     :}
                |  EXTERNINVK PARENTESIS_IZQ STRING_LITERAL:s COMA type_or_void:t PARENTESIS_DER {: 
                     ExternInvkExpr res=new ExternInvkExpr(s,new LinkedList(),t);
+                    //CODIGO DE 3 DIRECCIONES
+                    String resultLabel="EXTERNINVK "+Labels.getLabel(); 
+                    TripletList.addLast(new TripletCode(TripletOperator.EXTERNINVK, res,null,null)); //!!VERIFICAR 
+                    //FIN CODIGO 3 DIRECCIONES
                     RESULT=res;
                 :}
                ;

@@ -14,8 +14,10 @@ public enum TripletOperator{
  	, PARAM 	  /* Tercer parametro: Variable con valor del parametro - PARAMETRO */
  	, CMP 		  /* Primer parametro: expr a comparar. Segundo parametro: valor a comparar*/
  	, JMP, JNE, JNL /* Tercer parametro: Label a saltar - SALTO (JMP salto incondicional) */
- 	, ARRAYLABEL /*Primero parametro: tipo arreglo. Segundo parametro: tamaño. Tercer Parametro: nombre del arreglo.(para las var. declaradas como "Tipo ID[expr]") */;
+ 	, ARRAYLABEL /*Primero parametro: tipo arreglo. Segundo parametro: tamaño. Tercer Parametro: nombre del arreglo.(para las var. declaradas como "Tipo ID[expr]") */
  	//CREO DEBERIAMOS TENER PARA LAS LLAMADAS A METODOS TANTO EXTERNOS COMO INTERNOS 
+ 	, METHODCALL /* Primer parametro: ID del metodo. Segundo parametro: cant de parametros.  */
+ 	,EXTERNINVK; /* Primer parametro: Expresion */
  	@Override
 	public String toString() {
 		switch(this) {
@@ -71,6 +73,10 @@ public enum TripletOperator{
 		   		return "JNE";
 		   	case JNL:
 		   		return "JNL";
+		   	case METHODCALL:
+		   		return "METHODCALL";
+		   	case EXTERNINVK:
+		   		return "EXTERNINVK";
 
 		}
 		return null;

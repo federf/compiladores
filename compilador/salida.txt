@@ -10,7 +10,7 @@
 ---------------- Test tests/test_correctos/factorial.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 14
+tamaño lista de codigo tercetos: 17
 lista: 
 {LABEL, int, null, Result: i}
 {LABEL, int, null, Result: total}
@@ -26,13 +26,16 @@ lista:
 {ASSIGN(=), 0 - 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 7}
 {LABEL, null, null, Result: EndWhile Label 8}
+{METHODCALL, factorial, 1, Result: RESULT Label 17}
+{PARAM, null, null, Result: 3}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=factorial, args=[3]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/floatTest.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 13
+tamaño lista de codigo tercetos: 29
 lista: 
 {DIVIDE(/), 0.0, 0.0, Result: VarLocation{name=DIVIDE Label 3, type=float, expr=VarLocation{name=factor Label 1, type=float, expr=0.0, size=0} / VarLocation{name=factor Label 2, type=float, expr=0.0, size=0}, size=0}}
 {MINUS(-), 0.0, 0.0, Result: VarLocation{name=MINUS Label 6, type=float, expr=0.0 - 0.0, size=0}}
@@ -46,14 +49,30 @@ lista:
 {ASSIGN(=), -27.5, null, Result: VarLocation{name=y, type=float, expr=null, size=0}}
 {UNARYMINUS(-expr), 70.3, null, Result: VarLocation{name=UNARYMINUS Label 17, type=float, expr=-70.3, size=0}}
 {ASSIGN(=), -70.3, null, Result: VarLocation{name=z, type=float, expr=null, size=0}}
-{UNARYMINUS(-expr), 0.0, null, Result: VarLocation{name=UNARYMINUS Label 26, type=float, expr=-0.0, size=0}}
+{METHODCALL, sum, 2, Result: RESULT Label 20}
+{PARAM, null, null, Result: 0.0}
+{PARAM, null, null, Result: 0.0}
+{METHODCALL, div, 2, Result: RESULT Label 24}
+{PARAM, null, null, Result: 0.0}
+{PARAM, null, null, Result: 0.0}
+{METHODCALL, mult, 2, Result: RESULT Label 26}
+{PARAM, null, null, Result: MethodCallExpr{name=sum, args=[0.0, 0.0]}}
+{PARAM, null, null, Result: MethodCallExpr{name=div, args=[0.0, 0.0]}}
+{UNARYMINUS(-expr), 0.0, null, Result: VarLocation{name=UNARYMINUS Label 29, type=float, expr=-0.0, size=0}}
+{METHODCALL, resta, 2, Result: RESULT Label 31}
+{PARAM, null, null, Result: -0.0}
+{PARAM, null, null, Result: 0.0}
+{METHODCALL, sum, 2, Result: RESULT Label 33}
+{PARAM, null, null, Result: MethodCallExpr{name=mult, args=[MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}}
+{PARAM, null, null, Result: MethodCallExpr{name=resta, args=[-0.0, 0.0]}}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandoFloatTest"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=mult, args=[MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}, MethodCallExpr{name=resta, args=[-0.0, 0.0]}]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/logicTest.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 7
+tamaño lista de codigo tercetos: 10
 lista: 
 {LABEL, boolean, null, Result: bool}
 {ASSIGN(=), true, null, Result: VarLocation{name=bool, type=boolean, expr=null, size=0}}
@@ -62,23 +81,31 @@ lista:
 {AND(&&), VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0}, !true, Result: VarLocation{name=CONJUNCION Label 8, type=boolean, expr=VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0} && !true, size=0}}
 {NON(!), false, null, Result: VarLocation{name=NON Label 11, type=boolean, expr=!false, size=0}}
 {AND(&&), VarLocation{name=CONJUNCION Label 8, type=boolean, expr=VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0} && !true, size=0}, !false, Result: VarLocation{name=CONJUNCION Label 12, type=boolean, expr=VarLocation{name=CONJUNCION Label 8, type=boolean, expr=VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0} && !true, size=0} && !false, size=0}}
+{METHODCALL, pruebaLogica, 1, Result: RESULT Label 15}
+{PARAM, null, null, Result: true}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[true]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/program.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 9
+tamaño lista de codigo tercetos: 14
 lista: 
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 3, type=int, expr=0 + 1, size=0}}
 {LABEL, int, null, Result: y}
-{ASSIGN(=), MethodCallExpr{name=inc, args=["get_int"()]}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
-{CEQ(==), 0, 1, Result: VarLocation{name=CEQ Label 8, type=boolean, expr=0 == 1, size=0}}
-{CMP, VarLocation{name=CEQ Label 8, type=boolean, expr=0 == 1, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 9}
-{JMP, null, null, Result: endIf Label 10}
-{LABEL, null, null, Result: elseCond Label 9}
-{LABEL, null, null, Result: endIf Label 10}
+{EXTERNINVK, ExternInvkExpr{id="get_int", type=int, parameters=[]}, null, Result: null}
+{METHODCALL, inc, 1, Result: RESULT Label 6}
+{PARAM, null, null, Result: ExternInvkExpr{id="get_int", type=int, parameters=[]}}
+{ASSIGN(=), MethodCallExpr{name=inc, args=[ExternInvkExpr{id="get_int", type=int, parameters=[]}]}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
+{CEQ(==), 0, 1, Result: VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 1, size=0}}
+{CMP, VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 1, size=0}, true, Result: null}
+{JNE, null, null, Result: elseCond Label 11}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==1\n"}]}, null, Result: null}
+{JMP, null, null, Result: endIf Label 12}
+{LABEL, null, null, Result: elseCond Label 11}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==%d\n"}, 0]}, null, Result: null}
+{LABEL, null, null, Result: endIf Label 12}
 ---------------------------------------------------
   
   
@@ -122,7 +149,7 @@ lista:
 parseo iniciado
 Error: Method pruArreglos must return int
 parseo exitoso
-tamaño lista de codigo tercetos: 61
+tamaño lista de codigo tercetos: 66
 lista: 
 {array[], int[], 589, Result: A}
 {array[], float[], 56, Result: B}
@@ -185,13 +212,18 @@ lista:
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 62}
 {LABEL, null, null, Result: EndWhile Label 63}
+{METHODCALL, pruArreglos, 2, Result: RESULT Label 81}
+{PARAM, null, null, Result: 4}
+{PARAM, null, null, Result: 8}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_Asignaciones.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 14
+tamaño lista de codigo tercetos: 17
 lista: 
 {LABEL, int, null, Result: a}
 {LABEL, int, null, Result: b}
@@ -207,13 +239,16 @@ lista:
 {ASSIGN(=), VarLocation{name=DIVIDE Label 15, type=int, expr=0 / 0 / 0 / 2, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 {MOD(%), 0, 2, Result: VarLocation{name=MOD Label 19, type=int, expr=0 % 2, size=0}}
 {ASSIGN(=), 0 % 2, null, Result: VarLocation{name=c, type=int, expr=null, size=0}}
+{METHODCALL, pruAritmetica, 1, Result: RESULT Label 22}
+{PARAM, null, null, Result: 3}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[3]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/testAssing.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 14
+tamaño lista de codigo tercetos: 17
 lista: 
 {LABEL, int, null, Result: a}
 {LABEL, int, null, Result: b}
@@ -229,13 +264,16 @@ lista:
 {ASSIGN(=), 0 % 3, null, Result: VarLocation{name=c, type=int, expr=null, size=0}}
 {ASSIGN(=), 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 {ASSIGN(=), 2, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{METHODCALL, aritmTest, 1, Result: RESULT Label 20}
+{PARAM, null, null, Result: 5}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=aritmTest, args=[5]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_bloques02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 20
+tamaño lista de codigo tercetos: 23
 lista: 
 {LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
@@ -257,13 +295,16 @@ lista:
 {LABEL, null, null, Result: endIf Label 16}
 {JMP, null, null, Result: BeginWhile Label 6}
 {LABEL, null, null, Result: EndWhile Label 7}
+{METHODCALL, breaks, 1, Result: RESULT Label 19}
+{PARAM, null, null, Result: 1}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_bloques.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 18
+tamaño lista de codigo tercetos: 21
 lista: 
 {LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
@@ -283,13 +324,16 @@ lista:
 {LABEL, null, null, Result: endIf Label 15}
 {JMP, null, null, Result: BeginWhile Label 6}
 {LABEL, null, null, Result: EndWhile Label 7}
+{METHODCALL, breaks, 1, Result: RESULT Label 18}
+{PARAM, null, null, Result: 1}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_booleanos.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 12
+tamaño lista de codigo tercetos: 23
 lista: 
 {NON(!), false, null, Result: VarLocation{name=NON Label 2, type=boolean, expr=!false, size=0}}
 {AND(&&), false, false, Result: VarLocation{name=CONJUNCION Label 5, type=boolean, expr=false && false, size=0}}
@@ -301,15 +345,26 @@ lista:
 {LABEL, int, null, Result: y}
 {ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
 {ASSIGN(=), false, null, Result: VarLocation{name=b, type=boolean, expr=null, size=0}}
+{METHODCALL, neg, 1, Result: RESULT Label 12}
+{PARAM, null, null, Result: false}
 {ASSIGN(=), MethodCallExpr{name=neg, args=[false]}, null, Result: VarLocation{name=b, type=boolean, expr=null, size=0}}
+{METHODCALL, and, 2, Result: RESULT Label 16}
+{PARAM, null, null, Result: false}
+{PARAM, null, null, Result: false}
+{METHODCALL, neg, 1, Result: RESULT Label 19}
+{PARAM, null, null, Result: false}
+{METHODCALL, or, 2, Result: RESULT Label 21}
+{PARAM, null, null, Result: MethodCallExpr{name=and, args=[false, false]}}
+{PARAM, null, null, Result: MethodCallExpr{name=neg, args=[false]}}
 {ASSIGN(=), MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_break.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 18
+tamaño lista de codigo tercetos: 21
 lista: 
 {LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
@@ -329,13 +384,16 @@ lista:
 {LABEL, null, null, Result: endIf Label 15}
 {JMP, null, null, Result: BeginWhile Label 6}
 {LABEL, null, null, Result: EndWhile Label 7}
+{METHODCALL, breaks, 1, Result: RESULT Label 18}
+{PARAM, null, null, Result: 1}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_comentarios2.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 9
+tamaño lista de codigo tercetos: 13
 lista: 
 {LABEL, float, null, Result: res}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
@@ -346,13 +404,17 @@ lista:
 {LABEL, null, null, Result: elseCond Label 4}
 {ASSIGN(=), 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 5}
+{METHODCALL, pruAritmetica, 2, Result: RESULT Label 11}
+{PARAM, null, null, Result: 4}
+{PARAM, null, null, Result: 8}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_comentarios.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 10
+tamaño lista de codigo tercetos: 14
 lista: 
 {LABEL, float, null, Result: res}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
@@ -364,13 +426,17 @@ lista:
 {LABEL, null, null, Result: elseCond Label 4}
 {ASSIGN(=), 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 5}
+{METHODCALL, pruAritmetica, 2, Result: RESULT Label 13}
+{PARAM, null, null, Result: 4}
+{PARAM, null, null, Result: 8}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_condiciones.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 76
+tamaño lista de codigo tercetos: 81
 lista: 
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 6, size=0}}
 {NON(!), VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 5, type=boolean, expr=!VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 6, size=0}, size=0}}
@@ -448,13 +514,18 @@ lista:
 {JMP, null, null, Result: endIf Label 145}
 {LABEL, null, null, Result: elseCond Label 144}
 {LABEL, null, null, Result: endIf Label 145}
+{METHODCALL, dados, 3, Result: RESULT Label 150}
+{PARAM, null, null, Result: 1}
+{PARAM, null, null, Result: 6}
+{PARAM, null, null, Result: 9}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=dados, args=[1, 6, 9]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_continuebreak.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 37
+tamaño lista de codigo tercetos: 41
 lista: 
 {LABEL, float, null, Result: i}
 {LABEL, int, null, Result: n}
@@ -493,13 +564,17 @@ lista:
 {LABEL, null, null, Result: EndWhile Label 10}
 {UNARYMINUS(-expr), 2, null, Result: VarLocation{name=UNARYMINUS Label 34, type=int, expr=-2, size=0}}
 {MULTIPLY(*), -2, 0.0, Result: VarLocation{name=MULTIPLY Label 36, type=int, expr=-2 * 0.0, size=0}}
+{METHODCALL, pruContinue, 2, Result: RESULT Label 39}
+{PARAM, null, null, Result: 3.0}
+{PARAM, null, null, Result: 2}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=pruContinue, args=[3.0, 2]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_expresiones01.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 37
+tamaño lista de codigo tercetos: 40
 lista: 
 {LABEL, int, null, Result: a}
 {LABEL, float, null, Result: c}
@@ -538,13 +613,16 @@ lista:
 {JMP, null, null, Result: endIf Label 6}
 {LABEL, null, null, Result: elseCond Label 5}
 {LABEL, null, null, Result: endIf Label 6}
+{METHODCALL, prueba, 1, Result: RESULT Label 39}
+{PARAM, null, null, Result: 6}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_expresiones02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 21
+tamaño lista de codigo tercetos: 24
 lista: 
 {LABEL, int, null, Result: a}
 {LABEL, float, null, Result: f}
@@ -567,13 +645,16 @@ lista:
 {JMP, null, null, Result: endIf Label 20}
 {LABEL, null, null, Result: elseCond Label 19}
 {LABEL, null, null, Result: endIf Label 20}
+{METHODCALL, prueba, 1, Result: RESULT Label 24}
+{PARAM, null, null, Result: 6}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float01.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 39
+tamaño lista de codigo tercetos: 43
 lista: 
 {LABEL, int, null, Result: i}
 {LABEL, boolean, null, Result: neg}
@@ -613,14 +694,18 @@ lista:
 {LABEL, float, null, Result: f}
 {LABEL, float, null, Result: a}
 {ASSIGN(=), 8.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
+{METHODCALL, potencia, 2, Result: RESULT Label 40}
+{PARAM, null, null, Result: 0.0}
+{PARAM, null, null, Result: 2}
 {ASSIGN(=), MethodCallExpr{name=potencia, args=[0.0, 2]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 27
+tamaño lista de codigo tercetos: 30
 lista: 
 {LABEL, float, null, Result: total}
 {LABEL, float, null, Result: i}
@@ -648,14 +733,17 @@ lista:
 {LABEL, float, null, Result: f}
 {LABEL, float, null, Result: a}
 {ASSIGN(=), 8.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
+{METHODCALL, sumatoria, 1, Result: RESULT Label 26}
+{PARAM, null, null, Result: 0.0}
 {ASSIGN(=), MethodCallExpr{name=sumatoria, args=[0.0]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float03.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 148
+tamaño lista de codigo tercetos: 155
 lista: 
 {LABEL, float, null, Result: w}
 {LABEL, float, null, Result: m}
@@ -803,15 +891,22 @@ lista:
 {ASSIGN(=), 4.3, null, Result: VarLocation{name=w, type=float, expr=null, size=0}}
 {UNARYMINUS(-expr), 7.6, null, Result: VarLocation{name=UNARYMINUS Label 155, type=float, expr=-7.6, size=0}}
 {ASSIGN(=), -7.6, null, Result: VarLocation{name=m, type=float, expr=null, size=0}}
+{METHODCALL, potencia, 2, Result: RESULT Label 158}
+{PARAM, null, null, Result: 0.0}
+{PARAM, null, null, Result: 2}
 {ASSIGN(=), MethodCallExpr{name=potencia, args=[0.0, 2]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
-{PLUS(+), 0.0, 2.0, Result: VarLocation{name=PLUS Label 162, type=float, expr=0.0 + 2.0, size=0}}
+{PLUS(+), 0.0, 2.0, Result: VarLocation{name=PLUS Label 163, type=float, expr=0.0 + 2.0, size=0}}
+{METHODCALL, multiples, 2, Result: RESULT Label 164}
+{PARAM, null, null, Result: 0.0}
+{PARAM, null, null, Result: 0.0 + 2.0}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multiples, args=[0.0, 0.0 + 2.0]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_float04.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 56
+tamaño lista de codigo tercetos: 63
 lista: 
 {LABEL, float, null, Result: w}
 {LABEL, float, null, Result: m}
@@ -868,14 +963,21 @@ lista:
 {UNARYMINUS(-expr), 7.6, null, Result: VarLocation{name=UNARYMINUS Label 58, type=float, expr=-7.6, size=0}}
 {ASSIGN(=), -7.6, null, Result: VarLocation{name=m, type=float, expr=null, size=0}}
 {ASSIGN(=), 80.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
+{METHODCALL, potencia, 2, Result: RESULT Label 62}
+{PARAM, null, null, Result: 0.0}
+{PARAM, null, null, Result: 2}
 {ASSIGN(=), MethodCallExpr{name=potencia, args=[0.0, 2]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
+{METHODCALL, multRepeat, 2, Result: RESULT Label 66}
+{PARAM, null, null, Result: 0.0}
+{PARAM, null, null, Result: 0.0}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multRepeat, args=[0.0, 0.0]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_floats05.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 10
+tamaño lista de codigo tercetos: 20
 lista: 
 {DIVIDE(/), 0.0, 0.0, Result: VarLocation{name=DIVIDE Label 3, type=float, expr=VarLocation{name=factor Label 1, type=float, expr=0.0, size=0} / VarLocation{name=factor Label 2, type=float, expr=0.0, size=0}, size=0}}
 {MINUS(-), 0.0, 0.0, Result: VarLocation{name=MINUS Label 6, type=float, expr=0.0 - 0.0, size=0}}
@@ -887,13 +989,23 @@ lista:
 {UNARYMINUS(-expr), 002.5, null, Result: VarLocation{name=UNARYMINUS Label 12, type=float, expr=-002.5, size=0}}
 {ASSIGN(=), -002.5, null, Result: VarLocation{name=y, type=float, expr=null, size=0}}
 {ASSIGN(=), 3.5698, null, Result: VarLocation{name=z, type=float, expr=null, size=0}}
+{METHODCALL, resta, 2, Result: RESULT Label 16}
+{PARAM, null, null, Result: 0.0}
+{PARAM, null, null, Result: 0.0}
+{METHODCALL, div, 2, Result: RESULT Label 20}
+{PARAM, null, null, Result: 0.0}
+{PARAM, null, null, Result: 0.0}
+{METHODCALL, sum, 2, Result: RESULT Label 22}
+{PARAM, null, null, Result: MethodCallExpr{name=resta, args=[0.0, 0.0]}}
+{PARAM, null, null, Result: MethodCallExpr{name=div, args=[0.0, 0.0]}}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandofuncionesflotantes"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=resta, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for01.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 15
+tamaño lista de codigo tercetos: 19
 lista: 
 {array[], int[], 5, Result: A}
 {array[], float[], 56, Result: B}
@@ -910,13 +1022,17 @@ lista:
 {PLUS(+), VarLocation{name=factor Label 5, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factor Label 5, type=int, expr=5, size=0}}
 {JMP, null, null, Result: BeginFor Label 9}
 {LABEL, null, null, Result: EndFor Label 10}
+{METHODCALL, pruArreglos, 2, Result: RESULT Label 17}
+{PARAM, null, null, Result: 4}
+{PARAM, null, null, Result: 8}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 14
+tamaño lista de codigo tercetos: 18
 lista: 
 {array[], int[], 5, Result: A}
 {array[], float[], 56, Result: B}
@@ -932,13 +1048,17 @@ lista:
 {PLUS(+), VarLocation{name=factor Label 5, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factor Label 5, type=int, expr=5, size=0}}
 {JMP, null, null, Result: BeginFor Label 7}
 {LABEL, null, null, Result: EndFor Label 8}
+{METHODCALL, pruArreglos, 2, Result: RESULT Label 15}
+{PARAM, null, null, Result: 4}
+{PARAM, null, null, Result: 8}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for03.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 15
+tamaño lista de codigo tercetos: 19
 lista: 
 {array[], int[], 5, Result: A}
 {array[], float[], 56, Result: B}
@@ -955,13 +1075,17 @@ lista:
 {PLUS(+), VarLocation{name=factor Label 5, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factor Label 5, type=int, expr=5, size=0}}
 {JMP, null, null, Result: BeginFor Label 8}
 {LABEL, null, null, Result: EndFor Label 9}
+{METHODCALL, pruArreglos, 2, Result: RESULT Label 16}
+{PARAM, null, null, Result: 4}
+{PARAM, null, null, Result: 8}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for04.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 17
+tamaño lista de codigo tercetos: 21
 lista: 
 {array[], int[], 5, Result: A}
 {array[], float[], 56, Result: B}
@@ -980,13 +1104,17 @@ lista:
 {PLUS(+), VarLocation{name=factor Label 5, type=int, expr=0, size=0}, 1, Result: VarLocation{name=factor Label 5, type=int, expr=0, size=0}}
 {JMP, null, null, Result: BeginFor Label 13}
 {LABEL, null, null, Result: EndFor Label 14}
+{METHODCALL, pruArreglos, 2, Result: RESULT Label 21}
+{PARAM, null, null, Result: 4}
+{PARAM, null, null, Result: 8}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_for05.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 15
+tamaño lista de codigo tercetos: 21
 lista: 
 {array[], int[], 5, Result: A}
 {array[], float[], 56, Result: B}
@@ -994,22 +1122,28 @@ lista:
 {LABEL, int, null, Result: i}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
 {RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
-{PLUS(+), MethodCallExpr{name=par, args=[]}, 5, Result: VarLocation{name=PLUS Label 9, type=int, expr=MethodCallExpr{name=par, args=[]} + 5, size=0}}
-{LABEL, null, null, Result: BeginFor Label 10}
-{CMP, VarLocation{name=factor Label 6, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, VarLocation{name=PLUS Label 9, type=int, expr=MethodCallExpr{name=par, args=[]} + 5, size=0}, Result: null}
-{JNL, null, null, Result: EndFor Label 11}
-{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 15, type=int, expr=0 + 2, size=0}}
+{METHODCALL, par, 0, Result: RESULT Label 6}
+{METHODCALL, par, 0, Result: RESULT Label 8}
+{PLUS(+), MethodCallExpr{name=par, args=[]}, 5, Result: VarLocation{name=PLUS Label 11, type=int, expr=MethodCallExpr{name=par, args=[]} + 5, size=0}}
+{LABEL, null, null, Result: BeginFor Label 12}
+{CMP, VarLocation{name=factor Label 7, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, VarLocation{name=PLUS Label 11, type=int, expr=MethodCallExpr{name=par, args=[]} + 5, size=0}, Result: null}
+{JNL, null, null, Result: EndFor Label 13}
+{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 17, type=int, expr=0 + 2, size=0}}
 {ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{PLUS(+), VarLocation{name=factor Label 6, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, 1, Result: VarLocation{name=factor Label 6, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}}
-{JMP, null, null, Result: BeginFor Label 10}
-{LABEL, null, null, Result: EndFor Label 11}
+{PLUS(+), VarLocation{name=factor Label 7, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, 1, Result: VarLocation{name=factor Label 7, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}}
+{JMP, null, null, Result: BeginFor Label 12}
+{LABEL, null, null, Result: EndFor Label 13}
+{METHODCALL, pruArreglos, 2, Result: RESULT Label 20}
+{PARAM, null, null, Result: 4}
+{PARAM, null, null, Result: 8}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_if_anidados.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 19
+tamaño lista de codigo tercetos: 32
 lista: 
 {LABEL, float, null, Result: res}
 {NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 3, type=boolean, expr=0 != 0, size=0}}
@@ -1030,13 +1164,26 @@ lista:
 {MULTIPLY(*), 0, 5, Result: VarLocation{name=MULTIPLY Label 19, type=int, expr=0 * 5, size=0}}
 {ASSIGN(=), 0 * 5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 5}
+{METHODCALL, pruAritmetica, 2, Result: RESULT Label 23}
+{PARAM, null, null, Result: 4}
+{PARAM, null, null, Result: 8}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: null}
+{METHODCALL, pruAritmetica, 2, Result: RESULT Label 29}
+{PARAM, null, null, Result: 4}
+{PARAM, null, null, Result: 4}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: null}
+{METHODCALL, pruAritmetica, 2, Result: RESULT Label 34}
+{PARAM, null, null, Result: 8}
+{PARAM, null, null, Result: 5}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_if.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 19
+tamaño lista de codigo tercetos: 32
 lista: 
 {LABEL, float, null, Result: res}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
@@ -1057,13 +1204,26 @@ lista:
 {MINUS(-), 0, 0, Result: VarLocation{name=MINUS Label 19, type=int, expr=0 - 0, size=0}}
 {ASSIGN(=), 0 - 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 13}
+{METHODCALL, pruAritmetica, 2, Result: RESULT Label 23}
+{PARAM, null, null, Result: 4}
+{PARAM, null, null, Result: 8}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: null}
+{METHODCALL, pruAritmetica, 2, Result: RESULT Label 29}
+{PARAM, null, null, Result: 4}
+{PARAM, null, null, Result: 4}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: null}
+{METHODCALL, pruAritmetica, 2, Result: RESULT Label 34}
+{PARAM, null, null, Result: 8}
+{PARAM, null, null, Result: 5}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_logicos01.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 7
+tamaño lista de codigo tercetos: 10
 lista: 
 {LABEL, boolean, null, Result: a}
 {ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
@@ -1072,13 +1232,16 @@ lista:
 {AND(&&), VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0}, !true, Result: VarLocation{name=CONJUNCION Label 8, type=boolean, expr=VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0} && !true, size=0}}
 {NON(!), false, null, Result: VarLocation{name=NON Label 11, type=boolean, expr=!false, size=0}}
 {AND(&&), VarLocation{name=CONJUNCION Label 8, type=boolean, expr=VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0} && !true, size=0}, !false, Result: VarLocation{name=CONJUNCION Label 12, type=boolean, expr=VarLocation{name=CONJUNCION Label 8, type=boolean, expr=VarLocation{name=DISYUNCION Label 4, type=boolean, expr=false || false, size=0} && !true, size=0} && !false, size=0}}
+{METHODCALL, pruebaLogica, 1, Result: RESULT Label 15}
+{PARAM, null, null, Result: false}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[false]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_logicos02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 40
+tamaño lista de codigo tercetos: 45
 lista: 
 {GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0.0 > 0.0, size=0}}
 {GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 7, type=boolean, expr=0.0 > 0.0, size=0}}
@@ -1120,13 +1283,18 @@ lista:
 {JMP, null, null, Result: endIf Label 67}
 {LABEL, null, null, Result: elseCond Label 66}
 {LABEL, null, null, Result: endIf Label 67}
+{METHODCALL, promedio, 3, Result: RESULT Label 72}
+{PARAM, null, null, Result: 3.3}
+{PARAM, null, null, Result: 0.66}
+{PARAM, null, null, Result: 10.0}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=promedio, args=[3.3, 0.66, 10.0]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mainSolo.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 12
+tamaño lista de codigo tercetos: 13
 lista: 
 {LABEL, boolean, null, Result: a}
 {LABEL, boolean, null, Result: b}
@@ -1140,13 +1308,14 @@ lista:
 {NON(!), false, null, Result: VarLocation{name=NON Label 9, type=boolean, expr=!false, size=0}}
 {OR(||), VarLocation{name=CONJUNCION Label 6, type=boolean, expr=false && false, size=0}, !false, Result: VarLocation{name=DISYUNCION Label 10, type=boolean, expr=VarLocation{name=CONJUNCION Label 6, type=boolean, expr=false && false, size=0} || !false, size=0}}
 {ASSIGN(=), VarLocation{name=CONJUNCION Label 6, type=boolean, expr=false && false, size=0} || !false, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mcd.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 24
+tamaño lista de codigo tercetos: 28
 lista: 
 {LABEL, int, null, Result: dividendo}
 {LABEL, int, null, Result: divisor}
@@ -1172,6 +1341,10 @@ lista:
 {ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 16}
 {LABEL, null, null, Result: EndWhile Label 17}
+{METHODCALL, maxcomdiv, 2, Result: RESULT Label 26}
+{PARAM, null, null, Result: 6}
+{PARAM, null, null, Result: 9}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="mcd%d"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: null}
 ---------------------------------------------------
   
   
@@ -1194,7 +1367,7 @@ ocurrio un error: null
 parseo iniciado
 Error: Method alo not declared
 parseo exitoso
-tamaño lista de codigo tercetos: 17
+tamaño lista de codigo tercetos: 22
 lista: 
 {LABEL, float, null, Result: c}
 {CMP, VarLocation{name=factor Label 1, type=boolean, expr=false, size=0}, true, Result: null}
@@ -1206,20 +1379,25 @@ lista:
 {MINUS(-), 0, 1, Result: VarLocation{name=MINUS Label 9, type=int, expr=0 - 1, size=0}}
 {ASSIGN(=), 0 - 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 3}
-{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 14, type=int, expr=0 + 1, size=0}}
+{METHODCALL, alo, 2, Result: RESULT Label 12}
+{PARAM, null, null, Result: true}
+{PARAM, null, null, Result: 0}
+{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 15, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {LABEL, int, null, Result: y}
 {ASSIGN(=), 7, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
 {ASSIGN(=), 8.0, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
+{METHODCALL, alo2, 1, Result: RESULT Label 20}
+{PARAM, null, null, Result: 0}
 {ASSIGN(=), MethodCallExpr{name=alo2, args=[0]}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
-{MULTIPLY(*), VarLocation{name=factor Label 21, type=int, expr=3, size=0}, 0, Result: VarLocation{name=MULTIPLY Label 24, type=int, expr=VarLocation{name=factor Label 21, type=int, expr=3, size=0} * 0, size=0}}
+{MULTIPLY(*), VarLocation{name=factor Label 23, type=int, expr=3, size=0}, 0, Result: VarLocation{name=MULTIPLY Label 26, type=int, expr=VarLocation{name=factor Label 23, type=int, expr=3, size=0} * 0, size=0}}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_metodos03.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 17
+tamaño lista de codigo tercetos: 22
 lista: 
 {LABEL, boolean, null, Result: res}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 3, type=int, expr=0 + 1, size=0}}
@@ -1237,6 +1415,11 @@ lista:
 {LABEL, null, null, Result: endIf Label 10}
 {array[], int[], 1, Result: A}
 {ASSIGN(=), false, null, Result: VarLocation{name=res, type=boolean, expr=null, size=0}}
+{METHODCALL, inc, 1, Result: RESULT Label 21}
+{PARAM, null, null, Result: 5}
+{METHODCALL, resto, 2, Result: RESULT Label 24}
+{PARAM, null, null, Result: MethodCallExpr{name=inc, args=[5]}}
+{PARAM, null, null, Result: 10.2}
 {ASSIGN(=), MethodCallExpr{name=resto, args=[MethodCallExpr{name=inc, args=[5]}, 10.2]}, null, Result: VarLocation{name=A, type=int[], expr=null, size=1}}
 ---------------------------------------------------
   
@@ -1252,7 +1435,7 @@ ocurrio un error: null
 ---------------- Test tests/test_correctos/test_metodos_externos02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 29
+tamaño lista de codigo tercetos: 33
 lista: 
 {LABEL, int, null, Result: dividendo}
 {LABEL, int, null, Result: divisor}
@@ -1280,27 +1463,33 @@ lista:
 {LABEL, null, null, Result: EndWhile Label 17}
 {LABEL, int, null, Result: a}
 {ASSIGN(=), 10000, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{MULTIPLY(*), 3.5, 0, Result: VarLocation{name=MULTIPLY Label 30, type=int, expr=3.5 * 0, size=0}}
-{DIVIDE(/), 7, 6, Result: VarLocation{name=DIVIDE Label 33, type=int, expr=7 / 6, size=0}}
-{MINUS(-), 3.5 * 0, 7 / 6, Result: VarLocation{name=MINUS Label 34, type=int, expr=3.5 * 0 - 7 / 6, size=0}}
+{METHODCALL, maxcomdiv, 2, Result: RESULT Label 27}
+{PARAM, null, null, Result: 6}
+{PARAM, null, null, Result: 9}
+{MULTIPLY(*), 3.5, 0, Result: VarLocation{name=MULTIPLY Label 31, type=int, expr=3.5 * 0, size=0}}
+{DIVIDE(/), 7, 6, Result: VarLocation{name=DIVIDE Label 34, type=int, expr=7 / 6, size=0}}
+{MINUS(-), 3.5 * 0, 7 / 6, Result: VarLocation{name=MINUS Label 35, type=int, expr=3.5 * 0 - 7 / 6, size=0}}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%d%f"}, StringLiteral{value="mcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}, 3.5 * 0 - 7 / 6]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mod.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 3
+tamaño lista de codigo tercetos: 5
 lista: 
 {LABEL, int, null, Result: a}
 {ASSIGN(=), 90, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 {MOD(%), 0, 7, Result: VarLocation{name=MOD Label 4, type=int, expr=0 % 7, size=0}}
+{METHODCALL, pruAritmetica, 0, Result: RESULT Label 6}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mult01.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 7
+tamaño lista de codigo tercetos: 10
 lista: 
 {LABEL, int, null, Result: a}
 {LABEL, int, null, Result: d}
@@ -1309,17 +1498,22 @@ lista:
 {MULTIPLY(*), 0, 1000, Result: VarLocation{name=MULTIPLY Label 5, type=int, expr=0 * 1000, size=0}}
 {MULTIPLY(*), 0 * 1000, 0, Result: VarLocation{name=MULTIPLY Label 7, type=int, expr=0 * 1000 * 0, size=0}}
 {MULTIPLY(*), 0 * 1000 * 0, 0, Result: VarLocation{name=MULTIPLY Label 9, type=int, expr=0 * 1000 * 0 * 0, size=0}}
+{METHODCALL, pruMult, 1, Result: RESULT Label 12}
+{PARAM, null, null, Result: 2}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[2]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mult02.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 3
+tamaño lista de codigo tercetos: 5
 lista: 
 {LABEL, int, null, Result: a}
 {ASSIGN(=), 5, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 {MULTIPLY(*), 0, 7, Result: VarLocation{name=MULTIPLY Label 4, type=int, expr=0 * 7, size=0}}
+{METHODCALL, pruMult, 0, Result: RESULT Label 6}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[]}]}, null, Result: null}
 ---------------------------------------------------
   
   
@@ -1337,7 +1531,7 @@ lista:
 ---------------- Test tests/test_correctos/test_retorno.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 63
+tamaño lista de codigo tercetos: 66
 lista: 
 {LABEL, int, null, Result: i}
 {LABEL, int, null, Result: j}
@@ -1402,13 +1596,16 @@ lista:
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 8}
 {LABEL, null, null, Result: EndWhile Label 9}
+{METHODCALL, id, 1, Result: RESULT Label 77}
+{PARAM, null, null, Result: 9}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=id, args=[9]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_suma.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 13
+tamaño lista de codigo tercetos: 17
 lista: 
 {CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 0, size=0}}
 {CMP, VarLocation{name=CEQ Label 3, type=boolean, expr=0 == 0, size=0}, true, Result: null}
@@ -1423,13 +1620,17 @@ lista:
 {PLUS(+), 0, 0, Result: VarLocation{name=PLUS Label 15, type=int, expr=0 + 0, size=0}}
 {LABEL, null, null, Result: endIf Label 11}
 {LABEL, null, null, Result: endIf Label 5}
+{METHODCALL, suma, 2, Result: RESULT Label 18}
+{PARAM, null, null, Result: 4}
+{PARAM, null, null, Result: 9}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=suma, args=[4, 9]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_sumx.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 14
+tamaño lista de codigo tercetos: 18
 lista: 
 {LABEL, float, null, Result: aux}
 {LABEL, int, null, Result: i}
@@ -1445,13 +1646,17 @@ lista:
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 7}
 {LABEL, null, null, Result: EndWhile Label 8}
+{METHODCALL, sumx, 2, Result: RESULT Label 18}
+{PARAM, null, null, Result: 6.0}
+{PARAM, null, null, Result: 2}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=sumx, args=[6.0, 2]}]}, null, Result: null}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_while.ctds ... -------------------
 parseo iniciado
 parseo exitoso
-tamaño lista de codigo tercetos: 27
+tamaño lista de codigo tercetos: 31
 lista: 
 {LABEL, int, null, Result: dividendo}
 {LABEL, int, null, Result: divisor}
@@ -1480,6 +1685,10 @@ lista:
 {JNE, null, null, Result: EndWhile Label 26}
 {JMP, null, null, Result: BeginWhile Label 25}
 {LABEL, null, null, Result: EndWhile Label 26}
+{METHODCALL, maxcomdiv, 2, Result: RESULT Label 30}
+{PARAM, null, null, Result: 6}
+{PARAM, null, null, Result: 9}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%dMcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: null}
 ---------------------------------------------------
   
   
