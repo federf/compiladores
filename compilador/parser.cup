@@ -131,11 +131,11 @@
                 
             }
             System.out.println("parseo exitoso");
-            /*System.out.println("tamaño lista de codigo tercetos: "+TripletList.size());
+            System.out.println("tamaño lista de codigo tercetos: "+TripletList.size());
             System.out.println("lista: ");
             for(TripletCode t : TripletList){
                 System.out.println(t);
-            }*/
+            }
             :}
             ;
 
@@ -1483,6 +1483,8 @@
                                 System.out.println("Error: expression in array must be int");
                                 
                             }else{
+                                String LabelArrayAccess="Array Access "+Labels.getLabel();
+                                TripletList.addLast(new TripletCode(TripletOperator.ARRAYACCESS,id, e,LabelArrayAccess));
                                 RESULT= new ArrayLiteral((String)id, s.getSize(), s.getType());
                             }
                         }else{
