@@ -11,8 +11,11 @@
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 22
+tamaño lista de codigo tercetos: 28
 lista: 
+{LABEL, null, null, Result: BeginMethod factorial}
+
+{METHODDECL, Metodo{ name=factorial, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: i}
 {LABEL, int, null, Result: total}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
@@ -31,10 +34,15 @@ lista:
 {JMP, null, null, Result: BeginWhile Label 9}
 {LABEL, null, null, Result: EndWhile Label 10}
 {RETURN, null, null, Result: 0}
+{LABEL, null, null, Result: EndMethod factorial}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 3, null, Result: IntLiteral Label 19}
 {METHODCALL, factorial, 1, Result: RESULT Label 21}
 {PARAM, null, null, Result: 3}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=factorial, args=[3]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -43,15 +51,34 @@ parseo iniciado
 Error: Method mult must return float
 
 parseo exitoso
-tamaño lista de codigo tercetos: 35
+tamaño lista de codigo tercetos: 50
 lista: 
+{LABEL, null, null, Result: BeginMethod div}
+
+{METHODDECL, Metodo{ name=div, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=a, value=null, size=0}, Simbolo{type=float, name=b, value=null, size=0}]}, null, Result: null}
 {DIVIDE(/), 0.0, 0.0, Result: VarLocation{name=DIVIDE Label 3, type=float, expr=VarLocation{name=factor Label 1, type=float, expr=0.0, size=0} / VarLocation{name=factor Label 2, type=float, expr=0.0, size=0}, size=0}}
 {RETURN, null, null, Result: VarLocation{name=factor Label 1, type=float, expr=0.0, size=0} / VarLocation{name=factor Label 2, type=float, expr=0.0, size=0}}
+{LABEL, null, null, Result: EndMethod div}
+{LABEL, null, null, Result: BeginMethod resta}
+
+{METHODDECL, Metodo{ name=resta, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=a, value=null, size=0}, Simbolo{type=float, name=b, value=null, size=0}]}, null, Result: null}
 {MINUS(-), 0.0, 0.0, Result: VarLocation{name=MINUS Label 6, type=float, expr=0.0 - 0.0, size=0}}
 {RETURN, null, null, Result: 0.0 - 0.0}
+{LABEL, null, null, Result: EndMethod resta}
+{LABEL, null, null, Result: BeginMethod sum}
+
+{METHODDECL, Metodo{ name=sum, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=a, value=null, size=0}, Simbolo{type=float, name=b, value=null, size=0}]}, null, Result: null}
 {PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 9, type=float, expr=0.0 + 0.0, size=0}}
 {RETURN, null, null, Result: 0.0 + 0.0}
+{LABEL, null, null, Result: EndMethod sum}
+{LABEL, null, null, Result: BeginMethod mult}
+
+{METHODDECL, Metodo{ name=mult, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=a, value=null, size=0}, Simbolo{type=float, name=b, value=null, size=0}]}, null, Result: null}
 {MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 12, type=int, expr=0.0 * 0.0, size=0}}
+{LABEL, null, null, Result: EndMethod mult}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
 {LABEL, float, null, Result: x}
 {LABEL, float, null, Result: y}
 {LABEL, float, null, Result: z}
@@ -80,6 +107,7 @@ lista:
 {PARAM, null, null, Result: MethodCallExpr{name=mult, args=[MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}}
 {PARAM, null, null, Result: MethodCallExpr{name=resta, args=[-0.0, 0.0]}}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandoFloatTest"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=mult, args=[MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}, MethodCallExpr{name=resta, args=[-0.0, 0.0]}]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -88,9 +116,12 @@ parseo iniciado
 Error: Method pruebaLogica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 14
+tamaño lista de codigo tercetos: 20
 lista: 
 {LABEL, boolean, null, Result: bool}
+{LABEL, null, null, Result: BeginMethod pruebaLogica}
+
+{METHODDECL, Metodo{ name=pruebaLogica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=boolean, name=b, value=null, size=0}]}, null, Result: null}
 {ASSIGN(=), true, null, Result: BoolLiteral Label 1}
 {ASSIGN(=), true, null, Result: VarLocation{name=bool, type=boolean, expr=null, size=0}}
 {ASSIGN(=), false, null, Result: BoolLiteral Label 3}
@@ -100,10 +131,15 @@ lista:
 {AND(&&), VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0}, !true, Result: VarLocation{name=CONJUNCION Label 11, type=boolean, expr=VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0} && !true, size=0}}
 {NON(!), false, null, Result: VarLocation{name=NON Label 14, type=boolean, expr=!false, size=0}}
 {AND(&&), VarLocation{name=CONJUNCION Label 11, type=boolean, expr=VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0} && !true, size=0}, !false, Result: VarLocation{name=CONJUNCION Label 15, type=boolean, expr=VarLocation{name=CONJUNCION Label 11, type=boolean, expr=VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0} && !true, size=0} && !false, size=0}}
+{LABEL, null, null, Result: EndMethod pruebaLogica}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), true, null, Result: BoolLiteral Label 17}
 {METHODCALL, pruebaLogica, 1, Result: RESULT Label 19}
 {PARAM, null, null, Result: true}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[true]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -111,11 +147,18 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 17
+tamaño lista de codigo tercetos: 23
 lista: 
+{LABEL, null, null, Result: BeginMethod inc}
+
+{METHODDECL, Metodo{ name=inc, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 2}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 4, type=int, expr=0 + 1, size=0}}
 {RETURN, null, null, Result: 0 + 1}
+{LABEL, null, null, Result: EndMethod inc}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
 {LABEL, int, null, Result: y}
 {EXTERNINVK, ExternInvkExpr{id="get_int", type=int, parameters=[]}, null, Result: null}
 {METHODCALL, inc, 1, Result: RESULT Label 7}
@@ -130,6 +173,7 @@ lista:
 {LABEL, null, null, Result: elseCond Label 13}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==%d\n"}, 0]}, null, Result: null}
 {LABEL, null, null, Result: endIf Label 14}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -137,12 +181,15 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 55
+tamaño lista de codigo tercetos: 61
 lista: 
 {array[], int[], 5, Result: A}
 {array[], float[], 56, Result: B}
 {array[], boolean[], 10, Result: C}
 {LABEL, boolean, null, Result: y}
+{LABEL, null, null, Result: BeginMethod pruArreglos}
+
+{METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
 {LABEL, float, null, Result: y}
 {ASSIGN(=), 8.87, null, Result: FloatLiteral Label 1}
 {ASSIGN(=), 8.87, null, Result: VarLocation{name=y, type=float, expr=null, size=0}}
@@ -162,6 +209,10 @@ lista:
 {ASSIGN(=), 0, null, Result: IntLiteral Label 26}
 {ARRAYACCESS, A, VarLocation{name=factor Label 27, type=int, expr=0, size=0}, Result: Array Access Label 28}
 {RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
+{LABEL, null, null, Result: EndMethod pruArreglos}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), true, null, Result: BoolLiteral Label 30}
 {ASSIGN(=), true, null, Result: VarLocation{name=y, type=boolean, expr=null, size=0}}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 32}
@@ -194,6 +245,7 @@ lista:
 {ASSIGN(=), VarLocation{name=GEQ Label 71, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0} || true, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=10}}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 76}
 {RETURN, null, null, Result: 1}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -202,11 +254,14 @@ parseo iniciado
 Error: Method pruArreglos must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 95
+tamaño lista de codigo tercetos: 101
 lista: 
 {array[], int[], 589, Result: A}
 {array[], float[], 56, Result: B}
 {array[], boolean[], 5, Result: C}
+{LABEL, null, null, Result: BeginMethod pruArreglos}
+
+{METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
 {array[], float[], 8, Result: res}
 {LABEL, int, null, Result: i}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
@@ -292,6 +347,10 @@ lista:
 {LABEL, null, null, Result: EndWhile Label 83}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 102}
 {ARRAYACCESS, res, VarLocation{name=factor Label 103, type=int, expr=0, size=0}, Result: Array Access Label 104}
+{LABEL, null, null, Result: EndMethod pruArreglos}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 4, null, Result: IntLiteral Label 106}
 {ASSIGN(=), 8, null, Result: IntLiteral Label 108}
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 110}
@@ -299,6 +358,7 @@ lista:
 {PARAM, null, null, Result: 8}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -306,8 +366,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 25
+tamaño lista de codigo tercetos: 31
 lista: 
+{LABEL, null, null, Result: BeginMethod pruAritmetica}
+
+{METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: a}
 {LABEL, int, null, Result: b}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 1}
@@ -329,10 +392,15 @@ lista:
 {MOD(%), 0, 2, Result: VarLocation{name=MOD Label 25, type=int, expr=0 % 2, size=0}}
 {ASSIGN(=), 0 % 2, null, Result: VarLocation{name=c, type=int, expr=null, size=0}}
 {RETURN, null, null, Result: 0}
+{LABEL, null, null, Result: EndMethod pruAritmetica}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 3, null, Result: IntLiteral Label 27}
 {METHODCALL, pruAritmetica, 1, Result: RESULT Label 29}
 {PARAM, null, null, Result: 3}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[3]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -340,8 +408,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 26
+tamaño lista de codigo tercetos: 32
 lista: 
+{LABEL, null, null, Result: BeginMethod aritmTest}
+
+{METHODDECL, Metodo{ name=aritmTest, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: a}
 {LABEL, int, null, Result: b}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 1}
@@ -364,10 +435,15 @@ lista:
 {ASSIGN(=), 2, null, Result: IntLiteral Label 23}
 {ASSIGN(=), 2, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 {RETURN, null, null, Result: 0}
+{LABEL, null, null, Result: EndMethod aritmTest}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 5, null, Result: IntLiteral Label 26}
 {METHODCALL, aritmTest, 1, Result: RESULT Label 28}
 {PARAM, null, null, Result: 5}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=aritmTest, args=[5]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -375,8 +451,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 32
+tamaño lista de codigo tercetos: 38
 lista: 
+{LABEL, null, null, Result: BeginMethod breaks}
+
+{METHODDECL, Metodo{ name=breaks, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=g, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
@@ -403,12 +482,17 @@ lista:
 {JMP, null, null, Result: BeginWhile Label 8}
 {LABEL, null, null, Result: EndWhile Label 9}
 {RETURN, null, null, Result: 0}
+{LABEL, null, null, Result: EndMethod breaks}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 23}
 {METHODCALL, breaks, 1, Result: RESULT Label 25}
 {PARAM, null, null, Result: 1}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: null}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 28}
 {RETURN, null, null, Result: 1}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -416,8 +500,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 29
+tamaño lista de codigo tercetos: 35
 lista: 
+{LABEL, null, null, Result: BeginMethod breaks}
+
+{METHODDECL, Metodo{ name=breaks, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=g, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
@@ -441,12 +528,17 @@ lista:
 {JMP, null, null, Result: BeginWhile Label 8}
 {LABEL, null, null, Result: EndWhile Label 9}
 {RETURN, null, null, Result: 0}
+{LABEL, null, null, Result: EndMethod breaks}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 21}
 {METHODCALL, breaks, 1, Result: RESULT Label 23}
 {PARAM, null, null, Result: 1}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: null}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 26}
 {RETURN, null, null, Result: 1}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -454,14 +546,29 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 28
+tamaño lista de codigo tercetos: 40
 lista: 
+{LABEL, null, null, Result: BeginMethod neg}
+
+{METHODDECL, Metodo{ name=neg, return_not_void=true, typeReturn=boolean, parameters [Simbolo{type=boolean, name=b, value=null, size=0}]}, null, Result: null}
 {NON(!), false, null, Result: VarLocation{name=NON Label 2, type=boolean, expr=!false, size=0}}
 {RETURN, null, null, Result: !false}
+{LABEL, null, null, Result: EndMethod neg}
+{LABEL, null, null, Result: BeginMethod and}
+
+{METHODDECL, Metodo{ name=and, return_not_void=true, typeReturn=boolean, parameters [Simbolo{type=boolean, name=a, value=null, size=0}, Simbolo{type=boolean, name=b, value=null, size=0}]}, null, Result: null}
 {AND(&&), false, false, Result: VarLocation{name=CONJUNCION Label 5, type=boolean, expr=false && false, size=0}}
 {RETURN, null, null, Result: false && false}
+{LABEL, null, null, Result: EndMethod and}
+{LABEL, null, null, Result: BeginMethod or}
+
+{METHODDECL, Metodo{ name=or, return_not_void=true, typeReturn=boolean, parameters [Simbolo{type=boolean, name=a, value=null, size=0}, Simbolo{type=boolean, name=b, value=null, size=0}]}, null, Result: null}
 {OR(||), false, false, Result: VarLocation{name=DISYUNCION Label 8, type=boolean, expr=false || false, size=0}}
 {RETURN, null, null, Result: false || false}
+{LABEL, null, null, Result: EndMethod or}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
 {LABEL, boolean, null, Result: a}
 {LABEL, boolean, null, Result: b}
 {LABEL, boolean, null, Result: c}
@@ -484,6 +591,7 @@ lista:
 {PARAM, null, null, Result: MethodCallExpr{name=neg, args=[false]}}
 {ASSIGN(=), MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -491,8 +599,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 29
+tamaño lista de codigo tercetos: 35
 lista: 
+{LABEL, null, null, Result: BeginMethod breaks}
+
+{METHODDECL, Metodo{ name=breaks, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=g, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
@@ -516,12 +627,17 @@ lista:
 {JMP, null, null, Result: BeginWhile Label 8}
 {LABEL, null, null, Result: EndWhile Label 9}
 {RETURN, null, null, Result: 0}
+{LABEL, null, null, Result: EndMethod breaks}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 21}
 {METHODCALL, breaks, 1, Result: RESULT Label 23}
 {PARAM, null, null, Result: 1}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: null}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 26}
 {RETURN, null, null, Result: 1}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -530,8 +646,11 @@ parseo iniciado
 Error: Method pruAritmetica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 15
+tamaño lista de codigo tercetos: 21
 lista: 
+{LABEL, null, null, Result: BeginMethod pruAritmetica}
+
+{METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
 {LABEL, float, null, Result: res}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
 {CMP, VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}, true, Result: null}
@@ -541,12 +660,17 @@ lista:
 {LABEL, null, null, Result: elseCond Label 4}
 {ASSIGN(=), 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 5}
+{LABEL, null, null, Result: EndMethod pruAritmetica}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 4, null, Result: IntLiteral Label 9}
 {ASSIGN(=), 8, null, Result: IntLiteral Label 11}
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 13}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -555,8 +679,11 @@ parseo iniciado
 Error: Method pruAritmetica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 17
+tamaño lista de codigo tercetos: 23
 lista: 
+{LABEL, null, null, Result: BeginMethod pruAritmetica}
+
+{METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
 {LABEL, float, null, Result: res}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
 {CMP, VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}, true, Result: null}
@@ -568,12 +695,17 @@ lista:
 {LABEL, null, null, Result: elseCond Label 4}
 {ASSIGN(=), 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 5}
+{LABEL, null, null, Result: EndMethod pruAritmetica}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 4, null, Result: IntLiteral Label 12}
 {ASSIGN(=), 8, null, Result: IntLiteral Label 14}
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 16}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -581,8 +713,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 116
+tamaño lista de codigo tercetos: 122
 lista: 
+{LABEL, null, null, Result: BeginMethod dados}
+
+{METHODDECL, Metodo{ name=dados, return_not_void=true, typeReturn=float, parameters [Simbolo{type=int, name=d1, value=null, size=0}, Simbolo{type=int, name=d2, value=null, size=0}, Simbolo{type=int, name=d3, value=null, size=0}]}, null, Result: null}
 {ASSIGN(=), 6, null, Result: IntLiteral Label 2}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 6, size=0}}
 {NON(!), VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 6, type=boolean, expr=!VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 6, size=0}, size=0}}
@@ -691,6 +826,10 @@ lista:
 {JMP, null, null, Result: endIf Label 172}
 {LABEL, null, null, Result: elseCond Label 171}
 {LABEL, null, null, Result: endIf Label 172}
+{LABEL, null, null, Result: EndMethod dados}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 175}
 {ASSIGN(=), 6, null, Result: IntLiteral Label 177}
 {ASSIGN(=), 9, null, Result: IntLiteral Label 179}
@@ -699,6 +838,7 @@ lista:
 {PARAM, null, null, Result: 6}
 {PARAM, null, null, Result: 9}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=dados, args=[1, 6, 9]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -707,8 +847,11 @@ parseo iniciado
 Error: Method pruContinue must return float
 
 parseo exitoso
-tamaño lista de codigo tercetos: 52
+tamaño lista de codigo tercetos: 58
 lista: 
+{LABEL, null, null, Result: BeginMethod pruContinue}
+
+{METHODDECL, Metodo{ name=pruContinue, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=b, value=null, size=0}]}, null, Result: null}
 {LABEL, float, null, Result: i}
 {LABEL, int, null, Result: n}
 {LABEL, float, null, Result: total}
@@ -755,12 +898,17 @@ lista:
 {ASSIGN(=), 2, null, Result: IntLiteral Label 41}
 {UNARYMINUS(-expr), 2, null, Result: VarLocation{name=UNARYMINUS Label 43, type=int, expr=-2, size=0}}
 {MULTIPLY(*), -2, 0.0, Result: VarLocation{name=MULTIPLY Label 45, type=int, expr=-2 * 0.0, size=0}}
+{LABEL, null, null, Result: EndMethod pruContinue}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 3.0, null, Result: FloatLiteral Label 46}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 48}
 {METHODCALL, pruContinue, 2, Result: RESULT Label 50}
 {PARAM, null, null, Result: 3.0}
 {PARAM, null, null, Result: 2}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=pruContinue, args=[3.0, 2]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -768,8 +916,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 52
+tamaño lista de codigo tercetos: 58
 lista: 
+{LABEL, null, null, Result: BeginMethod prueba}
+
+{METHODDECL, Metodo{ name=prueba, return_not_void=true, typeReturn=float, parameters [Simbolo{type=int, name=b, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: a}
 {LABEL, float, null, Result: c}
 {LABEL, int, null, Result: g}
@@ -818,10 +969,15 @@ lista:
 {LABEL, null, null, Result: elseCond Label 7}
 {LABEL, null, null, Result: endIf Label 8}
 {RETURN, null, null, Result: 0.0}
+{LABEL, null, null, Result: EndMethod prueba}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 6, null, Result: IntLiteral Label 48}
 {METHODCALL, prueba, 1, Result: RESULT Label 50}
 {PARAM, null, null, Result: 6}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -829,8 +985,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 34
+tamaño lista de codigo tercetos: 40
 lista: 
+{LABEL, null, null, Result: BeginMethod prueba}
+
+{METHODDECL, Metodo{ name=prueba, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=p, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: a}
 {LABEL, float, null, Result: f}
 {LABEL, int, null, Result: b}
@@ -861,10 +1020,15 @@ lista:
 {ASSIGN(=), 0, null, Result: IntLiteral Label 28}
 {RETURN, null, null, Result: 0}
 {LABEL, null, null, Result: endIf Label 25}
+{LABEL, null, null, Result: EndMethod prueba}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 6, null, Result: IntLiteral Label 30}
 {METHODCALL, prueba, 1, Result: RESULT Label 32}
 {PARAM, null, null, Result: 6}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -872,8 +1036,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 55
+tamaño lista de codigo tercetos: 61
 lista: 
+{LABEL, null, null, Result: BeginMethod potencia}
+
+{METHODDECL, Metodo{ name=potencia, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: i}
 {LABEL, boolean, null, Result: neg}
 {LABEL, float, null, Result: prod}
@@ -919,6 +1086,10 @@ lista:
 {ASSIGN(=), 100.1, null, Result: FloatLiteral Label 41}
 {UNARYMINUS(-expr), 100.1, null, Result: VarLocation{name=UNARYMINUS Label 43, type=float, expr=-100.1, size=0}}
 {RETURN, null, null, Result: -100.1}
+{LABEL, null, null, Result: EndMethod potencia}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
 {LABEL, float, null, Result: f}
 {LABEL, float, null, Result: a}
 {ASSIGN(=), 8.0, null, Result: FloatLiteral Label 44}
@@ -929,6 +1100,7 @@ lista:
 {PARAM, null, null, Result: 2}
 {ASSIGN(=), MethodCallExpr{name=potencia, args=[0.0, 2]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -936,8 +1108,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 37
+tamaño lista de codigo tercetos: 43
 lista: 
+{LABEL, null, null, Result: BeginMethod sumatoria}
+
+{METHODDECL, Metodo{ name=sumatoria, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=b, value=null, size=0}]}, null, Result: null}
 {LABEL, float, null, Result: total}
 {LABEL, float, null, Result: i}
 {LABEL, float, null, Result: res}
@@ -967,6 +1142,10 @@ lista:
 {LABEL, null, null, Result: EndWhile Label 15}
 {ASSIGN(=), 0.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 {RETURN, null, null, Result: 0.0}
+{LABEL, null, null, Result: EndMethod sumatoria}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
 {LABEL, float, null, Result: f}
 {LABEL, float, null, Result: a}
 {ASSIGN(=), 8.0, null, Result: FloatLiteral Label 29}
@@ -975,6 +1154,7 @@ lista:
 {PARAM, null, null, Result: 0.0}
 {ASSIGN(=), MethodCallExpr{name=sumatoria, args=[0.0]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -982,11 +1162,14 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 198
+tamaño lista de codigo tercetos: 207
 lista: 
 {LABEL, float, null, Result: w}
 {LABEL, float, null, Result: m}
 {LABEL, float, null, Result: res}
+{LABEL, null, null, Result: BeginMethod potencia}
+
+{METHODDECL, Metodo{ name=potencia, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: i}
 {LABEL, boolean, null, Result: neg}
 {LABEL, float, null, Result: prod}
@@ -1036,6 +1219,10 @@ lista:
 {ASSIGN(=), 100.1, null, Result: FloatLiteral Label 48}
 {UNARYMINUS(-expr), 100.1, null, Result: VarLocation{name=UNARYMINUS Label 50, type=float, expr=-100.1, size=0}}
 {RETURN, null, null, Result: -100.1}
+{LABEL, null, null, Result: EndMethod potencia}
+{LABEL, null, null, Result: BeginMethod multiples}
+
+{METHODDECL, Metodo{ name=multiples, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=float, name=y, value=null, size=0}]}, null, Result: null}
 {LABEL, float, null, Result: a}
 {LABEL, float, null, Result: z}
 {LABEL, int, null, Result: b}
@@ -1159,6 +1346,10 @@ lista:
 {LABEL, null, null, Result: endIf Label 80}
 {UNARYMINUS(-expr), 0.0, null, Result: VarLocation{name=UNARYMINUS Label 182, type=float, expr=-0.0, size=0}}
 {RETURN, null, null, Result: -0.0}
+{LABEL, null, null, Result: EndMethod multiples}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
 {LABEL, float, null, Result: f}
 {LABEL, float, null, Result: a}
 {ASSIGN(=), 80.0, null, Result: FloatLiteral Label 183}
@@ -1182,6 +1373,7 @@ lista:
 {PARAM, null, null, Result: 0.0}
 {PARAM, null, null, Result: 0.0 + 2.0}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multiples, args=[0.0, 0.0 + 2.0]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1189,11 +1381,14 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 81
+tamaño lista de codigo tercetos: 90
 lista: 
 {LABEL, float, null, Result: w}
 {LABEL, float, null, Result: m}
 {LABEL, float, null, Result: res}
+{LABEL, null, null, Result: BeginMethod potencia}
+
+{METHODDECL, Metodo{ name=potencia, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: i}
 {LABEL, boolean, null, Result: neg}
 {LABEL, float, null, Result: prod}
@@ -1243,6 +1438,10 @@ lista:
 {ASSIGN(=), 100.1, null, Result: FloatLiteral Label 48}
 {UNARYMINUS(-expr), 100.1, null, Result: VarLocation{name=UNARYMINUS Label 50, type=float, expr=-100.1, size=0}}
 {RETURN, null, null, Result: -100.1}
+{LABEL, null, null, Result: EndMethod potencia}
+{LABEL, null, null, Result: BeginMethod multRepeat}
+
+{METHODDECL, Metodo{ name=multRepeat, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=b, value=null, size=0}, Simbolo{type=float, name=a, value=null, size=0}]}, null, Result: null}
 {LABEL, float, null, Result: c}
 {MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 53, type=int, expr=0.0 * 0.0, size=0}}
 {MULTIPLY(*), 0.0 * 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 55, type=int, expr=0.0 * 0.0 * 0.0, size=0}}
@@ -1251,6 +1450,10 @@ lista:
 {MULTIPLY(*), 0.0 * 0.0 * 0.0 * 0.0 * 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 61, type=int, expr=0.0 * 0.0 * 0.0 * 0.0 * 0.0 * 0.0, size=0}}
 {ASSIGN(=), 0.0 * 0.0 * 0.0 * 0.0 * 0.0 * 0.0, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
 {RETURN, null, null, Result: 0.0}
+{LABEL, null, null, Result: EndMethod multRepeat}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
 {LABEL, float, null, Result: f}
 {LABEL, float, null, Result: a}
 {ASSIGN(=), 15.0, null, Result: FloatLiteral Label 63}
@@ -1272,6 +1475,7 @@ lista:
 {PARAM, null, null, Result: 0.0}
 {PARAM, null, null, Result: 0.0}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multRepeat, args=[0.0, 0.0]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1279,14 +1483,29 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 26
+tamaño lista de codigo tercetos: 38
 lista: 
+{LABEL, null, null, Result: BeginMethod div}
+
+{METHODDECL, Metodo{ name=div, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=a, value=null, size=0}, Simbolo{type=float, name=b, value=null, size=0}]}, null, Result: null}
 {DIVIDE(/), 0.0, 0.0, Result: VarLocation{name=DIVIDE Label 3, type=float, expr=VarLocation{name=factor Label 1, type=float, expr=0.0, size=0} / VarLocation{name=factor Label 2, type=float, expr=0.0, size=0}, size=0}}
 {RETURN, null, null, Result: VarLocation{name=factor Label 1, type=float, expr=0.0, size=0} / VarLocation{name=factor Label 2, type=float, expr=0.0, size=0}}
+{LABEL, null, null, Result: EndMethod div}
+{LABEL, null, null, Result: BeginMethod resta}
+
+{METHODDECL, Metodo{ name=resta, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=a, value=null, size=0}, Simbolo{type=float, name=b, value=null, size=0}]}, null, Result: null}
 {MINUS(-), 0.0, 0.0, Result: VarLocation{name=MINUS Label 6, type=float, expr=0.0 - 0.0, size=0}}
 {RETURN, null, null, Result: 0.0 - 0.0}
+{LABEL, null, null, Result: EndMethod resta}
+{LABEL, null, null, Result: BeginMethod sum}
+
+{METHODDECL, Metodo{ name=sum, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=a, value=null, size=0}, Simbolo{type=float, name=b, value=null, size=0}]}, null, Result: null}
 {PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 9, type=float, expr=0.0 + 0.0, size=0}}
 {RETURN, null, null, Result: 0.0 + 0.0}
+{LABEL, null, null, Result: EndMethod sum}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
 {LABEL, float, null, Result: x}
 {LABEL, float, null, Result: y}
 {LABEL, float, null, Result: z}
@@ -1307,6 +1526,7 @@ lista:
 {PARAM, null, null, Result: MethodCallExpr{name=resta, args=[0.0, 0.0]}}
 {PARAM, null, null, Result: MethodCallExpr{name=div, args=[0.0, 0.0]}}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandofuncionesflotantes"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=resta, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1314,11 +1534,14 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 30
+tamaño lista de codigo tercetos: 36
 lista: 
 {array[], int[], 5, Result: A}
 {array[], float[], 56, Result: B}
 {array[], boolean[], 10, Result: C}
+{LABEL, null, null, Result: BeginMethod pruArreglos}
+
+{METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 3}
@@ -1338,6 +1561,10 @@ lista:
 {PLUS(+), VarLocation{name=factor Label 10, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factor Label 10, type=int, expr=5, size=0}}
 {JMP, null, null, Result: BeginFor Label 15}
 {LABEL, null, null, Result: EndFor Label 16}
+{LABEL, null, null, Result: EndMethod pruArreglos}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 4, null, Result: IntLiteral Label 22}
 {ASSIGN(=), 8, null, Result: IntLiteral Label 24}
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 26}
@@ -1346,6 +1573,7 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 29}
 {RETURN, null, null, Result: 1}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1353,11 +1581,14 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 29
+tamaño lista de codigo tercetos: 35
 lista: 
 {array[], int[], 5, Result: A}
 {array[], float[], 56, Result: B}
 {array[], boolean[], 10, Result: C}
+{LABEL, null, null, Result: BeginMethod pruArreglos}
+
+{METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 3}
@@ -1376,6 +1607,10 @@ lista:
 {PLUS(+), VarLocation{name=factor Label 10, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factor Label 10, type=int, expr=5, size=0}}
 {JMP, null, null, Result: BeginFor Label 13}
 {LABEL, null, null, Result: EndFor Label 14}
+{LABEL, null, null, Result: EndMethod pruArreglos}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 4, null, Result: IntLiteral Label 20}
 {ASSIGN(=), 8, null, Result: IntLiteral Label 22}
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 24}
@@ -1384,6 +1619,7 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 27}
 {RETURN, null, null, Result: 1}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1391,11 +1627,14 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 30
+tamaño lista de codigo tercetos: 36
 lista: 
 {array[], int[], 5, Result: A}
 {array[], float[], 56, Result: B}
 {array[], boolean[], 10, Result: C}
+{LABEL, null, null, Result: BeginMethod pruArreglos}
+
+{METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 3}
@@ -1415,6 +1654,10 @@ lista:
 {PLUS(+), VarLocation{name=factor Label 10, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factor Label 10, type=int, expr=5, size=0}}
 {JMP, null, null, Result: BeginFor Label 14}
 {LABEL, null, null, Result: EndFor Label 15}
+{LABEL, null, null, Result: EndMethod pruArreglos}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 4, null, Result: IntLiteral Label 21}
 {ASSIGN(=), 8, null, Result: IntLiteral Label 23}
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 25}
@@ -1423,6 +1666,7 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 28}
 {RETURN, null, null, Result: 1}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1430,11 +1674,14 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 34
+tamaño lista de codigo tercetos: 40
 lista: 
 {array[], int[], 5, Result: A}
 {array[], float[], 56, Result: B}
 {array[], boolean[], 10, Result: C}
+{LABEL, null, null, Result: BeginMethod pruArreglos}
+
+{METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 3}
@@ -1458,6 +1705,10 @@ lista:
 {PLUS(+), VarLocation{name=factor Label 10, type=int, expr=0, size=0}, 1, Result: VarLocation{name=factor Label 10, type=int, expr=0, size=0}}
 {JMP, null, null, Result: BeginFor Label 21}
 {LABEL, null, null, Result: EndFor Label 22}
+{LABEL, null, null, Result: EndMethod pruArreglos}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 4, null, Result: IntLiteral Label 28}
 {ASSIGN(=), 8, null, Result: IntLiteral Label 30}
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 32}
@@ -1466,6 +1717,7 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 35}
 {RETURN, null, null, Result: 1}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1473,13 +1725,20 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 33
+tamaño lista de codigo tercetos: 42
 lista: 
 {array[], int[], 5, Result: A}
 {array[], float[], 56, Result: B}
 {array[], boolean[], 10, Result: C}
+{LABEL, null, null, Result: BeginMethod par}
+
+{METHODDECL, Metodo{ name=par, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 15, null, Result: IntLiteral Label 1}
 {RETURN, null, null, Result: 15}
+{LABEL, null, null, Result: EndMethod par}
+{LABEL, null, null, Result: BeginMethod pruArreglos}
+
+{METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 5}
@@ -1500,6 +1759,10 @@ lista:
 {PLUS(+), VarLocation{name=factor Label 12, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, 1, Result: VarLocation{name=factor Label 12, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}}
 {JMP, null, null, Result: BeginFor Label 18}
 {LABEL, null, null, Result: EndFor Label 19}
+{LABEL, null, null, Result: EndMethod pruArreglos}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 4, null, Result: IntLiteral Label 25}
 {ASSIGN(=), 8, null, Result: IntLiteral Label 27}
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 29}
@@ -1508,6 +1771,7 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 32}
 {RETURN, null, null, Result: 1}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1516,8 +1780,11 @@ parseo iniciado
 Error: Method pruAritmetica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 39
+tamaño lista de codigo tercetos: 45
 lista: 
+{LABEL, null, null, Result: BeginMethod pruAritmetica}
+
+{METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
 {LABEL, float, null, Result: res}
 {NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 3, type=boolean, expr=0 != 0, size=0}}
 {CMP, VarLocation{name=NEQ Label 3, type=boolean, expr=0 != 0, size=0}, true, Result: null}
@@ -1538,6 +1805,10 @@ lista:
 {MULTIPLY(*), 0, 5, Result: VarLocation{name=MULTIPLY Label 20, type=int, expr=0 * 5, size=0}}
 {ASSIGN(=), 0 * 5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 5}
+{LABEL, null, null, Result: EndMethod pruAritmetica}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 4, null, Result: IntLiteral Label 22}
 {ASSIGN(=), 8, null, Result: IntLiteral Label 24}
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 26}
@@ -1557,6 +1828,7 @@ lista:
 {PARAM, null, null, Result: 8}
 {PARAM, null, null, Result: 5}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1565,8 +1837,11 @@ parseo iniciado
 Error: Method pruAritmetica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 39
+tamaño lista de codigo tercetos: 45
 lista: 
+{LABEL, null, null, Result: BeginMethod pruAritmetica}
+
+{METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
 {LABEL, float, null, Result: res}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
 {CMP, VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}, true, Result: null}
@@ -1587,6 +1862,10 @@ lista:
 {MINUS(-), 0, 0, Result: VarLocation{name=MINUS Label 20, type=int, expr=0 - 0, size=0}}
 {ASSIGN(=), 0 - 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 13}
+{LABEL, null, null, Result: EndMethod pruAritmetica}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 4, null, Result: IntLiteral Label 22}
 {ASSIGN(=), 8, null, Result: IntLiteral Label 24}
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 26}
@@ -1606,6 +1885,7 @@ lista:
 {PARAM, null, null, Result: 8}
 {PARAM, null, null, Result: 5}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1614,8 +1894,11 @@ parseo iniciado
 Error: Method pruebaLogica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 14
+tamaño lista de codigo tercetos: 20
 lista: 
+{LABEL, null, null, Result: BeginMethod pruebaLogica}
+
+{METHODDECL, Metodo{ name=pruebaLogica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=boolean, name=i, value=null, size=0}]}, null, Result: null}
 {LABEL, boolean, null, Result: a}
 {ASSIGN(=), true, null, Result: BoolLiteral Label 1}
 {ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
@@ -1626,10 +1909,15 @@ lista:
 {AND(&&), VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0}, !true, Result: VarLocation{name=CONJUNCION Label 11, type=boolean, expr=VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0} && !true, size=0}}
 {NON(!), false, null, Result: VarLocation{name=NON Label 14, type=boolean, expr=!false, size=0}}
 {AND(&&), VarLocation{name=CONJUNCION Label 11, type=boolean, expr=VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0} && !true, size=0}, !false, Result: VarLocation{name=CONJUNCION Label 15, type=boolean, expr=VarLocation{name=CONJUNCION Label 11, type=boolean, expr=VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0} && !true, size=0} && !false, size=0}}
+{LABEL, null, null, Result: EndMethod pruebaLogica}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), false, null, Result: BoolLiteral Label 17}
 {METHODCALL, pruebaLogica, 1, Result: RESULT Label 19}
 {PARAM, null, null, Result: false}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[false]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1637,8 +1925,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 57
+tamaño lista de codigo tercetos: 63
 lista: 
+{LABEL, null, null, Result: BeginMethod promedio}
+
+{METHODDECL, Metodo{ name=promedio, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=nota1, value=null, size=0}, Simbolo{type=float, name=nota2, value=null, size=0}, Simbolo{type=float, name=nota3, value=null, size=0}]}, null, Result: null}
 {GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0.0 > 0.0, size=0}}
 {GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 7, type=boolean, expr=0.0 > 0.0, size=0}}
 {AND(&&), VarLocation{name=GE Label 3, type=boolean, expr=0.0 > 0.0, size=0}, VarLocation{name=GE Label 7, type=boolean, expr=0.0 > 0.0, size=0}, Result: VarLocation{name=CONJUNCION Label 9, type=boolean, expr=VarLocation{name=GE Label 3, type=boolean, expr=0.0 > 0.0, size=0} && VarLocation{name=GE Label 7, type=boolean, expr=0.0 > 0.0, size=0}, size=0}}
@@ -1686,6 +1977,10 @@ lista:
 {JMP, null, null, Result: endIf Label 70}
 {LABEL, null, null, Result: elseCond Label 69}
 {LABEL, null, null, Result: endIf Label 70}
+{LABEL, null, null, Result: EndMethod promedio}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 3.3, null, Result: FloatLiteral Label 72}
 {ASSIGN(=), 0.66, null, Result: FloatLiteral Label 74}
 {ASSIGN(=), 10.0, null, Result: FloatLiteral Label 76}
@@ -1696,6 +1991,7 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=promedio, args=[3.3, 0.66, 10.0]}]}, null, Result: null}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 81}
 {RETURN, null, null, Result: 1}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1703,8 +1999,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 14
+tamaño lista de codigo tercetos: 17
 lista: 
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
 {LABEL, boolean, null, Result: a}
 {LABEL, boolean, null, Result: b}
 {LABEL, boolean, null, Result: c}
@@ -1719,6 +2018,7 @@ lista:
 {OR(||), VarLocation{name=CONJUNCION Label 7, type=boolean, expr=false && false, size=0}, !false, Result: VarLocation{name=DISYUNCION Label 11, type=boolean, expr=VarLocation{name=CONJUNCION Label 7, type=boolean, expr=false && false, size=0} || !false, size=0}}
 {ASSIGN(=), VarLocation{name=CONJUNCION Label 7, type=boolean, expr=false && false, size=0} || !false, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1726,8 +2026,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 33
+tamaño lista de codigo tercetos: 39
 lista: 
+{LABEL, null, null, Result: BeginMethod maxcomdiv}
+
+{METHODDECL, Metodo{ name=maxcomdiv, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=a, value=null, size=0}, Simbolo{type=int, name=b, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: dividendo}
 {LABEL, int, null, Result: divisor}
 {LABEL, int, null, Result: resto}
@@ -1755,12 +2058,17 @@ lista:
 {JMP, null, null, Result: BeginWhile Label 18}
 {LABEL, null, null, Result: EndWhile Label 19}
 {RETURN, null, null, Result: 0}
+{LABEL, null, null, Result: EndMethod maxcomdiv}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 6, null, Result: IntLiteral Label 26}
 {ASSIGN(=), 9, null, Result: IntLiteral Label 28}
 {METHODCALL, maxcomdiv, 2, Result: RESULT Label 30}
 {PARAM, null, null, Result: 6}
 {PARAM, null, null, Result: 9}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="mcd%d"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1784,9 +2092,12 @@ parseo iniciado
 Error: Method alo not declared
 
 parseo exitoso
-tamaño lista de codigo tercetos: 31
+tamaño lista de codigo tercetos: 43
 lista: 
 {LABEL, float, null, Result: c}
+{LABEL, null, null, Result: BeginMethod alo}
+
+{METHODDECL, Metodo{ name=alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=boolean, name=b, value=null, size=0}, Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
 {CMP, VarLocation{name=factor Label 1, type=boolean, expr=false, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 2}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 5}
@@ -1798,6 +2109,14 @@ lista:
 {MINUS(-), 0, 1, Result: VarLocation{name=MINUS Label 11, type=int, expr=0 - 1, size=0}}
 {ASSIGN(=), 0 - 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 3}
+{LABEL, null, null, Result: EndMethod alo}
+{LABEL, null, null, Result: BeginMethod Alo}
+
+{METHODDECL, Metodo{ name=Alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=boolean, name=b, value=null, size=0}, Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod Alo}
+{LABEL, null, null, Result: BeginMethod alo2}
+
+{METHODDECL, Metodo{ name=alo2, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
 {ASSIGN(=), true, null, Result: BoolLiteral Label 12}
 {METHODCALL, alo, 2, Result: RESULT Label 15}
 {PARAM, null, null, Result: true}
@@ -1806,6 +2125,10 @@ lista:
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 19, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {RETURN, null, null, Result: 0}
+{LABEL, null, null, Result: EndMethod alo2}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
 {LABEL, int, null, Result: y}
 {ASSIGN(=), 7, null, Result: IntLiteral Label 21}
 {ASSIGN(=), 7, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
@@ -1817,6 +2140,7 @@ lista:
 {ASSIGN(=), false, null, Result: BoolLiteral Label 28}
 {ASSIGN(=), 3, null, Result: IntLiteral Label 30}
 {MULTIPLY(*), VarLocation{name=factor Label 31, type=int, expr=3, size=0}, 0, Result: VarLocation{name=MULTIPLY Label 34, type=int, expr=VarLocation{name=factor Label 31, type=int, expr=3, size=0} * 0, size=0}}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1824,12 +2148,19 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 33
+tamaño lista de codigo tercetos: 42
 lista: 
 {LABEL, boolean, null, Result: res}
+{LABEL, null, null, Result: BeginMethod inc}
+
+{METHODDECL, Metodo{ name=inc, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 2}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 4, type=int, expr=0 + 1, size=0}}
 {RETURN, null, null, Result: 0 + 1}
+{LABEL, null, null, Result: EndMethod inc}
+{LABEL, null, null, Result: BeginMethod resto}
+
+{METHODDECL, Metodo{ name=resto, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}, Simbolo{type=float, name=y, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: res}
 {ASSIGN(=), 3, null, Result: IntLiteral Label 6}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 8}
@@ -1847,6 +2178,10 @@ lista:
 {ASSIGN(=), 0 % 2, null, Result: VarLocation{name=res, type=int, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 13}
 {RETURN, null, null, Result: 0}
+{LABEL, null, null, Result: EndMethod resto}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {array[], int[], 1, Result: A}
 {ASSIGN(=), false, null, Result: BoolLiteral Label 23}
 {ASSIGN(=), false, null, Result: VarLocation{name=res, type=boolean, expr=null, size=0}}
@@ -1859,6 +2194,7 @@ lista:
 {PARAM, null, null, Result: MethodCallExpr{name=inc, args=[5]}}
 {PARAM, null, null, Result: 10.2}
 {ASSIGN(=), MethodCallExpr{name=resto, args=[MethodCallExpr{name=inc, args=[5]}, 10.2]}, null, Result: VarLocation{name=A, type=int[], expr=null, size=1}}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1874,8 +2210,11 @@ ocurrio un error: null
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 42
+tamaño lista de codigo tercetos: 48
 lista: 
+{LABEL, null, null, Result: BeginMethod maxcomdiv}
+
+{METHODDECL, Metodo{ name=maxcomdiv, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=a, value=null, size=0}, Simbolo{type=int, name=b, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: dividendo}
 {LABEL, int, null, Result: divisor}
 {LABEL, int, null, Result: resto}
@@ -1903,6 +2242,10 @@ lista:
 {JMP, null, null, Result: BeginWhile Label 18}
 {LABEL, null, null, Result: EndWhile Label 19}
 {RETURN, null, null, Result: 0}
+{LABEL, null, null, Result: EndMethod maxcomdiv}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {LABEL, int, null, Result: a}
 {ASSIGN(=), 10000, null, Result: IntLiteral Label 26}
 {ASSIGN(=), 10000, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
@@ -1918,6 +2261,7 @@ lista:
 {DIVIDE(/), 7, 6, Result: VarLocation{name=DIVIDE Label 42, type=int, expr=7 / 6, size=0}}
 {MINUS(-), 3.5 * 0, 7 / 6, Result: VarLocation{name=MINUS Label 43, type=int, expr=3.5 * 0 - 7 / 6, size=0}}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%d%f"}, StringLiteral{value="mcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}, 3.5 * 0 - 7 / 6]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1925,16 +2269,24 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 8
+tamaño lista de codigo tercetos: 14
 lista: 
+{LABEL, null, null, Result: BeginMethod pruAritmetica}
+
+{METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {LABEL, int, null, Result: a}
 {ASSIGN(=), 90, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 90, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 {ASSIGN(=), 7, null, Result: IntLiteral Label 4}
 {MOD(%), 0, 7, Result: VarLocation{name=MOD Label 6, type=int, expr=0 % 7, size=0}}
 {RETURN, null, null, Result: VarLocation{name=MOD Label 6, type=int, expr=0 % 7, size=0}}
+{LABEL, null, null, Result: EndMethod pruAritmetica}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {METHODCALL, pruAritmetica, 0, Result: RESULT Label 8}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1942,8 +2294,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 15
+tamaño lista de codigo tercetos: 21
 lista: 
+{LABEL, null, null, Result: BeginMethod pruMult}
+
+{METHODDECL, Metodo{ name=pruMult, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: a}
 {LABEL, int, null, Result: d}
 {ASSIGN(=), 5, null, Result: IntLiteral Label 1}
@@ -1955,10 +2310,15 @@ lista:
 {MULTIPLY(*), 0 * 1000, 0, Result: VarLocation{name=MULTIPLY Label 10, type=int, expr=0 * 1000 * 0, size=0}}
 {MULTIPLY(*), 0 * 1000 * 0, 0, Result: VarLocation{name=MULTIPLY Label 12, type=int, expr=0 * 1000 * 0 * 0, size=0}}
 {RETURN, null, null, Result: VarLocation{name=MULTIPLY Label 12, type=int, expr=0 * 1000 * 0 * 0, size=0}}
+{LABEL, null, null, Result: EndMethod pruMult}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 14}
 {METHODCALL, pruMult, 1, Result: RESULT Label 16}
 {PARAM, null, null, Result: 2}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[2]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1966,16 +2326,24 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 8
+tamaño lista de codigo tercetos: 14
 lista: 
+{LABEL, null, null, Result: BeginMethod pruMult}
+
+{METHODDECL, Metodo{ name=pruMult, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {LABEL, int, null, Result: a}
 {ASSIGN(=), 5, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 5, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 {ASSIGN(=), 7, null, Result: IntLiteral Label 4}
 {MULTIPLY(*), 0, 7, Result: VarLocation{name=MULTIPLY Label 6, type=int, expr=0 * 7, size=0}}
 {RETURN, null, null, Result: VarLocation{name=MULTIPLY Label 6, type=int, expr=0 * 7, size=0}}
+{LABEL, null, null, Result: EndMethod pruMult}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {METHODCALL, pruMult, 0, Result: RESULT Label 8}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -1984,12 +2352,16 @@ parseo iniciado
 
 Error: Main Method Missing in Class prueba2
 parseo exitoso
-tamaño lista de codigo tercetos: 4
+tamaño lista de codigo tercetos: 7
 lista: 
 {LABEL, float, null, Result: c}
+{LABEL, null, null, Result: BeginMethod alo}
+
+{METHODDECL, Metodo{ name=alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 2}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 4, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{LABEL, null, null, Result: EndMethod alo}
 ---------------------------------------------------
   
   
@@ -1997,8 +2369,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 78
+tamaño lista de codigo tercetos: 84
 lista: 
+{LABEL, null, null, Result: BeginMethod id}
+
+{METHODDECL, Metodo{ name=id, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: i}
 {LABEL, int, null, Result: j}
 {LABEL, int, null, Result: z}
@@ -2073,10 +2448,15 @@ lista:
 {JMP, null, null, Result: BeginWhile Label 10}
 {LABEL, null, null, Result: EndWhile Label 11}
 {RETURN, null, null, Result: 0}
+{LABEL, null, null, Result: EndMethod id}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 9, null, Result: IntLiteral Label 86}
 {METHODCALL, id, 1, Result: RESULT Label 88}
 {PARAM, null, null, Result: 9}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=id, args=[9]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -2084,8 +2464,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 24
+tamaño lista de codigo tercetos: 30
 lista: 
+{LABEL, null, null, Result: BeginMethod suma}
+
+{METHODDECL, Metodo{ name=suma, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=num1, value=null, size=0}, Simbolo{type=int, name=num2, value=null, size=0}]}, null, Result: null}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 2}
 {CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 0, size=0}}
 {CMP, VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 0, size=0}, true, Result: null}
@@ -2104,12 +2487,17 @@ lista:
 {RETURN, null, null, Result: 0 + 0}
 {LABEL, null, null, Result: endIf Label 13}
 {LABEL, null, null, Result: endIf Label 6}
+{LABEL, null, null, Result: EndMethod suma}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 4, null, Result: IntLiteral Label 18}
 {ASSIGN(=), 9, null, Result: IntLiteral Label 20}
 {METHODCALL, suma, 2, Result: RESULT Label 22}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 9}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=suma, args=[4, 9]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -2117,8 +2505,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 24
+tamaño lista de codigo tercetos: 30
 lista: 
+{LABEL, null, null, Result: BeginMethod sumx}
+
+{METHODDECL, Metodo{ name=sumx, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
 {LABEL, float, null, Result: aux}
 {LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 1}
@@ -2137,12 +2528,17 @@ lista:
 {JMP, null, null, Result: BeginWhile Label 9}
 {LABEL, null, null, Result: EndWhile Label 10}
 {RETURN, null, null, Result: 0.0}
+{LABEL, null, null, Result: EndMethod sumx}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 6.0, null, Result: FloatLiteral Label 19}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 21}
 {METHODCALL, sumx, 2, Result: RESULT Label 23}
 {PARAM, null, null, Result: 6.0}
 {PARAM, null, null, Result: 2}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=sumx, args=[6.0, 2]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
@@ -2150,8 +2546,11 @@ lista:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 38
+tamaño lista de codigo tercetos: 44
 lista: 
+{LABEL, null, null, Result: BeginMethod maxcomdiv}
+
+{METHODDECL, Metodo{ name=maxcomdiv, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=a, value=null, size=0}, Simbolo{type=int, name=b, value=null, size=0}]}, null, Result: null}
 {LABEL, int, null, Result: dividendo}
 {LABEL, int, null, Result: divisor}
 {LABEL, int, null, Result: resto}
@@ -2184,12 +2583,17 @@ lista:
 {JMP, null, null, Result: BeginWhile Label 29}
 {LABEL, null, null, Result: EndWhile Label 30}
 {RETURN, null, null, Result: 0}
+{LABEL, null, null, Result: EndMethod maxcomdiv}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), 6, null, Result: IntLiteral Label 32}
 {ASSIGN(=), 9, null, Result: IntLiteral Label 34}
 {METHODCALL, maxcomdiv, 2, Result: RESULT Label 36}
 {PARAM, null, null, Result: 6}
 {PARAM, null, null, Result: 9}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%dMcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: null}
+{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   

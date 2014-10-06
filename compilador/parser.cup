@@ -28,10 +28,6 @@
     //lista de codigo de tercetos/triplas
     LinkedList<TripletCode> TripletList;
 
-    //ULTIMOS LABEL DE BEGIN Y END DEL ULTIMO WHILE LEIDO
-    String LastBeginWhileLabel;
-    String LastEndWhileLabel;
-
     //pilas de labels
     //para whiles
     LinkedList<String> WhilesStack;
@@ -246,10 +242,19 @@
                         } 
                         //creamos el objeto metodo en el nivel corriente
                         TS.agregarMetodo(Type.VOID, d.toString());
+
+                        //CODIGO TRES DIRECCIONES
+                        String labelBeginMethod="BeginMethod "+d;
+                        TripletList.addLast(new TripletCode(TripletOperator.LABEL, null,null, labelBeginMethod));
+                        //FIN CODIGO TRES DIRECCIONES
                :} parameters {: //luego de leer los parametros
                         //obtenemos el ultimo metodo creado ya que son sus parametros 
                         Metodo e=TS.obtenerMetodo();
                         ult_metodo=e;
+
+                        //agregamos el metodo CODIGO TRES DIRECCIONES
+                        TripletList.addLast(new TripletCode(TripletOperator.METHODDECL,ult_metodo,null,null));
+
                         //agregamos un nuevo nivel al arbol
                         TS.agregarNivel();
                         //si el ultimo metodo leido no es main
@@ -259,7 +264,7 @@
                             for(int i=0; i<e.getParametros().size(); i++){
                                 Simbolo actual = e.getParametros().get(i);
                                 TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
-                            }  
+                            }
                         }else{//sino, si el metodo leido fue main
                         //verificamos que no tiene parametros, ya que main no debe tener parametros
                             if(ult_metodo.getParametros().size()!=0){
@@ -269,7 +274,14 @@
                                 mainDeclared=false;
                             }
                         }
-               :} block {://luego de terminar de procesar el cuerpo del metodo, subimos de nivel dentro del arbol
+               :} block {:
+
+                        String labelEndMethod="EndMethod "+d;
+                        //label de fin de metodo (CODIGO TRES DIRECCIONES)
+                        TripletList.addLast(new TripletCode(TripletOperator.LABEL, null,null, labelEndMethod));
+
+
+                        //luego de terminar de procesar el cuerpo del metodo, subimos de nivel dentro del arbol
                         TS.SubirNivel(); :}
                | type:t ID:g {:
                             //si el metodo se llama main marcamos que leimos el metodo main
@@ -288,10 +300,19 @@
                                             TS.agregarMetodo(Type.BOOLEAN, g.toString()); 
                                             break;
                              }
+
+                            String labelBeginMethod="BeginMethod "+g;
+                            TripletList.addLast(new TripletCode(TripletOperator.LABEL,null,null,labelBeginMethod));
+
+
                              :} parameters {:
                             //buscamos el ult metodo leido, luego de agregarle sus parametros
                             Metodo e=TS.obtenerMetodo();
                             ult_metodo=TS.obtenerMetodo();  
+
+                            //agregamos el metodo CODIGO TRES DIRECCIONES
+                            TripletList.addLast(new TripletCode(TripletOperator.METHODDECL,ult_metodo,null,null));
+
                             //agregamos un nuevo nivel en el arbol, para el cuerpo del metodo
                             TS.agregarNivel();
                             //si el ultimo metodo leido no es main
@@ -312,8 +333,11 @@
                                 }
                             }
                             
-                        :} block {: //al terminar de procesar el cuerpo del metodo subimos de nivel
-                                TS.SubirNivel();:}
+                        :} block {:
+                            String labelEndMethod="EndMethod "+g;
+                            TripletList.addLast(new TripletCode(TripletOperator.LABEL,null,null,labelEndMethod));
+                             //al terminar de procesar el cuerpo del metodo subimos de nivel
+                            TS.SubirNivel();:}
                ;
 
     block::= LLAVE_IZQ LLAVE_DER

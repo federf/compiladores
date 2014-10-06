@@ -18,6 +18,7 @@ public enum TripletOperator{
  	//CREO DEBERIAMOS TENER PARA LAS LLAMADAS A METODOS TANTO EXTERNOS COMO INTERNOS 
  	, METHODCALL /* Primer parametro: ID del metodo. Segundo parametro: cant de parametros.  */
  	, ARRAYACCESS /*Primer parametro: Arreglo. Segundo Parametro: indice. Tercer Parametro: direccion en donde se guardara*/
+ 	, METHODDECL /*Primer parametro: Metodo*/
  	,EXTERNINVK; /* Primer parametro: Expresion */
  	@Override
 	public String toString() {
@@ -80,6 +81,8 @@ public enum TripletOperator{
 		   		return "EXTERNINVK";
 		   	case ARRAYACCESS:
 		   		return "ARRAYACCESS";
+		   	case METHODDECL:
+		   		return "METHODDECL";
 
 		}
 		return null;
