@@ -30,6 +30,22 @@ public TripletCode(TripletOperator op, Object fD, Object sD, Object res) {
 
 }
 
+public Object getFirstDir() {
+    return firstDir;
+}
+
+public Object getSecondDir() {
+    return secondDir;
+}
+
+public Object getResult() {
+    return result;
+}
+
+public TripletOperator getOperator() {
+    return operator;
+}
+
 @Override
 public String toString() {
  	

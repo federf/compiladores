@@ -39,6 +39,52 @@
     LinkedList<String> ForsStack;
     //para ifs
     LinkedList<String> IfsStack;
+
+    //metodo que dadas dos VarLocation verifica si son operandos validos para: suma, resta, mult, division,LE,GE,GEQ,LEQ
+    private boolean validOperators(VarLocation s1, VarLocation s2){
+        return ((s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
+                (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
+                (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
+                (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
+
+                (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
+                (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
+                (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
+                (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
+
+                (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
+                (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
+                (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
+                (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
+                
+                (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
+                (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
+                (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
+                (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT)));
+    }
+
+    private boolean logicValidOperators(VarLocation r1,VarLocation r2){
+        return( r1.getType().equals(Type.BOOLEAN) && r2.getType().equals(Type.BOOLEAN) ||
+                (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.INT)) ||
+                (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.INTARRAY)) ||
+                (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.FLOAT))||
+                (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.FLOATARRAY))||
+
+                (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.INT)) ||
+                (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.INTARRAY)) ||
+                (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.FLOAT))||
+                (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.FLOATARRAY))||
+                
+                (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.INT)) ||
+                (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.INTARRAY)) ||
+                (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.FLOAT))||
+                (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.FLOATARRAY))||
+
+                (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.INT)) ||
+                (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.INTARRAY)) ||
+                (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.FLOAT))||
+                (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.FLOATARRAY)));
+    }
     :};
 
     parser code{:
@@ -867,7 +913,6 @@
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.OR,e.getExpr(), c.getExpr(),res));
                                                 //FIN CODIGO TRES DIRECCIONES
-                                                //res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
                                                 System.out.println("Error: "+BinOpType.OR+"can only be applied to Boolean operands");
@@ -885,7 +930,6 @@
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.AND, c1.getExpr(), c2.getExpr(), res));
                                                 //FIN CODIGO TRES DIRECCIONES
-                                                //res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
                                                 System.out.println("Error: "+BinOpType.AND+"can only be applied to Boolean operands");
@@ -896,36 +940,14 @@
 
     comparison::= relation:r {: RESULT=r; :}
               | relation:r1 IGUALDAD_LOGICA relation:r2 {: 
-                                    //verificamos que el tipo de los operandos sean validos para la operacion
-                                    if(r1.getType().equals(Type.BOOLEAN) && r2.getType().equals(Type.BOOLEAN) ||
-                                                (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.INT)) ||
-                                                (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.INTARRAY)) ||
-                                                (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.FLOAT))||
-                                                (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.FLOATARRAY))||
-
-                                                (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.INT)) ||
-                                                (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.INTARRAY)) ||
-                                                (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.FLOAT))||
-                                                (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.FLOATARRAY))||
-                                                
-                                                (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.INT)) ||
-                                                (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.INTARRAY)) ||
-                                                (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.FLOAT))||
-                                                (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.FLOATARRAY))||
-
-                                                (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.INT)) ||
-                                                (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.INTARRAY)) ||
-                                                (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.FLOAT))||
-                                                (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.FLOATARRAY))
-                                                ){
+                                            //verificamos que el tipo de los operandos sean validos para la operacion
+                                            if(logicValidOperators(r1,r2)){
                                                 
                                                 BinOpExpr exp= new BinOpExpr(r1.getExpr(),BinOpType.CEQ,r2.getExpr());
                                                 VarLocation res=new VarLocation("CEQ "+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.CEQ, r1.getExpr(), r2.getExpr(), res));
                                                 //FIN CODIGO TRES DIRECCIONES
-                                                //res.setType(Type.BOOLEAN);
-
                                                 RESULT=res;
                                             }else{
                                                 //si no lo son mostramos un mensaje de error
@@ -936,34 +958,13 @@
                                              :}
               | relation:r1 DIFERENCIA_LOGICA relation:r2 {:
                                                 //verificamos que el tipo de los operandos sean validos para la operacion
-                                            if(r1.getType().equals(Type.BOOLEAN) && r2.getType().equals(Type.BOOLEAN) ||
-                                                (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.INT)) ||
-                                                (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.INTARRAY)) ||
-                                                (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.FLOAT))||
-                                                (r1.getType().equals(Type.INT)&& r2.getType().equals(Type.FLOATARRAY))||
-
-                                                (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.INT)) ||
-                                                (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.INTARRAY)) ||
-                                                (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.FLOAT))||
-                                                (r1.getType().equals(Type.FLOAT)&& r2.getType().equals(Type.FLOATARRAY))||
-                                                
-                                                (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.INT)) ||
-                                                (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.INTARRAY)) ||
-                                                (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.FLOAT))||
-                                                (r1.getType().equals(Type.INTARRAY)&& r2.getType().equals(Type.FLOATARRAY))||
-
-                                                (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.INT)) ||
-                                                (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.INTARRAY)) ||
-                                                (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.FLOAT))||
-                                                (r1.getType().equals(Type.FLOATARRAY)&& r2.getType().equals(Type.FLOATARRAY))
-                                                ){
+                                            if( logicValidOperators(r1,r2)){
                                                 
                                                 BinOpExpr exp= new BinOpExpr(r1.getExpr(),BinOpType.NEQ,r2.getExpr());
                                                 VarLocation res=new VarLocation("NEQ "+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.NEQ, r1.getExpr(), r2.getExpr(), res));
                                                 //FIN CODIGO TRES DIRECCIONES
-                                                //res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
                                                 //si no lo son mostramos un mensaje de error
@@ -977,36 +978,13 @@
     relation::= sum:s {:RESULT=s; :}
             | sum:s1 MENOR sum:s2 {:
                     //verificamos que el tipo de los operandos sean validos para la operacion
-                                            if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
-
-
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
-
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
-                                            
-
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT))
-
-                                            ){
+                                            if(validOperators(s1,s2)){
                                                 
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.LE,s2.getExpr());
                                                 VarLocation res=new VarLocation("LE "+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.LE, s1.getExpr(), s2.getExpr(), res));
                                                 //FIN CODIGO TRES DIRECCIONES
-                                                //res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
                                                 //si no lo son mostramos un mensaje de error
@@ -1016,35 +994,13 @@
                                          :}
             | sum:s1 MAYOR sum:s2 {: 
                                      //verificamos que el tipo de los operandos sean validos para la operacion
-                                            if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
-
-
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
-
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
-                                            
-
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT))
-                                            ){
+                                            if(validOperators(s1,s2)){
                                                 
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.GE,s2.getExpr());
                                                 VarLocation res=new VarLocation("GE "+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.GE, s1.getExpr(), s2.getExpr(), res));
                                                 //FIN CODIGO TRES DIRECCIONES
-                                                //res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
                                                 //si no lo son mostramos un mensaje de error
@@ -1055,35 +1011,13 @@
                                          :}
             | sum:s1 MAYOR_IGUAL sum:s2 {:
                                         //verificamos que el tipo de los operandos sean validos para la operacion
-                                            if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
-
-
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
-
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
-                                            
-
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT))
-                                            ){
+                                            if(validOperators(s1,s2)){
                                                 
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.GEQ,s2.getExpr());
                                                 VarLocation res=new VarLocation("GEQ "+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 //CODIGO DE TRES DIRECCIONES   
                                                 TripletList.addLast(new TripletCode(TripletOperator.GEQ, s1.getExpr(),s2.getExpr(),res));
                                                 //FIN CODIGO TRES DIRECCIONES
-                                                //res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
                                                 //si no lo son mostramos un mensaje de error
@@ -1094,35 +1028,13 @@
                                          :}
             | sum:s1 MENOR_IGUAL sum:s2 {: 
                                         //verificamos que el tipo de los operandos sean validos para la operacion
-                                            if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
-
-
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
-
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
-                                            
-
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT))
-                                            ){
+                                            if(validOperators(s1,s2)){
                                                 
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.LEQ,s2.getExpr());
                                                 VarLocation res=new VarLocation("LEQ "+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 //CODIGO DE TRES DIRECCIONES 
                                                 TripletList.addLast(new TripletCode(TripletOperator.LEQ, s1.getExpr(), s2.getExpr(), res));
                                                 //FIN CODIGO TRES DIRECCIONES
-                                                //res.setType(Type.BOOLEAN);
                                                 RESULT=res;
                                             }else{
                                                 //si no lo son mostramos un mensaje de error
@@ -1136,27 +1048,7 @@
     sum::= term:t {: RESULT=t; :}
        | sum:s1 SUMA term:s2 {:
                                         //verificamos que el tipo de los operandos sean validos para la operacion
-                                            if(  (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
-
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
-
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
-                                            
-
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT))
-                                            ){
+                                            if(validOperators(s1,s2)){
                                                 if((s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
                                                 (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
                                                 (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
@@ -1168,7 +1060,6 @@
                                                     //CODIGO DE TRES DIRECCIONES
                                                     TripletList.addLast(new TripletCode(TripletOperator.PLUS, s1.getExpr(), s2.getExpr(), res));
                                                     //FIN CODIGO TRES DIRECCIONES
-                                                    //res.setType(Type.INT);
                                                     RESULT=res;
                                                 }else{
                                                     BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.PLUS,s2.getExpr());
@@ -1176,7 +1067,6 @@
                                                     //CODIGO DE TRES DIRECCIONES
                                                     TripletList.addLast(new TripletCode(TripletOperator.PLUS, s1.getExpr(), s2.getExpr(), res));
                                                     //FIN CODIGO TRES DIRECCIONES
-                                                    //res.setType(Type.FLOAT);
                                                     RESULT=res;
                                                 }
                                         }else{
@@ -1188,28 +1078,7 @@
                                          :}
        | sum:s1 RESTA term:s2 {:
                                     //verificamos que el tipo de los operandos sean validos para la operacion
-                                            if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
-
-
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
-
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
-                                            
-
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT))
-                                            ){
+                                            if(validOperators(s1,s2)){
                                                 
                                                 if((s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
                                                 (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
@@ -1221,7 +1090,6 @@
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.MINUS, s1.getExpr(), s2.getExpr(), res));
                                                 //FIN CODIGO TRES DIRECCIONES
-                                                //res.setType(Type.INT);
                                                 RESULT=res;
                                             }else{
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MINUS,s2.getExpr());
@@ -1229,7 +1097,6 @@
                                                 //CODIGO DE TRES DIRECCIONES 
                                                 TripletList.addLast(new TripletCode(TripletOperator.MINUS, s1.getExpr(), s2.getExpr(), res));
                                                 //FIN CODIGO TRES DIRECCIONES
-                                                //res.setType(Type.FLOAT);
                                                 RESULT=res;
                                             }
                                         }else{
@@ -1244,28 +1111,7 @@
     term::= factor:f {: RESULT=f; :}
         | term:s1 MULTIPLICACION factor:s2 {: 
                                         //verificamos que el tipo de los operandos sean validos para la operacion
-                                            if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
-
-
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
-
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
-                                            
-
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT))
-                                            ){
+                                            if(validOperators(s1,s2)){
                                                 
                                                 if((s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
                                                 (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
@@ -1277,7 +1123,6 @@
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.MULTIPLY, s1.getExpr(), s2.getExpr(), res));
                                                 //FIN CODIGO TRES DIRECCIONES
-                                                //res.setType(Type.INT);
                                                 RESULT=res;
                                             }else{
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MULTIPLY,s2.getExpr());
@@ -1285,7 +1130,6 @@
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.MULTIPLY, s1.getExpr(), s2.getExpr(), res));
                                                 //FIN CODIGO TRES DIRECCIONES
-                                                //res.setType(Type.FLOAT);
                                                 RESULT=res;
                                             }
                                         }else{
@@ -1297,28 +1141,7 @@
                                          :}
         | term:s1 DIVISION factor:s2 {:
                                         //verificamos que el tipo de los operandos sean validos para la operacion
-                                            if(    (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOAT)) ||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.FLOATARRAY)) ||
-                                            (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
-
-
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOAT))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INT))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.INTARRAY))||
-                                            (s1.getType().equals(Type.FLOAT) && s2.getType().equals(Type.FLOATARRAY))||
-
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOATARRAY))||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.FLOAT)) ||
-                                            (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))||
-                                            
-
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOATARRAY)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INTARRAY)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.INT)) ||
-                                            (s1.getType().equals(Type.FLOATARRAY) && s2.getType().equals(Type.FLOAT))
-                                            ){
+                                            if(validOperators(s1,s2)){
                                                 
                                                 if((s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
                                                 (s1.getType().equals(Type.INT) && s2.getType().equals(Type.INTARRAY)) ||
@@ -1331,7 +1154,6 @@
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.DIVIDE, s1.getExpr(), s2.getExpr(), res));          
                                                 //FIN CODIGO TRES DIRECCIONES
-                                                //res.setType(Type.INT);
                                                 RESULT=res;
                                             }else{
                                                 BinOpExpr exp=new BinOpExpr(s1,BinOpType.DIVIDE,s2);
@@ -1339,7 +1161,6 @@
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.DIVIDE, s1.getExpr(), s2.getExpr(), res));          
                                                 //FIN CODIGO TRES DIRECCIONES
-                                                //res.setType(Type.FLOAT);
                                                 RESULT=res;
                                             }
                                         }else{
@@ -1362,7 +1183,6 @@
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.MOD, s1.getExpr(), s2.getExpr(), res));                   
                                                 //FIN CODIGO TRES DIRECCIONES
-                                                //res.setType(Type.INT);
                                                 RESULT=res;
                                             }else{
                                                 //si no lo son mostramos un mensaje de error
