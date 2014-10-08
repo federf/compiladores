@@ -188,7 +188,8 @@ public class AssemblyCodeGenerator{
 			        result=result+ "NEQ(!=)"; 
 			        break;
 				case ASSIGN:
-			        result=result+ "ASSIGN(=)"; 
+			        result=result+"mov " + t.getFirstDir() + "(%rbp), %eax\n"+
+								"mov %eax, " + t.getResult() + "(%rbp)\n";
 			        break;
 			    case INCREMENT:
 			    	result=result+ "INCREMENT(+=)"; 
@@ -197,16 +198,22 @@ public class AssemblyCodeGenerator{
 			    	result=result+ "DECREMENT(-=)"; 
 			    	break;
 			    case LABEL:
-			    	result=result+ "LABEL"; 
+			    	result=result+ "."+t.getResult()+"\n"; 
 			    	break;
 				case RETURN:
-			    	result=result+ "RETURN"; 
+					if (t.getResult() != null) 
+				 		result += "mov " + t.getResult() + "(%rbp), %eax\n";
+				 	else 
+						result += "mov $0, %eax\n";
+				 	result += "leave\n";
+					result += "ret\n";
 			    	break;
 			    case PARAM:
 			    	result=result+ "PARAM"; 
 			    	break;
 			    case CMP:
-			    	result=result+ "CMP"; 
+			    	result += "mov " + t.getSecondDir() + "(%rbp), %eax\n";
+					result += "cmp " + t.getFirstDir() + "(%rbp), %eax\n";
 			    	break;
 			 	case JMP:
 			    	result=result+ "jmp "+t.getResult()+"\n"; 
