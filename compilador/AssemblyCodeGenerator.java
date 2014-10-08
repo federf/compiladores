@@ -10,6 +10,7 @@ public class AssemblyCodeGenerator{
 		for(TripletCode t: list){
 			switch(t.getOperator()){
 				case PLUS:
+					
 					result=result+ "PLUS(+)"; 
 					break;
 				case MINUS:

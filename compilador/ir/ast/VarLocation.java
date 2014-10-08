@@ -6,12 +6,22 @@ public class VarLocation extends Location {
 
     Type type;
     int size;
+    int offset;
+    
+    static int off = -4;
+
+    public static void resetOffset(){
+        off = 4;
+    }
 
     public VarLocation(String id, Type type, Expression expr, int size) {
         this.id=id;
         this.type = type;
         this.expr = expr;
         this.size = size;
+        this.offset = off;
+
+        off = off - 4;
     }
 
     public void setSize(int size) {
@@ -27,6 +37,9 @@ public class VarLocation extends Location {
         this.type=t;
     }
 
+    public int getOffset(){
+        return offset;
+    }
     @Override
     public String toString() {
         return "VarLocation{" +"name="+ id +", type=" + type + ", expr=" + expr + ", size=" + size + '}';
