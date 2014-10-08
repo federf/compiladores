@@ -38,7 +38,7 @@ public class VarLocation extends Location {
     }
 
     public int getOffset(){
-        return offset;
+        return this.offset;
     }
     @Override
     public String toString() {

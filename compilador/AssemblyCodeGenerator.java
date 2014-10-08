@@ -1,4 +1,5 @@
 import java.util.*;
+import ir.ast.*;
 public class AssemblyCodeGenerator{
 	public AssemblyCodeGenerator(){
 
@@ -10,7 +11,68 @@ public class AssemblyCodeGenerator{
 		for(TripletCode t: list){
 			switch(t.getOperator()){
 				case PLUS:
-					result=result+ "PLUS(+)"; 
+
+					VarLocation res = (VarLocation)t.getResult();
+
+
+					int ResOff = res.getOffset();
+
+					if (t.getFirstDir() instanceof VarLocation && t.getSecondDir() instanceof VarLocation) {
+						VarLocation  x = (VarLocation)t.getFirstDir();
+						VarLocation  y = (VarLocation)t.getSecondDir();
+
+						int XOff = x.getOffset();
+						int YOff = y.getOffset();
+
+						result = result +(
+
+						"mov" + XOff + "(%ebp) , %eax \n"+
+						"mov" + YOff + "(%ebp), %edx \n"+
+						"add %eax, %edx \n"+
+						"mov %edx," + ResOff + "%(ebp) \n");
+
+					}
+
+					if (t.getFirstDir() instanceof VarLocation && !(t.getSecondDir() instanceof VarLocation)) {
+						VarLocation  x = (VarLocation)t.getFirstDir();
+						IntLiteral  y = (IntLiteral)t.getSecondDir();
+
+						int XOff = x.getOffset();
+
+						result = result +(
+
+						"mov" + XOff + "(%ebp) , %eax \n"+
+						"add $" +y.getStringValue() + ", %eax \n"+
+						"mov %edx," + ResOff + "%(ebp) \n");
+
+					}
+
+					if ((t.getFirstDir() instanceof VarLocation) && t.getSecondDir() instanceof VarLocation) {
+						IntLiteral  x = (IntLiteral)t.getFirstDir();
+						VarLocation  y = (VarLocation)t.getSecondDir();
+
+						int YOff = y.getOffset();
+
+						result = result +(
+
+						"mov" + YOff + "(%ebp), %eax \n"+
+						"add $" +x.getStringValue() + ", %eax \n"+
+						"mov %edx," + ResOff + "%(ebp) \n");
+
+					}
+
+					if (!(t.getFirstDir() instanceof VarLocation) && !(t.getSecondDir() instanceof VarLocation)) {
+						IntLiteral  x = (IntLiteral)t.getFirstDir();
+						IntLiteral  y = (IntLiteral)t.getSecondDir();
+
+						result = result +(
+
+						"mov $" + x.getStringValue() + "%eax \n"+
+						"mov $" + y.getStringValue() + "%edx \n"+
+						"add %eax, %edx \n"+
+						"mov %edx," + ResOff + "%(ebp) \n");
+
+					}
 					break;
 				case MINUS:
 					result=result+ "MINUS(-)"; 
