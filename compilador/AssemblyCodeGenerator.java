@@ -134,8 +134,8 @@ public class AssemblyCodeGenerator{
 			    case CMP:
 			    	result=result+ "CMP"; 
 			    	break;
-			    case JMP:
-			    	result=result+ "JMP"; 
+			 	case JMP:
+			    	result=result+ "jmp "+t.getResult()+"\n"; 
 			    	break;
 			    case OR:
 			    	result=result+ "OR(||)"; 
@@ -144,10 +144,10 @@ public class AssemblyCodeGenerator{
 			    	result=result+ "array[]"; 
 			    	break;
 			   	case JNE:
-			   		result=result+ "JNE"; 
+			   		result=result+ "jne "+t.getResult()+"\n"; 
 			   		break;
 			   	case JNL:
-			   		result=result+ "JNL"; 
+			   		result=result+ "jnl "+t.getResult()+"\n"; 
 			   		break;
 			   	case METHODCALL:
 			   		result=result+ "METHODCALL"; 
