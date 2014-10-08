@@ -11,7 +11,7 @@ public class VarLocation extends Location {
     static int off = -4;
 
     public static void resetOffset(){
-        off = 4;
+        off = -4;
     }
 
     public VarLocation(String id, Type type, Expression expr, int size) {

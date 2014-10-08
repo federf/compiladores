@@ -230,11 +230,13 @@
                                                     :} 
       ;
 
-    methodDeclarations::= {: VarLocation.resetOffset() :} method_decl 
+    methodDeclarations::= method_decl 
                       | methodDeclarations method_decl
                       ;
 
-    method_decl::= VOID ID:d {: //declaracion de metodo que no retorna nada (retorna void)
+    method_decl::= VOID ID:d {:  //declaracion de metodo que no retorna nada (retorna void)
+                        
+                        VarLocation.resetOffset();
                         //si el id leido es "main"
                         if(d.toString().equals("main")){
                             //marcamos que se encontro un metodo main (almenos)
@@ -285,6 +287,7 @@
                         TS.SubirNivel(); :}
                | type:t ID:g {:
                             //si el metodo se llama main marcamos que leimos el metodo main
+                            VarLocation.resetOffset();
                             if(g.toString().equals("main")){
                                 mainDeclared=true;
                             } 
@@ -1237,7 +1240,6 @@
         ;
 
     factor::=literal:l {: VarLocation res=new VarLocation("factor "+Labels.getLabel(),l.getType(),l,0); RESULT = res; :} 
-                            System.out.println("OFFSET = " + res.getOffset());
           | ADMIRACION factor:f {: 
                                     //verificamos que el operando sea valido para la operacion
                                     if(f.getType().equals(Type.BOOLEAN)){

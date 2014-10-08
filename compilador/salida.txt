@@ -9,6 +9,13 @@
 ///////////////////////// TESTS CORRECTOS ////////////////////////////////////////
 ---------------- Test tests/test_correctos/factorial.ctds ... -------------------
 parseo iniciado
+OFFSET = 4
+OFFSET = -4
+OFFSET = -20
+OFFSET = -28
+OFFSET = -40
+OFFSET = -44
+OFFSET = -56
 
 parseo exitoso
 tamaño lista de codigo tercetos: 28
@@ -48,7 +55,17 @@ lista:
   
 ---------------- Test tests/test_correctos/floatTest.ctds ... -------------------
 parseo iniciado
+OFFSET = -4
+OFFSET = -4
+OFFSET = -4
+OFFSET = -4
 Error: Method mult must return float
+OFFSET = 4
+OFFSET = -4
+OFFSET = -12
+OFFSET = -16
+OFFSET = -24
+OFFSET = -60
 
 parseo exitoso
 tamaño lista de codigo tercetos: 50
@@ -113,6 +130,12 @@ lista:
   
 ---------------- Test tests/test_correctos/logicTest.ctds ... -------------------
 parseo iniciado
+OFFSET = 4
+OFFSET = -12
+OFFSET = -24
+OFFSET = -28
+OFFSET = -40
+OFFSET = -44
 Error: Method pruebaLogica must return int
 
 parseo exitoso
@@ -145,112 +168,152 @@ lista:
   
 ---------------- Test tests/test_correctos/program.ctds ... -------------------
 parseo iniciado
+OFFSET = -4
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/testAssing.ctds ... -------------------
+parseo iniciado
+OFFSET = 4
+OFFSET = -4
+OFFSET = -12
+OFFSET = -24
+OFFSET = -28
+OFFSET = -40
+OFFSET = -44
+OFFSET = -56
+OFFSET = -64
+OFFSET = -76
+OFFSET = -80
+OFFSET = -88
 
 parseo exitoso
-tamaño lista de codigo tercetos: 23
+tamaño lista de codigo tercetos: 32
 lista: 
-{LABEL, null, null, Result: BeginMethod inc}
+{LABEL, null, null, Result: BeginMethod aritmTest}
 
-{METHODDECL, Metodo{ name=inc, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 2}
-{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 4, type=int, expr=0 + 1, size=0}}
-{RETURN, null, null, Result: 0 + 1}
-{LABEL, null, null, Result: EndMethod inc}
+{METHODDECL, Metodo{ name=aritmTest, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
+{LABEL, int, null, Result: a}
+{LABEL, int, null, Result: b}
+{ASSIGN(=), 1, null, Result: IntLiteral Label 1}
+{ASSIGN(=), 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{ASSIGN(=), 2, null, Result: IntLiteral Label 3}
+{ASSIGN(=), 2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
+{ASSIGN(=), 1, null, Result: IntLiteral Label 5}
+{PLUS(+), 1, 0, Result: VarLocation{name=PLUS Label 8, type=int, expr=1 + 0, size=0}}
+{ASSIGN(=), 1 + 0, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{ASSIGN(=), 2, null, Result: IntLiteral Label 10}
+{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 12, type=int, expr=0 + 2, size=0}}
+{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
+{DIVIDE(/), 0, 0, Result: VarLocation{name=DIVIDE Label 15, type=int, expr=0 / 0, size=0}}
+{ASSIGN(=), VarLocation{name=DIVIDE Label 15, type=int, expr=0 / 0, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{ASSIGN(=), 3, null, Result: IntLiteral Label 18}
+{MOD(%), 0, 3, Result: VarLocation{name=MOD Label 20, type=int, expr=0 % 3, size=0}}
+{ASSIGN(=), 0 % 3, null, Result: VarLocation{name=c, type=int, expr=null, size=0}}
+{ASSIGN(=), 1, null, Result: IntLiteral Label 21}
+{ASSIGN(=), 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{ASSIGN(=), 2, null, Result: IntLiteral Label 23}
+{ASSIGN(=), 2, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{RETURN, null, null, Result: 0}
+{LABEL, null, null, Result: EndMethod aritmTest}
 {LABEL, null, null, Result: BeginMethod main}
 
-{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, int, null, Result: y}
-{EXTERNINVK, ExternInvkExpr{id="get_int", type=int, parameters=[]}, null, Result: null}
-{METHODCALL, inc, 1, Result: RESULT Label 7}
-{PARAM, null, null, Result: ExternInvkExpr{id="get_int", type=int, parameters=[]}}
-{ASSIGN(=), MethodCallExpr{name=inc, args=[ExternInvkExpr{id="get_int", type=int, parameters=[]}]}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 10}
-{CEQ(==), 0, 1, Result: VarLocation{name=CEQ Label 12, type=boolean, expr=0 == 1, size=0}}
-{CMP, VarLocation{name=CEQ Label 12, type=boolean, expr=0 == 1, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 13}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==1\n"}]}, null, Result: null}
-{JMP, null, null, Result: endIf Label 14}
-{LABEL, null, null, Result: elseCond Label 13}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==%d\n"}, 0]}, null, Result: null}
-{LABEL, null, null, Result: endIf Label 14}
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
+{ASSIGN(=), 5, null, Result: IntLiteral Label 26}
+{METHODCALL, aritmTest, 1, Result: RESULT Label 28}
+{PARAM, null, null, Result: 5}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=aritmTest, args=[5]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
----------------- Test tests/test_correctos/test_arreglos2.ctds ... -------------------
+---------------- Test tests/test_correctos/test_Asignaciones.ctds ... -------------------
 parseo iniciado
+OFFSET = 4
+OFFSET = -4
+OFFSET = -12
+OFFSET = -24
+OFFSET = -28
+OFFSET = -40
+OFFSET = -44
+OFFSET = -56
+OFFSET = -64
+OFFSET = -72
+OFFSET = -80
+OFFSET = -92
 
 parseo exitoso
-tamaño lista de codigo tercetos: 61
+tamaño lista de codigo tercetos: 31
 lista: 
-{array[], int[], 5, Result: A}
-{array[], float[], 56, Result: B}
-{array[], boolean[], 10, Result: C}
-{LABEL, boolean, null, Result: y}
-{LABEL, null, null, Result: BeginMethod pruArreglos}
+{LABEL, null, null, Result: BeginMethod pruAritmetica}
 
-{METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: y}
-{ASSIGN(=), 8.87, null, Result: FloatLiteral Label 1}
-{ASSIGN(=), 8.87, null, Result: VarLocation{name=y, type=float, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 3}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 5}
-{ASSIGN(=), 4, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{ASSIGN(=), 55, null, Result: IntLiteral Label 7}
-{ASSIGN(=), 2.6, null, Result: FloatLiteral Label 9}
-{PLUS(+), 2.6, 0.0, Result: VarLocation{name=PLUS Label 12, type=float, expr=2.6 + 0.0, size=0}}
-{ASSIGN(=), 2.6 + 0.0, null, Result: VarLocation{name=B, type=float[], expr=null, size=56}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 13}
-{LE(<), 0, 0, Result: VarLocation{name=LE Label 17, type=boolean, expr=0 < 0, size=0}}
-{ASSIGN(=), VarLocation{name=factor Label 18, type=boolean, expr=VarLocation{name=LE Label 17, type=boolean, expr=0 < 0, size=0}, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=10}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 20}
-{GEQ(>=), 0, 0, Result: VarLocation{name=GEQ Label 24, type=boolean, expr=0 >= 0, size=0}}
-{ASSIGN(=), VarLocation{name=GEQ Label 24, type=boolean, expr=0 >= 0, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=10}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 26}
-{ARRAYACCESS, A, VarLocation{name=factor Label 27, type=int, expr=0, size=0}, Result: Array Access Label 28}
-{RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
-{LABEL, null, null, Result: EndMethod pruArreglos}
+{METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
+{LABEL, int, null, Result: a}
+{LABEL, int, null, Result: b}
+{ASSIGN(=), 1, null, Result: IntLiteral Label 1}
+{ASSIGN(=), 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{ASSIGN(=), 8, null, Result: IntLiteral Label 3}
+{ASSIGN(=), 8, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
+{ASSIGN(=), 699, null, Result: IntLiteral Label 5}
+{PLUS(+), 699, 0, Result: VarLocation{name=PLUS Label 8, type=int, expr=699 + 0, size=0}}
+{ASSIGN(=), 699 + 0, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{ASSIGN(=), 2, null, Result: IntLiteral Label 10}
+{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 12, type=int, expr=0 + 2, size=0}}
+{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
+{DIVIDE(/), 0, 0, Result: VarLocation{name=DIVIDE Label 15, type=int, expr=0 / 0, size=0}}
+{DIVIDE(/), 0 / 0, 0, Result: VarLocation{name=DIVIDE Label 17, type=int, expr=0 / 0 / 0, size=0}}
+{ASSIGN(=), 2, null, Result: IntLiteral Label 18}
+{DIVIDE(/), 0 / 0 / 0, 2, Result: VarLocation{name=DIVIDE Label 20, type=int, expr=0 / 0 / 0 / 2, size=0}}
+{ASSIGN(=), VarLocation{name=DIVIDE Label 20, type=int, expr=0 / 0 / 0 / 2, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{ASSIGN(=), 2, null, Result: IntLiteral Label 23}
+{MOD(%), 0, 2, Result: VarLocation{name=MOD Label 25, type=int, expr=0 % 2, size=0}}
+{ASSIGN(=), 0 % 2, null, Result: VarLocation{name=c, type=int, expr=null, size=0}}
+{RETURN, null, null, Result: 0}
+{LABEL, null, null, Result: EndMethod pruAritmetica}
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 30}
-{ASSIGN(=), true, null, Result: VarLocation{name=y, type=boolean, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 32}
-{ASSIGN(=), 58, null, Result: IntLiteral Label 34}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 36}
-{UNARYMINUS(-expr), 6, null, Result: VarLocation{name=UNARYMINUS Label 38, type=int, expr=-6, size=0}}
-{MINUS(-), 58, VarLocation{name=UNARYMINUS Label 38, type=int, expr=-6, size=0}, Result: VarLocation{name=MINUS Label 40, type=int, expr=58 - VarLocation{name=UNARYMINUS Label 38, type=int, expr=-6, size=0}, size=0}}
-{ASSIGN(=), 58 - VarLocation{name=UNARYMINUS Label 38, type=int, expr=-6, size=0}, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 41}
-{ASSIGN(=), 2.6, null, Result: FloatLiteral Label 43}
-{UNARYMINUS(-expr), 2.6, null, Result: VarLocation{name=UNARYMINUS Label 45, type=float, expr=-2.6, size=0}}
-{ASSIGN(=), -2.6, null, Result: VarLocation{name=B, type=float[], expr=null, size=56}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 46}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 48}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 50}
-{LE(<), 4, 6, Result: VarLocation{name=LE Label 52, type=boolean, expr=4 < 6, size=0}}
-{NON(!), VarLocation{name=factor Label 53, type=boolean, expr=VarLocation{name=LE Label 52, type=boolean, expr=4 < 6, size=0}, size=0}, null, Result: VarLocation{name=NON Label 55, type=boolean, expr=!VarLocation{name=factor Label 53, type=boolean, expr=VarLocation{name=LE Label 52, type=boolean, expr=4 < 6, size=0}, size=0}, size=0}}
-{ASSIGN(=), !VarLocation{name=factor Label 53, type=boolean, expr=VarLocation{name=LE Label 52, type=boolean, expr=4 < 6, size=0}, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=10}}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 56}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 58}
-{ASSIGN(=), 7, null, Result: IntLiteral Label 60}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 62}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 64}
-{PLUS(+), 3, 3, Result: VarLocation{name=PLUS Label 66, type=int, expr=3 + 3, size=0}}
-{MINUS(-), 7, VarLocation{name=PLUS Label 66, type=int, expr=3 + 3, size=0}, Result: VarLocation{name=MINUS Label 68, type=int, expr=7 - VarLocation{name=PLUS Label 66, type=int, expr=3 + 3, size=0}, size=0}}
-{ARRAYACCESS, A, VarLocation{name=MINUS Label 68, type=int, expr=7 - VarLocation{name=PLUS Label 66, type=int, expr=3 + 3, size=0}, size=0}, Result: Array Access Label 69}
-{GEQ(>=), 5, ArrayLiteral{id=A, size=5}, Result: VarLocation{name=GEQ Label 71, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0}}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 73}
-{OR(||), VarLocation{name=GEQ Label 71, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0}, true, Result: VarLocation{name=DISYUNCION Label 75, type=boolean, expr=VarLocation{name=GEQ Label 71, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0} || true, size=0}}
-{ASSIGN(=), VarLocation{name=GEQ Label 71, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0} || true, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=10}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 76}
-{RETURN, null, null, Result: 1}
+{ASSIGN(=), 3, null, Result: IntLiteral Label 27}
+{METHODCALL, pruAritmetica, 1, Result: RESULT Label 29}
+{PARAM, null, null, Result: 3}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[3]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_arreglos.ctds ... -------------------
 parseo iniciado
+OFFSET = -4
+OFFSET = -12
+OFFSET = -24
+OFFSET = -36
+OFFSET = -48
+OFFSET = -52
+OFFSET = -64
+OFFSET = -76
+OFFSET = -80
+OFFSET = -88
+OFFSET = -104
+OFFSET = -116
+OFFSET = -128
+OFFSET = -132
+OFFSET = -140
+OFFSET = -156
+OFFSET = -164
+OFFSET = -176
+OFFSET = -184
+OFFSET = -196
+OFFSET = -200
+OFFSET = -208
+OFFSET = -228
+OFFSET = -240
+OFFSET = -244
+OFFSET = -252
+OFFSET = -264
+OFFSET = -272
+OFFSET = -288
+OFFSET = -292
+OFFSET = -304
 Error: Method pruArreglos must return int
 
 parseo exitoso
@@ -362,188 +425,56 @@ lista:
 ---------------------------------------------------
   
   
----------------- Test tests/test_correctos/test_Asignaciones.ctds ... -------------------
+---------------- Test tests/test_correctos/test_arreglos2.ctds ... -------------------
 parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 31
-lista: 
-{LABEL, null, null, Result: BeginMethod pruAritmetica}
-
-{METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: a}
-{LABEL, int, null, Result: b}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 3}
-{ASSIGN(=), 8, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
-{ASSIGN(=), 699, null, Result: IntLiteral Label 5}
-{PLUS(+), 699, 0, Result: VarLocation{name=PLUS Label 8, type=int, expr=699 + 0, size=0}}
-{ASSIGN(=), 699 + 0, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 10}
-{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 12, type=int, expr=0 + 2, size=0}}
-{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
-{DIVIDE(/), 0, 0, Result: VarLocation{name=DIVIDE Label 15, type=int, expr=0 / 0, size=0}}
-{DIVIDE(/), 0 / 0, 0, Result: VarLocation{name=DIVIDE Label 17, type=int, expr=0 / 0 / 0, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 18}
-{DIVIDE(/), 0 / 0 / 0, 2, Result: VarLocation{name=DIVIDE Label 20, type=int, expr=0 / 0 / 0 / 2, size=0}}
-{ASSIGN(=), VarLocation{name=DIVIDE Label 20, type=int, expr=0 / 0 / 0 / 2, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 23}
-{MOD(%), 0, 2, Result: VarLocation{name=MOD Label 25, type=int, expr=0 % 2, size=0}}
-{ASSIGN(=), 0 % 2, null, Result: VarLocation{name=c, type=int, expr=null, size=0}}
-{RETURN, null, null, Result: 0}
-{LABEL, null, null, Result: EndMethod pruAritmetica}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 27}
-{METHODCALL, pruAritmetica, 1, Result: RESULT Label 29}
-{PARAM, null, null, Result: 3}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[3]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/testAssing.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 32
-lista: 
-{LABEL, null, null, Result: BeginMethod aritmTest}
-
-{METHODDECL, Metodo{ name=aritmTest, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: a}
-{LABEL, int, null, Result: b}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 3}
-{ASSIGN(=), 2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 5}
-{PLUS(+), 1, 0, Result: VarLocation{name=PLUS Label 8, type=int, expr=1 + 0, size=0}}
-{ASSIGN(=), 1 + 0, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 10}
-{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 12, type=int, expr=0 + 2, size=0}}
-{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
-{DIVIDE(/), 0, 0, Result: VarLocation{name=DIVIDE Label 15, type=int, expr=0 / 0, size=0}}
-{ASSIGN(=), VarLocation{name=DIVIDE Label 15, type=int, expr=0 / 0, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 18}
-{MOD(%), 0, 3, Result: VarLocation{name=MOD Label 20, type=int, expr=0 % 3, size=0}}
-{ASSIGN(=), 0 % 3, null, Result: VarLocation{name=c, type=int, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 21}
-{ASSIGN(=), 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 23}
-{ASSIGN(=), 2, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{RETURN, null, null, Result: 0}
-{LABEL, null, null, Result: EndMethod aritmTest}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 26}
-{METHODCALL, aritmTest, 1, Result: RESULT Label 28}
-{PARAM, null, null, Result: 5}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=aritmTest, args=[5]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_bloques02.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 38
-lista: 
-{LABEL, null, null, Result: BeginMethod breaks}
-
-{METHODDECL, Metodo{ name=breaks, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=g, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 10, null, Result: IntLiteral Label 4}
-{LE(<), 0, 10, Result: VarLocation{name=LE Label 6, type=boolean, expr=0 < 10, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 8}
-{CMP, VarLocation{name=factor Label 7, type=boolean, expr=VarLocation{name=LE Label 6, type=boolean, expr=0 < 10, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 9}
-{LABEL, float, null, Result: j}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 11}
-{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 13, type=int, expr=0 + 1, size=0}}
-{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 2.3, null, Result: FloatLiteral Label 14}
-{ASSIGN(=), 2.3, null, Result: VarLocation{name=j, type=float, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 17}
-{LE(<), 0, 0, Result: VarLocation{name=LE Label 19, type=boolean, expr=0 < 0, size=0}}
-{CMP, VarLocation{name=LE Label 19, type=boolean, expr=0 < 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 20}
-{JMP, null, null, Result: EndWhile Label 9}
-{JMP, null, null, Result: endIf Label 21}
-{LABEL, null, null, Result: elseCond Label 20}
-{JMP, null, null, Result: BeginWhile Label 8}
-{LABEL, null, null, Result: endIf Label 21}
-{JMP, null, null, Result: BeginWhile Label 8}
-{LABEL, null, null, Result: EndWhile Label 9}
-{RETURN, null, null, Result: 0}
-{LABEL, null, null, Result: EndMethod breaks}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 23}
-{METHODCALL, breaks, 1, Result: RESULT Label 25}
-{PARAM, null, null, Result: 1}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 28}
-{RETURN, null, null, Result: 1}
-{LABEL, null, null, Result: EndMethod main}
+OFFSET = 4
+OFFSET = -8
+OFFSET = -20
+OFFSET = -32
+OFFSET = -40
+OFFSET = -52
+OFFSET = -68
+OFFSET = -80
+OFFSET = 4
+OFFSET = -8
+OFFSET = -20
+OFFSET = -28
+OFFSET = -36
+OFFSET = -44
+OFFSET = -52
+OFFSET = -64
+OFFSET = -76
+OFFSET = -84
+OFFSET = -104
+OFFSET = -112
+OFFSET = -120
+OFFSET = -132
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_bloques.ctds ... -------------------
 parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 35
-lista: 
-{LABEL, null, null, Result: BeginMethod breaks}
-
-{METHODDECL, Metodo{ name=breaks, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=g, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 10, null, Result: IntLiteral Label 4}
-{LE(<), 0, 10, Result: VarLocation{name=LE Label 6, type=boolean, expr=0 < 10, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 8}
-{CMP, VarLocation{name=factor Label 7, type=boolean, expr=VarLocation{name=LE Label 6, type=boolean, expr=0 < 10, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 9}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 11}
-{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 13, type=int, expr=0 + 1, size=0}}
-{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 15}
-{LE(<), 0, 0, Result: VarLocation{name=LE Label 17, type=boolean, expr=0 < 0, size=0}}
-{CMP, VarLocation{name=LE Label 17, type=boolean, expr=0 < 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 18}
-{JMP, null, null, Result: EndWhile Label 9}
-{JMP, null, null, Result: endIf Label 19}
-{LABEL, null, null, Result: elseCond Label 18}
-{JMP, null, null, Result: BeginWhile Label 8}
-{LABEL, null, null, Result: endIf Label 19}
-{JMP, null, null, Result: BeginWhile Label 8}
-{LABEL, null, null, Result: EndWhile Label 9}
-{RETURN, null, null, Result: 0}
-{LABEL, null, null, Result: EndMethod breaks}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 21}
-{METHODCALL, breaks, 1, Result: RESULT Label 23}
-{PARAM, null, null, Result: 1}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 26}
-{RETURN, null, null, Result: 1}
-{LABEL, null, null, Result: EndMethod main}
+OFFSET = 4
+OFFSET = -12
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_bloques02.ctds ... -------------------
+parseo iniciado
+OFFSET = 4
+OFFSET = -12
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_booleanos.ctds ... -------------------
 parseo iniciado
+OFFSET = 0
+OFFSET = -4
+OFFSET = -4
+OFFSET = 4
+OFFSET = -4
+OFFSET = -12
+OFFSET = -24
 
 parseo exitoso
 tamaño lista de codigo tercetos: 40
@@ -597,6 +528,11 @@ lista:
   
 ---------------- Test tests/test_correctos/test_break.ctds ... -------------------
 parseo iniciado
+OFFSET = 4
+OFFSET = -12
+OFFSET = -20
+OFFSET = -32
+OFFSET = -44
 
 parseo exitoso
 tamaño lista de codigo tercetos: 35
@@ -641,76 +577,74 @@ lista:
 ---------------------------------------------------
   
   
----------------- Test tests/test_correctos/test_comentarios2.ctds ... -------------------
+---------------- Test tests/test_correctos/test_comentarios.ctds ... -------------------
 parseo iniciado
-Error: Method pruAritmetica must return int
-
-parseo exitoso
-tamaño lista de codigo tercetos: 21
-lista: 
-{LABEL, null, null, Result: BeginMethod pruAritmetica}
-
-{METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: res}
-{GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
-{CMP, VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 4}
-{ASSIGN(=), 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 5}
-{LABEL, null, null, Result: elseCond Label 4}
-{ASSIGN(=), 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{LABEL, null, null, Result: endIf Label 5}
-{LABEL, null, null, Result: EndMethod pruAritmetica}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 9}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 11}
-{METHODCALL, pruAritmetica, 2, Result: RESULT Label 13}
-{PARAM, null, null, Result: 4}
-{PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
----------------- Test tests/test_correctos/test_comentarios.ctds ... -------------------
+---------------- Test tests/test_correctos/test_comentarios2.ctds ... -------------------
 parseo iniciado
-Error: Method pruAritmetica must return int
-
-parseo exitoso
-tamaño lista de codigo tercetos: 23
-lista: 
-{LABEL, null, null, Result: BeginMethod pruAritmetica}
-
-{METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: res}
-{GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
-{CMP, VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 4}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 7}
-{PLUS(+), 0, 5, Result: VarLocation{name=PLUS Label 9, type=int, expr=0 + 5, size=0}}
-{ASSIGN(=), 0 + 5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 5}
-{LABEL, null, null, Result: elseCond Label 4}
-{ASSIGN(=), 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{LABEL, null, null, Result: endIf Label 5}
-{LABEL, null, null, Result: EndMethod pruAritmetica}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 12}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 14}
-{METHODCALL, pruAritmetica, 2, Result: RESULT Label 16}
-{PARAM, null, null, Result: 4}
-{PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_condiciones.ctds ... -------------------
 parseo iniciado
+OFFSET = -4
+OFFSET = -12
+OFFSET = -24
+OFFSET = -32
+OFFSET = -36
+OFFSET = -48
+OFFSET = -56
+OFFSET = -60
+OFFSET = -76
+OFFSET = -92
+OFFSET = -100
+OFFSET = -104
+OFFSET = -116
+OFFSET = -124
+OFFSET = -128
+OFFSET = -144
+OFFSET = -152
+OFFSET = -164
+OFFSET = -172
+OFFSET = -184
+OFFSET = -192
+OFFSET = -196
+OFFSET = -204
+OFFSET = -216
+OFFSET = -224
+OFFSET = -236
+OFFSET = -244
+OFFSET = -248
+OFFSET = -260
+OFFSET = -268
+OFFSET = -276
+OFFSET = -292
+OFFSET = -308
+OFFSET = -316
+OFFSET = -328
+OFFSET = -336
+OFFSET = -340
+OFFSET = -356
+OFFSET = -372
+OFFSET = -380
+OFFSET = -384
+OFFSET = -396
+OFFSET = -404
+OFFSET = -412
+OFFSET = -424
+OFFSET = -432
+OFFSET = -444
+OFFSET = -452
+OFFSET = -464
+OFFSET = -472
+OFFSET = -480
+OFFSET = -496
+OFFSET = -512
+OFFSET = -520
+OFFSET = -532
+OFFSET = -540
 
 parseo exitoso
 tamaño lista de codigo tercetos: 122
@@ -844,6 +778,23 @@ lista:
   
 ---------------- Test tests/test_correctos/test_continuebreak.ctds ... -------------------
 parseo iniciado
+OFFSET = 4
+OFFSET = -4
+OFFSET = -8
+OFFSET = -16
+OFFSET = -32
+OFFSET = -40
+OFFSET = -52
+OFFSET = -64
+OFFSET = -76
+OFFSET = -80
+OFFSET = -92
+OFFSET = -100
+OFFSET = -104
+OFFSET = -112
+OFFSET = -120
+OFFSET = -128
+OFFSET = -136
 Error: Method pruContinue must return float
 
 parseo exitoso
@@ -914,6 +865,20 @@ lista:
   
 ---------------- Test tests/test_correctos/test_expresiones01.ctds ... -------------------
 parseo iniciado
+OFFSET = 4
+OFFSET = -12
+OFFSET = -16
+OFFSET = -32
+OFFSET = -44
+OFFSET = -60
+OFFSET = -68
+OFFSET = -80
+OFFSET = -84
+OFFSET = -96
+OFFSET = -100
+OFFSET = -112
+OFFSET = -116
+OFFSET = -128
 
 parseo exitoso
 tamaño lista de codigo tercetos: 58
@@ -983,6 +948,17 @@ lista:
   
 ---------------- Test tests/test_correctos/test_expresiones02.ctds ... -------------------
 parseo iniciado
+OFFSET = 4
+OFFSET = -4
+OFFSET = -12
+OFFSET = -24
+OFFSET = -28
+OFFSET = -40
+OFFSET = -44
+OFFSET = -52
+OFFSET = -64
+OFFSET = -76
+OFFSET = -88
 
 parseo exitoso
 tamaño lista de codigo tercetos: 40
@@ -1034,6 +1010,25 @@ lista:
   
 ---------------- Test tests/test_correctos/test_float01.ctds ... -------------------
 parseo iniciado
+OFFSET = 4
+OFFSET = -4
+OFFSET = -12
+OFFSET = -28
+OFFSET = -32
+OFFSET = -40
+OFFSET = -44
+OFFSET = -52
+OFFSET = -64
+OFFSET = -72
+OFFSET = -84
+OFFSET = -88
+OFFSET = -100
+OFFSET = -108
+OFFSET = -116
+OFFSET = -128
+OFFSET = -140
+OFFSET = 4
+OFFSET = -4
 
 parseo exitoso
 tamaño lista de codigo tercetos: 61
@@ -1105,1766 +1100,3 @@ lista:
   
   
 ---------------- Test tests/test_correctos/test_float02.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 43
-lista: 
-{LABEL, null, null, Result: BeginMethod sumatoria}
-
-{METHODDECL, Metodo{ name=sumatoria, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=b, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: total}
-{LABEL, float, null, Result: i}
-{LABEL, float, null, Result: res}
-{ASSIGN(=), 0.0, null, Result: FloatLiteral Label 1}
-{ASSIGN(=), 0.0, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
-{ASSIGN(=), 0.0, null, Result: VarLocation{name=i, type=float, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 5}
-{GE(>), 0.0, 0, Result: VarLocation{name=GE Label 7, type=boolean, expr=0.0 > 0, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 9}
-{GE(>), 0.0, 0, Result: VarLocation{name=GE Label 11, type=boolean, expr=0.0 > 0, size=0}}
-{OR(||), 0.0 > 0, 0.0 > 0, Result: VarLocation{name=DISYUNCION Label 12, type=boolean, expr=0.0 > 0 || 0.0 > 0, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 14}
-{CMP, VarLocation{name=factor Label 13, type=boolean, expr=VarLocation{name=DISYUNCION Label 12, type=boolean, expr=0.0 > 0 || 0.0 > 0, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 15}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 17}
-{GE(>), 0.0, 0, Result: VarLocation{name=GE Label 19, type=boolean, expr=0.0 > 0, size=0}}
-{CMP, VarLocation{name=GE Label 19, type=boolean, expr=0.0 > 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 20}
-{PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 24, type=float, expr=0.0 + 0.0, size=0}}
-{ASSIGN(=), 0.0 + 0.0, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 21}
-{LABEL, null, null, Result: elseCond Label 20}
-{LABEL, null, null, Result: endIf Label 21}
-{ASSIGN(=), 1.0, null, Result: FloatLiteral Label 25}
-{ASSIGN(=), 1.0, null, Result: VarLocation{name=i, type=float, expr=null, size=0}}
-{JMP, null, null, Result: BeginWhile Label 14}
-{LABEL, null, null, Result: EndWhile Label 15}
-{ASSIGN(=), 0.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{RETURN, null, null, Result: 0.0}
-{LABEL, null, null, Result: EndMethod sumatoria}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, float, null, Result: f}
-{LABEL, float, null, Result: a}
-{ASSIGN(=), 8.0, null, Result: FloatLiteral Label 29}
-{ASSIGN(=), 8.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
-{METHODCALL, sumatoria, 1, Result: RESULT Label 32}
-{PARAM, null, null, Result: 0.0}
-{ASSIGN(=), MethodCallExpr{name=sumatoria, args=[0.0]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_float03.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 207
-lista: 
-{LABEL, float, null, Result: w}
-{LABEL, float, null, Result: m}
-{LABEL, float, null, Result: res}
-{LABEL, null, null, Result: BeginMethod potencia}
-
-{METHODDECL, Metodo{ name=potencia, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
-{LABEL, boolean, null, Result: neg}
-{LABEL, float, null, Result: prod}
-{ASSIGN(=), false, null, Result: BoolLiteral Label 1}
-{ASSIGN(=), false, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 3}
-{ASSIGN(=), 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 1.0, null, Result: FloatLiteral Label 5}
-{ASSIGN(=), 1.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 8}
-{LE(<), 0, 0, Result: VarLocation{name=LE Label 10, type=boolean, expr=0 < 0, size=0}}
-{CMP, VarLocation{name=LE Label 10, type=boolean, expr=0 < 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 11}
-{UNARYMINUS(-expr), 0, null, Result: VarLocation{name=UNARYMINUS Label 14, type=int, expr=-0, size=0}}
-{ASSIGN(=), -0, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 15}
-{ASSIGN(=), true, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 12}
-{LABEL, null, null, Result: elseCond Label 11}
-{LABEL, null, null, Result: endIf Label 12}
-{LE(<), 0, 0, Result: VarLocation{name=LE Label 19, type=boolean, expr=0 < 0, size=0}}
-{CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 22, type=boolean, expr=0 == 0, size=0}}
-{OR(||), 0 < 0, 0 == 0, Result: VarLocation{name=DISYUNCION Label 23, type=boolean, expr=0 < 0 || 0 == 0, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 25}
-{CMP, VarLocation{name=factor Label 24, type=boolean, expr=VarLocation{name=DISYUNCION Label 23, type=boolean, expr=0 < 0 || 0 == 0, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 26}
-{MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 29, type=int, expr=0.0 * 0.0, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 30}
-{MULTIPLY(*), 0.0 * 0.0, 2, Result: VarLocation{name=MULTIPLY Label 32, type=int, expr=0.0 * 0.0 * 2, size=0}}
-{ASSIGN(=), 0.0 * 0.0 * 2, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 34}
-{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 36, type=int, expr=0 + 1, size=0}}
-{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{JMP, null, null, Result: BeginWhile Label 25}
-{LABEL, null, null, Result: EndWhile Label 26}
-{NON(!), false, null, Result: VarLocation{name=NON Label 38, type=boolean, expr=!false, size=0}}
-{NON(!), VarLocation{name=NON Label 38, type=boolean, expr=!false, size=0}, null, Result: VarLocation{name=NON Label 40, type=boolean, expr=!VarLocation{name=NON Label 38, type=boolean, expr=!false, size=0}, size=0}}
-{CMP, VarLocation{name=NON Label 40, type=boolean, expr=!VarLocation{name=NON Label 38, type=boolean, expr=!false, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 41}
-{ASSIGN(=), 1.0, null, Result: FloatLiteral Label 43}
-{DIVIDE(/), 1.0, 0.0, Result: VarLocation{name=DIVIDE Label 46, type=float, expr=VarLocation{name=factor Label 44, type=float, expr=1.0, size=0} / VarLocation{name=factor Label 45, type=float, expr=0.0, size=0}, size=0}}
-{RETURN, null, null, Result: VarLocation{name=factor Label 44, type=float, expr=1.0, size=0} / VarLocation{name=factor Label 45, type=float, expr=0.0, size=0}}
-{JMP, null, null, Result: endIf Label 42}
-{LABEL, null, null, Result: elseCond Label 41}
-{RETURN, null, null, Result: 0.0}
-{LABEL, null, null, Result: endIf Label 42}
-{ASSIGN(=), 100.1, null, Result: FloatLiteral Label 48}
-{UNARYMINUS(-expr), 100.1, null, Result: VarLocation{name=UNARYMINUS Label 50, type=float, expr=-100.1, size=0}}
-{RETURN, null, null, Result: -100.1}
-{LABEL, null, null, Result: EndMethod potencia}
-{LABEL, null, null, Result: BeginMethod multiples}
-
-{METHODDECL, Metodo{ name=multiples, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=float, name=y, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: a}
-{LABEL, float, null, Result: z}
-{LABEL, int, null, Result: b}
-{LABEL, float, null, Result: w}
-{LABEL, float, null, Result: m}
-{LABEL, float, null, Result: res}
-{LABEL, int, null, Result: j}
-{LABEL, int, null, Result: i}
-{LABEL, int, null, Result: k}
-{LABEL, int, null, Result: n}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 51}
-{UNARYMINUS(-expr), 2.0, null, Result: VarLocation{name=UNARYMINUS Label 53, type=float, expr=-2.0, size=0}}
-{ASSIGN(=), -2.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 54}
-{UNARYMINUS(-expr), 2, null, Result: VarLocation{name=UNARYMINUS Label 56, type=int, expr=-2, size=0}}
-{ASSIGN(=), -2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
-{ASSIGN(=), 3.0, null, Result: FloatLiteral Label 57}
-{UNARYMINUS(-expr), 3.0, null, Result: VarLocation{name=UNARYMINUS Label 59, type=float, expr=-3.0, size=0}}
-{ASSIGN(=), -3.0, null, Result: VarLocation{name=w, type=float, expr=null, size=0}}
-{ASSIGN(=), 3.0, null, Result: FloatLiteral Label 60}
-{UNARYMINUS(-expr), 3.0, null, Result: VarLocation{name=UNARYMINUS Label 62, type=float, expr=-3.0, size=0}}
-{ASSIGN(=), -3.0, null, Result: VarLocation{name=z, type=float, expr=null, size=0}}
-{MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 65, type=int, expr=0.0 * 0.0, size=0}}
-{MINUS(-), 0.0 * 0.0, 0.0, Result: VarLocation{name=MINUS Label 67, type=float, expr=0.0 * 0.0 - 0.0, size=0}}
-{ASSIGN(=), 0.0 * 0.0 - 0.0, null, Result: VarLocation{name=m, type=float, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 68}
-{ASSIGN(=), 0, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 70}
-{ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 72}
-{ASSIGN(=), 0, null, Result: VarLocation{name=k, type=int, expr=null, size=0}}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 74}
-{ASSIGN(=), 5, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
-{GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 78, type=boolean, expr=0.0 > 0.0, size=0}}
-{CMP, VarLocation{name=GE Label 78, type=boolean, expr=0.0 > 0.0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 79}
-{LE(<), 0.0, 0.0, Result: VarLocation{name=LE Label 83, type=boolean, expr=0.0 < 0.0, size=0}}
-{CMP, VarLocation{name=LE Label 83, type=boolean, expr=0.0 < 0.0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 84}
-{ASSIGN(=), 0.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 85}
-{LABEL, null, null, Result: elseCond Label 84}
-{ASSIGN(=), 0.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{LABEL, null, null, Result: endIf Label 85}
-{JMP, null, null, Result: endIf Label 80}
-{LABEL, null, null, Result: elseCond Label 79}
-{LEQ(<=), 0, 0, Result: VarLocation{name=LEQ Label 90, type=boolean, expr=0 <= 0, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 92}
-{CMP, VarLocation{name=factor Label 91, type=boolean, expr=VarLocation{name=LEQ Label 90, type=boolean, expr=0 <= 0, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 93}
-{LEQ(<=), 0, 0, Result: VarLocation{name=LEQ Label 96, type=boolean, expr=0 <= 0, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 97}
-{CMP, VarLocation{name=LEQ Label 96, type=boolean, expr=0 <= 0, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 98}
-{LE(<), 0, 0, Result: VarLocation{name=LE Label 101, type=boolean, expr=0 < 0, size=0}}
-{CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 104, type=boolean, expr=0 == 0, size=0}}
-{OR(||), 0 < 0, 0 == 0, Result: VarLocation{name=DISYUNCION Label 105, type=boolean, expr=0 < 0 || 0 == 0, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 109}
-{CMP, VarLocation{name=factor Label 108, type=boolean, expr=VarLocation{name=factor Label 107, type=boolean, expr=VarLocation{name=factor Label 106, type=boolean, expr=VarLocation{name=DISYUNCION Label 105, type=boolean, expr=0 < 0 || 0 == 0, size=0}, size=0}, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 110}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 112}
-{CEQ(==), 0, 3, Result: VarLocation{name=CEQ Label 114, type=boolean, expr=0 == 3, size=0}}
-{CMP, VarLocation{name=CEQ Label 114, type=boolean, expr=0 == 3, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 115}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 118}
-{PLUS(+), 0.0, 2.0, Result: VarLocation{name=PLUS Label 120, type=float, expr=0.0 + 2.0, size=0}}
-{ASSIGN(=), 0.0 + 2.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 116}
-{LABEL, null, null, Result: elseCond Label 115}
-{ASSIGN(=), 10.0, null, Result: FloatLiteral Label 122}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 124}
-{DIVIDE(/), 10.0, 2.0, Result: VarLocation{name=DIVIDE Label 126, type=float, expr=VarLocation{name=factor Label 123, type=float, expr=10.0, size=0} / VarLocation{name=factor Label 125, type=float, expr=2.0, size=0}, size=0}}
-{MINUS(-), 0.0, VarLocation{name=DIVIDE Label 126, type=float, expr=VarLocation{name=factor Label 123, type=float, expr=10.0, size=0} / VarLocation{name=factor Label 125, type=float, expr=2.0, size=0}, size=0}, Result: VarLocation{name=MINUS Label 128, type=float, expr=0.0 - VarLocation{name=DIVIDE Label 126, type=float, expr=VarLocation{name=factor Label 123, type=float, expr=10.0, size=0} / VarLocation{name=factor Label 125, type=float, expr=2.0, size=0}, size=0}, size=0}}
-{ASSIGN(=), 0.0 - VarLocation{name=DIVIDE Label 126, type=float, expr=VarLocation{name=factor Label 123, type=float, expr=10.0, size=0} / VarLocation{name=factor Label 125, type=float, expr=2.0, size=0}, size=0}, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{LABEL, null, null, Result: endIf Label 116}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 129}
-{ASSIGN(=), 1, null, Result: VarLocation{name=k, type=int, expr=null, size=0}}
-{JMP, null, null, Result: BeginWhile Label 109}
-{LABEL, null, null, Result: EndWhile Label 110}
-{LE(<), 0.0, 0.0, Result: VarLocation{name=LE Label 133, type=boolean, expr=0.0 < 0.0, size=0}}
-{ASSIGN(=), 0.0, null, Result: FloatLiteral Label 134}
-{LE(<), 0.0, 0.0, Result: VarLocation{name=LE Label 137, type=boolean, expr=0.0 < 0.0, size=0}}
-{AND(&&), 0.0 < 0.0, 0.0 < 0.0, Result: VarLocation{name=CONJUNCION Label 138, type=boolean, expr=0.0 < 0.0 && 0.0 < 0.0, size=0}}
-{CMP, VarLocation{name=CONJUNCION Label 138, type=boolean, expr=0.0 < 0.0 && 0.0 < 0.0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 139}
-{ASSIGN(=), 35.0, null, Result: FloatLiteral Label 141}
-{ASSIGN(=), 4.0, null, Result: FloatLiteral Label 143}
-{MULTIPLY(*), 4.0, 0.0, Result: VarLocation{name=MULTIPLY Label 146, type=int, expr=4.0 * 0.0, size=0}}
-{PLUS(+), 35.0, 4.0 * 0.0, Result: VarLocation{name=PLUS Label 147, type=float, expr=35.0 + 4.0 * 0.0, size=0}}
-{ASSIGN(=), 498.0, null, Result: FloatLiteral Label 148}
-{MINUS(-), 35.0 + 4.0 * 0.0, 498.0, Result: VarLocation{name=MINUS Label 150, type=float, expr=35.0 + 4.0 * 0.0 - 498.0, size=0}}
-{ASSIGN(=), 35.0 + 4.0 * 0.0 - 498.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 140}
-{LABEL, null, null, Result: elseCond Label 139}
-{ASSIGN(=), 3.2, null, Result: FloatLiteral Label 151}
-{MINUS(-), 3.2, 0.0, Result: VarLocation{name=MINUS Label 154, type=float, expr=3.2 - 0.0, size=0}}
-{ASSIGN(=), 12345.356, null, Result: FloatLiteral Label 155}
-{MINUS(-), 3.2 - 0.0, 12345.356, Result: VarLocation{name=MINUS Label 157, type=float, expr=3.2 - 0.0 - 12345.356, size=0}}
-{ASSIGN(=), 3.2 - 0.0 - 12345.356, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{LABEL, null, null, Result: endIf Label 140}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 159}
-{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 161, type=int, expr=0 + 1, size=0}}
-{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{JMP, null, null, Result: BeginWhile Label 97}
-{LABEL, null, null, Result: EndWhile Label 98}
-{UNARYMINUS(-expr), 0.0, null, Result: VarLocation{name=UNARYMINUS Label 164, type=float, expr=-0.0, size=0}}
-{MULTIPLY(*), 0.0, -0.0, Result: VarLocation{name=MULTIPLY Label 165, type=int, expr=0.0 * -0.0, size=0}}
-{ASSIGN(=), 23.0, null, Result: FloatLiteral Label 166}
-{MULTIPLY(*), 23.0, 0.0, Result: VarLocation{name=MULTIPLY Label 169, type=int, expr=23.0 * 0.0, size=0}}
-{PLUS(+), 0.0 * -0.0, 23.0 * 0.0, Result: VarLocation{name=PLUS Label 170, type=int, expr=0.0 * -0.0 + 23.0 * 0.0, size=0}}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 171}
-{ASSIGN(=), 4.0, null, Result: FloatLiteral Label 173}
-{DIVIDE(/), 2.0, 4.0, Result: VarLocation{name=DIVIDE Label 175, type=float, expr=VarLocation{name=factor Label 172, type=float, expr=2.0, size=0} / VarLocation{name=factor Label 174, type=float, expr=4.0, size=0}, size=0}}
-{PLUS(+), 0.0 * -0.0 + 23.0 * 0.0, VarLocation{name=factor Label 172, type=float, expr=2.0, size=0} / VarLocation{name=factor Label 174, type=float, expr=4.0, size=0}, Result: VarLocation{name=PLUS Label 176, type=float, expr=0.0 * -0.0 + 23.0 * 0.0 + VarLocation{name=factor Label 172, type=float, expr=2.0, size=0} / VarLocation{name=factor Label 174, type=float, expr=4.0, size=0}, size=0}}
-{ASSIGN(=), 0.0 * -0.0 + 23.0 * 0.0 + VarLocation{name=factor Label 172, type=float, expr=2.0, size=0} / VarLocation{name=factor Label 174, type=float, expr=4.0, size=0}, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 178}
-{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 180, type=int, expr=0 + 1, size=0}}
-{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
-{JMP, null, null, Result: BeginWhile Label 92}
-{LABEL, null, null, Result: EndWhile Label 93}
-{LABEL, null, null, Result: endIf Label 80}
-{UNARYMINUS(-expr), 0.0, null, Result: VarLocation{name=UNARYMINUS Label 182, type=float, expr=-0.0, size=0}}
-{RETURN, null, null, Result: -0.0}
-{LABEL, null, null, Result: EndMethod multiples}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, float, null, Result: f}
-{LABEL, float, null, Result: a}
-{ASSIGN(=), 80.0, null, Result: FloatLiteral Label 183}
-{ASSIGN(=), 80.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
-{ASSIGN(=), 15.0, null, Result: FloatLiteral Label 185}
-{UNARYMINUS(-expr), 15.0, null, Result: VarLocation{name=UNARYMINUS Label 187, type=float, expr=-15.0, size=0}}
-{ASSIGN(=), -15.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN(=), 4.3, null, Result: FloatLiteral Label 188}
-{ASSIGN(=), 4.3, null, Result: VarLocation{name=w, type=float, expr=null, size=0}}
-{ASSIGN(=), 7.6, null, Result: FloatLiteral Label 190}
-{UNARYMINUS(-expr), 7.6, null, Result: VarLocation{name=UNARYMINUS Label 192, type=float, expr=-7.6, size=0}}
-{ASSIGN(=), -7.6, null, Result: VarLocation{name=m, type=float, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 194}
-{METHODCALL, potencia, 2, Result: RESULT Label 196}
-{PARAM, null, null, Result: 0.0}
-{PARAM, null, null, Result: 2}
-{ASSIGN(=), MethodCallExpr{name=potencia, args=[0.0, 2]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 200}
-{PLUS(+), 0.0, 2.0, Result: VarLocation{name=PLUS Label 202, type=float, expr=0.0 + 2.0, size=0}}
-{METHODCALL, multiples, 2, Result: RESULT Label 203}
-{PARAM, null, null, Result: 0.0}
-{PARAM, null, null, Result: 0.0 + 2.0}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multiples, args=[0.0, 0.0 + 2.0]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_float04.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 90
-lista: 
-{LABEL, float, null, Result: w}
-{LABEL, float, null, Result: m}
-{LABEL, float, null, Result: res}
-{LABEL, null, null, Result: BeginMethod potencia}
-
-{METHODDECL, Metodo{ name=potencia, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
-{LABEL, boolean, null, Result: neg}
-{LABEL, float, null, Result: prod}
-{ASSIGN(=), false, null, Result: BoolLiteral Label 1}
-{ASSIGN(=), false, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 3}
-{ASSIGN(=), 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 1.0, null, Result: FloatLiteral Label 5}
-{ASSIGN(=), 1.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 8}
-{LE(<), 0, 0, Result: VarLocation{name=LE Label 10, type=boolean, expr=0 < 0, size=0}}
-{CMP, VarLocation{name=LE Label 10, type=boolean, expr=0 < 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 11}
-{UNARYMINUS(-expr), 0, null, Result: VarLocation{name=UNARYMINUS Label 14, type=int, expr=-0, size=0}}
-{ASSIGN(=), -0, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 15}
-{ASSIGN(=), true, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 12}
-{LABEL, null, null, Result: elseCond Label 11}
-{LABEL, null, null, Result: endIf Label 12}
-{LE(<), 0, 0, Result: VarLocation{name=LE Label 19, type=boolean, expr=0 < 0, size=0}}
-{CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 22, type=boolean, expr=0 == 0, size=0}}
-{OR(||), 0 < 0, 0 == 0, Result: VarLocation{name=DISYUNCION Label 23, type=boolean, expr=0 < 0 || 0 == 0, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 25}
-{CMP, VarLocation{name=factor Label 24, type=boolean, expr=VarLocation{name=DISYUNCION Label 23, type=boolean, expr=0 < 0 || 0 == 0, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 26}
-{MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 29, type=int, expr=0.0 * 0.0, size=0}}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 30}
-{MULTIPLY(*), 0.0 * 0.0, 2.0, Result: VarLocation{name=MULTIPLY Label 32, type=int, expr=0.0 * 0.0 * 2.0, size=0}}
-{ASSIGN(=), 0.0 * 0.0 * 2.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 34}
-{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 36, type=int, expr=0 + 1, size=0}}
-{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{JMP, null, null, Result: BeginWhile Label 25}
-{LABEL, null, null, Result: EndWhile Label 26}
-{NON(!), false, null, Result: VarLocation{name=NON Label 38, type=boolean, expr=!false, size=0}}
-{NON(!), VarLocation{name=NON Label 38, type=boolean, expr=!false, size=0}, null, Result: VarLocation{name=NON Label 40, type=boolean, expr=!VarLocation{name=NON Label 38, type=boolean, expr=!false, size=0}, size=0}}
-{CMP, VarLocation{name=NON Label 40, type=boolean, expr=!VarLocation{name=NON Label 38, type=boolean, expr=!false, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 41}
-{ASSIGN(=), 1.0, null, Result: FloatLiteral Label 43}
-{DIVIDE(/), 1.0, 0.0, Result: VarLocation{name=DIVIDE Label 46, type=float, expr=VarLocation{name=factor Label 44, type=float, expr=1.0, size=0} / VarLocation{name=factor Label 45, type=float, expr=0.0, size=0}, size=0}}
-{RETURN, null, null, Result: VarLocation{name=factor Label 44, type=float, expr=1.0, size=0} / VarLocation{name=factor Label 45, type=float, expr=0.0, size=0}}
-{JMP, null, null, Result: endIf Label 42}
-{LABEL, null, null, Result: elseCond Label 41}
-{RETURN, null, null, Result: 0.0}
-{LABEL, null, null, Result: endIf Label 42}
-{ASSIGN(=), 100.1, null, Result: FloatLiteral Label 48}
-{UNARYMINUS(-expr), 100.1, null, Result: VarLocation{name=UNARYMINUS Label 50, type=float, expr=-100.1, size=0}}
-{RETURN, null, null, Result: -100.1}
-{LABEL, null, null, Result: EndMethod potencia}
-{LABEL, null, null, Result: BeginMethod multRepeat}
-
-{METHODDECL, Metodo{ name=multRepeat, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=b, value=null, size=0}, Simbolo{type=float, name=a, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: c}
-{MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 53, type=int, expr=0.0 * 0.0, size=0}}
-{MULTIPLY(*), 0.0 * 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 55, type=int, expr=0.0 * 0.0 * 0.0, size=0}}
-{MULTIPLY(*), 0.0 * 0.0 * 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 57, type=int, expr=0.0 * 0.0 * 0.0 * 0.0, size=0}}
-{MULTIPLY(*), 0.0 * 0.0 * 0.0 * 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 59, type=int, expr=0.0 * 0.0 * 0.0 * 0.0 * 0.0, size=0}}
-{MULTIPLY(*), 0.0 * 0.0 * 0.0 * 0.0 * 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 61, type=int, expr=0.0 * 0.0 * 0.0 * 0.0 * 0.0 * 0.0, size=0}}
-{ASSIGN(=), 0.0 * 0.0 * 0.0 * 0.0 * 0.0 * 0.0, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
-{RETURN, null, null, Result: 0.0}
-{LABEL, null, null, Result: EndMethod multRepeat}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, float, null, Result: f}
-{LABEL, float, null, Result: a}
-{ASSIGN(=), 15.0, null, Result: FloatLiteral Label 63}
-{UNARYMINUS(-expr), 15.0, null, Result: VarLocation{name=UNARYMINUS Label 65, type=float, expr=-15.0, size=0}}
-{ASSIGN(=), -15.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN(=), 4.3, null, Result: FloatLiteral Label 66}
-{ASSIGN(=), 4.3, null, Result: VarLocation{name=w, type=float, expr=null, size=0}}
-{ASSIGN(=), 7.6, null, Result: FloatLiteral Label 68}
-{UNARYMINUS(-expr), 7.6, null, Result: VarLocation{name=UNARYMINUS Label 70, type=float, expr=-7.6, size=0}}
-{ASSIGN(=), -7.6, null, Result: VarLocation{name=m, type=float, expr=null, size=0}}
-{ASSIGN(=), 80.0, null, Result: FloatLiteral Label 71}
-{ASSIGN(=), 80.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 74}
-{METHODCALL, potencia, 2, Result: RESULT Label 76}
-{PARAM, null, null, Result: 0.0}
-{PARAM, null, null, Result: 2}
-{ASSIGN(=), MethodCallExpr{name=potencia, args=[0.0, 2]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
-{METHODCALL, multRepeat, 2, Result: RESULT Label 80}
-{PARAM, null, null, Result: 0.0}
-{PARAM, null, null, Result: 0.0}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multRepeat, args=[0.0, 0.0]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_floats05.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 38
-lista: 
-{LABEL, null, null, Result: BeginMethod div}
-
-{METHODDECL, Metodo{ name=div, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=a, value=null, size=0}, Simbolo{type=float, name=b, value=null, size=0}]}, null, Result: null}
-{DIVIDE(/), 0.0, 0.0, Result: VarLocation{name=DIVIDE Label 3, type=float, expr=VarLocation{name=factor Label 1, type=float, expr=0.0, size=0} / VarLocation{name=factor Label 2, type=float, expr=0.0, size=0}, size=0}}
-{RETURN, null, null, Result: VarLocation{name=factor Label 1, type=float, expr=0.0, size=0} / VarLocation{name=factor Label 2, type=float, expr=0.0, size=0}}
-{LABEL, null, null, Result: EndMethod div}
-{LABEL, null, null, Result: BeginMethod resta}
-
-{METHODDECL, Metodo{ name=resta, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=a, value=null, size=0}, Simbolo{type=float, name=b, value=null, size=0}]}, null, Result: null}
-{MINUS(-), 0.0, 0.0, Result: VarLocation{name=MINUS Label 6, type=float, expr=0.0 - 0.0, size=0}}
-{RETURN, null, null, Result: 0.0 - 0.0}
-{LABEL, null, null, Result: EndMethod resta}
-{LABEL, null, null, Result: BeginMethod sum}
-
-{METHODDECL, Metodo{ name=sum, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=a, value=null, size=0}, Simbolo{type=float, name=b, value=null, size=0}]}, null, Result: null}
-{PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 9, type=float, expr=0.0 + 0.0, size=0}}
-{RETURN, null, null, Result: 0.0 + 0.0}
-{LABEL, null, null, Result: EndMethod sum}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, float, null, Result: x}
-{LABEL, float, null, Result: y}
-{LABEL, float, null, Result: z}
-{ASSIGN(=), 6.982, null, Result: FloatLiteral Label 10}
-{ASSIGN(=), 6.982, null, Result: VarLocation{name=x, type=float, expr=null, size=0}}
-{ASSIGN(=), 002.5, null, Result: FloatLiteral Label 12}
-{UNARYMINUS(-expr), 002.5, null, Result: VarLocation{name=UNARYMINUS Label 14, type=float, expr=-002.5, size=0}}
-{ASSIGN(=), -002.5, null, Result: VarLocation{name=y, type=float, expr=null, size=0}}
-{ASSIGN(=), 3.5698, null, Result: FloatLiteral Label 15}
-{ASSIGN(=), 3.5698, null, Result: VarLocation{name=z, type=float, expr=null, size=0}}
-{METHODCALL, resta, 2, Result: RESULT Label 19}
-{PARAM, null, null, Result: 0.0}
-{PARAM, null, null, Result: 0.0}
-{METHODCALL, div, 2, Result: RESULT Label 23}
-{PARAM, null, null, Result: 0.0}
-{PARAM, null, null, Result: 0.0}
-{METHODCALL, sum, 2, Result: RESULT Label 25}
-{PARAM, null, null, Result: MethodCallExpr{name=resta, args=[0.0, 0.0]}}
-{PARAM, null, null, Result: MethodCallExpr{name=div, args=[0.0, 0.0]}}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandofuncionesflotantes"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=resta, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_for01.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 36
-lista: 
-{array[], int[], 5, Result: A}
-{array[], float[], 56, Result: B}
-{array[], boolean[], 10, Result: C}
-{LABEL, null, null, Result: BeginMethod pruArreglos}
-
-{METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 3}
-{ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 5}
-{ARRAYACCESS, A, VarLocation{name=factor Label 6, type=int, expr=1, size=0}, Result: Array Access Label 7}
-{RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 9}
-{ASSIGN(=), 10, null, Result: IntLiteral Label 12}
-{MULTIPLY(*), 0, 10, Result: VarLocation{name=MULTIPLY Label 14, type=int, expr=0 * 10, size=0}}
-{LABEL, null, null, Result: BeginFor Label 15}
-{CMP, VarLocation{name=factor Label 10, type=int, expr=5, size=0}, VarLocation{name=MULTIPLY Label 14, type=int, expr=0 * 10, size=0}, Result: null}
-{JNL, null, null, Result: EndFor Label 16}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 19}
-{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 21, type=int, expr=0 + 2, size=0}}
-{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{PLUS(+), VarLocation{name=factor Label 10, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factor Label 10, type=int, expr=5, size=0}}
-{JMP, null, null, Result: BeginFor Label 15}
-{LABEL, null, null, Result: EndFor Label 16}
-{LABEL, null, null, Result: EndMethod pruArreglos}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 22}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 24}
-{METHODCALL, pruArreglos, 2, Result: RESULT Label 26}
-{PARAM, null, null, Result: 4}
-{PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 29}
-{RETURN, null, null, Result: 1}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_for02.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 35
-lista: 
-{array[], int[], 5, Result: A}
-{array[], float[], 56, Result: B}
-{array[], boolean[], 10, Result: C}
-{LABEL, null, null, Result: BeginMethod pruArreglos}
-
-{METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 3}
-{ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 5}
-{ARRAYACCESS, A, VarLocation{name=factor Label 6, type=int, expr=1, size=0}, Result: Array Access Label 7}
-{RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 9}
-{ASSIGN(=), 10, null, Result: IntLiteral Label 11}
-{LABEL, null, null, Result: BeginFor Label 13}
-{CMP, VarLocation{name=factor Label 10, type=int, expr=5, size=0}, VarLocation{name=factor Label 12, type=int, expr=10, size=0}, Result: null}
-{JNL, null, null, Result: EndFor Label 14}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 17}
-{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 19, type=int, expr=0 + 2, size=0}}
-{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{PLUS(+), VarLocation{name=factor Label 10, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factor Label 10, type=int, expr=5, size=0}}
-{JMP, null, null, Result: BeginFor Label 13}
-{LABEL, null, null, Result: EndFor Label 14}
-{LABEL, null, null, Result: EndMethod pruArreglos}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 20}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 22}
-{METHODCALL, pruArreglos, 2, Result: RESULT Label 24}
-{PARAM, null, null, Result: 4}
-{PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 27}
-{RETURN, null, null, Result: 1}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_for03.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 36
-lista: 
-{array[], int[], 5, Result: A}
-{array[], float[], 56, Result: B}
-{array[], boolean[], 10, Result: C}
-{LABEL, null, null, Result: BeginMethod pruArreglos}
-
-{METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 3}
-{ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 5}
-{ARRAYACCESS, A, VarLocation{name=factor Label 6, type=int, expr=1, size=0}, Result: Array Access Label 7}
-{RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 9}
-{ASSIGN(=), 10, null, Result: IntLiteral Label 11}
-{UNARYMINUS(-expr), 10, null, Result: VarLocation{name=UNARYMINUS Label 13, type=int, expr=-10, size=0}}
-{LABEL, null, null, Result: BeginFor Label 14}
-{CMP, VarLocation{name=factor Label 10, type=int, expr=5, size=0}, VarLocation{name=UNARYMINUS Label 13, type=int, expr=-10, size=0}, Result: null}
-{JNL, null, null, Result: EndFor Label 15}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 18}
-{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 20, type=int, expr=0 + 2, size=0}}
-{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{PLUS(+), VarLocation{name=factor Label 10, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factor Label 10, type=int, expr=5, size=0}}
-{JMP, null, null, Result: BeginFor Label 14}
-{LABEL, null, null, Result: EndFor Label 15}
-{LABEL, null, null, Result: EndMethod pruArreglos}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 21}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 23}
-{METHODCALL, pruArreglos, 2, Result: RESULT Label 25}
-{PARAM, null, null, Result: 4}
-{PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 28}
-{RETURN, null, null, Result: 1}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_for04.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 40
-lista: 
-{array[], int[], 5, Result: A}
-{array[], float[], 56, Result: B}
-{array[], boolean[], 10, Result: C}
-{LABEL, null, null, Result: BeginMethod pruArreglos}
-
-{METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 3}
-{ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 5}
-{ARRAYACCESS, A, VarLocation{name=factor Label 6, type=int, expr=1, size=0}, Result: Array Access Label 7}
-{RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 9}
-{ASSIGN(=), 10, null, Result: IntLiteral Label 11}
-{UNARYMINUS(-expr), 10, null, Result: VarLocation{name=UNARYMINUS Label 13, type=int, expr=-10, size=0}}
-{ASSIGN(=), 11, null, Result: IntLiteral Label 14}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 16}
-{MULTIPLY(*), 11, 2, Result: VarLocation{name=MULTIPLY Label 18, type=int, expr=11 * 2, size=0}}
-{PLUS(+), -10, 11 * 2, Result: VarLocation{name=PLUS Label 19, type=int, expr=-10 + 11 * 2, size=0}}
-{LABEL, null, null, Result: BeginFor Label 21}
-{CMP, VarLocation{name=factor Label 10, type=int, expr=0, size=0}, VarLocation{name=factor Label 20, type=int, expr=VarLocation{name=PLUS Label 19, type=int, expr=-10 + 11 * 2, size=0}, size=0}, Result: null}
-{JNL, null, null, Result: EndFor Label 22}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 25}
-{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 27, type=int, expr=0 + 2, size=0}}
-{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{PLUS(+), VarLocation{name=factor Label 10, type=int, expr=0, size=0}, 1, Result: VarLocation{name=factor Label 10, type=int, expr=0, size=0}}
-{JMP, null, null, Result: BeginFor Label 21}
-{LABEL, null, null, Result: EndFor Label 22}
-{LABEL, null, null, Result: EndMethod pruArreglos}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 28}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 30}
-{METHODCALL, pruArreglos, 2, Result: RESULT Label 32}
-{PARAM, null, null, Result: 4}
-{PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 35}
-{RETURN, null, null, Result: 1}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_for05.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 42
-lista: 
-{array[], int[], 5, Result: A}
-{array[], float[], 56, Result: B}
-{array[], boolean[], 10, Result: C}
-{LABEL, null, null, Result: BeginMethod par}
-
-{METHODDECL, Metodo{ name=par, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 15, null, Result: IntLiteral Label 1}
-{RETURN, null, null, Result: 15}
-{LABEL, null, null, Result: EndMethod par}
-{LABEL, null, null, Result: BeginMethod pruArreglos}
-
-{METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 3}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 5}
-{ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 7}
-{ARRAYACCESS, A, VarLocation{name=factor Label 8, type=int, expr=1, size=0}, Result: Array Access Label 9}
-{RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
-{METHODCALL, par, 0, Result: RESULT Label 11}
-{METHODCALL, par, 0, Result: RESULT Label 13}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 15}
-{PLUS(+), MethodCallExpr{name=par, args=[]}, 5, Result: VarLocation{name=PLUS Label 17, type=int, expr=MethodCallExpr{name=par, args=[]} + 5, size=0}}
-{LABEL, null, null, Result: BeginFor Label 18}
-{CMP, VarLocation{name=factor Label 12, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, VarLocation{name=PLUS Label 17, type=int, expr=MethodCallExpr{name=par, args=[]} + 5, size=0}, Result: null}
-{JNL, null, null, Result: EndFor Label 19}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 22}
-{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 24, type=int, expr=0 + 2, size=0}}
-{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{PLUS(+), VarLocation{name=factor Label 12, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, 1, Result: VarLocation{name=factor Label 12, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}}
-{JMP, null, null, Result: BeginFor Label 18}
-{LABEL, null, null, Result: EndFor Label 19}
-{LABEL, null, null, Result: EndMethod pruArreglos}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 25}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 27}
-{METHODCALL, pruArreglos, 2, Result: RESULT Label 29}
-{PARAM, null, null, Result: 4}
-{PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 32}
-{RETURN, null, null, Result: 1}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_if_anidados.ctds ... -------------------
-parseo iniciado
-Error: Method pruAritmetica must return int
-
-parseo exitoso
-tamaño lista de codigo tercetos: 45
-lista: 
-{LABEL, null, null, Result: BeginMethod pruAritmetica}
-
-{METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: res}
-{NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 3, type=boolean, expr=0 != 0, size=0}}
-{CMP, VarLocation{name=NEQ Label 3, type=boolean, expr=0 != 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 4}
-{GE(>), 0, 0, Result: VarLocation{name=GE Label 8, type=boolean, expr=0 > 0, size=0}}
-{CMP, VarLocation{name=GE Label 8, type=boolean, expr=0 > 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 9}
-{MINUS(-), 0, 0, Result: VarLocation{name=MINUS Label 13, type=int, expr=0 - 0, size=0}}
-{ASSIGN(=), 0 - 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 10}
-{LABEL, null, null, Result: elseCond Label 9}
-{MINUS(-), 0, 0, Result: VarLocation{name=MINUS Label 16, type=int, expr=0 - 0, size=0}}
-{ASSIGN(=), 0 - 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{LABEL, null, null, Result: endIf Label 10}
-{JMP, null, null, Result: endIf Label 5}
-{LABEL, null, null, Result: elseCond Label 4}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 18}
-{MULTIPLY(*), 0, 5, Result: VarLocation{name=MULTIPLY Label 20, type=int, expr=0 * 5, size=0}}
-{ASSIGN(=), 0 * 5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{LABEL, null, null, Result: endIf Label 5}
-{LABEL, null, null, Result: EndMethod pruAritmetica}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 22}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 24}
-{METHODCALL, pruAritmetica, 2, Result: RESULT Label 26}
-{PARAM, null, null, Result: 4}
-{PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 30}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 32}
-{METHODCALL, pruAritmetica, 2, Result: RESULT Label 34}
-{PARAM, null, null, Result: 4}
-{PARAM, null, null, Result: 4}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: null}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 37}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 39}
-{METHODCALL, pruAritmetica, 2, Result: RESULT Label 41}
-{PARAM, null, null, Result: 8}
-{PARAM, null, null, Result: 5}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_if.ctds ... -------------------
-parseo iniciado
-Error: Method pruAritmetica must return int
-
-parseo exitoso
-tamaño lista de codigo tercetos: 45
-lista: 
-{LABEL, null, null, Result: BeginMethod pruAritmetica}
-
-{METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: res}
-{GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
-{CMP, VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 4}
-{MINUS(-), 0, 0, Result: VarLocation{name=MINUS Label 8, type=int, expr=0 - 0, size=0}}
-{ASSIGN(=), 0 - 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 5}
-{LABEL, null, null, Result: elseCond Label 4}
-{LABEL, null, null, Result: endIf Label 5}
-{CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 11, type=boolean, expr=0 == 0, size=0}}
-{CMP, VarLocation{name=CEQ Label 11, type=boolean, expr=0 == 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 12}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 15}
-{MULTIPLY(*), 0, 5, Result: VarLocation{name=MULTIPLY Label 17, type=int, expr=0 * 5, size=0}}
-{ASSIGN(=), 0 * 5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 13}
-{LABEL, null, null, Result: elseCond Label 12}
-{MINUS(-), 0, 0, Result: VarLocation{name=MINUS Label 20, type=int, expr=0 - 0, size=0}}
-{ASSIGN(=), 0 - 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{LABEL, null, null, Result: endIf Label 13}
-{LABEL, null, null, Result: EndMethod pruAritmetica}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 22}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 24}
-{METHODCALL, pruAritmetica, 2, Result: RESULT Label 26}
-{PARAM, null, null, Result: 4}
-{PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 30}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 32}
-{METHODCALL, pruAritmetica, 2, Result: RESULT Label 34}
-{PARAM, null, null, Result: 4}
-{PARAM, null, null, Result: 4}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: null}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 37}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 39}
-{METHODCALL, pruAritmetica, 2, Result: RESULT Label 41}
-{PARAM, null, null, Result: 8}
-{PARAM, null, null, Result: 5}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_logicos01.ctds ... -------------------
-parseo iniciado
-Error: Method pruebaLogica must return int
-
-parseo exitoso
-tamaño lista de codigo tercetos: 20
-lista: 
-{LABEL, null, null, Result: BeginMethod pruebaLogica}
-
-{METHODDECL, Metodo{ name=pruebaLogica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=boolean, name=i, value=null, size=0}]}, null, Result: null}
-{LABEL, boolean, null, Result: a}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 1}
-{ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
-{ASSIGN(=), false, null, Result: BoolLiteral Label 3}
-{OR(||), false, false, Result: VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0}}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 8}
-{NON(!), true, null, Result: VarLocation{name=NON Label 10, type=boolean, expr=!true, size=0}}
-{AND(&&), VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0}, !true, Result: VarLocation{name=CONJUNCION Label 11, type=boolean, expr=VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0} && !true, size=0}}
-{NON(!), false, null, Result: VarLocation{name=NON Label 14, type=boolean, expr=!false, size=0}}
-{AND(&&), VarLocation{name=CONJUNCION Label 11, type=boolean, expr=VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0} && !true, size=0}, !false, Result: VarLocation{name=CONJUNCION Label 15, type=boolean, expr=VarLocation{name=CONJUNCION Label 11, type=boolean, expr=VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0} && !true, size=0} && !false, size=0}}
-{LABEL, null, null, Result: EndMethod pruebaLogica}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), false, null, Result: BoolLiteral Label 17}
-{METHODCALL, pruebaLogica, 1, Result: RESULT Label 19}
-{PARAM, null, null, Result: false}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[false]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_logicos02.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 63
-lista: 
-{LABEL, null, null, Result: BeginMethod promedio}
-
-{METHODDECL, Metodo{ name=promedio, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=nota1, value=null, size=0}, Simbolo{type=float, name=nota2, value=null, size=0}, Simbolo{type=float, name=nota3, value=null, size=0}]}, null, Result: null}
-{GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0.0 > 0.0, size=0}}
-{GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 7, type=boolean, expr=0.0 > 0.0, size=0}}
-{AND(&&), VarLocation{name=GE Label 3, type=boolean, expr=0.0 > 0.0, size=0}, VarLocation{name=GE Label 7, type=boolean, expr=0.0 > 0.0, size=0}, Result: VarLocation{name=CONJUNCION Label 9, type=boolean, expr=VarLocation{name=GE Label 3, type=boolean, expr=0.0 > 0.0, size=0} && VarLocation{name=GE Label 7, type=boolean, expr=0.0 > 0.0, size=0}, size=0}}
-{CMP, VarLocation{name=CONJUNCION Label 9, type=boolean, expr=VarLocation{name=GE Label 3, type=boolean, expr=0.0 > 0.0, size=0} && VarLocation{name=GE Label 7, type=boolean, expr=0.0 > 0.0, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 10}
-{PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 14, type=float, expr=0.0 + 0.0, size=0}}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 16}
-{DIVIDE(/), VarLocation{name=PLUS Label 14, type=float, expr=0.0 + 0.0, size=0}, 2.0, Result: VarLocation{name=DIVIDE Label 18, type=float, expr=VarLocation{name=factor Label 15, type=float, expr=VarLocation{name=PLUS Label 14, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factor Label 17, type=float, expr=2.0, size=0}, size=0}}
-{RETURN, null, null, Result: VarLocation{name=factor Label 15, type=float, expr=VarLocation{name=PLUS Label 14, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factor Label 17, type=float, expr=2.0, size=0}}
-{JMP, null, null, Result: endIf Label 11}
-{LABEL, null, null, Result: elseCond Label 10}
-{LABEL, null, null, Result: endIf Label 11}
-{GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 21, type=boolean, expr=0.0 > 0.0, size=0}}
-{GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 25, type=boolean, expr=0.0 > 0.0, size=0}}
-{AND(&&), VarLocation{name=GE Label 21, type=boolean, expr=0.0 > 0.0, size=0}, VarLocation{name=GE Label 25, type=boolean, expr=0.0 > 0.0, size=0}, Result: VarLocation{name=CONJUNCION Label 27, type=boolean, expr=VarLocation{name=GE Label 21, type=boolean, expr=0.0 > 0.0, size=0} && VarLocation{name=GE Label 25, type=boolean, expr=0.0 > 0.0, size=0}, size=0}}
-{CMP, VarLocation{name=CONJUNCION Label 27, type=boolean, expr=VarLocation{name=GE Label 21, type=boolean, expr=0.0 > 0.0, size=0} && VarLocation{name=GE Label 25, type=boolean, expr=0.0 > 0.0, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 28}
-{PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 32, type=float, expr=0.0 + 0.0, size=0}}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 34}
-{DIVIDE(/), VarLocation{name=PLUS Label 32, type=float, expr=0.0 + 0.0, size=0}, 2.0, Result: VarLocation{name=DIVIDE Label 36, type=float, expr=VarLocation{name=factor Label 33, type=float, expr=VarLocation{name=PLUS Label 32, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factor Label 35, type=float, expr=2.0, size=0}, size=0}}
-{RETURN, null, null, Result: VarLocation{name=factor Label 33, type=float, expr=VarLocation{name=PLUS Label 32, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factor Label 35, type=float, expr=2.0, size=0}}
-{JMP, null, null, Result: endIf Label 29}
-{LABEL, null, null, Result: elseCond Label 28}
-{LABEL, null, null, Result: endIf Label 29}
-{GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 39, type=boolean, expr=0.0 > 0.0, size=0}}
-{GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 43, type=boolean, expr=0.0 > 0.0, size=0}}
-{AND(&&), VarLocation{name=GE Label 39, type=boolean, expr=0.0 > 0.0, size=0}, VarLocation{name=GE Label 43, type=boolean, expr=0.0 > 0.0, size=0}, Result: VarLocation{name=CONJUNCION Label 45, type=boolean, expr=VarLocation{name=GE Label 39, type=boolean, expr=0.0 > 0.0, size=0} && VarLocation{name=GE Label 43, type=boolean, expr=0.0 > 0.0, size=0}, size=0}}
-{CMP, VarLocation{name=CONJUNCION Label 45, type=boolean, expr=VarLocation{name=GE Label 39, type=boolean, expr=0.0 > 0.0, size=0} && VarLocation{name=GE Label 43, type=boolean, expr=0.0 > 0.0, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 46}
-{PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 50, type=float, expr=0.0 + 0.0, size=0}}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 52}
-{DIVIDE(/), VarLocation{name=PLUS Label 50, type=float, expr=0.0 + 0.0, size=0}, 2.0, Result: VarLocation{name=DIVIDE Label 54, type=float, expr=VarLocation{name=factor Label 51, type=float, expr=VarLocation{name=PLUS Label 50, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factor Label 53, type=float, expr=2.0, size=0}, size=0}}
-{RETURN, null, null, Result: VarLocation{name=factor Label 51, type=float, expr=VarLocation{name=PLUS Label 50, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factor Label 53, type=float, expr=2.0, size=0}}
-{JMP, null, null, Result: endIf Label 47}
-{LABEL, null, null, Result: elseCond Label 46}
-{LABEL, null, null, Result: endIf Label 47}
-{CEQ(==), 0.0, 0.0, Result: VarLocation{name=CEQ Label 57, type=boolean, expr=0.0 == 0.0, size=0}}
-{CEQ(==), 0.0, 0.0, Result: VarLocation{name=CEQ Label 61, type=boolean, expr=0.0 == 0.0, size=0}}
-{AND(&&), VarLocation{name=CEQ Label 57, type=boolean, expr=0.0 == 0.0, size=0}, VarLocation{name=CEQ Label 61, type=boolean, expr=0.0 == 0.0, size=0}, Result: VarLocation{name=CONJUNCION Label 63, type=boolean, expr=VarLocation{name=CEQ Label 57, type=boolean, expr=0.0 == 0.0, size=0} && VarLocation{name=CEQ Label 61, type=boolean, expr=0.0 == 0.0, size=0}, size=0}}
-{CEQ(==), 0.0, 0.0, Result: VarLocation{name=CEQ Label 66, type=boolean, expr=0.0 == 0.0, size=0}}
-{AND(&&), VarLocation{name=CEQ Label 57, type=boolean, expr=0.0 == 0.0, size=0} && VarLocation{name=CEQ Label 61, type=boolean, expr=0.0 == 0.0, size=0}, VarLocation{name=CEQ Label 66, type=boolean, expr=0.0 == 0.0, size=0}, Result: VarLocation{name=CONJUNCION Label 68, type=boolean, expr=VarLocation{name=CEQ Label 57, type=boolean, expr=0.0 == 0.0, size=0} && VarLocation{name=CEQ Label 61, type=boolean, expr=0.0 == 0.0, size=0} && VarLocation{name=CEQ Label 66, type=boolean, expr=0.0 == 0.0, size=0}, size=0}}
-{CMP, VarLocation{name=CONJUNCION Label 68, type=boolean, expr=VarLocation{name=CEQ Label 57, type=boolean, expr=0.0 == 0.0, size=0} && VarLocation{name=CEQ Label 61, type=boolean, expr=0.0 == 0.0, size=0} && VarLocation{name=CEQ Label 66, type=boolean, expr=0.0 == 0.0, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 69}
-{RETURN, null, null, Result: 0.0}
-{JMP, null, null, Result: endIf Label 70}
-{LABEL, null, null, Result: elseCond Label 69}
-{LABEL, null, null, Result: endIf Label 70}
-{LABEL, null, null, Result: EndMethod promedio}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 3.3, null, Result: FloatLiteral Label 72}
-{ASSIGN(=), 0.66, null, Result: FloatLiteral Label 74}
-{ASSIGN(=), 10.0, null, Result: FloatLiteral Label 76}
-{METHODCALL, promedio, 3, Result: RESULT Label 78}
-{PARAM, null, null, Result: 3.3}
-{PARAM, null, null, Result: 0.66}
-{PARAM, null, null, Result: 10.0}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=promedio, args=[3.3, 0.66, 10.0]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 81}
-{RETURN, null, null, Result: 1}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_mainSolo.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 17
-lista: 
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, boolean, null, Result: a}
-{LABEL, boolean, null, Result: b}
-{LABEL, boolean, null, Result: c}
-{LABEL, int, null, Result: x}
-{LABEL, int, null, Result: y}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 1}
-{ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
-{NON(!), false, null, Result: VarLocation{name=NON Label 4, type=boolean, expr=!false, size=0}}
-{ASSIGN(=), !false, null, Result: VarLocation{name=b, type=boolean, expr=null, size=0}}
-{AND(&&), false, false, Result: VarLocation{name=CONJUNCION Label 7, type=boolean, expr=false && false, size=0}}
-{NON(!), false, null, Result: VarLocation{name=NON Label 10, type=boolean, expr=!false, size=0}}
-{OR(||), VarLocation{name=CONJUNCION Label 7, type=boolean, expr=false && false, size=0}, !false, Result: VarLocation{name=DISYUNCION Label 11, type=boolean, expr=VarLocation{name=CONJUNCION Label 7, type=boolean, expr=false && false, size=0} || !false, size=0}}
-{ASSIGN(=), VarLocation{name=CONJUNCION Label 7, type=boolean, expr=false && false, size=0} || !false, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_mcd.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 39
-lista: 
-{LABEL, null, null, Result: BeginMethod maxcomdiv}
-
-{METHODDECL, Metodo{ name=maxcomdiv, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=a, value=null, size=0}, Simbolo{type=int, name=b, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: dividendo}
-{LABEL, int, null, Result: divisor}
-{LABEL, int, null, Result: resto}
-{GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
-{CMP, VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 4}
-{ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 5}
-{LABEL, null, null, Result: elseCond Label 4}
-{ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
-{LABEL, null, null, Result: endIf Label 5}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 10}
-{ASSIGN(=), 1, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 13}
-{NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 15, type=boolean, expr=0 != 0, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 18}
-{CMP, VarLocation{name=factor Label 17, type=boolean, expr=VarLocation{name=factor Label 16, type=boolean, expr=VarLocation{name=NEQ Label 15, type=boolean, expr=0 != 0, size=0}, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 19}
-{MOD(%), 0, 0, Result: VarLocation{name=MOD Label 22, type=int, expr=0 % 0, size=0}}
-{ASSIGN(=), 0 % 0, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
-{JMP, null, null, Result: BeginWhile Label 18}
-{LABEL, null, null, Result: EndWhile Label 19}
-{RETURN, null, null, Result: 0}
-{LABEL, null, null, Result: EndMethod maxcomdiv}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 26}
-{ASSIGN(=), 9, null, Result: IntLiteral Label 28}
-{METHODCALL, maxcomdiv, 2, Result: RESULT Label 30}
-{PARAM, null, null, Result: 6}
-{PARAM, null, null, Result: 9}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="mcd%d"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_metodos00.ctds ... -------------------
-parseo iniciado
-Error: Method alo not declared
-Error: Method alo not declared
-ocurrio un error: null
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_metodos01.ctds ... -------------------
-parseo iniciado
-Error: Method alo2 not declared
-ocurrio un error: null
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_metodos02.ctds ... -------------------
-parseo iniciado
-Error: Method alo not declared
-
-parseo exitoso
-tamaño lista de codigo tercetos: 43
-lista: 
-{LABEL, float, null, Result: c}
-{LABEL, null, null, Result: BeginMethod alo}
-
-{METHODDECL, Metodo{ name=alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=boolean, name=b, value=null, size=0}, Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
-{CMP, VarLocation{name=factor Label 1, type=boolean, expr=false, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 2}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 5}
-{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 7, type=int, expr=0 + 1, size=0}}
-{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 3}
-{LABEL, null, null, Result: elseCond Label 2}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 9}
-{MINUS(-), 0, 1, Result: VarLocation{name=MINUS Label 11, type=int, expr=0 - 1, size=0}}
-{ASSIGN(=), 0 - 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{LABEL, null, null, Result: endIf Label 3}
-{LABEL, null, null, Result: EndMethod alo}
-{LABEL, null, null, Result: BeginMethod Alo}
-
-{METHODDECL, Metodo{ name=Alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=boolean, name=b, value=null, size=0}, Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod Alo}
-{LABEL, null, null, Result: BeginMethod alo2}
-
-{METHODDECL, Metodo{ name=alo2, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 12}
-{METHODCALL, alo, 2, Result: RESULT Label 15}
-{PARAM, null, null, Result: true}
-{PARAM, null, null, Result: 0}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 17}
-{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 19, type=int, expr=0 + 1, size=0}}
-{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{RETURN, null, null, Result: 0}
-{LABEL, null, null, Result: EndMethod alo2}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, int, null, Result: y}
-{ASSIGN(=), 7, null, Result: IntLiteral Label 21}
-{ASSIGN(=), 7, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
-{ASSIGN(=), 8.0, null, Result: FloatLiteral Label 23}
-{ASSIGN(=), 8.0, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
-{METHODCALL, alo2, 1, Result: RESULT Label 26}
-{PARAM, null, null, Result: 0}
-{ASSIGN(=), MethodCallExpr{name=alo2, args=[0]}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
-{ASSIGN(=), false, null, Result: BoolLiteral Label 28}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 30}
-{MULTIPLY(*), VarLocation{name=factor Label 31, type=int, expr=3, size=0}, 0, Result: VarLocation{name=MULTIPLY Label 34, type=int, expr=VarLocation{name=factor Label 31, type=int, expr=3, size=0} * 0, size=0}}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_metodos03.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 42
-lista: 
-{LABEL, boolean, null, Result: res}
-{LABEL, null, null, Result: BeginMethod inc}
-
-{METHODDECL, Metodo{ name=inc, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 2}
-{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 4, type=int, expr=0 + 1, size=0}}
-{RETURN, null, null, Result: 0 + 1}
-{LABEL, null, null, Result: EndMethod inc}
-{LABEL, null, null, Result: BeginMethod resto}
-
-{METHODDECL, Metodo{ name=resto, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}, Simbolo{type=float, name=y, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: res}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 6}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 8}
-{MULTIPLY(*), 3, 2, Result: VarLocation{name=MULTIPLY Label 10, type=int, expr=3 * 2, size=0}}
-{GE(>), 0, 3 * 2, Result: VarLocation{name=GE Label 11, type=boolean, expr=0 > 3 * 2, size=0}}
-{CMP, VarLocation{name=GE Label 11, type=boolean, expr=0 > 3 * 2, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 12}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 15}
-{DIVIDE(/), 0, 3, Result: VarLocation{name=DIVIDE Label 17, type=int, expr=0 / 3, size=0}}
-{ASSIGN(=), 0 / 3, null, Result: VarLocation{name=res, type=int, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 13}
-{LABEL, null, null, Result: elseCond Label 12}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 19}
-{MOD(%), 0, 2, Result: VarLocation{name=MOD Label 21, type=int, expr=0 % 2, size=0}}
-{ASSIGN(=), 0 % 2, null, Result: VarLocation{name=res, type=int, expr=null, size=0}}
-{LABEL, null, null, Result: endIf Label 13}
-{RETURN, null, null, Result: 0}
-{LABEL, null, null, Result: EndMethod resto}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{array[], int[], 1, Result: A}
-{ASSIGN(=), false, null, Result: BoolLiteral Label 23}
-{ASSIGN(=), false, null, Result: VarLocation{name=res, type=boolean, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 25}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 27}
-{METHODCALL, inc, 1, Result: RESULT Label 29}
-{PARAM, null, null, Result: 5}
-{ASSIGN(=), 10.2, null, Result: FloatLiteral Label 31}
-{METHODCALL, resto, 2, Result: RESULT Label 33}
-{PARAM, null, null, Result: MethodCallExpr{name=inc, args=[5]}}
-{PARAM, null, null, Result: 10.2}
-{ASSIGN(=), MethodCallExpr{name=resto, args=[MethodCallExpr{name=inc, args=[5]}, 10.2]}, null, Result: VarLocation{name=A, type=int[], expr=null, size=1}}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_metodos_externos01.ctds ... -------------------
-parseo iniciado
-Error: Method alo not declared
-Error: Method alo not declared
-ocurrio un error: null
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_metodos_externos02.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 48
-lista: 
-{LABEL, null, null, Result: BeginMethod maxcomdiv}
-
-{METHODDECL, Metodo{ name=maxcomdiv, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=a, value=null, size=0}, Simbolo{type=int, name=b, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: dividendo}
-{LABEL, int, null, Result: divisor}
-{LABEL, int, null, Result: resto}
-{GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
-{CMP, VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 4}
-{ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 5}
-{LABEL, null, null, Result: elseCond Label 4}
-{ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
-{LABEL, null, null, Result: endIf Label 5}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 10}
-{ASSIGN(=), 1, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 13}
-{NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 15, type=boolean, expr=0 != 0, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 18}
-{CMP, VarLocation{name=factor Label 17, type=boolean, expr=VarLocation{name=factor Label 16, type=boolean, expr=VarLocation{name=NEQ Label 15, type=boolean, expr=0 != 0, size=0}, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 19}
-{MOD(%), 0, 0, Result: VarLocation{name=MOD Label 22, type=int, expr=0 % 0, size=0}}
-{ASSIGN(=), 0 % 0, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
-{JMP, null, null, Result: BeginWhile Label 18}
-{LABEL, null, null, Result: EndWhile Label 19}
-{RETURN, null, null, Result: 0}
-{LABEL, null, null, Result: EndMethod maxcomdiv}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{LABEL, int, null, Result: a}
-{ASSIGN(=), 10000, null, Result: IntLiteral Label 26}
-{ASSIGN(=), 10000, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 28}
-{ASSIGN(=), 9, null, Result: IntLiteral Label 30}
-{METHODCALL, maxcomdiv, 2, Result: RESULT Label 32}
-{PARAM, null, null, Result: 6}
-{PARAM, null, null, Result: 9}
-{ASSIGN(=), 3.5, null, Result: FloatLiteral Label 34}
-{MULTIPLY(*), 3.5, 0, Result: VarLocation{name=MULTIPLY Label 37, type=int, expr=3.5 * 0, size=0}}
-{ASSIGN(=), 7, null, Result: IntLiteral Label 38}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 40}
-{DIVIDE(/), 7, 6, Result: VarLocation{name=DIVIDE Label 42, type=int, expr=7 / 6, size=0}}
-{MINUS(-), 3.5 * 0, 7 / 6, Result: VarLocation{name=MINUS Label 43, type=int, expr=3.5 * 0 - 7 / 6, size=0}}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%d%f"}, StringLiteral{value="mcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}, 3.5 * 0 - 7 / 6]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_mod.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 14
-lista: 
-{LABEL, null, null, Result: BeginMethod pruAritmetica}
-
-{METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{LABEL, int, null, Result: a}
-{ASSIGN(=), 90, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 90, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 7, null, Result: IntLiteral Label 4}
-{MOD(%), 0, 7, Result: VarLocation{name=MOD Label 6, type=int, expr=0 % 7, size=0}}
-{RETURN, null, null, Result: VarLocation{name=MOD Label 6, type=int, expr=0 % 7, size=0}}
-{LABEL, null, null, Result: EndMethod pruAritmetica}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{METHODCALL, pruAritmetica, 0, Result: RESULT Label 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_mult01.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 21
-lista: 
-{LABEL, null, null, Result: BeginMethod pruMult}
-
-{METHODDECL, Metodo{ name=pruMult, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: a}
-{LABEL, int, null, Result: d}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 5, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 2000, null, Result: IntLiteral Label 3}
-{ASSIGN(=), 2000, null, Result: VarLocation{name=d, type=int, expr=null, size=0}}
-{ASSIGN(=), 1000, null, Result: IntLiteral Label 6}
-{MULTIPLY(*), 0, 1000, Result: VarLocation{name=MULTIPLY Label 8, type=int, expr=0 * 1000, size=0}}
-{MULTIPLY(*), 0 * 1000, 0, Result: VarLocation{name=MULTIPLY Label 10, type=int, expr=0 * 1000 * 0, size=0}}
-{MULTIPLY(*), 0 * 1000 * 0, 0, Result: VarLocation{name=MULTIPLY Label 12, type=int, expr=0 * 1000 * 0 * 0, size=0}}
-{RETURN, null, null, Result: VarLocation{name=MULTIPLY Label 12, type=int, expr=0 * 1000 * 0 * 0, size=0}}
-{LABEL, null, null, Result: EndMethod pruMult}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 14}
-{METHODCALL, pruMult, 1, Result: RESULT Label 16}
-{PARAM, null, null, Result: 2}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[2]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_mult02.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 14
-lista: 
-{LABEL, null, null, Result: BeginMethod pruMult}
-
-{METHODDECL, Metodo{ name=pruMult, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{LABEL, int, null, Result: a}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 5, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 7, null, Result: IntLiteral Label 4}
-{MULTIPLY(*), 0, 7, Result: VarLocation{name=MULTIPLY Label 6, type=int, expr=0 * 7, size=0}}
-{RETURN, null, null, Result: VarLocation{name=MULTIPLY Label 6, type=int, expr=0 * 7, size=0}}
-{LABEL, null, null, Result: EndMethod pruMult}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{METHODCALL, pruMult, 0, Result: RESULT Label 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_prog_simple.ctds ... -------------------
-parseo iniciado
-
-Error: Main Method Missing in Class prueba2
-parseo exitoso
-tamaño lista de codigo tercetos: 7
-lista: 
-{LABEL, float, null, Result: c}
-{LABEL, null, null, Result: BeginMethod alo}
-
-{METHODDECL, Metodo{ name=alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 2}
-{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 4, type=int, expr=0 + 1, size=0}}
-{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{LABEL, null, null, Result: EndMethod alo}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_retorno.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 84
-lista: 
-{LABEL, null, null, Result: BeginMethod id}
-
-{METHODDECL, Metodo{ name=id, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
-{LABEL, int, null, Result: j}
-{LABEL, int, null, Result: z}
-{ASSIGN(=), 100, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 100, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 3}
-{ASSIGN(=), 0, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: VarLocation{name=z, type=int, expr=null, size=0}}
-{LE(<), 0, 0, Result: VarLocation{name=LE Label 8, type=boolean, expr=0 < 0, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 10}
-{CMP, VarLocation{name=factor Label 9, type=boolean, expr=VarLocation{name=LE Label 8, type=boolean, expr=0 < 0, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 11}
-{LABEL, int, null, Result: i}
-{ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 14}
-{GE(>), 0, 0, Result: VarLocation{name=GE Label 16, type=boolean, expr=0 > 0, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 19}
-{LE(<), 0, 0, Result: VarLocation{name=LE Label 21, type=boolean, expr=0 < 0, size=0}}
-{OR(||), VarLocation{name=GE Label 16, type=boolean, expr=0 > 0, size=0}, VarLocation{name=LE Label 21, type=boolean, expr=0 < 0, size=0}, Result: VarLocation{name=DISYUNCION Label 23, type=boolean, expr=VarLocation{name=GE Label 16, type=boolean, expr=0 > 0, size=0} || VarLocation{name=LE Label 21, type=boolean, expr=0 < 0, size=0}, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 25}
-{CMP, VarLocation{name=factor Label 24, type=boolean, expr=VarLocation{name=DISYUNCION Label 23, type=boolean, expr=VarLocation{name=GE Label 16, type=boolean, expr=0 > 0, size=0} || VarLocation{name=LE Label 21, type=boolean, expr=0 < 0, size=0}, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 26}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 28}
-{GE(>), 0, 0, Result: VarLocation{name=GE Label 30, type=boolean, expr=0 > 0, size=0}}
-{CMP, VarLocation{name=GE Label 30, type=boolean, expr=0 > 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 31}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 34}
-{MINUS(-), 0, 1, Result: VarLocation{name=MINUS Label 36, type=int, expr=0 - 1, size=0}}
-{ASSIGN(=), 0 - 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 32}
-{LABEL, null, null, Result: elseCond Label 31}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 38}
-{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 40, type=int, expr=0 + 1, size=0}}
-{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{LABEL, null, null, Result: endIf Label 32}
-{JMP, null, null, Result: BeginWhile Label 25}
-{LABEL, null, null, Result: EndWhile Label 26}
-{LE(<), 0, 0, Result: VarLocation{name=LE Label 43, type=boolean, expr=0 < 0, size=0}}
-{GE(>), 0, 0, Result: VarLocation{name=GE Label 47, type=boolean, expr=0 > 0, size=0}}
-{OR(||), VarLocation{name=LE Label 43, type=boolean, expr=0 < 0, size=0}, VarLocation{name=GE Label 47, type=boolean, expr=0 > 0, size=0}, Result: VarLocation{name=DISYUNCION Label 49, type=boolean, expr=VarLocation{name=LE Label 43, type=boolean, expr=0 < 0, size=0} || VarLocation{name=GE Label 47, type=boolean, expr=0 > 0, size=0}, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 51}
-{CMP, VarLocation{name=factor Label 50, type=boolean, expr=VarLocation{name=DISYUNCION Label 49, type=boolean, expr=VarLocation{name=LE Label 43, type=boolean, expr=0 < 0, size=0} || VarLocation{name=GE Label 47, type=boolean, expr=0 > 0, size=0}, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 52}
-{LE(<), 0, 0, Result: VarLocation{name=LE Label 55, type=boolean, expr=0 < 0, size=0}}
-{CMP, VarLocation{name=LE Label 55, type=boolean, expr=0 < 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 56}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 59}
-{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 61, type=int, expr=0 + 1, size=0}}
-{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 57}
-{LABEL, null, null, Result: elseCond Label 56}
-{CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 64, type=boolean, expr=0 == 0, size=0}}
-{CMP, VarLocation{name=CEQ Label 64, type=boolean, expr=0 == 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 65}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 68}
-{MINUS(-), 0, 1, Result: VarLocation{name=MINUS Label 70, type=int, expr=0 - 1, size=0}}
-{MULTIPLY(*), 0, 0, Result: VarLocation{name=MULTIPLY Label 73, type=int, expr=0 * 0, size=0}}
-{MULTIPLY(*), 0, 0, Result: VarLocation{name=MULTIPLY Label 76, type=int, expr=0 * 0, size=0}}
-{MINUS(-), 0 * 0, 0 * 0, Result: VarLocation{name=MINUS Label 77, type=int, expr=0 * 0 - 0 * 0, size=0}}
-{PLUS(+), 0 - 1, VarLocation{name=MINUS Label 77, type=int, expr=0 * 0 - 0 * 0, size=0}, Result: VarLocation{name=PLUS Label 79, type=int, expr=0 - 1 + VarLocation{name=MINUS Label 77, type=int, expr=0 * 0 - 0 * 0, size=0}, size=0}}
-{ASSIGN(=), 0 - 1 + VarLocation{name=MINUS Label 77, type=int, expr=0 * 0 - 0 * 0, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{JMP, null, null, Result: endIf Label 66}
-{LABEL, null, null, Result: elseCond Label 65}
-{LABEL, null, null, Result: endIf Label 66}
-{LABEL, null, null, Result: endIf Label 57}
-{JMP, null, null, Result: BeginWhile Label 51}
-{LABEL, null, null, Result: EndWhile Label 52}
-{ASSIGN(=), 0, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 82}
-{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 84, type=int, expr=0 + 1, size=0}}
-{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
-{JMP, null, null, Result: BeginWhile Label 10}
-{LABEL, null, null, Result: EndWhile Label 11}
-{RETURN, null, null, Result: 0}
-{LABEL, null, null, Result: EndMethod id}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 9, null, Result: IntLiteral Label 86}
-{METHODCALL, id, 1, Result: RESULT Label 88}
-{PARAM, null, null, Result: 9}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=id, args=[9]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_suma.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 30
-lista: 
-{LABEL, null, null, Result: BeginMethod suma}
-
-{METHODDECL, Metodo{ name=suma, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=num1, value=null, size=0}, Simbolo{type=int, name=num2, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 2}
-{CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 0, size=0}}
-{CMP, VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 5}
-{RETURN, null, null, Result: 0}
-{JMP, null, null, Result: endIf Label 6}
-{LABEL, null, null, Result: elseCond Label 5}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 9}
-{CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 11, type=boolean, expr=0 == 0, size=0}}
-{CMP, VarLocation{name=CEQ Label 11, type=boolean, expr=0 == 0, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCond Label 12}
-{RETURN, null, null, Result: 0}
-{JMP, null, null, Result: endIf Label 13}
-{LABEL, null, null, Result: elseCond Label 12}
-{PLUS(+), 0, 0, Result: VarLocation{name=PLUS Label 17, type=int, expr=0 + 0, size=0}}
-{RETURN, null, null, Result: 0 + 0}
-{LABEL, null, null, Result: endIf Label 13}
-{LABEL, null, null, Result: endIf Label 6}
-{LABEL, null, null, Result: EndMethod suma}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 18}
-{ASSIGN(=), 9, null, Result: IntLiteral Label 20}
-{METHODCALL, suma, 2, Result: RESULT Label 22}
-{PARAM, null, null, Result: 4}
-{PARAM, null, null, Result: 9}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=suma, args=[4, 9]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_sumx.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 30
-lista: 
-{LABEL, null, null, Result: BeginMethod sumx}
-
-{METHODDECL, Metodo{ name=sumx, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: aux}
-{LABEL, int, null, Result: i}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 0, null, Result: VarLocation{name=aux, type=float, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 3}
-{ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{LE(<), 0, 0, Result: VarLocation{name=LE Label 7, type=boolean, expr=0 < 0, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 9}
-{CMP, VarLocation{name=factor Label 8, type=boolean, expr=VarLocation{name=LE Label 7, type=boolean, expr=0 < 0, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 10}
-{PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 13, type=float, expr=0.0 + 0.0, size=0}}
-{ASSIGN(=), 0.0 + 0.0, null, Result: VarLocation{name=aux, type=float, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 15}
-{PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 17, type=int, expr=0 + 1, size=0}}
-{ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{JMP, null, null, Result: BeginWhile Label 9}
-{LABEL, null, null, Result: EndWhile Label 10}
-{RETURN, null, null, Result: 0.0}
-{LABEL, null, null, Result: EndMethod sumx}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 6.0, null, Result: FloatLiteral Label 19}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 21}
-{METHODCALL, sumx, 2, Result: RESULT Label 23}
-{PARAM, null, null, Result: 6.0}
-{PARAM, null, null, Result: 2}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=sumx, args=[6.0, 2]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_while.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
-tamaño lista de codigo tercetos: 44
-lista: 
-{LABEL, null, null, Result: BeginMethod maxcomdiv}
-
-{METHODDECL, Metodo{ name=maxcomdiv, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=a, value=null, size=0}, Simbolo{type=int, name=b, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: dividendo}
-{LABEL, int, null, Result: divisor}
-{LABEL, int, null, Result: resto}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 1, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 4}
-{NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 6, type=boolean, expr=0 != 0, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 12}
-{CMP, VarLocation{name=factor Label 11, type=boolean, expr=VarLocation{name=factor Label 10, type=boolean, expr=VarLocation{name=factor Label 9, type=boolean, expr=VarLocation{name=factor Label 8, type=boolean, expr=VarLocation{name=factor Label 7, type=boolean, expr=VarLocation{name=NEQ Label 6, type=boolean, expr=0 != 0, size=0}, size=0}, size=0}, size=0}, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 13}
-{MOD(%), 0, 0, Result: VarLocation{name=MOD Label 16, type=int, expr=0 % 0, size=0}}
-{ASSIGN(=), 0 % 0, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
-{JMP, null, null, Result: BeginWhile Label 12}
-{JMP, null, null, Result: BeginWhile Label 12}
-{LABEL, null, null, Result: EndWhile Label 13}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 19}
-{NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 21, type=boolean, expr=0 != 0, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 22}
-{CMP, VarLocation{name=NEQ Label 21, type=boolean, expr=0 != 0, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 23}
-{JMP, null, null, Result: EndWhile Label 23}
-{JMP, null, null, Result: BeginWhile Label 22}
-{LABEL, null, null, Result: EndWhile Label 23}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 25}
-{NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 27, type=boolean, expr=0 != 0, size=0}}
-{LABEL, null, null, Result: BeginWhile Label 29}
-{CMP, VarLocation{name=factor Label 28, type=boolean, expr=VarLocation{name=NEQ Label 27, type=boolean, expr=0 != 0, size=0}, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhile Label 30}
-{JMP, null, null, Result: BeginWhile Label 29}
-{LABEL, null, null, Result: EndWhile Label 30}
-{RETURN, null, null, Result: 0}
-{LABEL, null, null, Result: EndMethod maxcomdiv}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 32}
-{ASSIGN(=), 9, null, Result: IntLiteral Label 34}
-{METHODCALL, maxcomdiv, 2, Result: RESULT Label 36}
-{PARAM, null, null, Result: 6}
-{PARAM, null, null, Result: 9}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%dMcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: null}
-{LABEL, null, null, Result: EndMethod main}
----------------------------------------------------
-  
-  
-///////////////////////// TESTS CON FALLAS ////////////////////////////////////////
----------------- Test tests/test_errores/error_arreglos01.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 3.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_arreglos02.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 3.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_arreglos03.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 7.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_arreglos04.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 3.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_arreglos05.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 3.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_bloques01.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 3.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_bloques02.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 9.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_char.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 4.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_class01.ctds ... -------------------
-parseo iniciado
-Error: Method alo not declared
-Error: Method alo not declared
-ocurrio un error: null
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_class02.ctds ... -------------------
-parseo iniciado
-Error: Method alo not declared
-Error: Method alo not declared
-ocurrio un error: null
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/errores.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 3.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_externinvk02.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 23.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_externinvk.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 22.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_float01.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 9.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_float02.ctds ... -------------------
-parseo iniciado
-error: 0 9 .
-error: 0 21 .
-error de sintaxis: Linea 22.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_float03.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 29.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_float04.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 41.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_for01.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 13.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_for02.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 13.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_for03.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 13.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_for04.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 13.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_for05.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 18.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_if01.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 9.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_if02.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 8.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_lineaerror02.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 20.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_lineaerror.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 20.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_test_break.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 20.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_test_logicos02.ctds ... -------------------
-parseo iniciado
-error: 0 4 &
-error de sintaxis: Linea 5.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_test_logicos.ctds ... -------------------
-parseo iniciado
-ocurrio un error: null
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_test_main01.ctds ... -------------------
-parseo iniciado
-Error: Method alo not declared
-error de sintaxis: Linea 11.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_test_main02.ctds ... -------------------
-parseo iniciado
-Error: Method Main must not have parameters
-Error: Method alo not declared
-error de sintaxis: Linea 14.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_test_metodos01.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 4.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_test_metodos02.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 4.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_test_metodos03.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 19.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_test_metodos04.ctds ... -------------------
-parseo iniciado
-Error: Method alo3 not declared
-error de sintaxis: Linea 21.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_test_metodos05.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 15.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_test_metodos06.ctds ... -------------------
-parseo iniciado
-error: 0 3 &
-error de sintaxis: Linea 4.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_test_metodos07.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 9.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_test_multiplesMain.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 9.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_vbles01.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 6.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_vbles02.ctds ... -------------------
-parseo iniciado
-error: 0 5 _
-error de sintaxis: Linea 7.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/error_vbles03.ctds ... -------------------
-error de sintaxis: Linea 3.
----------------------------------------------------
-  
-  
----------------- Test tests/test_errores/ifErrorTest.ctds ... -------------------
-parseo iniciado
-error de sintaxis: Linea 6.
----------------------------------------------------
-  
-  
