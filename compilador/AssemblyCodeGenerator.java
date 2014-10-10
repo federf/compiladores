@@ -113,10 +113,10 @@ public class AssemblyCodeGenerator{
 
 			result = result +(
 
-			"mov" + YOff + "(%ebp), %eax \n"+
+			"mov" + YOff + "(%ebp), %eax\n"+
 			"mov $" + x.getStringValue() + ", %edx\n"+
-			"sub %edx, %eax \n"+
-			"mov %edx," + ResOff + "%(ebp) \n");
+			"sub %edx, %eax\n"+
+			"mov %edx," + ResOff + "%(ebp)\n");
 
 		}
 
@@ -126,14 +126,77 @@ public class AssemblyCodeGenerator{
 
 			result = result +(
 
-			"mov $" + x.getStringValue() + "%eax \n"+
-			"mov $" + y.getStringValue() + "%edx \n"+
-			"sub %eax, %edx \n"+
-			"mov %edx," + ResOff + "%(ebp) \n");
+			"mov $" + x.getStringValue() + "%eax\n"+
+			"mov $" + y.getStringValue() + "%edx\n"+
+			"sub %eax, %edx\n"+
+			"mov %edx," + ResOff + "%(ebp)\n");
 
 		}
 	}
 	
+	public void ASM_Imul(TripletCode t){
+
+		VarLocation res = (VarLocation)t.getResult();
+		int ResOff = res.getOffset();
+		
+		if (t.getFirstDir() instanceof VarLocation && t.getSecondDir() instanceof VarLocation) {
+			VarLocation  x = (VarLocation)t.getFirstDir();
+			VarLocation  y = (VarLocation)t.getSecondDir();
+
+			int XOff = x.getOffset();
+			int YOff = y.getOffset();
+
+			result = result +(
+
+			"mov" + XOff + "(%ebp) , %eax \n"+
+			"imul" + YOff + "(%ebp), %eax \n"+
+			"mov %eax," + ResOff + "%(ebp) \n");
+
+		}
+
+		if (t.getFirstDir() instanceof VarLocation && !(t.getSecondDir() instanceof VarLocation)) {
+			VarLocation  x = (VarLocation)t.getFirstDir();
+			IntLiteral  y = (IntLiteral)t.getSecondDir();
+
+			int XOff = x.getOffset();
+
+			result = result +(
+
+			"mov" + XOff + "(%ebp) , %eax \n"+
+			"mov $" + y.getStringValue() + ", %edx\n"+
+			"imul %edx, %eax \n"+
+			"mov %eax," + ResOff + "%(ebp) \n");
+
+		}
+
+		if ((t.getFirstDir() instanceof VarLocation) && t.getSecondDir() instanceof VarLocation) {
+			IntLiteral  x = (IntLiteral)t.getFirstDir();
+			VarLocation  y = (VarLocation)t.getSecondDir();
+
+			int YOff = y.getOffset();
+
+			result = result +(
+
+			"mov" + YOff + "(%ebp), %eax\n"+
+			"mov $" + x.getStringValue() + ", %edx\n"+
+			"imul %edx, %eax\n"+
+			"mov %eax," + ResOff + "%(ebp)\n");
+
+		}
+
+		if (!(t.getFirstDir() instanceof VarLocation) && !(t.getSecondDir() instanceof VarLocation)) {
+			IntLiteral  x = (IntLiteral)t.getFirstDir();
+			IntLiteral  y = (IntLiteral)t.getSecondDir();
+
+			result = result +(
+
+			"mov $" + x.getStringValue() + "%eax\n"+
+			"mov $" + y.getStringValue() + "%edx\n"+
+			"sub %edx, %eax\n"+
+			"mov %eax," + ResOff + "%(ebp)\n");
+
+		}
+	}
 	//metodo que dada una lista de codigos de 3 direcciones genera el codigo assembly correspondiente
 	public String generate(LinkedList<TripletCode> list){
 	
@@ -152,8 +215,9 @@ public class AssemblyCodeGenerator{
 					break;
 
 			    case MULTIPLY:
-			        result=result+ "MULTIPLY(*)"; 
+			        ASM_Imul(t); 
 			        break;
+
 			    case DIVIDE:
 			        result=result+ "DIVIDE(/)"; 
 			        break;
