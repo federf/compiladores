@@ -192,7 +192,7 @@ public class AssemblyCodeGenerator{
 
 			"mov $" + x.getStringValue() + "%eax\n"+
 			"mov $" + y.getStringValue() + "%edx\n"+
-			"sub %edx, %eax\n"+
+			"imul %edx, %eax\n"+
 			"mov %eax," + ResOff + "%(ebp)\n");
 
 		}
