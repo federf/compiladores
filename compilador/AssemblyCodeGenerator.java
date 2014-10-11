@@ -21,8 +21,8 @@ public class AssemblyCodeGenerator{
 
 			result = result +(
 
-			"mov" + XOff + "(%ebp) , %eax \n"+
-			"mov" + YOff + "(%ebp), %edx \n"+
+			"mov " + XOff + "(%ebp) , %eax \n"+
+			"mov " + YOff + "(%ebp), %edx \n"+
 			"add %eax, %edx \n"+
 			"mov %edx," + ResOff + "%(ebp) \n");
 
@@ -36,7 +36,7 @@ public class AssemblyCodeGenerator{
 
 			result = result +(
 
-			"mov" + XOff + "(%ebp) , %eax \n"+
+			"mov " + XOff + "(%ebp) , %eax \n"+
 			"add $" +y.getStringValue() + ", %eax \n"+
 			"mov %edx," + ResOff + "%(ebp) \n");
 
@@ -50,7 +50,7 @@ public class AssemblyCodeGenerator{
 
 			result = result +(
 
-			"mov" + YOff + "(%ebp), %eax \n"+
+			"mov " + YOff + "(%ebp), %eax \n"+
 			"add $" +x.getStringValue() + ", %eax \n"+
 			"mov %edx," + ResOff + "%(ebp) \n");
 
@@ -83,8 +83,8 @@ public class AssemblyCodeGenerator{
 
 			result = result +(
 
-			"mov" + XOff + "(%ebp) , %eax \n"+
-			"mov" + YOff + "(%ebp), %edx \n"+
+			"mov " + XOff + "(%ebp) , %eax \n"+
+			"mov " + YOff + "(%ebp), %edx \n"+
 			"sub %eax, %edx \n"+
 			"mov %edx," + ResOff + "%(ebp) \n");
 
@@ -98,7 +98,7 @@ public class AssemblyCodeGenerator{
 
 			result = result +(
 
-			"mov" + XOff + "(%ebp) , %eax \n"+
+			"mov " + XOff + "(%ebp) , %eax \n"+
 			"mov $" + y.getStringValue() + ", %edx\n"+
 			"sub %edx, %eax \n"+
 			"mov %edx," + ResOff + "%(ebp) \n");
@@ -113,7 +113,7 @@ public class AssemblyCodeGenerator{
 
 			result = result +(
 
-			"mov" + YOff + "(%ebp), %eax\n"+
+			"mov " + YOff + "(%ebp), %eax\n"+
 			"mov $" + x.getStringValue() + ", %edx\n"+
 			"sub %edx, %eax\n"+
 			"mov %edx," + ResOff + "%(ebp)\n");
@@ -148,7 +148,7 @@ public class AssemblyCodeGenerator{
 
 			result = result +(
 
-			"mov" + XOff + "(%ebp) , %eax \n"+
+			"mov " + XOff + "(%ebp) , %eax \n"+
 			"imul" + YOff + "(%ebp), %eax \n"+
 			"mov %eax," + ResOff + "%(ebp) \n");
 
@@ -162,7 +162,7 @@ public class AssemblyCodeGenerator{
 
 			result = result +(
 
-			"mov" + XOff + "(%ebp) , %eax \n"+
+			"mov " + XOff + "(%ebp) , %eax \n"+
 			"mov $" + y.getStringValue() + ", %edx\n"+
 			"imul %edx, %eax \n"+
 			"mov %eax," + ResOff + "%(ebp) \n");
@@ -177,7 +177,7 @@ public class AssemblyCodeGenerator{
 
 			result = result +(
 
-			"mov" + YOff + "(%ebp), %eax\n"+
+			"mov " + YOff + "(%ebp), %eax\n"+
 			"mov $" + x.getStringValue() + ", %edx\n"+
 			"imul %edx, %eax\n"+
 			"mov %eax," + ResOff + "%(ebp)\n");
@@ -236,11 +236,75 @@ public class AssemblyCodeGenerator{
 			    case GEQ:
 			        result=result+ "GEQ(>=)"; 
 			        break;
-			    case NON:
-			        result=result+ "NON(!)"; 
+			    case NON: 
+
+			        //si el operando es una VarLocation
+			        if(t.getFirstDir() instanceof VarLocation){
+			     		VarLocation op=(VarLocation) t.getFirstDir();
+			        	VarLocation res=(VarLocation) t.getResult();
+			        	//obtenemos sus offset y con el mismo trabajamos
+			        	int operandOffSet=op.getOffset();
+			        	int resOffSet=res.getOffset();
+
+				        result += "cmp $0, " + operandOffSet + "(%rbp) \n";
+						result += "sete %al \n";
+						result += "movzbl %al, %eax \n";
+						result += "mov %eax, " + resOffSet + "(%rbp) \n";
+
+			        }else{ //caso contrario debe ser un BoolLiteral
+			        	BoolLiteral op=(BoolLiteral) t.getFirstDir();
+			        	VarLocation res=(VarLocation) t.getResult();
+			        	//obtenemos sus offset y con el mismo trabajamos
+			        	int resOffSet=res.getOffset();
+
+				        result += "cmp $0, " + op.toString() + "(%rbp) \n";
+						result += "sete	%al \n";
+						result += "movzbl %al, %eax \n";
+						result += "mov %eax, " + resOffSet + "(%rbp) \n";
+			        }
+			    
 			        break;
 				case UNARYMINUS:
 			        result=result+ "UNARYMINUS(-expr)"; 
+
+			        //caso de que el operando sea una VarLocation
+			        if(t.getFirstDir() instanceof VarLocation){
+			        	VarLocation op=(VarLocation) t.getFirstDir();
+			        	VarLocation res=(VarLocation) t.getResult();
+			        	//obtenemos sus offset y con el mismo trabajamos
+			        	int operandOffSet=op.getOffset();
+			        	int resOffSet=res.getOffset();
+
+				        result += "movl	" + operandOffSet + "(%rbp), %eax \n";
+						result += "negl	%eax \n";
+						result += "movl	%eax, " + resOffSet + "(%rbp) \n";
+
+			        }else{ //caso contrario debe ser un Numero (int o float)
+			        	VarLocation res=(VarLocation) t.getResult();
+			        	//POR AHORA SOLO IMPLEMENTADO PARA INT
+			        	if(t.getFirstDir() instanceof IntLiteral){
+			        		IntLiteral op=(IntLiteral) t.getFirstDir();	
+				        	//obtenemos sus offset y con el mismo trabajamos
+				        	int resOffSet=res.getOffset();
+				        	result += "movl	" + op.getRawValue() + "(%rbp), %eax \n";
+							result += "negl	%eax \n";
+							result += "movl	%eax, " + resOffSet + "(%rbp) \n";
+			        	}else{
+			        		System.out.println("IMPLEMENTAR CASO -(FLOAT)");
+			        	}
+			        	/*
+			        	if(t.getFirstDir() instanceof FloatLiteral){
+			        		FloatLiteral op=(FloatLiteral) t.getFirstDir();	
+				        	//obtenemos sus offset y con el mismo trabajamos
+				        	int resOffSet=res.getOffset();
+				        	result += "movl		" + op.getRawValue() + "(%rbp), %eax \n";
+							result += "negl		%eax \n";
+							result += "movl		%eax, " + resOffSet + "(%rbp) \n";
+			        	}*/
+			        	
+			        	
+			        }
+
 			        break;
 			    case AND:
 			        result=result+ "AND(&&)"; 
@@ -303,6 +367,19 @@ public class AssemblyCodeGenerator{
 			   	case ARRAYACCESS:
 			   		result=result+ "ARRAYACCESS"; 
 			   		break;
+			   	case METHODDECL:
+		   			result=result+ "METHODDECL";
+
+		   			Metodo m=(Metodo)t.getFirstDir();
+
+		   			result += ".globl	" + m.getName() + "\n";
+					result += ".type	" + m.getName() + ", @function \n";			
+					result += m.getName() + ": \n";	
+					/*VER COMO RESERVAR ESPACIO PARA PARAMETROS EN LA DECLARACION DEL METODO*/
+					//result += "enter   $(4 * " + m.getParametros().size() + "), $0 \n";
+					result += "push	%rbp\n";
+					result += "mov %rsp, %rbp\n";
+		   			break;
 			}
 		}
 		return result;
