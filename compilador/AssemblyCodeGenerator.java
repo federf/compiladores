@@ -197,6 +197,69 @@ public class AssemblyCodeGenerator{
 
 		}
 	}
+
+	//metodo que dado un codigo de 3 direcciones de una comparacion logica GE, GEQ, LE o LEQ, CEQ o NEQ
+	//genera el codigo assembly correspondiente
+	public void ASM_logic(TripletCode t, TripletOperator logic){
+		VarLocation res=(VarLocation) t.getResult();
+
+			        //si el primer operando es una VarLocation
+			        if(t.getFirstDir() instanceof VarLocation){
+			        	//obtenemos su offset
+			        	VarLocation op=(VarLocation) t.getFirstDir();
+			        	int offset1=op.getOffset();
+			        	result += "movl	" + offset1 + "(%rbp), %eax\n";	
+			        }else{ //caso contrario debe ser Int o Float
+			        	//caso int
+			        	if(t.getFirstDir() instanceof IntLiteral){
+			        		IntLiteral op1=(IntLiteral) t.getFirstDir();
+			        		result += "movl	" + op1.getRawValue() + "(%rbp), %eax\n";
+			        	}else{//caso float
+			        		FloatLiteral op1=(FloatLiteral) t.getFirstDir();
+			        		result += "movl	" + op1.getRawValue() + "(%rbp), %eax\n";
+			        	}
+			        }
+
+			        //si el 2do operando es una VarLocation
+			        if(t.getSecondDir() instanceof VarLocation){
+			        	//obtenemos su offset
+			        	VarLocation op=(VarLocation) t.getSecondDir();
+			        	int offset2=op.getOffset();
+			        	result += "cmpl	" + offset2 + "(%rbp), %eax\n";	
+			        }else{ //caso contrario debe ser Int o Float
+			        	//caso int
+			        	if(t.getSecondDir() instanceof IntLiteral){
+			        		IntLiteral op2=(IntLiteral) t.getSecondDir();
+			        		result += "cmpl	" + op2.getRawValue() + "(%rbp), %eax\n";
+			        	}else{//caso float
+			        		FloatLiteral op2=(FloatLiteral) t.getSecondDir();
+			        		result += "cmpl	" + op2.getRawValue() + "(%rbp), %eax\n";
+			        	}
+			        }
+			        //case de la operacion logica 
+			        switch(logic){
+			        	case LE:
+			        		result += "setl	%al\n";
+			        		break;
+			        	case LEQ:
+			        		result += "setle %al\n";
+			        		break;
+			        	case GE:
+			        		result += "setg	%al\n";
+			        		break;
+			        	case GEQ:
+			        		result += "setge %al\n";
+			        		break;
+			        	case CEQ:
+			        		result += "sete %al\n";
+			        		break;
+			        	case NEQ:
+			        		result += "setgne %al\n";
+			        		break;
+			        }
+					result += "movzbl %al, %eax\n";
+					result += "movl	%eax, " + res.getOffset() + "(%rbp)\n";
+	}
 	//metodo que dada una lista de codigos de 3 direcciones genera el codigo assembly correspondiente
 	public String generate(LinkedList<TripletCode> list){
 	
@@ -225,16 +288,16 @@ public class AssemblyCodeGenerator{
 			        result=result+ "MOD(%)"; 
 			        break;
 			    case LE:
-			        result=result+ "LE(<)"; 
+			      	ASM_logic(t, t.getOperator());	
 			        break;
 			    case LEQ:
-			        result=result+ "LEQ(<=)"; 
+			        ASM_logic(t, t.getOperator());	
 			        break;
 			    case GE:
-			        result=result+ "GE(>)"; 
+			        ASM_logic(t, t.getOperator());	
 			        break;
 			    case GEQ:
-			        result=result+ "GEQ(>=)"; 
+			        ASM_logic(t, t.getOperator());	
 			        break;
 			    case NON: 
 
