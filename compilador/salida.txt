@@ -18,13 +18,11 @@ OFFSET = -52
 OFFSET = -64
 
 parseo exitoso
-tamaño lista de codigo tercetos: 28
+tamaño lista de codigo tercetos: 26
 lista: 
 {LABEL, null, null, Result: BeginMethod factorial}
 
 {METHODDECL, Metodo{ name=factorial, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
-{LABEL, int, null, Result: total}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 2}
 {ASSIGN(=), 1, null, Result: VarLocation{name=total, type=int, expr=null, size=0}}
@@ -50,6 +48,66 @@ lista:
 {PARAM, null, null, Result: 3}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=factorial, args=[3]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	factorial
+.type	factorial, @function 
+factorial: 
+    enter   $(4), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 0(%rbp), %eax
+    mov -4(%rbp), %eax
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 2(%rbp)
+    mov 1(%rbp), %eax
+    mov -12(%rbp), %eax
+    mov 0(%rbp), %eax
+    mov %eax, IntLiteral Label 5(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    setg	%al
+    movzbl %al, %eax
+    movl	%eax, -28(%rbp)
+.BeginWhile Label 9
+    mov true(%rbp), %eax
+    cmp -32(%rbp), %eax
+    jne EndWhile Label 10
+    mov $0%eax
+    mov $0%edx
+    imul %edx, %eax
+    mov %eax,-48%(ebp)
+    mov 0 * 0(%rbp), %eax
+    mov -36(%rbp), %eax
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 15(%rbp)
+    mov $0%eax
+    mov $1%edx
+    sub %eax, %edx
+    mov %edx,-64%(ebp)
+    mov 0 - 1(%rbp), %eax
+    mov -52(%rbp), %eax
+    jmp BeginWhile Label 9
+.EndWhile Label 10
+    mov 0(%rbp), %eax
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 3(%rbp), %eax
+    mov %eax, IntLiteral Label 19(%rbp)
+    call 	factorial
+    movl 	%eax, RESULT Label 21(%rbp) 
+PARAM
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -68,7 +126,7 @@ OFFSET = -32
 OFFSET = -68
 
 parseo exitoso
-tamaño lista de codigo tercetos: 50
+tamaño lista de codigo tercetos: 47
 lista: 
 {LABEL, null, null, Result: BeginMethod div}
 
@@ -96,9 +154,6 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, float, null, Result: x}
-{LABEL, float, null, Result: y}
-{LABEL, float, null, Result: z}
 {ASSIGN(=), 1.234, null, Result: FloatLiteral Label 13}
 {ASSIGN(=), 1.234, null, Result: VarLocation{name=x, type=float, expr=null, size=0}}
 {ASSIGN(=), 27.5, null, Result: FloatLiteral Label 15}
@@ -125,6 +180,8 @@ lista:
 {PARAM, null, null, Result: MethodCallExpr{name=resta, args=[-0.0, 0.0]}}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandoFloatTest"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=mult, args=[MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}, MethodCallExpr{name=resta, args=[-0.0, 0.0]}]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -139,9 +196,8 @@ OFFSET = -52
 Error: Method pruebaLogica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 20
+tamaño lista de codigo tercetos: 19
 lista: 
-{LABEL, boolean, null, Result: bool}
 {LABEL, null, null, Result: BeginMethod pruebaLogica}
 
 {METHODDECL, Metodo{ name=pruebaLogica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=boolean, name=b, value=null, size=0}]}, null, Result: null}
@@ -163,6 +219,51 @@ lista:
 {PARAM, null, null, Result: true}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[true]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	pruebaLogica
+.type	pruebaLogica, @function 
+pruebaLogica: 
+    enter   $(4), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov true(%rbp), %eax
+    mov %eax, BoolLiteral Label 1(%rbp)
+    mov true(%rbp), %eax
+    mov -4(%rbp), %eax
+    mov false(%rbp), %eax
+    mov %eax, BoolLiteral Label 3(%rbp)
+OR(||)
+    mov true(%rbp), %eax
+    mov %eax, BoolLiteral Label 8(%rbp)
+    cmp $0, true(%rbp) 
+    sete	%al 
+    movzbl %al, %eax 
+    mov %eax, -32(%rbp) 
+AND(&&)
+    cmp $0, false(%rbp) 
+    sete	%al 
+    movzbl %al, %eax 
+    mov %eax, -48(%rbp) 
+AND(&&)
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov true(%rbp), %eax
+    mov %eax, BoolLiteral Label 17(%rbp)
+    call 	pruebaLogica
+    movl 	%eax, RESULT Label 19(%rbp) 
+PARAM
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -173,7 +274,7 @@ OFFSET = -4
 OFFSET = -24
 
 parseo exitoso
-tamaño lista de codigo tercetos: 23
+tamaño lista de codigo tercetos: 22
 lista: 
 {LABEL, null, null, Result: BeginMethod inc}
 
@@ -185,7 +286,6 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, int, null, Result: y}
 {EXTERNINVK, ExternInvkExpr{id="get_int", type=int, parameters=[]}, null, Result: null}
 {METHODCALL, inc, 1, Result: RESULT Label 7}
 {PARAM, null, null, Result: ExternInvkExpr{id="get_int", type=int, parameters=[]}}
@@ -200,6 +300,54 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==%d\n"}, 0]}, null, Result: null}
 {LABEL, null, null, Result: endIf Label 14}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	inc
+.type	inc, @function 
+inc: 
+    enter   $(4), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 2(%rbp)
+    mov $0%eax 
+    mov $1%edx 
+    add %eax, %edx 
+    mov %edx,-12%(ebp) 
+    mov 0 + 1(%rbp), %eax
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+EXTERNINVK
+    call 	inc
+    movl 	%eax, RESULT Label 7(%rbp) 
+PARAM
+    mov MethodCallExpr{name=inc, args=[ExternInvkExpr{id="get_int", type=int, parameters=[]}]}(%rbp), %eax
+    mov -4(%rbp), %eax
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 10(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	1(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -24(%rbp)
+    mov true(%rbp), %eax
+    cmp -24(%rbp), %eax
+    jne elseCond Label 13
+EXTERNINVK
+    jmp endIf Label 14
+.elseCond Label 13
+EXTERNINVK
+.endIf Label 14
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -229,16 +377,11 @@ OFFSET = -128
 OFFSET = -140
 
 parseo exitoso
-tamaño lista de codigo tercetos: 61
+tamaño lista de codigo tercetos: 56
 lista: 
-{array[], int[], 5, Result: A}
-{array[], float[], 56, Result: B}
-{array[], boolean[], 10, Result: C}
-{LABEL, boolean, null, Result: y}
 {LABEL, null, null, Result: BeginMethod pruArreglos}
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: y}
 {ASSIGN(=), 8.87, null, Result: FloatLiteral Label 1}
 {ASSIGN(=), 8.87, null, Result: VarLocation{name=y, type=float, expr=null, size=0}}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 3}
@@ -294,6 +437,8 @@ lista:
 {ASSIGN(=), 1, null, Result: IntLiteral Label 76}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -333,16 +478,11 @@ OFFSET = -312
 Error: Method pruArreglos must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 101
+tamaño lista de codigo tercetos: 96
 lista: 
-{array[], int[], 589, Result: A}
-{array[], float[], 56, Result: B}
-{array[], boolean[], 5, Result: C}
 {LABEL, null, null, Result: BeginMethod pruArreglos}
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{array[], float[], 8, Result: res}
-{LABEL, int, null, Result: i}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
 {CMP, VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 4}
@@ -438,60 +578,55 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.BinOpExpr cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_Asignaciones.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
-OFFSET = -32
-OFFSET = -36
-OFFSET = -48
-OFFSET = -52
-OFFSET = -64
-OFFSET = -72
-OFFSET = -80
-OFFSET = -88
-OFFSET = -100
 
 parseo exitoso
-tamaño lista de codigo tercetos: 31
+tamaño lista de codigo tercetos: 10
 lista: 
 {LABEL, null, null, Result: BeginMethod pruAritmetica}
 
 {METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: a}
-{LABEL, int, null, Result: b}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 3}
-{ASSIGN(=), 8, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
-{ASSIGN(=), 699, null, Result: IntLiteral Label 5}
-{PLUS(+), 699, 0, Result: VarLocation{name=PLUS Label 8, type=int, expr=699 + 0, size=0}}
-{ASSIGN(=), 699 + 0, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 10}
-{PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 12, type=int, expr=0 + 2, size=0}}
-{ASSIGN(=), 0 + 2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
-{DIVIDE(/), 0, 0, Result: VarLocation{name=DIVIDE Label 15, type=int, expr=0 / 0, size=0}}
-{DIVIDE(/), 0 / 0, 0, Result: VarLocation{name=DIVIDE Label 17, type=int, expr=0 / 0 / 0, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 18}
-{DIVIDE(/), 0 / 0 / 0, 2, Result: VarLocation{name=DIVIDE Label 20, type=int, expr=0 / 0 / 0 / 2, size=0}}
-{ASSIGN(=), VarLocation{name=DIVIDE Label 20, type=int, expr=0 / 0 / 0 / 2, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 23}
-{MOD(%), 0, 2, Result: VarLocation{name=MOD Label 25, type=int, expr=0 % 2, size=0}}
-{ASSIGN(=), 0 % 2, null, Result: VarLocation{name=c, type=int, expr=null, size=0}}
-{RETURN, null, null, Result: 0}
 {LABEL, null, null, Result: EndMethod pruAritmetica}
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 27}
-{METHODCALL, pruAritmetica, 1, Result: RESULT Label 29}
+{ASSIGN(=), 3, null, Result: IntLiteral Label 1}
+{METHODCALL, pruAritmetica, 1, Result: RESULT Label 3}
 {PARAM, null, null, Result: 3}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[3]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	pruAritmetica
+.type	pruAritmetica, @function 
+pruAritmetica: 
+    enter   $(4), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 3(%rbp), %eax
+    mov %eax, IntLiteral Label 1(%rbp)
+    call 	pruAritmetica
+    movl 	%eax, RESULT Label 3(%rbp) 
+PARAM
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -511,13 +646,11 @@ OFFSET = -88
 OFFSET = -96
 
 parseo exitoso
-tamaño lista de codigo tercetos: 32
+tamaño lista de codigo tercetos: 30
 lista: 
 {LABEL, null, null, Result: BeginMethod aritmTest}
 
 {METHODDECL, Metodo{ name=aritmTest, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: a}
-{LABEL, int, null, Result: b}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 3}
@@ -547,6 +680,73 @@ lista:
 {PARAM, null, null, Result: 5}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=aritmTest, args=[5]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	aritmTest
+.type	aritmTest, @function 
+aritmTest: 
+    enter   $(4), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 1(%rbp)
+    mov 1(%rbp), %eax
+    mov -4(%rbp), %eax
+    mov 2(%rbp), %eax
+    mov %eax, IntLiteral Label 3(%rbp)
+    mov 2(%rbp), %eax
+    mov -12(%rbp), %eax
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 5(%rbp)
+    mov $1%eax 
+    mov $0%edx 
+    add %eax, %edx 
+    mov %edx,-32%(ebp) 
+    mov 1 + 0(%rbp), %eax
+    mov -20(%rbp), %eax
+    mov 2(%rbp), %eax
+    mov %eax, IntLiteral Label 10(%rbp)
+    mov $0%eax 
+    mov $2%edx 
+    add %eax, %edx 
+    mov %edx,-48%(ebp) 
+    mov 0 + 2(%rbp), %eax
+    mov -36(%rbp), %eax
+DIVIDE(/)
+    mov -64(%rbp), %eax
+    mov -52(%rbp), %eax
+    mov 3(%rbp), %eax
+    mov %eax, IntLiteral Label 18(%rbp)
+MOD(%)
+    mov 0 % 3(%rbp), %eax
+    mov -72(%rbp), %eax
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 21(%rbp)
+    mov 1(%rbp), %eax
+    mov -88(%rbp), %eax
+    mov 2(%rbp), %eax
+    mov %eax, IntLiteral Label 23(%rbp)
+    mov 2(%rbp), %eax
+    mov -96(%rbp), %eax
+    mov 0(%rbp), %eax
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 5(%rbp), %eax
+    mov %eax, IntLiteral Label 26(%rbp)
+    call 	aritmTest
+    movl 	%eax, RESULT Label 28(%rbp) 
+PARAM
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -560,12 +760,11 @@ OFFSET = -44
 OFFSET = -60
 
 parseo exitoso
-tamaño lista de codigo tercetos: 38
+tamaño lista de codigo tercetos: 36
 lista: 
 {LABEL, null, null, Result: BeginMethod breaks}
 
 {METHODDECL, Metodo{ name=breaks, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=g, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {ASSIGN(=), 10, null, Result: IntLiteral Label 4}
@@ -573,7 +772,6 @@ lista:
 {LABEL, null, null, Result: BeginWhile Label 8}
 {CMP, VarLocation{name=factor Label 7, type=boolean, expr=VarLocation{name=LE Label 6, type=boolean, expr=0 < 10, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 9}
-{LABEL, float, null, Result: j}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 11}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 13, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
@@ -602,6 +800,80 @@ lista:
 {ASSIGN(=), 1, null, Result: IntLiteral Label 28}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	breaks
+.type	breaks, @function 
+breaks: 
+    enter   $(4), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 0(%rbp), %eax
+    mov %eax, IntLiteral Label 1(%rbp)
+    mov 0(%rbp), %eax
+    mov -4(%rbp), %eax
+    mov 10(%rbp), %eax
+    mov %eax, IntLiteral Label 4(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	10(%rbp), %eax
+    setl	%al
+    movzbl %al, %eax
+    movl	%eax, -20(%rbp)
+.BeginWhile Label 8
+    mov true(%rbp), %eax
+    cmp -24(%rbp), %eax
+    jne EndWhile Label 9
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 11(%rbp)
+    mov $0%eax 
+    mov $1%edx 
+    add %eax, %edx 
+    mov %edx,-40%(ebp) 
+    mov 0 + 1(%rbp), %eax
+    mov -28(%rbp), %eax
+    mov 2.3(%rbp), %eax
+    mov %eax, FloatLiteral Label 14(%rbp)
+    mov 2.3(%rbp), %eax
+    mov -44(%rbp), %eax
+    mov 0(%rbp), %eax
+    mov %eax, IntLiteral Label 17(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    setl	%al
+    movzbl %al, %eax
+    movl	%eax, -60(%rbp)
+    mov true(%rbp), %eax
+    cmp -60(%rbp), %eax
+    jne elseCond Label 20
+    jmp EndWhile Label 9
+    jmp endIf Label 21
+.elseCond Label 20
+    jmp BeginWhile Label 8
+.endIf Label 21
+    jmp BeginWhile Label 8
+.EndWhile Label 9
+    mov 0(%rbp), %eax
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 23(%rbp)
+    call 	breaks
+    movl 	%eax, RESULT Label 25(%rbp) 
+PARAM
+EXTERNINVK
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 28(%rbp)
+    mov 1(%rbp), %eax
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -614,12 +886,11 @@ OFFSET = -40
 OFFSET = -52
 
 parseo exitoso
-tamaño lista de codigo tercetos: 35
+tamaño lista de codigo tercetos: 34
 lista: 
 {LABEL, null, null, Result: BeginMethod breaks}
 
 {METHODDECL, Metodo{ name=breaks, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=g, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {ASSIGN(=), 10, null, Result: IntLiteral Label 4}
@@ -653,6 +924,76 @@ lista:
 {ASSIGN(=), 1, null, Result: IntLiteral Label 26}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	breaks
+.type	breaks, @function 
+breaks: 
+    enter   $(4), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 0(%rbp), %eax
+    mov %eax, IntLiteral Label 1(%rbp)
+    mov 0(%rbp), %eax
+    mov -4(%rbp), %eax
+    mov 10(%rbp), %eax
+    mov %eax, IntLiteral Label 4(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	10(%rbp), %eax
+    setl	%al
+    movzbl %al, %eax
+    movl	%eax, -20(%rbp)
+.BeginWhile Label 8
+    mov true(%rbp), %eax
+    cmp -24(%rbp), %eax
+    jne EndWhile Label 9
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 11(%rbp)
+    mov $0%eax 
+    mov $1%edx 
+    add %eax, %edx 
+    mov %edx,-40%(ebp) 
+    mov 0 + 1(%rbp), %eax
+    mov -28(%rbp), %eax
+    mov 0(%rbp), %eax
+    mov %eax, IntLiteral Label 15(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    setl	%al
+    movzbl %al, %eax
+    movl	%eax, -52(%rbp)
+    mov true(%rbp), %eax
+    cmp -52(%rbp), %eax
+    jne elseCond Label 18
+    jmp EndWhile Label 9
+    jmp endIf Label 19
+.elseCond Label 18
+    jmp BeginWhile Label 8
+.endIf Label 19
+    jmp BeginWhile Label 8
+.EndWhile Label 9
+    mov 0(%rbp), %eax
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 21(%rbp)
+    call 	breaks
+    movl 	%eax, RESULT Label 23(%rbp) 
+PARAM
+EXTERNINVK
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 26(%rbp)
+    mov 1(%rbp), %eax
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -667,7 +1008,7 @@ OFFSET = -20
 OFFSET = -32
 
 parseo exitoso
-tamaño lista de codigo tercetos: 40
+tamaño lista de codigo tercetos: 35
 lista: 
 {LABEL, null, null, Result: BeginMethod neg}
 
@@ -690,11 +1031,6 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, boolean, null, Result: a}
-{LABEL, boolean, null, Result: b}
-{LABEL, boolean, null, Result: c}
-{LABEL, int, null, Result: x}
-{LABEL, int, null, Result: y}
 {ASSIGN(=), true, null, Result: BoolLiteral Label 9}
 {ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
 {ASSIGN(=), false, null, Result: BoolLiteral Label 11}
@@ -713,6 +1049,80 @@ lista:
 {ASSIGN(=), MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	neg
+.type	neg, @function 
+neg: 
+    enter   $(4), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    cmp $0, false(%rbp) 
+    sete	%al 
+    movzbl %al, %eax 
+    mov %eax, -8(%rbp) 
+    mov !false(%rbp), %eax
+    leave
+    ret
+
+.globl	and
+.type	and, @function 
+and: 
+    enter   $(8), $0 
+    push	%rbp
+    mov %rsp, %rbp
+AND(&&)
+    mov false && false(%rbp), %eax
+    leave
+    ret
+
+.globl	or
+.type	or, @function 
+or: 
+    enter   $(8), $0 
+    push	%rbp
+    mov %rsp, %rbp
+OR(||)
+    mov false || false(%rbp), %eax
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov true(%rbp), %eax
+    mov %eax, BoolLiteral Label 9(%rbp)
+    mov true(%rbp), %eax
+    mov -4(%rbp), %eax
+    mov false(%rbp), %eax
+    mov %eax, BoolLiteral Label 11(%rbp)
+    mov false(%rbp), %eax
+    mov -12(%rbp), %eax
+    call 	neg
+    movl 	%eax, RESULT Label 14(%rbp) 
+PARAM
+    mov MethodCallExpr{name=neg, args=[false]}(%rbp), %eax
+    mov -20(%rbp), %eax
+    call 	and
+    movl 	%eax, RESULT Label 18(%rbp) 
+PARAM
+PARAM
+    call 	neg
+    movl 	%eax, RESULT Label 21(%rbp) 
+PARAM
+    call 	or
+    movl 	%eax, RESULT Label 23(%rbp) 
+PARAM
+PARAM
+    mov MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}(%rbp), %eax
+    mov -32(%rbp), %eax
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -725,12 +1135,11 @@ OFFSET = -40
 OFFSET = -52
 
 parseo exitoso
-tamaño lista de codigo tercetos: 35
+tamaño lista de codigo tercetos: 34
 lista: 
 {LABEL, null, null, Result: BeginMethod breaks}
 
 {METHODDECL, Metodo{ name=breaks, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=g, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {ASSIGN(=), 10, null, Result: IntLiteral Label 4}
@@ -764,6 +1173,76 @@ lista:
 {ASSIGN(=), 1, null, Result: IntLiteral Label 26}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	breaks
+.type	breaks, @function 
+breaks: 
+    enter   $(4), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 0(%rbp), %eax
+    mov %eax, IntLiteral Label 1(%rbp)
+    mov 0(%rbp), %eax
+    mov -4(%rbp), %eax
+    mov 10(%rbp), %eax
+    mov %eax, IntLiteral Label 4(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	10(%rbp), %eax
+    setl	%al
+    movzbl %al, %eax
+    movl	%eax, -20(%rbp)
+.BeginWhile Label 8
+    mov true(%rbp), %eax
+    cmp -24(%rbp), %eax
+    jne EndWhile Label 9
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 11(%rbp)
+    mov $0%eax 
+    mov $1%edx 
+    add %eax, %edx 
+    mov %edx,-40%(ebp) 
+    mov 0 + 1(%rbp), %eax
+    mov -28(%rbp), %eax
+    mov 0(%rbp), %eax
+    mov %eax, IntLiteral Label 15(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    setl	%al
+    movzbl %al, %eax
+    movl	%eax, -52(%rbp)
+    mov true(%rbp), %eax
+    cmp -52(%rbp), %eax
+    jne elseCond Label 18
+    jmp EndWhile Label 9
+    jmp endIf Label 19
+.elseCond Label 18
+    jmp BeginWhile Label 8
+.endIf Label 19
+    jmp BeginWhile Label 8
+.EndWhile Label 9
+    mov 0(%rbp), %eax
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 21(%rbp)
+    call 	breaks
+    movl 	%eax, RESULT Label 23(%rbp) 
+PARAM
+EXTERNINVK
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 26(%rbp)
+    mov 1(%rbp), %eax
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -775,12 +1254,11 @@ OFFSET = -24
 Error: Method pruAritmetica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 21
+tamaño lista de codigo tercetos: 20
 lista: 
 {LABEL, null, null, Result: BeginMethod pruAritmetica}
 
 {METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: res}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
 {CMP, VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 4}
@@ -800,6 +1278,50 @@ lista:
 {PARAM, null, null, Result: 8}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	pruAritmetica
+.type	pruAritmetica, @function 
+pruAritmetica: 
+    enter   $(8), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    setg	%al
+    movzbl %al, %eax
+    movl	%eax, -12(%rbp)
+    mov true(%rbp), %eax
+    cmp -12(%rbp), %eax
+    jne elseCond Label 4
+    mov 0(%rbp), %eax
+    mov -16(%rbp), %eax
+    jmp endIf Label 5
+.elseCond Label 4
+    mov 0(%rbp), %eax
+    mov -24(%rbp), %eax
+.endIf Label 5
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 4(%rbp), %eax
+    mov %eax, IntLiteral Label 9(%rbp)
+    mov 8(%rbp), %eax
+    mov %eax, IntLiteral Label 11(%rbp)
+    call 	pruAritmetica
+    movl 	%eax, RESULT Label 13(%rbp) 
+PARAM
+PARAM
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -812,12 +1334,11 @@ OFFSET = -32
 Error: Method pruAritmetica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 23
+tamaño lista de codigo tercetos: 22
 lista: 
 {LABEL, null, null, Result: BeginMethod pruAritmetica}
 
 {METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: res}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
 {CMP, VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 4}
@@ -839,6 +1360,56 @@ lista:
 {PARAM, null, null, Result: 8}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	pruAritmetica
+.type	pruAritmetica, @function 
+pruAritmetica: 
+    enter   $(8), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    setg	%al
+    movzbl %al, %eax
+    movl	%eax, -12(%rbp)
+    mov true(%rbp), %eax
+    cmp -12(%rbp), %eax
+    jne elseCond Label 4
+    mov 5(%rbp), %eax
+    mov %eax, IntLiteral Label 7(%rbp)
+    mov $0%eax 
+    mov $5%edx 
+    add %eax, %edx 
+    mov %edx,-28%(ebp) 
+    mov 0 + 5(%rbp), %eax
+    mov -16(%rbp), %eax
+    jmp endIf Label 5
+.elseCond Label 4
+    mov 0(%rbp), %eax
+    mov -32(%rbp), %eax
+.endIf Label 5
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 4(%rbp), %eax
+    mov %eax, IntLiteral Label 12(%rbp)
+    mov 8(%rbp), %eax
+    mov %eax, IntLiteral Label 14(%rbp)
+    call 	pruAritmetica
+    movl 	%eax, RESULT Label 16(%rbp) 
+PARAM
+PARAM
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -1028,6 +1599,310 @@ lista:
 {PARAM, null, null, Result: 9}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=dados, args=[1, 6, 9]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	dados
+.type	dados, @function 
+dados: 
+    enter   $(12), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 2(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -12(%rbp)
+    cmp $0, -12(%rbp) 
+    sete %al 
+    movzbl %al, %eax 
+    mov %eax, -20(%rbp) 
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 8(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -32(%rbp)
+    cmp $0, -32(%rbp) 
+    sete %al 
+    movzbl %al, %eax 
+    mov %eax, -40(%rbp) 
+AND(&&)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 15(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -56(%rbp)
+    cmp $0, -56(%rbp) 
+    sete %al 
+    movzbl %al, %eax 
+    mov %eax, -64(%rbp) 
+AND(&&)
+    mov true(%rbp), %eax
+    cmp -68(%rbp), %eax
+    jne elseCond Label 21
+    mov 1.00(%rbp), %eax
+    mov %eax, FloatLiteral Label 23(%rbp)
+    mov 1.00(%rbp), %eax
+    jmp endIf Label 22
+.elseCond Label 21
+.endIf Label 22
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 26(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -84(%rbp)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 31(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -100(%rbp)
+    cmp $0, -100(%rbp) 
+    sete %al 
+    movzbl %al, %eax 
+    mov %eax, -108(%rbp) 
+AND(&&)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 38(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -124(%rbp)
+    cmp $0, -124(%rbp) 
+    sete %al 
+    movzbl %al, %eax 
+    mov %eax, -132(%rbp) 
+AND(&&)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 46(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -152(%rbp)
+    cmp $0, -152(%rbp) 
+    sete %al 
+    movzbl %al, %eax 
+    mov %eax, -160(%rbp) 
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 52(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -172(%rbp)
+AND(&&)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 58(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -192(%rbp)
+    cmp $0, -192(%rbp) 
+    sete %al 
+    movzbl %al, %eax 
+    mov %eax, -200(%rbp) 
+AND(&&)
+OR(||)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 67(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -224(%rbp)
+    cmp $0, -224(%rbp) 
+    sete %al 
+    movzbl %al, %eax 
+    mov %eax, -232(%rbp) 
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 73(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -244(%rbp)
+    cmp $0, -244(%rbp) 
+    sete %al 
+    movzbl %al, %eax 
+    mov %eax, -252(%rbp) 
+AND(&&)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 80(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -268(%rbp)
+AND(&&)
+OR(||)
+    mov true(%rbp), %eax
+    cmp -284(%rbp), %eax
+    jne elseCond Label 87
+    mov 4.00(%rbp), %eax
+    mov %eax, FloatLiteral Label 89(%rbp)
+    mov 4.00(%rbp), %eax
+    jmp endIf Label 88
+.elseCond Label 87
+.endIf Label 88
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 92(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -300(%rbp)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 97(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -316(%rbp)
+AND(&&)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 103(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -336(%rbp)
+    cmp $0, -336(%rbp) 
+    sete %al 
+    movzbl %al, %eax 
+    mov %eax, -344(%rbp) 
+AND(&&)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 111(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -364(%rbp)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 116(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -380(%rbp)
+    cmp $0, -380(%rbp) 
+    sete %al 
+    movzbl %al, %eax 
+    mov %eax, -388(%rbp) 
+AND(&&)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 123(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -404(%rbp)
+AND(&&)
+OR(||)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 131(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -432(%rbp)
+    cmp $0, -432(%rbp) 
+    sete %al 
+    movzbl %al, %eax 
+    mov %eax, -440(%rbp) 
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 137(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -452(%rbp)
+AND(&&)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 143(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -472(%rbp)
+AND(&&)
+OR(||)
+    mov true(%rbp), %eax
+    cmp -488(%rbp), %eax
+    jne elseCond Label 150
+    mov 8.50(%rbp), %eax
+    mov %eax, FloatLiteral Label 152(%rbp)
+    mov 8.50(%rbp), %eax
+    jmp endIf Label 151
+.elseCond Label 150
+.endIf Label 151
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 155(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -504(%rbp)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 160(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -520(%rbp)
+AND(&&)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 166(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	6(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -540(%rbp)
+AND(&&)
+    mov true(%rbp), %eax
+    cmp -548(%rbp), %eax
+    jne elseCond Label 171
+    mov 10.00(%rbp), %eax
+    mov %eax, FloatLiteral Label 173(%rbp)
+    mov 10.00(%rbp), %eax
+    jmp endIf Label 172
+.elseCond Label 171
+.endIf Label 172
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 175(%rbp)
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 177(%rbp)
+    mov 9(%rbp), %eax
+    mov %eax, IntLiteral Label 179(%rbp)
+    call 	dados
+    movl 	%eax, RESULT Label 181(%rbp) 
+PARAM
+PARAM
+PARAM
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -1053,14 +1928,11 @@ OFFSET = -144
 Error: Method pruContinue must return float
 
 parseo exitoso
-tamaño lista de codigo tercetos: 58
+tamaño lista de codigo tercetos: 55
 lista: 
 {LABEL, null, null, Result: BeginMethod pruContinue}
 
 {METHODDECL, Metodo{ name=pruContinue, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=b, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: i}
-{LABEL, int, null, Result: n}
-{LABEL, float, null, Result: total}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 1}
 {UNARYMINUS(-expr), 1, null, Result: VarLocation{name=UNARYMINUS Label 3, type=int, expr=-1, size=0}}
 {ASSIGN(=), -1, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
@@ -1115,6 +1987,8 @@ lista:
 {PARAM, null, null, Result: 2}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=pruContinue, args=[3.0, 2]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -1136,14 +2010,11 @@ OFFSET = -124
 OFFSET = -136
 
 parseo exitoso
-tamaño lista de codigo tercetos: 58
+tamaño lista de codigo tercetos: 55
 lista: 
 {LABEL, null, null, Result: BeginMethod prueba}
 
 {METHODDECL, Metodo{ name=prueba, return_not_void=true, typeReturn=float, parameters [Simbolo{type=int, name=b, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: a}
-{LABEL, float, null, Result: c}
-{LABEL, int, null, Result: g}
 {ASSIGN(=), 50, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 50, null, Result: VarLocation{name=g, type=int, expr=null, size=0}}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 4}
@@ -1198,6 +2069,122 @@ lista:
 {PARAM, null, null, Result: 6}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	prueba
+.type	prueba, @function 
+prueba: 
+    enter   $(4), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 50(%rbp), %eax
+    mov %eax, IntLiteral Label 1(%rbp)
+    mov 50(%rbp), %eax
+    mov -4(%rbp), %eax
+    mov 0(%rbp), %eax
+    mov %eax, IntLiteral Label 4(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    setg	%al
+    movzbl %al, %eax
+    movl	%eax, -20(%rbp)
+    mov true(%rbp), %eax
+    cmp -20(%rbp), %eax
+    jne elseCond Label 7
+    mov 4(%rbp), %eax
+    mov %eax, IntLiteral Label 9(%rbp)
+    mov 4(%rbp), %eax
+    mov -24(%rbp), %eax
+    mov 4(%rbp), %eax
+    mov %eax, IntLiteral Label 12(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	4(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -40(%rbp)
+    mov true(%rbp), %eax
+    cmp -40(%rbp), %eax
+    jne elseCond Label 15
+    mov 4(%rbp), %eax
+    mov %eax, IntLiteral Label 18(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	4(%rbp), %eax
+    setl	%al
+    movzbl %al, %eax
+    movl	%eax, -52(%rbp)
+.BeginWhile Label 22
+    mov true(%rbp), %eax
+    cmp -56(%rbp), %eax
+    jne EndWhile Label 23
+    mov 4(%rbp), %eax
+    mov %eax, IntLiteral Label 25(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	4(%rbp), %eax
+    setg	%al
+    movzbl %al, %eax
+    movl	%eax, -68(%rbp)
+.BeginWhile Label 29
+    mov true(%rbp), %eax
+    cmp -72(%rbp), %eax
+    jne EndWhile Label 30
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 32(%rbp)
+    mov $0%eax
+    mov $1%edx
+    sub %eax, %edx
+    mov %edx,-88%(ebp)
+    mov 0 - 1(%rbp), %eax
+    mov -76(%rbp), %eax
+    mov 2(%rbp), %eax
+    mov %eax, IntLiteral Label 36(%rbp)
+    mov $0%eax
+    mov $2%edx
+    imul %edx, %eax
+    mov %eax,-104%(ebp)
+    mov 0 * 2(%rbp), %eax
+    mov -92(%rbp), %eax
+    jmp BeginWhile Label 29
+.EndWhile Label 30
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 40(%rbp)
+    mov $0%eax 
+    mov $1%edx 
+    add %eax, %edx 
+    mov %edx,-120%(ebp) 
+    mov 0 + 1(%rbp), %eax
+    mov -108(%rbp), %eax
+    mov 2(%rbp), %eax
+    mov %eax, IntLiteral Label 44(%rbp)
+DIVIDE(/)
+    mov VarLocation{name=factor Label 43, type=float, expr=0.0, size=0} / VarLocation{name=factor Label 45, type=int, expr=2, size=0}(%rbp), %eax
+    mov -124(%rbp), %eax
+    jmp BeginWhile Label 22
+.EndWhile Label 23
+    jmp endIf Label 16
+.elseCond Label 15
+.endIf Label 16
+    jmp endIf Label 8
+.elseCond Label 7
+.endIf Label 8
+    mov 0.0(%rbp), %eax
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 48(%rbp)
+    call 	prueba
+    movl 	%eax, RESULT Label 50(%rbp) 
+PARAM
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -1216,15 +2203,11 @@ OFFSET = -84
 OFFSET = -96
 
 parseo exitoso
-tamaño lista de codigo tercetos: 40
+tamaño lista de codigo tercetos: 35
 lista: 
 {LABEL, null, null, Result: BeginMethod prueba}
 
 {METHODDECL, Metodo{ name=prueba, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=p, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: a}
-{LABEL, float, null, Result: f}
-{LABEL, int, null, Result: b}
-{LABEL, int, null, Result: c}
 {ASSIGN(=), 4, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 4, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
 {ASSIGN(=), 5, null, Result: IntLiteral Label 3}
@@ -1233,7 +2216,6 @@ lista:
 {ASSIGN(=), 0 * 0, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 {PLUS(+), 0, 0, Result: VarLocation{name=PLUS Label 10, type=int, expr=0 + 0, size=0}}
 {ASSIGN(=), 0 + 0, null, Result: VarLocation{name=p, type=int, expr=null, size=0}}
-{LABEL, float, null, Result: pi}
 {ASSIGN(=), 3.14, null, Result: FloatLiteral Label 11}
 {ASSIGN(=), 3.14, null, Result: VarLocation{name=pi, type=float, expr=null, size=0}}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 13}
@@ -1260,6 +2242,8 @@ lista:
 {PARAM, null, null, Result: 6}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -1286,14 +2270,11 @@ OFFSET = -4
 OFFSET = -12
 
 parseo exitoso
-tamaño lista de codigo tercetos: 61
+tamaño lista de codigo tercetos: 56
 lista: 
 {LABEL, null, null, Result: BeginMethod potencia}
 
 {METHODDECL, Metodo{ name=potencia, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
-{LABEL, boolean, null, Result: neg}
-{LABEL, float, null, Result: prod}
 {ASSIGN(=), false, null, Result: BoolLiteral Label 1}
 {ASSIGN(=), false, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 3}
@@ -1340,8 +2321,6 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, float, null, Result: f}
-{LABEL, float, null, Result: a}
 {ASSIGN(=), 8.0, null, Result: FloatLiteral Label 44}
 {ASSIGN(=), 8.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 47}
@@ -1351,6 +2330,8 @@ lista:
 {ASSIGN(=), MethodCallExpr{name=potencia, args=[0.0, 2]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -1370,14 +2351,11 @@ OFFSET = -4
 OFFSET = -12
 
 parseo exitoso
-tamaño lista de codigo tercetos: 43
+tamaño lista de codigo tercetos: 38
 lista: 
 {LABEL, null, null, Result: BeginMethod sumatoria}
 
 {METHODDECL, Metodo{ name=sumatoria, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=b, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: total}
-{LABEL, float, null, Result: i}
-{LABEL, float, null, Result: res}
 {ASSIGN(=), 0.0, null, Result: FloatLiteral Label 1}
 {ASSIGN(=), 0.0, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
 {ASSIGN(=), 0.0, null, Result: VarLocation{name=i, type=float, expr=null, size=0}}
@@ -1408,8 +2386,6 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, float, null, Result: f}
-{LABEL, float, null, Result: a}
 {ASSIGN(=), 8.0, null, Result: FloatLiteral Label 29}
 {ASSIGN(=), 8.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
 {METHODCALL, sumatoria, 1, Result: RESULT Label 32}
@@ -1417,6 +2393,8 @@ lista:
 {ASSIGN(=), MethodCallExpr{name=sumatoria, args=[0.0]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -1504,17 +2482,11 @@ OFFSET = -44
 OFFSET = -72
 
 parseo exitoso
-tamaño lista de codigo tercetos: 207
+tamaño lista de codigo tercetos: 189
 lista: 
-{LABEL, float, null, Result: w}
-{LABEL, float, null, Result: m}
-{LABEL, float, null, Result: res}
 {LABEL, null, null, Result: BeginMethod potencia}
 
 {METHODDECL, Metodo{ name=potencia, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
-{LABEL, boolean, null, Result: neg}
-{LABEL, float, null, Result: prod}
 {ASSIGN(=), false, null, Result: BoolLiteral Label 1}
 {ASSIGN(=), false, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 3}
@@ -1565,16 +2537,6 @@ lista:
 {LABEL, null, null, Result: BeginMethod multiples}
 
 {METHODDECL, Metodo{ name=multiples, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=float, name=y, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: a}
-{LABEL, float, null, Result: z}
-{LABEL, int, null, Result: b}
-{LABEL, float, null, Result: w}
-{LABEL, float, null, Result: m}
-{LABEL, float, null, Result: res}
-{LABEL, int, null, Result: j}
-{LABEL, int, null, Result: i}
-{LABEL, int, null, Result: k}
-{LABEL, int, null, Result: n}
 {ASSIGN(=), 2.0, null, Result: FloatLiteral Label 51}
 {UNARYMINUS(-expr), 2.0, null, Result: VarLocation{name=UNARYMINUS Label 53, type=float, expr=-2.0, size=0}}
 {ASSIGN(=), -2.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
@@ -1692,8 +2654,6 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, float, null, Result: f}
-{LABEL, float, null, Result: a}
 {ASSIGN(=), 80.0, null, Result: FloatLiteral Label 183}
 {ASSIGN(=), 80.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
 {ASSIGN(=), 15.0, null, Result: FloatLiteral Label 185}
@@ -1716,6 +2676,8 @@ lista:
 {PARAM, null, null, Result: 0.0 + 2.0}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multiples, args=[0.0, 0.0 + 2.0]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -1755,17 +2717,11 @@ OFFSET = -36
 OFFSET = -44
 
 parseo exitoso
-tamaño lista de codigo tercetos: 90
+tamaño lista de codigo tercetos: 81
 lista: 
-{LABEL, float, null, Result: w}
-{LABEL, float, null, Result: m}
-{LABEL, float, null, Result: res}
 {LABEL, null, null, Result: BeginMethod potencia}
 
 {METHODDECL, Metodo{ name=potencia, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
-{LABEL, boolean, null, Result: neg}
-{LABEL, float, null, Result: prod}
 {ASSIGN(=), false, null, Result: BoolLiteral Label 1}
 {ASSIGN(=), false, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 3}
@@ -1816,7 +2772,6 @@ lista:
 {LABEL, null, null, Result: BeginMethod multRepeat}
 
 {METHODDECL, Metodo{ name=multRepeat, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=b, value=null, size=0}, Simbolo{type=float, name=a, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: c}
 {MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 53, type=int, expr=0.0 * 0.0, size=0}}
 {MULTIPLY(*), 0.0 * 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 55, type=int, expr=0.0 * 0.0 * 0.0, size=0}}
 {MULTIPLY(*), 0.0 * 0.0 * 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 57, type=int, expr=0.0 * 0.0 * 0.0 * 0.0, size=0}}
@@ -1828,8 +2783,6 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, float, null, Result: f}
-{LABEL, float, null, Result: a}
 {ASSIGN(=), 15.0, null, Result: FloatLiteral Label 63}
 {UNARYMINUS(-expr), 15.0, null, Result: VarLocation{name=UNARYMINUS Label 65, type=float, expr=-15.0, size=0}}
 {ASSIGN(=), -15.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
@@ -1850,6 +2803,8 @@ lista:
 {PARAM, null, null, Result: 0.0}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multRepeat, args=[0.0, 0.0]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -1864,7 +2819,7 @@ OFFSET = -20
 OFFSET = -24
 
 parseo exitoso
-tamaño lista de codigo tercetos: 38
+tamaño lista de codigo tercetos: 35
 lista: 
 {LABEL, null, null, Result: BeginMethod div}
 
@@ -1887,9 +2842,6 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, float, null, Result: x}
-{LABEL, float, null, Result: y}
-{LABEL, float, null, Result: z}
 {ASSIGN(=), 6.982, null, Result: FloatLiteral Label 10}
 {ASSIGN(=), 6.982, null, Result: VarLocation{name=x, type=float, expr=null, size=0}}
 {ASSIGN(=), 002.5, null, Result: FloatLiteral Label 12}
@@ -1908,6 +2860,8 @@ lista:
 {PARAM, null, null, Result: MethodCallExpr{name=div, args=[0.0, 0.0]}}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandofuncionesflotantes"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=resta, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -1919,15 +2873,11 @@ OFFSET = -44
 OFFSET = -56
 
 parseo exitoso
-tamaño lista de codigo tercetos: 36
+tamaño lista de codigo tercetos: 32
 lista: 
-{array[], int[], 5, Result: A}
-{array[], float[], 56, Result: B}
-{array[], boolean[], 10, Result: C}
 {LABEL, null, null, Result: BeginMethod pruArreglos}
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
@@ -1959,6 +2909,8 @@ lista:
 {ASSIGN(=), 1, null, Result: IntLiteral Label 29}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: java.lang.String cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -1969,15 +2921,11 @@ OFFSET = -36
 OFFSET = -48
 
 parseo exitoso
-tamaño lista de codigo tercetos: 35
+tamaño lista de codigo tercetos: 31
 lista: 
-{array[], int[], 5, Result: A}
-{array[], float[], 56, Result: B}
-{array[], boolean[], 10, Result: C}
 {LABEL, null, null, Result: BeginMethod pruArreglos}
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
@@ -2008,6 +2956,8 @@ lista:
 {ASSIGN(=), 1, null, Result: IntLiteral Label 27}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: java.lang.String cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -2019,15 +2969,11 @@ OFFSET = -40
 OFFSET = -52
 
 parseo exitoso
-tamaño lista de codigo tercetos: 36
+tamaño lista de codigo tercetos: 32
 lista: 
-{array[], int[], 5, Result: A}
-{array[], float[], 56, Result: B}
-{array[], boolean[], 10, Result: C}
 {LABEL, null, null, Result: BeginMethod pruArreglos}
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
@@ -2059,6 +3005,8 @@ lista:
 {ASSIGN(=), 1, null, Result: IntLiteral Label 28}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: java.lang.String cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -2072,15 +3020,11 @@ OFFSET = -60
 OFFSET = -72
 
 parseo exitoso
-tamaño lista de codigo tercetos: 40
+tamaño lista de codigo tercetos: 36
 lista: 
-{array[], int[], 5, Result: A}
-{array[], float[], 56, Result: B}
-{array[], boolean[], 10, Result: C}
 {LABEL, null, null, Result: BeginMethod pruArreglos}
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
@@ -2116,6 +3060,8 @@ lista:
 {ASSIGN(=), 1, null, Result: IntLiteral Label 35}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.UnaryOpExpr cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -2127,11 +3073,8 @@ OFFSET = -44
 OFFSET = -56
 
 parseo exitoso
-tamaño lista de codigo tercetos: 42
+tamaño lista de codigo tercetos: 38
 lista: 
-{array[], int[], 5, Result: A}
-{array[], float[], 56, Result: B}
-{array[], boolean[], 10, Result: C}
 {LABEL, null, null, Result: BeginMethod par}
 
 {METHODDECL, Metodo{ name=par, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
@@ -2141,7 +3084,6 @@ lista:
 {LABEL, null, null, Result: BeginMethod pruArreglos}
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 5}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
@@ -2174,6 +3116,8 @@ lista:
 {ASSIGN(=), 1, null, Result: IntLiteral Label 32}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.MethodCallExpr cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -2190,12 +3134,11 @@ OFFSET = -72
 Error: Method pruAritmetica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 45
+tamaño lista de codigo tercetos: 44
 lista: 
 {LABEL, null, null, Result: BeginMethod pruAritmetica}
 
 {METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: res}
 {NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 3, type=boolean, expr=0 != 0, size=0}}
 {CMP, VarLocation{name=NEQ Label 3, type=boolean, expr=0 != 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 4}
@@ -2239,6 +3182,96 @@ lista:
 {PARAM, null, null, Result: 5}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	pruAritmetica
+.type	pruAritmetica, @function 
+pruAritmetica: 
+    enter   $(8), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    setgne %al
+    movzbl %al, %eax
+    movl	%eax, -12(%rbp)
+    mov true(%rbp), %eax
+    cmp -12(%rbp), %eax
+    jne elseCond Label 4
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    setg	%al
+    movzbl %al, %eax
+    movl	%eax, -24(%rbp)
+    mov true(%rbp), %eax
+    cmp -24(%rbp), %eax
+    jne elseCond Label 9
+    mov $0%eax
+    mov $0%edx
+    sub %eax, %edx
+    mov %edx,-40%(ebp)
+    mov 0 - 0(%rbp), %eax
+    mov -28(%rbp), %eax
+    jmp endIf Label 10
+.elseCond Label 9
+    mov $0%eax
+    mov $0%edx
+    sub %eax, %edx
+    mov %edx,-56%(ebp)
+    mov 0 - 0(%rbp), %eax
+    mov -44(%rbp), %eax
+.endIf Label 10
+    jmp endIf Label 5
+.elseCond Label 4
+    mov 5(%rbp), %eax
+    mov %eax, IntLiteral Label 18(%rbp)
+    mov $0%eax
+    mov $5%edx
+    imul %edx, %eax
+    mov %eax,-72%(ebp)
+    mov 0 * 5(%rbp), %eax
+    mov -60(%rbp), %eax
+.endIf Label 5
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 4(%rbp), %eax
+    mov %eax, IntLiteral Label 22(%rbp)
+    mov 8(%rbp), %eax
+    mov %eax, IntLiteral Label 24(%rbp)
+    call 	pruAritmetica
+    movl 	%eax, RESULT Label 26(%rbp) 
+PARAM
+PARAM
+EXTERNINVK
+EXTERNINVK
+    mov 4(%rbp), %eax
+    mov %eax, IntLiteral Label 30(%rbp)
+    mov 4(%rbp), %eax
+    mov %eax, IntLiteral Label 32(%rbp)
+    call 	pruAritmetica
+    movl 	%eax, RESULT Label 34(%rbp) 
+PARAM
+PARAM
+EXTERNINVK
+    mov 8(%rbp), %eax
+    mov %eax, IntLiteral Label 37(%rbp)
+    mov 5(%rbp), %eax
+    mov %eax, IntLiteral Label 39(%rbp)
+    call 	pruAritmetica
+    movl 	%eax, RESULT Label 41(%rbp) 
+PARAM
+PARAM
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -2255,12 +3288,11 @@ OFFSET = -72
 Error: Method pruAritmetica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 45
+tamaño lista de codigo tercetos: 44
 lista: 
 {LABEL, null, null, Result: BeginMethod pruAritmetica}
 
 {METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: res}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
 {CMP, VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 4}
@@ -2304,6 +3336,96 @@ lista:
 {PARAM, null, null, Result: 5}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	pruAritmetica
+.type	pruAritmetica, @function 
+pruAritmetica: 
+    enter   $(8), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    setg	%al
+    movzbl %al, %eax
+    movl	%eax, -12(%rbp)
+    mov true(%rbp), %eax
+    cmp -12(%rbp), %eax
+    jne elseCond Label 4
+    mov $0%eax
+    mov $0%edx
+    sub %eax, %edx
+    mov %edx,-28%(ebp)
+    mov 0 - 0(%rbp), %eax
+    mov -16(%rbp), %eax
+    jmp endIf Label 5
+.elseCond Label 4
+.endIf Label 5
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -40(%rbp)
+    mov true(%rbp), %eax
+    cmp -40(%rbp), %eax
+    jne elseCond Label 12
+    mov 5(%rbp), %eax
+    mov %eax, IntLiteral Label 15(%rbp)
+    mov $0%eax
+    mov $5%edx
+    imul %edx, %eax
+    mov %eax,-56%(ebp)
+    mov 0 * 5(%rbp), %eax
+    mov -44(%rbp), %eax
+    jmp endIf Label 13
+.elseCond Label 12
+    mov $0%eax
+    mov $0%edx
+    sub %eax, %edx
+    mov %edx,-72%(ebp)
+    mov 0 - 0(%rbp), %eax
+    mov -60(%rbp), %eax
+.endIf Label 13
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 4(%rbp), %eax
+    mov %eax, IntLiteral Label 22(%rbp)
+    mov 8(%rbp), %eax
+    mov %eax, IntLiteral Label 24(%rbp)
+    call 	pruAritmetica
+    movl 	%eax, RESULT Label 26(%rbp) 
+PARAM
+PARAM
+EXTERNINVK
+EXTERNINVK
+    mov 4(%rbp), %eax
+    mov %eax, IntLiteral Label 30(%rbp)
+    mov 4(%rbp), %eax
+    mov %eax, IntLiteral Label 32(%rbp)
+    call 	pruAritmetica
+    movl 	%eax, RESULT Label 34(%rbp) 
+PARAM
+PARAM
+EXTERNINVK
+    mov 8(%rbp), %eax
+    mov %eax, IntLiteral Label 37(%rbp)
+    mov 5(%rbp), %eax
+    mov %eax, IntLiteral Label 39(%rbp)
+    call 	pruAritmetica
+    movl 	%eax, RESULT Label 41(%rbp) 
+PARAM
+PARAM
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -2318,12 +3440,11 @@ OFFSET = -52
 Error: Method pruebaLogica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 20
+tamaño lista de codigo tercetos: 19
 lista: 
 {LABEL, null, null, Result: BeginMethod pruebaLogica}
 
 {METHODDECL, Metodo{ name=pruebaLogica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=boolean, name=i, value=null, size=0}]}, null, Result: null}
-{LABEL, boolean, null, Result: a}
 {ASSIGN(=), true, null, Result: BoolLiteral Label 1}
 {ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
 {ASSIGN(=), false, null, Result: BoolLiteral Label 3}
@@ -2342,6 +3463,51 @@ lista:
 {PARAM, null, null, Result: false}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[false]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	pruebaLogica
+.type	pruebaLogica, @function 
+pruebaLogica: 
+    enter   $(4), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov true(%rbp), %eax
+    mov %eax, BoolLiteral Label 1(%rbp)
+    mov true(%rbp), %eax
+    mov -4(%rbp), %eax
+    mov false(%rbp), %eax
+    mov %eax, BoolLiteral Label 3(%rbp)
+OR(||)
+    mov true(%rbp), %eax
+    mov %eax, BoolLiteral Label 8(%rbp)
+    cmp $0, true(%rbp) 
+    sete	%al 
+    movzbl %al, %eax 
+    mov %eax, -32(%rbp) 
+AND(&&)
+    cmp $0, false(%rbp) 
+    sete	%al 
+    movzbl %al, %eax 
+    mov %eax, -48(%rbp) 
+AND(&&)
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov false(%rbp), %eax
+    mov %eax, BoolLiteral Label 17(%rbp)
+    call 	pruebaLogica
+    movl 	%eax, RESULT Label 19(%rbp) 
+PARAM
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -2436,6 +3602,8 @@ lista:
 {ASSIGN(=), 1, null, Result: IntLiteral Label 81}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -2450,16 +3618,11 @@ OFFSET = -48
 OFFSET = -52
 
 parseo exitoso
-tamaño lista de codigo tercetos: 17
+tamaño lista de codigo tercetos: 12
 lista: 
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, boolean, null, Result: a}
-{LABEL, boolean, null, Result: b}
-{LABEL, boolean, null, Result: c}
-{LABEL, int, null, Result: x}
-{LABEL, int, null, Result: y}
 {ASSIGN(=), true, null, Result: BoolLiteral Label 1}
 {ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
 {NON(!), false, null, Result: VarLocation{name=NON Label 4, type=boolean, expr=!false, size=0}}
@@ -2470,6 +3633,36 @@ lista:
 {ASSIGN(=), VarLocation{name=CONJUNCION Label 7, type=boolean, expr=false && false, size=0} || !false, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov true(%rbp), %eax
+    mov %eax, BoolLiteral Label 1(%rbp)
+    mov true(%rbp), %eax
+    mov -4(%rbp), %eax
+    cmp $0, false(%rbp) 
+    sete	%al 
+    movzbl %al, %eax 
+    mov %eax, -20(%rbp) 
+    mov !false(%rbp), %eax
+    mov -12(%rbp), %eax
+AND(&&)
+    cmp $0, false(%rbp) 
+    sete	%al 
+    movzbl %al, %eax 
+    mov %eax, -48(%rbp) 
+OR(||)
+    mov VarLocation{name=CONJUNCION Label 7, type=boolean, expr=false && false, size=0} || !false(%rbp), %eax
+    mov -24(%rbp), %eax
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -2488,14 +3681,11 @@ OFFSET = -92
 OFFSET = -100
 
 parseo exitoso
-tamaño lista de codigo tercetos: 39
+tamaño lista de codigo tercetos: 36
 lista: 
 {LABEL, null, null, Result: BeginMethod maxcomdiv}
 
 {METHODDECL, Metodo{ name=maxcomdiv, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=a, value=null, size=0}, Simbolo{type=int, name=b, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: dividendo}
-{LABEL, int, null, Result: divisor}
-{LABEL, int, null, Result: resto}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
 {CMP, VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 4}
@@ -2531,6 +3721,79 @@ lista:
 {PARAM, null, null, Result: 9}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="mcd%d"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	maxcomdiv
+.type	maxcomdiv, @function 
+maxcomdiv: 
+    enter   $(8), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    setg	%al
+    movzbl %al, %eax
+    movl	%eax, -12(%rbp)
+    mov true(%rbp), %eax
+    cmp -12(%rbp), %eax
+    jne elseCond Label 4
+    mov 0(%rbp), %eax
+    mov -16(%rbp), %eax
+    mov 0(%rbp), %eax
+    mov -24(%rbp), %eax
+    jmp endIf Label 5
+.elseCond Label 4
+    mov 0(%rbp), %eax
+    mov -32(%rbp), %eax
+    mov 0(%rbp), %eax
+    mov -40(%rbp), %eax
+.endIf Label 5
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 10(%rbp)
+    mov 1(%rbp), %eax
+    mov -48(%rbp), %eax
+    mov 0(%rbp), %eax
+    mov %eax, IntLiteral Label 13(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    setgne %al
+    movzbl %al, %eax
+    movl	%eax, -64(%rbp)
+.BeginWhile Label 18
+    mov true(%rbp), %eax
+    cmp -72(%rbp), %eax
+    jne EndWhile Label 19
+MOD(%)
+    mov 0 % 0(%rbp), %eax
+    mov -76(%rbp), %eax
+    mov 0(%rbp), %eax
+    mov -92(%rbp), %eax
+    mov 0(%rbp), %eax
+    mov -100(%rbp), %eax
+    jmp BeginWhile Label 18
+.EndWhile Label 19
+    mov 0(%rbp), %eax
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 26(%rbp)
+    mov 9(%rbp), %eax
+    mov %eax, IntLiteral Label 28(%rbp)
+    call 	maxcomdiv
+    movl 	%eax, RESULT Label 30(%rbp) 
+PARAM
+PARAM
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -2576,9 +3839,8 @@ OFFSET = -48
 Error: Method alo not declared
 
 parseo exitoso
-tamaño lista de codigo tercetos: 43
+tamaño lista de codigo tercetos: 41
 lista: 
-{LABEL, float, null, Result: c}
 {LABEL, null, null, Result: BeginMethod alo}
 
 {METHODDECL, Metodo{ name=alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=boolean, name=b, value=null, size=0}, Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
@@ -2613,7 +3875,6 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{LABEL, int, null, Result: y}
 {ASSIGN(=), 7, null, Result: IntLiteral Label 21}
 {ASSIGN(=), 7, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
 {ASSIGN(=), 8.0, null, Result: FloatLiteral Label 23}
@@ -2625,6 +3886,102 @@ lista:
 {ASSIGN(=), 3, null, Result: IntLiteral Label 30}
 {MULTIPLY(*), VarLocation{name=factor Label 31, type=int, expr=3, size=0}, 0, Result: VarLocation{name=MULTIPLY Label 34, type=int, expr=VarLocation{name=factor Label 31, type=int, expr=3, size=0} * 0, size=0}}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	alo
+.type	alo, @function 
+alo: 
+    enter   $(8), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov true(%rbp), %eax
+    cmp -4(%rbp), %eax
+    jne elseCond Label 2
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 5(%rbp)
+    mov $0%eax 
+    mov $1%edx 
+    add %eax, %edx 
+    mov %edx,-20%(ebp) 
+    mov 0 + 1(%rbp), %eax
+    mov -8(%rbp), %eax
+    jmp endIf Label 3
+.elseCond Label 2
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 9(%rbp)
+    mov $0%eax
+    mov $1%edx
+    sub %eax, %edx
+    mov %edx,-36%(ebp)
+    mov 0 - 1(%rbp), %eax
+    mov -24(%rbp), %eax
+.endIf Label 3
+    leave
+    ret
+
+.globl	Alo
+.type	Alo, @function 
+Alo: 
+    enter   $(8), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    leave
+    ret
+
+.globl	alo2
+.type	alo2, @function 
+alo2: 
+    enter   $(4), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov true(%rbp), %eax
+    mov %eax, BoolLiteral Label 12(%rbp)
+    call 	alo
+    movl 	%eax, RESULT Label 15(%rbp) 
+PARAM
+PARAM
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 17(%rbp)
+    mov $0%eax 
+    mov $1%edx 
+    add %eax, %edx 
+    mov %edx,-24%(ebp) 
+    mov 0 + 1(%rbp), %eax
+    mov -12(%rbp), %eax
+    mov 0(%rbp), %eax
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 7(%rbp), %eax
+    mov %eax, IntLiteral Label 21(%rbp)
+    mov 7(%rbp), %eax
+    mov -4(%rbp), %eax
+    mov 8.0(%rbp), %eax
+    mov %eax, FloatLiteral Label 23(%rbp)
+    mov 8.0(%rbp), %eax
+    mov -12(%rbp), %eax
+    call 	alo2
+    movl 	%eax, RESULT Label 26(%rbp) 
+PARAM
+    mov MethodCallExpr{name=alo2, args=[0]}(%rbp), %eax
+    mov -20(%rbp), %eax
+    mov false(%rbp), %eax
+    mov %eax, BoolLiteral Label 28(%rbp)
+    mov 3(%rbp), %eax
+    mov %eax, IntLiteral Label 30(%rbp)
+    mov -36(%ebp) , %eax 
+    mov $0, %edx
+    imul %edx, %eax 
+    mov %eax,-48%(ebp) 
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -2641,9 +3998,8 @@ OFFSET = -4
 OFFSET = -16
 
 parseo exitoso
-tamaño lista de codigo tercetos: 42
+tamaño lista de codigo tercetos: 39
 lista: 
-{LABEL, boolean, null, Result: res}
 {LABEL, null, null, Result: BeginMethod inc}
 
 {METHODDECL, Metodo{ name=inc, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
@@ -2654,7 +4010,6 @@ lista:
 {LABEL, null, null, Result: BeginMethod resto}
 
 {METHODDECL, Metodo{ name=resto, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}, Simbolo{type=float, name=y, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: res}
 {ASSIGN(=), 3, null, Result: IntLiteral Label 6}
 {ASSIGN(=), 2, null, Result: IntLiteral Label 8}
 {MULTIPLY(*), 3, 2, Result: VarLocation{name=MULTIPLY Label 10, type=int, expr=3 * 2, size=0}}
@@ -2675,7 +4030,6 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{array[], int[], 1, Result: A}
 {ASSIGN(=), false, null, Result: BoolLiteral Label 23}
 {ASSIGN(=), false, null, Result: VarLocation{name=res, type=boolean, expr=null, size=0}}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 25}
@@ -2688,6 +4042,8 @@ lista:
 {PARAM, null, null, Result: 10.2}
 {ASSIGN(=), MethodCallExpr{name=resto, args=[MethodCallExpr{name=inc, args=[5]}, 10.2]}, null, Result: VarLocation{name=A, type=int[], expr=null, size=1}}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.BinOpExpr cannot be cast to ir.ast.FloatLiteral
 ---------------------------------------------------
   
   
@@ -2721,14 +4077,11 @@ OFFSET = -44
 OFFSET = -48
 
 parseo exitoso
-tamaño lista de codigo tercetos: 48
+tamaño lista de codigo tercetos: 44
 lista: 
 {LABEL, null, null, Result: BeginMethod maxcomdiv}
 
 {METHODDECL, Metodo{ name=maxcomdiv, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=a, value=null, size=0}, Simbolo{type=int, name=b, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: dividendo}
-{LABEL, int, null, Result: divisor}
-{LABEL, int, null, Result: resto}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
 {CMP, VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 4}
@@ -2757,7 +4110,6 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{LABEL, int, null, Result: a}
 {ASSIGN(=), 10000, null, Result: IntLiteral Label 26}
 {ASSIGN(=), 10000, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 {ASSIGN(=), 6, null, Result: IntLiteral Label 28}
@@ -2773,6 +4125,8 @@ lista:
 {MINUS(-), 3.5 * 0, 7 / 6, Result: VarLocation{name=MINUS Label 43, type=int, expr=3.5 * 0 - 7 / 6, size=0}}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%d%f"}, StringLiteral{value="mcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}, 3.5 * 0 - 7 / 6]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -2782,12 +4136,11 @@ OFFSET = -4
 OFFSET = -20
 
 parseo exitoso
-tamaño lista de codigo tercetos: 14
+tamaño lista de codigo tercetos: 13
 lista: 
 {LABEL, null, null, Result: BeginMethod pruAritmetica}
 
 {METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{LABEL, int, null, Result: a}
 {ASSIGN(=), 90, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 90, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 {ASSIGN(=), 7, null, Result: IntLiteral Label 4}
@@ -2800,6 +4153,37 @@ lista:
 {METHODCALL, pruAritmetica, 0, Result: RESULT Label 8}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	pruAritmetica
+.type	pruAritmetica, @function 
+pruAritmetica: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 90(%rbp), %eax
+    mov %eax, IntLiteral Label 1(%rbp)
+    mov 90(%rbp), %eax
+    mov -4(%rbp), %eax
+    mov 7(%rbp), %eax
+    mov %eax, IntLiteral Label 4(%rbp)
+MOD(%)
+    mov VarLocation{name=MOD Label 6, type=int, expr=0 % 7, size=0}(%rbp), %eax
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    call 	pruAritmetica
+    movl 	%eax, RESULT Label 8(%rbp) 
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -2812,13 +4196,11 @@ OFFSET = -36
 OFFSET = -44
 
 parseo exitoso
-tamaño lista de codigo tercetos: 21
+tamaño lista de codigo tercetos: 19
 lista: 
 {LABEL, null, null, Result: BeginMethod pruMult}
 
 {METHODDECL, Metodo{ name=pruMult, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: a}
-{LABEL, int, null, Result: d}
 {ASSIGN(=), 5, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 5, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 {ASSIGN(=), 2000, null, Result: IntLiteral Label 3}
@@ -2837,6 +4219,8 @@ lista:
 {PARAM, null, null, Result: 2}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[2]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.BinOpExpr cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -2846,12 +4230,11 @@ OFFSET = -4
 OFFSET = -20
 
 parseo exitoso
-tamaño lista de codigo tercetos: 14
+tamaño lista de codigo tercetos: 13
 lista: 
 {LABEL, null, null, Result: BeginMethod pruMult}
 
 {METHODDECL, Metodo{ name=pruMult, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{LABEL, int, null, Result: a}
 {ASSIGN(=), 5, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 5, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 {ASSIGN(=), 7, null, Result: IntLiteral Label 4}
@@ -2864,6 +4247,40 @@ lista:
 {METHODCALL, pruMult, 0, Result: RESULT Label 8}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	pruMult
+.type	pruMult, @function 
+pruMult: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 5(%rbp), %eax
+    mov %eax, IntLiteral Label 1(%rbp)
+    mov 5(%rbp), %eax
+    mov -4(%rbp), %eax
+    mov 7(%rbp), %eax
+    mov %eax, IntLiteral Label 4(%rbp)
+    mov $0%eax
+    mov $7%edx
+    imul %edx, %eax
+    mov %eax,-20%(ebp)
+    mov VarLocation{name=MULTIPLY Label 6, type=int, expr=0 * 7, size=0}(%rbp), %eax
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    call 	pruMult
+    movl 	%eax, RESULT Label 8(%rbp) 
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -2874,9 +4291,8 @@ OFFSET = -16
 
 Error: Main Method Missing in Class prueba2
 parseo exitoso
-tamaño lista de codigo tercetos: 7
+tamaño lista de codigo tercetos: 6
 lista: 
-{LABEL, float, null, Result: c}
 {LABEL, null, null, Result: BeginMethod alo}
 
 {METHODDECL, Metodo{ name=alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
@@ -2884,6 +4300,25 @@ lista:
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 4, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {LABEL, null, null, Result: EndMethod alo}
+
+.globl	alo
+.type	alo, @function 
+alo: 
+    enter   $(4), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 2(%rbp)
+    mov $0%eax 
+    mov $1%edx 
+    add %eax, %edx 
+    mov %edx,-16%(ebp) 
+    mov 0 + 1(%rbp), %eax
+    mov -4(%rbp), %eax
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -2920,14 +4355,11 @@ OFFSET = -276
 OFFSET = -288
 
 parseo exitoso
-tamaño lista de codigo tercetos: 84
+tamaño lista de codigo tercetos: 80
 lista: 
 {LABEL, null, null, Result: BeginMethod id}
 
 {METHODDECL, Metodo{ name=id, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: i}
-{LABEL, int, null, Result: j}
-{LABEL, int, null, Result: z}
 {ASSIGN(=), 100, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 100, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 3}
@@ -2937,7 +4369,6 @@ lista:
 {LABEL, null, null, Result: BeginWhile Label 10}
 {CMP, VarLocation{name=factor Label 9, type=boolean, expr=VarLocation{name=LE Label 8, type=boolean, expr=0 < 0, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 11}
-{LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 14}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 16, type=boolean, expr=0 > 0, size=0}}
@@ -3008,6 +4439,8 @@ lista:
 {PARAM, null, null, Result: 9}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=id, args=[9]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.BinOpExpr cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -3052,6 +4485,68 @@ lista:
 {PARAM, null, null, Result: 9}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=suma, args=[4, 9]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	suma
+.type	suma, @function 
+suma: 
+    enter   $(8), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 0(%rbp), %eax
+    mov %eax, IntLiteral Label 2(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -12(%rbp)
+    mov true(%rbp), %eax
+    cmp -12(%rbp), %eax
+    jne elseCond Label 5
+    mov 0(%rbp), %eax
+    jmp endIf Label 6
+.elseCond Label 5
+    mov 0(%rbp), %eax
+    mov %eax, IntLiteral Label 9(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    sete %al
+    movzbl %al, %eax
+    movl	%eax, -28(%rbp)
+    mov true(%rbp), %eax
+    cmp -28(%rbp), %eax
+    jne elseCond Label 12
+    mov 0(%rbp), %eax
+    jmp endIf Label 13
+.elseCond Label 12
+    mov $0%eax 
+    mov $0%edx 
+    add %eax, %edx 
+    mov %edx,-44%(ebp) 
+    mov 0 + 0(%rbp), %eax
+.endIf Label 13
+.endIf Label 6
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 4(%rbp), %eax
+    mov %eax, IntLiteral Label 18(%rbp)
+    mov 9(%rbp), %eax
+    mov %eax, IntLiteral Label 20(%rbp)
+    call 	suma
+    movl 	%eax, RESULT Label 22(%rbp) 
+PARAM
+PARAM
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -3066,13 +4561,11 @@ OFFSET = -52
 OFFSET = -64
 
 parseo exitoso
-tamaño lista de codigo tercetos: 30
+tamaño lista de codigo tercetos: 28
 lista: 
 {LABEL, null, null, Result: BeginMethod sumx}
 
 {METHODDECL, Metodo{ name=sumx, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
-{LABEL, float, null, Result: aux}
-{LABEL, int, null, Result: i}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 0, null, Result: VarLocation{name=aux, type=float, expr=null, size=0}}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 3}
@@ -3100,6 +4593,8 @@ lista:
 {PARAM, null, null, Result: 2}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=sumx, args=[6.0, 2]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
 ---------------------------------------------------
   
   
@@ -3114,14 +4609,11 @@ OFFSET = -76
 OFFSET = -88
 
 parseo exitoso
-tamaño lista de codigo tercetos: 44
+tamaño lista de codigo tercetos: 41
 lista: 
 {LABEL, null, null, Result: BeginMethod maxcomdiv}
 
 {METHODDECL, Metodo{ name=maxcomdiv, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=a, value=null, size=0}, Simbolo{type=int, name=b, value=null, size=0}]}, null, Result: null}
-{LABEL, int, null, Result: dividendo}
-{LABEL, int, null, Result: divisor}
-{LABEL, int, null, Result: resto}
 {ASSIGN(=), 1, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 1, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
 {ASSIGN(=), 0, null, Result: IntLiteral Label 4}
@@ -3162,6 +4654,86 @@ lista:
 {PARAM, null, null, Result: 9}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%dMcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: null}
 {LABEL, null, null, Result: EndMethod main}
+
+.globl	maxcomdiv
+.type	maxcomdiv, @function 
+maxcomdiv: 
+    enter   $(8), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 1(%rbp), %eax
+    mov %eax, IntLiteral Label 1(%rbp)
+    mov 1(%rbp), %eax
+    mov -4(%rbp), %eax
+    mov 0(%rbp), %eax
+    mov %eax, IntLiteral Label 4(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    setgne %al
+    movzbl %al, %eax
+    movl	%eax, -20(%rbp)
+.BeginWhile Label 12
+    mov true(%rbp), %eax
+    cmp -40(%rbp), %eax
+    jne EndWhile Label 13
+MOD(%)
+    mov 0 % 0(%rbp), %eax
+    mov -44(%rbp), %eax
+    mov 0(%rbp), %eax
+    mov -60(%rbp), %eax
+    jmp BeginWhile Label 12
+    jmp BeginWhile Label 12
+.EndWhile Label 13
+    mov 0(%rbp), %eax
+    mov %eax, IntLiteral Label 19(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    setgne %al
+    movzbl %al, %eax
+    movl	%eax, -76(%rbp)
+.BeginWhile Label 22
+    mov true(%rbp), %eax
+    cmp -76(%rbp), %eax
+    jne EndWhile Label 23
+    jmp EndWhile Label 23
+    jmp BeginWhile Label 22
+.EndWhile Label 23
+    mov 0(%rbp), %eax
+    mov %eax, IntLiteral Label 25(%rbp)
+    movl	0(%rbp), %eax
+    cmpl	0(%rbp), %eax
+    setgne %al
+    movzbl %al, %eax
+    movl	%eax, -88(%rbp)
+.BeginWhile Label 29
+    mov true(%rbp), %eax
+    cmp -92(%rbp), %eax
+    jne EndWhile Label 30
+    jmp BeginWhile Label 29
+.EndWhile Label 30
+    mov 0(%rbp), %eax
+    leave
+    ret
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+    mov 6(%rbp), %eax
+    mov %eax, IntLiteral Label 32(%rbp)
+    mov 9(%rbp), %eax
+    mov %eax, IntLiteral Label 34(%rbp)
+    call 	maxcomdiv
+    movl 	%eax, RESULT Label 36(%rbp) 
+PARAM
+PARAM
+EXTERNINVK
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   

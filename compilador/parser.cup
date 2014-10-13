@@ -178,6 +178,9 @@
             for(TripletCode t : TripletList){
                 System.out.println(t);
             }
+            System.out.println();
+            AssemblyCodeGenerator ASMGenerator=new AssemblyCodeGenerator();
+            System.out.println(ASMGenerator.generate(TripletList));
             :}
             ;
 
@@ -204,7 +207,11 @@
     identifier::= ID:s {: //caso identificador ID
                         TS.agregarSimbolo(tipo_corriente, s.toString(), null, 0);
                         //CODIGO DE TRES DIRECCIONES  - guardamos la variable declarada y su tipo
-                        TripletList.addLast(new TripletCode(TripletOperator.LABEL, tipo_corriente,null,s.toString())); 
+                        
+
+                        /*System.out.println("ENTRO ACA "+s.toString() );
+                        TripletList.addLast(new TripletCode(TripletOperator.LABEL, tipo_corriente,null,s.toString())); */
+
                         //FIN CODIGO TRES DIRECCIONES
                         :} 
                         
@@ -224,8 +231,11 @@
                                                                    break;
                                                     }
                                                     //CODIGO DE TRES DIRECCIONES  - guardamos la variable declarada y su tipo}
-                                                    Simbolo ultimo=TS.obtenerSimbolo();
-                                                    TripletList.addLast(new TripletCode(TripletOperator.ARRAYLABEL, ultimo.getType(),i,s.toString()));
+                                                    
+
+                                                    /*Simbolo ultimo=TS.obtenerSimbolo();
+                                                    TripletList.addLast(new TripletCode(TripletOperator.ARRAYLABEL, ultimo.getType(),i,s.toString()));*/
+
                                                     //FIN CODIGO TRES DIRECCIONES
                                                     :} 
       ;
