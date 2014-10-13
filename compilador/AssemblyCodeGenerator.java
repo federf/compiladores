@@ -260,6 +260,73 @@ public class AssemblyCodeGenerator{
 					result += "movzbl %al, %eax\n";
 					result += "movl	%eax, " + res.getOffset() + "(%rbp)\n";
 	}
+
+	public void ASM_Non(TripletCode t){
+		//si el operando es una VarLocation
+        if(t.getFirstDir() instanceof VarLocation){
+     		VarLocation op=(VarLocation) t.getFirstDir();
+        	VarLocation res=(VarLocation) t.getResult();
+        	//obtenemos sus offset y con el mismo trabajamos
+        	int operandOffSet=op.getOffset();
+        	int resOffSet=res.getOffset();
+
+	        result += "cmp $0, " + operandOffSet + "(%rbp) \n";
+			result += "sete %al \n";
+			result += "movzbl %al, %eax \n";
+			result += "mov %eax, " + resOffSet + "(%rbp) \n";
+
+        }else{ //caso contrario debe ser un BoolLiteral
+        	BoolLiteral op=(BoolLiteral) t.getFirstDir();
+        	VarLocation res=(VarLocation) t.getResult();
+        	//obtenemos sus offset y con el mismo trabajamos
+        	int resOffSet=res.getOffset();
+
+	        result += "cmp $0, " + op.toString() + "(%rbp) \n";
+			result += "sete	%al \n";
+			result += "movzbl %al, %eax \n";
+			result += "mov %eax, " + resOffSet + "(%rbp) \n";
+        }
+	}
+
+	public void ASM_Unary_Minus(TripletCode t){
+		//caso de que el operando sea una VarLocation
+	    if(t.getFirstDir() instanceof VarLocation){
+	    	VarLocation op=(VarLocation) t.getFirstDir();
+	    	VarLocation res=(VarLocation) t.getResult();
+	    	//obtenemos sus offset y con el mismo trabajamos
+	    	int operandOffSet=op.getOffset();
+	    	int resOffSet=res.getOffset();
+
+	        result += "movl	" + operandOffSet + "(%rbp), %eax \n";
+			result += "negl	%eax \n";
+			result += "movl	%eax, " + resOffSet + "(%rbp) \n";
+
+	    }else{ //caso contrario debe ser un Numero (int o float)
+	    	VarLocation res=(VarLocation) t.getResult();
+	    	//POR AHORA SOLO IMPLEMENTADO PARA INT
+	    	if(t.getFirstDir() instanceof IntLiteral){
+	    		IntLiteral op=(IntLiteral) t.getFirstDir();	
+	        	//obtenemos sus offset y con el mismo trabajamos
+	        	int resOffSet=res.getOffset();
+	        	result += "movl	" + op.getRawValue() + "(%rbp), %eax \n";
+				result += "negl	%eax \n";
+				result += "movl	%eax, " + resOffSet + "(%rbp) \n";
+	    	}else{
+	    		System.out.println("IMPLEMENTAR CASO -(FLOAT)");
+	    	}
+	    	/*
+	    	if(t.getFirstDir() instanceof FloatLiteral){
+	    		FloatLiteral op=(FloatLiteral) t.getFirstDir();	
+	        	//obtenemos sus offset y con el mismo trabajamos
+	        	int resOffSet=res.getOffset();
+	        	result += "movl		" + op.getRawValue() + "(%rbp), %eax \n";
+				result += "negl		%eax \n";
+				result += "movl		%eax, " + resOffSet + "(%rbp) \n";
+	    	}*/
+	    	
+	    	
+	    }
+	}
 	//metodo que dada una lista de codigos de 3 direcciones genera el codigo assembly correspondiente
 	public String generate(LinkedList<TripletCode> list){
 	
@@ -300,83 +367,19 @@ public class AssemblyCodeGenerator{
 			        ASM_logic(t, t.getOperator());	
 			        break;
 			    case NON: 
-
-			        //si el operando es una VarLocation
-			        if(t.getFirstDir() instanceof VarLocation){
-			     		VarLocation op=(VarLocation) t.getFirstDir();
-			        	VarLocation res=(VarLocation) t.getResult();
-			        	//obtenemos sus offset y con el mismo trabajamos
-			        	int operandOffSet=op.getOffset();
-			        	int resOffSet=res.getOffset();
-
-				        result += "cmp $0, " + operandOffSet + "(%rbp) \n";
-						result += "sete %al \n";
-						result += "movzbl %al, %eax \n";
-						result += "mov %eax, " + resOffSet + "(%rbp) \n";
-
-			        }else{ //caso contrario debe ser un BoolLiteral
-			        	BoolLiteral op=(BoolLiteral) t.getFirstDir();
-			        	VarLocation res=(VarLocation) t.getResult();
-			        	//obtenemos sus offset y con el mismo trabajamos
-			        	int resOffSet=res.getOffset();
-
-				        result += "cmp $0, " + op.toString() + "(%rbp) \n";
-						result += "sete	%al \n";
-						result += "movzbl %al, %eax \n";
-						result += "mov %eax, " + resOffSet + "(%rbp) \n";
-			        }
-			    
+			    	ASM_Non(t);
 			        break;
 				case UNARYMINUS:
-			        result=result+ "UNARYMINUS(-expr)"; 
-
-			        //caso de que el operando sea una VarLocation
-			        if(t.getFirstDir() instanceof VarLocation){
-			        	VarLocation op=(VarLocation) t.getFirstDir();
-			        	VarLocation res=(VarLocation) t.getResult();
-			        	//obtenemos sus offset y con el mismo trabajamos
-			        	int operandOffSet=op.getOffset();
-			        	int resOffSet=res.getOffset();
-
-				        result += "movl	" + operandOffSet + "(%rbp), %eax \n";
-						result += "negl	%eax \n";
-						result += "movl	%eax, " + resOffSet + "(%rbp) \n";
-
-			        }else{ //caso contrario debe ser un Numero (int o float)
-			        	VarLocation res=(VarLocation) t.getResult();
-			        	//POR AHORA SOLO IMPLEMENTADO PARA INT
-			        	if(t.getFirstDir() instanceof IntLiteral){
-			        		IntLiteral op=(IntLiteral) t.getFirstDir();	
-				        	//obtenemos sus offset y con el mismo trabajamos
-				        	int resOffSet=res.getOffset();
-				        	result += "movl	" + op.getRawValue() + "(%rbp), %eax \n";
-							result += "negl	%eax \n";
-							result += "movl	%eax, " + resOffSet + "(%rbp) \n";
-			        	}else{
-			        		System.out.println("IMPLEMENTAR CASO -(FLOAT)");
-			        	}
-			        	/*
-			        	if(t.getFirstDir() instanceof FloatLiteral){
-			        		FloatLiteral op=(FloatLiteral) t.getFirstDir();	
-				        	//obtenemos sus offset y con el mismo trabajamos
-				        	int resOffSet=res.getOffset();
-				        	result += "movl		" + op.getRawValue() + "(%rbp), %eax \n";
-							result += "negl		%eax \n";
-							result += "movl		%eax, " + resOffSet + "(%rbp) \n";
-			        	}*/
-			        	
-			        	
-			        }
-
+			        ASM_Unary_Minus(t);
 			        break;
 			    case AND:
 			        result=result+ "AND(&&)"; 
 			        break;
 			    case CEQ:
-			        result=result+ "CEQ(==)"; 
+			        ASM_logic(t, t.getOperator());
 			        break;
 			    case NEQ:
-			        result=result+ "NEQ(!=)"; 
+			        ASM_logic(t, t.getOperator());
 			        break;
 				case ASSIGN:
 			        result=result+"mov " + t.getFirstDir() + "(%rbp), %eax\n"+
