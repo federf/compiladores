@@ -425,7 +425,10 @@ public class AssemblyCodeGenerator{
 			   		result=result+ "jnl "+t.getResult()+"\n"; 
 			   		break;
 			   	case METHODCALL:
-			   		result=result+ "METHODCALL"; 
+			   		result += "call 	" + t.getFirstDir() + "\n";		
+				  	if (t.getResult() != null)
+				  		result += "movl 	%eax, " + t.getResult() + "(%rbp) \n";
+
 			   		break;
 			   	case EXTERNINVK:
 			   		result=result+ "EXTERNINVK"; 
@@ -441,8 +444,8 @@ public class AssemblyCodeGenerator{
 		   			result += ".globl	" + m.getName() + "\n";
 					result += ".type	" + m.getName() + ", @function \n";			
 					result += m.getName() + ": \n";	
-					/*VER COMO RESERVAR ESPACIO PARA PARAMETROS EN LA DECLARACION DEL METODO*/
-					//result += "enter   $(4 * " + m.getParametros().size() + "), $0 \n";
+					/*Dejamos espacio para los parametros del metodo*/
+					result += "enter   $(4 * " + m.getParametros().size() + "), $0 \n";
 					result += "push	%rbp\n";
 					result += "mov %rsp, %rbp\n";
 		   			break;
