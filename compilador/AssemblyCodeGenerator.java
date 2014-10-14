@@ -213,10 +213,10 @@ public class AssemblyCodeGenerator{
 			        	//caso int
 			        	if(t.getFirstDir() instanceof IntLiteral){
 			        		IntLiteral op1=(IntLiteral) t.getFirstDir();
-			        		result += "    movl	" + op1.getRawValue() + "(%rbp), %eax\n";
+			        		result += "    movl	$" + op1.getRawValue() + ", %eax\n";
 			        	}else{//caso float
 			        		FloatLiteral op1=(FloatLiteral) t.getFirstDir();
-			        		result += "    movl	" + op1.getRawValue() + "(%rbp), %eax\n";
+			        		result += "    movl	$" + op1.getRawValue() + ", %eax\n";
 			        	}
 			        }
 
@@ -230,10 +230,10 @@ public class AssemblyCodeGenerator{
 			        	//caso int
 			        	if(t.getSecondDir() instanceof IntLiteral){
 			        		IntLiteral op2=(IntLiteral) t.getSecondDir();
-			        		result += "    cmpl	" + op2.getRawValue() + "(%rbp), %eax\n";
+			        		result += "    cmpl	$" + op2.getRawValue() + ", %eax\n";
 			        	}else{//caso float
 			        		FloatLiteral op2=(FloatLiteral) t.getSecondDir();
-			        		result += "    cmpl	" + op2.getRawValue() + "(%rbp), %eax\n";
+			        		result += "    cmpl	$" + op2.getRawValue() + ", %eax\n";
 			        	}
 			        }
 			        //case de la operacion logica 
@@ -298,7 +298,7 @@ public class AssemblyCodeGenerator{
 	    	int resOffSet=res.getOffset();
 
 	        result += "    movl	" + operandOffSet + "(%rbp), %eax \n";
-			result += "negl	%eax \n";
+			result += "    negl	%eax \n";
 			result += "    movl	%eax, " + resOffSet + "(%rbp) \n";
 
 	    }else{ //caso contrario debe ser un Numero (int o float)
@@ -308,8 +308,8 @@ public class AssemblyCodeGenerator{
 	    		IntLiteral op=(IntLiteral) t.getFirstDir();	
 	        	//obtenemos sus offset y con el mismo trabajamos
 	        	int resOffSet=res.getOffset();
-	        	result += "    movl	" + op.getRawValue() + "(%rbp), %eax \n";
-				result += "negl	%eax \n";
+	        	result += "    movl	$" + op.getRawValue() + ", %eax \n";
+				result += "	   negl	%eax \n";
 				result += "    movl	%eax, " + resOffSet + "(%rbp) \n";
 	    	}else{
 	    		System.out.println("IMPLEMENTAR CASO -(FLOAT)");
@@ -319,13 +319,37 @@ public class AssemblyCodeGenerator{
 	    		FloatLiteral op=(FloatLiteral) t.getFirstDir();	
 	        	//obtenemos sus offset y con el mismo trabajamos
 	        	int resOffSet=res.getOffset();
-	        	result += "    movl		" + op.getRawValue() + "(%rbp), %eax \n";
+	        	result += "    movl		$" + op.getRawValue() + ", %eax \n";
 				result += "negl		%eax \n";
 				result += "    movl		%eax, " + resOffSet + "(%rbp) \n";
 	    	}*/
 	    	
 	    	
 	    }
+	}
+
+	public void ASM_Mod(TripletCode t){
+
+		//si el 2do operando es una varlocation obtenemos su offset
+		if(t.getSecondDir() instanceof VarLocation){
+			VarLocation secOp=(VarLocation) t.getSecondDir();
+			result += "    movl	" + secOp.getOffset() + "(%rbp), %eax \n";
+		}else{//sino, debe ser un intliteral
+			IntLiteral secOp=(IntLiteral) t.getSecondDir();
+			result += "    movl	$" + secOp.getRawValue() + ", %eax \n";
+		}
+		//si el 1er operando es una varlocation obtenemos su offset
+		if(t.getFirstDir() instanceof VarLocation){
+			VarLocation firstOp=(VarLocation) t.getFirstDir();
+			result += "    idivl " + firstOp.getOffset() + "(%rbp), %eax \n";
+		}else{//sino, debe ser un intliteral
+			IntLiteral firstOp=(IntLiteral) t.getFirstDir();
+			result += "    idivl $" + firstOp.getRawValue() + ", %eax \n";
+		}
+		//obtenemos la varlocation resultado
+		VarLocation res=(VarLocation) t.getResult();
+		result += "    movl	%edx, " + res.getOffset() + "(%rbp)\n";//en edx queda el resto de la division
+
 	}
 	//metodo que dada una lista de codigos de 3 direcciones genera el codigo assembly correspondiente
 	public String generate(LinkedList<TripletCode> list){
@@ -352,7 +376,7 @@ public class AssemblyCodeGenerator{
 			        result=result+ "DIVIDE(/)\n"; 
 			        break;
 			    case MOD:
-			        result=result+ "MOD(%)\n"; 
+			        ASM_Mod(t);
 			        break;
 			    case LE:
 			      	ASM_logic(t, t.getOperator());	

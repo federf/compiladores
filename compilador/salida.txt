@@ -63,8 +63,8 @@ factorial:
     mov -12(%rbp), %eax
     mov 0(%rbp), %eax
     mov %eax, IntLiteral Label 5(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -28(%rbp)
@@ -331,8 +331,8 @@ PARAM
     mov -4(%rbp), %eax
     mov 1(%rbp), %eax
     mov %eax, IntLiteral Label 10(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	1(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$1, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -24(%rbp)
@@ -716,7 +716,9 @@ DIVIDE(/)
     mov -52(%rbp), %eax
     mov 3(%rbp), %eax
     mov %eax, IntLiteral Label 18(%rbp)
-MOD(%)
+    movl	$3, %eax 
+    idivl $0, %eax 
+    movl	%edx, -84(%rbp)
     mov 0 % 3(%rbp), %eax
     mov -72(%rbp), %eax
     mov 1(%rbp), %eax
@@ -813,8 +815,8 @@ breaks:
     mov -4(%rbp), %eax
     mov 10(%rbp), %eax
     mov %eax, IntLiteral Label 4(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	10(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$10, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -20(%rbp)
@@ -836,8 +838,8 @@ breaks:
     mov -44(%rbp), %eax
     mov 0(%rbp), %eax
     mov %eax, IntLiteral Label 17(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -60(%rbp)
@@ -937,8 +939,8 @@ breaks:
     mov -4(%rbp), %eax
     mov 10(%rbp), %eax
     mov %eax, IntLiteral Label 4(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	10(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$10, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -20(%rbp)
@@ -956,8 +958,8 @@ breaks:
     mov -28(%rbp), %eax
     mov 0(%rbp), %eax
     mov %eax, IntLiteral Label 15(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -52(%rbp)
@@ -1186,8 +1188,8 @@ breaks:
     mov -4(%rbp), %eax
     mov 10(%rbp), %eax
     mov %eax, IntLiteral Label 4(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	10(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$10, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -20(%rbp)
@@ -1205,8 +1207,8 @@ breaks:
     mov -28(%rbp), %eax
     mov 0(%rbp), %eax
     mov %eax, IntLiteral Label 15(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -52(%rbp)
@@ -1285,8 +1287,8 @@ pruAritmetica:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
@@ -1367,8 +1369,8 @@ pruAritmetica:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
@@ -1608,8 +1610,8 @@ dados:
     mov %rsp, %rbp
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 2(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
@@ -1619,8 +1621,8 @@ dados:
     mov %eax, -20(%rbp) 
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 8(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -32(%rbp)
@@ -1631,8 +1633,8 @@ dados:
 AND(&&)
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 15(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -56(%rbp)
@@ -1652,15 +1654,15 @@ AND(&&)
 .endIf Label 22
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 26(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -84(%rbp)
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 31(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -100(%rbp)
@@ -1671,8 +1673,8 @@ AND(&&)
 AND(&&)
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 38(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -124(%rbp)
@@ -1683,8 +1685,8 @@ AND(&&)
 AND(&&)
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 46(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -152(%rbp)
@@ -1694,16 +1696,16 @@ AND(&&)
     mov %eax, -160(%rbp) 
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 52(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -172(%rbp)
 AND(&&)
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 58(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -192(%rbp)
@@ -1715,8 +1717,8 @@ AND(&&)
 OR(||)
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 67(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -224(%rbp)
@@ -1726,8 +1728,8 @@ OR(||)
     mov %eax, -232(%rbp) 
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 73(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -244(%rbp)
@@ -1738,8 +1740,8 @@ OR(||)
 AND(&&)
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 80(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -268(%rbp)
@@ -1756,23 +1758,23 @@ OR(||)
 .endIf Label 88
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 92(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -300(%rbp)
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 97(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -316(%rbp)
 AND(&&)
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 103(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -336(%rbp)
@@ -1783,15 +1785,15 @@ AND(&&)
 AND(&&)
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 111(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -364(%rbp)
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 116(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -380(%rbp)
@@ -1802,8 +1804,8 @@ AND(&&)
 AND(&&)
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 123(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -404(%rbp)
@@ -1811,8 +1813,8 @@ AND(&&)
 OR(||)
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 131(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -432(%rbp)
@@ -1822,16 +1824,16 @@ OR(||)
     mov %eax, -440(%rbp) 
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 137(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -452(%rbp)
 AND(&&)
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 143(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -472(%rbp)
@@ -1848,23 +1850,23 @@ OR(||)
 .endIf Label 151
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 155(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -504(%rbp)
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 160(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -520(%rbp)
 AND(&&)
     mov 6(%rbp), %eax
     mov %eax, IntLiteral Label 166(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	6(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -540(%rbp)
@@ -2082,8 +2084,8 @@ prueba:
     mov -4(%rbp), %eax
     mov 0(%rbp), %eax
     mov %eax, IntLiteral Label 4(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -20(%rbp)
@@ -2096,8 +2098,8 @@ prueba:
     mov -24(%rbp), %eax
     mov 4(%rbp), %eax
     mov %eax, IntLiteral Label 12(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	4(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$4, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -40(%rbp)
@@ -2106,8 +2108,8 @@ prueba:
     jne elseCond Label 15
     mov 4(%rbp), %eax
     mov %eax, IntLiteral Label 18(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	4(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$4, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -52(%rbp)
@@ -2117,8 +2119,8 @@ prueba:
     jne EndWhile Label 23
     mov 4(%rbp), %eax
     mov %eax, IntLiteral Label 25(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	4(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$4, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -68(%rbp)
@@ -3189,16 +3191,16 @@ pruAritmetica:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     setgne %al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
     mov true(%rbp), %eax
     cmp -12(%rbp), %eax
     jne elseCond Label 4
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -24(%rbp)
@@ -3343,8 +3345,8 @@ pruAritmetica:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
@@ -3360,8 +3362,8 @@ pruAritmetica:
     jmp endIf Label 5
 .elseCond Label 4
 .endIf Label 5
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -40(%rbp)
@@ -3728,8 +3730,8 @@ maxcomdiv:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
@@ -3753,8 +3755,8 @@ maxcomdiv:
     mov -48(%rbp), %eax
     mov 0(%rbp), %eax
     mov %eax, IntLiteral Label 13(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     setgne %al
     movzbl %al, %eax
     movl	%eax, -64(%rbp)
@@ -3762,7 +3764,9 @@ maxcomdiv:
     mov true(%rbp), %eax
     cmp -72(%rbp), %eax
     jne EndWhile Label 19
-MOD(%)
+    movl	$0, %eax 
+    idivl $0, %eax 
+    movl	%edx, -88(%rbp)
     mov 0 % 0(%rbp), %eax
     mov -76(%rbp), %eax
     mov 0(%rbp), %eax
@@ -4166,7 +4170,9 @@ pruAritmetica:
     mov -4(%rbp), %eax
     mov 7(%rbp), %eax
     mov %eax, IntLiteral Label 4(%rbp)
-MOD(%)
+    movl	$7, %eax 
+    idivl $0, %eax 
+    movl	%edx, -20(%rbp)
     mov VarLocation{name=MOD Label 6, type=int, expr=0 % 7, size=0}(%rbp), %eax
     leave
     ret
@@ -4494,8 +4500,8 @@ suma:
     mov %rsp, %rbp
     mov 0(%rbp), %eax
     mov %eax, IntLiteral Label 2(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
@@ -4507,8 +4513,8 @@ suma:
 .elseCond Label 5
     mov 0(%rbp), %eax
     mov %eax, IntLiteral Label 9(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -28(%rbp)
@@ -4667,8 +4673,8 @@ maxcomdiv:
     mov -4(%rbp), %eax
     mov 0(%rbp), %eax
     mov %eax, IntLiteral Label 4(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     setgne %al
     movzbl %al, %eax
     movl	%eax, -20(%rbp)
@@ -4676,7 +4682,9 @@ maxcomdiv:
     mov true(%rbp), %eax
     cmp -40(%rbp), %eax
     jne EndWhile Label 13
-MOD(%)
+    movl	$0, %eax 
+    idivl $0, %eax 
+    movl	%edx, -56(%rbp)
     mov 0 % 0(%rbp), %eax
     mov -44(%rbp), %eax
     mov 0(%rbp), %eax
@@ -4686,8 +4694,8 @@ MOD(%)
 .EndWhile Label 13
     mov 0(%rbp), %eax
     mov %eax, IntLiteral Label 19(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     setgne %al
     movzbl %al, %eax
     movl	%eax, -76(%rbp)
@@ -4700,8 +4708,8 @@ MOD(%)
 .EndWhile Label 23
     mov 0(%rbp), %eax
     mov %eax, IntLiteral Label 25(%rbp)
-    movl	0(%rbp), %eax
-    cmpl	0(%rbp), %eax
+    movl	$0, %eax
+    cmpl	$0, %eax
     setgne %al
     movzbl %al, %eax
     movl	%eax, -88(%rbp)
