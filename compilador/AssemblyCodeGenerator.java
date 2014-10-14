@@ -526,7 +526,12 @@ public class AssemblyCodeGenerator{
 
 			   		break;
 			   	case EXTERNINVK:
-			   		result=result+ "EXTERNINVK\n"; 
+
+			   		ExternInvkExpr mc=(ExternInvkExpr) t.getFirstDir();
+			   		result += "    call " + mc.getId() + "\n";		
+				  	if (t.getResult() != null)
+				  		result += "    movl %eax, " + t.getResult() + "(%rbp) \n";
+
 			   		break;
 			   	case ARRAYACCESS:
 			   		result=result+ "ARRAYACCESS\n"; 

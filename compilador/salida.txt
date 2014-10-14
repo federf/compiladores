@@ -46,7 +46,7 @@ lista:
 {null, 3, null, Result: IntLiteral Label 19}
 {METHODCALL, factorial, 1, Result: RESULT Label 21}
 {PARAM, null, null, Result: 3}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=factorial, args=[3]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=factorial, args=[3]}]}, null, Result: EXTERNINVK Label 23}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	factorial
@@ -99,7 +99,8 @@ main:
     call factorial
     movl %eax, RESULT Label 21(%rbp) 
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 23(%rbp) 
     leave
     ret
 
@@ -174,7 +175,7 @@ lista:
 {METHODCALL, sum, 2, Result: RESULT Label 36}
 {PARAM, null, null, Result: MethodCallExpr{name=mult, args=[MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}}
 {PARAM, null, null, Result: MethodCallExpr{name=resta, args=[-0.0, 0.0]}}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandoFloatTest"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=mult, args=[MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}, MethodCallExpr{name=resta, args=[-0.0, 0.0]}]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandoFloatTest"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=mult, args=[MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}, MethodCallExpr{name=resta, args=[-0.0, 0.0]}]}]}, null, Result: EXTERNINVK Label 38}
 {LABEL, null, null, Result: EndMethod main}
 
 ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
@@ -213,7 +214,7 @@ lista:
 {null, true, null, Result: BoolLiteral Label 17}
 {METHODCALL, pruebaLogica, 1, Result: RESULT Label 19}
 {PARAM, null, null, Result: true}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[true]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[true]}]}, null, Result: EXTERNINVK Label 21}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	pruebaLogica
@@ -251,7 +252,8 @@ main:
     call pruebaLogica
     movl %eax, RESULT Label 19(%rbp) 
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 21(%rbp) 
     leave
     ret
 
@@ -278,7 +280,7 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{EXTERNINVK, ExternInvkExpr{id="get_int", type=int, parameters=[]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="get_int", type=int, parameters=[]}, null, Result: EXTERNINVK Label 5}
 {METHODCALL, inc, 1, Result: RESULT Label 7}
 {PARAM, null, null, Result: ExternInvkExpr{id="get_int", type=int, parameters=[]}}
 {ASSIGN(=), MethodCallExpr{name=inc, args=[ExternInvkExpr{id="get_int", type=int, parameters=[]}]}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
@@ -286,10 +288,10 @@ lista:
 {CEQ(==), 0, 1, Result: VarLocation{name=CEQ Label 12, type=boolean, expr=0 == 1, size=0}}
 {CMP, VarLocation{name=CEQ Label 12, type=boolean, expr=0 == 1, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 13}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==1\n"}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==1\n"}]}, null, Result: EXTERNINVK Label 15}
 {JMP, null, null, Result: endIf Label 14}
 {LABEL, null, null, Result: elseCond Label 13}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==%d\n"}, 0]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==%d\n"}, 0]}, null, Result: EXTERNINVK Label 17}
 {LABEL, null, null, Result: endIf Label 14}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -314,7 +316,8 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-EXTERNINVK
+    call "get_int"
+    movl %eax, EXTERNINVK Label 5(%rbp) 
     call inc
     movl %eax, RESULT Label 7(%rbp) 
 PARAM
@@ -329,10 +332,12 @@ PARAM
     mov true(%rbp), %eax
     cmp -24(%rbp), %eax
     jne elseCond Label 13
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 15(%rbp) 
     jmp endIf Label 14
 .elseCond Label 13
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 17(%rbp) 
 .endIf Label 14
     leave
     ret
@@ -565,8 +570,8 @@ lista:
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 110}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVK Label 112}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVK Label 113}
 {LABEL, null, null, Result: EndMethod main}
 
 ocurrio un error: ir.ast.BinOpExpr cannot be cast to ir.ast.IntLiteral
@@ -589,7 +594,7 @@ lista:
 {null, 3, null, Result: IntLiteral Label 1}
 {METHODCALL, pruAritmetica, 1, Result: RESULT Label 3}
 {PARAM, null, null, Result: 3}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[3]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[3]}]}, null, Result: EXTERNINVK Label 5}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	pruAritmetica
@@ -611,7 +616,8 @@ main:
     call pruAritmetica
     movl %eax, RESULT Label 3(%rbp) 
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 5(%rbp) 
     leave
     ret
 
@@ -667,7 +673,7 @@ lista:
 {null, 5, null, Result: IntLiteral Label 26}
 {METHODCALL, aritmTest, 1, Result: RESULT Label 28}
 {PARAM, null, null, Result: 5}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=aritmTest, args=[5]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=aritmTest, args=[5]}]}, null, Result: EXTERNINVK Label 30}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	aritmTest
@@ -725,7 +731,8 @@ main:
     call aritmTest
     movl %eax, RESULT Label 28(%rbp) 
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 30(%rbp) 
     leave
     ret
 
@@ -779,7 +786,7 @@ lista:
 {null, 1, null, Result: IntLiteral Label 23}
 {METHODCALL, breaks, 1, Result: RESULT Label 25}
 {PARAM, null, null, Result: 1}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: EXTERNINVK Label 27}
 {null, 1, null, Result: IntLiteral Label 28}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
@@ -843,7 +850,8 @@ main:
     call breaks
     movl %eax, RESULT Label 25(%rbp) 
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 27(%rbp) 
     movl $1, IntLiteral Label 28(%rbp)
     mov 1(%rbp), %eax
     leave
@@ -896,7 +904,7 @@ lista:
 {null, 1, null, Result: IntLiteral Label 21}
 {METHODCALL, breaks, 1, Result: RESULT Label 23}
 {PARAM, null, null, Result: 1}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: EXTERNINVK Label 25}
 {null, 1, null, Result: IntLiteral Label 26}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
@@ -957,7 +965,8 @@ main:
     call breaks
     movl %eax, RESULT Label 23(%rbp) 
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 25(%rbp) 
     movl $1, IntLiteral Label 26(%rbp)
     mov 1(%rbp), %eax
     leave
@@ -1017,7 +1026,7 @@ lista:
 {PARAM, null, null, Result: MethodCallExpr{name=and, args=[false, false]}}
 {PARAM, null, null, Result: MethodCallExpr{name=neg, args=[false]}}
 {ASSIGN(=), MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: EXTERNINVK Label 26}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	neg
@@ -1086,7 +1095,8 @@ PARAM
 PARAM
     mov MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}(%rbp), %eax
     mov -32(%rbp), %eax
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 26(%rbp) 
     leave
     ret
 
@@ -1137,7 +1147,7 @@ lista:
 {null, 1, null, Result: IntLiteral Label 21}
 {METHODCALL, breaks, 1, Result: RESULT Label 23}
 {PARAM, null, null, Result: 1}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: EXTERNINVK Label 25}
 {null, 1, null, Result: IntLiteral Label 26}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
@@ -1198,7 +1208,8 @@ main:
     call breaks
     movl %eax, RESULT Label 23(%rbp) 
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 25(%rbp) 
     movl $1, IntLiteral Label 26(%rbp)
     mov 1(%rbp), %eax
     leave
@@ -1238,7 +1249,7 @@ lista:
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 13}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVK Label 15}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	pruAritmetica
@@ -1277,7 +1288,8 @@ main:
     movl %eax, RESULT Label 13(%rbp) 
 PARAM
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 15(%rbp) 
     leave
     ret
 
@@ -1318,7 +1330,7 @@ lista:
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 16}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVK Label 18}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	pruAritmetica
@@ -1362,7 +1374,8 @@ main:
     movl %eax, RESULT Label 16(%rbp) 
 PARAM
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 18(%rbp) 
     leave
     ret
 
@@ -1554,7 +1567,7 @@ lista:
 {PARAM, null, null, Result: 1}
 {PARAM, null, null, Result: 6}
 {PARAM, null, null, Result: 9}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=dados, args=[1, 6, 9]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=dados, args=[1, 6, 9]}]}, null, Result: EXTERNINVK Label 183}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	dados
@@ -1824,7 +1837,8 @@ main:
 PARAM
 PARAM
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 183(%rbp) 
     leave
     ret
 
@@ -1911,7 +1925,7 @@ lista:
 {METHODCALL, pruContinue, 2, Result: RESULT Label 50}
 {PARAM, null, null, Result: 3.0}
 {PARAM, null, null, Result: 2}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=pruContinue, args=[3.0, 2]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=pruContinue, args=[3.0, 2]}]}, null, Result: EXTERNINVK Label 52}
 {LABEL, null, null, Result: EndMethod main}
 
 ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
@@ -1993,7 +2007,7 @@ lista:
 {null, 6, null, Result: IntLiteral Label 48}
 {METHODCALL, prueba, 1, Result: RESULT Label 50}
 {PARAM, null, null, Result: 6}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: EXTERNINVK Label 52}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	prueba
@@ -2095,7 +2109,8 @@ main:
     call prueba
     movl %eax, RESULT Label 50(%rbp) 
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 52(%rbp) 
     leave
     ret
 
@@ -2155,7 +2170,7 @@ lista:
 {null, 6, null, Result: IntLiteral Label 30}
 {METHODCALL, prueba, 1, Result: RESULT Label 32}
 {PARAM, null, null, Result: 6}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: EXTERNINVK Label 34}
 {LABEL, null, null, Result: EndMethod main}
 
 ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
@@ -2243,7 +2258,7 @@ lista:
 {PARAM, null, null, Result: 0.0}
 {PARAM, null, null, Result: 2}
 {ASSIGN(=), MethodCallExpr{name=potencia, args=[0.0, 2]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: EXTERNINVK Label 52}
 {LABEL, null, null, Result: EndMethod main}
 
 ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
@@ -2306,7 +2321,7 @@ lista:
 {METHODCALL, sumatoria, 1, Result: RESULT Label 32}
 {PARAM, null, null, Result: 0.0}
 {ASSIGN(=), MethodCallExpr{name=sumatoria, args=[0.0]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: EXTERNINVK Label 35}
 {LABEL, null, null, Result: EndMethod main}
 
 ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
@@ -2589,7 +2604,7 @@ lista:
 {METHODCALL, multiples, 2, Result: RESULT Label 203}
 {PARAM, null, null, Result: 0.0}
 {PARAM, null, null, Result: 0.0 + 2.0}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multiples, args=[0.0, 0.0 + 2.0]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multiples, args=[0.0, 0.0 + 2.0]}]}, null, Result: EXTERNINVK Label 205}
 {LABEL, null, null, Result: EndMethod main}
 
 ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
@@ -2716,7 +2731,7 @@ lista:
 {METHODCALL, multRepeat, 2, Result: RESULT Label 80}
 {PARAM, null, null, Result: 0.0}
 {PARAM, null, null, Result: 0.0}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multRepeat, args=[0.0, 0.0]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multRepeat, args=[0.0, 0.0]}]}, null, Result: EXTERNINVK Label 82}
 {LABEL, null, null, Result: EndMethod main}
 
 ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
@@ -2773,7 +2788,7 @@ lista:
 {METHODCALL, sum, 2, Result: RESULT Label 25}
 {PARAM, null, null, Result: MethodCallExpr{name=resta, args=[0.0, 0.0]}}
 {PARAM, null, null, Result: MethodCallExpr{name=div, args=[0.0, 0.0]}}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandofuncionesflotantes"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=resta, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandofuncionesflotantes"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=resta, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}]}, null, Result: EXTERNINVK Label 27}
 {LABEL, null, null, Result: EndMethod main}
 
 ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
@@ -2820,7 +2835,7 @@ lista:
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 26}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVK Label 28}
 {null, 1, null, Result: IntLiteral Label 29}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
@@ -2867,7 +2882,7 @@ lista:
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 24}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVK Label 26}
 {null, 1, null, Result: IntLiteral Label 27}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
@@ -2916,7 +2931,7 @@ lista:
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 25}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVK Label 27}
 {null, 1, null, Result: IntLiteral Label 28}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
@@ -2971,7 +2986,7 @@ lista:
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 32}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVK Label 34}
 {null, 1, null, Result: IntLiteral Label 35}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
@@ -3027,7 +3042,7 @@ lista:
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 29}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVK Label 31}
 {null, 1, null, Result: IntLiteral Label 32}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
@@ -3082,20 +3097,20 @@ lista:
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 26}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVK Label 28}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVK Label 29}
 {null, 4, null, Result: IntLiteral Label 30}
 {null, 4, null, Result: IntLiteral Label 32}
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 34}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 4}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: EXTERNINVK Label 36}
 {null, 8, null, Result: IntLiteral Label 37}
 {null, 5, null, Result: IntLiteral Label 39}
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 41}
 {PARAM, null, null, Result: 8}
 {PARAM, null, null, Result: 5}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: EXTERNINVK Label 43}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	pruAritmetica
@@ -3160,22 +3175,26 @@ main:
     movl %eax, RESULT Label 26(%rbp) 
 PARAM
 PARAM
-EXTERNINVK
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 28(%rbp) 
+    call "printf"
+    movl %eax, EXTERNINVK Label 29(%rbp) 
     movl $4, IntLiteral Label 30(%rbp)
     movl $4, IntLiteral Label 32(%rbp)
     call pruAritmetica
     movl %eax, RESULT Label 34(%rbp) 
 PARAM
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 36(%rbp) 
     movl $8, IntLiteral Label 37(%rbp)
     movl $5, IntLiteral Label 39(%rbp)
     call pruAritmetica
     movl %eax, RESULT Label 41(%rbp) 
 PARAM
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 43(%rbp) 
     leave
     ret
 
@@ -3229,20 +3248,20 @@ lista:
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 26}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVK Label 28}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVK Label 29}
 {null, 4, null, Result: IntLiteral Label 30}
 {null, 4, null, Result: IntLiteral Label 32}
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 34}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 4}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: EXTERNINVK Label 36}
 {null, 8, null, Result: IntLiteral Label 37}
 {null, 5, null, Result: IntLiteral Label 39}
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 41}
 {PARAM, null, null, Result: 8}
 {PARAM, null, null, Result: 5}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: EXTERNINVK Label 43}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	pruAritmetica
@@ -3307,22 +3326,26 @@ main:
     movl %eax, RESULT Label 26(%rbp) 
 PARAM
 PARAM
-EXTERNINVK
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 28(%rbp) 
+    call "printf"
+    movl %eax, EXTERNINVK Label 29(%rbp) 
     movl $4, IntLiteral Label 30(%rbp)
     movl $4, IntLiteral Label 32(%rbp)
     call pruAritmetica
     movl %eax, RESULT Label 34(%rbp) 
 PARAM
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 36(%rbp) 
     movl $8, IntLiteral Label 37(%rbp)
     movl $5, IntLiteral Label 39(%rbp)
     call pruAritmetica
     movl %eax, RESULT Label 41(%rbp) 
 PARAM
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 43(%rbp) 
     leave
     ret
 
@@ -3362,7 +3385,7 @@ lista:
 {null, false, null, Result: BoolLiteral Label 17}
 {METHODCALL, pruebaLogica, 1, Result: RESULT Label 19}
 {PARAM, null, null, Result: false}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[false]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[false]}]}, null, Result: EXTERNINVK Label 21}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	pruebaLogica
@@ -3400,7 +3423,8 @@ main:
     call pruebaLogica
     movl %eax, RESULT Label 19(%rbp) 
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 21(%rbp) 
     leave
     ret
 
@@ -3495,7 +3519,7 @@ lista:
 {PARAM, null, null, Result: 3.3}
 {PARAM, null, null, Result: 0.66}
 {PARAM, null, null, Result: 10.0}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=promedio, args=[3.3, 0.66, 10.0]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=promedio, args=[3.3, 0.66, 10.0]}]}, null, Result: EXTERNINVK Label 80}
 {null, 1, null, Result: IntLiteral Label 81}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
@@ -3528,7 +3552,7 @@ lista:
 {NON(!), false, null, Result: VarLocation{name=NON Label 10, type=boolean, expr=!false, size=0}}
 {OR(||), VarLocation{name=CONJUNCION Label 7, type=boolean, expr=false && false, size=0}, !false, Result: VarLocation{name=DISYUNCION Label 11, type=boolean, expr=VarLocation{name=CONJUNCION Label 7, type=boolean, expr=false && false, size=0} || !false, size=0}}
 {ASSIGN(=), VarLocation{name=CONJUNCION Label 7, type=boolean, expr=false && false, size=0} || !false, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: EXTERNINVK Label 13}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	main
@@ -3554,7 +3578,8 @@ AND(&&)
 OR(||)
     mov VarLocation{name=CONJUNCION Label 7, type=boolean, expr=false && false, size=0} || !false(%rbp), %eax
     mov -24(%rbp), %eax
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 13(%rbp) 
     leave
     ret
 
@@ -3615,7 +3640,7 @@ lista:
 {METHODCALL, maxcomdiv, 2, Result: RESULT Label 30}
 {PARAM, null, null, Result: 6}
 {PARAM, null, null, Result: 9}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="mcd%d"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="mcd%d"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: EXTERNINVK Label 32}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	maxcomdiv
@@ -3683,7 +3708,8 @@ main:
     movl %eax, RESULT Label 30(%rbp) 
 PARAM
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 32(%rbp) 
     leave
     ret
 
@@ -4009,7 +4035,7 @@ lista:
 {null, 6, null, Result: IntLiteral Label 40}
 {DIVIDE(/), 7, 6, Result: VarLocation{name=DIVIDE Label 42, type=int, expr=7 / 6, size=0}}
 {MINUS(-), 3.5 * 0, 7 / 6, Result: VarLocation{name=MINUS Label 43, type=int, expr=3.5 * 0 - 7 / 6, size=0}}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%d%f"}, StringLiteral{value="mcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}, 3.5 * 0 - 7 / 6]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%d%f"}, StringLiteral{value="mcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}, 3.5 * 0 - 7 / 6]}, null, Result: EXTERNINVK Label 44}
 {LABEL, null, null, Result: EndMethod main}
 
 ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
@@ -4037,7 +4063,7 @@ lista:
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {METHODCALL, pruAritmetica, 0, Result: RESULT Label 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[]}]}, null, Result: EXTERNINVK Label 10}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	pruAritmetica
@@ -4065,7 +4091,8 @@ main:
     mov %rsp, %rbp
     call pruAritmetica
     movl %eax, RESULT Label 8(%rbp) 
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 10(%rbp) 
     leave
     ret
 
@@ -4103,7 +4130,7 @@ lista:
 {null, 2, null, Result: IntLiteral Label 14}
 {METHODCALL, pruMult, 1, Result: RESULT Label 16}
 {PARAM, null, null, Result: 2}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[2]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[2]}]}, null, Result: EXTERNINVK Label 18}
 {LABEL, null, null, Result: EndMethod main}
 
 ocurrio un error: ir.ast.BinOpExpr cannot be cast to ir.ast.IntLiteral
@@ -4131,7 +4158,7 @@ lista:
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {METHODCALL, pruMult, 0, Result: RESULT Label 8}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[]}]}, null, Result: EXTERNINVK Label 10}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	pruMult
@@ -4160,7 +4187,8 @@ main:
     mov %rsp, %rbp
     call pruMult
     movl %eax, RESULT Label 8(%rbp) 
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 10(%rbp) 
     leave
     ret
 
@@ -4320,7 +4348,7 @@ lista:
 {null, 9, null, Result: IntLiteral Label 86}
 {METHODCALL, id, 1, Result: RESULT Label 88}
 {PARAM, null, null, Result: 9}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=id, args=[9]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=id, args=[9]}]}, null, Result: EXTERNINVK Label 90}
 {LABEL, null, null, Result: EndMethod main}
 
 ocurrio un error: ir.ast.BinOpExpr cannot be cast to ir.ast.IntLiteral
@@ -4366,7 +4394,7 @@ lista:
 {METHODCALL, suma, 2, Result: RESULT Label 22}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 9}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=suma, args=[4, 9]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=suma, args=[4, 9]}]}, null, Result: EXTERNINVK Label 24}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	suma
@@ -4421,7 +4449,8 @@ main:
     movl %eax, RESULT Label 22(%rbp) 
 PARAM
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 24(%rbp) 
     leave
     ret
 
@@ -4470,7 +4499,7 @@ lista:
 {METHODCALL, sumx, 2, Result: RESULT Label 23}
 {PARAM, null, null, Result: 6.0}
 {PARAM, null, null, Result: 2}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=sumx, args=[6.0, 2]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=sumx, args=[6.0, 2]}]}, null, Result: EXTERNINVK Label 25}
 {LABEL, null, null, Result: EndMethod main}
 
 ocurrio un error: ir.ast.FloatLiteral cannot be cast to ir.ast.IntLiteral
@@ -4531,7 +4560,7 @@ lista:
 {METHODCALL, maxcomdiv, 2, Result: RESULT Label 36}
 {PARAM, null, null, Result: 6}
 {PARAM, null, null, Result: 9}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%dMcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: null}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%dMcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: EXTERNINVK Label 38}
 {LABEL, null, null, Result: EndMethod main}
 
 .globl	maxcomdiv
@@ -4604,7 +4633,8 @@ main:
     movl %eax, RESULT Label 36(%rbp) 
 PARAM
 PARAM
-EXTERNINVK
+    call "printf"
+    movl %eax, EXTERNINVK Label 38(%rbp) 
     leave
     ret
 

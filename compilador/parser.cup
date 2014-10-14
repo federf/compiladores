@@ -854,7 +854,7 @@
                         ExternInvkExpr res=new ExternInvkExpr(s,args,t);
                         //CODIGO DE 3 DIRECCIONES
                         String resultLabel="EXTERNINVK "+Labels.getLabel();
-                        TripletList.addLast(new TripletCode(TripletOperator.EXTERNINVK, res,null,null));//!!VERIFICAR 
+                        TripletList.addLast(new TripletCode(TripletOperator.EXTERNINVK, res,null,resultLabel));//!!VERIFICAR 
                         //FIN CODIGO 3 DIRECCIONES
                         RESULT=res;
                     :}
@@ -862,7 +862,7 @@
                     ExternInvkExpr res=new ExternInvkExpr(s,new LinkedList(),t);
                     //CODIGO DE 3 DIRECCIONES
                     String resultLabel="EXTERNINVK "+Labels.getLabel(); 
-                    TripletList.addLast(new TripletCode(TripletOperator.EXTERNINVK, res,null,null)); //!!VERIFICAR 
+                    TripletList.addLast(new TripletCode(TripletOperator.EXTERNINVK, res,null,resultLabel)); //!!VERIFICAR 
                     //FIN CODIGO 3 DIRECCIONES
                     RESULT=res;
                 :}
