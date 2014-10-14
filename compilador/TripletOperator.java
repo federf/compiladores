@@ -19,6 +19,7 @@ public enum TripletOperator{
  	, METHODCALL /* Primer parametro: ID del metodo. Segundo parametro: cant de parametros.  */
  	, ARRAYACCESS /*Primer parametro: Arreglo. Segundo Parametro: indice. Tercer Parametro: direccion en donde se guardara*/
  	, METHODDECL /*Primer parametro: Metodo*/
+ 	, CONST /*Primer Parametro: literal (int, float o bool). Tercer Parametro: nombre Label*/
  	,EXTERNINVK; /* Primer parametro: Expresion */
  	@Override
 	public String toString() {

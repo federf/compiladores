@@ -24,16 +24,16 @@ lista:
 
 {METHODDECL, Metodo{ name=factorial, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 2}
+{null, 1, null, Result: IntLiteral Label 2}
 {ASSIGN(=), 1, null, Result: VarLocation{name=total, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 5}
+{null, 0, null, Result: IntLiteral Label 5}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 7, type=boolean, expr=0 > 0, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 9}
 {CMP, VarLocation{name=factor Label 8, type=boolean, expr=VarLocation{name=GE Label 7, type=boolean, expr=0 > 0, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 10}
 {MULTIPLY(*), 0, 0, Result: VarLocation{name=MULTIPLY Label 13, type=int, expr=0 * 0, size=0}}
 {ASSIGN(=), 0 * 0, null, Result: VarLocation{name=total, type=int, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 15}
+{null, 1, null, Result: IntLiteral Label 15}
 {MINUS(-), 0, 1, Result: VarLocation{name=MINUS Label 17, type=int, expr=0 - 1, size=0}}
 {ASSIGN(=), 0 - 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 9}
@@ -43,7 +43,7 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 19}
+{null, 3, null, Result: IntLiteral Label 19}
 {METHODCALL, factorial, 1, Result: RESULT Label 21}
 {PARAM, null, null, Result: 3}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=factorial, args=[3]}]}, null, Result: null}
@@ -57,12 +57,10 @@ factorial:
     mov %rsp, %rbp
     mov 0(%rbp), %eax
     mov -4(%rbp), %eax
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 2(%rbp)
+    movl $1, IntLiteral Label 2(%rbp)
     mov 1(%rbp), %eax
     mov -12(%rbp), %eax
-    mov 0(%rbp), %eax
-    mov %eax, IntLiteral Label 5(%rbp)
+    movl $0, IntLiteral Label 5(%rbp)
     movl	$0, %eax
     cmpl	$0, %eax
     setg	%al
@@ -72,16 +70,15 @@ factorial:
     mov true(%rbp), %eax
     cmp -32(%rbp), %eax
     jne EndWhile Label 10
-    mov $0%eax
-    mov $0%edx
+    mov $0, %eax
+    mov $0, %edx
     imul %edx, %eax
     mov %eax,-48%(ebp)
     mov 0 * 0(%rbp), %eax
     mov -36(%rbp), %eax
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 15(%rbp)
-    mov $0%eax
-    mov $1%edx
+    movl $1, IntLiteral Label 15(%rbp)
+    mov $0, %eax
+    mov $1, %edx
     sub %eax, %edx
     mov %edx,-64%(ebp)
     mov 0 - 1(%rbp), %eax
@@ -98,10 +95,9 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 3(%rbp), %eax
-    mov %eax, IntLiteral Label 19(%rbp)
-    call 	factorial
-    movl 	%eax, RESULT Label 21(%rbp) 
+    movl $3, IntLiteral Label 19(%rbp)
+    call factorial
+    movl %eax, RESULT Label 21(%rbp) 
 PARAM
 EXTERNINVK
     leave
@@ -154,12 +150,12 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{ASSIGN(=), 1.234, null, Result: FloatLiteral Label 13}
+{null, 1.234, null, Result: FloatLiteral Label 13}
 {ASSIGN(=), 1.234, null, Result: VarLocation{name=x, type=float, expr=null, size=0}}
-{ASSIGN(=), 27.5, null, Result: FloatLiteral Label 15}
+{null, 27.5, null, Result: FloatLiteral Label 15}
 {UNARYMINUS(-expr), 27.5, null, Result: VarLocation{name=UNARYMINUS Label 17, type=float, expr=-27.5, size=0}}
 {ASSIGN(=), -27.5, null, Result: VarLocation{name=y, type=float, expr=null, size=0}}
-{ASSIGN(=), 70.3, null, Result: FloatLiteral Label 18}
+{null, 70.3, null, Result: FloatLiteral Label 18}
 {UNARYMINUS(-expr), 70.3, null, Result: VarLocation{name=UNARYMINUS Label 20, type=float, expr=-70.3, size=0}}
 {ASSIGN(=), -70.3, null, Result: VarLocation{name=z, type=float, expr=null, size=0}}
 {METHODCALL, sum, 2, Result: RESULT Label 23}
@@ -201,11 +197,11 @@ lista:
 {LABEL, null, null, Result: BeginMethod pruebaLogica}
 
 {METHODDECL, Metodo{ name=pruebaLogica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=boolean, name=b, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 1}
+{null, true, null, Result: BoolLiteral Label 1}
 {ASSIGN(=), true, null, Result: VarLocation{name=bool, type=boolean, expr=null, size=0}}
-{ASSIGN(=), false, null, Result: BoolLiteral Label 3}
+{null, false, null, Result: BoolLiteral Label 3}
 {OR(||), false, false, Result: VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0}}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 8}
+{null, true, null, Result: BoolLiteral Label 8}
 {NON(!), true, null, Result: VarLocation{name=NON Label 10, type=boolean, expr=!true, size=0}}
 {AND(&&), VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0}, !true, Result: VarLocation{name=CONJUNCION Label 11, type=boolean, expr=VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0} && !true, size=0}}
 {NON(!), false, null, Result: VarLocation{name=NON Label 14, type=boolean, expr=!false, size=0}}
@@ -214,7 +210,7 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 17}
+{null, true, null, Result: BoolLiteral Label 17}
 {METHODCALL, pruebaLogica, 1, Result: RESULT Label 19}
 {PARAM, null, null, Result: true}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[true]}]}, null, Result: null}
@@ -226,15 +222,12 @@ pruebaLogica:
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov true(%rbp), %eax
-    mov %eax, BoolLiteral Label 1(%rbp)
+    movl $true, BoolLiteral Label 1(%rbp)
     mov true(%rbp), %eax
     mov -4(%rbp), %eax
-    mov false(%rbp), %eax
-    mov %eax, BoolLiteral Label 3(%rbp)
+    movl $false, BoolLiteral Label 3(%rbp)
 OR(||)
-    mov true(%rbp), %eax
-    mov %eax, BoolLiteral Label 8(%rbp)
+    movl $true, BoolLiteral Label 8(%rbp)
     cmp $0, true(%rbp) 
     sete	%al 
     movzbl %al, %eax 
@@ -254,10 +247,9 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov true(%rbp), %eax
-    mov %eax, BoolLiteral Label 17(%rbp)
-    call 	pruebaLogica
-    movl 	%eax, RESULT Label 19(%rbp) 
+    movl $true, BoolLiteral Label 17(%rbp)
+    call pruebaLogica
+    movl %eax, RESULT Label 19(%rbp) 
 PARAM
 EXTERNINVK
     leave
@@ -279,7 +271,7 @@ lista:
 {LABEL, null, null, Result: BeginMethod inc}
 
 {METHODDECL, Metodo{ name=inc, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 2}
+{null, 1, null, Result: IntLiteral Label 2}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 4, type=int, expr=0 + 1, size=0}}
 {RETURN, null, null, Result: 0 + 1}
 {LABEL, null, null, Result: EndMethod inc}
@@ -290,7 +282,7 @@ lista:
 {METHODCALL, inc, 1, Result: RESULT Label 7}
 {PARAM, null, null, Result: ExternInvkExpr{id="get_int", type=int, parameters=[]}}
 {ASSIGN(=), MethodCallExpr{name=inc, args=[ExternInvkExpr{id="get_int", type=int, parameters=[]}]}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 10}
+{null, 1, null, Result: IntLiteral Label 10}
 {CEQ(==), 0, 1, Result: VarLocation{name=CEQ Label 12, type=boolean, expr=0 == 1, size=0}}
 {CMP, VarLocation{name=CEQ Label 12, type=boolean, expr=0 == 1, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 13}
@@ -307,10 +299,9 @@ inc:
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 2(%rbp)
-    mov $0%eax 
-    mov $1%edx 
+    movl $1, IntLiteral Label 2(%rbp)
+    mov $0, %eax 
+    mov $1, %edx 
     add %eax, %edx 
     mov %edx,-12%(ebp) 
     mov 0 + 1(%rbp), %eax
@@ -324,13 +315,12 @@ main:
     push	%rbp
     mov %rsp, %rbp
 EXTERNINVK
-    call 	inc
-    movl 	%eax, RESULT Label 7(%rbp) 
+    call inc
+    movl %eax, RESULT Label 7(%rbp) 
 PARAM
     mov MethodCallExpr{name=inc, args=[ExternInvkExpr{id="get_int", type=int, parameters=[]}]}(%rbp), %eax
     mov -4(%rbp), %eax
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 10(%rbp)
+    movl $1, IntLiteral Label 10(%rbp)
     movl	$0, %eax
     cmpl	$1, %eax
     sete %al
@@ -382,59 +372,59 @@ lista:
 {LABEL, null, null, Result: BeginMethod pruArreglos}
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 8.87, null, Result: FloatLiteral Label 1}
+{null, 8.87, null, Result: FloatLiteral Label 1}
 {ASSIGN(=), 8.87, null, Result: VarLocation{name=y, type=float, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 3}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 5}
+{null, 0, null, Result: IntLiteral Label 3}
+{null, 4, null, Result: IntLiteral Label 5}
 {ASSIGN(=), 4, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{ASSIGN(=), 55, null, Result: IntLiteral Label 7}
-{ASSIGN(=), 2.6, null, Result: FloatLiteral Label 9}
+{null, 55, null, Result: IntLiteral Label 7}
+{null, 2.6, null, Result: FloatLiteral Label 9}
 {PLUS(+), 2.6, 0.0, Result: VarLocation{name=PLUS Label 12, type=float, expr=2.6 + 0.0, size=0}}
 {ASSIGN(=), 2.6 + 0.0, null, Result: VarLocation{name=B, type=float[], expr=null, size=56}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 13}
+{null, 0, null, Result: IntLiteral Label 13}
 {LE(<), 0, 0, Result: VarLocation{name=LE Label 17, type=boolean, expr=0 < 0, size=0}}
 {ASSIGN(=), VarLocation{name=factor Label 18, type=boolean, expr=VarLocation{name=LE Label 17, type=boolean, expr=0 < 0, size=0}, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=10}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 20}
+{null, 1, null, Result: IntLiteral Label 20}
 {GEQ(>=), 0, 0, Result: VarLocation{name=GEQ Label 24, type=boolean, expr=0 >= 0, size=0}}
 {ASSIGN(=), VarLocation{name=GEQ Label 24, type=boolean, expr=0 >= 0, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=10}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 26}
+{null, 0, null, Result: IntLiteral Label 26}
 {ARRAYACCESS, A, VarLocation{name=factor Label 27, type=int, expr=0, size=0}, Result: Array Access Label 28}
 {RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
 {LABEL, null, null, Result: EndMethod pruArreglos}
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 30}
+{null, true, null, Result: BoolLiteral Label 30}
 {ASSIGN(=), true, null, Result: VarLocation{name=y, type=boolean, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 32}
-{ASSIGN(=), 58, null, Result: IntLiteral Label 34}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 36}
+{null, 1, null, Result: IntLiteral Label 32}
+{null, 58, null, Result: IntLiteral Label 34}
+{null, 6, null, Result: IntLiteral Label 36}
 {UNARYMINUS(-expr), 6, null, Result: VarLocation{name=UNARYMINUS Label 38, type=int, expr=-6, size=0}}
 {MINUS(-), 58, VarLocation{name=UNARYMINUS Label 38, type=int, expr=-6, size=0}, Result: VarLocation{name=MINUS Label 40, type=int, expr=58 - VarLocation{name=UNARYMINUS Label 38, type=int, expr=-6, size=0}, size=0}}
 {ASSIGN(=), 58 - VarLocation{name=UNARYMINUS Label 38, type=int, expr=-6, size=0}, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 41}
-{ASSIGN(=), 2.6, null, Result: FloatLiteral Label 43}
+{null, 0, null, Result: IntLiteral Label 41}
+{null, 2.6, null, Result: FloatLiteral Label 43}
 {UNARYMINUS(-expr), 2.6, null, Result: VarLocation{name=UNARYMINUS Label 45, type=float, expr=-2.6, size=0}}
 {ASSIGN(=), -2.6, null, Result: VarLocation{name=B, type=float[], expr=null, size=56}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 46}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 48}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 50}
+{null, 2, null, Result: IntLiteral Label 46}
+{null, 4, null, Result: IntLiteral Label 48}
+{null, 6, null, Result: IntLiteral Label 50}
 {LE(<), 4, 6, Result: VarLocation{name=LE Label 52, type=boolean, expr=4 < 6, size=0}}
 {NON(!), VarLocation{name=factor Label 53, type=boolean, expr=VarLocation{name=LE Label 52, type=boolean, expr=4 < 6, size=0}, size=0}, null, Result: VarLocation{name=NON Label 55, type=boolean, expr=!VarLocation{name=factor Label 53, type=boolean, expr=VarLocation{name=LE Label 52, type=boolean, expr=4 < 6, size=0}, size=0}, size=0}}
 {ASSIGN(=), !VarLocation{name=factor Label 53, type=boolean, expr=VarLocation{name=LE Label 52, type=boolean, expr=4 < 6, size=0}, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=10}}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 56}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 58}
-{ASSIGN(=), 7, null, Result: IntLiteral Label 60}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 62}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 64}
+{null, 3, null, Result: IntLiteral Label 56}
+{null, 5, null, Result: IntLiteral Label 58}
+{null, 7, null, Result: IntLiteral Label 60}
+{null, 3, null, Result: IntLiteral Label 62}
+{null, 3, null, Result: IntLiteral Label 64}
 {PLUS(+), 3, 3, Result: VarLocation{name=PLUS Label 66, type=int, expr=3 + 3, size=0}}
 {MINUS(-), 7, VarLocation{name=PLUS Label 66, type=int, expr=3 + 3, size=0}, Result: VarLocation{name=MINUS Label 68, type=int, expr=7 - VarLocation{name=PLUS Label 66, type=int, expr=3 + 3, size=0}, size=0}}
 {ARRAYACCESS, A, VarLocation{name=MINUS Label 68, type=int, expr=7 - VarLocation{name=PLUS Label 66, type=int, expr=3 + 3, size=0}, size=0}, Result: Array Access Label 69}
 {GEQ(>=), 5, ArrayLiteral{id=A, size=5}, Result: VarLocation{name=GEQ Label 71, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0}}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 73}
+{null, true, null, Result: BoolLiteral Label 73}
 {OR(||), VarLocation{name=GEQ Label 71, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0}, true, Result: VarLocation{name=DISYUNCION Label 75, type=boolean, expr=VarLocation{name=GEQ Label 71, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0} || true, size=0}}
 {ASSIGN(=), VarLocation{name=GEQ Label 71, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0} || true, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=10}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 76}
+{null, 1, null, Result: IntLiteral Label 76}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -486,8 +476,8 @@ lista:
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
 {CMP, VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 4}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 6}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 8}
+{null, 0, null, Result: IntLiteral Label 6}
+{null, 1, null, Result: IntLiteral Label 8}
 {MINUS(-), 1, 0, Result: VarLocation{name=MINUS Label 11, type=int, expr=1 - 0, size=0}}
 {ASSIGN(=), 1 - 0, null, Result: VarLocation{name=res, type=float[], expr=null, size=8}}
 {JMP, null, null, Result: endIf Label 5}
@@ -496,10 +486,10 @@ lista:
 {CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 14, type=boolean, expr=0 == 0, size=0}}
 {CMP, VarLocation{name=CEQ Label 14, type=boolean, expr=0 == 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 15}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 17}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 19}
+{null, 1, null, Result: IntLiteral Label 17}
+{null, 1, null, Result: IntLiteral Label 19}
 {MINUS(-), 1, 1, Result: VarLocation{name=MINUS Label 21, type=int, expr=1 - 1, size=0}}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 23}
+{null, 5, null, Result: IntLiteral Label 23}
 {MULTIPLY(*), 0, 5, Result: VarLocation{name=MULTIPLY Label 25, type=int, expr=0 * 5, size=0}}
 {ASSIGN(=), 0 * 5, null, Result: VarLocation{name=res, type=float[], expr=null, size=8}}
 {JMP, null, null, Result: endIf Label 16}
@@ -507,71 +497,71 @@ lista:
 {MINUS(-), 0, 0, Result: VarLocation{name=MINUS Label 28, type=int, expr=0 - 0, size=0}}
 {ASSIGN(=), 0, null, Result: VarLocation{name=res, type=float[], expr=null, size=8}}
 {LABEL, null, null, Result: endIf Label 16}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 30}
+{null, 0, null, Result: IntLiteral Label 30}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 589, null, Result: IntLiteral Label 33}
+{null, 589, null, Result: IntLiteral Label 33}
 {LE(<), 0, 589, Result: VarLocation{name=LE Label 35, type=boolean, expr=0 < 589, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 37}
 {CMP, VarLocation{name=factor Label 36, type=boolean, expr=VarLocation{name=LE Label 35, type=boolean, expr=0 < 589, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 38}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 41}
+{null, 2, null, Result: IntLiteral Label 41}
 {MULTIPLY(*), 0, 2, Result: VarLocation{name=MULTIPLY Label 43, type=int, expr=0 * 2, size=0}}
 {ASSIGN(=), 0 * 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=589}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 44}
+{null, 1, null, Result: IntLiteral Label 44}
 {ASSIGN(=), 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 37}
 {LABEL, null, null, Result: EndWhile Label 38}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 46}
+{null, 8, null, Result: IntLiteral Label 46}
 {ASSIGN(=), 8, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 49}
+{null, 0, null, Result: IntLiteral Label 49}
 {GEQ(>=), 0, 0, Result: VarLocation{name=GEQ Label 51, type=boolean, expr=0 >= 0, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 52}
 {CMP, VarLocation{name=GEQ Label 51, type=boolean, expr=0 >= 0, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 53}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 56}
+{null, 2, null, Result: IntLiteral Label 56}
 {MULTIPLY(*), 0, 2, Result: VarLocation{name=MULTIPLY Label 58, type=int, expr=0 * 2, size=0}}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 59}
+{null, 8, null, Result: IntLiteral Label 59}
 {PLUS(+), 0 * 2, 8, Result: VarLocation{name=PLUS Label 61, type=int, expr=0 * 2 + 8, size=0}}
 {ARRAYACCESS, A, VarLocation{name=PLUS Label 61, type=int, expr=0 * 2 + 8, size=0}, Result: Array Access Label 62}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 64}
+{null, 3, null, Result: IntLiteral Label 64}
 {PLUS(+), ArrayLiteral{id=A, size=589}, 3, Result: VarLocation{name=PLUS Label 66, type=int, expr=ArrayLiteral{id=A, size=589} + 3, size=0}}
 {ASSIGN(=), ArrayLiteral{id=A, size=589} + 3, null, Result: VarLocation{name=B, type=float[], expr=null, size=56}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 67}
+{null, 1, null, Result: IntLiteral Label 67}
 {ASSIGN(=), 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 52}
 {LABEL, null, null, Result: EndWhile Label 53}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 69}
+{null, 0, null, Result: IntLiteral Label 69}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 72}
-{ASSIGN(=), 9, null, Result: IntLiteral Label 74}
+{null, 5, null, Result: IntLiteral Label 72}
+{null, 9, null, Result: IntLiteral Label 74}
 {MULTIPLY(*), 5, 9, Result: VarLocation{name=MULTIPLY Label 76, type=int, expr=5 * 9, size=0}}
-{ASSIGN(=), 40, null, Result: IntLiteral Label 78}
+{null, 40, null, Result: IntLiteral Label 78}
 {MINUS(-), VarLocation{name=MULTIPLY Label 76, type=int, expr=5 * 9, size=0}, 40, Result: VarLocation{name=MINUS Label 80, type=int, expr=VarLocation{name=MULTIPLY Label 76, type=int, expr=5 * 9, size=0} - 40, size=0}}
 {LEQ(<=), 0, VarLocation{name=MULTIPLY Label 76, type=int, expr=5 * 9, size=0} - 40, Result: VarLocation{name=LEQ Label 81, type=boolean, expr=0 <= VarLocation{name=MULTIPLY Label 76, type=int, expr=5 * 9, size=0} - 40, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 82}
 {CMP, VarLocation{name=LEQ Label 81, type=boolean, expr=0 <= VarLocation{name=MULTIPLY Label 76, type=int, expr=5 * 9, size=0} - 40, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 83}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 86}
+{null, 2, null, Result: IntLiteral Label 86}
 {MULTIPLY(*), 0, 2, Result: VarLocation{name=MULTIPLY Label 88, type=int, expr=0 * 2, size=0}}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 89}
+{null, 8, null, Result: IntLiteral Label 89}
 {PLUS(+), 0 * 2, 8, Result: VarLocation{name=PLUS Label 91, type=int, expr=0 * 2 + 8, size=0}}
 {ARRAYACCESS, A, VarLocation{name=PLUS Label 91, type=int, expr=0 * 2 + 8, size=0}, Result: Array Access Label 92}
 {ARRAYACCESS, B, VarLocation{name=factor Label 94, type=int, expr=0, size=0}, Result: Array Access Label 95}
 {GE(>), ArrayLiteral{id=A, size=589}, ArrayLiteral{id=B, size=56}, Result: VarLocation{name=GE Label 97, type=boolean, expr=ArrayLiteral{id=A, size=589} > ArrayLiteral{id=B, size=56}, size=0}}
 {ASSIGN(=), ArrayLiteral{id=A, size=589} > ArrayLiteral{id=B, size=56}, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=5}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 99}
+{null, 1, null, Result: IntLiteral Label 99}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 101, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 82}
 {LABEL, null, null, Result: EndWhile Label 83}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 102}
+{null, 0, null, Result: IntLiteral Label 102}
 {ARRAYACCESS, res, VarLocation{name=factor Label 103, type=int, expr=0, size=0}, Result: Array Access Label 104}
 {LABEL, null, null, Result: EndMethod pruArreglos}
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 106}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 108}
+{null, 4, null, Result: IntLiteral Label 106}
+{null, 8, null, Result: IntLiteral Label 108}
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 110}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
@@ -596,7 +586,7 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 1}
+{null, 3, null, Result: IntLiteral Label 1}
 {METHODCALL, pruAritmetica, 1, Result: RESULT Label 3}
 {PARAM, null, null, Result: 3}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[3]}]}, null, Result: null}
@@ -617,10 +607,9 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 3(%rbp), %eax
-    mov %eax, IntLiteral Label 1(%rbp)
-    call 	pruAritmetica
-    movl 	%eax, RESULT Label 3(%rbp) 
+    movl $3, IntLiteral Label 1(%rbp)
+    call pruAritmetica
+    movl %eax, RESULT Label 3(%rbp) 
 PARAM
 EXTERNINVK
     leave
@@ -651,31 +640,31 @@ lista:
 {LABEL, null, null, Result: BeginMethod aritmTest}
 
 {METHODDECL, Metodo{ name=aritmTest, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 1}
+{null, 1, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 3}
+{null, 2, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 5}
+{null, 1, null, Result: IntLiteral Label 5}
 {PLUS(+), 1, 0, Result: VarLocation{name=PLUS Label 8, type=int, expr=1 + 0, size=0}}
 {ASSIGN(=), 1 + 0, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 10}
+{null, 2, null, Result: IntLiteral Label 10}
 {PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 12, type=int, expr=0 + 2, size=0}}
 {ASSIGN(=), 0 + 2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
 {DIVIDE(/), 0, 0, Result: VarLocation{name=DIVIDE Label 15, type=int, expr=0 / 0, size=0}}
 {ASSIGN(=), VarLocation{name=DIVIDE Label 15, type=int, expr=0 / 0, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 18}
+{null, 3, null, Result: IntLiteral Label 18}
 {MOD(%), 0, 3, Result: VarLocation{name=MOD Label 20, type=int, expr=0 % 3, size=0}}
 {ASSIGN(=), 0 % 3, null, Result: VarLocation{name=c, type=int, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 21}
+{null, 1, null, Result: IntLiteral Label 21}
 {ASSIGN(=), 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 23}
+{null, 2, null, Result: IntLiteral Label 23}
 {ASSIGN(=), 2, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 {RETURN, null, null, Result: 0}
 {LABEL, null, null, Result: EndMethod aritmTest}
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 26}
+{null, 5, null, Result: IntLiteral Label 26}
 {METHODCALL, aritmTest, 1, Result: RESULT Label 28}
 {PARAM, null, null, Result: 5}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=aritmTest, args=[5]}]}, null, Result: null}
@@ -687,26 +676,22 @@ aritmTest:
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 1(%rbp)
+    movl $1, IntLiteral Label 1(%rbp)
     mov 1(%rbp), %eax
     mov -4(%rbp), %eax
-    mov 2(%rbp), %eax
-    mov %eax, IntLiteral Label 3(%rbp)
+    movl $2, IntLiteral Label 3(%rbp)
     mov 2(%rbp), %eax
     mov -12(%rbp), %eax
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 5(%rbp)
-    mov $1%eax 
-    mov $0%edx 
+    movl $1, IntLiteral Label 5(%rbp)
+    mov $1, %eax 
+    mov $0, %edx 
     add %eax, %edx 
     mov %edx,-32%(ebp) 
     mov 1 + 0(%rbp), %eax
     mov -20(%rbp), %eax
-    mov 2(%rbp), %eax
-    mov %eax, IntLiteral Label 10(%rbp)
-    mov $0%eax 
-    mov $2%edx 
+    movl $2, IntLiteral Label 10(%rbp)
+    mov $0, %eax 
+    mov $2, %edx 
     add %eax, %edx 
     mov %edx,-48%(ebp) 
     mov 0 + 2(%rbp), %eax
@@ -714,19 +699,16 @@ aritmTest:
 DIVIDE(/)
     mov -64(%rbp), %eax
     mov -52(%rbp), %eax
-    mov 3(%rbp), %eax
-    mov %eax, IntLiteral Label 18(%rbp)
+    movl $3, IntLiteral Label 18(%rbp)
     movl	$3, %eax 
     idivl $0, %eax 
     movl	%edx, -84(%rbp)
     mov 0 % 3(%rbp), %eax
     mov -72(%rbp), %eax
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 21(%rbp)
+    movl $1, IntLiteral Label 21(%rbp)
     mov 1(%rbp), %eax
     mov -88(%rbp), %eax
-    mov 2(%rbp), %eax
-    mov %eax, IntLiteral Label 23(%rbp)
+    movl $2, IntLiteral Label 23(%rbp)
     mov 2(%rbp), %eax
     mov -96(%rbp), %eax
     mov 0(%rbp), %eax
@@ -739,10 +721,9 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 5(%rbp), %eax
-    mov %eax, IntLiteral Label 26(%rbp)
-    call 	aritmTest
-    movl 	%eax, RESULT Label 28(%rbp) 
+    movl $5, IntLiteral Label 26(%rbp)
+    call aritmTest
+    movl %eax, RESULT Label 28(%rbp) 
 PARAM
 EXTERNINVK
     leave
@@ -767,19 +748,19 @@ lista:
 {LABEL, null, null, Result: BeginMethod breaks}
 
 {METHODDECL, Metodo{ name=breaks, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=g, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 1}
+{null, 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 10, null, Result: IntLiteral Label 4}
+{null, 10, null, Result: IntLiteral Label 4}
 {LE(<), 0, 10, Result: VarLocation{name=LE Label 6, type=boolean, expr=0 < 10, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 8}
 {CMP, VarLocation{name=factor Label 7, type=boolean, expr=VarLocation{name=LE Label 6, type=boolean, expr=0 < 10, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 9}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 11}
+{null, 1, null, Result: IntLiteral Label 11}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 13, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 2.3, null, Result: FloatLiteral Label 14}
+{null, 2.3, null, Result: FloatLiteral Label 14}
 {ASSIGN(=), 2.3, null, Result: VarLocation{name=j, type=float, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 17}
+{null, 0, null, Result: IntLiteral Label 17}
 {LE(<), 0, 0, Result: VarLocation{name=LE Label 19, type=boolean, expr=0 < 0, size=0}}
 {CMP, VarLocation{name=LE Label 19, type=boolean, expr=0 < 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 20}
@@ -795,11 +776,11 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 23}
+{null, 1, null, Result: IntLiteral Label 23}
 {METHODCALL, breaks, 1, Result: RESULT Label 25}
 {PARAM, null, null, Result: 1}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 28}
+{null, 1, null, Result: IntLiteral Label 28}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -809,12 +790,10 @@ breaks:
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 0(%rbp), %eax
-    mov %eax, IntLiteral Label 1(%rbp)
+    movl $0, IntLiteral Label 1(%rbp)
     mov 0(%rbp), %eax
     mov -4(%rbp), %eax
-    mov 10(%rbp), %eax
-    mov %eax, IntLiteral Label 4(%rbp)
+    movl $10, IntLiteral Label 4(%rbp)
     movl	$0, %eax
     cmpl	$10, %eax
     setl	%al
@@ -824,20 +803,17 @@ breaks:
     mov true(%rbp), %eax
     cmp -24(%rbp), %eax
     jne EndWhile Label 9
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 11(%rbp)
-    mov $0%eax 
-    mov $1%edx 
+    movl $1, IntLiteral Label 11(%rbp)
+    mov $0, %eax 
+    mov $1, %edx 
     add %eax, %edx 
     mov %edx,-40%(ebp) 
     mov 0 + 1(%rbp), %eax
     mov -28(%rbp), %eax
-    mov 2.3(%rbp), %eax
-    mov %eax, FloatLiteral Label 14(%rbp)
+    movl $2.3, FloatLiteral Label 14(%rbp)
     mov 2.3(%rbp), %eax
     mov -44(%rbp), %eax
-    mov 0(%rbp), %eax
-    mov %eax, IntLiteral Label 17(%rbp)
+    movl $0, IntLiteral Label 17(%rbp)
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
@@ -863,14 +839,12 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 23(%rbp)
-    call 	breaks
-    movl 	%eax, RESULT Label 25(%rbp) 
+    movl $1, IntLiteral Label 23(%rbp)
+    call breaks
+    movl %eax, RESULT Label 25(%rbp) 
 PARAM
 EXTERNINVK
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 28(%rbp)
+    movl $1, IntLiteral Label 28(%rbp)
     mov 1(%rbp), %eax
     leave
     ret
@@ -893,17 +867,17 @@ lista:
 {LABEL, null, null, Result: BeginMethod breaks}
 
 {METHODDECL, Metodo{ name=breaks, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=g, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 1}
+{null, 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 10, null, Result: IntLiteral Label 4}
+{null, 10, null, Result: IntLiteral Label 4}
 {LE(<), 0, 10, Result: VarLocation{name=LE Label 6, type=boolean, expr=0 < 10, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 8}
 {CMP, VarLocation{name=factor Label 7, type=boolean, expr=VarLocation{name=LE Label 6, type=boolean, expr=0 < 10, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 9}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 11}
+{null, 1, null, Result: IntLiteral Label 11}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 13, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 15}
+{null, 0, null, Result: IntLiteral Label 15}
 {LE(<), 0, 0, Result: VarLocation{name=LE Label 17, type=boolean, expr=0 < 0, size=0}}
 {CMP, VarLocation{name=LE Label 17, type=boolean, expr=0 < 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 18}
@@ -919,11 +893,11 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 21}
+{null, 1, null, Result: IntLiteral Label 21}
 {METHODCALL, breaks, 1, Result: RESULT Label 23}
 {PARAM, null, null, Result: 1}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 26}
+{null, 1, null, Result: IntLiteral Label 26}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -933,12 +907,10 @@ breaks:
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 0(%rbp), %eax
-    mov %eax, IntLiteral Label 1(%rbp)
+    movl $0, IntLiteral Label 1(%rbp)
     mov 0(%rbp), %eax
     mov -4(%rbp), %eax
-    mov 10(%rbp), %eax
-    mov %eax, IntLiteral Label 4(%rbp)
+    movl $10, IntLiteral Label 4(%rbp)
     movl	$0, %eax
     cmpl	$10, %eax
     setl	%al
@@ -948,16 +920,14 @@ breaks:
     mov true(%rbp), %eax
     cmp -24(%rbp), %eax
     jne EndWhile Label 9
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 11(%rbp)
-    mov $0%eax 
-    mov $1%edx 
+    movl $1, IntLiteral Label 11(%rbp)
+    mov $0, %eax 
+    mov $1, %edx 
     add %eax, %edx 
     mov %edx,-40%(ebp) 
     mov 0 + 1(%rbp), %eax
     mov -28(%rbp), %eax
-    mov 0(%rbp), %eax
-    mov %eax, IntLiteral Label 15(%rbp)
+    movl $0, IntLiteral Label 15(%rbp)
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
@@ -983,14 +953,12 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 21(%rbp)
-    call 	breaks
-    movl 	%eax, RESULT Label 23(%rbp) 
+    movl $1, IntLiteral Label 21(%rbp)
+    call breaks
+    movl %eax, RESULT Label 23(%rbp) 
 PARAM
 EXTERNINVK
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 26(%rbp)
+    movl $1, IntLiteral Label 26(%rbp)
     mov 1(%rbp), %eax
     leave
     ret
@@ -1033,9 +1001,9 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 9}
+{null, true, null, Result: BoolLiteral Label 9}
 {ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
-{ASSIGN(=), false, null, Result: BoolLiteral Label 11}
+{null, false, null, Result: BoolLiteral Label 11}
 {ASSIGN(=), false, null, Result: VarLocation{name=b, type=boolean, expr=null, size=0}}
 {METHODCALL, neg, 1, Result: RESULT Label 14}
 {PARAM, null, null, Result: false}
@@ -1094,28 +1062,26 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov true(%rbp), %eax
-    mov %eax, BoolLiteral Label 9(%rbp)
+    movl $true, BoolLiteral Label 9(%rbp)
     mov true(%rbp), %eax
     mov -4(%rbp), %eax
-    mov false(%rbp), %eax
-    mov %eax, BoolLiteral Label 11(%rbp)
+    movl $false, BoolLiteral Label 11(%rbp)
     mov false(%rbp), %eax
     mov -12(%rbp), %eax
-    call 	neg
-    movl 	%eax, RESULT Label 14(%rbp) 
+    call neg
+    movl %eax, RESULT Label 14(%rbp) 
 PARAM
     mov MethodCallExpr{name=neg, args=[false]}(%rbp), %eax
     mov -20(%rbp), %eax
-    call 	and
-    movl 	%eax, RESULT Label 18(%rbp) 
+    call and
+    movl %eax, RESULT Label 18(%rbp) 
 PARAM
 PARAM
-    call 	neg
-    movl 	%eax, RESULT Label 21(%rbp) 
+    call neg
+    movl %eax, RESULT Label 21(%rbp) 
 PARAM
-    call 	or
-    movl 	%eax, RESULT Label 23(%rbp) 
+    call or
+    movl %eax, RESULT Label 23(%rbp) 
 PARAM
 PARAM
     mov MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}(%rbp), %eax
@@ -1142,17 +1108,17 @@ lista:
 {LABEL, null, null, Result: BeginMethod breaks}
 
 {METHODDECL, Metodo{ name=breaks, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=g, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 1}
+{null, 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 10, null, Result: IntLiteral Label 4}
+{null, 10, null, Result: IntLiteral Label 4}
 {LE(<), 0, 10, Result: VarLocation{name=LE Label 6, type=boolean, expr=0 < 10, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 8}
 {CMP, VarLocation{name=factor Label 7, type=boolean, expr=VarLocation{name=LE Label 6, type=boolean, expr=0 < 10, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 9}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 11}
+{null, 1, null, Result: IntLiteral Label 11}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 13, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 15}
+{null, 0, null, Result: IntLiteral Label 15}
 {LE(<), 0, 0, Result: VarLocation{name=LE Label 17, type=boolean, expr=0 < 0, size=0}}
 {CMP, VarLocation{name=LE Label 17, type=boolean, expr=0 < 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 18}
@@ -1168,11 +1134,11 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 21}
+{null, 1, null, Result: IntLiteral Label 21}
 {METHODCALL, breaks, 1, Result: RESULT Label 23}
 {PARAM, null, null, Result: 1}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 26}
+{null, 1, null, Result: IntLiteral Label 26}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -1182,12 +1148,10 @@ breaks:
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 0(%rbp), %eax
-    mov %eax, IntLiteral Label 1(%rbp)
+    movl $0, IntLiteral Label 1(%rbp)
     mov 0(%rbp), %eax
     mov -4(%rbp), %eax
-    mov 10(%rbp), %eax
-    mov %eax, IntLiteral Label 4(%rbp)
+    movl $10, IntLiteral Label 4(%rbp)
     movl	$0, %eax
     cmpl	$10, %eax
     setl	%al
@@ -1197,16 +1161,14 @@ breaks:
     mov true(%rbp), %eax
     cmp -24(%rbp), %eax
     jne EndWhile Label 9
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 11(%rbp)
-    mov $0%eax 
-    mov $1%edx 
+    movl $1, IntLiteral Label 11(%rbp)
+    mov $0, %eax 
+    mov $1, %edx 
     add %eax, %edx 
     mov %edx,-40%(ebp) 
     mov 0 + 1(%rbp), %eax
     mov -28(%rbp), %eax
-    mov 0(%rbp), %eax
-    mov %eax, IntLiteral Label 15(%rbp)
+    movl $0, IntLiteral Label 15(%rbp)
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
@@ -1232,14 +1194,12 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 21(%rbp)
-    call 	breaks
-    movl 	%eax, RESULT Label 23(%rbp) 
+    movl $1, IntLiteral Label 21(%rbp)
+    call breaks
+    movl %eax, RESULT Label 23(%rbp) 
 PARAM
 EXTERNINVK
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 26(%rbp)
+    movl $1, IntLiteral Label 26(%rbp)
     mov 1(%rbp), %eax
     leave
     ret
@@ -1273,8 +1233,8 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 9}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 11}
+{null, 4, null, Result: IntLiteral Label 9}
+{null, 8, null, Result: IntLiteral Label 11}
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 13}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
@@ -1311,12 +1271,10 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 4(%rbp), %eax
-    mov %eax, IntLiteral Label 9(%rbp)
-    mov 8(%rbp), %eax
-    mov %eax, IntLiteral Label 11(%rbp)
-    call 	pruAritmetica
-    movl 	%eax, RESULT Label 13(%rbp) 
+    movl $4, IntLiteral Label 9(%rbp)
+    movl $8, IntLiteral Label 11(%rbp)
+    call pruAritmetica
+    movl %eax, RESULT Label 13(%rbp) 
 PARAM
 PARAM
 EXTERNINVK
@@ -1344,7 +1302,7 @@ lista:
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}}
 {CMP, VarLocation{name=GE Label 3, type=boolean, expr=0 > 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 4}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 7}
+{null, 5, null, Result: IntLiteral Label 7}
 {PLUS(+), 0, 5, Result: VarLocation{name=PLUS Label 9, type=int, expr=0 + 5, size=0}}
 {ASSIGN(=), 0 + 5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 {JMP, null, null, Result: endIf Label 5}
@@ -1355,8 +1313,8 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 12}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 14}
+{null, 4, null, Result: IntLiteral Label 12}
+{null, 8, null, Result: IntLiteral Label 14}
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 16}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
@@ -1377,10 +1335,9 @@ pruAritmetica:
     mov true(%rbp), %eax
     cmp -12(%rbp), %eax
     jne elseCond Label 4
-    mov 5(%rbp), %eax
-    mov %eax, IntLiteral Label 7(%rbp)
-    mov $0%eax 
-    mov $5%edx 
+    movl $5, IntLiteral Label 7(%rbp)
+    mov $0, %eax 
+    mov $5, %edx 
     add %eax, %edx 
     mov %edx,-28%(ebp) 
     mov 0 + 5(%rbp), %eax
@@ -1399,12 +1356,10 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 4(%rbp), %eax
-    mov %eax, IntLiteral Label 12(%rbp)
-    mov 8(%rbp), %eax
-    mov %eax, IntLiteral Label 14(%rbp)
-    call 	pruAritmetica
-    movl 	%eax, RESULT Label 16(%rbp) 
+    movl $4, IntLiteral Label 12(%rbp)
+    movl $8, IntLiteral Label 14(%rbp)
+    call pruAritmetica
+    movl %eax, RESULT Label 16(%rbp) 
 PARAM
 PARAM
 EXTERNINVK
@@ -1480,110 +1435,110 @@ lista:
 {LABEL, null, null, Result: BeginMethod dados}
 
 {METHODDECL, Metodo{ name=dados, return_not_void=true, typeReturn=float, parameters [Simbolo{type=int, name=d1, value=null, size=0}, Simbolo{type=int, name=d2, value=null, size=0}, Simbolo{type=int, name=d3, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 2}
+{null, 6, null, Result: IntLiteral Label 2}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 6, size=0}}
 {NON(!), VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 6, type=boolean, expr=!VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 6, size=0}, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 8}
+{null, 6, null, Result: IntLiteral Label 8}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0}}
 {NON(!), VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 12, type=boolean, expr=!VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0}, size=0}}
 {AND(&&), !VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 6, size=0}, !VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 13, type=boolean, expr=!VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0}, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 15}
+{null, 6, null, Result: IntLiteral Label 15}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 17, type=boolean, expr=0 == 6, size=0}}
 {NON(!), VarLocation{name=CEQ Label 17, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 19, type=boolean, expr=!VarLocation{name=CEQ Label 17, type=boolean, expr=0 == 6, size=0}, size=0}}
 {AND(&&), !VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0}, !VarLocation{name=CEQ Label 17, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 20, type=boolean, expr=!VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 17, type=boolean, expr=0 == 6, size=0}, size=0}}
 {CMP, VarLocation{name=CONJUNCION Label 20, type=boolean, expr=!VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 10, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 17, type=boolean, expr=0 == 6, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 21}
-{ASSIGN(=), 1.00, null, Result: FloatLiteral Label 23}
+{null, 1.00, null, Result: FloatLiteral Label 23}
 {RETURN, null, null, Result: 1.00}
 {JMP, null, null, Result: endIf Label 22}
 {LABEL, null, null, Result: elseCond Label 21}
 {LABEL, null, null, Result: endIf Label 22}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 26}
+{null, 6, null, Result: IntLiteral Label 26}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 28, type=boolean, expr=0 == 6, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 31}
+{null, 6, null, Result: IntLiteral Label 31}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0}}
 {NON(!), VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 35, type=boolean, expr=!VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0}, size=0}}
 {AND(&&), VarLocation{name=CEQ Label 28, type=boolean, expr=0 == 6, size=0}, !VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 36, type=boolean, expr=VarLocation{name=CEQ Label 28, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0}, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 38}
+{null, 6, null, Result: IntLiteral Label 38}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 40, type=boolean, expr=0 == 6, size=0}}
 {NON(!), VarLocation{name=CEQ Label 40, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 42, type=boolean, expr=!VarLocation{name=CEQ Label 40, type=boolean, expr=0 == 6, size=0}, size=0}}
 {AND(&&), VarLocation{name=CEQ Label 28, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0}, !VarLocation{name=CEQ Label 40, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 43, type=boolean, expr=VarLocation{name=CEQ Label 28, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 40, type=boolean, expr=0 == 6, size=0}, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 46}
+{null, 6, null, Result: IntLiteral Label 46}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0}}
 {NON(!), VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 50, type=boolean, expr=!VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0}, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 52}
+{null, 6, null, Result: IntLiteral Label 52}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 54, type=boolean, expr=0 == 6, size=0}}
 {AND(&&), !VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0}, VarLocation{name=CEQ Label 54, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 56, type=boolean, expr=!VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 54, type=boolean, expr=0 == 6, size=0}, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 58}
+{null, 6, null, Result: IntLiteral Label 58}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 60, type=boolean, expr=0 == 6, size=0}}
 {NON(!), VarLocation{name=CEQ Label 60, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 62, type=boolean, expr=!VarLocation{name=CEQ Label 60, type=boolean, expr=0 == 6, size=0}, size=0}}
 {AND(&&), !VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 54, type=boolean, expr=0 == 6, size=0}, !VarLocation{name=CEQ Label 60, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 63, type=boolean, expr=!VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 54, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 60, type=boolean, expr=0 == 6, size=0}, size=0}}
 {OR(||), VarLocation{name=CONJUNCION Label 43, type=boolean, expr=VarLocation{name=CEQ Label 28, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 40, type=boolean, expr=0 == 6, size=0}, size=0}, VarLocation{name=CONJUNCION Label 63, type=boolean, expr=!VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 54, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 60, type=boolean, expr=0 == 6, size=0}, size=0}, Result: VarLocation{name=DISYUNCION Label 65, type=boolean, expr=VarLocation{name=CONJUNCION Label 43, type=boolean, expr=VarLocation{name=CEQ Label 28, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 40, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 63, type=boolean, expr=!VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 54, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 60, type=boolean, expr=0 == 6, size=0}, size=0}, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 67}
+{null, 6, null, Result: IntLiteral Label 67}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 69, type=boolean, expr=0 == 6, size=0}}
 {NON(!), VarLocation{name=CEQ Label 69, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 71, type=boolean, expr=!VarLocation{name=CEQ Label 69, type=boolean, expr=0 == 6, size=0}, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 73}
+{null, 6, null, Result: IntLiteral Label 73}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0}}
 {NON(!), VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 77, type=boolean, expr=!VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0}, size=0}}
 {AND(&&), !VarLocation{name=CEQ Label 69, type=boolean, expr=0 == 6, size=0}, !VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 78, type=boolean, expr=!VarLocation{name=CEQ Label 69, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0}, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 80}
+{null, 6, null, Result: IntLiteral Label 80}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 82, type=boolean, expr=0 == 6, size=0}}
 {AND(&&), !VarLocation{name=CEQ Label 69, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0}, VarLocation{name=CEQ Label 82, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 84, type=boolean, expr=!VarLocation{name=CEQ Label 69, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 82, type=boolean, expr=0 == 6, size=0}, size=0}}
 {OR(||), VarLocation{name=CONJUNCION Label 43, type=boolean, expr=VarLocation{name=CEQ Label 28, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 40, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 63, type=boolean, expr=!VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 54, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 60, type=boolean, expr=0 == 6, size=0}, size=0}, VarLocation{name=CONJUNCION Label 84, type=boolean, expr=!VarLocation{name=CEQ Label 69, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 82, type=boolean, expr=0 == 6, size=0}, size=0}, Result: VarLocation{name=DISYUNCION Label 86, type=boolean, expr=VarLocation{name=CONJUNCION Label 43, type=boolean, expr=VarLocation{name=CEQ Label 28, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 40, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 63, type=boolean, expr=!VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 54, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 60, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 84, type=boolean, expr=!VarLocation{name=CEQ Label 69, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 82, type=boolean, expr=0 == 6, size=0}, size=0}, size=0}}
 {CMP, VarLocation{name=DISYUNCION Label 86, type=boolean, expr=VarLocation{name=CONJUNCION Label 43, type=boolean, expr=VarLocation{name=CEQ Label 28, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 33, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 40, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 63, type=boolean, expr=!VarLocation{name=CEQ Label 48, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 54, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 60, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 84, type=boolean, expr=!VarLocation{name=CEQ Label 69, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 75, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 82, type=boolean, expr=0 == 6, size=0}, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 87}
-{ASSIGN(=), 4.00, null, Result: FloatLiteral Label 89}
+{null, 4.00, null, Result: FloatLiteral Label 89}
 {RETURN, null, null, Result: 4.00}
 {JMP, null, null, Result: endIf Label 88}
 {LABEL, null, null, Result: elseCond Label 87}
 {LABEL, null, null, Result: endIf Label 88}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 92}
+{null, 6, null, Result: IntLiteral Label 92}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 94, type=boolean, expr=0 == 6, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 97}
+{null, 6, null, Result: IntLiteral Label 97}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 99, type=boolean, expr=0 == 6, size=0}}
 {AND(&&), VarLocation{name=CEQ Label 94, type=boolean, expr=0 == 6, size=0}, VarLocation{name=CEQ Label 99, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 101, type=boolean, expr=VarLocation{name=CEQ Label 94, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 99, type=boolean, expr=0 == 6, size=0}, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 103}
+{null, 6, null, Result: IntLiteral Label 103}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 105, type=boolean, expr=0 == 6, size=0}}
 {NON(!), VarLocation{name=CEQ Label 105, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 107, type=boolean, expr=!VarLocation{name=CEQ Label 105, type=boolean, expr=0 == 6, size=0}, size=0}}
 {AND(&&), VarLocation{name=CEQ Label 94, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 99, type=boolean, expr=0 == 6, size=0}, !VarLocation{name=CEQ Label 105, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 108, type=boolean, expr=VarLocation{name=CEQ Label 94, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 99, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 105, type=boolean, expr=0 == 6, size=0}, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 111}
+{null, 6, null, Result: IntLiteral Label 111}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 116}
+{null, 6, null, Result: IntLiteral Label 116}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0}}
 {NON(!), VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 120, type=boolean, expr=!VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0}, size=0}}
 {AND(&&), VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0}, !VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 121, type=boolean, expr=VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0}, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 123}
+{null, 6, null, Result: IntLiteral Label 123}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 125, type=boolean, expr=0 == 6, size=0}}
 {AND(&&), VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0}, VarLocation{name=CEQ Label 125, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 127, type=boolean, expr=VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 125, type=boolean, expr=0 == 6, size=0}, size=0}}
 {OR(||), VarLocation{name=CONJUNCION Label 108, type=boolean, expr=VarLocation{name=CEQ Label 94, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 99, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 105, type=boolean, expr=0 == 6, size=0}, size=0}, VarLocation{name=CONJUNCION Label 127, type=boolean, expr=VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 125, type=boolean, expr=0 == 6, size=0}, size=0}, Result: VarLocation{name=DISYUNCION Label 129, type=boolean, expr=VarLocation{name=CONJUNCION Label 108, type=boolean, expr=VarLocation{name=CEQ Label 94, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 99, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 105, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 127, type=boolean, expr=VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 125, type=boolean, expr=0 == 6, size=0}, size=0}, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 131}
+{null, 6, null, Result: IntLiteral Label 131}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 133, type=boolean, expr=0 == 6, size=0}}
 {NON(!), VarLocation{name=CEQ Label 133, type=boolean, expr=0 == 6, size=0}, null, Result: VarLocation{name=NON Label 135, type=boolean, expr=!VarLocation{name=CEQ Label 133, type=boolean, expr=0 == 6, size=0}, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 137}
+{null, 6, null, Result: IntLiteral Label 137}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 139, type=boolean, expr=0 == 6, size=0}}
 {AND(&&), !VarLocation{name=CEQ Label 133, type=boolean, expr=0 == 6, size=0}, VarLocation{name=CEQ Label 139, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 141, type=boolean, expr=!VarLocation{name=CEQ Label 133, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 139, type=boolean, expr=0 == 6, size=0}, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 143}
+{null, 6, null, Result: IntLiteral Label 143}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 145, type=boolean, expr=0 == 6, size=0}}
 {AND(&&), !VarLocation{name=CEQ Label 133, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 139, type=boolean, expr=0 == 6, size=0}, VarLocation{name=CEQ Label 145, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 147, type=boolean, expr=!VarLocation{name=CEQ Label 133, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 139, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 145, type=boolean, expr=0 == 6, size=0}, size=0}}
 {OR(||), VarLocation{name=CONJUNCION Label 108, type=boolean, expr=VarLocation{name=CEQ Label 94, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 99, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 105, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 127, type=boolean, expr=VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 125, type=boolean, expr=0 == 6, size=0}, size=0}, VarLocation{name=CONJUNCION Label 147, type=boolean, expr=!VarLocation{name=CEQ Label 133, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 139, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 145, type=boolean, expr=0 == 6, size=0}, size=0}, Result: VarLocation{name=DISYUNCION Label 149, type=boolean, expr=VarLocation{name=CONJUNCION Label 108, type=boolean, expr=VarLocation{name=CEQ Label 94, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 99, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 105, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 127, type=boolean, expr=VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 125, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 147, type=boolean, expr=!VarLocation{name=CEQ Label 133, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 139, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 145, type=boolean, expr=0 == 6, size=0}, size=0}, size=0}}
 {CMP, VarLocation{name=DISYUNCION Label 149, type=boolean, expr=VarLocation{name=CONJUNCION Label 108, type=boolean, expr=VarLocation{name=CEQ Label 94, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 99, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 105, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 127, type=boolean, expr=VarLocation{name=CEQ Label 113, type=boolean, expr=0 == 6, size=0} && !VarLocation{name=CEQ Label 118, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 125, type=boolean, expr=0 == 6, size=0}, size=0} || VarLocation{name=CONJUNCION Label 147, type=boolean, expr=!VarLocation{name=CEQ Label 133, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 139, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 145, type=boolean, expr=0 == 6, size=0}, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 150}
-{ASSIGN(=), 8.50, null, Result: FloatLiteral Label 152}
+{null, 8.50, null, Result: FloatLiteral Label 152}
 {RETURN, null, null, Result: 8.50}
 {JMP, null, null, Result: endIf Label 151}
 {LABEL, null, null, Result: elseCond Label 150}
 {LABEL, null, null, Result: endIf Label 151}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 155}
+{null, 6, null, Result: IntLiteral Label 155}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 157, type=boolean, expr=0 == 6, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 160}
+{null, 6, null, Result: IntLiteral Label 160}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 162, type=boolean, expr=0 == 6, size=0}}
 {AND(&&), VarLocation{name=CEQ Label 157, type=boolean, expr=0 == 6, size=0}, VarLocation{name=CEQ Label 162, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 164, type=boolean, expr=VarLocation{name=CEQ Label 157, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 162, type=boolean, expr=0 == 6, size=0}, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 166}
+{null, 6, null, Result: IntLiteral Label 166}
 {CEQ(==), 0, 6, Result: VarLocation{name=CEQ Label 168, type=boolean, expr=0 == 6, size=0}}
 {AND(&&), VarLocation{name=CEQ Label 157, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 162, type=boolean, expr=0 == 6, size=0}, VarLocation{name=CEQ Label 168, type=boolean, expr=0 == 6, size=0}, Result: VarLocation{name=CONJUNCION Label 170, type=boolean, expr=VarLocation{name=CEQ Label 157, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 162, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 168, type=boolean, expr=0 == 6, size=0}, size=0}}
 {CMP, VarLocation{name=CONJUNCION Label 170, type=boolean, expr=VarLocation{name=CEQ Label 157, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 162, type=boolean, expr=0 == 6, size=0} && VarLocation{name=CEQ Label 168, type=boolean, expr=0 == 6, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 171}
-{ASSIGN(=), 10.00, null, Result: FloatLiteral Label 173}
+{null, 10.00, null, Result: FloatLiteral Label 173}
 {RETURN, null, null, Result: 10.00}
 {JMP, null, null, Result: endIf Label 172}
 {LABEL, null, null, Result: elseCond Label 171}
@@ -1592,9 +1547,9 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 175}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 177}
-{ASSIGN(=), 9, null, Result: IntLiteral Label 179}
+{null, 1, null, Result: IntLiteral Label 175}
+{null, 6, null, Result: IntLiteral Label 177}
+{null, 9, null, Result: IntLiteral Label 179}
 {METHODCALL, dados, 3, Result: RESULT Label 181}
 {PARAM, null, null, Result: 1}
 {PARAM, null, null, Result: 6}
@@ -1608,8 +1563,7 @@ dados:
     enter   $(12), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 2(%rbp)
+    movl $6, IntLiteral Label 2(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
@@ -1619,8 +1573,7 @@ dados:
     sete %al 
     movzbl %al, %eax 
     mov %eax, -20(%rbp) 
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 8(%rbp)
+    movl $6, IntLiteral Label 8(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
@@ -1631,8 +1584,7 @@ dados:
     movzbl %al, %eax 
     mov %eax, -40(%rbp) 
 AND(&&)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 15(%rbp)
+    movl $6, IntLiteral Label 15(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
@@ -1646,21 +1598,18 @@ AND(&&)
     mov true(%rbp), %eax
     cmp -68(%rbp), %eax
     jne elseCond Label 21
-    mov 1.00(%rbp), %eax
-    mov %eax, FloatLiteral Label 23(%rbp)
+    movl $1.00, FloatLiteral Label 23(%rbp)
     mov 1.00(%rbp), %eax
     jmp endIf Label 22
 .elseCond Label 21
 .endIf Label 22
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 26(%rbp)
+    movl $6, IntLiteral Label 26(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -84(%rbp)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 31(%rbp)
+    movl $6, IntLiteral Label 31(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
@@ -1671,8 +1620,7 @@ AND(&&)
     movzbl %al, %eax 
     mov %eax, -108(%rbp) 
 AND(&&)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 38(%rbp)
+    movl $6, IntLiteral Label 38(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
@@ -1683,8 +1631,7 @@ AND(&&)
     movzbl %al, %eax 
     mov %eax, -132(%rbp) 
 AND(&&)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 46(%rbp)
+    movl $6, IntLiteral Label 46(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
@@ -1694,16 +1641,14 @@ AND(&&)
     sete %al 
     movzbl %al, %eax 
     mov %eax, -160(%rbp) 
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 52(%rbp)
+    movl $6, IntLiteral Label 52(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -172(%rbp)
 AND(&&)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 58(%rbp)
+    movl $6, IntLiteral Label 58(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
@@ -1715,8 +1660,7 @@ AND(&&)
     mov %eax, -200(%rbp) 
 AND(&&)
 OR(||)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 67(%rbp)
+    movl $6, IntLiteral Label 67(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
@@ -1726,8 +1670,7 @@ OR(||)
     sete %al 
     movzbl %al, %eax 
     mov %eax, -232(%rbp) 
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 73(%rbp)
+    movl $6, IntLiteral Label 73(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
@@ -1738,8 +1681,7 @@ OR(||)
     movzbl %al, %eax 
     mov %eax, -252(%rbp) 
 AND(&&)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 80(%rbp)
+    movl $6, IntLiteral Label 80(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
@@ -1750,29 +1692,25 @@ OR(||)
     mov true(%rbp), %eax
     cmp -284(%rbp), %eax
     jne elseCond Label 87
-    mov 4.00(%rbp), %eax
-    mov %eax, FloatLiteral Label 89(%rbp)
+    movl $4.00, FloatLiteral Label 89(%rbp)
     mov 4.00(%rbp), %eax
     jmp endIf Label 88
 .elseCond Label 87
 .endIf Label 88
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 92(%rbp)
+    movl $6, IntLiteral Label 92(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -300(%rbp)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 97(%rbp)
+    movl $6, IntLiteral Label 97(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -316(%rbp)
 AND(&&)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 103(%rbp)
+    movl $6, IntLiteral Label 103(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
@@ -1783,15 +1721,13 @@ AND(&&)
     movzbl %al, %eax 
     mov %eax, -344(%rbp) 
 AND(&&)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 111(%rbp)
+    movl $6, IntLiteral Label 111(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -364(%rbp)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 116(%rbp)
+    movl $6, IntLiteral Label 116(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
@@ -1802,8 +1738,7 @@ AND(&&)
     movzbl %al, %eax 
     mov %eax, -388(%rbp) 
 AND(&&)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 123(%rbp)
+    movl $6, IntLiteral Label 123(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
@@ -1811,8 +1746,7 @@ AND(&&)
     movl	%eax, -404(%rbp)
 AND(&&)
 OR(||)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 131(%rbp)
+    movl $6, IntLiteral Label 131(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
@@ -1822,16 +1756,14 @@ OR(||)
     sete %al 
     movzbl %al, %eax 
     mov %eax, -440(%rbp) 
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 137(%rbp)
+    movl $6, IntLiteral Label 137(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -452(%rbp)
 AND(&&)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 143(%rbp)
+    movl $6, IntLiteral Label 143(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
@@ -1842,29 +1774,25 @@ OR(||)
     mov true(%rbp), %eax
     cmp -488(%rbp), %eax
     jne elseCond Label 150
-    mov 8.50(%rbp), %eax
-    mov %eax, FloatLiteral Label 152(%rbp)
+    movl $8.50, FloatLiteral Label 152(%rbp)
     mov 8.50(%rbp), %eax
     jmp endIf Label 151
 .elseCond Label 150
 .endIf Label 151
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 155(%rbp)
+    movl $6, IntLiteral Label 155(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -504(%rbp)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 160(%rbp)
+    movl $6, IntLiteral Label 160(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -520(%rbp)
 AND(&&)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 166(%rbp)
+    movl $6, IntLiteral Label 166(%rbp)
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
@@ -1874,8 +1802,7 @@ AND(&&)
     mov true(%rbp), %eax
     cmp -548(%rbp), %eax
     jne elseCond Label 171
-    mov 10.00(%rbp), %eax
-    mov %eax, FloatLiteral Label 173(%rbp)
+    movl $10.00, FloatLiteral Label 173(%rbp)
     mov 10.00(%rbp), %eax
     jmp endIf Label 172
 .elseCond Label 171
@@ -1889,14 +1816,11 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 175(%rbp)
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 177(%rbp)
-    mov 9(%rbp), %eax
-    mov %eax, IntLiteral Label 179(%rbp)
-    call 	dados
-    movl 	%eax, RESULT Label 181(%rbp) 
+    movl $1, IntLiteral Label 175(%rbp)
+    movl $6, IntLiteral Label 177(%rbp)
+    movl $9, IntLiteral Label 179(%rbp)
+    call dados
+    movl %eax, RESULT Label 181(%rbp) 
 PARAM
 PARAM
 PARAM
@@ -1935,25 +1859,25 @@ lista:
 {LABEL, null, null, Result: BeginMethod pruContinue}
 
 {METHODDECL, Metodo{ name=pruContinue, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=b, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 1}
+{null, 1, null, Result: IntLiteral Label 1}
 {UNARYMINUS(-expr), 1, null, Result: VarLocation{name=UNARYMINUS Label 3, type=int, expr=-1, size=0}}
 {ASSIGN(=), -1, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
-{ASSIGN(=), 23, null, Result: IntLiteral Label 4}
+{null, 23, null, Result: IntLiteral Label 4}
 {ASSIGN(=), 23, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
-{ASSIGN(=), 23, null, Result: IntLiteral Label 6}
+{null, 23, null, Result: IntLiteral Label 6}
 {ASSIGN(=), 23, null, Result: VarLocation{name=i, type=float, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 9}
+{null, 0, null, Result: IntLiteral Label 9}
 {GEQ(>=), 0.0, 0, Result: VarLocation{name=GEQ Label 11, type=boolean, expr=0.0 >= 0, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 13}
 {CMP, VarLocation{name=factor Label 12, type=boolean, expr=VarLocation{name=GEQ Label 11, type=boolean, expr=0.0 >= 0, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 14}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 16}
+{null, 1, null, Result: IntLiteral Label 16}
 {MINUS(-), 0.0, 1, Result: VarLocation{name=MINUS Label 18, type=float, expr=0.0 - 1, size=0}}
 {ASSIGN(=), 0.0 - 1, null, Result: VarLocation{name=i, type=float, expr=null, size=0}}
 {LE(<), 0.0, 0, Result: VarLocation{name=LE Label 21, type=boolean, expr=0.0 < 0, size=0}}
 {CMP, VarLocation{name=LE Label 21, type=boolean, expr=0.0 < 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 22}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 25}
+{null, 0, null, Result: IntLiteral Label 25}
 {NEQ(!=), 0.0, 0, Result: VarLocation{name=NEQ Label 27, type=boolean, expr=0.0 != 0, size=0}}
 {CMP, VarLocation{name=NEQ Label 27, type=boolean, expr=0.0 != 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 28}
@@ -1966,24 +1890,24 @@ lista:
 {JMP, null, null, Result: BeginWhile Label 13}
 {JMP, null, null, Result: endIf Label 23}
 {LABEL, null, null, Result: elseCond Label 22}
-{ASSIGN(=), 1000.2343, null, Result: FloatLiteral Label 35}
+{null, 1000.2343, null, Result: FloatLiteral Label 35}
 {UNARYMINUS(-expr), 1000.2343, null, Result: VarLocation{name=UNARYMINUS Label 37, type=float, expr=-1000.2343, size=0}}
-{ASSIGN(=), 6752, null, Result: IntLiteral Label 38}
+{null, 6752, null, Result: IntLiteral Label 38}
 {PLUS(+), -1000.2343, 6752, Result: VarLocation{name=PLUS Label 40, type=float, expr=-1000.2343 + 6752, size=0}}
 {ASSIGN(=), -1000.2343 + 6752, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
 {JMP, null, null, Result: EndWhile Label 14}
 {LABEL, null, null, Result: endIf Label 23}
 {JMP, null, null, Result: BeginWhile Label 13}
 {LABEL, null, null, Result: EndWhile Label 14}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 41}
+{null, 2, null, Result: IntLiteral Label 41}
 {UNARYMINUS(-expr), 2, null, Result: VarLocation{name=UNARYMINUS Label 43, type=int, expr=-2, size=0}}
 {MULTIPLY(*), -2, 0.0, Result: VarLocation{name=MULTIPLY Label 45, type=int, expr=-2 * 0.0, size=0}}
 {LABEL, null, null, Result: EndMethod pruContinue}
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 3.0, null, Result: FloatLiteral Label 46}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 48}
+{null, 3.0, null, Result: FloatLiteral Label 46}
+{null, 2, null, Result: IntLiteral Label 48}
 {METHODCALL, pruContinue, 2, Result: RESULT Label 50}
 {PARAM, null, null, Result: 3.0}
 {PARAM, null, null, Result: 2}
@@ -2017,40 +1941,40 @@ lista:
 {LABEL, null, null, Result: BeginMethod prueba}
 
 {METHODDECL, Metodo{ name=prueba, return_not_void=true, typeReturn=float, parameters [Simbolo{type=int, name=b, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 50, null, Result: IntLiteral Label 1}
+{null, 50, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 50, null, Result: VarLocation{name=g, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 4}
+{null, 0, null, Result: IntLiteral Label 4}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 6, type=boolean, expr=0 > 0, size=0}}
 {CMP, VarLocation{name=GE Label 6, type=boolean, expr=0 > 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 7}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 9}
+{null, 4, null, Result: IntLiteral Label 9}
 {ASSIGN(=), 4, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 12}
+{null, 4, null, Result: IntLiteral Label 12}
 {CEQ(==), 0, 4, Result: VarLocation{name=CEQ Label 14, type=boolean, expr=0 == 4, size=0}}
 {CMP, VarLocation{name=CEQ Label 14, type=boolean, expr=0 == 4, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 15}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 18}
+{null, 4, null, Result: IntLiteral Label 18}
 {LE(<), 0, 4, Result: VarLocation{name=LE Label 20, type=boolean, expr=0 < 4, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 22}
 {CMP, VarLocation{name=factor Label 21, type=boolean, expr=VarLocation{name=LE Label 20, type=boolean, expr=0 < 4, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 23}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 25}
+{null, 4, null, Result: IntLiteral Label 25}
 {GE(>), 0, 4, Result: VarLocation{name=GE Label 27, type=boolean, expr=0 > 4, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 29}
 {CMP, VarLocation{name=factor Label 28, type=boolean, expr=VarLocation{name=GE Label 27, type=boolean, expr=0 > 4, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 30}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 32}
+{null, 1, null, Result: IntLiteral Label 32}
 {MINUS(-), 0, 1, Result: VarLocation{name=MINUS Label 34, type=int, expr=0 - 1, size=0}}
 {ASSIGN(=), 0 - 1, null, Result: VarLocation{name=g, type=int, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 36}
+{null, 2, null, Result: IntLiteral Label 36}
 {MULTIPLY(*), 0, 2, Result: VarLocation{name=MULTIPLY Label 38, type=int, expr=0 * 2, size=0}}
 {ASSIGN(=), 0 * 2, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 29}
 {LABEL, null, null, Result: EndWhile Label 30}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 40}
+{null, 1, null, Result: IntLiteral Label 40}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 42, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 44}
+{null, 2, null, Result: IntLiteral Label 44}
 {DIVIDE(/), 0.0, 2, Result: VarLocation{name=DIVIDE Label 46, type=float, expr=VarLocation{name=factor Label 43, type=float, expr=0.0, size=0} / VarLocation{name=factor Label 45, type=int, expr=2, size=0}, size=0}}
 {ASSIGN(=), VarLocation{name=factor Label 43, type=float, expr=0.0, size=0} / VarLocation{name=factor Label 45, type=int, expr=2, size=0}, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 22}
@@ -2066,7 +1990,7 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 48}
+{null, 6, null, Result: IntLiteral Label 48}
 {METHODCALL, prueba, 1, Result: RESULT Label 50}
 {PARAM, null, null, Result: 6}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: null}
@@ -2078,12 +2002,10 @@ prueba:
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 50(%rbp), %eax
-    mov %eax, IntLiteral Label 1(%rbp)
+    movl $50, IntLiteral Label 1(%rbp)
     mov 50(%rbp), %eax
     mov -4(%rbp), %eax
-    mov 0(%rbp), %eax
-    mov %eax, IntLiteral Label 4(%rbp)
+    movl $0, IntLiteral Label 4(%rbp)
     movl	$0, %eax
     cmpl	$0, %eax
     setg	%al
@@ -2092,12 +2014,10 @@ prueba:
     mov true(%rbp), %eax
     cmp -20(%rbp), %eax
     jne elseCond Label 7
-    mov 4(%rbp), %eax
-    mov %eax, IntLiteral Label 9(%rbp)
+    movl $4, IntLiteral Label 9(%rbp)
     mov 4(%rbp), %eax
     mov -24(%rbp), %eax
-    mov 4(%rbp), %eax
-    mov %eax, IntLiteral Label 12(%rbp)
+    movl $4, IntLiteral Label 12(%rbp)
     movl	$0, %eax
     cmpl	$4, %eax
     sete %al
@@ -2106,8 +2026,7 @@ prueba:
     mov true(%rbp), %eax
     cmp -40(%rbp), %eax
     jne elseCond Label 15
-    mov 4(%rbp), %eax
-    mov %eax, IntLiteral Label 18(%rbp)
+    movl $4, IntLiteral Label 18(%rbp)
     movl	$0, %eax
     cmpl	$4, %eax
     setl	%al
@@ -2117,8 +2036,7 @@ prueba:
     mov true(%rbp), %eax
     cmp -56(%rbp), %eax
     jne EndWhile Label 23
-    mov 4(%rbp), %eax
-    mov %eax, IntLiteral Label 25(%rbp)
+    movl $4, IntLiteral Label 25(%rbp)
     movl	$0, %eax
     cmpl	$4, %eax
     setg	%al
@@ -2128,34 +2046,30 @@ prueba:
     mov true(%rbp), %eax
     cmp -72(%rbp), %eax
     jne EndWhile Label 30
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 32(%rbp)
-    mov $0%eax
-    mov $1%edx
+    movl $1, IntLiteral Label 32(%rbp)
+    mov $0, %eax
+    mov $1, %edx
     sub %eax, %edx
     mov %edx,-88%(ebp)
     mov 0 - 1(%rbp), %eax
     mov -76(%rbp), %eax
-    mov 2(%rbp), %eax
-    mov %eax, IntLiteral Label 36(%rbp)
-    mov $0%eax
-    mov $2%edx
+    movl $2, IntLiteral Label 36(%rbp)
+    mov $0, %eax
+    mov $2, %edx
     imul %edx, %eax
     mov %eax,-104%(ebp)
     mov 0 * 2(%rbp), %eax
     mov -92(%rbp), %eax
     jmp BeginWhile Label 29
 .EndWhile Label 30
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 40(%rbp)
-    mov $0%eax 
-    mov $1%edx 
+    movl $1, IntLiteral Label 40(%rbp)
+    mov $0, %eax 
+    mov $1, %edx 
     add %eax, %edx 
     mov %edx,-120%(ebp) 
     mov 0 + 1(%rbp), %eax
     mov -108(%rbp), %eax
-    mov 2(%rbp), %eax
-    mov %eax, IntLiteral Label 44(%rbp)
+    movl $2, IntLiteral Label 44(%rbp)
 DIVIDE(/)
     mov VarLocation{name=factor Label 43, type=float, expr=0.0, size=0} / VarLocation{name=factor Label 45, type=int, expr=2, size=0}(%rbp), %eax
     mov -124(%rbp), %eax
@@ -2177,10 +2091,9 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 48(%rbp)
-    call 	prueba
-    movl 	%eax, RESULT Label 50(%rbp) 
+    movl $6, IntLiteral Label 48(%rbp)
+    call prueba
+    movl %eax, RESULT Label 50(%rbp) 
 PARAM
 EXTERNINVK
     leave
@@ -2210,36 +2123,36 @@ lista:
 {LABEL, null, null, Result: BeginMethod prueba}
 
 {METHODDECL, Metodo{ name=prueba, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=p, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 1}
+{null, 4, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 4, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 3}
+{null, 5, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 5, null, Result: VarLocation{name=c, type=int, expr=null, size=0}}
 {MULTIPLY(*), 0, 0, Result: VarLocation{name=MULTIPLY Label 7, type=int, expr=0 * 0, size=0}}
 {ASSIGN(=), 0 * 0, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 {PLUS(+), 0, 0, Result: VarLocation{name=PLUS Label 10, type=int, expr=0 + 0, size=0}}
 {ASSIGN(=), 0 + 0, null, Result: VarLocation{name=p, type=int, expr=null, size=0}}
-{ASSIGN(=), 3.14, null, Result: FloatLiteral Label 11}
+{null, 3.14, null, Result: FloatLiteral Label 11}
 {ASSIGN(=), 3.14, null, Result: VarLocation{name=pi, type=float, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 13}
+{null, 2, null, Result: IntLiteral Label 13}
 {MULTIPLY(*), 2, 0.0, Result: VarLocation{name=MULTIPLY Label 16, type=int, expr=2 * 0.0, size=0}}
 {ASSIGN(=), 2 * 0.0, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
 {DIVIDE(/), 0, 0.0, Result: VarLocation{name=DIVIDE Label 19, type=float, expr=VarLocation{name=factor Label 17, type=int, expr=0, size=0} / VarLocation{name=factor Label 18, type=float, expr=0.0, size=0}, size=0}}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 21}
+{null, 5, null, Result: IntLiteral Label 21}
 {GE(>), VarLocation{name=DIVIDE Label 19, type=float, expr=VarLocation{name=factor Label 17, type=int, expr=0, size=0} / VarLocation{name=factor Label 18, type=float, expr=0.0, size=0}, size=0}, 5, Result: VarLocation{name=GE Label 23, type=boolean, expr=VarLocation{name=DIVIDE Label 19, type=float, expr=VarLocation{name=factor Label 17, type=int, expr=0, size=0} / VarLocation{name=factor Label 18, type=float, expr=0.0, size=0}, size=0} > 5, size=0}}
 {CMP, VarLocation{name=GE Label 23, type=boolean, expr=VarLocation{name=DIVIDE Label 19, type=float, expr=VarLocation{name=factor Label 17, type=int, expr=0, size=0} / VarLocation{name=factor Label 18, type=float, expr=0.0, size=0}, size=0} > 5, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 24}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 26}
+{null, 1, null, Result: IntLiteral Label 26}
 {RETURN, null, null, Result: 1}
 {JMP, null, null, Result: endIf Label 25}
 {LABEL, null, null, Result: elseCond Label 24}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 28}
+{null, 0, null, Result: IntLiteral Label 28}
 {RETURN, null, null, Result: 0}
 {LABEL, null, null, Result: endIf Label 25}
 {LABEL, null, null, Result: EndMethod prueba}
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 30}
+{null, 6, null, Result: IntLiteral Label 30}
 {METHODCALL, prueba, 1, Result: RESULT Label 32}
 {PARAM, null, null, Result: 6}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: null}
@@ -2277,13 +2190,13 @@ lista:
 {LABEL, null, null, Result: BeginMethod potencia}
 
 {METHODDECL, Metodo{ name=potencia, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), false, null, Result: BoolLiteral Label 1}
+{null, false, null, Result: BoolLiteral Label 1}
 {ASSIGN(=), false, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 3}
+{null, 1, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 1.0, null, Result: FloatLiteral Label 5}
+{null, 1.0, null, Result: FloatLiteral Label 5}
 {ASSIGN(=), 1.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 8}
+{null, 0, null, Result: IntLiteral Label 8}
 {LE(<), 0, 0, Result: VarLocation{name=LE Label 10, type=boolean, expr=0 < 0, size=0}}
 {CMP, VarLocation{name=LE Label 10, type=boolean, expr=0 < 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 11}
@@ -2300,7 +2213,7 @@ lista:
 {JNE, null, null, Result: EndWhile Label 22}
 {MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 25, type=int, expr=0.0 * 0.0, size=0}}
 {ASSIGN(=), 0.0 * 0.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 27}
+{null, 1, null, Result: IntLiteral Label 27}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 29, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 21}
@@ -2309,23 +2222,23 @@ lista:
 {NON(!), VarLocation{name=NON Label 31, type=boolean, expr=!false, size=0}, null, Result: VarLocation{name=NON Label 33, type=boolean, expr=!VarLocation{name=NON Label 31, type=boolean, expr=!false, size=0}, size=0}}
 {CMP, VarLocation{name=NON Label 33, type=boolean, expr=!VarLocation{name=NON Label 31, type=boolean, expr=!false, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 34}
-{ASSIGN(=), 1.0, null, Result: FloatLiteral Label 36}
+{null, 1.0, null, Result: FloatLiteral Label 36}
 {DIVIDE(/), 1.0, 0.0, Result: VarLocation{name=DIVIDE Label 39, type=float, expr=VarLocation{name=factor Label 37, type=float, expr=1.0, size=0} / VarLocation{name=factor Label 38, type=float, expr=0.0, size=0}, size=0}}
 {RETURN, null, null, Result: VarLocation{name=factor Label 37, type=float, expr=1.0, size=0} / VarLocation{name=factor Label 38, type=float, expr=0.0, size=0}}
 {JMP, null, null, Result: endIf Label 35}
 {LABEL, null, null, Result: elseCond Label 34}
 {RETURN, null, null, Result: 0.0}
 {LABEL, null, null, Result: endIf Label 35}
-{ASSIGN(=), 100.1, null, Result: FloatLiteral Label 41}
+{null, 100.1, null, Result: FloatLiteral Label 41}
 {UNARYMINUS(-expr), 100.1, null, Result: VarLocation{name=UNARYMINUS Label 43, type=float, expr=-100.1, size=0}}
 {RETURN, null, null, Result: -100.1}
 {LABEL, null, null, Result: EndMethod potencia}
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{ASSIGN(=), 8.0, null, Result: FloatLiteral Label 44}
+{null, 8.0, null, Result: FloatLiteral Label 44}
 {ASSIGN(=), 8.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 47}
+{null, 2, null, Result: IntLiteral Label 47}
 {METHODCALL, potencia, 2, Result: RESULT Label 49}
 {PARAM, null, null, Result: 0.0}
 {PARAM, null, null, Result: 2}
@@ -2358,18 +2271,18 @@ lista:
 {LABEL, null, null, Result: BeginMethod sumatoria}
 
 {METHODDECL, Metodo{ name=sumatoria, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=b, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 0.0, null, Result: FloatLiteral Label 1}
+{null, 0.0, null, Result: FloatLiteral Label 1}
 {ASSIGN(=), 0.0, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
 {ASSIGN(=), 0.0, null, Result: VarLocation{name=i, type=float, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 5}
+{null, 0, null, Result: IntLiteral Label 5}
 {GE(>), 0.0, 0, Result: VarLocation{name=GE Label 7, type=boolean, expr=0.0 > 0, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 9}
+{null, 0, null, Result: IntLiteral Label 9}
 {GE(>), 0.0, 0, Result: VarLocation{name=GE Label 11, type=boolean, expr=0.0 > 0, size=0}}
 {OR(||), 0.0 > 0, 0.0 > 0, Result: VarLocation{name=DISYUNCION Label 12, type=boolean, expr=0.0 > 0 || 0.0 > 0, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 14}
 {CMP, VarLocation{name=factor Label 13, type=boolean, expr=VarLocation{name=DISYUNCION Label 12, type=boolean, expr=0.0 > 0 || 0.0 > 0, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 15}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 17}
+{null, 0, null, Result: IntLiteral Label 17}
 {GE(>), 0.0, 0, Result: VarLocation{name=GE Label 19, type=boolean, expr=0.0 > 0, size=0}}
 {CMP, VarLocation{name=GE Label 19, type=boolean, expr=0.0 > 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 20}
@@ -2378,7 +2291,7 @@ lista:
 {JMP, null, null, Result: endIf Label 21}
 {LABEL, null, null, Result: elseCond Label 20}
 {LABEL, null, null, Result: endIf Label 21}
-{ASSIGN(=), 1.0, null, Result: FloatLiteral Label 25}
+{null, 1.0, null, Result: FloatLiteral Label 25}
 {ASSIGN(=), 1.0, null, Result: VarLocation{name=i, type=float, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 14}
 {LABEL, null, null, Result: EndWhile Label 15}
@@ -2388,7 +2301,7 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{ASSIGN(=), 8.0, null, Result: FloatLiteral Label 29}
+{null, 8.0, null, Result: FloatLiteral Label 29}
 {ASSIGN(=), 8.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
 {METHODCALL, sumatoria, 1, Result: RESULT Label 32}
 {PARAM, null, null, Result: 0.0}
@@ -2489,19 +2402,19 @@ lista:
 {LABEL, null, null, Result: BeginMethod potencia}
 
 {METHODDECL, Metodo{ name=potencia, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), false, null, Result: BoolLiteral Label 1}
+{null, false, null, Result: BoolLiteral Label 1}
 {ASSIGN(=), false, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 3}
+{null, 1, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 1.0, null, Result: FloatLiteral Label 5}
+{null, 1.0, null, Result: FloatLiteral Label 5}
 {ASSIGN(=), 1.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 8}
+{null, 0, null, Result: IntLiteral Label 8}
 {LE(<), 0, 0, Result: VarLocation{name=LE Label 10, type=boolean, expr=0 < 0, size=0}}
 {CMP, VarLocation{name=LE Label 10, type=boolean, expr=0 < 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 11}
 {UNARYMINUS(-expr), 0, null, Result: VarLocation{name=UNARYMINUS Label 14, type=int, expr=-0, size=0}}
 {ASSIGN(=), -0, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 15}
+{null, true, null, Result: BoolLiteral Label 15}
 {ASSIGN(=), true, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
 {JMP, null, null, Result: endIf Label 12}
 {LABEL, null, null, Result: elseCond Label 11}
@@ -2513,10 +2426,10 @@ lista:
 {CMP, VarLocation{name=factor Label 24, type=boolean, expr=VarLocation{name=DISYUNCION Label 23, type=boolean, expr=0 < 0 || 0 == 0, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 26}
 {MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 29, type=int, expr=0.0 * 0.0, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 30}
+{null, 2, null, Result: IntLiteral Label 30}
 {MULTIPLY(*), 0.0 * 0.0, 2, Result: VarLocation{name=MULTIPLY Label 32, type=int, expr=0.0 * 0.0 * 2, size=0}}
 {ASSIGN(=), 0.0 * 0.0 * 2, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 34}
+{null, 1, null, Result: IntLiteral Label 34}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 36, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 25}
@@ -2525,42 +2438,42 @@ lista:
 {NON(!), VarLocation{name=NON Label 38, type=boolean, expr=!false, size=0}, null, Result: VarLocation{name=NON Label 40, type=boolean, expr=!VarLocation{name=NON Label 38, type=boolean, expr=!false, size=0}, size=0}}
 {CMP, VarLocation{name=NON Label 40, type=boolean, expr=!VarLocation{name=NON Label 38, type=boolean, expr=!false, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 41}
-{ASSIGN(=), 1.0, null, Result: FloatLiteral Label 43}
+{null, 1.0, null, Result: FloatLiteral Label 43}
 {DIVIDE(/), 1.0, 0.0, Result: VarLocation{name=DIVIDE Label 46, type=float, expr=VarLocation{name=factor Label 44, type=float, expr=1.0, size=0} / VarLocation{name=factor Label 45, type=float, expr=0.0, size=0}, size=0}}
 {RETURN, null, null, Result: VarLocation{name=factor Label 44, type=float, expr=1.0, size=0} / VarLocation{name=factor Label 45, type=float, expr=0.0, size=0}}
 {JMP, null, null, Result: endIf Label 42}
 {LABEL, null, null, Result: elseCond Label 41}
 {RETURN, null, null, Result: 0.0}
 {LABEL, null, null, Result: endIf Label 42}
-{ASSIGN(=), 100.1, null, Result: FloatLiteral Label 48}
+{null, 100.1, null, Result: FloatLiteral Label 48}
 {UNARYMINUS(-expr), 100.1, null, Result: VarLocation{name=UNARYMINUS Label 50, type=float, expr=-100.1, size=0}}
 {RETURN, null, null, Result: -100.1}
 {LABEL, null, null, Result: EndMethod potencia}
 {LABEL, null, null, Result: BeginMethod multiples}
 
 {METHODDECL, Metodo{ name=multiples, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=float, name=y, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 51}
+{null, 2.0, null, Result: FloatLiteral Label 51}
 {UNARYMINUS(-expr), 2.0, null, Result: VarLocation{name=UNARYMINUS Label 53, type=float, expr=-2.0, size=0}}
 {ASSIGN(=), -2.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 54}
+{null, 2, null, Result: IntLiteral Label 54}
 {UNARYMINUS(-expr), 2, null, Result: VarLocation{name=UNARYMINUS Label 56, type=int, expr=-2, size=0}}
 {ASSIGN(=), -2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
-{ASSIGN(=), 3.0, null, Result: FloatLiteral Label 57}
+{null, 3.0, null, Result: FloatLiteral Label 57}
 {UNARYMINUS(-expr), 3.0, null, Result: VarLocation{name=UNARYMINUS Label 59, type=float, expr=-3.0, size=0}}
 {ASSIGN(=), -3.0, null, Result: VarLocation{name=w, type=float, expr=null, size=0}}
-{ASSIGN(=), 3.0, null, Result: FloatLiteral Label 60}
+{null, 3.0, null, Result: FloatLiteral Label 60}
 {UNARYMINUS(-expr), 3.0, null, Result: VarLocation{name=UNARYMINUS Label 62, type=float, expr=-3.0, size=0}}
 {ASSIGN(=), -3.0, null, Result: VarLocation{name=z, type=float, expr=null, size=0}}
 {MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 65, type=int, expr=0.0 * 0.0, size=0}}
 {MINUS(-), 0.0 * 0.0, 0.0, Result: VarLocation{name=MINUS Label 67, type=float, expr=0.0 * 0.0 - 0.0, size=0}}
 {ASSIGN(=), 0.0 * 0.0 - 0.0, null, Result: VarLocation{name=m, type=float, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 68}
+{null, 0, null, Result: IntLiteral Label 68}
 {ASSIGN(=), 0, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 70}
+{null, 0, null, Result: IntLiteral Label 70}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 72}
+{null, 0, null, Result: IntLiteral Label 72}
 {ASSIGN(=), 0, null, Result: VarLocation{name=k, type=int, expr=null, size=0}}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 74}
+{null, 5, null, Result: IntLiteral Label 74}
 {ASSIGN(=), 5, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
 {GE(>), 0.0, 0.0, Result: VarLocation{name=GE Label 78, type=boolean, expr=0.0 > 0.0, size=0}}
 {CMP, VarLocation{name=GE Label 78, type=boolean, expr=0.0 > 0.0, size=0}, true, Result: null}
@@ -2589,62 +2502,62 @@ lista:
 {LABEL, null, null, Result: BeginWhile Label 109}
 {CMP, VarLocation{name=factor Label 108, type=boolean, expr=VarLocation{name=factor Label 107, type=boolean, expr=VarLocation{name=factor Label 106, type=boolean, expr=VarLocation{name=DISYUNCION Label 105, type=boolean, expr=0 < 0 || 0 == 0, size=0}, size=0}, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 110}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 112}
+{null, 3, null, Result: IntLiteral Label 112}
 {CEQ(==), 0, 3, Result: VarLocation{name=CEQ Label 114, type=boolean, expr=0 == 3, size=0}}
 {CMP, VarLocation{name=CEQ Label 114, type=boolean, expr=0 == 3, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 115}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 118}
+{null, 2.0, null, Result: FloatLiteral Label 118}
 {PLUS(+), 0.0, 2.0, Result: VarLocation{name=PLUS Label 120, type=float, expr=0.0 + 2.0, size=0}}
 {ASSIGN(=), 0.0 + 2.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 {JMP, null, null, Result: endIf Label 116}
 {LABEL, null, null, Result: elseCond Label 115}
-{ASSIGN(=), 10.0, null, Result: FloatLiteral Label 122}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 124}
+{null, 10.0, null, Result: FloatLiteral Label 122}
+{null, 2.0, null, Result: FloatLiteral Label 124}
 {DIVIDE(/), 10.0, 2.0, Result: VarLocation{name=DIVIDE Label 126, type=float, expr=VarLocation{name=factor Label 123, type=float, expr=10.0, size=0} / VarLocation{name=factor Label 125, type=float, expr=2.0, size=0}, size=0}}
 {MINUS(-), 0.0, VarLocation{name=DIVIDE Label 126, type=float, expr=VarLocation{name=factor Label 123, type=float, expr=10.0, size=0} / VarLocation{name=factor Label 125, type=float, expr=2.0, size=0}, size=0}, Result: VarLocation{name=MINUS Label 128, type=float, expr=0.0 - VarLocation{name=DIVIDE Label 126, type=float, expr=VarLocation{name=factor Label 123, type=float, expr=10.0, size=0} / VarLocation{name=factor Label 125, type=float, expr=2.0, size=0}, size=0}, size=0}}
 {ASSIGN(=), 0.0 - VarLocation{name=DIVIDE Label 126, type=float, expr=VarLocation{name=factor Label 123, type=float, expr=10.0, size=0} / VarLocation{name=factor Label 125, type=float, expr=2.0, size=0}, size=0}, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 116}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 129}
+{null, 1, null, Result: IntLiteral Label 129}
 {ASSIGN(=), 1, null, Result: VarLocation{name=k, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 109}
 {LABEL, null, null, Result: EndWhile Label 110}
 {LE(<), 0.0, 0.0, Result: VarLocation{name=LE Label 133, type=boolean, expr=0.0 < 0.0, size=0}}
-{ASSIGN(=), 0.0, null, Result: FloatLiteral Label 134}
+{null, 0.0, null, Result: FloatLiteral Label 134}
 {LE(<), 0.0, 0.0, Result: VarLocation{name=LE Label 137, type=boolean, expr=0.0 < 0.0, size=0}}
 {AND(&&), 0.0 < 0.0, 0.0 < 0.0, Result: VarLocation{name=CONJUNCION Label 138, type=boolean, expr=0.0 < 0.0 && 0.0 < 0.0, size=0}}
 {CMP, VarLocation{name=CONJUNCION Label 138, type=boolean, expr=0.0 < 0.0 && 0.0 < 0.0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 139}
-{ASSIGN(=), 35.0, null, Result: FloatLiteral Label 141}
-{ASSIGN(=), 4.0, null, Result: FloatLiteral Label 143}
+{null, 35.0, null, Result: FloatLiteral Label 141}
+{null, 4.0, null, Result: FloatLiteral Label 143}
 {MULTIPLY(*), 4.0, 0.0, Result: VarLocation{name=MULTIPLY Label 146, type=int, expr=4.0 * 0.0, size=0}}
 {PLUS(+), 35.0, 4.0 * 0.0, Result: VarLocation{name=PLUS Label 147, type=float, expr=35.0 + 4.0 * 0.0, size=0}}
-{ASSIGN(=), 498.0, null, Result: FloatLiteral Label 148}
+{null, 498.0, null, Result: FloatLiteral Label 148}
 {MINUS(-), 35.0 + 4.0 * 0.0, 498.0, Result: VarLocation{name=MINUS Label 150, type=float, expr=35.0 + 4.0 * 0.0 - 498.0, size=0}}
 {ASSIGN(=), 35.0 + 4.0 * 0.0 - 498.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 {JMP, null, null, Result: endIf Label 140}
 {LABEL, null, null, Result: elseCond Label 139}
-{ASSIGN(=), 3.2, null, Result: FloatLiteral Label 151}
+{null, 3.2, null, Result: FloatLiteral Label 151}
 {MINUS(-), 3.2, 0.0, Result: VarLocation{name=MINUS Label 154, type=float, expr=3.2 - 0.0, size=0}}
-{ASSIGN(=), 12345.356, null, Result: FloatLiteral Label 155}
+{null, 12345.356, null, Result: FloatLiteral Label 155}
 {MINUS(-), 3.2 - 0.0, 12345.356, Result: VarLocation{name=MINUS Label 157, type=float, expr=3.2 - 0.0 - 12345.356, size=0}}
 {ASSIGN(=), 3.2 - 0.0 - 12345.356, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 140}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 159}
+{null, 1, null, Result: IntLiteral Label 159}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 161, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 97}
 {LABEL, null, null, Result: EndWhile Label 98}
 {UNARYMINUS(-expr), 0.0, null, Result: VarLocation{name=UNARYMINUS Label 164, type=float, expr=-0.0, size=0}}
 {MULTIPLY(*), 0.0, -0.0, Result: VarLocation{name=MULTIPLY Label 165, type=int, expr=0.0 * -0.0, size=0}}
-{ASSIGN(=), 23.0, null, Result: FloatLiteral Label 166}
+{null, 23.0, null, Result: FloatLiteral Label 166}
 {MULTIPLY(*), 23.0, 0.0, Result: VarLocation{name=MULTIPLY Label 169, type=int, expr=23.0 * 0.0, size=0}}
 {PLUS(+), 0.0 * -0.0, 23.0 * 0.0, Result: VarLocation{name=PLUS Label 170, type=int, expr=0.0 * -0.0 + 23.0 * 0.0, size=0}}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 171}
-{ASSIGN(=), 4.0, null, Result: FloatLiteral Label 173}
+{null, 2.0, null, Result: FloatLiteral Label 171}
+{null, 4.0, null, Result: FloatLiteral Label 173}
 {DIVIDE(/), 2.0, 4.0, Result: VarLocation{name=DIVIDE Label 175, type=float, expr=VarLocation{name=factor Label 172, type=float, expr=2.0, size=0} / VarLocation{name=factor Label 174, type=float, expr=4.0, size=0}, size=0}}
 {PLUS(+), 0.0 * -0.0 + 23.0 * 0.0, VarLocation{name=factor Label 172, type=float, expr=2.0, size=0} / VarLocation{name=factor Label 174, type=float, expr=4.0, size=0}, Result: VarLocation{name=PLUS Label 176, type=float, expr=0.0 * -0.0 + 23.0 * 0.0 + VarLocation{name=factor Label 172, type=float, expr=2.0, size=0} / VarLocation{name=factor Label 174, type=float, expr=4.0, size=0}, size=0}}
 {ASSIGN(=), 0.0 * -0.0 + 23.0 * 0.0 + VarLocation{name=factor Label 172, type=float, expr=2.0, size=0} / VarLocation{name=factor Label 174, type=float, expr=4.0, size=0}, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 178}
+{null, 1, null, Result: IntLiteral Label 178}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 180, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 92}
@@ -2656,22 +2569,22 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{ASSIGN(=), 80.0, null, Result: FloatLiteral Label 183}
+{null, 80.0, null, Result: FloatLiteral Label 183}
 {ASSIGN(=), 80.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
-{ASSIGN(=), 15.0, null, Result: FloatLiteral Label 185}
+{null, 15.0, null, Result: FloatLiteral Label 185}
 {UNARYMINUS(-expr), 15.0, null, Result: VarLocation{name=UNARYMINUS Label 187, type=float, expr=-15.0, size=0}}
 {ASSIGN(=), -15.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN(=), 4.3, null, Result: FloatLiteral Label 188}
+{null, 4.3, null, Result: FloatLiteral Label 188}
 {ASSIGN(=), 4.3, null, Result: VarLocation{name=w, type=float, expr=null, size=0}}
-{ASSIGN(=), 7.6, null, Result: FloatLiteral Label 190}
+{null, 7.6, null, Result: FloatLiteral Label 190}
 {UNARYMINUS(-expr), 7.6, null, Result: VarLocation{name=UNARYMINUS Label 192, type=float, expr=-7.6, size=0}}
 {ASSIGN(=), -7.6, null, Result: VarLocation{name=m, type=float, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 194}
+{null, 2, null, Result: IntLiteral Label 194}
 {METHODCALL, potencia, 2, Result: RESULT Label 196}
 {PARAM, null, null, Result: 0.0}
 {PARAM, null, null, Result: 2}
 {ASSIGN(=), MethodCallExpr{name=potencia, args=[0.0, 2]}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 200}
+{null, 2.0, null, Result: FloatLiteral Label 200}
 {PLUS(+), 0.0, 2.0, Result: VarLocation{name=PLUS Label 202, type=float, expr=0.0 + 2.0, size=0}}
 {METHODCALL, multiples, 2, Result: RESULT Label 203}
 {PARAM, null, null, Result: 0.0}
@@ -2724,19 +2637,19 @@ lista:
 {LABEL, null, null, Result: BeginMethod potencia}
 
 {METHODDECL, Metodo{ name=potencia, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), false, null, Result: BoolLiteral Label 1}
+{null, false, null, Result: BoolLiteral Label 1}
 {ASSIGN(=), false, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 3}
+{null, 1, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 1.0, null, Result: FloatLiteral Label 5}
+{null, 1.0, null, Result: FloatLiteral Label 5}
 {ASSIGN(=), 1.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 8}
+{null, 0, null, Result: IntLiteral Label 8}
 {LE(<), 0, 0, Result: VarLocation{name=LE Label 10, type=boolean, expr=0 < 0, size=0}}
 {CMP, VarLocation{name=LE Label 10, type=boolean, expr=0 < 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 11}
 {UNARYMINUS(-expr), 0, null, Result: VarLocation{name=UNARYMINUS Label 14, type=int, expr=-0, size=0}}
 {ASSIGN(=), -0, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 15}
+{null, true, null, Result: BoolLiteral Label 15}
 {ASSIGN(=), true, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
 {JMP, null, null, Result: endIf Label 12}
 {LABEL, null, null, Result: elseCond Label 11}
@@ -2748,10 +2661,10 @@ lista:
 {CMP, VarLocation{name=factor Label 24, type=boolean, expr=VarLocation{name=DISYUNCION Label 23, type=boolean, expr=0 < 0 || 0 == 0, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 26}
 {MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLY Label 29, type=int, expr=0.0 * 0.0, size=0}}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 30}
+{null, 2.0, null, Result: FloatLiteral Label 30}
 {MULTIPLY(*), 0.0 * 0.0, 2.0, Result: VarLocation{name=MULTIPLY Label 32, type=int, expr=0.0 * 0.0 * 2.0, size=0}}
 {ASSIGN(=), 0.0 * 0.0 * 2.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 34}
+{null, 1, null, Result: IntLiteral Label 34}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 36, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 25}
@@ -2760,14 +2673,14 @@ lista:
 {NON(!), VarLocation{name=NON Label 38, type=boolean, expr=!false, size=0}, null, Result: VarLocation{name=NON Label 40, type=boolean, expr=!VarLocation{name=NON Label 38, type=boolean, expr=!false, size=0}, size=0}}
 {CMP, VarLocation{name=NON Label 40, type=boolean, expr=!VarLocation{name=NON Label 38, type=boolean, expr=!false, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 41}
-{ASSIGN(=), 1.0, null, Result: FloatLiteral Label 43}
+{null, 1.0, null, Result: FloatLiteral Label 43}
 {DIVIDE(/), 1.0, 0.0, Result: VarLocation{name=DIVIDE Label 46, type=float, expr=VarLocation{name=factor Label 44, type=float, expr=1.0, size=0} / VarLocation{name=factor Label 45, type=float, expr=0.0, size=0}, size=0}}
 {RETURN, null, null, Result: VarLocation{name=factor Label 44, type=float, expr=1.0, size=0} / VarLocation{name=factor Label 45, type=float, expr=0.0, size=0}}
 {JMP, null, null, Result: endIf Label 42}
 {LABEL, null, null, Result: elseCond Label 41}
 {RETURN, null, null, Result: 0.0}
 {LABEL, null, null, Result: endIf Label 42}
-{ASSIGN(=), 100.1, null, Result: FloatLiteral Label 48}
+{null, 100.1, null, Result: FloatLiteral Label 48}
 {UNARYMINUS(-expr), 100.1, null, Result: VarLocation{name=UNARYMINUS Label 50, type=float, expr=-100.1, size=0}}
 {RETURN, null, null, Result: -100.1}
 {LABEL, null, null, Result: EndMethod potencia}
@@ -2785,17 +2698,17 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{ASSIGN(=), 15.0, null, Result: FloatLiteral Label 63}
+{null, 15.0, null, Result: FloatLiteral Label 63}
 {UNARYMINUS(-expr), 15.0, null, Result: VarLocation{name=UNARYMINUS Label 65, type=float, expr=-15.0, size=0}}
 {ASSIGN(=), -15.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN(=), 4.3, null, Result: FloatLiteral Label 66}
+{null, 4.3, null, Result: FloatLiteral Label 66}
 {ASSIGN(=), 4.3, null, Result: VarLocation{name=w, type=float, expr=null, size=0}}
-{ASSIGN(=), 7.6, null, Result: FloatLiteral Label 68}
+{null, 7.6, null, Result: FloatLiteral Label 68}
 {UNARYMINUS(-expr), 7.6, null, Result: VarLocation{name=UNARYMINUS Label 70, type=float, expr=-7.6, size=0}}
 {ASSIGN(=), -7.6, null, Result: VarLocation{name=m, type=float, expr=null, size=0}}
-{ASSIGN(=), 80.0, null, Result: FloatLiteral Label 71}
+{null, 80.0, null, Result: FloatLiteral Label 71}
 {ASSIGN(=), 80.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 74}
+{null, 2, null, Result: IntLiteral Label 74}
 {METHODCALL, potencia, 2, Result: RESULT Label 76}
 {PARAM, null, null, Result: 0.0}
 {PARAM, null, null, Result: 2}
@@ -2844,12 +2757,12 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{ASSIGN(=), 6.982, null, Result: FloatLiteral Label 10}
+{null, 6.982, null, Result: FloatLiteral Label 10}
 {ASSIGN(=), 6.982, null, Result: VarLocation{name=x, type=float, expr=null, size=0}}
-{ASSIGN(=), 002.5, null, Result: FloatLiteral Label 12}
+{null, 002.5, null, Result: FloatLiteral Label 12}
 {UNARYMINUS(-expr), 002.5, null, Result: VarLocation{name=UNARYMINUS Label 14, type=float, expr=-002.5, size=0}}
 {ASSIGN(=), -002.5, null, Result: VarLocation{name=y, type=float, expr=null, size=0}}
-{ASSIGN(=), 3.5698, null, Result: FloatLiteral Label 15}
+{null, 3.5698, null, Result: FloatLiteral Label 15}
 {ASSIGN(=), 3.5698, null, Result: VarLocation{name=z, type=float, expr=null, size=0}}
 {METHODCALL, resta, 2, Result: RESULT Label 19}
 {PARAM, null, null, Result: 0.0}
@@ -2880,19 +2793,19 @@ lista:
 {LABEL, null, null, Result: BeginMethod pruArreglos}
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 3}
+{null, 0, null, Result: IntLiteral Label 1}
+{null, 2, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 5}
+{null, 1, null, Result: IntLiteral Label 5}
 {ARRAYACCESS, A, VarLocation{name=factor Label 6, type=int, expr=1, size=0}, Result: Array Access Label 7}
 {RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 9}
-{ASSIGN(=), 10, null, Result: IntLiteral Label 12}
+{null, 5, null, Result: IntLiteral Label 9}
+{null, 10, null, Result: IntLiteral Label 12}
 {MULTIPLY(*), 0, 10, Result: VarLocation{name=MULTIPLY Label 14, type=int, expr=0 * 10, size=0}}
 {LABEL, null, null, Result: BeginFor Label 15}
 {CMP, VarLocation{name=factor Label 10, type=int, expr=5, size=0}, VarLocation{name=MULTIPLY Label 14, type=int, expr=0 * 10, size=0}, Result: null}
 {JNL, null, null, Result: EndFor Label 16}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 19}
+{null, 2, null, Result: IntLiteral Label 19}
 {PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 21, type=int, expr=0 + 2, size=0}}
 {ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
 {PLUS(+), VarLocation{name=factor Label 10, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factor Label 10, type=int, expr=5, size=0}}
@@ -2902,13 +2815,13 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 22}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 24}
+{null, 4, null, Result: IntLiteral Label 22}
+{null, 8, null, Result: IntLiteral Label 24}
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 26}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 29}
+{null, 1, null, Result: IntLiteral Label 29}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -2928,18 +2841,18 @@ lista:
 {LABEL, null, null, Result: BeginMethod pruArreglos}
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 3}
+{null, 0, null, Result: IntLiteral Label 1}
+{null, 2, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 5}
+{null, 1, null, Result: IntLiteral Label 5}
 {ARRAYACCESS, A, VarLocation{name=factor Label 6, type=int, expr=1, size=0}, Result: Array Access Label 7}
 {RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 9}
-{ASSIGN(=), 10, null, Result: IntLiteral Label 11}
+{null, 5, null, Result: IntLiteral Label 9}
+{null, 10, null, Result: IntLiteral Label 11}
 {LABEL, null, null, Result: BeginFor Label 13}
 {CMP, VarLocation{name=factor Label 10, type=int, expr=5, size=0}, VarLocation{name=factor Label 12, type=int, expr=10, size=0}, Result: null}
 {JNL, null, null, Result: EndFor Label 14}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 17}
+{null, 2, null, Result: IntLiteral Label 17}
 {PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 19, type=int, expr=0 + 2, size=0}}
 {ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
 {PLUS(+), VarLocation{name=factor Label 10, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factor Label 10, type=int, expr=5, size=0}}
@@ -2949,13 +2862,13 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 20}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 22}
+{null, 4, null, Result: IntLiteral Label 20}
+{null, 8, null, Result: IntLiteral Label 22}
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 24}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 27}
+{null, 1, null, Result: IntLiteral Label 27}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -2976,19 +2889,19 @@ lista:
 {LABEL, null, null, Result: BeginMethod pruArreglos}
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 3}
+{null, 0, null, Result: IntLiteral Label 1}
+{null, 2, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 5}
+{null, 1, null, Result: IntLiteral Label 5}
 {ARRAYACCESS, A, VarLocation{name=factor Label 6, type=int, expr=1, size=0}, Result: Array Access Label 7}
 {RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 9}
-{ASSIGN(=), 10, null, Result: IntLiteral Label 11}
+{null, 5, null, Result: IntLiteral Label 9}
+{null, 10, null, Result: IntLiteral Label 11}
 {UNARYMINUS(-expr), 10, null, Result: VarLocation{name=UNARYMINUS Label 13, type=int, expr=-10, size=0}}
 {LABEL, null, null, Result: BeginFor Label 14}
 {CMP, VarLocation{name=factor Label 10, type=int, expr=5, size=0}, VarLocation{name=UNARYMINUS Label 13, type=int, expr=-10, size=0}, Result: null}
 {JNL, null, null, Result: EndFor Label 15}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 18}
+{null, 2, null, Result: IntLiteral Label 18}
 {PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 20, type=int, expr=0 + 2, size=0}}
 {ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
 {PLUS(+), VarLocation{name=factor Label 10, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factor Label 10, type=int, expr=5, size=0}}
@@ -2998,13 +2911,13 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 21}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 23}
+{null, 4, null, Result: IntLiteral Label 21}
+{null, 8, null, Result: IntLiteral Label 23}
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 25}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 28}
+{null, 1, null, Result: IntLiteral Label 28}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -3027,23 +2940,23 @@ lista:
 {LABEL, null, null, Result: BeginMethod pruArreglos}
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 1}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 3}
+{null, 0, null, Result: IntLiteral Label 1}
+{null, 2, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 5}
+{null, 1, null, Result: IntLiteral Label 5}
 {ARRAYACCESS, A, VarLocation{name=factor Label 6, type=int, expr=1, size=0}, Result: Array Access Label 7}
 {RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 9}
-{ASSIGN(=), 10, null, Result: IntLiteral Label 11}
+{null, 0, null, Result: IntLiteral Label 9}
+{null, 10, null, Result: IntLiteral Label 11}
 {UNARYMINUS(-expr), 10, null, Result: VarLocation{name=UNARYMINUS Label 13, type=int, expr=-10, size=0}}
-{ASSIGN(=), 11, null, Result: IntLiteral Label 14}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 16}
+{null, 11, null, Result: IntLiteral Label 14}
+{null, 2, null, Result: IntLiteral Label 16}
 {MULTIPLY(*), 11, 2, Result: VarLocation{name=MULTIPLY Label 18, type=int, expr=11 * 2, size=0}}
 {PLUS(+), -10, 11 * 2, Result: VarLocation{name=PLUS Label 19, type=int, expr=-10 + 11 * 2, size=0}}
 {LABEL, null, null, Result: BeginFor Label 21}
 {CMP, VarLocation{name=factor Label 10, type=int, expr=0, size=0}, VarLocation{name=factor Label 20, type=int, expr=VarLocation{name=PLUS Label 19, type=int, expr=-10 + 11 * 2, size=0}, size=0}, Result: null}
 {JNL, null, null, Result: EndFor Label 22}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 25}
+{null, 2, null, Result: IntLiteral Label 25}
 {PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 27, type=int, expr=0 + 2, size=0}}
 {ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
 {PLUS(+), VarLocation{name=factor Label 10, type=int, expr=0, size=0}, 1, Result: VarLocation{name=factor Label 10, type=int, expr=0, size=0}}
@@ -3053,13 +2966,13 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 28}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 30}
+{null, 4, null, Result: IntLiteral Label 28}
+{null, 8, null, Result: IntLiteral Label 30}
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 32}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 35}
+{null, 1, null, Result: IntLiteral Label 35}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -3080,26 +2993,26 @@ lista:
 {LABEL, null, null, Result: BeginMethod par}
 
 {METHODDECL, Metodo{ name=par, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 15, null, Result: IntLiteral Label 1}
+{null, 15, null, Result: IntLiteral Label 1}
 {RETURN, null, null, Result: 15}
 {LABEL, null, null, Result: EndMethod par}
 {LABEL, null, null, Result: BeginMethod pruArreglos}
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0}, Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 3}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 5}
+{null, 0, null, Result: IntLiteral Label 3}
+{null, 2, null, Result: IntLiteral Label 5}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 7}
+{null, 1, null, Result: IntLiteral Label 7}
 {ARRAYACCESS, A, VarLocation{name=factor Label 8, type=int, expr=1, size=0}, Result: Array Access Label 9}
 {RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
 {METHODCALL, par, 0, Result: RESULT Label 11}
 {METHODCALL, par, 0, Result: RESULT Label 13}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 15}
+{null, 5, null, Result: IntLiteral Label 15}
 {PLUS(+), MethodCallExpr{name=par, args=[]}, 5, Result: VarLocation{name=PLUS Label 17, type=int, expr=MethodCallExpr{name=par, args=[]} + 5, size=0}}
 {LABEL, null, null, Result: BeginFor Label 18}
 {CMP, VarLocation{name=factor Label 12, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, VarLocation{name=PLUS Label 17, type=int, expr=MethodCallExpr{name=par, args=[]} + 5, size=0}, Result: null}
 {JNL, null, null, Result: EndFor Label 19}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 22}
+{null, 2, null, Result: IntLiteral Label 22}
 {PLUS(+), 0, 2, Result: VarLocation{name=PLUS Label 24, type=int, expr=0 + 2, size=0}}
 {ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
 {PLUS(+), VarLocation{name=factor Label 12, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, 1, Result: VarLocation{name=factor Label 12, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}}
@@ -3109,13 +3022,13 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 25}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 27}
+{null, 4, null, Result: IntLiteral Label 25}
+{null, 8, null, Result: IntLiteral Label 27}
 {METHODCALL, pruArreglos, 2, Result: RESULT Label 29}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 32}
+{null, 1, null, Result: IntLiteral Label 32}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -3156,7 +3069,7 @@ lista:
 {LABEL, null, null, Result: endIf Label 10}
 {JMP, null, null, Result: endIf Label 5}
 {LABEL, null, null, Result: elseCond Label 4}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 18}
+{null, 5, null, Result: IntLiteral Label 18}
 {MULTIPLY(*), 0, 5, Result: VarLocation{name=MULTIPLY Label 20, type=int, expr=0 * 5, size=0}}
 {ASSIGN(=), 0 * 5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 5}
@@ -3164,21 +3077,21 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 22}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 24}
+{null, 4, null, Result: IntLiteral Label 22}
+{null, 8, null, Result: IntLiteral Label 24}
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 26}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 30}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 32}
+{null, 4, null, Result: IntLiteral Label 30}
+{null, 4, null, Result: IntLiteral Label 32}
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 34}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 4}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: null}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 37}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 39}
+{null, 8, null, Result: IntLiteral Label 37}
+{null, 5, null, Result: IntLiteral Label 39}
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 41}
 {PARAM, null, null, Result: 8}
 {PARAM, null, null, Result: 5}
@@ -3207,16 +3120,16 @@ pruAritmetica:
     mov true(%rbp), %eax
     cmp -24(%rbp), %eax
     jne elseCond Label 9
-    mov $0%eax
-    mov $0%edx
+    mov $0, %eax
+    mov $0, %edx
     sub %eax, %edx
     mov %edx,-40%(ebp)
     mov 0 - 0(%rbp), %eax
     mov -28(%rbp), %eax
     jmp endIf Label 10
 .elseCond Label 9
-    mov $0%eax
-    mov $0%edx
+    mov $0, %eax
+    mov $0, %edx
     sub %eax, %edx
     mov %edx,-56%(ebp)
     mov 0 - 0(%rbp), %eax
@@ -3224,10 +3137,9 @@ pruAritmetica:
 .endIf Label 10
     jmp endIf Label 5
 .elseCond Label 4
-    mov 5(%rbp), %eax
-    mov %eax, IntLiteral Label 18(%rbp)
-    mov $0%eax
-    mov $5%edx
+    movl $5, IntLiteral Label 18(%rbp)
+    mov $0, %eax
+    mov $5, %edx
     imul %edx, %eax
     mov %eax,-72%(ebp)
     mov 0 * 5(%rbp), %eax
@@ -3242,31 +3154,25 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 4(%rbp), %eax
-    mov %eax, IntLiteral Label 22(%rbp)
-    mov 8(%rbp), %eax
-    mov %eax, IntLiteral Label 24(%rbp)
-    call 	pruAritmetica
-    movl 	%eax, RESULT Label 26(%rbp) 
+    movl $4, IntLiteral Label 22(%rbp)
+    movl $8, IntLiteral Label 24(%rbp)
+    call pruAritmetica
+    movl %eax, RESULT Label 26(%rbp) 
 PARAM
 PARAM
 EXTERNINVK
 EXTERNINVK
-    mov 4(%rbp), %eax
-    mov %eax, IntLiteral Label 30(%rbp)
-    mov 4(%rbp), %eax
-    mov %eax, IntLiteral Label 32(%rbp)
-    call 	pruAritmetica
-    movl 	%eax, RESULT Label 34(%rbp) 
+    movl $4, IntLiteral Label 30(%rbp)
+    movl $4, IntLiteral Label 32(%rbp)
+    call pruAritmetica
+    movl %eax, RESULT Label 34(%rbp) 
 PARAM
 PARAM
 EXTERNINVK
-    mov 8(%rbp), %eax
-    mov %eax, IntLiteral Label 37(%rbp)
-    mov 5(%rbp), %eax
-    mov %eax, IntLiteral Label 39(%rbp)
-    call 	pruAritmetica
-    movl 	%eax, RESULT Label 41(%rbp) 
+    movl $8, IntLiteral Label 37(%rbp)
+    movl $5, IntLiteral Label 39(%rbp)
+    call pruAritmetica
+    movl %eax, RESULT Label 41(%rbp) 
 PARAM
 PARAM
 EXTERNINVK
@@ -3306,7 +3212,7 @@ lista:
 {CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 11, type=boolean, expr=0 == 0, size=0}}
 {CMP, VarLocation{name=CEQ Label 11, type=boolean, expr=0 == 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 12}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 15}
+{null, 5, null, Result: IntLiteral Label 15}
 {MULTIPLY(*), 0, 5, Result: VarLocation{name=MULTIPLY Label 17, type=int, expr=0 * 5, size=0}}
 {ASSIGN(=), 0 * 5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 {JMP, null, null, Result: endIf Label 13}
@@ -3318,21 +3224,21 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 22}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 24}
+{null, 4, null, Result: IntLiteral Label 22}
+{null, 8, null, Result: IntLiteral Label 24}
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 26}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 8}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: null}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 30}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 32}
+{null, 4, null, Result: IntLiteral Label 30}
+{null, 4, null, Result: IntLiteral Label 32}
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 34}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 4}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: null}
-{ASSIGN(=), 8, null, Result: IntLiteral Label 37}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 39}
+{null, 8, null, Result: IntLiteral Label 37}
+{null, 5, null, Result: IntLiteral Label 39}
 {METHODCALL, pruAritmetica, 2, Result: RESULT Label 41}
 {PARAM, null, null, Result: 8}
 {PARAM, null, null, Result: 5}
@@ -3353,8 +3259,8 @@ pruAritmetica:
     mov true(%rbp), %eax
     cmp -12(%rbp), %eax
     jne elseCond Label 4
-    mov $0%eax
-    mov $0%edx
+    mov $0, %eax
+    mov $0, %edx
     sub %eax, %edx
     mov %edx,-28%(ebp)
     mov 0 - 0(%rbp), %eax
@@ -3370,18 +3276,17 @@ pruAritmetica:
     mov true(%rbp), %eax
     cmp -40(%rbp), %eax
     jne elseCond Label 12
-    mov 5(%rbp), %eax
-    mov %eax, IntLiteral Label 15(%rbp)
-    mov $0%eax
-    mov $5%edx
+    movl $5, IntLiteral Label 15(%rbp)
+    mov $0, %eax
+    mov $5, %edx
     imul %edx, %eax
     mov %eax,-56%(ebp)
     mov 0 * 5(%rbp), %eax
     mov -44(%rbp), %eax
     jmp endIf Label 13
 .elseCond Label 12
-    mov $0%eax
-    mov $0%edx
+    mov $0, %eax
+    mov $0, %edx
     sub %eax, %edx
     mov %edx,-72%(ebp)
     mov 0 - 0(%rbp), %eax
@@ -3396,31 +3301,25 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 4(%rbp), %eax
-    mov %eax, IntLiteral Label 22(%rbp)
-    mov 8(%rbp), %eax
-    mov %eax, IntLiteral Label 24(%rbp)
-    call 	pruAritmetica
-    movl 	%eax, RESULT Label 26(%rbp) 
+    movl $4, IntLiteral Label 22(%rbp)
+    movl $8, IntLiteral Label 24(%rbp)
+    call pruAritmetica
+    movl %eax, RESULT Label 26(%rbp) 
 PARAM
 PARAM
 EXTERNINVK
 EXTERNINVK
-    mov 4(%rbp), %eax
-    mov %eax, IntLiteral Label 30(%rbp)
-    mov 4(%rbp), %eax
-    mov %eax, IntLiteral Label 32(%rbp)
-    call 	pruAritmetica
-    movl 	%eax, RESULT Label 34(%rbp) 
+    movl $4, IntLiteral Label 30(%rbp)
+    movl $4, IntLiteral Label 32(%rbp)
+    call pruAritmetica
+    movl %eax, RESULT Label 34(%rbp) 
 PARAM
 PARAM
 EXTERNINVK
-    mov 8(%rbp), %eax
-    mov %eax, IntLiteral Label 37(%rbp)
-    mov 5(%rbp), %eax
-    mov %eax, IntLiteral Label 39(%rbp)
-    call 	pruAritmetica
-    movl 	%eax, RESULT Label 41(%rbp) 
+    movl $8, IntLiteral Label 37(%rbp)
+    movl $5, IntLiteral Label 39(%rbp)
+    call pruAritmetica
+    movl %eax, RESULT Label 41(%rbp) 
 PARAM
 PARAM
 EXTERNINVK
@@ -3447,11 +3346,11 @@ lista:
 {LABEL, null, null, Result: BeginMethod pruebaLogica}
 
 {METHODDECL, Metodo{ name=pruebaLogica, return_not_void=true, typeReturn=int, parameters [Simbolo{type=boolean, name=i, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 1}
+{null, true, null, Result: BoolLiteral Label 1}
 {ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
-{ASSIGN(=), false, null, Result: BoolLiteral Label 3}
+{null, false, null, Result: BoolLiteral Label 3}
 {OR(||), false, false, Result: VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0}}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 8}
+{null, true, null, Result: BoolLiteral Label 8}
 {NON(!), true, null, Result: VarLocation{name=NON Label 10, type=boolean, expr=!true, size=0}}
 {AND(&&), VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0}, !true, Result: VarLocation{name=CONJUNCION Label 11, type=boolean, expr=VarLocation{name=DISYUNCION Label 6, type=boolean, expr=false || false, size=0} && !true, size=0}}
 {NON(!), false, null, Result: VarLocation{name=NON Label 14, type=boolean, expr=!false, size=0}}
@@ -3460,7 +3359,7 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), false, null, Result: BoolLiteral Label 17}
+{null, false, null, Result: BoolLiteral Label 17}
 {METHODCALL, pruebaLogica, 1, Result: RESULT Label 19}
 {PARAM, null, null, Result: false}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[false]}]}, null, Result: null}
@@ -3472,15 +3371,12 @@ pruebaLogica:
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov true(%rbp), %eax
-    mov %eax, BoolLiteral Label 1(%rbp)
+    movl $true, BoolLiteral Label 1(%rbp)
     mov true(%rbp), %eax
     mov -4(%rbp), %eax
-    mov false(%rbp), %eax
-    mov %eax, BoolLiteral Label 3(%rbp)
+    movl $false, BoolLiteral Label 3(%rbp)
 OR(||)
-    mov true(%rbp), %eax
-    mov %eax, BoolLiteral Label 8(%rbp)
+    movl $true, BoolLiteral Label 8(%rbp)
     cmp $0, true(%rbp) 
     sete	%al 
     movzbl %al, %eax 
@@ -3500,10 +3396,9 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov false(%rbp), %eax
-    mov %eax, BoolLiteral Label 17(%rbp)
-    call 	pruebaLogica
-    movl 	%eax, RESULT Label 19(%rbp) 
+    movl $false, BoolLiteral Label 17(%rbp)
+    call pruebaLogica
+    movl %eax, RESULT Label 19(%rbp) 
 PARAM
 EXTERNINVK
     leave
@@ -3548,7 +3443,7 @@ lista:
 {CMP, VarLocation{name=CONJUNCION Label 9, type=boolean, expr=VarLocation{name=GE Label 3, type=boolean, expr=0.0 > 0.0, size=0} && VarLocation{name=GE Label 7, type=boolean, expr=0.0 > 0.0, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 10}
 {PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 14, type=float, expr=0.0 + 0.0, size=0}}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 16}
+{null, 2.0, null, Result: FloatLiteral Label 16}
 {DIVIDE(/), VarLocation{name=PLUS Label 14, type=float, expr=0.0 + 0.0, size=0}, 2.0, Result: VarLocation{name=DIVIDE Label 18, type=float, expr=VarLocation{name=factor Label 15, type=float, expr=VarLocation{name=PLUS Label 14, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factor Label 17, type=float, expr=2.0, size=0}, size=0}}
 {RETURN, null, null, Result: VarLocation{name=factor Label 15, type=float, expr=VarLocation{name=PLUS Label 14, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factor Label 17, type=float, expr=2.0, size=0}}
 {JMP, null, null, Result: endIf Label 11}
@@ -3560,7 +3455,7 @@ lista:
 {CMP, VarLocation{name=CONJUNCION Label 27, type=boolean, expr=VarLocation{name=GE Label 21, type=boolean, expr=0.0 > 0.0, size=0} && VarLocation{name=GE Label 25, type=boolean, expr=0.0 > 0.0, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 28}
 {PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 32, type=float, expr=0.0 + 0.0, size=0}}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 34}
+{null, 2.0, null, Result: FloatLiteral Label 34}
 {DIVIDE(/), VarLocation{name=PLUS Label 32, type=float, expr=0.0 + 0.0, size=0}, 2.0, Result: VarLocation{name=DIVIDE Label 36, type=float, expr=VarLocation{name=factor Label 33, type=float, expr=VarLocation{name=PLUS Label 32, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factor Label 35, type=float, expr=2.0, size=0}, size=0}}
 {RETURN, null, null, Result: VarLocation{name=factor Label 33, type=float, expr=VarLocation{name=PLUS Label 32, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factor Label 35, type=float, expr=2.0, size=0}}
 {JMP, null, null, Result: endIf Label 29}
@@ -3572,7 +3467,7 @@ lista:
 {CMP, VarLocation{name=CONJUNCION Label 45, type=boolean, expr=VarLocation{name=GE Label 39, type=boolean, expr=0.0 > 0.0, size=0} && VarLocation{name=GE Label 43, type=boolean, expr=0.0 > 0.0, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 46}
 {PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 50, type=float, expr=0.0 + 0.0, size=0}}
-{ASSIGN(=), 2.0, null, Result: FloatLiteral Label 52}
+{null, 2.0, null, Result: FloatLiteral Label 52}
 {DIVIDE(/), VarLocation{name=PLUS Label 50, type=float, expr=0.0 + 0.0, size=0}, 2.0, Result: VarLocation{name=DIVIDE Label 54, type=float, expr=VarLocation{name=factor Label 51, type=float, expr=VarLocation{name=PLUS Label 50, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factor Label 53, type=float, expr=2.0, size=0}, size=0}}
 {RETURN, null, null, Result: VarLocation{name=factor Label 51, type=float, expr=VarLocation{name=PLUS Label 50, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factor Label 53, type=float, expr=2.0, size=0}}
 {JMP, null, null, Result: endIf Label 47}
@@ -3593,15 +3488,15 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 3.3, null, Result: FloatLiteral Label 72}
-{ASSIGN(=), 0.66, null, Result: FloatLiteral Label 74}
-{ASSIGN(=), 10.0, null, Result: FloatLiteral Label 76}
+{null, 3.3, null, Result: FloatLiteral Label 72}
+{null, 0.66, null, Result: FloatLiteral Label 74}
+{null, 10.0, null, Result: FloatLiteral Label 76}
 {METHODCALL, promedio, 3, Result: RESULT Label 78}
 {PARAM, null, null, Result: 3.3}
 {PARAM, null, null, Result: 0.66}
 {PARAM, null, null, Result: 10.0}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=promedio, args=[3.3, 0.66, 10.0]}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 81}
+{null, 1, null, Result: IntLiteral Label 81}
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -3625,7 +3520,7 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 1}
+{null, true, null, Result: BoolLiteral Label 1}
 {ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
 {NON(!), false, null, Result: VarLocation{name=NON Label 4, type=boolean, expr=!false, size=0}}
 {ASSIGN(=), !false, null, Result: VarLocation{name=b, type=boolean, expr=null, size=0}}
@@ -3642,8 +3537,7 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov true(%rbp), %eax
-    mov %eax, BoolLiteral Label 1(%rbp)
+    movl $true, BoolLiteral Label 1(%rbp)
     mov true(%rbp), %eax
     mov -4(%rbp), %eax
     cmp $0, false(%rbp) 
@@ -3698,9 +3592,9 @@ lista:
 {ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
 {ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 5}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 10}
+{null, 1, null, Result: IntLiteral Label 10}
 {ASSIGN(=), 1, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 13}
+{null, 0, null, Result: IntLiteral Label 13}
 {NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 15, type=boolean, expr=0 != 0, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 18}
 {CMP, VarLocation{name=factor Label 17, type=boolean, expr=VarLocation{name=factor Label 16, type=boolean, expr=VarLocation{name=NEQ Label 15, type=boolean, expr=0 != 0, size=0}, size=0}, size=0}, true, Result: null}
@@ -3716,8 +3610,8 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 26}
-{ASSIGN(=), 9, null, Result: IntLiteral Label 28}
+{null, 6, null, Result: IntLiteral Label 26}
+{null, 9, null, Result: IntLiteral Label 28}
 {METHODCALL, maxcomdiv, 2, Result: RESULT Label 30}
 {PARAM, null, null, Result: 6}
 {PARAM, null, null, Result: 9}
@@ -3749,12 +3643,10 @@ maxcomdiv:
     mov 0(%rbp), %eax
     mov -40(%rbp), %eax
 .endIf Label 5
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 10(%rbp)
+    movl $1, IntLiteral Label 10(%rbp)
     mov 1(%rbp), %eax
     mov -48(%rbp), %eax
-    mov 0(%rbp), %eax
-    mov %eax, IntLiteral Label 13(%rbp)
+    movl $0, IntLiteral Label 13(%rbp)
     movl	$0, %eax
     cmpl	$0, %eax
     setgne %al
@@ -3785,12 +3677,10 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 26(%rbp)
-    mov 9(%rbp), %eax
-    mov %eax, IntLiteral Label 28(%rbp)
-    call 	maxcomdiv
-    movl 	%eax, RESULT Label 30(%rbp) 
+    movl $6, IntLiteral Label 26(%rbp)
+    movl $9, IntLiteral Label 28(%rbp)
+    call maxcomdiv
+    movl %eax, RESULT Label 30(%rbp) 
 PARAM
 PARAM
 EXTERNINVK
@@ -3850,12 +3740,12 @@ lista:
 {METHODDECL, Metodo{ name=alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=boolean, name=b, value=null, size=0}, Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
 {CMP, VarLocation{name=factor Label 1, type=boolean, expr=false, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 2}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 5}
+{null, 1, null, Result: IntLiteral Label 5}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 7, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {JMP, null, null, Result: endIf Label 3}
 {LABEL, null, null, Result: elseCond Label 2}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 9}
+{null, 1, null, Result: IntLiteral Label 9}
 {MINUS(-), 0, 1, Result: VarLocation{name=MINUS Label 11, type=int, expr=0 - 1, size=0}}
 {ASSIGN(=), 0 - 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 3}
@@ -3867,11 +3757,11 @@ lista:
 {LABEL, null, null, Result: BeginMethod alo2}
 
 {METHODDECL, Metodo{ name=alo2, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), true, null, Result: BoolLiteral Label 12}
+{null, true, null, Result: BoolLiteral Label 12}
 {METHODCALL, alo, 2, Result: RESULT Label 15}
 {PARAM, null, null, Result: true}
 {PARAM, null, null, Result: 0}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 17}
+{null, 1, null, Result: IntLiteral Label 17}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 19, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {RETURN, null, null, Result: 0}
@@ -3879,15 +3769,15 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{ASSIGN(=), 7, null, Result: IntLiteral Label 21}
+{null, 7, null, Result: IntLiteral Label 21}
 {ASSIGN(=), 7, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
-{ASSIGN(=), 8.0, null, Result: FloatLiteral Label 23}
+{null, 8.0, null, Result: FloatLiteral Label 23}
 {ASSIGN(=), 8.0, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
 {METHODCALL, alo2, 1, Result: RESULT Label 26}
 {PARAM, null, null, Result: 0}
 {ASSIGN(=), MethodCallExpr{name=alo2, args=[0]}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
-{ASSIGN(=), false, null, Result: BoolLiteral Label 28}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 30}
+{null, false, null, Result: BoolLiteral Label 28}
+{null, 3, null, Result: IntLiteral Label 30}
 {MULTIPLY(*), VarLocation{name=factor Label 31, type=int, expr=3, size=0}, 0, Result: VarLocation{name=MULTIPLY Label 34, type=int, expr=VarLocation{name=factor Label 31, type=int, expr=3, size=0} * 0, size=0}}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -3900,20 +3790,18 @@ alo:
     mov true(%rbp), %eax
     cmp -4(%rbp), %eax
     jne elseCond Label 2
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 5(%rbp)
-    mov $0%eax 
-    mov $1%edx 
+    movl $1, IntLiteral Label 5(%rbp)
+    mov $0, %eax 
+    mov $1, %edx 
     add %eax, %edx 
     mov %edx,-20%(ebp) 
     mov 0 + 1(%rbp), %eax
     mov -8(%rbp), %eax
     jmp endIf Label 3
 .elseCond Label 2
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 9(%rbp)
-    mov $0%eax
-    mov $1%edx
+    movl $1, IntLiteral Label 9(%rbp)
+    mov $0, %eax
+    mov $1, %edx
     sub %eax, %edx
     mov %edx,-36%(ebp)
     mov 0 - 1(%rbp), %eax
@@ -3937,16 +3825,14 @@ alo2:
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov true(%rbp), %eax
-    mov %eax, BoolLiteral Label 12(%rbp)
-    call 	alo
-    movl 	%eax, RESULT Label 15(%rbp) 
+    movl $true, BoolLiteral Label 12(%rbp)
+    call alo
+    movl %eax, RESULT Label 15(%rbp) 
 PARAM
 PARAM
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 17(%rbp)
-    mov $0%eax 
-    mov $1%edx 
+    movl $1, IntLiteral Label 17(%rbp)
+    mov $0, %eax 
+    mov $1, %edx 
     add %eax, %edx 
     mov %edx,-24%(ebp) 
     mov 0 + 1(%rbp), %eax
@@ -3961,23 +3847,19 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 7(%rbp), %eax
-    mov %eax, IntLiteral Label 21(%rbp)
+    movl $7, IntLiteral Label 21(%rbp)
     mov 7(%rbp), %eax
     mov -4(%rbp), %eax
-    mov 8.0(%rbp), %eax
-    mov %eax, FloatLiteral Label 23(%rbp)
+    movl $8.0, FloatLiteral Label 23(%rbp)
     mov 8.0(%rbp), %eax
     mov -12(%rbp), %eax
-    call 	alo2
-    movl 	%eax, RESULT Label 26(%rbp) 
+    call alo2
+    movl %eax, RESULT Label 26(%rbp) 
 PARAM
     mov MethodCallExpr{name=alo2, args=[0]}(%rbp), %eax
     mov -20(%rbp), %eax
-    mov false(%rbp), %eax
-    mov %eax, BoolLiteral Label 28(%rbp)
-    mov 3(%rbp), %eax
-    mov %eax, IntLiteral Label 30(%rbp)
+    movl $false, BoolLiteral Label 28(%rbp)
+    movl $3, IntLiteral Label 30(%rbp)
     mov -36(%ebp) , %eax 
     mov $0, %edx
     imul %edx, %eax 
@@ -4007,25 +3889,25 @@ lista:
 {LABEL, null, null, Result: BeginMethod inc}
 
 {METHODDECL, Metodo{ name=inc, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 2}
+{null, 1, null, Result: IntLiteral Label 2}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 4, type=int, expr=0 + 1, size=0}}
 {RETURN, null, null, Result: 0 + 1}
 {LABEL, null, null, Result: EndMethod inc}
 {LABEL, null, null, Result: BeginMethod resto}
 
 {METHODDECL, Metodo{ name=resto, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}, Simbolo{type=float, name=y, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 6}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 8}
+{null, 3, null, Result: IntLiteral Label 6}
+{null, 2, null, Result: IntLiteral Label 8}
 {MULTIPLY(*), 3, 2, Result: VarLocation{name=MULTIPLY Label 10, type=int, expr=3 * 2, size=0}}
 {GE(>), 0, 3 * 2, Result: VarLocation{name=GE Label 11, type=boolean, expr=0 > 3 * 2, size=0}}
 {CMP, VarLocation{name=GE Label 11, type=boolean, expr=0 > 3 * 2, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 12}
-{ASSIGN(=), 3, null, Result: IntLiteral Label 15}
+{null, 3, null, Result: IntLiteral Label 15}
 {DIVIDE(/), 0, 3, Result: VarLocation{name=DIVIDE Label 17, type=int, expr=0 / 3, size=0}}
 {ASSIGN(=), 0 / 3, null, Result: VarLocation{name=res, type=int, expr=null, size=0}}
 {JMP, null, null, Result: endIf Label 13}
 {LABEL, null, null, Result: elseCond Label 12}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 19}
+{null, 2, null, Result: IntLiteral Label 19}
 {MOD(%), 0, 2, Result: VarLocation{name=MOD Label 21, type=int, expr=0 % 2, size=0}}
 {ASSIGN(=), 0 % 2, null, Result: VarLocation{name=res, type=int, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 13}
@@ -4034,13 +3916,13 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), false, null, Result: BoolLiteral Label 23}
+{null, false, null, Result: BoolLiteral Label 23}
 {ASSIGN(=), false, null, Result: VarLocation{name=res, type=boolean, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 25}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 27}
+{null, 0, null, Result: IntLiteral Label 25}
+{null, 5, null, Result: IntLiteral Label 27}
 {METHODCALL, inc, 1, Result: RESULT Label 29}
 {PARAM, null, null, Result: 5}
-{ASSIGN(=), 10.2, null, Result: FloatLiteral Label 31}
+{null, 10.2, null, Result: FloatLiteral Label 31}
 {METHODCALL, resto, 2, Result: RESULT Label 33}
 {PARAM, null, null, Result: MethodCallExpr{name=inc, args=[5]}}
 {PARAM, null, null, Result: 10.2}
@@ -4096,9 +3978,9 @@ lista:
 {ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
 {ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 5}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 10}
+{null, 1, null, Result: IntLiteral Label 10}
 {ASSIGN(=), 1, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 13}
+{null, 0, null, Result: IntLiteral Label 13}
 {NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 15, type=boolean, expr=0 != 0, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 18}
 {CMP, VarLocation{name=factor Label 17, type=boolean, expr=VarLocation{name=factor Label 16, type=boolean, expr=VarLocation{name=NEQ Label 15, type=boolean, expr=0 != 0, size=0}, size=0}, size=0}, true, Result: null}
@@ -4114,17 +3996,17 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 10000, null, Result: IntLiteral Label 26}
+{null, 10000, null, Result: IntLiteral Label 26}
 {ASSIGN(=), 10000, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 28}
-{ASSIGN(=), 9, null, Result: IntLiteral Label 30}
+{null, 6, null, Result: IntLiteral Label 28}
+{null, 9, null, Result: IntLiteral Label 30}
 {METHODCALL, maxcomdiv, 2, Result: RESULT Label 32}
 {PARAM, null, null, Result: 6}
 {PARAM, null, null, Result: 9}
-{ASSIGN(=), 3.5, null, Result: FloatLiteral Label 34}
+{null, 3.5, null, Result: FloatLiteral Label 34}
 {MULTIPLY(*), 3.5, 0, Result: VarLocation{name=MULTIPLY Label 37, type=int, expr=3.5 * 0, size=0}}
-{ASSIGN(=), 7, null, Result: IntLiteral Label 38}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 40}
+{null, 7, null, Result: IntLiteral Label 38}
+{null, 6, null, Result: IntLiteral Label 40}
 {DIVIDE(/), 7, 6, Result: VarLocation{name=DIVIDE Label 42, type=int, expr=7 / 6, size=0}}
 {MINUS(-), 3.5 * 0, 7 / 6, Result: VarLocation{name=MINUS Label 43, type=int, expr=3.5 * 0 - 7 / 6, size=0}}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%d%f"}, StringLiteral{value="mcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}, 3.5 * 0 - 7 / 6]}, null, Result: null}
@@ -4145,9 +4027,9 @@ lista:
 {LABEL, null, null, Result: BeginMethod pruAritmetica}
 
 {METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 90, null, Result: IntLiteral Label 1}
+{null, 90, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 90, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 7, null, Result: IntLiteral Label 4}
+{null, 7, null, Result: IntLiteral Label 4}
 {MOD(%), 0, 7, Result: VarLocation{name=MOD Label 6, type=int, expr=0 % 7, size=0}}
 {RETURN, null, null, Result: VarLocation{name=MOD Label 6, type=int, expr=0 % 7, size=0}}
 {LABEL, null, null, Result: EndMethod pruAritmetica}
@@ -4164,12 +4046,10 @@ pruAritmetica:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 90(%rbp), %eax
-    mov %eax, IntLiteral Label 1(%rbp)
+    movl $90, IntLiteral Label 1(%rbp)
     mov 90(%rbp), %eax
     mov -4(%rbp), %eax
-    mov 7(%rbp), %eax
-    mov %eax, IntLiteral Label 4(%rbp)
+    movl $7, IntLiteral Label 4(%rbp)
     movl	$7, %eax 
     idivl $0, %eax 
     movl	%edx, -20(%rbp)
@@ -4183,8 +4063,8 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    call 	pruAritmetica
-    movl 	%eax, RESULT Label 8(%rbp) 
+    call pruAritmetica
+    movl %eax, RESULT Label 8(%rbp) 
 EXTERNINVK
     leave
     ret
@@ -4207,11 +4087,11 @@ lista:
 {LABEL, null, null, Result: BeginMethod pruMult}
 
 {METHODDECL, Metodo{ name=pruMult, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=c, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 1}
+{null, 5, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 5, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 2000, null, Result: IntLiteral Label 3}
+{null, 2000, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 2000, null, Result: VarLocation{name=d, type=int, expr=null, size=0}}
-{ASSIGN(=), 1000, null, Result: IntLiteral Label 6}
+{null, 1000, null, Result: IntLiteral Label 6}
 {MULTIPLY(*), 0, 1000, Result: VarLocation{name=MULTIPLY Label 8, type=int, expr=0 * 1000, size=0}}
 {MULTIPLY(*), 0 * 1000, 0, Result: VarLocation{name=MULTIPLY Label 10, type=int, expr=0 * 1000 * 0, size=0}}
 {MULTIPLY(*), 0 * 1000 * 0, 0, Result: VarLocation{name=MULTIPLY Label 12, type=int, expr=0 * 1000 * 0 * 0, size=0}}
@@ -4220,7 +4100,7 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 14}
+{null, 2, null, Result: IntLiteral Label 14}
 {METHODCALL, pruMult, 1, Result: RESULT Label 16}
 {PARAM, null, null, Result: 2}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[2]}]}, null, Result: null}
@@ -4241,9 +4121,9 @@ lista:
 {LABEL, null, null, Result: BeginMethod pruMult}
 
 {METHODDECL, Metodo{ name=pruMult, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 5, null, Result: IntLiteral Label 1}
+{null, 5, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 5, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN(=), 7, null, Result: IntLiteral Label 4}
+{null, 7, null, Result: IntLiteral Label 4}
 {MULTIPLY(*), 0, 7, Result: VarLocation{name=MULTIPLY Label 6, type=int, expr=0 * 7, size=0}}
 {RETURN, null, null, Result: VarLocation{name=MULTIPLY Label 6, type=int, expr=0 * 7, size=0}}
 {LABEL, null, null, Result: EndMethod pruMult}
@@ -4260,14 +4140,12 @@ pruMult:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 5(%rbp), %eax
-    mov %eax, IntLiteral Label 1(%rbp)
+    movl $5, IntLiteral Label 1(%rbp)
     mov 5(%rbp), %eax
     mov -4(%rbp), %eax
-    mov 7(%rbp), %eax
-    mov %eax, IntLiteral Label 4(%rbp)
-    mov $0%eax
-    mov $7%edx
+    movl $7, IntLiteral Label 4(%rbp)
+    mov $0, %eax
+    mov $7, %edx
     imul %edx, %eax
     mov %eax,-20%(ebp)
     mov VarLocation{name=MULTIPLY Label 6, type=int, expr=0 * 7, size=0}(%rbp), %eax
@@ -4280,8 +4158,8 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    call 	pruMult
-    movl 	%eax, RESULT Label 8(%rbp) 
+    call pruMult
+    movl %eax, RESULT Label 8(%rbp) 
 EXTERNINVK
     leave
     ret
@@ -4302,7 +4180,7 @@ lista:
 {LABEL, null, null, Result: BeginMethod alo}
 
 {METHODDECL, Metodo{ name=alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 2}
+{null, 1, null, Result: IntLiteral Label 2}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 4, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {LABEL, null, null, Result: EndMethod alo}
@@ -4313,10 +4191,9 @@ alo:
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 2(%rbp)
-    mov $0%eax 
-    mov $1%edx 
+    movl $1, IntLiteral Label 2(%rbp)
+    mov $0, %eax 
+    mov $1, %edx 
     add %eax, %edx 
     mov %edx,-16%(ebp) 
     mov 0 + 1(%rbp), %eax
@@ -4366,9 +4243,9 @@ lista:
 {LABEL, null, null, Result: BeginMethod id}
 
 {METHODDECL, Metodo{ name=id, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 100, null, Result: IntLiteral Label 1}
+{null, 100, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 100, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 3}
+{null, 0, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 0, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
 {ASSIGN(=), 0, null, Result: VarLocation{name=z, type=int, expr=null, size=0}}
 {LE(<), 0, 0, Result: VarLocation{name=LE Label 8, type=boolean, expr=0 < 0, size=0}}
@@ -4376,24 +4253,24 @@ lista:
 {CMP, VarLocation{name=factor Label 9, type=boolean, expr=VarLocation{name=LE Label 8, type=boolean, expr=0 < 0, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 11}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 14}
+{null, 0, null, Result: IntLiteral Label 14}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 16, type=boolean, expr=0 > 0, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 19}
+{null, 0, null, Result: IntLiteral Label 19}
 {LE(<), 0, 0, Result: VarLocation{name=LE Label 21, type=boolean, expr=0 < 0, size=0}}
 {OR(||), VarLocation{name=GE Label 16, type=boolean, expr=0 > 0, size=0}, VarLocation{name=LE Label 21, type=boolean, expr=0 < 0, size=0}, Result: VarLocation{name=DISYUNCION Label 23, type=boolean, expr=VarLocation{name=GE Label 16, type=boolean, expr=0 > 0, size=0} || VarLocation{name=LE Label 21, type=boolean, expr=0 < 0, size=0}, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 25}
 {CMP, VarLocation{name=factor Label 24, type=boolean, expr=VarLocation{name=DISYUNCION Label 23, type=boolean, expr=VarLocation{name=GE Label 16, type=boolean, expr=0 > 0, size=0} || VarLocation{name=LE Label 21, type=boolean, expr=0 < 0, size=0}, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: EndWhile Label 26}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 28}
+{null, 0, null, Result: IntLiteral Label 28}
 {GE(>), 0, 0, Result: VarLocation{name=GE Label 30, type=boolean, expr=0 > 0, size=0}}
 {CMP, VarLocation{name=GE Label 30, type=boolean, expr=0 > 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 31}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 34}
+{null, 1, null, Result: IntLiteral Label 34}
 {MINUS(-), 0, 1, Result: VarLocation{name=MINUS Label 36, type=int, expr=0 - 1, size=0}}
 {ASSIGN(=), 0 - 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {JMP, null, null, Result: endIf Label 32}
 {LABEL, null, null, Result: elseCond Label 31}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 38}
+{null, 1, null, Result: IntLiteral Label 38}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 40, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {LABEL, null, null, Result: endIf Label 32}
@@ -4408,7 +4285,7 @@ lista:
 {LE(<), 0, 0, Result: VarLocation{name=LE Label 55, type=boolean, expr=0 < 0, size=0}}
 {CMP, VarLocation{name=LE Label 55, type=boolean, expr=0 < 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 56}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 59}
+{null, 1, null, Result: IntLiteral Label 59}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 61, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {JMP, null, null, Result: endIf Label 57}
@@ -4416,7 +4293,7 @@ lista:
 {CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 64, type=boolean, expr=0 == 0, size=0}}
 {CMP, VarLocation{name=CEQ Label 64, type=boolean, expr=0 == 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 65}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 68}
+{null, 1, null, Result: IntLiteral Label 68}
 {MINUS(-), 0, 1, Result: VarLocation{name=MINUS Label 70, type=int, expr=0 - 1, size=0}}
 {MULTIPLY(*), 0, 0, Result: VarLocation{name=MULTIPLY Label 73, type=int, expr=0 * 0, size=0}}
 {MULTIPLY(*), 0, 0, Result: VarLocation{name=MULTIPLY Label 76, type=int, expr=0 * 0, size=0}}
@@ -4430,7 +4307,7 @@ lista:
 {JMP, null, null, Result: BeginWhile Label 51}
 {LABEL, null, null, Result: EndWhile Label 52}
 {ASSIGN(=), 0, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 82}
+{null, 1, null, Result: IntLiteral Label 82}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 84, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 10}
@@ -4440,7 +4317,7 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 9, null, Result: IntLiteral Label 86}
+{null, 9, null, Result: IntLiteral Label 86}
 {METHODCALL, id, 1, Result: RESULT Label 88}
 {PARAM, null, null, Result: 9}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=id, args=[9]}]}, null, Result: null}
@@ -4462,14 +4339,14 @@ lista:
 {LABEL, null, null, Result: BeginMethod suma}
 
 {METHODDECL, Metodo{ name=suma, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=num1, value=null, size=0}, Simbolo{type=int, name=num2, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 2}
+{null, 0, null, Result: IntLiteral Label 2}
 {CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 0, size=0}}
 {CMP, VarLocation{name=CEQ Label 4, type=boolean, expr=0 == 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 5}
 {RETURN, null, null, Result: 0}
 {JMP, null, null, Result: endIf Label 6}
 {LABEL, null, null, Result: elseCond Label 5}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 9}
+{null, 0, null, Result: IntLiteral Label 9}
 {CEQ(==), 0, 0, Result: VarLocation{name=CEQ Label 11, type=boolean, expr=0 == 0, size=0}}
 {CMP, VarLocation{name=CEQ Label 11, type=boolean, expr=0 == 0, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCond Label 12}
@@ -4484,8 +4361,8 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 4, null, Result: IntLiteral Label 18}
-{ASSIGN(=), 9, null, Result: IntLiteral Label 20}
+{null, 4, null, Result: IntLiteral Label 18}
+{null, 9, null, Result: IntLiteral Label 20}
 {METHODCALL, suma, 2, Result: RESULT Label 22}
 {PARAM, null, null, Result: 4}
 {PARAM, null, null, Result: 9}
@@ -4498,8 +4375,7 @@ suma:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 0(%rbp), %eax
-    mov %eax, IntLiteral Label 2(%rbp)
+    movl $0, IntLiteral Label 2(%rbp)
     movl	$0, %eax
     cmpl	$0, %eax
     sete %al
@@ -4511,8 +4387,7 @@ suma:
     mov 0(%rbp), %eax
     jmp endIf Label 6
 .elseCond Label 5
-    mov 0(%rbp), %eax
-    mov %eax, IntLiteral Label 9(%rbp)
+    movl $0, IntLiteral Label 9(%rbp)
     movl	$0, %eax
     cmpl	$0, %eax
     sete %al
@@ -4524,8 +4399,8 @@ suma:
     mov 0(%rbp), %eax
     jmp endIf Label 13
 .elseCond Label 12
-    mov $0%eax 
-    mov $0%edx 
+    mov $0, %eax 
+    mov $0, %edx 
     add %eax, %edx 
     mov %edx,-44%(ebp) 
     mov 0 + 0(%rbp), %eax
@@ -4540,12 +4415,10 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 4(%rbp), %eax
-    mov %eax, IntLiteral Label 18(%rbp)
-    mov 9(%rbp), %eax
-    mov %eax, IntLiteral Label 20(%rbp)
-    call 	suma
-    movl 	%eax, RESULT Label 22(%rbp) 
+    movl $4, IntLiteral Label 18(%rbp)
+    movl $9, IntLiteral Label 20(%rbp)
+    call suma
+    movl %eax, RESULT Label 22(%rbp) 
 PARAM
 PARAM
 EXTERNINVK
@@ -4572,9 +4445,9 @@ lista:
 {LABEL, null, null, Result: BeginMethod sumx}
 
 {METHODDECL, Metodo{ name=sumx, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=x, value=null, size=0}, Simbolo{type=int, name=n, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 1}
+{null, 0, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 0, null, Result: VarLocation{name=aux, type=float, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 3}
+{null, 0, null, Result: IntLiteral Label 3}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {LE(<), 0, 0, Result: VarLocation{name=LE Label 7, type=boolean, expr=0 < 0, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 9}
@@ -4582,7 +4455,7 @@ lista:
 {JNE, null, null, Result: EndWhile Label 10}
 {PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUS Label 13, type=float, expr=0.0 + 0.0, size=0}}
 {ASSIGN(=), 0.0 + 0.0, null, Result: VarLocation{name=aux, type=float, expr=null, size=0}}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 15}
+{null, 1, null, Result: IntLiteral Label 15}
 {PLUS(+), 0, 1, Result: VarLocation{name=PLUS Label 17, type=int, expr=0 + 1, size=0}}
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhile Label 9}
@@ -4592,8 +4465,8 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 6.0, null, Result: FloatLiteral Label 19}
-{ASSIGN(=), 2, null, Result: IntLiteral Label 21}
+{null, 6.0, null, Result: FloatLiteral Label 19}
+{null, 2, null, Result: IntLiteral Label 21}
 {METHODCALL, sumx, 2, Result: RESULT Label 23}
 {PARAM, null, null, Result: 6.0}
 {PARAM, null, null, Result: 2}
@@ -4620,9 +4493,9 @@ lista:
 {LABEL, null, null, Result: BeginMethod maxcomdiv}
 
 {METHODDECL, Metodo{ name=maxcomdiv, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=a, value=null, size=0}, Simbolo{type=int, name=b, value=null, size=0}]}, null, Result: null}
-{ASSIGN(=), 1, null, Result: IntLiteral Label 1}
+{null, 1, null, Result: IntLiteral Label 1}
 {ASSIGN(=), 1, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 4}
+{null, 0, null, Result: IntLiteral Label 4}
 {NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 6, type=boolean, expr=0 != 0, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 12}
 {CMP, VarLocation{name=factor Label 11, type=boolean, expr=VarLocation{name=factor Label 10, type=boolean, expr=VarLocation{name=factor Label 9, type=boolean, expr=VarLocation{name=factor Label 8, type=boolean, expr=VarLocation{name=factor Label 7, type=boolean, expr=VarLocation{name=NEQ Label 6, type=boolean, expr=0 != 0, size=0}, size=0}, size=0}, size=0}, size=0}, size=0}, true, Result: null}
@@ -4633,7 +4506,7 @@ lista:
 {JMP, null, null, Result: BeginWhile Label 12}
 {JMP, null, null, Result: BeginWhile Label 12}
 {LABEL, null, null, Result: EndWhile Label 13}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 19}
+{null, 0, null, Result: IntLiteral Label 19}
 {NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 21, type=boolean, expr=0 != 0, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 22}
 {CMP, VarLocation{name=NEQ Label 21, type=boolean, expr=0 != 0, size=0}, true, Result: null}
@@ -4641,7 +4514,7 @@ lista:
 {JMP, null, null, Result: EndWhile Label 23}
 {JMP, null, null, Result: BeginWhile Label 22}
 {LABEL, null, null, Result: EndWhile Label 23}
-{ASSIGN(=), 0, null, Result: IntLiteral Label 25}
+{null, 0, null, Result: IntLiteral Label 25}
 {NEQ(!=), 0, 0, Result: VarLocation{name=NEQ Label 27, type=boolean, expr=0 != 0, size=0}}
 {LABEL, null, null, Result: BeginWhile Label 29}
 {CMP, VarLocation{name=factor Label 28, type=boolean, expr=VarLocation{name=NEQ Label 27, type=boolean, expr=0 != 0, size=0}, size=0}, true, Result: null}
@@ -4653,8 +4526,8 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{ASSIGN(=), 6, null, Result: IntLiteral Label 32}
-{ASSIGN(=), 9, null, Result: IntLiteral Label 34}
+{null, 6, null, Result: IntLiteral Label 32}
+{null, 9, null, Result: IntLiteral Label 34}
 {METHODCALL, maxcomdiv, 2, Result: RESULT Label 36}
 {PARAM, null, null, Result: 6}
 {PARAM, null, null, Result: 9}
@@ -4667,12 +4540,10 @@ maxcomdiv:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 1(%rbp), %eax
-    mov %eax, IntLiteral Label 1(%rbp)
+    movl $1, IntLiteral Label 1(%rbp)
     mov 1(%rbp), %eax
     mov -4(%rbp), %eax
-    mov 0(%rbp), %eax
-    mov %eax, IntLiteral Label 4(%rbp)
+    movl $0, IntLiteral Label 4(%rbp)
     movl	$0, %eax
     cmpl	$0, %eax
     setgne %al
@@ -4692,8 +4563,7 @@ maxcomdiv:
     jmp BeginWhile Label 12
     jmp BeginWhile Label 12
 .EndWhile Label 13
-    mov 0(%rbp), %eax
-    mov %eax, IntLiteral Label 19(%rbp)
+    movl $0, IntLiteral Label 19(%rbp)
     movl	$0, %eax
     cmpl	$0, %eax
     setgne %al
@@ -4706,8 +4576,7 @@ maxcomdiv:
     jmp EndWhile Label 23
     jmp BeginWhile Label 22
 .EndWhile Label 23
-    mov 0(%rbp), %eax
-    mov %eax, IntLiteral Label 25(%rbp)
+    movl $0, IntLiteral Label 25(%rbp)
     movl	$0, %eax
     cmpl	$0, %eax
     setgne %al
@@ -4729,12 +4598,10 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
-    mov 6(%rbp), %eax
-    mov %eax, IntLiteral Label 32(%rbp)
-    mov 9(%rbp), %eax
-    mov %eax, IntLiteral Label 34(%rbp)
-    call 	maxcomdiv
-    movl 	%eax, RESULT Label 36(%rbp) 
+    movl $6, IntLiteral Label 32(%rbp)
+    movl $9, IntLiteral Label 34(%rbp)
+    call maxcomdiv
+    movl %eax, RESULT Label 36(%rbp) 
 PARAM
 PARAM
 EXTERNINVK

@@ -62,8 +62,8 @@ public class AssemblyCodeGenerator{
 
 			result = result +(
 
-			"    mov $" + x.getStringValue() + "%eax \n"+
-			"    mov $" + y.getStringValue() + "%edx \n"+
+			"    mov $" + x.getStringValue() + ", %eax \n"+
+			"    mov $" + y.getStringValue() + ", %edx \n"+
 			"    add %eax, %edx \n"+
 			"    mov %edx," + ResOff + "%(ebp) \n");
 		}
@@ -126,8 +126,8 @@ public class AssemblyCodeGenerator{
 
 			result = result +(
 
-			"    mov $" + x.getStringValue() + "%eax\n"+
-			"    mov $" + y.getStringValue() + "%edx\n"+
+			"    mov $" + x.getStringValue() + ", %eax\n"+
+			"    mov $" + y.getStringValue() + ", %edx\n"+
 			"    sub %eax, %edx\n"+
 			"    mov %edx," + ResOff + "%(ebp)\n");
 
@@ -190,8 +190,8 @@ public class AssemblyCodeGenerator{
 
 			result = result +(
 
-			"    mov $" + x.getStringValue() + "%eax\n"+
-			"    mov $" + y.getStringValue() + "%edx\n"+
+			"    mov $" + x.getStringValue() + ", %eax\n"+
+			"    mov $" + y.getStringValue() + ", %edx\n"+
 			"    imul %edx, %eax\n"+
 			"    mov %eax," + ResOff + "%(ebp)\n");
 
@@ -351,6 +351,72 @@ public class AssemblyCodeGenerator{
 		result += "    movl	%edx, " + res.getOffset() + "(%rbp)\n";//en edx queda el resto de la division
 
 	}
+
+	public void ASM_Assing(TripletCode t){
+		if(t.getFirstDir() instanceof VarLocation){
+			VarLocation firstOp=(VarLocation) t.getFirstDir();
+			result=result+"    mov " + firstOp.getOffset() + "(%rbp), %eax\n";
+		}else{
+			result=result+"    mov " + t.getFirstDir() + "(%rbp), %eax\n";
+		}
+		if(t.getResult() instanceof VarLocation){
+			VarLocation res=(VarLocation) t.getResult();
+			result=result+"    mov " + res.getOffset() + "(%rbp), %eax\n";
+		}else{
+			//casos del resultado, puede ser intliteral, boolliteral o floatliteral
+			if(t.getResult() instanceof BoolLiteral){
+				BoolLiteral res= (BoolLiteral) t.getResult();
+			}
+			if(t.getResult() instanceof IntLiteral){
+				IntLiteral res= (IntLiteral) t.getResult();
+			}
+			if(t.getResult() instanceof FloatLiteral){
+				FloatLiteral res= (FloatLiteral) t.getResult();
+			}
+			result=result+"    mov %eax, " + t.getResult() + "(%rbp)\n";
+		}
+	}
+
+	public void ASM_Label(TripletCode t){
+		String res=(String)t.getResult();
+    	//ignoramos las label que marcan inicio de declaracion de metodos
+    	if(!res.contains("BeginMethod")){
+	    	//si la label marca el fin de un metodo (de su declaracion) agregamos un leave y ret
+	    	if(res.contains("EndMethod")){
+	    		result += "    leave\n";
+	    		result=result+ "    ret\n";
+	    		result += "\n";
+	    	}else{
+	    		result=result+ "."+t.getResult()+"\n"; 
+	    	}
+	    }
+	}
+
+	public void ASM_Cmp(TripletCode t){
+		if(t.getSecondDir() instanceof VarLocation){
+			VarLocation secondOp=(VarLocation)t.getSecondDir();
+			result += "    mov " + secondOp.getOffset() + "(%rbp), %eax\n";	
+		}else{
+			result += "    mov " + t.getSecondDir() + "(%rbp), %eax\n";	
+		}
+		if(t.getFirstDir() instanceof VarLocation){
+			VarLocation firstOp=(VarLocation)t.getFirstDir();
+			result += "    cmp " + firstOp.getOffset() + "(%rbp), %eax\n";
+		}else{
+			result += "    cmp " + t.getFirstDir() + "(%rbp), %eax\n";
+		}
+	}
+
+	public void ASM_Method_Decl(TripletCode t){
+		Metodo m=(Metodo)t.getFirstDir();
+		result += ".globl	" + m.getName() + "\n";
+		result += ".type	" + m.getName() + ", @function \n";			
+		result += m.getName() + ": \n";	
+		/*Dejamos espacio para los parametros del metodo*/
+		result += "    enter   $("+4 * m.getParametros().size() + "), $0 \n";
+		result += "    push	%rbp\n";
+		result += "    mov %rsp, %rbp\n";
+	}
 	//metodo que dada una lista de codigos de 3 direcciones genera el codigo assembly correspondiente
 	public String generate(LinkedList<TripletCode> list){
 	
@@ -406,18 +472,7 @@ public class AssemblyCodeGenerator{
 			        ASM_logic(t, t.getOperator());
 			        break;
 				case ASSIGN:
-					if(t.getFirstDir() instanceof VarLocation){
-						VarLocation firstOp=(VarLocation) t.getFirstDir();
-						result=result+"    mov " + firstOp.getOffset() + "(%rbp), %eax\n";
-					}else{
-						result=result+"    mov " + t.getFirstDir() + "(%rbp), %eax\n";
-					}
-					if(t.getResult() instanceof VarLocation){
-						VarLocation res=(VarLocation) t.getResult();
-						result=result+"    mov " + res.getOffset() + "(%rbp), %eax\n";
-					}else{
-						result=result+"    mov %eax, " + t.getResult() + "(%rbp)\n";
-					}
+					ASM_Assing(t);
 			        break;
 			    case INCREMENT:
 			    	result=result+ "INCREMENT(+=)\n"; 
@@ -426,18 +481,7 @@ public class AssemblyCodeGenerator{
 			    	result=result+ "DECREMENT(-=)\n"; 
 			    	break;
 			    case LABEL:
-			    	String res=(String)t.getResult();
-			    	//ignoramos las label que marcan inicio de declaracion de metodos
-			    	if(!res.contains("BeginMethod")){
-				    	//si la label marca el fin de un metodo (de su declaracion) agregamos un leave y ret
-				    	if(res.contains("EndMethod")){
-				    		result += "    leave\n";
-				    		result=result+ "    ret\n";
-				    		result += "\n";
-				    	}else{
-				    		result=result+ "."+t.getResult()+"\n"; 
-				    	}
-				    }
+			    	ASM_Label(t);
 			    	break;
 				case RETURN:
 					if (t.getResult() != null) 
@@ -458,18 +502,7 @@ public class AssemblyCodeGenerator{
 
 			    	break;
 			    case CMP:
-			    	if(t.getSecondDir() instanceof VarLocation){
-			    		VarLocation secondOp=(VarLocation)t.getSecondDir();
-			    		result += "    mov " + secondOp.getOffset() + "(%rbp), %eax\n";	
-			    	}else{
-			    		result += "    mov " + t.getSecondDir() + "(%rbp), %eax\n";	
-			    	}
-			    	if(t.getFirstDir() instanceof VarLocation){
-			    		VarLocation firstOp=(VarLocation)t.getFirstDir();
-			    		result += "    cmp " + firstOp.getOffset() + "(%rbp), %eax\n";
-			    	}else{
-			    		result += "    cmp " + t.getFirstDir() + "(%rbp), %eax\n";
-			    	}
+			    	ASM_Cmp(t);
 			    	break;
 			 	case JMP:
 			    	result=result+ "    jmp "+t.getResult()+"\n"; 
@@ -487,9 +520,9 @@ public class AssemblyCodeGenerator{
 			   		result=result+ "    jnl "+t.getResult()+"\n"; 
 			   		break;
 			   	case METHODCALL:
-			   		result += "    call 	" + t.getFirstDir() + "\n";		
+			   		result += "    call " + t.getFirstDir() + "\n";		
 				  	if (t.getResult() != null)
-				  		result += "    movl 	%eax, " + t.getResult() + "(%rbp) \n";
+				  		result += "    movl %eax, " + t.getResult() + "(%rbp) \n";
 
 			   		break;
 			   	case EXTERNINVK:
@@ -499,15 +532,13 @@ public class AssemblyCodeGenerator{
 			   		result=result+ "ARRAYACCESS\n"; 
 			   		break;
 			   	case METHODDECL:
-		   			Metodo m=(Metodo)t.getFirstDir();
-
-		   			result += ".globl	" + m.getName() + "\n";
-					result += ".type	" + m.getName() + ", @function \n";			
-					result += m.getName() + ": \n";	
-					/*Dejamos espacio para los parametros del metodo*/
-					result += "    enter   $("+4 * m.getParametros().size() + "), $0 \n";
-					result += "    push	%rbp\n";
-					result += "    mov %rsp, %rbp\n";
+		   			ASM_Method_Decl(t);
+		   			break;
+		   		case CONST:
+		   			/*System.out.println(t.getFirstDir().getClass());
+		   			System.out.println("CONST "+t.getFirstDir());*/
+		   			
+		   			result += "    movl $" + t.getFirstDir() + ", " + t.getResult() + "(%rbp)\n";
 		   			break;
 			}
 		}
