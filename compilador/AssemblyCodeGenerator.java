@@ -4,7 +4,18 @@ public class AssemblyCodeGenerator{
 	public AssemblyCodeGenerator(){
 
 	}
+	//nro de label que se utilizara en la generacion de Or y And
+	int OrAndlabelInt;
 
+	public void incLabelOrAnd(){
+		OrAndlabelInt=OrAndlabelInt+1;
+	}
+
+	public void resetLabelOrAnd(){
+		OrAndlabelInt=0;
+	}
+
+	//cadena generada
 	String result="";
 
 	public void ASM_Add(TripletCode t){
@@ -451,14 +462,12 @@ public class AssemblyCodeGenerator{
 			VarLocation secondOp=(VarLocation)t.getSecondDir();
 			result += "    mov " + secondOp.getOffset() + "(%rbp), %eax\n";	
 		}else{
-			System.out.println("{Cmp} CASO (2do)"+t.getSecondDir().getClass());
 			result += "    mov " + t.getSecondDir() + "(%rbp), %eax\n";	
 		}
 		if(t.getFirstDir() instanceof VarLocation){
 			VarLocation firstOp=(VarLocation)t.getFirstDir();
 			result += "    cmp " + firstOp.getOffset() + "(%rbp), %eax\n";
 		}else{
-			System.out.println("{Cmp} CASO (1er)"+t.getFirstDir().getClass());
 			result += "    cmp " + t.getFirstDir() + "(%rbp), %eax\n";
 		}
 	}
@@ -473,73 +482,155 @@ public class AssemblyCodeGenerator{
 		result += "    push	%rbp\n";
 		result += "    mov %rsp, %rbp\n";
 	}
+
+	public void ASM_Or(TripletCode t){
+		if(t.getFirstDir() instanceof VarLocation && t.getSecondDir() instanceof VarLocation){
+			VarLocation op1=(VarLocation)t.getFirstDir();
+			VarLocation op2=(VarLocation)t.getSecondDir();
+			VarLocation res=(VarLocation)t.getResult();
+
+			int label1=OrAndlabelInt;
+			incLabelOrAnd();
+			int label2=OrAndlabelInt;
+			incLabelOrAnd();
+			//label final
+			int label3=OrAndlabelInt;
+			incLabelOrAnd();
+
+			result += "    cmp	$0, " + op1.getOffset() + "(%rbp)\n";
+			result += "    jne .L" +label1  + "\n";		
+			result += "    cmp	$0, " + op2.getOffset() + "(%rbp)\n";
+			result += "    je .L" + label1 + "\n";
+			result += "    mov	$1, %eax\n";
+			result += "    jmp .L" + label2 + "\n";
+			result += ".L" + label1 + ":\n";
+			result += "    movl	$0, %eax\n";
+			result += "    jmp .L" + label3 + "\n";
+			result += ".L" + label2 + ":\n";
+			result += "    movl	%eax, " + res.getOffset() + "(%rbp)\n";
+			result += ".L"+label3+":\n";
+		}else{
+			System.out.println("{Or}TRATAMIENTO PARA " + t.getFirstDir().getClass()+ " y "+ t.getSecondDir().getClass()+" PENDIENTE");
+		}
+		
+	}
+
+	public void ASM_And(TripletCode t){
+		if(t.getFirstDir() instanceof VarLocation && t.getSecondDir() instanceof VarLocation){
+			VarLocation op1=(VarLocation)t.getFirstDir();
+			VarLocation op2=(VarLocation)t.getSecondDir();
+			VarLocation res=(VarLocation)t.getResult();
+
+			int label1=OrAndlabelInt;
+			incLabelOrAnd();
+			int label2=OrAndlabelInt;
+			incLabelOrAnd();
+			//label final
+			int label3=OrAndlabelInt;
+			incLabelOrAnd();
+
+			result += "    cmp	$0, " + op1.getOffset() + "(%rbp)\n";
+			result += "    je .L" +label1  + "\n";		
+			result += "    cmp	$0, " + op2.getOffset() + "(%rbp)\n";
+			result += "    je .L" + label1 + "\n";
+			result += "    mov	$1, %eax\n";
+			result += "    jmp .L" + label2 + "\n";
+			result += ".L" + label1 + ":\n";
+			result += "    movl	$0, %eax\n";
+			result += "    jmp .L" + label3 + "\n";
+			result += ".L" + label2 + ":\n";
+			result += "    movl	%eax, " + res.getOffset() + "(%rbp)\n";
+			result += ".L"+label3+":\n";
+
+		}else{
+			System.out.println("{And}TRATAMIENTO PARA " + t.getFirstDir().getClass()+ " y "+ t.getSecondDir().getClass()+" PENDIENTE");
+		}
+		
+	}
 	//metodo que dada una lista de codigos de 3 direcciones genera el codigo assembly correspondiente
 	public String generate(LinkedList<TripletCode> list){
-	
+		OrAndlabelInt=0;
 		for(TripletCode t: list){
 
 			switch(t.getOperator()){
 				
 				case PLUS:
-
+					result+="\n";
 					ASM_Add(t);
 					break;
 
 				case MINUS:
-
+					result+="\n";
 					ASM_Sub(t);
 					break;
 
 			    case MULTIPLY:
+			    	result+="\n";
 			        ASM_Imul(t); 
 			        break;
 
 			    case DIVIDE:
+			    	result+="\n";
 			        result=result+ "DIVIDE(/)\n"; 
 			        break;
 			    case MOD:
+			    	result+="\n";
 			        ASM_Mod(t);
 			        break;
 			    case LE:
+			    	result+="\n";
 			      	ASM_logic(t, t.getOperator());	
 			        break;
 			    case LEQ:
+			    	result+="\n";
 			        ASM_logic(t, t.getOperator());	
 			        break;
 			    case GE:
+			    	result+="\n";
 			        ASM_logic(t, t.getOperator());	
 			        break;
 			    case GEQ:
+			    	result+="\n";
 			        ASM_logic(t, t.getOperator());	
 			        break;
 			    case NON: 
+			    	result+="\n";
 			    	ASM_Non(t);
 			        break;
 				case UNARYMINUS:
+					result+="\n";
 			        ASM_Unary_Minus(t);
 			        break;
 			    case AND:
-			        result=result+ "AND(&&)\n"; 
+			    	result+="\n";
+			        ASM_And(t);
 			        break;
 			    case CEQ:
+			    	result+="\n";
 			        ASM_logic(t, t.getOperator());
 			        break;
 			    case NEQ:
+			    	result+="\n";
 			        ASM_logic(t, t.getOperator());
 			        break;
 				case ASSIGN:
+					result+="\n";
 					ASM_Assing(t);
 			        break;
 			    case INCREMENT:
+			    	result+="\n";
 			    	result=result+ "INCREMENT(+=)\n"; 
 			    	break;
 			    case DECREMENT:
+			    	result+="\n";
 			    	result=result+ "DECREMENT(-=)\n"; 
 			    	break;
 			    case LABEL:
+			    	result+="\n";
 			    	ASM_Label(t);
 			    	break;
 				case RETURN:
+					result+="\n";
 					if (t.getResult() != null) 
 				 		result += "    mov " + t.getResult() + "(%rbp), %eax\n";
 				 	else 
@@ -547,6 +638,7 @@ public class AssemblyCodeGenerator{
 				 	
 			    	break;
 			    case PARAM:
+			    	result+="\n";
 			    	result=result+ "PARAM\n";
 
 			    	/*Simbolo res=t.getResult();
@@ -558,31 +650,38 @@ public class AssemblyCodeGenerator{
 
 			    	break;
 			    case CMP:
+			    	result+="\n";
 			    	ASM_Cmp(t);
 			    	break;
 			 	case JMP:
+			 		result+="\n";
 			    	result=result+ "    jmp "+t.getResult()+"\n"; 
 			    	break;
 			    case OR:
-			    	result=result+ "OR(||)\n"; 
+			    	result+="\n";
+			    	ASM_Or(t);
 			    	break;
 			    case ARRAYLABEL:
+			    	result+="\n";
 			    	result=result+ "array[]\n"; 
 			    	break;
 			   	case JNE:
+			   		result+="\n";
 			   		result=result+ "    jne "+t.getResult()+"\n"; 
 			   		break;
 			   	case JNL:
+			   		result+="\n";
 			   		result=result+ "    jnl "+t.getResult()+"\n"; 
 			   		break;
 			   	case METHODCALL:
+			   		result+="\n";
 			   		result += "    call " + t.getFirstDir() + "\n";		
 				  	if (t.getResult() != null)
 				  		result += "    movl %eax, " + t.getResult() + "(%rbp) \n";
 
 			   		break;
 			   	case EXTERNINVK:
-
+			   		result+="\n";
 			   		ExternInvkExpr mc=(ExternInvkExpr) t.getFirstDir();
 			   		result += "    call " + mc.getId() + "\n";		
 				  	if (t.getResult() != null)
@@ -590,12 +689,15 @@ public class AssemblyCodeGenerator{
 
 			   		break;
 			   	case ARRAYACCESS:
+			   		result+="\n";
 			   		result=result+ "ARRAYACCESS\n"; 
 			   		break;
 			   	case METHODDECL:
+			   		result+="\n";
 		   			ASM_Method_Decl(t);
 		   			break;
 		   		case CONST:
+		   			result+="\n";
 		   			/*System.out.println(t.getFirstDir().getClass());
 		   			System.out.println("CONST "+t.getFirstDir());*/
 		   			

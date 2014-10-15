@@ -50,45 +50,66 @@ lista:
 {LABEL, null, null, Result: EndMethod main}
 
 {Cmp} CASO (2do)class java.lang.String
+
+
 .globl	factorial
 .type	factorial, @function 
 factorial: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     mov 0(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $1, IntLiteralLabel2(%rbp)
+
     mov 1(%rbp), %eax
     mov -12(%rbp), %eax
+
     movl $0, IntLiteralLabel5(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -28(%rbp)
+
 .BeginWhileLabel9
+
     mov true(%rbp), %eax
     cmp -32(%rbp), %eax
+
     jne EndWhileLabel10
+
     mov $0, %eax
     mov $0, %edx
     imul %edx, %eax
     mov %eax,-48%(ebp)
+
     mov 0 * 0(%rbp), %eax
     mov -36(%rbp), %eax
+
     movl $1, IntLiteralLabel15(%rbp)
+
     mov $0, %eax
     mov $1, %edx
     sub %eax, %edx
     mov %edx,-64%(ebp)
+
     mov 0 - 1(%rbp), %eax
     mov -52(%rbp), %eax
+
     jmp BeginWhileLabel9
+
 .EndWhileLabel10
+
     mov 0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -96,12 +117,17 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $3, IntLiteralLabel19(%rbp)
+
     call factorial
     movl %eax, RESULTLabel21(%rbp) 
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel23(%rbp) 
+
     leave
     ret
 
@@ -185,16 +211,23 @@ lista:
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
+
+
 .globl	div
 .type	div, @function 
 div: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
 DIVIDE(/)
+
     mov VarLocation{name=factorLabel1, type=float, expr=0.0, size=0} / VarLocation{name=factorLabel2, type=float, expr=0.0, size=0}(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	resta
 .type	resta, @function 
@@ -202,9 +235,14 @@ resta:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
+
     mov 0.0 - 0.0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	sum
 .type	sum, @function 
@@ -212,9 +250,14 @@ sum:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
+
     mov 0.0 + 0.0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	mult
 .type	mult, @function 
@@ -222,8 +265,12 @@ mult:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -231,37 +278,63 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $1.234, FloatLiteralLabel13(%rbp)
+
     mov 1.234(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $27.5, FloatLiteralLabel15(%rbp)
+
+
     mov -27.5(%rbp), %eax
     mov -12(%rbp), %eax
+
     movl $70.3, FloatLiteralLabel18(%rbp)
+
+
     mov -70.3(%rbp), %eax
     mov -24(%rbp), %eax
+
     call sum
     movl %eax, RESULTLabel23(%rbp) 
+
 PARAM
+
 PARAM
+
     call div
     movl %eax, RESULTLabel27(%rbp) 
+
 PARAM
+
 PARAM
+
     call mult
     movl %eax, RESULTLabel29(%rbp) 
+
 PARAM
+
 PARAM
+
+
     call resta
     movl %eax, RESULTLabel34(%rbp) 
+
 PARAM
+
 PARAM
+
     call sum
     movl %eax, RESULTLabel36(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel38(%rbp) 
+
     leave
     ret
 
@@ -304,30 +377,44 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[true]}]}, null, Result: EXTERNINVKLabel21}
 {LABEL, null, null, Result: EndMethod main}
 
+{Or}TRATAMIENTO PARA class ir.ast.BoolLiteral y class ir.ast.BoolLiteral PENDIENTE
+{And}TRATAMIENTO PARA class ir.ast.VarLocation y class ir.ast.UnaryOpExpr PENDIENTE
+{And}TRATAMIENTO PARA class ir.ast.VarLocation y class ir.ast.UnaryOpExpr PENDIENTE
+
+
 .globl	pruebaLogica
 .type	pruebaLogica, @function 
 pruebaLogica: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $true, BoolLiteralLabel1(%rbp)
+
     mov true(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $false, BoolLiteralLabel3(%rbp)
-OR(||)
+
+
     movl $true, BoolLiteralLabel8(%rbp)
+
     cmp $0, true(%rbp) 
     sete	%al 
     movzbl %al, %eax 
     mov %eax, -32(%rbp) 
-AND(&&)
+
+
     cmp $0, false(%rbp) 
     sete	%al 
     movzbl %al, %eax 
     mov %eax, -48(%rbp) 
-AND(&&)
+
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -335,12 +422,17 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $true, BoolLiteralLabel17(%rbp)
+
     call pruebaLogica
     movl %eax, RESULTLabel19(%rbp) 
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel21(%rbp) 
+
     leave
     ret
 
@@ -382,21 +474,29 @@ lista:
 {LABEL, null, null, Result: endIfLabel14}
 {LABEL, null, null, Result: EndMethod main}
 
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+
+
 .globl	inc
 .type	inc, @function 
 inc: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $1, IntLiteralLabel2(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-12%(ebp) 
+
     mov 0 + 1(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -404,29 +504,43 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     call "get_int"
     movl %eax, EXTERNINVKLabel5(%rbp) 
+
     call inc
     movl %eax, RESULTLabel7(%rbp) 
+
 PARAM
+
     mov MethodCallExpr{name=inc, args=[ExternInvkExpr{id="get_int", type=int, parameters=[]}]}(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $1, IntLiteralLabel10(%rbp)
+
     movl	$0, %eax
     cmpl	$1, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -24(%rbp)
+
     mov true(%rbp), %eax
     cmp -24(%rbp), %eax
+
     jne elseCondLabel13
+
     call "printf"
     movl %eax, EXTERNINVKLabel15(%rbp) 
+
     jmp endIfLabel14
+
 .elseCondLabel13
+
     call "printf"
     movl %eax, EXTERNINVKLabel17(%rbp) 
+
 .endIfLabel14
+
     leave
     ret
 
@@ -524,44 +638,68 @@ lista:
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {logic} FALTA CASO (2do param)class ir.ast.ArrayLiteral
+{Or}TRATAMIENTO PARA class ir.ast.VarLocation y class ir.ast.BoolLiteral PENDIENTE
+
+
 .globl	pruArreglos
 .type	pruArreglos, @function 
 pruArreglos: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $8.87, FloatLiteralLabel1(%rbp)
+
     mov 8.87(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $0, IntLiteralLabel3(%rbp)
+
     movl $4, IntLiteralLabel5(%rbp)
+
     mov 4(%rbp), %eax
     mov -16(%rbp), %eax
+
     movl $55, IntLiteralLabel7(%rbp)
+
     movl $2.6, FloatLiteralLabel9(%rbp)
+
+
     mov 2.6 + 0.0(%rbp), %eax
     mov -28(%rbp), %eax
+
     movl $0, IntLiteralLabel13(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -60(%rbp)
+
     mov -64(%rbp), %eax
     mov -48(%rbp), %eax
+
     movl $1, IntLiteralLabel20(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setge %al
     movzbl %al, %eax
     movl	%eax, -88(%rbp)
+
     mov -88(%rbp), %eax
     mov -76(%rbp), %eax
+
     movl $0, IntLiteralLabel26(%rbp)
+
 ARRAYACCESS
+
     mov ArrayLiteral{id=A, size=5}(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -569,55 +707,87 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $true, BoolLiteralLabel30(%rbp)
+
     mov true(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $1, IntLiteralLabel32(%rbp)
+
     movl $58, IntLiteralLabel34(%rbp)
+
     movl $6, IntLiteralLabel36(%rbp)
+
     movl	$6, %eax 
 	   negl	%eax 
     movl	%eax, -28(%rbp) 
+
+
     mov 58 - VarLocation{name=UNARYMINUSLabel38, type=int, expr=-6, size=0}(%rbp), %eax
     mov -16(%rbp), %eax
+
     movl $0, IntLiteralLabel41(%rbp)
+
     movl $2.6, FloatLiteralLabel43(%rbp)
+
+
     mov -2.6(%rbp), %eax
     mov -44(%rbp), %eax
+
     movl $2, IntLiteralLabel46(%rbp)
+
     movl $4, IntLiteralLabel48(%rbp)
+
     movl $6, IntLiteralLabel50(%rbp)
+
     movl	$4, %eax
     cmpl	$6, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -72(%rbp)
+
     cmp $0, -76(%rbp) 
     sete %al 
     movzbl %al, %eax 
     mov %eax, -84(%rbp) 
+
     mov !VarLocation{name=factorLabel53, type=boolean, expr=VarLocation{name=LELabel52, type=boolean, expr=4 < 6, size=0}, size=0}(%rbp), %eax
     mov -60(%rbp), %eax
+
     movl $3, IntLiteralLabel56(%rbp)
+
     movl $5, IntLiteralLabel58(%rbp)
+
     movl $7, IntLiteralLabel60(%rbp)
+
     movl $3, IntLiteralLabel62(%rbp)
+
     movl $3, IntLiteralLabel64(%rbp)
+
     mov $3, %eax 
     mov $3, %edx 
     add %eax, %edx 
     mov %edx,-112%(ebp) 
+
+
 ARRAYACCESS
+
     movl	$5, %eax
     setge %al
     movzbl %al, %eax
     movl	%eax, -128(%rbp)
+
     movl $true, BoolLiteralLabel73(%rbp)
-OR(||)
+
+
     mov VarLocation{name=GEQLabel71, type=boolean, expr=5 >= ArrayLiteral{id=A, size=5}, size=0} || true(%rbp), %eax
     mov -92(%rbp), %eax
+
     movl $1, IntLiteralLabel76(%rbp)
+
     mov 1(%rbp), %eax
+
     leave
     ret
 
@@ -762,8 +932,8 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel113}
 {LABEL, null, null, Result: EndMethod main}
 
-{Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+{Cmp} CASO (2do)class java.lang.Boolean
 {Cmp} CASO (2do)class java.lang.String
 {Cmp} CASO (2do)class java.lang.String
 {Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.IntLiteral PENDIENTE
@@ -773,162 +943,250 @@ lista:
 {Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.IntLiteral PENDIENTE
 {logic} FALTA CASO (1er param)class ir.ast.ArrayLiteral
 {logic} FALTA CASO (2do param)class ir.ast.ArrayLiteral
+
+
 .globl	pruArreglos
 .type	pruArreglos, @function 
 pruArreglos: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl	$0, %eax
     cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
+
     mov true(%rbp), %eax
     cmp -12(%rbp), %eax
+
     jne elseCondLabel4
+
     movl $0, IntLiteralLabel6(%rbp)
+
     movl $1, IntLiteralLabel8(%rbp)
+
     mov $1, %eax
     mov $0, %edx
     sub %eax, %edx
     mov %edx,-32%(ebp)
+
     mov 1 - 0(%rbp), %eax
     mov -20(%rbp), %eax
+
     jmp endIfLabel5
+
 .elseCondLabel4
+
 .endIfLabel5
+
     movl	$0, %eax
     cmpl	$0, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -44(%rbp)
+
     mov true(%rbp), %eax
     cmp -44(%rbp), %eax
+
     jne elseCondLabel15
+
     movl $1, IntLiteralLabel17(%rbp)
+
     movl $1, IntLiteralLabel19(%rbp)
+
     mov $1, %eax
     mov $1, %edx
     sub %eax, %edx
     mov %edx,-56%(ebp)
+
     movl $5, IntLiteralLabel23(%rbp)
+
     mov $0, %eax
     mov $5, %edx
     imul %edx, %eax
     mov %eax,-72%(ebp)
+
     mov 0 * 5(%rbp), %eax
     mov -60(%rbp), %eax
+
     jmp endIfLabel16
+
 .elseCondLabel15
+
     mov $0, %eax
     mov $0, %edx
     sub %eax, %edx
     mov %edx,-84%(ebp)
+
     mov 0(%rbp), %eax
     mov -88(%rbp), %eax
+
 .endIfLabel16
+
     movl $0, IntLiteralLabel30(%rbp)
+
     mov 0(%rbp), %eax
     mov -96(%rbp), %eax
+
     movl $589, IntLiteralLabel33(%rbp)
+
     movl	$0, %eax
     cmpl	$589, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -112(%rbp)
+
 .BeginWhileLabel37
+
     mov true(%rbp), %eax
     cmp -116(%rbp), %eax
+
     jne EndWhileLabel38
+
     movl $2, IntLiteralLabel41(%rbp)
+
     mov $0, %eax
     mov $2, %edx
     imul %edx, %eax
     mov %eax,-136%(ebp)
+
     mov 0 * 2(%rbp), %eax
     mov -124(%rbp), %eax
+
     movl $1, IntLiteralLabel44(%rbp)
+
     mov 1(%rbp), %eax
     mov -140(%rbp), %eax
+
     jmp BeginWhileLabel37
+
 .EndWhileLabel38
+
     movl $8, IntLiteralLabel46(%rbp)
+
     mov 8(%rbp), %eax
     mov -148(%rbp), %eax
+
     movl $0, IntLiteralLabel49(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setge %al
     movzbl %al, %eax
     movl	%eax, -164(%rbp)
+
 .BeginWhileLabel52
+
     mov true(%rbp), %eax
     cmp -164(%rbp), %eax
+
     jne EndWhileLabel53
+
     movl $2, IntLiteralLabel56(%rbp)
+
     mov $0, %eax
     mov $2, %edx
     imul %edx, %eax
     mov %eax,-184%(ebp)
+
     movl $8, IntLiteralLabel59(%rbp)
+
+
 ARRAYACCESS
+
     movl $3, IntLiteralLabel64(%rbp)
+
+
     mov ArrayLiteral{id=A, size=589} + 3(%rbp), %eax
     mov -172(%rbp), %eax
+
     movl $1, IntLiteralLabel67(%rbp)
+
     mov 1(%rbp), %eax
     mov -208(%rbp), %eax
+
     jmp BeginWhileLabel52
+
 .EndWhileLabel53
+
     movl $0, IntLiteralLabel69(%rbp)
+
     mov 0(%rbp), %eax
     mov -216(%rbp), %eax
+
     movl $5, IntLiteralLabel72(%rbp)
+
     movl $9, IntLiteralLabel74(%rbp)
+
     mov $5, %eax
     mov $9, %edx
     imul %edx, %eax
     mov %eax,-236%(ebp)
+
     movl $40, IntLiteralLabel78(%rbp)
+
     mov -236(%ebp) , %eax 
     mov $40, %edx
     sub %edx, %eax 
     mov %edx,-248%(ebp) 
+
     movl	$0, %eax
     setle %al
     movzbl %al, %eax
     movl	%eax, -252(%rbp)
+
 .BeginWhileLabel82
+
     mov true(%rbp), %eax
     cmp -252(%rbp), %eax
+
     jne EndWhileLabel83
+
     movl $2, IntLiteralLabel86(%rbp)
+
     mov $0, %eax
     mov $2, %edx
     imul %edx, %eax
     mov %eax,-272%(ebp)
+
     movl $8, IntLiteralLabel89(%rbp)
+
+
 ARRAYACCESS
+
 ARRAYACCESS
+
     setg	%al
     movzbl %al, %eax
     movl	%eax, -296(%rbp)
+
     mov ArrayLiteral{id=A, size=589} > ArrayLiteral{id=B, size=56}(%rbp), %eax
     mov -260(%rbp), %eax
+
     movl $1, IntLiteralLabel99(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-312%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -300(%rbp), %eax
+
     jmp BeginWhileLabel82
+
 .EndWhileLabel83
+
     movl $0, IntLiteralLabel102(%rbp)
+
 ARRAYACCESS
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -936,16 +1194,24 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $4, IntLiteralLabel106(%rbp)
+
     movl $8, IntLiteralLabel108(%rbp)
+
     call pruArreglos
     movl %eax, RESULTLabel110(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel112(%rbp) 
+
     call "printf"
     movl %eax, EXTERNINVKLabel113(%rbp) 
+
     leave
     ret
 
@@ -972,14 +1238,19 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[3]}]}, null, Result: EXTERNINVKLabel5}
 {LABEL, null, null, Result: EndMethod main}
 
+
+
 .globl	pruAritmetica
 .type	pruAritmetica, @function 
 pruAritmetica: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -987,12 +1258,17 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $3, IntLiteralLabel1(%rbp)
+
     call pruAritmetica
     movl %eax, RESULTLabel3(%rbp) 
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel5(%rbp) 
+
     leave
     ret
 
@@ -1051,50 +1327,75 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=aritmTest, args=[5]}]}, null, Result: EXTERNINVKLabel30}
 {LABEL, null, null, Result: EndMethod main}
 
+
+
 .globl	aritmTest
 .type	aritmTest, @function 
 aritmTest: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $1, IntLiteralLabel1(%rbp)
+
     mov 1(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $2, IntLiteralLabel3(%rbp)
+
     mov 2(%rbp), %eax
     mov -12(%rbp), %eax
+
     movl $1, IntLiteralLabel5(%rbp)
+
     mov $1, %eax 
     mov $0, %edx 
     add %eax, %edx 
     mov %edx,-32%(ebp) 
+
     mov 1 + 0(%rbp), %eax
     mov -20(%rbp), %eax
+
     movl $2, IntLiteralLabel10(%rbp)
+
     mov $0, %eax 
     mov $2, %edx 
     add %eax, %edx 
     mov %edx,-48%(ebp) 
+
     mov 0 + 2(%rbp), %eax
     mov -36(%rbp), %eax
+
 DIVIDE(/)
+
     mov -64(%rbp), %eax
     mov -52(%rbp), %eax
+
     movl $3, IntLiteralLabel18(%rbp)
+
     movl	$3, %eax 
     idivl $0, %eax 
     movl	%edx, -84(%rbp)
+
     mov 0 % 3(%rbp), %eax
     mov -72(%rbp), %eax
+
     movl $1, IntLiteralLabel21(%rbp)
+
     mov 1(%rbp), %eax
     mov -88(%rbp), %eax
+
     movl $2, IntLiteralLabel23(%rbp)
+
     mov 2(%rbp), %eax
     mov -96(%rbp), %eax
+
     mov 0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -1102,12 +1403,17 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $5, IntLiteralLabel26(%rbp)
+
     call aritmTest
     movl %eax, RESULTLabel28(%rbp) 
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel30(%rbp) 
+
     leave
     ret
 
@@ -1167,55 +1473,84 @@ lista:
 {LABEL, null, null, Result: EndMethod main}
 
 {Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+
+
 .globl	breaks
 .type	breaks, @function 
 breaks: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $0, IntLiteralLabel1(%rbp)
+
     mov 0(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $10, IntLiteralLabel4(%rbp)
+
     movl	$0, %eax
     cmpl	$10, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -20(%rbp)
+
 .BeginWhileLabel8
+
     mov true(%rbp), %eax
     cmp -24(%rbp), %eax
+
     jne EndWhileLabel9
+
     movl $1, IntLiteralLabel11(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-40%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -28(%rbp), %eax
+
     movl $2.3, FloatLiteralLabel14(%rbp)
+
     mov 2.3(%rbp), %eax
     mov -44(%rbp), %eax
+
     movl $0, IntLiteralLabel17(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -60(%rbp)
+
     mov true(%rbp), %eax
     cmp -60(%rbp), %eax
+
     jne elseCondLabel20
+
     jmp EndWhileLabel9
+
     jmp endIfLabel21
+
 .elseCondLabel20
+
     jmp BeginWhileLabel8
+
 .endIfLabel21
+
     jmp BeginWhileLabel8
+
 .EndWhileLabel9
+
     mov 0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -1223,14 +1558,21 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $1, IntLiteralLabel23(%rbp)
+
     call breaks
     movl %eax, RESULTLabel25(%rbp) 
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel27(%rbp) 
+
     movl $1, IntLiteralLabel28(%rbp)
+
     mov 1(%rbp), %eax
+
     leave
     ret
 
@@ -1287,52 +1629,79 @@ lista:
 {LABEL, null, null, Result: EndMethod main}
 
 {Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+
+
 .globl	breaks
 .type	breaks, @function 
 breaks: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $0, IntLiteralLabel1(%rbp)
+
     mov 0(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $10, IntLiteralLabel4(%rbp)
+
     movl	$0, %eax
     cmpl	$10, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -20(%rbp)
+
 .BeginWhileLabel8
+
     mov true(%rbp), %eax
     cmp -24(%rbp), %eax
+
     jne EndWhileLabel9
+
     movl $1, IntLiteralLabel11(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-40%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -28(%rbp), %eax
+
     movl $0, IntLiteralLabel15(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -52(%rbp)
+
     mov true(%rbp), %eax
     cmp -52(%rbp), %eax
+
     jne elseCondLabel18
+
     jmp EndWhileLabel9
+
     jmp endIfLabel19
+
 .elseCondLabel18
+
     jmp BeginWhileLabel8
+
 .endIfLabel19
+
     jmp BeginWhileLabel8
+
 .EndWhileLabel9
+
     mov 0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -1340,14 +1709,21 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $1, IntLiteralLabel21(%rbp)
+
     call breaks
     movl %eax, RESULTLabel23(%rbp) 
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel25(%rbp) 
+
     movl $1, IntLiteralLabel26(%rbp)
+
     mov 1(%rbp), %eax
+
     leave
     ret
 
@@ -1408,19 +1784,28 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: EXTERNINVKLabel26}
 {LABEL, null, null, Result: EndMethod main}
 
+{And}TRATAMIENTO PARA class ir.ast.BoolLiteral y class ir.ast.BoolLiteral PENDIENTE
+{Or}TRATAMIENTO PARA class ir.ast.BoolLiteral y class ir.ast.BoolLiteral PENDIENTE
+
+
 .globl	neg
 .type	neg, @function 
 neg: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     cmp $0, false(%rbp) 
     sete	%al 
     movzbl %al, %eax 
     mov %eax, -8(%rbp) 
+
     mov !false(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	and
 .type	and, @function 
@@ -1428,10 +1813,14 @@ and:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
-AND(&&)
+
+
     mov false && false(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	or
 .type	or, @function 
@@ -1439,10 +1828,14 @@ or:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
-OR(||)
+
+
     mov false || false(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -1450,32 +1843,50 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $true, BoolLiteralLabel9(%rbp)
+
     mov true(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $false, BoolLiteralLabel11(%rbp)
+
     mov false(%rbp), %eax
     mov -12(%rbp), %eax
+
     call neg
     movl %eax, RESULTLabel14(%rbp) 
+
 PARAM
+
     mov MethodCallExpr{name=neg, args=[false]}(%rbp), %eax
     mov -20(%rbp), %eax
+
     call and
     movl %eax, RESULTLabel18(%rbp) 
+
 PARAM
+
 PARAM
+
     call neg
     movl %eax, RESULTLabel21(%rbp) 
+
 PARAM
+
     call or
     movl %eax, RESULTLabel23(%rbp) 
+
 PARAM
+
 PARAM
+
     mov MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}(%rbp), %eax
     mov -32(%rbp), %eax
+
     call "printf"
     movl %eax, EXTERNINVKLabel26(%rbp) 
+
     leave
     ret
 
@@ -1532,52 +1943,79 @@ lista:
 {LABEL, null, null, Result: EndMethod main}
 
 {Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+
+
 .globl	breaks
 .type	breaks, @function 
 breaks: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $0, IntLiteralLabel1(%rbp)
+
     mov 0(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $10, IntLiteralLabel4(%rbp)
+
     movl	$0, %eax
     cmpl	$10, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -20(%rbp)
+
 .BeginWhileLabel8
+
     mov true(%rbp), %eax
     cmp -24(%rbp), %eax
+
     jne EndWhileLabel9
+
     movl $1, IntLiteralLabel11(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-40%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -28(%rbp), %eax
+
     movl $0, IntLiteralLabel15(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -52(%rbp)
+
     mov true(%rbp), %eax
     cmp -52(%rbp), %eax
+
     jne elseCondLabel18
+
     jmp EndWhileLabel9
+
     jmp endIfLabel19
+
 .elseCondLabel18
+
     jmp BeginWhileLabel8
+
 .endIfLabel19
+
     jmp BeginWhileLabel8
+
 .EndWhileLabel9
+
     mov 0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -1585,14 +2023,21 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $1, IntLiteralLabel21(%rbp)
+
     call breaks
     movl %eax, RESULTLabel23(%rbp) 
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel25(%rbp) 
+
     movl $1, IntLiteralLabel26(%rbp)
+
     mov 1(%rbp), %eax
+
     leave
     ret
 
@@ -1633,30 +2078,43 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel15}
 {LABEL, null, null, Result: EndMethod main}
 
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+
+
 .globl	pruAritmetica
 .type	pruAritmetica, @function 
 pruAritmetica: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl	$0, %eax
     cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
+
     mov true(%rbp), %eax
     cmp -12(%rbp), %eax
+
     jne elseCondLabel4
+
     mov 0(%rbp), %eax
     mov -16(%rbp), %eax
+
     jmp endIfLabel5
+
 .elseCondLabel4
+
     mov 0(%rbp), %eax
     mov -24(%rbp), %eax
+
 .endIfLabel5
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -1664,14 +2122,21 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $4, IntLiteralLabel9(%rbp)
+
     movl $8, IntLiteralLabel11(%rbp)
+
     call pruAritmetica
     movl %eax, RESULTLabel13(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel15(%rbp) 
+
     leave
     ret
 
@@ -1715,35 +2180,50 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel18}
 {LABEL, null, null, Result: EndMethod main}
 
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+
+
 .globl	pruAritmetica
 .type	pruAritmetica, @function 
 pruAritmetica: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl	$0, %eax
     cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
+
     mov true(%rbp), %eax
     cmp -12(%rbp), %eax
+
     jne elseCondLabel4
+
     movl $5, IntLiteralLabel7(%rbp)
+
     mov $0, %eax 
     mov $5, %edx 
     add %eax, %edx 
     mov %edx,-28%(ebp) 
+
     mov 0 + 5(%rbp), %eax
     mov -16(%rbp), %eax
+
     jmp endIfLabel5
+
 .elseCondLabel4
+
     mov 0(%rbp), %eax
     mov -32(%rbp), %eax
+
 .endIfLabel5
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -1751,14 +2231,21 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $4, IntLiteralLabel12(%rbp)
+
     movl $8, IntLiteralLabel14(%rbp)
+
     call pruAritmetica
     movl %eax, RESULTLabel16(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel18(%rbp) 
+
     leave
     ret
 
@@ -1953,262 +2440,419 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=dados, args=[1, 6, 9]}]}, null, Result: EXTERNINVKLabel183}
 {LABEL, null, null, Result: EndMethod main}
 
-{Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
+{And}TRATAMIENTO PARA class ir.ast.UnaryOpExpr y class ir.ast.UnaryOpExpr PENDIENTE
+{And}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.UnaryOpExpr PENDIENTE
+{Cmp} CASO (2do)class java.lang.Boolean
+{And}TRATAMIENTO PARA class ir.ast.VarLocation y class ir.ast.UnaryOpExpr PENDIENTE
+{And}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.UnaryOpExpr PENDIENTE
+{And}TRATAMIENTO PARA class ir.ast.UnaryOpExpr y class ir.ast.VarLocation PENDIENTE
+{And}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.UnaryOpExpr PENDIENTE
+{And}TRATAMIENTO PARA class ir.ast.UnaryOpExpr y class ir.ast.UnaryOpExpr PENDIENTE
+{And}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.VarLocation PENDIENTE
+{Or}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.VarLocation PENDIENTE
+{Cmp} CASO (2do)class java.lang.Boolean
+{And}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.UnaryOpExpr PENDIENTE
+{And}TRATAMIENTO PARA class ir.ast.VarLocation y class ir.ast.UnaryOpExpr PENDIENTE
+{And}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.VarLocation PENDIENTE
+{And}TRATAMIENTO PARA class ir.ast.UnaryOpExpr y class ir.ast.VarLocation PENDIENTE
+{And}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.VarLocation PENDIENTE
+{Or}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.VarLocation PENDIENTE
+{Cmp} CASO (2do)class java.lang.Boolean
+{And}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.VarLocation PENDIENTE
+{Cmp} CASO (2do)class java.lang.Boolean
+
+
 .globl	dados
 .type	dados, @function 
 dados: 
     enter   $(12), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $6, IntLiteralLabel2(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
+
     cmp $0, -12(%rbp) 
     sete %al 
     movzbl %al, %eax 
     mov %eax, -20(%rbp) 
+
     movl $6, IntLiteralLabel8(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -32(%rbp)
+
     cmp $0, -32(%rbp) 
     sete %al 
     movzbl %al, %eax 
     mov %eax, -40(%rbp) 
-AND(&&)
+
+
     movl $6, IntLiteralLabel15(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -56(%rbp)
+
     cmp $0, -56(%rbp) 
     sete %al 
     movzbl %al, %eax 
     mov %eax, -64(%rbp) 
-AND(&&)
+
+
     mov true(%rbp), %eax
     cmp -68(%rbp), %eax
+
     jne elseCondLabel21
+
     movl $1.00, FloatLiteralLabel23(%rbp)
+
     mov 1.00(%rbp), %eax
+
     jmp endIfLabel22
+
 .elseCondLabel21
+
 .endIfLabel22
+
     movl $6, IntLiteralLabel26(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -84(%rbp)
+
     movl $6, IntLiteralLabel31(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -100(%rbp)
+
     cmp $0, -100(%rbp) 
     sete %al 
     movzbl %al, %eax 
     mov %eax, -108(%rbp) 
-AND(&&)
+
+
     movl $6, IntLiteralLabel38(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -124(%rbp)
+
     cmp $0, -124(%rbp) 
     sete %al 
     movzbl %al, %eax 
     mov %eax, -132(%rbp) 
-AND(&&)
+
+
     movl $6, IntLiteralLabel46(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -152(%rbp)
+
     cmp $0, -152(%rbp) 
     sete %al 
     movzbl %al, %eax 
     mov %eax, -160(%rbp) 
+
     movl $6, IntLiteralLabel52(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -172(%rbp)
-AND(&&)
+
+
     movl $6, IntLiteralLabel58(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -192(%rbp)
+
     cmp $0, -192(%rbp) 
     sete %al 
     movzbl %al, %eax 
     mov %eax, -200(%rbp) 
-AND(&&)
-OR(||)
+
+
+    cmp	$0, -136(%rbp)
+    jne .L0
+    cmp	$0, -204(%rbp)
+    je .L0
+    mov	$1, %eax
+    jmp .L1
+.L0:
+    movl	$0, %eax
+    jmp .L2
+.L1:
+    movl	%eax, -212(%rbp)
+.L2:
+
     movl $6, IntLiteralLabel67(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -224(%rbp)
+
     cmp $0, -224(%rbp) 
     sete %al 
     movzbl %al, %eax 
     mov %eax, -232(%rbp) 
+
     movl $6, IntLiteralLabel73(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -244(%rbp)
+
     cmp $0, -244(%rbp) 
     sete %al 
     movzbl %al, %eax 
     mov %eax, -252(%rbp) 
-AND(&&)
+
+
     movl $6, IntLiteralLabel80(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -268(%rbp)
-AND(&&)
-OR(||)
+
+
+
     mov true(%rbp), %eax
     cmp -284(%rbp), %eax
+
     jne elseCondLabel87
+
     movl $4.00, FloatLiteralLabel89(%rbp)
+
     mov 4.00(%rbp), %eax
+
     jmp endIfLabel88
+
 .elseCondLabel87
+
 .endIfLabel88
+
     movl $6, IntLiteralLabel92(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -300(%rbp)
+
     movl $6, IntLiteralLabel97(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -316(%rbp)
-AND(&&)
+
+    cmp	$0, -300(%rbp)
+    je .L3
+    cmp	$0, -316(%rbp)
+    je .L3
+    mov	$1, %eax
+    jmp .L4
+.L3:
+    movl	$0, %eax
+    jmp .L5
+.L4:
+    movl	%eax, -324(%rbp)
+.L5:
+
     movl $6, IntLiteralLabel103(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -336(%rbp)
+
     cmp $0, -336(%rbp) 
     sete %al 
     movzbl %al, %eax 
     mov %eax, -344(%rbp) 
-AND(&&)
+
+
     movl $6, IntLiteralLabel111(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -364(%rbp)
+
     movl $6, IntLiteralLabel116(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -380(%rbp)
+
     cmp $0, -380(%rbp) 
     sete %al 
     movzbl %al, %eax 
     mov %eax, -388(%rbp) 
-AND(&&)
+
+
     movl $6, IntLiteralLabel123(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -404(%rbp)
-AND(&&)
-OR(||)
+
+
+    cmp	$0, -348(%rbp)
+    jne .L6
+    cmp	$0, -412(%rbp)
+    je .L6
+    mov	$1, %eax
+    jmp .L7
+.L6:
+    movl	$0, %eax
+    jmp .L8
+.L7:
+    movl	%eax, -420(%rbp)
+.L8:
+
     movl $6, IntLiteralLabel131(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -432(%rbp)
+
     cmp $0, -432(%rbp) 
     sete %al 
     movzbl %al, %eax 
     mov %eax, -440(%rbp) 
+
     movl $6, IntLiteralLabel137(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -452(%rbp)
-AND(&&)
+
+
     movl $6, IntLiteralLabel143(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -472(%rbp)
-AND(&&)
-OR(||)
+
+
+
     mov true(%rbp), %eax
     cmp -488(%rbp), %eax
+
     jne elseCondLabel150
+
     movl $8.50, FloatLiteralLabel152(%rbp)
+
     mov 8.50(%rbp), %eax
+
     jmp endIfLabel151
+
 .elseCondLabel150
+
 .endIfLabel151
+
     movl $6, IntLiteralLabel155(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -504(%rbp)
+
     movl $6, IntLiteralLabel160(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -520(%rbp)
-AND(&&)
+
+    cmp	$0, -504(%rbp)
+    je .L9
+    cmp	$0, -520(%rbp)
+    je .L9
+    mov	$1, %eax
+    jmp .L10
+.L9:
+    movl	$0, %eax
+    jmp .L11
+.L10:
+    movl	%eax, -528(%rbp)
+.L11:
+
     movl $6, IntLiteralLabel166(%rbp)
+
     movl	$0, %eax
     cmpl	$6, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -540(%rbp)
-AND(&&)
+
+
     mov true(%rbp), %eax
     cmp -548(%rbp), %eax
+
     jne elseCondLabel171
+
     movl $10.00, FloatLiteralLabel173(%rbp)
+
     mov 10.00(%rbp), %eax
+
     jmp endIfLabel172
+
 .elseCondLabel171
+
 .endIfLabel172
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -2216,16 +2860,25 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $1, IntLiteralLabel175(%rbp)
+
     movl $6, IntLiteralLabel177(%rbp)
+
     movl $9, IntLiteralLabel179(%rbp)
+
     call dados
     movl %eax, RESULTLabel181(%rbp) 
+
 PARAM
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel183(%rbp) 
+
     leave
     ret
 
@@ -2317,83 +2970,131 @@ lista:
 
 {Cmp} CASO (2do)class java.lang.String
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.IntLiteral PENDIENTE
-{Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+{Cmp} CASO (2do)class java.lang.Boolean
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.IntLiteral PENDIENTE
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Add}TRATAMIENTO PARA class ir.ast.UnaryOpExpr y class ir.ast.IntLiteral PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.UnaryOpExpr y class ir.ast.FloatLiteral PENDIENTE
+
+
 .globl	pruContinue
 .type	pruContinue, @function 
 pruContinue: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $1, IntLiteralLabel1(%rbp)
+
     movl	$1, %eax 
 	   negl	%eax 
     movl	%eax, -12(%rbp) 
+
     mov -1(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $23, IntLiteralLabel4(%rbp)
+
     mov 23(%rbp), %eax
     mov -16(%rbp), %eax
+
     movl $23, IntLiteralLabel6(%rbp)
+
     mov 23(%rbp), %eax
     mov -24(%rbp), %eax
+
     movl $0, IntLiteralLabel9(%rbp)
+
     movl	$0.0, %eax
     cmpl	$0, %eax
     setge %al
     movzbl %al, %eax
     movl	%eax, -40(%rbp)
+
 .BeginWhileLabel13
+
     mov true(%rbp), %eax
     cmp -44(%rbp), %eax
+
     jne EndWhileLabel14
+
     movl $1, IntLiteralLabel16(%rbp)
+
+
     mov 0.0 - 1(%rbp), %eax
     mov -48(%rbp), %eax
+
     movl	$0.0, %eax
     cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -72(%rbp)
+
     mov true(%rbp), %eax
     cmp -72(%rbp), %eax
+
     jne elseCondLabel22
+
     movl $0, IntLiteralLabel25(%rbp)
+
     movl	$0.0, %eax
     cmpl	$0, %eax
     setgne %al
     movzbl %al, %eax
     movl	%eax, -84(%rbp)
+
     mov true(%rbp), %eax
     cmp -84(%rbp), %eax
+
     jne elseCondLabel28
+
+
+
     mov 0.0 * 0.0 * 0(%rbp), %eax
     mov -88(%rbp), %eax
+
     jmp endIfLabel29
+
 .elseCondLabel28
+
 .endIfLabel29
+
     jmp BeginWhileLabel13
+
     jmp endIfLabel23
+
 .elseCondLabel22
+
     movl $1000.2343, FloatLiteralLabel35(%rbp)
+
+
     movl $6752, IntLiteralLabel38(%rbp)
+
+
     mov -1000.2343 + 6752(%rbp), %eax
     mov -112(%rbp), %eax
+
     jmp EndWhileLabel14
+
 .endIfLabel23
+
     jmp BeginWhileLabel13
+
 .EndWhileLabel14
+
     movl $2, IntLiteralLabel41(%rbp)
+
     movl	$2, %eax 
 	   negl	%eax 
     movl	%eax, -136(%rbp) 
+
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -2401,14 +3102,21 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $3.0, FloatLiteralLabel46(%rbp)
+
     movl $2, IntLiteralLabel48(%rbp)
+
     call pruContinue
     movl %eax, RESULTLabel50(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel52(%rbp) 
+
     leave
     ret
 
@@ -2494,98 +3202,148 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: EXTERNINVKLabel52}
 {LABEL, null, null, Result: EndMethod main}
 
+{Cmp} CASO (2do)class java.lang.Boolean
+{Cmp} CASO (2do)class java.lang.Boolean
 {Cmp} CASO (2do)class java.lang.String
 {Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
+
+
 .globl	prueba
 .type	prueba, @function 
 prueba: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $50, IntLiteralLabel1(%rbp)
+
     mov 50(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $0, IntLiteralLabel4(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -20(%rbp)
+
     mov true(%rbp), %eax
     cmp -20(%rbp), %eax
+
     jne elseCondLabel7
+
     movl $4, IntLiteralLabel9(%rbp)
+
     mov 4(%rbp), %eax
     mov -24(%rbp), %eax
+
     movl $4, IntLiteralLabel12(%rbp)
+
     movl	$0, %eax
     cmpl	$4, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -40(%rbp)
+
     mov true(%rbp), %eax
     cmp -40(%rbp), %eax
+
     jne elseCondLabel15
+
     movl $4, IntLiteralLabel18(%rbp)
+
     movl	$0, %eax
     cmpl	$4, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -52(%rbp)
+
 .BeginWhileLabel22
+
     mov true(%rbp), %eax
     cmp -56(%rbp), %eax
+
     jne EndWhileLabel23
+
     movl $4, IntLiteralLabel25(%rbp)
+
     movl	$0, %eax
     cmpl	$4, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -68(%rbp)
+
 .BeginWhileLabel29
+
     mov true(%rbp), %eax
     cmp -72(%rbp), %eax
+
     jne EndWhileLabel30
+
     movl $1, IntLiteralLabel32(%rbp)
+
     mov $0, %eax
     mov $1, %edx
     sub %eax, %edx
     mov %edx,-88%(ebp)
+
     mov 0 - 1(%rbp), %eax
     mov -76(%rbp), %eax
+
     movl $2, IntLiteralLabel36(%rbp)
+
     mov $0, %eax
     mov $2, %edx
     imul %edx, %eax
     mov %eax,-104%(ebp)
+
     mov 0 * 2(%rbp), %eax
     mov -92(%rbp), %eax
+
     jmp BeginWhileLabel29
+
 .EndWhileLabel30
+
     movl $1, IntLiteralLabel40(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-120%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -108(%rbp), %eax
+
     movl $2, IntLiteralLabel44(%rbp)
+
 DIVIDE(/)
+
     mov VarLocation{name=factorLabel43, type=float, expr=0.0, size=0} / VarLocation{name=factorLabel45, type=int, expr=2, size=0}(%rbp), %eax
     mov -124(%rbp), %eax
+
     jmp BeginWhileLabel22
+
 .EndWhileLabel23
+
     jmp endIfLabel16
+
 .elseCondLabel15
+
 .endIfLabel16
+
     jmp endIfLabel8
+
 .elseCondLabel7
+
 .endIfLabel8
+
     mov 0.0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -2593,12 +3351,17 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $6, IntLiteralLabel48(%rbp)
+
     call prueba
     movl %eax, RESULTLabel50(%rbp) 
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel52(%rbp) 
+
     leave
     ret
 
@@ -2662,56 +3425,86 @@ lista:
 {LABEL, null, null, Result: EndMethod main}
 
 {Imul}TRATAMIENTO PARA class ir.ast.IntLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+
+
 .globl	prueba
 .type	prueba, @function 
 prueba: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $4, IntLiteralLabel1(%rbp)
+
     mov 4(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $5, IntLiteralLabel3(%rbp)
+
     mov 5(%rbp), %eax
     mov -12(%rbp), %eax
+
     mov $0, %eax
     mov $0, %edx
     imul %edx, %eax
     mov %eax,-32%(ebp)
+
     mov 0 * 0(%rbp), %eax
     mov -20(%rbp), %eax
+
     mov $0, %eax 
     mov $0, %edx 
     add %eax, %edx 
     mov %edx,-48%(ebp) 
+
     mov 0 + 0(%rbp), %eax
     mov -36(%rbp), %eax
+
     movl $3.14, FloatLiteralLabel11(%rbp)
+
     mov 3.14(%rbp), %eax
     mov -52(%rbp), %eax
+
     movl $2, IntLiteralLabel13(%rbp)
+
+
     mov 2 * 0.0(%rbp), %eax
     mov -60(%rbp), %eax
+
 DIVIDE(/)
+
     movl $5, IntLiteralLabel21(%rbp)
+
     movl	-84(%rbp), %eax
     cmpl	$5, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -96(%rbp)
+
     mov true(%rbp), %eax
     cmp -96(%rbp), %eax
+
     jne elseCondLabel24
+
     movl $1, IntLiteralLabel26(%rbp)
+
     mov 1(%rbp), %eax
+
     jmp endIfLabel25
+
 .elseCondLabel24
+
     movl $0, IntLiteralLabel28(%rbp)
+
     mov 0(%rbp), %eax
+
 .endIfLabel25
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -2719,12 +3512,17 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $6, IntLiteralLabel30(%rbp)
+
     call prueba
     movl %eax, RESULTLabel32(%rbp) 
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel34(%rbp) 
+
     leave
     ret
 
@@ -2816,91 +3614,138 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: EXTERNINVKLabel52}
 {LABEL, null, null, Result: EndMethod main}
 
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
 {Cmp} CASO (2do)class java.lang.String
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
+
+
 .globl	potencia
 .type	potencia, @function 
 potencia: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $false, BoolLiteralLabel1(%rbp)
+
     mov false(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $1, IntLiteralLabel3(%rbp)
+
     mov 1(%rbp), %eax
     mov -12(%rbp), %eax
+
     movl $1.0, FloatLiteralLabel5(%rbp)
+
     mov 1.0(%rbp), %eax
     mov -20(%rbp), %eax
+
     movl $0, IntLiteralLabel8(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -36(%rbp)
+
     mov true(%rbp), %eax
     cmp -36(%rbp), %eax
+
     jne elseCondLabel11
+
     movl	$0, %eax 
 	   negl	%eax 
     movl	%eax, -48(%rbp) 
+
     mov -0(%rbp), %eax
     mov -40(%rbp), %eax
+
     cmp $0, false(%rbp) 
     sete	%al 
     movzbl %al, %eax 
     mov %eax, -60(%rbp) 
+
     mov !false(%rbp), %eax
     mov -52(%rbp), %eax
+
     jmp endIfLabel12
+
 .elseCondLabel11
+
 .endIfLabel12
+
     movl	$0, %eax
     cmpl	$0, %eax
     setle %al
     movzbl %al, %eax
     movl	%eax, -72(%rbp)
+
 .BeginWhileLabel21
+
     mov true(%rbp), %eax
     cmp -76(%rbp), %eax
+
     jne EndWhileLabel22
+
+
     mov 0.0 * 0.0(%rbp), %eax
     mov -80(%rbp), %eax
+
     movl $1, IntLiteralLabel27(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-108%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -96(%rbp), %eax
+
     jmp BeginWhileLabel21
+
 .EndWhileLabel22
+
     cmp $0, false(%rbp) 
     sete	%al 
     movzbl %al, %eax 
     mov %eax, -116(%rbp) 
+
     cmp $0, -116(%rbp) 
     sete %al 
     movzbl %al, %eax 
     mov %eax, -124(%rbp) 
+
     mov true(%rbp), %eax
     cmp -124(%rbp), %eax
+
     jne elseCondLabel34
+
     movl $1.0, FloatLiteralLabel36(%rbp)
+
 DIVIDE(/)
+
     mov VarLocation{name=factorLabel37, type=float, expr=1.0, size=0} / VarLocation{name=factorLabel38, type=float, expr=0.0, size=0}(%rbp), %eax
+
     jmp endIfLabel35
+
 .elseCondLabel34
+
     mov 0.0(%rbp), %eax
+
 .endIfLabel35
+
     movl $100.1, FloatLiteralLabel41(%rbp)
+
+
     mov -100.1(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -2908,18 +3753,27 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $8.0, FloatLiteralLabel44(%rbp)
+
     mov 8.0(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $2, IntLiteralLabel47(%rbp)
+
     call potencia
     movl %eax, RESULTLabel49(%rbp) 
+
 PARAM
+
 PARAM
+
     mov MethodCallExpr{name=potencia, args=[0.0, 2]}(%rbp), %eax
     mov -12(%rbp), %eax
+
     call "printf"
     movl %eax, EXTERNINVKLabel52(%rbp) 
+
     leave
     ret
 
@@ -2986,61 +3840,92 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: EXTERNINVKLabel35}
 {LABEL, null, null, Result: EndMethod main}
 
+{Or}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
 {Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
+
+
 .globl	sumatoria
 .type	sumatoria, @function 
 sumatoria: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $0.0, FloatLiteralLabel1(%rbp)
+
     mov 0.0(%rbp), %eax
     mov -4(%rbp), %eax
+
     mov 0.0(%rbp), %eax
     mov -12(%rbp), %eax
+
     movl $0, IntLiteralLabel5(%rbp)
+
     movl	$0.0, %eax
     cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -28(%rbp)
+
     movl $0, IntLiteralLabel9(%rbp)
+
     movl	$0.0, %eax
     cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -40(%rbp)
-OR(||)
+
+
 .BeginWhileLabel14
+
     mov true(%rbp), %eax
     cmp -48(%rbp), %eax
+
     jne EndWhileLabel15
+
     movl $0, IntLiteralLabel17(%rbp)
+
     movl	$0.0, %eax
     cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -60(%rbp)
+
     mov true(%rbp), %eax
     cmp -60(%rbp), %eax
+
     jne elseCondLabel20
+
+
     mov 0.0 + 0.0(%rbp), %eax
     mov -64(%rbp), %eax
+
     jmp endIfLabel21
+
 .elseCondLabel20
+
 .endIfLabel21
+
     movl $1.0, FloatLiteralLabel25(%rbp)
+
     mov 1.0(%rbp), %eax
     mov -80(%rbp), %eax
+
     jmp BeginWhileLabel14
+
 .EndWhileLabel15
+
     mov 0.0(%rbp), %eax
     mov -88(%rbp), %eax
+
     mov 0.0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -3048,16 +3933,23 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $8.0, FloatLiteralLabel29(%rbp)
+
     mov 8.0(%rbp), %eax
     mov -4(%rbp), %eax
+
     call sumatoria
     movl %eax, RESULTLabel32(%rbp) 
+
 PARAM
+
     mov MethodCallExpr{name=sumatoria, args=[0.0]}(%rbp), %eax
     mov -12(%rbp), %eax
+
     call "printf"
     movl %eax, EXTERNINVKLabel35(%rbp) 
+
     leave
     ret
 
@@ -3344,25 +4236,28 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multiples, args=[0.0, 0.0 + 2.0]}]}, null, Result: EXTERNINVKLabel205}
 {LABEL, null, null, Result: EndMethod main}
 
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+{Or}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
 {Cmp} CASO (2do)class java.lang.String
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.IntLiteral PENDIENTE
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.FloatLiteral PENDIENTE
+{Cmp} CASO (2do)class java.lang.Boolean
+{Cmp} CASO (2do)class java.lang.Boolean
 {Cmp} CASO (2do)class java.lang.String
 {Cmp} CASO (2do)class java.lang.String
+{Or}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
 {Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Cmp} CASO (2do)class java.lang.String
+{And}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
+{Cmp} CASO (2do)class java.lang.Boolean
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.BinOpExpr PENDIENTE
 {Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.FloatLiteral PENDIENTE
@@ -3377,90 +4272,140 @@ lista:
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
+
+
 .globl	potencia
 .type	potencia, @function 
 potencia: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $false, BoolLiteralLabel1(%rbp)
+
     mov false(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $1, IntLiteralLabel3(%rbp)
+
     mov 1(%rbp), %eax
     mov -12(%rbp), %eax
+
     movl $1.0, FloatLiteralLabel5(%rbp)
+
     mov 1.0(%rbp), %eax
     mov -20(%rbp), %eax
+
     movl $0, IntLiteralLabel8(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -36(%rbp)
+
     mov true(%rbp), %eax
     cmp -36(%rbp), %eax
+
     jne elseCondLabel11
+
     movl	$0, %eax 
 	   negl	%eax 
     movl	%eax, -48(%rbp) 
+
     mov -0(%rbp), %eax
     mov -40(%rbp), %eax
+
     movl $true, BoolLiteralLabel15(%rbp)
+
     mov true(%rbp), %eax
     mov -52(%rbp), %eax
+
     jmp endIfLabel12
+
 .elseCondLabel11
+
 .endIfLabel12
+
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -68(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -80(%rbp)
-OR(||)
+
+
 .BeginWhileLabel25
+
     mov true(%rbp), %eax
     cmp -88(%rbp), %eax
+
     jne EndWhileLabel26
+
+
     movl $2, IntLiteralLabel30(%rbp)
+
+
     mov 0.0 * 0.0 * 2(%rbp), %eax
     mov -92(%rbp), %eax
+
     movl $1, IntLiteralLabel34(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-128%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -116(%rbp), %eax
+
     jmp BeginWhileLabel25
+
 .EndWhileLabel26
+
     cmp $0, false(%rbp) 
     sete	%al 
     movzbl %al, %eax 
     mov %eax, -136(%rbp) 
+
     cmp $0, -136(%rbp) 
     sete %al 
     movzbl %al, %eax 
     mov %eax, -144(%rbp) 
+
     mov true(%rbp), %eax
     cmp -144(%rbp), %eax
+
     jne elseCondLabel41
+
     movl $1.0, FloatLiteralLabel43(%rbp)
+
 DIVIDE(/)
+
     mov VarLocation{name=factorLabel44, type=float, expr=1.0, size=0} / VarLocation{name=factorLabel45, type=float, expr=0.0, size=0}(%rbp), %eax
+
     jmp endIfLabel42
+
 .elseCondLabel41
+
     mov 0.0(%rbp), %eax
+
 .endIfLabel42
+
     movl $100.1, FloatLiteralLabel48(%rbp)
+
+
     mov -100.1(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	multiples
 .type	multiples, @function 
@@ -3468,173 +4413,287 @@ multiples:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $2.0, FloatLiteralLabel51(%rbp)
+
+
     mov -2.0(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $2, IntLiteralLabel54(%rbp)
+
     movl	$2, %eax 
 	   negl	%eax 
     movl	%eax, -24(%rbp) 
+
     mov -2(%rbp), %eax
     mov -16(%rbp), %eax
+
     movl $3.0, FloatLiteralLabel57(%rbp)
+
+
     mov -3.0(%rbp), %eax
     mov -28(%rbp), %eax
+
     movl $3.0, FloatLiteralLabel60(%rbp)
+
+
     mov -3.0(%rbp), %eax
     mov -40(%rbp), %eax
+
+
+
     mov 0.0 * 0.0 - 0.0(%rbp), %eax
     mov -52(%rbp), %eax
+
     movl $0, IntLiteralLabel68(%rbp)
+
     mov 0(%rbp), %eax
     mov -76(%rbp), %eax
+
     movl $0, IntLiteralLabel70(%rbp)
+
     mov 0(%rbp), %eax
     mov -84(%rbp), %eax
+
     movl $0, IntLiteralLabel72(%rbp)
+
     mov 0(%rbp), %eax
     mov -92(%rbp), %eax
+
     movl $5, IntLiteralLabel74(%rbp)
+
     mov 5(%rbp), %eax
     mov -100(%rbp), %eax
+
     movl	$0.0, %eax
     cmpl	$0.0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -116(%rbp)
+
     mov true(%rbp), %eax
     cmp -116(%rbp), %eax
+
     jne elseCondLabel79
+
     movl	$0.0, %eax
     cmpl	$0.0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -128(%rbp)
+
     mov true(%rbp), %eax
     cmp -128(%rbp), %eax
+
     jne elseCondLabel84
+
     mov 0.0(%rbp), %eax
     mov -132(%rbp), %eax
+
     jmp endIfLabel85
+
 .elseCondLabel84
+
     mov 0.0(%rbp), %eax
     mov -140(%rbp), %eax
+
 .endIfLabel85
+
     jmp endIfLabel80
+
 .elseCondLabel79
+
     movl	$0, %eax
     cmpl	$0, %eax
     setle %al
     movzbl %al, %eax
     movl	%eax, -156(%rbp)
+
 .BeginWhileLabel92
+
     mov true(%rbp), %eax
     cmp -160(%rbp), %eax
+
     jne EndWhileLabel93
+
     movl	$0, %eax
     cmpl	$0, %eax
     setle %al
     movzbl %al, %eax
     movl	%eax, -172(%rbp)
+
 .BeginWhileLabel97
+
     mov true(%rbp), %eax
     cmp -172(%rbp), %eax
+
     jne EndWhileLabel98
+
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -184(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -196(%rbp)
-OR(||)
+
+
 .BeginWhileLabel109
+
     mov true(%rbp), %eax
     cmp -212(%rbp), %eax
+
     jne EndWhileLabel110
+
     movl $3, IntLiteralLabel112(%rbp)
+
     movl	$0, %eax
     cmpl	$3, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -224(%rbp)
+
     mov true(%rbp), %eax
     cmp -224(%rbp), %eax
+
     jne elseCondLabel115
+
     movl $2.0, FloatLiteralLabel118(%rbp)
+
+
     mov 0.0 + 2.0(%rbp), %eax
     mov -228(%rbp), %eax
+
     jmp endIfLabel116
+
 .elseCondLabel115
+
     movl $10.0, FloatLiteralLabel122(%rbp)
+
     movl $2.0, FloatLiteralLabel124(%rbp)
+
 DIVIDE(/)
+
+
     mov 0.0 - VarLocation{name=DIVIDELabel126, type=float, expr=VarLocation{name=factorLabel123, type=float, expr=10.0, size=0} / VarLocation{name=factorLabel125, type=float, expr=2.0, size=0}, size=0}(%rbp), %eax
     mov -244(%rbp), %eax
+
 .endIfLabel116
+
     movl $1, IntLiteralLabel129(%rbp)
+
     mov 1(%rbp), %eax
     mov -272(%rbp), %eax
+
     jmp BeginWhileLabel109
+
 .EndWhileLabel110
+
     movl	$0.0, %eax
     cmpl	$0.0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -288(%rbp)
+
     movl $0.0, FloatLiteralLabel134(%rbp)
+
     movl	$0.0, %eax
     cmpl	$0.0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -300(%rbp)
-AND(&&)
+
+
     mov true(%rbp), %eax
     cmp -304(%rbp), %eax
+
     jne elseCondLabel139
+
     movl $35.0, FloatLiteralLabel141(%rbp)
+
     movl $4.0, FloatLiteralLabel143(%rbp)
+
+
+
     movl $498.0, FloatLiteralLabel148(%rbp)
+
+
     mov 35.0 + 4.0 * 0.0 - 498.0(%rbp), %eax
     mov -308(%rbp), %eax
+
     jmp endIfLabel140
+
 .elseCondLabel139
+
     movl $3.2, FloatLiteralLabel151(%rbp)
+
+
     movl $12345.356, FloatLiteralLabel155(%rbp)
+
+
     mov 3.2 - 0.0 - 12345.356(%rbp), %eax
     mov -340(%rbp), %eax
+
 .endIfLabel140
+
     movl $1, IntLiteralLabel159(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-376%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -364(%rbp), %eax
+
     jmp BeginWhileLabel97
+
 .EndWhileLabel98
+
+
+
     movl $23.0, FloatLiteralLabel166(%rbp)
+
+
+
     movl $2.0, FloatLiteralLabel171(%rbp)
+
     movl $4.0, FloatLiteralLabel173(%rbp)
+
 DIVIDE(/)
+
+
     mov 0.0 * -0.0 + 23.0 * 0.0 + VarLocation{name=factorLabel172, type=float, expr=2.0, size=0} / VarLocation{name=factorLabel174, type=float, expr=4.0, size=0}(%rbp), %eax
     mov -380(%rbp), %eax
+
     movl $1, IntLiteralLabel178(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-444%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -432(%rbp), %eax
+
     jmp BeginWhileLabel92
+
 .EndWhileLabel93
+
 .endIfLabel80
+
+
     mov -0.0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -3642,32 +4701,54 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $80.0, FloatLiteralLabel183(%rbp)
+
     mov 80.0(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $15.0, FloatLiteralLabel185(%rbp)
+
+
     mov -15.0(%rbp), %eax
     mov -12(%rbp), %eax
+
     movl $4.3, FloatLiteralLabel188(%rbp)
+
     mov 4.3(%rbp), %eax
     mov -24(%rbp), %eax
+
     movl $7.6, FloatLiteralLabel190(%rbp)
+
+
     mov -7.6(%rbp), %eax
     mov -32(%rbp), %eax
+
     movl $2, IntLiteralLabel194(%rbp)
+
     call potencia
     movl %eax, RESULTLabel196(%rbp) 
+
 PARAM
+
 PARAM
+
     mov MethodCallExpr{name=potencia, args=[0.0, 2]}(%rbp), %eax
     mov -44(%rbp), %eax
+
     movl $2.0, FloatLiteralLabel200(%rbp)
+
+
     call multiples
     movl %eax, RESULTLabel203(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel205(%rbp) 
+
     leave
     ret
 
@@ -3798,11 +4879,12 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multRepeat, args=[0.0, 0.0]}]}, null, Result: EXTERNINVKLabel82}
 {LABEL, null, null, Result: EndMethod main}
 
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+{Or}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
 {Cmp} CASO (2do)class java.lang.String
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.FloatLiteral PENDIENTE
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.FloatLiteral PENDIENTE
@@ -3811,90 +4893,140 @@ lista:
 {Imul}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.FloatLiteral PENDIENTE
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
+
+
 .globl	potencia
 .type	potencia, @function 
 potencia: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $false, BoolLiteralLabel1(%rbp)
+
     mov false(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $1, IntLiteralLabel3(%rbp)
+
     mov 1(%rbp), %eax
     mov -12(%rbp), %eax
+
     movl $1.0, FloatLiteralLabel5(%rbp)
+
     mov 1.0(%rbp), %eax
     mov -20(%rbp), %eax
+
     movl $0, IntLiteralLabel8(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -36(%rbp)
+
     mov true(%rbp), %eax
     cmp -36(%rbp), %eax
+
     jne elseCondLabel11
+
     movl	$0, %eax 
 	   negl	%eax 
     movl	%eax, -48(%rbp) 
+
     mov -0(%rbp), %eax
     mov -40(%rbp), %eax
+
     movl $true, BoolLiteralLabel15(%rbp)
+
     mov true(%rbp), %eax
     mov -52(%rbp), %eax
+
     jmp endIfLabel12
+
 .elseCondLabel11
+
 .endIfLabel12
+
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -68(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -80(%rbp)
-OR(||)
+
+
 .BeginWhileLabel25
+
     mov true(%rbp), %eax
     cmp -88(%rbp), %eax
+
     jne EndWhileLabel26
+
+
     movl $2.0, FloatLiteralLabel30(%rbp)
+
+
     mov 0.0 * 0.0 * 2.0(%rbp), %eax
     mov -92(%rbp), %eax
+
     movl $1, IntLiteralLabel34(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-128%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -116(%rbp), %eax
+
     jmp BeginWhileLabel25
+
 .EndWhileLabel26
+
     cmp $0, false(%rbp) 
     sete	%al 
     movzbl %al, %eax 
     mov %eax, -136(%rbp) 
+
     cmp $0, -136(%rbp) 
     sete %al 
     movzbl %al, %eax 
     mov %eax, -144(%rbp) 
+
     mov true(%rbp), %eax
     cmp -144(%rbp), %eax
+
     jne elseCondLabel41
+
     movl $1.0, FloatLiteralLabel43(%rbp)
+
 DIVIDE(/)
+
     mov VarLocation{name=factorLabel44, type=float, expr=1.0, size=0} / VarLocation{name=factorLabel45, type=float, expr=0.0, size=0}(%rbp), %eax
+
     jmp endIfLabel42
+
 .elseCondLabel41
+
     mov 0.0(%rbp), %eax
+
 .endIfLabel42
+
     movl $100.1, FloatLiteralLabel48(%rbp)
+
+
     mov -100.1(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	multRepeat
 .type	multRepeat, @function 
@@ -3902,11 +5034,21 @@ multRepeat:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
+
+
+
+
+
     mov 0.0 * 0.0 * 0.0 * 0.0 * 0.0 * 0.0(%rbp), %eax
     mov -4(%rbp), %eax
+
     mov 0.0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -3914,31 +5056,51 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $15.0, FloatLiteralLabel63(%rbp)
+
+
     mov -15.0(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $4.3, FloatLiteralLabel66(%rbp)
+
     mov 4.3(%rbp), %eax
     mov -16(%rbp), %eax
+
     movl $7.6, FloatLiteralLabel68(%rbp)
+
+
     mov -7.6(%rbp), %eax
     mov -24(%rbp), %eax
+
     movl $80.0, FloatLiteralLabel71(%rbp)
+
     mov 80.0(%rbp), %eax
     mov -36(%rbp), %eax
+
     movl $2, IntLiteralLabel74(%rbp)
+
     call potencia
     movl %eax, RESULTLabel76(%rbp) 
+
 PARAM
+
 PARAM
+
     mov MethodCallExpr{name=potencia, args=[0.0, 2]}(%rbp), %eax
     mov -44(%rbp), %eax
+
     call multRepeat
     movl %eax, RESULTLabel80(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel82(%rbp) 
+
     leave
     ret
 
@@ -4002,16 +5164,23 @@ lista:
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
+
+
 .globl	div
 .type	div, @function 
 div: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
 DIVIDE(/)
+
     mov VarLocation{name=factorLabel1, type=float, expr=0.0, size=0} / VarLocation{name=factorLabel2, type=float, expr=0.0, size=0}(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	resta
 .type	resta, @function 
@@ -4019,9 +5188,14 @@ resta:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
+
     mov 0.0 - 0.0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	sum
 .type	sum, @function 
@@ -4029,9 +5203,14 @@ sum:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
+
     mov 0.0 + 0.0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -4039,29 +5218,47 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $6.982, FloatLiteralLabel10(%rbp)
+
     mov 6.982(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $002.5, FloatLiteralLabel12(%rbp)
+
+
     mov -002.5(%rbp), %eax
     mov -12(%rbp), %eax
+
     movl $3.5698, FloatLiteralLabel15(%rbp)
+
     mov 3.5698(%rbp), %eax
     mov -24(%rbp), %eax
+
     call resta
     movl %eax, RESULTLabel19(%rbp) 
+
 PARAM
+
 PARAM
+
     call div
     movl %eax, RESULTLabel23(%rbp) 
+
 PARAM
+
 PARAM
+
     call sum
     movl %eax, RESULTLabel25(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel27(%rbp) 
+
     leave
     ret
 
@@ -4115,40 +5312,63 @@ lista:
 {LABEL, null, null, Result: EndMethod main}
 
 {Add}TRATAMIENTO PARA class java.lang.String PENDIENTE
+
+
 .globl	pruArreglos
 .type	pruArreglos, @function 
 pruArreglos: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $0, IntLiteralLabel1(%rbp)
+
     movl $2, IntLiteralLabel3(%rbp)
+
     mov 2(%rbp), %eax
     mov -8(%rbp), %eax
+
     movl $1, IntLiteralLabel5(%rbp)
+
 ARRAYACCESS
+
     mov ArrayLiteral{id=A, size=5}(%rbp), %eax
+
     movl $5, IntLiteralLabel9(%rbp)
+
     movl $10, IntLiteralLabel12(%rbp)
+
     mov $0, %eax
     mov $10, %edx
     imul %edx, %eax
     mov %eax,-36%(ebp)
+
 .BeginForLabel15
+
     mov -36(%rbp), %eax
     cmp -24(%rbp), %eax
+
     jnl EndForLabel16
+
     movl $2, IntLiteralLabel19(%rbp)
+
     mov $0, %eax 
     mov $2, %edx 
     add %eax, %edx 
     mov %edx,-56%(ebp) 
+
     mov 0 + 2(%rbp), %eax
     mov -44(%rbp), %eax
+
+
     jmp BeginForLabel15
+
 .EndForLabel16
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -4156,16 +5376,25 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $4, IntLiteralLabel22(%rbp)
+
     movl $8, IntLiteralLabel24(%rbp)
+
     call pruArreglos
     movl %eax, RESULTLabel26(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel28(%rbp) 
+
     movl $1, IntLiteralLabel29(%rbp)
+
     mov 1(%rbp), %eax
+
     leave
     ret
 
@@ -4217,36 +5446,58 @@ lista:
 {LABEL, null, null, Result: EndMethod main}
 
 {Add}TRATAMIENTO PARA class java.lang.String PENDIENTE
+
+
 .globl	pruArreglos
 .type	pruArreglos, @function 
 pruArreglos: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $0, IntLiteralLabel1(%rbp)
+
     movl $2, IntLiteralLabel3(%rbp)
+
     mov 2(%rbp), %eax
     mov -8(%rbp), %eax
+
     movl $1, IntLiteralLabel5(%rbp)
+
 ARRAYACCESS
+
     mov ArrayLiteral{id=A, size=5}(%rbp), %eax
+
     movl $5, IntLiteralLabel9(%rbp)
+
     movl $10, IntLiteralLabel11(%rbp)
+
 .BeginForLabel13
+
     mov -28(%rbp), %eax
     cmp -24(%rbp), %eax
+
     jnl EndForLabel14
+
     movl $2, IntLiteralLabel17(%rbp)
+
     mov $0, %eax 
     mov $2, %edx 
     add %eax, %edx 
     mov %edx,-48%(ebp) 
+
     mov 0 + 2(%rbp), %eax
     mov -36(%rbp), %eax
+
+
     jmp BeginForLabel13
+
 .EndForLabel14
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -4254,16 +5505,25 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $4, IntLiteralLabel20(%rbp)
+
     movl $8, IntLiteralLabel22(%rbp)
+
     call pruArreglos
     movl %eax, RESULTLabel24(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel26(%rbp) 
+
     movl $1, IntLiteralLabel27(%rbp)
+
     mov 1(%rbp), %eax
+
     leave
     ret
 
@@ -4317,39 +5577,62 @@ lista:
 {LABEL, null, null, Result: EndMethod main}
 
 {Add}TRATAMIENTO PARA class java.lang.String PENDIENTE
+
+
 .globl	pruArreglos
 .type	pruArreglos, @function 
 pruArreglos: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $0, IntLiteralLabel1(%rbp)
+
     movl $2, IntLiteralLabel3(%rbp)
+
     mov 2(%rbp), %eax
     mov -8(%rbp), %eax
+
     movl $1, IntLiteralLabel5(%rbp)
+
 ARRAYACCESS
+
     mov ArrayLiteral{id=A, size=5}(%rbp), %eax
+
     movl $5, IntLiteralLabel9(%rbp)
+
     movl $10, IntLiteralLabel11(%rbp)
+
     movl	$10, %eax 
 	   negl	%eax 
     movl	%eax, -32(%rbp) 
+
 .BeginForLabel14
+
     mov -32(%rbp), %eax
     cmp -24(%rbp), %eax
+
     jnl EndForLabel15
+
     movl $2, IntLiteralLabel18(%rbp)
+
     mov $0, %eax 
     mov $2, %edx 
     add %eax, %edx 
     mov %edx,-52%(ebp) 
+
     mov 0 + 2(%rbp), %eax
     mov -40(%rbp), %eax
+
+
     jmp BeginForLabel14
+
 .EndForLabel15
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -4357,16 +5640,25 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $4, IntLiteralLabel21(%rbp)
+
     movl $8, IntLiteralLabel23(%rbp)
+
     call pruArreglos
     movl %eax, RESULTLabel25(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel27(%rbp) 
+
     movl $1, IntLiteralLabel28(%rbp)
+
     mov 1(%rbp), %eax
+
     leave
     ret
 
@@ -4427,45 +5719,72 @@ lista:
 
 {Add}TRATAMIENTO PARA class ir.ast.UnaryOpExpr y class ir.ast.BinOpExpr PENDIENTE
 {Add}TRATAMIENTO PARA class java.lang.String PENDIENTE
+
+
 .globl	pruArreglos
 .type	pruArreglos, @function 
 pruArreglos: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $0, IntLiteralLabel1(%rbp)
+
     movl $2, IntLiteralLabel3(%rbp)
+
     mov 2(%rbp), %eax
     mov -8(%rbp), %eax
+
     movl $1, IntLiteralLabel5(%rbp)
+
 ARRAYACCESS
+
     mov ArrayLiteral{id=A, size=5}(%rbp), %eax
+
     movl $0, IntLiteralLabel9(%rbp)
+
     movl $10, IntLiteralLabel11(%rbp)
+
     movl	$10, %eax 
 	   negl	%eax 
     movl	%eax, -32(%rbp) 
+
     movl $11, IntLiteralLabel14(%rbp)
+
     movl $2, IntLiteralLabel16(%rbp)
+
     mov $11, %eax
     mov $2, %edx
     imul %edx, %eax
     mov %eax,-44%(ebp)
+
+
 .BeginForLabel21
+
     mov -52(%rbp), %eax
     cmp -24(%rbp), %eax
+
     jnl EndForLabel22
+
     movl $2, IntLiteralLabel25(%rbp)
+
     mov $0, %eax 
     mov $2, %edx 
     add %eax, %edx 
     mov %edx,-72%(ebp) 
+
     mov 0 + 2(%rbp), %eax
     mov -60(%rbp), %eax
+
+
     jmp BeginForLabel21
+
 .EndForLabel22
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -4473,16 +5792,25 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $4, IntLiteralLabel28(%rbp)
+
     movl $8, IntLiteralLabel30(%rbp)
+
     call pruArreglos
     movl %eax, RESULTLabel32(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel34(%rbp) 
+
     movl $1, IntLiteralLabel35(%rbp)
+
     mov 1(%rbp), %eax
+
     leave
     ret
 
@@ -4544,16 +5872,23 @@ lista:
 
 {Add}TRATAMIENTO PARA class ir.ast.MethodCallExpr y class ir.ast.IntLiteral PENDIENTE
 {Add}TRATAMIENTO PARA class java.lang.String PENDIENTE
+
+
 .globl	par
 .type	par, @function 
 par: 
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $15, IntLiteralLabel1(%rbp)
+
     mov 15(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	pruArreglos
 .type	pruArreglos, @function 
@@ -4561,33 +5896,55 @@ pruArreglos:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $0, IntLiteralLabel3(%rbp)
+
     movl $2, IntLiteralLabel5(%rbp)
+
     mov 2(%rbp), %eax
     mov -8(%rbp), %eax
+
     movl $1, IntLiteralLabel7(%rbp)
+
 ARRAYACCESS
+
     mov ArrayLiteral{id=A, size=5}(%rbp), %eax
+
     call par
     movl %eax, RESULTLabel11(%rbp) 
+
     call par
     movl %eax, RESULTLabel13(%rbp) 
+
     movl $5, IntLiteralLabel15(%rbp)
+
+
 .BeginForLabel18
+
     mov -36(%rbp), %eax
     cmp -24(%rbp), %eax
+
     jnl EndForLabel19
+
     movl $2, IntLiteralLabel22(%rbp)
+
     mov $0, %eax 
     mov $2, %edx 
     add %eax, %edx 
     mov %edx,-56%(ebp) 
+
     mov 0 + 2(%rbp), %eax
     mov -44(%rbp), %eax
+
+
     jmp BeginForLabel18
+
 .EndForLabel19
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -4595,16 +5952,25 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $4, IntLiteralLabel25(%rbp)
+
     movl $8, IntLiteralLabel27(%rbp)
+
     call pruArreglos
     movl %eax, RESULTLabel29(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel31(%rbp) 
+
     movl $1, IntLiteralLabel32(%rbp)
+
     mov 1(%rbp), %eax
+
     leave
     ret
 
@@ -4674,57 +6040,81 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: EXTERNINVKLabel43}
 {LABEL, null, null, Result: EndMethod main}
 
-{Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+{Cmp} CASO (2do)class java.lang.Boolean
+
+
 .globl	pruAritmetica
 .type	pruAritmetica, @function 
 pruAritmetica: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl	$0, %eax
     cmpl	$0, %eax
     setgne %al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
+
     mov true(%rbp), %eax
     cmp -12(%rbp), %eax
+
     jne elseCondLabel4
+
     movl	$0, %eax
     cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -24(%rbp)
+
     mov true(%rbp), %eax
     cmp -24(%rbp), %eax
+
     jne elseCondLabel9
+
     mov $0, %eax
     mov $0, %edx
     sub %eax, %edx
     mov %edx,-40%(ebp)
+
     mov 0 - 0(%rbp), %eax
     mov -28(%rbp), %eax
+
     jmp endIfLabel10
+
 .elseCondLabel9
+
     mov $0, %eax
     mov $0, %edx
     sub %eax, %edx
     mov %edx,-56%(ebp)
+
     mov 0 - 0(%rbp), %eax
     mov -44(%rbp), %eax
+
 .endIfLabel10
+
     jmp endIfLabel5
+
 .elseCondLabel4
+
     movl $5, IntLiteralLabel18(%rbp)
+
     mov $0, %eax
     mov $5, %edx
     imul %edx, %eax
     mov %eax,-72%(ebp)
+
     mov 0 * 5(%rbp), %eax
     mov -60(%rbp), %eax
+
 .endIfLabel5
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -4732,32 +6122,52 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $4, IntLiteralLabel22(%rbp)
+
     movl $8, IntLiteralLabel24(%rbp)
+
     call pruAritmetica
     movl %eax, RESULTLabel26(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel28(%rbp) 
+
     call "printf"
     movl %eax, EXTERNINVKLabel29(%rbp) 
+
     movl $4, IntLiteralLabel30(%rbp)
+
     movl $4, IntLiteralLabel32(%rbp)
+
     call pruAritmetica
     movl %eax, RESULTLabel34(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel36(%rbp) 
+
     movl $8, IntLiteralLabel37(%rbp)
+
     movl $5, IntLiteralLabel39(%rbp)
+
     call pruAritmetica
     movl %eax, RESULTLabel41(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel43(%rbp) 
+
     leave
     ret
 
@@ -4827,57 +6237,81 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: EXTERNINVKLabel43}
 {LABEL, null, null, Result: EndMethod main}
 
-{Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+{Cmp} CASO (2do)class java.lang.Boolean
+
+
 .globl	pruAritmetica
 .type	pruAritmetica, @function 
 pruAritmetica: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl	$0, %eax
     cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
+
     mov true(%rbp), %eax
     cmp -12(%rbp), %eax
+
     jne elseCondLabel4
+
     mov $0, %eax
     mov $0, %edx
     sub %eax, %edx
     mov %edx,-28%(ebp)
+
     mov 0 - 0(%rbp), %eax
     mov -16(%rbp), %eax
+
     jmp endIfLabel5
+
 .elseCondLabel4
+
 .endIfLabel5
+
     movl	$0, %eax
     cmpl	$0, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -40(%rbp)
+
     mov true(%rbp), %eax
     cmp -40(%rbp), %eax
+
     jne elseCondLabel12
+
     movl $5, IntLiteralLabel15(%rbp)
+
     mov $0, %eax
     mov $5, %edx
     imul %edx, %eax
     mov %eax,-56%(ebp)
+
     mov 0 * 5(%rbp), %eax
     mov -44(%rbp), %eax
+
     jmp endIfLabel13
+
 .elseCondLabel12
+
     mov $0, %eax
     mov $0, %edx
     sub %eax, %edx
     mov %edx,-72%(ebp)
+
     mov 0 - 0(%rbp), %eax
     mov -60(%rbp), %eax
+
 .endIfLabel13
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -4885,32 +6319,52 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $4, IntLiteralLabel22(%rbp)
+
     movl $8, IntLiteralLabel24(%rbp)
+
     call pruAritmetica
     movl %eax, RESULTLabel26(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel28(%rbp) 
+
     call "printf"
     movl %eax, EXTERNINVKLabel29(%rbp) 
+
     movl $4, IntLiteralLabel30(%rbp)
+
     movl $4, IntLiteralLabel32(%rbp)
+
     call pruAritmetica
     movl %eax, RESULTLabel34(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel36(%rbp) 
+
     movl $8, IntLiteralLabel37(%rbp)
+
     movl $5, IntLiteralLabel39(%rbp)
+
     call pruAritmetica
     movl %eax, RESULTLabel41(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel43(%rbp) 
+
     leave
     ret
 
@@ -4953,30 +6407,44 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[false]}]}, null, Result: EXTERNINVKLabel21}
 {LABEL, null, null, Result: EndMethod main}
 
+{Or}TRATAMIENTO PARA class ir.ast.BoolLiteral y class ir.ast.BoolLiteral PENDIENTE
+{And}TRATAMIENTO PARA class ir.ast.VarLocation y class ir.ast.UnaryOpExpr PENDIENTE
+{And}TRATAMIENTO PARA class ir.ast.VarLocation y class ir.ast.UnaryOpExpr PENDIENTE
+
+
 .globl	pruebaLogica
 .type	pruebaLogica, @function 
 pruebaLogica: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $true, BoolLiteralLabel1(%rbp)
+
     mov true(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $false, BoolLiteralLabel3(%rbp)
-OR(||)
+
+
     movl $true, BoolLiteralLabel8(%rbp)
+
     cmp $0, true(%rbp) 
     sete	%al 
     movzbl %al, %eax 
     mov %eax, -32(%rbp) 
-AND(&&)
+
+
     cmp $0, false(%rbp) 
     sete	%al 
     movzbl %al, %eax 
     mov %eax, -48(%rbp) 
-AND(&&)
+
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -4984,12 +6452,17 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $false, BoolLiteralLabel17(%rbp)
+
     call pruebaLogica
     movl %eax, RESULTLabel19(%rbp) 
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel21(%rbp) 
+
     leave
     ret
 
@@ -5089,105 +6562,201 @@ lista:
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Cmp} CASO (2do)class java.lang.String
+{And}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.VarLocation PENDIENTE
+{Cmp} CASO (2do)class java.lang.Boolean
+
+
 .globl	promedio
 .type	promedio, @function 
 promedio: 
     enter   $(12), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl	$0.0, %eax
     cmpl	$0.0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
+
     movl	$0.0, %eax
     cmpl	$0.0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -28(%rbp)
-AND(&&)
+
+    cmp	$0, -12(%rbp)
+    je .L0
+    cmp	$0, -28(%rbp)
+    je .L0
+    mov	$1, %eax
+    jmp .L1
+.L0:
+    movl	$0, %eax
+    jmp .L2
+.L1:
+    movl	%eax, -36(%rbp)
+.L2:
+
     mov true(%rbp), %eax
     cmp -36(%rbp), %eax
+
     jne elseCondLabel10
+
+
     movl $2.0, FloatLiteralLabel16(%rbp)
+
 DIVIDE(/)
+
     mov VarLocation{name=factorLabel15, type=float, expr=VarLocation{name=PLUSLabel14, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factorLabel17, type=float, expr=2.0, size=0}(%rbp), %eax
+
     jmp endIfLabel11
+
 .elseCondLabel10
+
 .endIfLabel11
+
     movl	$0.0, %eax
     cmpl	$0.0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -72(%rbp)
+
     movl	$0.0, %eax
     cmpl	$0.0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -88(%rbp)
-AND(&&)
+
+    cmp	$0, -72(%rbp)
+    je .L3
+    cmp	$0, -88(%rbp)
+    je .L3
+    mov	$1, %eax
+    jmp .L4
+.L3:
+    movl	$0, %eax
+    jmp .L5
+.L4:
+    movl	%eax, -96(%rbp)
+.L5:
+
     mov true(%rbp), %eax
     cmp -96(%rbp), %eax
+
     jne elseCondLabel28
+
+
     movl $2.0, FloatLiteralLabel34(%rbp)
+
 DIVIDE(/)
+
     mov VarLocation{name=factorLabel33, type=float, expr=VarLocation{name=PLUSLabel32, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factorLabel35, type=float, expr=2.0, size=0}(%rbp), %eax
+
     jmp endIfLabel29
+
 .elseCondLabel28
+
 .endIfLabel29
+
     movl	$0.0, %eax
     cmpl	$0.0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -132(%rbp)
+
     movl	$0.0, %eax
     cmpl	$0.0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -148(%rbp)
-AND(&&)
+
+    cmp	$0, -132(%rbp)
+    je .L6
+    cmp	$0, -148(%rbp)
+    je .L6
+    mov	$1, %eax
+    jmp .L7
+.L6:
+    movl	$0, %eax
+    jmp .L8
+.L7:
+    movl	%eax, -156(%rbp)
+.L8:
+
     mov true(%rbp), %eax
     cmp -156(%rbp), %eax
+
     jne elseCondLabel46
+
+
     movl $2.0, FloatLiteralLabel52(%rbp)
+
 DIVIDE(/)
+
     mov VarLocation{name=factorLabel51, type=float, expr=VarLocation{name=PLUSLabel50, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factorLabel53, type=float, expr=2.0, size=0}(%rbp), %eax
+
     jmp endIfLabel47
+
 .elseCondLabel46
+
 .endIfLabel47
+
     movl	$0.0, %eax
     cmpl	$0.0, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -192(%rbp)
+
     movl	$0.0, %eax
     cmpl	$0.0, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -208(%rbp)
-AND(&&)
+
+    cmp	$0, -192(%rbp)
+    je .L9
+    cmp	$0, -208(%rbp)
+    je .L9
+    mov	$1, %eax
+    jmp .L10
+.L9:
+    movl	$0, %eax
+    jmp .L11
+.L10:
+    movl	%eax, -216(%rbp)
+.L11:
+
     movl	$0.0, %eax
     cmpl	$0.0, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -228(%rbp)
-AND(&&)
+
+
     mov true(%rbp), %eax
     cmp -236(%rbp), %eax
+
     jne elseCondLabel69
+
     mov 0.0(%rbp), %eax
+
     jmp endIfLabel70
+
 .elseCondLabel69
+
 .endIfLabel70
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -5195,18 +6764,29 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $3.3, FloatLiteralLabel72(%rbp)
+
     movl $0.66, FloatLiteralLabel74(%rbp)
+
     movl $10.0, FloatLiteralLabel76(%rbp)
+
     call promedio
     movl %eax, RESULTLabel78(%rbp) 
+
 PARAM
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel80(%rbp) 
+
     movl $1, IntLiteralLabel81(%rbp)
+
     mov 1(%rbp), %eax
+
     leave
     ret
 
@@ -5241,31 +6821,43 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: EXTERNINVKLabel13}
 {LABEL, null, null, Result: EndMethod main}
 
+{And}TRATAMIENTO PARA class ir.ast.BoolLiteral y class ir.ast.BoolLiteral PENDIENTE
+{Or}TRATAMIENTO PARA class ir.ast.VarLocation y class ir.ast.UnaryOpExpr PENDIENTE
+
+
 .globl	main
 .type	main, @function 
 main: 
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $true, BoolLiteralLabel1(%rbp)
+
     mov true(%rbp), %eax
     mov -4(%rbp), %eax
+
     cmp $0, false(%rbp) 
     sete	%al 
     movzbl %al, %eax 
     mov %eax, -20(%rbp) 
+
     mov !false(%rbp), %eax
     mov -12(%rbp), %eax
-AND(&&)
+
+
     cmp $0, false(%rbp) 
     sete	%al 
     movzbl %al, %eax 
     mov %eax, -48(%rbp) 
-OR(||)
+
+
     mov VarLocation{name=CONJUNCIONLabel7, type=boolean, expr=false && false, size=0} || !false(%rbp), %eax
     mov -24(%rbp), %eax
+
     call "printf"
     movl %eax, EXTERNINVKLabel13(%rbp) 
+
     leave
     ret
 
@@ -5329,60 +6921,89 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="mcd%d"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: EXTERNINVKLabel32}
 {LABEL, null, null, Result: EndMethod main}
 
+{Cmp} CASO (2do)class java.lang.Boolean
 {Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
+
+
 .globl	maxcomdiv
 .type	maxcomdiv, @function 
 maxcomdiv: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl	$0, %eax
     cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
+
     mov true(%rbp), %eax
     cmp -12(%rbp), %eax
+
     jne elseCondLabel4
+
     mov 0(%rbp), %eax
     mov -16(%rbp), %eax
+
     mov 0(%rbp), %eax
     mov -24(%rbp), %eax
+
     jmp endIfLabel5
+
 .elseCondLabel4
+
     mov 0(%rbp), %eax
     mov -32(%rbp), %eax
+
     mov 0(%rbp), %eax
     mov -40(%rbp), %eax
+
 .endIfLabel5
+
     movl $1, IntLiteralLabel10(%rbp)
+
     mov 1(%rbp), %eax
     mov -48(%rbp), %eax
+
     movl $0, IntLiteralLabel13(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setgne %al
     movzbl %al, %eax
     movl	%eax, -64(%rbp)
+
 .BeginWhileLabel18
+
     mov true(%rbp), %eax
     cmp -72(%rbp), %eax
+
     jne EndWhileLabel19
+
     movl	$0, %eax 
     idivl $0, %eax 
     movl	%edx, -88(%rbp)
+
     mov 0 % 0(%rbp), %eax
     mov -76(%rbp), %eax
+
     mov 0(%rbp), %eax
     mov -92(%rbp), %eax
+
     mov 0(%rbp), %eax
     mov -100(%rbp), %eax
+
     jmp BeginWhileLabel18
+
 .EndWhileLabel19
+
     mov 0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -5390,14 +7011,21 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $6, IntLiteralLabel26(%rbp)
+
     movl $9, IntLiteralLabel28(%rbp)
+
     call maxcomdiv
     movl %eax, RESULTLabel30(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel32(%rbp) 
+
     leave
     ret
 
@@ -5495,35 +7123,51 @@ lista:
 {MULTIPLY(*), VarLocation{name=factorLabel31, type=int, expr=3, size=0}, 0, Result: VarLocation{name=MULTIPLYLabel34, type=int, expr=VarLocation{name=factorLabel31, type=int, expr=3, size=0} * 0, size=0}}
 {LABEL, null, null, Result: EndMethod main}
 
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+
+
 .globl	alo
 .type	alo, @function 
 alo: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     mov true(%rbp), %eax
     cmp -4(%rbp), %eax
+
     jne elseCondLabel2
+
     movl $1, IntLiteralLabel5(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-20%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -8(%rbp), %eax
+
     jmp endIfLabel3
+
 .elseCondLabel2
+
     movl $1, IntLiteralLabel9(%rbp)
+
     mov $0, %eax
     mov $1, %edx
     sub %eax, %edx
     mov %edx,-36%(ebp)
+
     mov 0 - 1(%rbp), %eax
     mov -24(%rbp), %eax
+
 .endIfLabel3
+
     leave
     ret
+
+
 
 .globl	Alo
 .type	Alo, @function 
@@ -5531,8 +7175,11 @@ Alo:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     leave
     ret
+
+
 
 .globl	alo2
 .type	alo2, @function 
@@ -5540,21 +7187,32 @@ alo2:
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $true, BoolLiteralLabel12(%rbp)
+
     call alo
     movl %eax, RESULTLabel15(%rbp) 
+
 PARAM
+
 PARAM
+
     movl $1, IntLiteralLabel17(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-24%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -12(%rbp), %eax
+
     mov 0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -5562,23 +7220,34 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $7, IntLiteralLabel21(%rbp)
+
     mov 7(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $8.0, FloatLiteralLabel23(%rbp)
+
     mov 8.0(%rbp), %eax
     mov -12(%rbp), %eax
+
     call alo2
     movl %eax, RESULTLabel26(%rbp) 
+
 PARAM
+
     mov MethodCallExpr{name=alo2, args=[0]}(%rbp), %eax
     mov -20(%rbp), %eax
+
     movl $false, BoolLiteralLabel28(%rbp)
+
     movl $3, IntLiteralLabel30(%rbp)
+
     mov -36(%ebp) , %eax 
     mov $0, %edx
     imul %edx, %eax 
     mov %eax,-48%(ebp) 
+
     leave
     ret
 
@@ -5645,21 +7314,29 @@ lista:
 {LABEL, null, null, Result: EndMethod main}
 
 {logic} FALTA CASO (2do param)class ir.ast.BinOpExpr
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+
+
 .globl	inc
 .type	inc, @function 
 inc: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $1, IntLiteralLabel2(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-12%(ebp) 
+
     mov 0 + 1(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	resto
 .type	resto, @function 
@@ -5667,35 +7344,54 @@ resto:
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $3, IntLiteralLabel6(%rbp)
+
     movl $2, IntLiteralLabel8(%rbp)
+
     mov $3, %eax
     mov $2, %edx
     imul %edx, %eax
     mov %eax,-16%(ebp)
+
     movl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -20(%rbp)
+
     mov true(%rbp), %eax
     cmp -20(%rbp), %eax
+
     jne elseCondLabel12
+
     movl $3, IntLiteralLabel15(%rbp)
+
 DIVIDE(/)
+
     mov 0 / 3(%rbp), %eax
     mov -24(%rbp), %eax
+
     jmp endIfLabel13
+
 .elseCondLabel12
+
     movl $2, IntLiteralLabel19(%rbp)
+
     movl	$2, %eax 
     idivl $0, %eax 
     movl	%edx, -52(%rbp)
+
     mov 0 % 2(%rbp), %eax
     mov -40(%rbp), %eax
+
 .endIfLabel13
+
     mov 0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -5703,21 +7399,33 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $false, BoolLiteralLabel23(%rbp)
+
     mov false(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $0, IntLiteralLabel25(%rbp)
+
     movl $5, IntLiteralLabel27(%rbp)
+
     call inc
     movl %eax, RESULTLabel29(%rbp) 
+
 PARAM
+
     movl $10.2, FloatLiteralLabel31(%rbp)
+
     call resto
     movl %eax, RESULTLabel33(%rbp) 
+
 PARAM
+
 PARAM
+
     mov MethodCallExpr{name=resto, args=[MethodCallExpr{name=inc, args=[5]}, 10.2]}(%rbp), %eax
     mov -16(%rbp), %eax
+
     leave
     ret
 
@@ -5804,62 +7512,91 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%d%f"}, StringLiteral{value="mcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}, 3.5 * 0 - 7 / 6]}, null, Result: EXTERNINVKLabel44}
 {LABEL, null, null, Result: EndMethod main}
 
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
 {Cmp} CASO (2do)class java.lang.String
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.IntLiteral PENDIENTE
 {Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
+
+
 .globl	maxcomdiv
 .type	maxcomdiv, @function 
 maxcomdiv: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl	$0, %eax
     cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
+
     mov true(%rbp), %eax
     cmp -12(%rbp), %eax
+
     jne elseCondLabel4
+
     mov 0(%rbp), %eax
     mov -16(%rbp), %eax
+
     mov 0(%rbp), %eax
     mov -24(%rbp), %eax
+
     jmp endIfLabel5
+
 .elseCondLabel4
+
     mov 0(%rbp), %eax
     mov -32(%rbp), %eax
+
     mov 0(%rbp), %eax
     mov -40(%rbp), %eax
+
 .endIfLabel5
+
     movl $1, IntLiteralLabel10(%rbp)
+
     mov 1(%rbp), %eax
     mov -48(%rbp), %eax
+
     movl $0, IntLiteralLabel13(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setgne %al
     movzbl %al, %eax
     movl	%eax, -64(%rbp)
+
 .BeginWhileLabel18
+
     mov true(%rbp), %eax
     cmp -72(%rbp), %eax
+
     jne EndWhileLabel19
+
     movl	$0, %eax 
     idivl $0, %eax 
     movl	%edx, -88(%rbp)
+
     mov 0 % 0(%rbp), %eax
     mov -76(%rbp), %eax
+
     mov 0(%rbp), %eax
     mov -92(%rbp), %eax
+
     mov 0(%rbp), %eax
     mov -100(%rbp), %eax
+
     jmp BeginWhileLabel18
+
 .EndWhileLabel19
+
     mov 0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -5867,21 +7604,36 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $10000, IntLiteralLabel26(%rbp)
+
     mov 10000(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $6, IntLiteralLabel28(%rbp)
+
     movl $9, IntLiteralLabel30(%rbp)
+
     call maxcomdiv
     movl %eax, RESULTLabel32(%rbp) 
+
 PARAM
+
 PARAM
+
     movl $3.5, FloatLiteralLabel34(%rbp)
+
+
     movl $7, IntLiteralLabel38(%rbp)
+
     movl $6, IntLiteralLabel40(%rbp)
+
 DIVIDE(/)
+
+
     call "printf"
     movl %eax, EXTERNINVKLabel44(%rbp) 
+
     leave
     ret
 
@@ -5913,22 +7665,32 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[]}]}, null, Result: EXTERNINVKLabel10}
 {LABEL, null, null, Result: EndMethod main}
 
+
+
 .globl	pruAritmetica
 .type	pruAritmetica, @function 
 pruAritmetica: 
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $90, IntLiteralLabel1(%rbp)
+
     mov 90(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $7, IntLiteralLabel4(%rbp)
+
     movl	$7, %eax 
     idivl $0, %eax 
     movl	%edx, -20(%rbp)
+
     mov VarLocation{name=MODLabel6, type=int, expr=0 % 7, size=0}(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -5936,10 +7698,13 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     call pruAritmetica
     movl %eax, RESULTLabel8(%rbp) 
+
     call "printf"
     movl %eax, EXTERNINVKLabel10(%rbp) 
+
     leave
     ret
 
@@ -5982,26 +7747,40 @@ lista:
 
 {Imul}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.IntLiteral PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.IntLiteral PENDIENTE
+
+
 .globl	pruMult
 .type	pruMult, @function 
 pruMult: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $5, IntLiteralLabel1(%rbp)
+
     mov 5(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $2000, IntLiteralLabel3(%rbp)
+
     mov 2000(%rbp), %eax
     mov -12(%rbp), %eax
+
     movl $1000, IntLiteralLabel6(%rbp)
+
     mov $0, %eax
     mov $1000, %edx
     imul %edx, %eax
     mov %eax,-28%(ebp)
+
+
+
     mov VarLocation{name=MULTIPLYLabel12, type=int, expr=0 * 1000 * 0 * 0, size=0}(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -6009,12 +7788,17 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $2, IntLiteralLabel14(%rbp)
+
     call pruMult
     movl %eax, RESULTLabel16(%rbp) 
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel18(%rbp) 
+
     leave
     ret
 
@@ -6046,23 +7830,33 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[]}]}, null, Result: EXTERNINVKLabel10}
 {LABEL, null, null, Result: EndMethod main}
 
+
+
 .globl	pruMult
 .type	pruMult, @function 
 pruMult: 
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $5, IntLiteralLabel1(%rbp)
+
     mov 5(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $7, IntLiteralLabel4(%rbp)
+
     mov $0, %eax
     mov $7, %edx
     imul %edx, %eax
     mov %eax,-20%(ebp)
+
     mov VarLocation{name=MULTIPLYLabel6, type=int, expr=0 * 7, size=0}(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -6070,10 +7864,13 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     call pruMult
     movl %eax, RESULTLabel8(%rbp) 
+
     call "printf"
     movl %eax, EXTERNINVKLabel10(%rbp) 
+
     leave
     ret
 
@@ -6098,19 +7895,25 @@ lista:
 {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {LABEL, null, null, Result: EndMethod alo}
 
+
+
 .globl	alo
 .type	alo, @function 
 alo: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $1, IntLiteralLabel2(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-16%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -4(%rbp), %eax
+
     leave
     ret
 
@@ -6238,156 +8041,253 @@ lista:
 
 {Cmp} CASO (2do)class java.lang.String
 {Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
 {Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+{Cmp} CASO (2do)class java.lang.Boolean
 {Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
+
+
 .globl	id
 .type	id, @function 
 id: 
     enter   $(4), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $100, IntLiteralLabel1(%rbp)
+
     mov 100(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $0, IntLiteralLabel3(%rbp)
+
     mov 0(%rbp), %eax
     mov -12(%rbp), %eax
+
     mov 0(%rbp), %eax
     mov -20(%rbp), %eax
+
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -36(%rbp)
+
 .BeginWhileLabel10
+
     mov true(%rbp), %eax
     cmp -40(%rbp), %eax
+
     jne EndWhileLabel11
+
     mov 0(%rbp), %eax
     mov -44(%rbp), %eax
+
     movl $0, IntLiteralLabel14(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -60(%rbp)
+
     movl $0, IntLiteralLabel19(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -76(%rbp)
-OR(||)
+
+    cmp	$0, -60(%rbp)
+    jne .L0
+    cmp	$0, -76(%rbp)
+    je .L0
+    mov	$1, %eax
+    jmp .L1
+.L0:
+    movl	$0, %eax
+    jmp .L2
+.L1:
+    movl	%eax, -84(%rbp)
+.L2:
+
 .BeginWhileLabel25
+
     mov true(%rbp), %eax
     cmp -88(%rbp), %eax
+
     jne EndWhileLabel26
+
     movl $0, IntLiteralLabel28(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -100(%rbp)
+
     mov true(%rbp), %eax
     cmp -100(%rbp), %eax
+
     jne elseCondLabel31
+
     movl $1, IntLiteralLabel34(%rbp)
+
     mov $0, %eax
     mov $1, %edx
     sub %eax, %edx
     mov %edx,-116%(ebp)
+
     mov 0 - 1(%rbp), %eax
     mov -104(%rbp), %eax
+
     jmp endIfLabel32
+
 .elseCondLabel31
+
     movl $1, IntLiteralLabel38(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-132%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -120(%rbp), %eax
+
 .endIfLabel32
+
     jmp BeginWhileLabel25
+
 .EndWhileLabel26
+
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -144(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setg	%al
     movzbl %al, %eax
     movl	%eax, -160(%rbp)
-OR(||)
+
+    cmp	$0, -144(%rbp)
+    jne .L3
+    cmp	$0, -160(%rbp)
+    je .L3
+    mov	$1, %eax
+    jmp .L4
+.L3:
+    movl	$0, %eax
+    jmp .L5
+.L4:
+    movl	%eax, -168(%rbp)
+.L5:
+
 .BeginWhileLabel51
+
     mov true(%rbp), %eax
     cmp -172(%rbp), %eax
+
     jne EndWhileLabel52
+
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -184(%rbp)
+
     mov true(%rbp), %eax
     cmp -184(%rbp), %eax
+
     jne elseCondLabel56
+
     movl $1, IntLiteralLabel59(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-200%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -188(%rbp), %eax
+
     jmp endIfLabel57
+
 .elseCondLabel56
+
     movl	$0, %eax
     cmpl	$0, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -212(%rbp)
+
     mov true(%rbp), %eax
     cmp -212(%rbp), %eax
+
     jne elseCondLabel65
+
     movl $1, IntLiteralLabel68(%rbp)
+
     mov $0, %eax
     mov $1, %edx
     sub %eax, %edx
     mov %edx,-228%(ebp)
+
     mov $0, %eax
     mov $0, %edx
     imul %edx, %eax
     mov %eax,-240%(ebp)
+
     mov $0, %eax
     mov $0, %edx
     imul %edx, %eax
     mov %eax,-252%(ebp)
+
+
+
     mov 0 - 1 + VarLocation{name=MINUSLabel77, type=int, expr=0 * 0 - 0 * 0, size=0}(%rbp), %eax
     mov -216(%rbp), %eax
+
     jmp endIfLabel66
+
 .elseCondLabel65
+
 .endIfLabel66
+
 .endIfLabel57
+
     jmp BeginWhileLabel51
+
 .EndWhileLabel52
+
     mov 0(%rbp), %eax
     mov -268(%rbp), %eax
+
     movl $1, IntLiteralLabel82(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-288%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -276(%rbp), %eax
+
     jmp BeginWhileLabel10
+
 .EndWhileLabel11
+
     mov 0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -6395,12 +8295,17 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $9, IntLiteralLabel86(%rbp)
+
     call id
     movl %eax, RESULTLabel88(%rbp) 
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel90(%rbp) 
+
     leave
     ret
 
@@ -6450,47 +8355,70 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=suma, args=[4, 9]}]}, null, Result: EXTERNINVKLabel24}
 {LABEL, null, null, Result: EndMethod main}
 
-{Cmp} CASO (2do)class java.lang.String
-{Cmp} CASO (2do)class java.lang.String
+{Cmp} CASO (2do)class java.lang.Boolean
+{Cmp} CASO (2do)class java.lang.Boolean
+
+
 .globl	suma
 .type	suma, @function 
 suma: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $0, IntLiteralLabel2(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -12(%rbp)
+
     mov true(%rbp), %eax
     cmp -12(%rbp), %eax
+
     jne elseCondLabel5
+
     mov 0(%rbp), %eax
+
     jmp endIfLabel6
+
 .elseCondLabel5
+
     movl $0, IntLiteralLabel9(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     sete %al
     movzbl %al, %eax
     movl	%eax, -28(%rbp)
+
     mov true(%rbp), %eax
     cmp -28(%rbp), %eax
+
     jne elseCondLabel12
+
     mov 0(%rbp), %eax
+
     jmp endIfLabel13
+
 .elseCondLabel12
+
     mov $0, %eax 
     mov $0, %edx 
     add %eax, %edx 
     mov %edx,-44%(ebp) 
+
     mov 0 + 0(%rbp), %eax
+
 .endIfLabel13
+
 .endIfLabel6
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -6498,14 +8426,21 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $4, IntLiteralLabel18(%rbp)
+
     movl $9, IntLiteralLabel20(%rbp)
+
     call suma
     movl %eax, RESULTLabel22(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel24(%rbp) 
+
     leave
     ret
 
@@ -6559,41 +8494,62 @@ lista:
 
 {Cmp} CASO (2do)class java.lang.String
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
+
+
 .globl	sumx
 .type	sumx, @function 
 sumx: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $0, IntLiteralLabel1(%rbp)
+
     mov 0(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $0, IntLiteralLabel3(%rbp)
+
     mov 0(%rbp), %eax
     mov -12(%rbp), %eax
+
     movl	$0, %eax
     cmpl	$0, %eax
     setl	%al
     movzbl %al, %eax
     movl	%eax, -28(%rbp)
+
 .BeginWhileLabel9
+
     mov true(%rbp), %eax
     cmp -32(%rbp), %eax
+
     jne EndWhileLabel10
+
+
     mov 0.0 + 0.0(%rbp), %eax
     mov -36(%rbp), %eax
+
     movl $1, IntLiteralLabel15(%rbp)
+
     mov $0, %eax 
     mov $1, %edx 
     add %eax, %edx 
     mov %edx,-64%(ebp) 
+
     mov 0 + 1(%rbp), %eax
     mov -52(%rbp), %eax
+
     jmp BeginWhileLabel9
+
 .EndWhileLabel10
+
     mov 0.0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -6601,14 +8557,21 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $6.0, FloatLiteralLabel19(%rbp)
+
     movl $2, IntLiteralLabel21(%rbp)
+
     call sumx
     movl %eax, RESULTLabel23(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel25(%rbp) 
+
     leave
     ret
 
@@ -6676,63 +8639,97 @@ lista:
 {Cmp} CASO (2do)class java.lang.String
 {Cmp} CASO (2do)class java.lang.String
 {Cmp} CASO (2do)class java.lang.String
+
+
 .globl	maxcomdiv
 .type	maxcomdiv, @function 
 maxcomdiv: 
     enter   $(8), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $1, IntLiteralLabel1(%rbp)
+
     mov 1(%rbp), %eax
     mov -4(%rbp), %eax
+
     movl $0, IntLiteralLabel4(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setgne %al
     movzbl %al, %eax
     movl	%eax, -20(%rbp)
+
 .BeginWhileLabel12
+
     mov true(%rbp), %eax
     cmp -40(%rbp), %eax
+
     jne EndWhileLabel13
+
     movl	$0, %eax 
     idivl $0, %eax 
     movl	%edx, -56(%rbp)
+
     mov 0 % 0(%rbp), %eax
     mov -44(%rbp), %eax
+
     mov 0(%rbp), %eax
     mov -60(%rbp), %eax
+
     jmp BeginWhileLabel12
+
     jmp BeginWhileLabel12
+
 .EndWhileLabel13
+
     movl $0, IntLiteralLabel19(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setgne %al
     movzbl %al, %eax
     movl	%eax, -76(%rbp)
+
 .BeginWhileLabel22
+
     mov true(%rbp), %eax
     cmp -76(%rbp), %eax
+
     jne EndWhileLabel23
+
     jmp EndWhileLabel23
+
     jmp BeginWhileLabel22
+
 .EndWhileLabel23
+
     movl $0, IntLiteralLabel25(%rbp)
+
     movl	$0, %eax
     cmpl	$0, %eax
     setgne %al
     movzbl %al, %eax
     movl	%eax, -88(%rbp)
+
 .BeginWhileLabel29
+
     mov true(%rbp), %eax
     cmp -92(%rbp), %eax
+
     jne EndWhileLabel30
+
     jmp BeginWhileLabel29
+
 .EndWhileLabel30
+
     mov 0(%rbp), %eax
+
     leave
     ret
+
+
 
 .globl	main
 .type	main, @function 
@@ -6740,14 +8737,21 @@ main:
     enter   $(0), $0 
     push	%rbp
     mov %rsp, %rbp
+
     movl $6, IntLiteralLabel32(%rbp)
+
     movl $9, IntLiteralLabel34(%rbp)
+
     call maxcomdiv
     movl %eax, RESULTLabel36(%rbp) 
+
 PARAM
+
 PARAM
+
     call "printf"
     movl %eax, EXTERNINVKLabel38(%rbp) 
+
     leave
     ret
 
