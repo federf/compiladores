@@ -30,42 +30,57 @@ public class AssemblyCodeGenerator{
 
 		if (t.getFirstDir() instanceof VarLocation && !(t.getSecondDir() instanceof VarLocation)) {
 			VarLocation  x = (VarLocation)t.getFirstDir();
-			IntLiteral  y = (IntLiteral)t.getSecondDir();
+			if(t.getSecondDir() instanceof IntLiteral){
+				IntLiteral  y = (IntLiteral)t.getSecondDir();
 
-			int XOff = x.getOffset();
+				int XOff = x.getOffset();
 
-			result = result +(
+				result = result +(
 
-			"    mov " + XOff + "(%ebp) , %eax \n"+
-			"    add $" +y.getStringValue() + ", %eax \n"+
-			"    mov %edx," + ResOff + "%(ebp) \n");
+				"    mov " + XOff + "(%ebp) , %eax \n"+
+				"    add $" +y.getStringValue() + ", %eax \n"+
+				"    mov %edx," + ResOff + "%(ebp) \n");	
+			}else{
+				System.out.println("{Add}TRATAMIENTO PARA " + t.getSecondDir().getClass() +" PENDIENTE");
+			}
+			
 
 		}
 
 		if ((t.getFirstDir() instanceof VarLocation) && t.getSecondDir() instanceof VarLocation) {
-			IntLiteral  x = (IntLiteral)t.getFirstDir();
-			VarLocation  y = (VarLocation)t.getSecondDir();
+			if(t.getFirstDir() instanceof IntLiteral){
+				IntLiteral  x = (IntLiteral)t.getFirstDir();
+				VarLocation  y = (VarLocation)t.getSecondDir();
 
-			int YOff = y.getOffset();
+				int YOff = y.getOffset();
 
-			result = result +(
+				result = result +(
 
-			"    mov " + YOff + "(%ebp), %eax \n"+
-			"    add $" +x.getStringValue() + ", %eax \n"+
-			"    mov %edx," + ResOff + "%(ebp) \n");
+				"    mov " + YOff + "(%ebp), %eax \n"+
+				"    add $" +x.getStringValue() + ", %eax \n"+
+				"    mov %edx," + ResOff + "%(ebp) \n");	
+			}else{
+				System.out.println("{Add}TRATAMIENTO PARA " + t.getFirstDir().getClass() +" PENDIENTE");
+			}
+			
 
 		}
 
 		if (!(t.getFirstDir() instanceof VarLocation) && !(t.getSecondDir() instanceof VarLocation)) {
-			IntLiteral  x = (IntLiteral)t.getFirstDir();
-			IntLiteral  y = (IntLiteral)t.getSecondDir();
+			if(t.getFirstDir() instanceof IntLiteral && t.getSecondDir() instanceof IntLiteral){
+				IntLiteral  x = (IntLiteral)t.getFirstDir();
+				IntLiteral  y = (IntLiteral)t.getSecondDir();
 
-			result = result +(
+				result = result +(
 
-			"    mov $" + x.getStringValue() + ", %eax \n"+
-			"    mov $" + y.getStringValue() + ", %edx \n"+
-			"    add %eax, %edx \n"+
-			"    mov %edx," + ResOff + "%(ebp) \n");
+				"    mov $" + x.getStringValue() + ", %eax \n"+
+				"    mov $" + y.getStringValue() + ", %edx \n"+
+				"    add %eax, %edx \n"+
+				"    mov %edx," + ResOff + "%(ebp) \n");
+			}else{
+				System.out.println("{Add}TRATAMIENTO PARA " + t.getFirstDir().getClass()+ " y "+ t.getSecondDir().getClass()+" PENDIENTE");
+			}
+			
 		}
 	}
 
@@ -92,44 +107,56 @@ public class AssemblyCodeGenerator{
 
 		if (t.getFirstDir() instanceof VarLocation && !(t.getSecondDir() instanceof VarLocation)) {
 			VarLocation  x = (VarLocation)t.getFirstDir();
-			IntLiteral  y = (IntLiteral)t.getSecondDir();
+			if(t.getSecondDir() instanceof  IntLiteral){
+				IntLiteral  y = (IntLiteral)t.getSecondDir();
+				int XOff = x.getOffset();
+				result = result +(
 
-			int XOff = x.getOffset();
-
-			result = result +(
-
-			"    mov " + XOff + "(%ebp) , %eax \n"+
-			"    mov $" + y.getStringValue() + ", %edx\n"+
-			"    sub %edx, %eax \n"+
-			"    mov %edx," + ResOff + "%(ebp) \n");
+				"    mov " + XOff + "(%ebp) , %eax \n"+
+				"    mov $" + y.getStringValue() + ", %edx\n"+
+				"    sub %edx, %eax \n"+
+				"    mov %edx," + ResOff + "%(ebp) \n");
+			}else{
+				System.out.println("{Sub}TRATAMIENTO "+t.getSecondDir().getClass()+" PENDIENTE");
+			}
+			
 
 		}
 
 		if ((t.getFirstDir() instanceof VarLocation) && t.getSecondDir() instanceof VarLocation) {
-			IntLiteral  x = (IntLiteral)t.getFirstDir();
-			VarLocation  y = (VarLocation)t.getSecondDir();
+			if(t.getFirstDir() instanceof IntLiteral){
+				IntLiteral  x = (IntLiteral)t.getFirstDir();
+				VarLocation  y = (VarLocation)t.getSecondDir();
 
-			int YOff = y.getOffset();
+				int YOff = y.getOffset();
 
-			result = result +(
+				result = result +(
 
-			"    mov " + YOff + "(%ebp), %eax\n"+
-			"    mov $" + x.getStringValue() + ", %edx\n"+
-			"    sub %edx, %eax\n"+
-			"    mov %edx," + ResOff + "%(ebp)\n");
+				"    mov " + YOff + "(%ebp), %eax\n"+
+				"    mov $" + x.getStringValue() + ", %edx\n"+
+				"    sub %edx, %eax\n"+
+				"    mov %edx," + ResOff + "%(ebp)\n");
+			}else{
+				System.out.println("{Sub}TRATAMIENTO "+t.getFirstDir().getClass()+" PENDIENTE");
+			}
 
 		}
 
 		if (!(t.getFirstDir() instanceof VarLocation) && !(t.getSecondDir() instanceof VarLocation)) {
-			IntLiteral  x = (IntLiteral)t.getFirstDir();
-			IntLiteral  y = (IntLiteral)t.getSecondDir();
+			if(t.getFirstDir() instanceof IntLiteral && t.getSecondDir() instanceof IntLiteral){
+				IntLiteral  x = (IntLiteral)t.getFirstDir();
+				IntLiteral  y = (IntLiteral)t.getSecondDir();
 
-			result = result +(
+				result = result +(
 
-			"    mov $" + x.getStringValue() + ", %eax\n"+
-			"    mov $" + y.getStringValue() + ", %edx\n"+
-			"    sub %eax, %edx\n"+
-			"    mov %edx," + ResOff + "%(ebp)\n");
+				"    mov $" + x.getStringValue() + ", %eax\n"+
+				"    mov $" + y.getStringValue() + ", %edx\n"+
+				"    sub %eax, %edx\n"+
+				"    mov %edx," + ResOff + "%(ebp)\n");	
+			}else{
+				System.out.println("{Add}TRATAMIENTO PARA " + t.getFirstDir().getClass()+ " y "+ t.getSecondDir().getClass()+" PENDIENTE");
+			}
+			
 
 		}
 	}
@@ -156,44 +183,61 @@ public class AssemblyCodeGenerator{
 
 		if (t.getFirstDir() instanceof VarLocation && !(t.getSecondDir() instanceof VarLocation)) {
 			VarLocation  x = (VarLocation)t.getFirstDir();
-			IntLiteral  y = (IntLiteral)t.getSecondDir();
+			if(t.getSecondDir() instanceof IntLiteral){
+				IntLiteral  y = (IntLiteral)t.getSecondDir();
 
-			int XOff = x.getOffset();
+				int XOff = x.getOffset();
 
-			result = result +(
+				result = result +(
 
-			"    mov " + XOff + "(%ebp) , %eax \n"+
-			"    mov $" + y.getStringValue() + ", %edx\n"+
-			"    imul %edx, %eax \n"+
-			"    mov %eax," + ResOff + "%(ebp) \n");
+				"    mov " + XOff + "(%ebp) , %eax \n"+
+				"    mov $" + y.getStringValue() + ", %edx\n"+
+				"    imul %edx, %eax \n"+
+				"    mov %eax," + ResOff + "%(ebp) \n");
+			}else{
+				System.out.println("{Imul}TRATAMIENTO PARA " + t.getSecondDir().getClass() +" PENDIENTE");
+			}
+			
 
 		}
 
 		if ((t.getFirstDir() instanceof VarLocation) && t.getSecondDir() instanceof VarLocation) {
-			IntLiteral  x = (IntLiteral)t.getFirstDir();
-			VarLocation  y = (VarLocation)t.getSecondDir();
+			if(t.getFirstDir() instanceof IntLiteral){
+				IntLiteral  x = (IntLiteral)t.getFirstDir();
+				VarLocation  y = (VarLocation)t.getSecondDir();
 
-			int YOff = y.getOffset();
+				int YOff = y.getOffset();
 
-			result = result +(
+				result = result +(
 
-			"    mov " + YOff + "(%ebp), %eax\n"+
-			"    mov $" + x.getStringValue() + ", %edx\n"+
-			"    imul %edx, %eax\n"+
-			"    mov %eax," + ResOff + "%(ebp)\n");
+				"    mov " + YOff + "(%ebp), %eax\n"+
+				"    mov $" + x.getStringValue() + ", %edx\n"+
+				"    imul %edx, %eax\n"+
+				"    mov %eax," + ResOff + "%(ebp)\n");
+			}else{
+				System.out.println("{Imul}TRATAMIENTO "+t.getFirstDir().getClass()+" PENDIENTE");
+			}
+			
 
 		}
 
 		if (!(t.getFirstDir() instanceof VarLocation) && !(t.getSecondDir() instanceof VarLocation)) {
-			IntLiteral  x = (IntLiteral)t.getFirstDir();
-			IntLiteral  y = (IntLiteral)t.getSecondDir();
 
-			result = result +(
+			if(t.getFirstDir() instanceof IntLiteral && t.getSecondDir() instanceof IntLiteral){
+				IntLiteral  x = (IntLiteral)t.getFirstDir();
+				IntLiteral  y = (IntLiteral)t.getSecondDir();
 
-			"    mov $" + x.getStringValue() + ", %eax\n"+
-			"    mov $" + y.getStringValue() + ", %edx\n"+
-			"    imul %edx, %eax\n"+
-			"    mov %eax," + ResOff + "%(ebp)\n");
+				result = result +(
+
+				"    mov $" + x.getStringValue() + ", %eax\n"+
+				"    mov $" + y.getStringValue() + ", %edx\n"+
+				"    imul %edx, %eax\n"+
+				"    mov %eax," + ResOff + "%(ebp)\n");
+			}else{
+				System.out.println("{Imul}TRATAMIENTO PARA " + t.getFirstDir().getClass()+ " y "+ t.getSecondDir().getClass()+" PENDIENTE");
+			}
+
+			
 
 		}
 	}
@@ -215,8 +259,13 @@ public class AssemblyCodeGenerator{
 			        		IntLiteral op1=(IntLiteral) t.getFirstDir();
 			        		result += "    movl	$" + op1.getRawValue() + ", %eax\n";
 			        	}else{//caso float
-			        		FloatLiteral op1=(FloatLiteral) t.getFirstDir();
-			        		result += "    movl	$" + op1.getRawValue() + ", %eax\n";
+			        		if(t.getFirstDir() instanceof FloatLiteral){
+			        			FloatLiteral op1=(FloatLiteral) t.getFirstDir();
+			        			result += "    movl	$" + op1.getRawValue() + ", %eax\n";	
+			        		}else{
+			        			System.out.println("{logic} FALTA CASO (1er param)" + t.getFirstDir().getClass());
+			        		}
+			        		
 			        	}
 			        }
 
@@ -232,8 +281,13 @@ public class AssemblyCodeGenerator{
 			        		IntLiteral op2=(IntLiteral) t.getSecondDir();
 			        		result += "    cmpl	$" + op2.getRawValue() + ", %eax\n";
 			        	}else{//caso float
-			        		FloatLiteral op2=(FloatLiteral) t.getSecondDir();
-			        		result += "    cmpl	$" + op2.getRawValue() + ", %eax\n";
+			        		if(t.getSecondDir() instanceof FloatLiteral){
+			        			FloatLiteral op2=(FloatLiteral) t.getSecondDir();
+			        			result += "    cmpl	$" + op2.getRawValue() + ", %eax\n";
+			        		}else{
+			        			System.out.println("{logic} FALTA CASO (2do param)" + t.getSecondDir().getClass());
+			        		}
+			        		
 			        	}
 			        }
 			        //case de la operacion logica 
@@ -312,7 +366,7 @@ public class AssemblyCodeGenerator{
 				result += "	   negl	%eax \n";
 				result += "    movl	%eax, " + resOffSet + "(%rbp) \n";
 	    	}else{
-	    		System.out.println("IMPLEMENTAR CASO -(FLOAT)");
+	    		System.out.println("{Unary_Minus}IMPLEMENTAR CASO -(FLOAT)");
 	    	}
 	    	/*
 	    	if(t.getFirstDir() instanceof FloatLiteral){
@@ -397,12 +451,14 @@ public class AssemblyCodeGenerator{
 			VarLocation secondOp=(VarLocation)t.getSecondDir();
 			result += "    mov " + secondOp.getOffset() + "(%rbp), %eax\n";	
 		}else{
+			System.out.println("{Cmp} CASO (2do)"+t.getSecondDir().getClass());
 			result += "    mov " + t.getSecondDir() + "(%rbp), %eax\n";	
 		}
 		if(t.getFirstDir() instanceof VarLocation){
 			VarLocation firstOp=(VarLocation)t.getFirstDir();
 			result += "    cmp " + firstOp.getOffset() + "(%rbp), %eax\n";
 		}else{
+			System.out.println("{Cmp} CASO (1er)"+t.getFirstDir().getClass());
 			result += "    cmp " + t.getFirstDir() + "(%rbp), %eax\n";
 		}
 	}

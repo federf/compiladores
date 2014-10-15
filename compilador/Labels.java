@@ -9,6 +9,6 @@ public class Labels {
 	private static int l = 0;
 
 	public static String getLabel() {
-		return "Label "+(++l);
+		return "Label"+(++l);
 	}
 } 
