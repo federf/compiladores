@@ -1301,22 +1301,22 @@
 
     literal::= INT_LITERAL:i {:
                 //CODIGO DE 3 DIRECCIONES
-                String IntLiteralLabel="IntLiteral"+Labels.getLabel();
-                TripletList.addLast(new TripletCode(TripletOperator.CONST, i, null, IntLiteralLabel));
+                /*String IntLiteralLabel="IntLiteral"+Labels.getLabel();
+                TripletList.addLast(new TripletCode(TripletOperator.CONST, i, null, IntLiteralLabel));*/
                 //FIN CODIGO 3 DIRECCIONES
                 RESULT= new IntLiteral((String) i); 
                 :} //entero
            | FLOAT_LITERAL:f {:
                 //CODIGO DE 3 DIRECCIONES
-                String FloatLiteralLabel="FloatLiteral"+Labels.getLabel();
-                TripletList.addLast(new TripletCode(TripletOperator.CONST, f, null, FloatLiteralLabel));
+                /*String FloatLiteralLabel="FloatLiteral"+Labels.getLabel();
+                TripletList.addLast(new TripletCode(TripletOperator.CONST, f, null, FloatLiteralLabel));*/
                 //FIN CODIGO 3 DIRECCIONES
                 RESULT= new FloatLiteral((String) f); 
                 :} //real
            | bool_LITERAL:b {:
                 //CODIGO DE 3 DIRECCIONES
-                String BoolLiteralLabel="BoolLiteral"+Labels.getLabel();
-                TripletList.addLast(new TripletCode(TripletOperator.CONST, b, null, BoolLiteralLabel));
+                /*String BoolLiteralLabel="BoolLiteral"+Labels.getLabel();
+                TripletList.addLast(new TripletCode(TripletOperator.CONST, b, null, BoolLiteralLabel));*/
                 //FIN CODIGO 3 DIRECCIONES
                 RESULT = b;
                 :} //boolean (valor logico)

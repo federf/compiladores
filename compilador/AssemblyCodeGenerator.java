@@ -338,9 +338,6 @@ public class AssemblyCodeGenerator{
 		}
 	}
 
-
-
-
 	//metodo que dado un codigo de 3 direcciones de una comparacion logica GE, GEQ, LE o LEQ, CEQ o NEQ
 	//genera el codigo assembly correspondiente
 	public void ASM_logic(TripletCode t, TripletOperator logic){
@@ -433,8 +430,12 @@ public class AssemblyCodeGenerator{
         	VarLocation res=(VarLocation) t.getResult();
         	//obtenemos sus offset y con el mismo trabajamos
         	int resOffSet=res.getOffset();
-
-	        result += "    cmp $0, " + op.toString() + "(%rbp) \n";
+        	if (op.toString().equals("true")){//por convencion tomaremos 1 como true y 0 como false
+        		result += "    cmp $0, " + 1 + "(%rbp) \n";	
+        	}else{
+        		result += "    cmp $0, " + 0 + "(%rbp) \n";
+        	}
+	        
 			result += "    sete	%al \n";
 			result += "    movzbl %al, %eax \n";
 			result += "    mov %eax, " + resOffSet + "(%rbp) \n";
