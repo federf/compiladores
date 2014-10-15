@@ -253,6 +253,94 @@ public class AssemblyCodeGenerator{
 		}
 	}
 
+	public void ASM_Idiv(TripletCode t){
+
+		VarLocation res = (VarLocation)t.getResult();
+		int ResOff = res.getOffset();
+		
+		if (t.getFirstDir() instanceof VarLocation && t.getSecondDir() instanceof VarLocation) {
+			VarLocation  x = (VarLocation)t.getFirstDir();
+			VarLocation  y = (VarLocation)t.getSecondDir();
+
+			int XOff = x.getOffset();
+			int YOff = y.getOffset();
+
+			result = result +(
+
+			"    mov " + XOff + "(%ebp) , %eax\n"+
+			"    mov " + YOff + "(%ebp) , %ecx\n"+
+			"	 cltd\n"+
+			"    idiv %ecx\n"+
+			"    mov %ecx," + ResOff + "%(ebp)\n");
+
+		}
+
+		if (t.getFirstDir() instanceof VarLocation && !(t.getSecondDir() instanceof VarLocation)) {
+			VarLocation  x = (VarLocation)t.getFirstDir();
+			if(t.getSecondDir() instanceof IntLiteral){
+				IntLiteral  y = (IntLiteral)t.getSecondDir();
+
+				int XOff = x.getOffset();
+
+				result = result +(
+
+				"    mov " + XOff + "(%ebp) , %eax \n"+
+				"    mov $" + y.getStringValue() + ", %ecx\n"+
+				"	 cltd\n"+
+				"    idiv %ecx\n"+
+				"    mov %ecx," + ResOff + "%(ebp) \n");
+			}else{
+				System.out.println("{Idiv}TRATAMIENTO PARA " + t.getSecondDir().getClass() +" PENDIENTE");
+			}
+			
+
+		}
+
+		if ((t.getFirstDir() instanceof VarLocation) && t.getSecondDir() instanceof VarLocation) {
+			if(t.getFirstDir() instanceof IntLiteral){
+				IntLiteral  x = (IntLiteral)t.getFirstDir();
+				VarLocation  y = (VarLocation)t.getSecondDir();
+
+				int YOff = y.getOffset();
+
+				result = result +(
+
+				"    mov $" + x.getStringValue() + ", %eax\n"+
+				"    mov " + YOff + "(%ebp), %ecx\n"+
+				"	 cltd\n"+
+				"    idiv %ecx\n"+
+				"    mov %ecx," + ResOff + "%(ebp)\n");
+			}else{
+				System.out.println("{Idiv}TRATAMIENTO "+t.getFirstDir().getClass()+" PENDIENTE");
+			}
+			
+
+		}
+
+		if (!(t.getFirstDir() instanceof VarLocation) && !(t.getSecondDir() instanceof VarLocation)) {
+
+			if(t.getFirstDir() instanceof IntLiteral && t.getSecondDir() instanceof IntLiteral){
+				IntLiteral  x = (IntLiteral)t.getFirstDir();
+				IntLiteral  y = (IntLiteral)t.getSecondDir();
+				result = result +(
+
+				"    mov $" + x.getStringValue() + ", %eax\n"+
+				"    mov $" + y.getStringValue() + ", %ecx\n"+
+				"	 cltd\n"+
+				"    idiv %ecx\n"+
+				"    mov %ecx," + ResOff + "%(ebp)\n");
+			}else{
+				System.out.println("{Idiv}TRATAMIENTO PARA " + t.getFirstDir().getClass()+ " y "+ t.getSecondDir().getClass()+" PENDIENTE");
+			}
+
+			
+
+		}
+	}
+
+
+
+
 	//metodo que dado un codigo de 3 direcciones de una comparacion logica GE, GEQ, LE o LEQ, CEQ o NEQ
 	//genera el codigo assembly correspondiente
 	public void ASM_logic(TripletCode t, TripletOperator logic){
@@ -571,7 +659,7 @@ public class AssemblyCodeGenerator{
 
 			    case DIVIDE:
 			    	result+="\n";
-			        result=result+ "DIVIDE(/)\n"; 
+			        ASM_Idiv(t);
 			        break;
 			    case MOD:
 			    	result+="\n";

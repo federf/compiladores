@@ -204,6 +204,7 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandoFloatTest"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=mult, args=[MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}, MethodCallExpr{name=resta, args=[-0.0, 0.0]}]}]}, null, Result: EXTERNINVKLabel38}
 {LABEL, null, null, Result: EndMethod main}
 
+{Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
@@ -219,7 +220,6 @@ div:
     push	%rbp
     mov %rsp, %rbp
 
-DIVIDE(/)
 
     mov VarLocation{name=factorLabel1, type=float, expr=0.0, size=0} / VarLocation{name=factorLabel2, type=float, expr=0.0, size=0}(%rbp), %eax
 
@@ -1359,7 +1359,11 @@ aritmTest:
     mov 0 + 2(%rbp), %eax
     mov -36(%rbp), %eax
 
-DIVIDE(/)
+    mov $0, %eax
+    mov $0, %ecx
+	 cltd
+    idiv %ecx
+    mov %ecx,-64%(ebp)
 
     mov -64(%rbp), %eax
     mov -52(%rbp), %eax
@@ -3180,6 +3184,7 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: EXTERNINVKLabel52}
 {LABEL, null, null, Result: EndMethod main}
 
+{Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.IntLiteral PENDIENTE
 
 
 .globl	prueba
@@ -3291,7 +3296,6 @@ prueba:
 
     movl $2, IntLiteralLabel44(%rbp)
 
-DIVIDE(/)
 
     mov VarLocation{name=factorLabel43, type=float, expr=0.0, size=0} / VarLocation{name=factorLabel45, type=int, expr=2, size=0}(%rbp), %eax
     mov -124(%rbp), %eax
@@ -3399,6 +3403,7 @@ lista:
 {LABEL, null, null, Result: EndMethod main}
 
 {Imul}TRATAMIENTO PARA class ir.ast.IntLiteral y class ir.ast.FloatLiteral PENDIENTE
+{Idiv}TRATAMIENTO PARA class ir.ast.IntLiteral y class ir.ast.FloatLiteral PENDIENTE
 
 
 .globl	prueba
@@ -3445,7 +3450,6 @@ prueba:
     mov 2 * 0.0(%rbp), %eax
     mov -60(%rbp), %eax
 
-DIVIDE(/)
 
     movl $5, IntLiteralLabel21(%rbp)
 
@@ -3588,6 +3592,7 @@ lista:
 {LABEL, null, null, Result: EndMethod main}
 
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
+{Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 
 
@@ -3695,7 +3700,6 @@ potencia:
 
     movl $1.0, FloatLiteralLabel36(%rbp)
 
-DIVIDE(/)
 
     mov VarLocation{name=factorLabel37, type=float, expr=1.0, size=0} / VarLocation{name=factorLabel38, type=float, expr=0.0, size=0}(%rbp), %eax
 
@@ -4207,6 +4211,7 @@ lista:
 {Or}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.IntLiteral PENDIENTE
+{Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
@@ -4215,6 +4220,7 @@ lista:
 {Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.FloatLiteral PENDIENTE
 {Or}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
+{Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {And}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.BinOpExpr PENDIENTE
@@ -4225,6 +4231,7 @@ lista:
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.UnaryOpExpr PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
+{Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
@@ -4343,7 +4350,6 @@ potencia:
 
     movl $1.0, FloatLiteralLabel43(%rbp)
 
-DIVIDE(/)
 
     mov VarLocation{name=factorLabel44, type=float, expr=1.0, size=0} / VarLocation{name=factorLabel45, type=float, expr=0.0, size=0}(%rbp), %eax
 
@@ -4535,7 +4541,6 @@ multiples:
 
     movl $2.0, FloatLiteralLabel124(%rbp)
 
-DIVIDE(/)
 
 
     mov 0.0 - VarLocation{name=DIVIDELabel126, type=float, expr=VarLocation{name=factorLabel123, type=float, expr=10.0, size=0} / VarLocation{name=factorLabel125, type=float, expr=2.0, size=0}, size=0}(%rbp), %eax
@@ -4623,7 +4628,6 @@ DIVIDE(/)
 
     movl $4.0, FloatLiteralLabel173(%rbp)
 
-DIVIDE(/)
 
 
     mov 0.0 * -0.0 + 23.0 * 0.0 + VarLocation{name=factorLabel172, type=float, expr=2.0, size=0} / VarLocation{name=factorLabel174, type=float, expr=4.0, size=0}(%rbp), %eax
@@ -4840,6 +4844,7 @@ lista:
 {Or}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.FloatLiteral PENDIENTE
+{Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.FloatLiteral PENDIENTE
@@ -4961,7 +4966,6 @@ potencia:
 
     movl $1.0, FloatLiteralLabel43(%rbp)
 
-DIVIDE(/)
 
     mov VarLocation{name=factorLabel44, type=float, expr=1.0, size=0} / VarLocation{name=factorLabel45, type=float, expr=0.0, size=0}(%rbp), %eax
 
@@ -5116,6 +5120,7 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandofuncionesflotantes"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=resta, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}]}, null, Result: EXTERNINVKLabel27}
 {LABEL, null, null, Result: EndMethod main}
 
+{Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
@@ -5128,7 +5133,6 @@ div:
     push	%rbp
     mov %rsp, %rbp
 
-DIVIDE(/)
 
     mov VarLocation{name=factorLabel1, type=float, expr=0.0, size=0} / VarLocation{name=factorLabel2, type=float, expr=0.0, size=0}(%rbp), %eax
 
@@ -6514,8 +6518,11 @@ lista:
 {LABEL, null, null, Result: EndMethod main}
 
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
+{Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral PENDIENTE
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
+{Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral PENDIENTE
 {Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
+{Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral PENDIENTE
 {And}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.VarLocation PENDIENTE
 
 
@@ -6559,7 +6566,6 @@ promedio:
 
     movl $2.0, FloatLiteralLabel16(%rbp)
 
-DIVIDE(/)
 
     mov VarLocation{name=factorLabel15, type=float, expr=VarLocation{name=PLUSLabel14, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factorLabel17, type=float, expr=2.0, size=0}(%rbp), %eax
 
@@ -6602,7 +6608,6 @@ DIVIDE(/)
 
     movl $2.0, FloatLiteralLabel34(%rbp)
 
-DIVIDE(/)
 
     mov VarLocation{name=factorLabel33, type=float, expr=VarLocation{name=PLUSLabel32, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factorLabel35, type=float, expr=2.0, size=0}(%rbp), %eax
 
@@ -6645,7 +6650,6 @@ DIVIDE(/)
 
     movl $2.0, FloatLiteralLabel52(%rbp)
 
-DIVIDE(/)
 
     mov VarLocation{name=factorLabel51, type=float, expr=VarLocation{name=PLUSLabel50, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factorLabel53, type=float, expr=2.0, size=0}(%rbp), %eax
 
@@ -7309,7 +7313,11 @@ resto:
 
     movl $3, IntLiteralLabel15(%rbp)
 
-DIVIDE(/)
+    mov $0, %eax
+    mov $3, %ecx
+	 cltd
+    idiv %ecx
+    mov %ecx,-36%(ebp)
 
     mov 0 / 3(%rbp), %eax
     mov -24(%rbp), %eax
@@ -7569,7 +7577,11 @@ PARAM
 
     movl $6, IntLiteralLabel40(%rbp)
 
-DIVIDE(/)
+    mov $7, %eax
+    mov $6, %ecx
+	 cltd
+    idiv %ecx
+    mov %ecx,-44%(ebp)
 
 
     call "printf"
