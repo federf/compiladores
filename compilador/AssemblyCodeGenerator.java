@@ -589,17 +589,98 @@ public class AssemblyCodeGenerator{
 		if(t.getSecondDir() instanceof VarLocation){
 			VarLocation secOp=(VarLocation) t.getSecondDir();
 			result += "    movl	" + secOp.getOffset() + "(%rbp), %eax \n";
-		}else{//sino, debe ser un intliteral
+		}else{
+			//si es una operacion binaria o unaria
+			if(t.getSecondDir() instanceof BinOpExpr || t.getSecondDir() instanceof UnaryOpExpr){
+				//valor del operando en caso de ser binopexpr o unaryopexpr
+				int secondOpValue=0;
+				//si el 2do operando es una exp binaria, calculamos su valor
+				if(t.getSecondDir() instanceof BinOpExpr){
+					BinOpExpr segunda=(BinOpExpr) t.getSecondDir();	
+					BinOpType operator=segunda.getOperator();
+					String partes[]=segunda.toString().split("\\"+operator.toString());
+					int primerValor=Integer.valueOf(partes[0].trim());
+					int segundoValor=Integer.valueOf(partes[1].trim());
+					System.out.println("SEGUNDA EXPR "+segunda+" pv: "+primerValor+" sv: "+segundoValor);
+					switch(operator){
+						case PLUS:
+							secondOpValue=(primerValor)+(segundoValor);
+							break;
+						case MINUS:
+							secondOpValue=(primerValor)-(segundoValor);
+							break;
+						case MULTIPLY:
+							secondOpValue=primerValor*segundoValor;
+							break;
+						case DIVIDE:
+							secondOpValue=(primerValor)/(segundoValor);
+							break;
+						case MOD:
+							secondOpValue=(primerValor)%(segundoValor);
+							break;
+					}
+					result+="    mov $" +secondOpValue+", %eax \n";
+				}else{//caso contrario es una expresion unaria
+					if(t.getSecondDir() instanceof UnaryOpExpr){//si es una operacion unaria (menos unario)
+						UnaryOpExpr segunda=(UnaryOpExpr) t.getSecondDir();
+						secondOpValue=Integer.valueOf(segunda.toString());
+						result+="    mov $" +secondOpValue+", %eax \n";
+					}
+				}
+			}
+			//sino, debe ser un intliteral
 			IntLiteral secOp=(IntLiteral) t.getSecondDir();
 			result += "    movl	$" + secOp.getRawValue() + ", %eax \n";
 		}
+		result += "    cltd\n";
 		//si el 1er operando es una varlocation obtenemos su offset
 		if(t.getFirstDir() instanceof VarLocation){
 			VarLocation firstOp=(VarLocation) t.getFirstDir();
-			result += "    idivl " + firstOp.getOffset() + "(%rbp), %eax \n";
-		}else{//sino, debe ser un intliteral
+			result += "    idivl " + firstOp.getOffset() + "(%rbp)\n";
+		}else{
+			//si el operando es una operacion binaria o unaria
+			if(t.getFirstDir() instanceof BinOpExpr || t.getFirstDir() instanceof UnaryOpExpr){
+				//valor del operando en caso de ser un operacion binaria o unaria
+				int firstOpValue=0;
+				//si el 1er operando es una exp binaria, calculamos su valor
+				if(t.getFirstDir() instanceof BinOpExpr){
+					BinOpExpr primer=(BinOpExpr) t.getFirstDir();	
+					BinOpType operator=primer.getOperator();
+					String partes[]=primer.toString().split("\\"+operator.toString());
+					int primerValor=Integer.valueOf(partes[0].trim());
+					int segundoValor=Integer.valueOf(partes[1].trim());
+					System.out.println("PRIMERA EXPR "+primer+" pv: "+primerValor+" sv: "+segundoValor);
+					switch(operator){
+						case PLUS:
+							firstOpValue=(primerValor)+(segundoValor);
+							break;
+						case MINUS:
+							firstOpValue=(primerValor)-(segundoValor);
+							break;
+						case MULTIPLY:
+							firstOpValue=primerValor*segundoValor;
+							break;
+						case DIVIDE:
+							firstOpValue=(primerValor)/(segundoValor);
+							break;
+						case MOD:
+							firstOpValue=(primerValor)%(segundoValor);
+							break;
+					}
+					result+="    idivl $" + firstOpValue + "\n";
+				}else{//caso contrario
+					if(t.getFirstDir() instanceof UnaryOpExpr){//si es una operacion unaria (menos unario)
+						UnaryOpExpr primer=(UnaryOpExpr) t.getFirstDir();
+						firstOpValue=Integer.valueOf(primer.toString());
+
+						result+="    idivl $" + firstOpValue + "\n";
+					}
+				}
+			}else{
+			//sino, debe ser un intliteral
 			IntLiteral firstOp=(IntLiteral) t.getFirstDir();
-			result += "    idivl $" + firstOp.getRawValue() + ", %eax \n";
+			result += "    idivl $" + firstOp.getRawValue() + " \n";
+			}
 		}
 		//obtenemos la varlocation resultado
 		VarLocation res=(VarLocation) t.getResult();

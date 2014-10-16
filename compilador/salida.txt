@@ -1174,7 +1174,8 @@ aritmTest:
     mov -52(%rbp), %eax
 
     movl	$3, %eax 
-    idivl $0, %eax 
+    cltd
+    idivl $0 
     movl	%edx, -84(%rbp)
 
     mov 0 % 3(%rbp), %eax
@@ -5495,7 +5496,8 @@ maxcomdiv:
     jne EndWhileLabel17
 
     movl	$0, %eax 
-    idivl $0, %eax 
+    cltd
+    idivl $0 
     movl	%edx, -88(%rbp)
 
     mov 0 % 0(%rbp), %eax
@@ -5842,7 +5844,8 @@ resto:
 .elseCondLabel9
 
     movl	$2, %eax 
-    idivl $0, %eax 
+    cltd
+    idivl $0 
     movl	%edx, -52(%rbp)
 
     mov 0 % 2(%rbp), %eax
@@ -6000,7 +6003,8 @@ pruAritmetica:
     mov -4(%rbp), %eax
 
     movl	$7, %eax 
-    idivl $0, %eax 
+    cltd
+    idivl $0 
     movl	%edx, -20(%rbp)
 
     mov VarLocation{name=MODLabel4, type=int, expr=0 % 7, size=0}(%rbp), %eax
@@ -6887,7 +6891,8 @@ maxcomdiv:
     jne EndWhileLabel11
 
     movl	$0, %eax 
-    idivl $0, %eax 
+    cltd
+    idivl $0 
     movl	%edx, -56(%rbp)
 
     mov 0 % 0(%rbp), %eax
