@@ -636,7 +636,7 @@
                 :}  block:b {:
 
                 // Incrementa el contador
-                TripletList.addLast(new TripletCode(TripletOperator.PLUS, e1, "1", e1));
+                TripletList.addLast(new TripletCode(TripletOperator.PLUS, e1, new IntLiteral("1"), e1));
                 //vuelve al inicio del ciclo (antes de la evaluacion de la condicion)
                 TripletList.addLast(new TripletCode(TripletOperator.JMP, null, null, ForsStack.get(ForsStack.size()-2)));
                 //agregamos el label de fin del for

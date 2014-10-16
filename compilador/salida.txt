@@ -190,8 +190,9 @@ lista:
 {LABEL, null, null, Result: EndMethod main}
 
 {Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
+{Sub}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
+{Add1} CASO class ir.ast.FloatLiteral PENDIENTE
+{Add2} CASO class ir.ast.FloatLiteral PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
@@ -235,6 +236,8 @@ sum:
     push	%rbp
     mov %rsp, %rbp
 
+    add %eax, %edx 
+    mov %edx,-12%(ebp) 
 
     mov 0.0 + 0.0(%rbp), %eax
 
@@ -448,7 +451,7 @@ inc:
     mov %rsp, %rbp
 
     mov $0, %eax 
-    mov $1, %edx 
+    mov $1, %eax 
     add %eax, %edx 
     mov %edx,-12%(ebp) 
 
@@ -570,7 +573,8 @@ lista:
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
-{Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
+{Add1} CASO class ir.ast.FloatLiteral PENDIENTE
+{Add2} CASO class ir.ast.FloatLiteral PENDIENTE
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {logic} FALTA CASO (2do param)class ir.ast.ArrayLiteral
 {Or}TRATAMIENTO PARA class ir.ast.VarLocation y class ir.ast.BoolLiteral PENDIENTE
@@ -589,6 +593,8 @@ pruArreglos:
     mov 4(%rbp), %eax
     mov -16(%rbp), %eax
 
+    add %eax, %edx 
+    mov %edx,-40%(ebp) 
 
     mov 2.6 + 0.0(%rbp), %eax
     mov -28(%rbp), %eax
@@ -657,7 +663,7 @@ main:
     mov -60(%rbp), %eax
 
     mov $3, %eax 
-    mov $3, %edx 
+    mov $3, %eax 
     add %eax, %edx 
     mov %edx,-112%(ebp) 
 
@@ -794,10 +800,19 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel88}
 {LABEL, null, null, Result: EndMethod main}
 
-{Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.IntLiteral PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.ArrayLiteral y class ir.ast.IntLiteral PENDIENTE
+PRIMERA EXPR 0 * 2 pv: 0 sv: 2
+{Add2-2}CASO class ir.ast.IntLiteral PENDIENTE
+0 * 2 , 8
+0 + 0
+{Add1-2}CASO class ir.ast.ArrayLiteral PENDIENTE
+{Add2-2}CASO class ir.ast.IntLiteral PENDIENTE
+ArrayLiteral{id=A, size=589} , 3
+0 + 0
 {logic} FALTA CASO (2do param)class ir.ast.BinOpExpr
-{Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.IntLiteral PENDIENTE
+PRIMERA EXPR 0 * 2 pv: 0 sv: 2
+{Add2-2}CASO class ir.ast.IntLiteral PENDIENTE
+0 * 2 , 8
+0 + 0
 {logic} FALTA CASO (1er param)class ir.ast.ArrayLiteral
 {logic} FALTA CASO (2do param)class ir.ast.ArrayLiteral
 
@@ -924,9 +939,11 @@ pruArreglos:
     imul %edx, %eax
     mov %eax,-184%(ebp)
 
+aca    mov $0,-192%(ebp) 
 
 ARRAYACCESS
 
+aca    mov $0,-204%(ebp) 
 
     mov ArrayLiteral{id=A, size=589} + 3(%rbp), %eax
     mov -172(%rbp), %eax
@@ -968,6 +985,7 @@ ARRAYACCESS
     imul %edx, %eax
     mov %eax,-272%(ebp)
 
+aca    mov $0,-280%(ebp) 
 
 ARRAYACCESS
 
@@ -981,7 +999,7 @@ ARRAYACCESS
     mov -260(%rbp), %eax
 
     mov $0, %eax 
-    mov $1, %edx 
+    mov $1, %eax 
     add %eax, %edx 
     mov %edx,-312%(ebp) 
 
@@ -1139,7 +1157,7 @@ aritmTest:
     mov -12(%rbp), %eax
 
     mov $1, %eax 
-    mov $0, %edx 
+    mov $0, %eax 
     add %eax, %edx 
     mov %edx,-32%(ebp) 
 
@@ -1147,7 +1165,7 @@ aritmTest:
     mov -20(%rbp), %eax
 
     mov $0, %eax 
-    mov $2, %edx 
+    mov $2, %eax 
     add %eax, %edx 
     mov %edx,-48%(ebp) 
 
@@ -1275,7 +1293,7 @@ breaks:
     jne EndWhileLabel7
 
     mov $0, %eax 
-    mov $1, %edx 
+    mov $1, %eax 
     add %eax, %edx 
     mov %edx,-40%(ebp) 
 
@@ -1409,7 +1427,7 @@ breaks:
     jne EndWhileLabel7
 
     mov $0, %eax 
-    mov $1, %edx 
+    mov $1, %eax 
     add %eax, %edx 
     mov %edx,-40%(ebp) 
 
@@ -1697,7 +1715,7 @@ breaks:
     jne EndWhileLabel7
 
     mov $0, %eax 
-    mov $1, %edx 
+    mov $1, %eax 
     add %eax, %edx 
     mov %edx,-40%(ebp) 
 
@@ -1906,7 +1924,7 @@ pruAritmetica:
     jne elseCondLabel4
 
     mov $0, %eax 
-    mov $5, %edx 
+    mov $5, %eax 
     add %eax, %edx 
     mov %edx,-28%(ebp) 
 
@@ -2558,134 +2576,11 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=pruContinue, args=[3.0, 2]}]}, null, Result: EXTERNINVKLabel41}
 {LABEL, null, null, Result: EndMethod main}
 
-{Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.IntLiteral PENDIENTE
+{Sub}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.IntLiteral PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.IntLiteral PENDIENTE
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
-{Add}TRATAMIENTO PARA class ir.ast.UnaryOpExpr y class ir.ast.IntLiteral PENDIENTE
-{Imul}TRATAMIENTO PARA class ir.ast.UnaryOpExpr y class ir.ast.FloatLiteral PENDIENTE
-
-
-.globl	pruContinue
-.type	pruContinue, @function 
-pruContinue: 
-    enter   $(8), $0 
-    push	%rbp
-    mov %rsp, %rbp
-
-    movl	$1, %eax 
-	   negl	%eax 
-    movl	%eax, -12(%rbp) 
-
-    mov -1(%rbp), %eax
-    mov -4(%rbp), %eax
-
-    mov 23(%rbp), %eax
-    mov -16(%rbp), %eax
-
-    mov 23(%rbp), %eax
-    mov -24(%rbp), %eax
-
-    movl	$0.0, %eax
-    cmpl	$0, %eax
-    setge %al
-    movzbl %al, %eax
-    movl	%eax, -40(%rbp)
-
-.BeginWhileLabel9
-
-    mov true(%rbp), %eax
-    cmp -44(%rbp), %eax
-
-    jne EndWhileLabel10
-
-
-    mov 0.0 - 1(%rbp), %eax
-    mov -48(%rbp), %eax
-
-    movl	$0.0, %eax
-    cmpl	$0, %eax
-    setl	%al
-    movzbl %al, %eax
-    movl	%eax, -72(%rbp)
-
-    mov true(%rbp), %eax
-    cmp -72(%rbp), %eax
-
-    jne elseCondLabel17
-
-    movl	$0.0, %eax
-    cmpl	$0, %eax
-    setgne %al
-    movzbl %al, %eax
-    movl	%eax, -84(%rbp)
-
-    mov true(%rbp), %eax
-    cmp -84(%rbp), %eax
-
-    jne elseCondLabel22
-
-
-
-    mov 0.0 * 0.0 * 0(%rbp), %eax
-    mov -88(%rbp), %eax
-
-    jmp endIfLabel23
-
-.elseCondLabel22
-
-.endIfLabel23
-
-    jmp BeginWhileLabel9
-
-    jmp endIfLabel18
-
-.elseCondLabel17
-
-
-
-    mov -1000.2343 + 6752(%rbp), %eax
-    mov -112(%rbp), %eax
-
-    jmp EndWhileLabel10
-
-.endIfLabel18
-
-    jmp BeginWhileLabel9
-
-.EndWhileLabel10
-
-    movl	$2, %eax 
-	   negl	%eax 
-    movl	%eax, -136(%rbp) 
-
-
-    leave
-    ret
-
-
-
-.globl	main
-.type	main, @function 
-main: 
-    enter   $(0), $0 
-    push	%rbp
-    mov %rsp, %rbp
-
-    call pruContinue
-    movl %eax, RESULTLabel39(%rbp) 
-
-PARAM
-
-PARAM
-
-    call "printf"
-    movl %eax, EXTERNINVKLabel41(%rbp) 
-
-    leave
-    ret
-
-
+ocurrio un error: For input string: "-1000.2343"
 ---------------------------------------------------
   
   
@@ -2841,7 +2736,7 @@ prueba:
 .EndWhileLabel24
 
     mov $0, %eax 
-    mov $1, %edx 
+    mov $1, %eax 
     add %eax, %edx 
     mov %edx,-120%(ebp) 
 
@@ -2970,7 +2865,7 @@ prueba:
     mov -20(%rbp), %eax
 
     mov $0, %eax 
-    mov $0, %edx 
+    mov $0, %eax 
     add %eax, %edx 
     mov %edx,-48%(ebp) 
 
@@ -3179,7 +3074,7 @@ potencia:
     mov -80(%rbp), %eax
 
     mov $0, %eax 
-    mov $1, %edx 
+    mov $1, %eax 
     add %eax, %edx 
     mov %edx,-108%(ebp) 
 
@@ -3308,7 +3203,8 @@ lista:
 {LABEL, null, null, Result: EndMethod main}
 
 {Or}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
+{Add1} CASO class ir.ast.FloatLiteral PENDIENTE
+{Add2} CASO class ir.ast.FloatLiteral PENDIENTE
 
 
 .globl	sumatoria
@@ -3355,6 +3251,8 @@ sumatoria:
 
     jne elseCondLabel16
 
+    add %eax, %edx 
+    mov %edx,-76%(ebp) 
 
     mov 0.0 + 0.0(%rbp), %eax
     mov -64(%rbp), %eax
@@ -3659,426 +3557,15 @@ lista:
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.FloatLiteral PENDIENTE
+{Sub}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.FloatLiteral PENDIENTE
 {Or}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
+{Add1} CASO class ir.ast.FloatLiteral PENDIENTE
+{Add2} CASO class ir.ast.FloatLiteral PENDIENTE
 {Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
 {And}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.BinOpExpr PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.FloatLiteral PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.FloatLiteral PENDIENTE
-{Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
-{Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.UnaryOpExpr PENDIENTE
-{Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
-{Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
-{Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
-{Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
-{Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
-{Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-
-
-.globl	potencia
-.type	potencia, @function 
-potencia: 
-    enter   $(8), $0 
-    push	%rbp
-    mov %rsp, %rbp
-
-    mov false(%rbp), %eax
-    mov -4(%rbp), %eax
-
-    mov 1(%rbp), %eax
-    mov -12(%rbp), %eax
-
-    mov 1.0(%rbp), %eax
-    mov -20(%rbp), %eax
-
-    movl	$0, %eax
-    cmpl	$0, %eax
-    setl	%al
-    movzbl %al, %eax
-    movl	%eax, -36(%rbp)
-
-    mov true(%rbp), %eax
-    cmp -36(%rbp), %eax
-
-    jne elseCondLabel7
-
-    movl	$0, %eax 
-	   negl	%eax 
-    movl	%eax, -48(%rbp) 
-
-    mov -0(%rbp), %eax
-    mov -40(%rbp), %eax
-
-    mov true(%rbp), %eax
-    mov -52(%rbp), %eax
-
-    jmp endIfLabel8
-
-.elseCondLabel7
-
-.endIfLabel8
-
-    movl	$0, %eax
-    cmpl	$0, %eax
-    setl	%al
-    movzbl %al, %eax
-    movl	%eax, -68(%rbp)
-
-    movl	$0, %eax
-    cmpl	$0, %eax
-    sete %al
-    movzbl %al, %eax
-    movl	%eax, -80(%rbp)
-
-
-.BeginWhileLabel20
-
-    mov true(%rbp), %eax
-    cmp -88(%rbp), %eax
-
-    jne EndWhileLabel21
-
-
-
-    mov 0.0 * 0.0 * 2(%rbp), %eax
-    mov -92(%rbp), %eax
-
-    mov $0, %eax 
-    mov $1, %edx 
-    add %eax, %edx 
-    mov %edx,-128%(ebp) 
-
-    mov 0 + 1(%rbp), %eax
-    mov -116(%rbp), %eax
-
-    jmp BeginWhileLabel20
-
-.EndWhileLabel21
-
-    cmp $0, 0(%rbp) 
-    sete	%al 
-    movzbl %al, %eax 
-    mov %eax, -136(%rbp) 
-
-    cmp $0, -136(%rbp) 
-    sete %al 
-    movzbl %al, %eax 
-    mov %eax, -144(%rbp) 
-
-    mov true(%rbp), %eax
-    cmp -144(%rbp), %eax
-
-    jne elseCondLabel34
-
-
-    mov VarLocation{name=factorLabel36, type=float, expr=1.0, size=0} / VarLocation{name=factorLabel37, type=float, expr=0.0, size=0}(%rbp), %eax
-
-    jmp endIfLabel35
-
-.elseCondLabel34
-
-    mov 0.0(%rbp), %eax
-
-.endIfLabel35
-
-
-    mov -100.1(%rbp), %eax
-
-    leave
-    ret
-
-
-
-.globl	multiples
-.type	multiples, @function 
-multiples: 
-    enter   $(8), $0 
-    push	%rbp
-    mov %rsp, %rbp
-
-
-    mov -2.0(%rbp), %eax
-    mov -4(%rbp), %eax
-
-    movl	$2, %eax 
-	   negl	%eax 
-    movl	%eax, -24(%rbp) 
-
-    mov -2(%rbp), %eax
-    mov -16(%rbp), %eax
-
-
-    mov -3.0(%rbp), %eax
-    mov -28(%rbp), %eax
-
-
-    mov -3.0(%rbp), %eax
-    mov -40(%rbp), %eax
-
-
-
-    mov 0.0 * 0.0 - 0.0(%rbp), %eax
-    mov -52(%rbp), %eax
-
-    mov 0(%rbp), %eax
-    mov -76(%rbp), %eax
-
-    mov 0(%rbp), %eax
-    mov -84(%rbp), %eax
-
-    mov 0(%rbp), %eax
-    mov -92(%rbp), %eax
-
-    mov 5(%rbp), %eax
-    mov -100(%rbp), %eax
-
-    movl	$0.0, %eax
-    cmpl	$0.0, %eax
-    setg	%al
-    movzbl %al, %eax
-    movl	%eax, -116(%rbp)
-
-    mov true(%rbp), %eax
-    cmp -116(%rbp), %eax
-
-    jne elseCondLabel62
-
-    movl	$0.0, %eax
-    cmpl	$0.0, %eax
-    setl	%al
-    movzbl %al, %eax
-    movl	%eax, -128(%rbp)
-
-    mov true(%rbp), %eax
-    cmp -128(%rbp), %eax
-
-    jne elseCondLabel67
-
-    mov 0.0(%rbp), %eax
-    mov -132(%rbp), %eax
-
-    jmp endIfLabel68
-
-.elseCondLabel67
-
-    mov 0.0(%rbp), %eax
-    mov -140(%rbp), %eax
-
-.endIfLabel68
-
-    jmp endIfLabel63
-
-.elseCondLabel62
-
-    movl	$0, %eax
-    cmpl	$0, %eax
-    setle %al
-    movzbl %al, %eax
-    movl	%eax, -156(%rbp)
-
-.BeginWhileLabel75
-
-    mov true(%rbp), %eax
-    cmp -160(%rbp), %eax
-
-    jne EndWhileLabel76
-
-    movl	$0, %eax
-    cmpl	$0, %eax
-    setle %al
-    movzbl %al, %eax
-    movl	%eax, -172(%rbp)
-
-.BeginWhileLabel80
-
-    mov true(%rbp), %eax
-    cmp -172(%rbp), %eax
-
-    jne EndWhileLabel81
-
-    movl	$0, %eax
-    cmpl	$0, %eax
-    setl	%al
-    movzbl %al, %eax
-    movl	%eax, -184(%rbp)
-
-    movl	$0, %eax
-    cmpl	$0, %eax
-    sete %al
-    movzbl %al, %eax
-    movl	%eax, -196(%rbp)
-
-
-.BeginWhileLabel92
-
-    mov true(%rbp), %eax
-    cmp -212(%rbp), %eax
-
-    jne EndWhileLabel93
-
-    movl	$0, %eax
-    cmpl	$3, %eax
-    sete %al
-    movzbl %al, %eax
-    movl	%eax, -224(%rbp)
-
-    mov true(%rbp), %eax
-    cmp -224(%rbp), %eax
-
-    jne elseCondLabel97
-
-
-    mov 0.0 + 2.0(%rbp), %eax
-    mov -228(%rbp), %eax
-
-    jmp endIfLabel98
-
-.elseCondLabel97
-
-
-
-    mov 0.0 - VarLocation{name=DIVIDELabel105, type=float, expr=VarLocation{name=factorLabel103, type=float, expr=10.0, size=0} / VarLocation{name=factorLabel104, type=float, expr=2.0, size=0}, size=0}(%rbp), %eax
-    mov -244(%rbp), %eax
-
-.endIfLabel98
-
-    mov 1(%rbp), %eax
-    mov -272(%rbp), %eax
-
-    jmp BeginWhileLabel92
-
-.EndWhileLabel93
-
-    movl	$0.0, %eax
-    cmpl	$0.0, %eax
-    setl	%al
-    movzbl %al, %eax
-    movl	%eax, -288(%rbp)
-
-    movl	$0.0, %eax
-    cmpl	$0.0, %eax
-    setl	%al
-    movzbl %al, %eax
-    movl	%eax, -300(%rbp)
-
-
-    mov true(%rbp), %eax
-    cmp -304(%rbp), %eax
-
-    jne elseCondLabel116
-
-
-
-
-    mov 35.0 + 4.0 * 0.0 - 498.0(%rbp), %eax
-    mov -308(%rbp), %eax
-
-    jmp endIfLabel117
-
-.elseCondLabel116
-
-
-
-    mov 3.2 - 0.0 - 12345.356(%rbp), %eax
-    mov -340(%rbp), %eax
-
-.endIfLabel117
-
-    mov $0, %eax 
-    mov $1, %edx 
-    add %eax, %edx 
-    mov %edx,-376%(ebp) 
-
-    mov 0 + 1(%rbp), %eax
-    mov -364(%rbp), %eax
-
-    jmp BeginWhileLabel80
-
-.EndWhileLabel81
-
-
-
-
-
-
-
-    mov 0.0 * -0.0 + 23.0 * 0.0 + VarLocation{name=factorLabel141, type=float, expr=2.0, size=0} / VarLocation{name=factorLabel142, type=float, expr=4.0, size=0}(%rbp), %eax
-    mov -380(%rbp), %eax
-
-    mov $0, %eax 
-    mov $1, %edx 
-    add %eax, %edx 
-    mov %edx,-444%(ebp) 
-
-    mov 0 + 1(%rbp), %eax
-    mov -432(%rbp), %eax
-
-    jmp BeginWhileLabel75
-
-.EndWhileLabel76
-
-.endIfLabel63
-
-
-    mov -0.0(%rbp), %eax
-
-    leave
-    ret
-
-
-
-.globl	main
-.type	main, @function 
-main: 
-    enter   $(0), $0 
-    push	%rbp
-    mov %rsp, %rbp
-
-    mov 80.0(%rbp), %eax
-    mov -4(%rbp), %eax
-
-
-    mov -15.0(%rbp), %eax
-    mov -12(%rbp), %eax
-
-    mov 4.3(%rbp), %eax
-    mov -24(%rbp), %eax
-
-
-    mov -7.6(%rbp), %eax
-    mov -32(%rbp), %eax
-
-    call potencia
-    movl %eax, RESULTLabel158(%rbp) 
-
-PARAM
-
-PARAM
-
-    mov MethodCallExpr{name=potencia, args=[0.0, 2]}(%rbp), %eax
-    mov -44(%rbp), %eax
-
-
-    call multiples
-    movl %eax, RESULTLabel164(%rbp) 
-
-PARAM
-
-PARAM
-
-    call "printf"
-    movl %eax, EXTERNINVKLabel166(%rbp) 
-
-    leave
-    ret
-
-
+{Add1-2}CASO class ir.ast.FloatLiteral PENDIENTE
+ocurrio un error: For input string: "4.0"
 ---------------------------------------------------
   
   
@@ -4274,7 +3761,7 @@ potencia:
     mov -92(%rbp), %eax
 
     mov $0, %eax 
-    mov $1, %edx 
+    mov $1, %eax 
     add %eax, %edx 
     mov %edx,-128%(ebp) 
 
@@ -4440,8 +3927,9 @@ lista:
 {LABEL, null, null, Result: EndMethod main}
 
 {Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
+{Sub}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
+{Add1} CASO class ir.ast.FloatLiteral PENDIENTE
+{Add2} CASO class ir.ast.FloatLiteral PENDIENTE
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 
 
@@ -4482,6 +3970,8 @@ sum:
     push	%rbp
     mov %rsp, %rbp
 
+    add %eax, %edx 
+    mov %edx,-12%(ebp) 
 
     mov 0.0 + 0.0(%rbp), %eax
 
@@ -4574,7 +4064,6 @@ lista:
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
-{Add}TRATAMIENTO PARA class java.lang.String PENDIENTE
 
 
 .globl	pruArreglos
@@ -4604,13 +4093,17 @@ ARRAYACCESS
     jnl EndForLabel11
 
     mov $0, %eax 
-    mov $2, %edx 
+    mov $2, %eax 
     add %eax, %edx 
     mov %edx,-56%(ebp) 
 
     mov 0 + 2(%rbp), %eax
     mov -44(%rbp), %eax
 
+    mov -24(%ebp) , %eax 
+    mov $1, %eax 
+    add %eax, %edx 
+    mov %edx,-24%(ebp) 
 
     jmp BeginForLabel10
 
@@ -4681,7 +4174,6 @@ lista:
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
-{Add}TRATAMIENTO PARA class java.lang.String PENDIENTE
 
 
 .globl	pruArreglos
@@ -4706,13 +4198,17 @@ ARRAYACCESS
     jnl EndForLabel9
 
     mov $0, %eax 
-    mov $2, %edx 
+    mov $2, %eax 
     add %eax, %edx 
     mov %edx,-48%(ebp) 
 
     mov 0 + 2(%rbp), %eax
     mov -36(%rbp), %eax
 
+    mov -24(%ebp) , %eax 
+    mov $1, %eax 
+    add %eax, %edx 
+    mov %edx,-24%(ebp) 
 
     jmp BeginForLabel8
 
@@ -4785,7 +4281,6 @@ lista:
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
-{Add}TRATAMIENTO PARA class java.lang.String PENDIENTE
 
 
 .globl	pruArreglos
@@ -4814,13 +4309,17 @@ ARRAYACCESS
     jnl EndForLabel10
 
     mov $0, %eax 
-    mov $2, %edx 
+    mov $2, %eax 
     add %eax, %edx 
     mov %edx,-52%(ebp) 
 
     mov 0 + 2(%rbp), %eax
     mov -40(%rbp), %eax
 
+    mov -24(%ebp) , %eax 
+    mov $1, %eax 
+    add %eax, %edx 
+    mov %edx,-24%(ebp) 
 
     jmp BeginForLabel9
 
@@ -4897,8 +4396,9 @@ lista:
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
-{Add}TRATAMIENTO PARA class ir.ast.UnaryOpExpr y class ir.ast.BinOpExpr PENDIENTE
-{Add}TRATAMIENTO PARA class java.lang.String PENDIENTE
+SEGUNDA EXPR 11 * 2 pv: 11 sv: 2
+-10 , 11 * 2
+-10 + 22
 
 
 .globl	pruArreglos
@@ -4924,6 +4424,7 @@ ARRAYACCESS
     imul %edx, %eax
     mov %eax,-44%(ebp)
 
+aca    mov $12,-48%(ebp) 
 
 .BeginForLabel14
 
@@ -4933,13 +4434,17 @@ ARRAYACCESS
     jnl EndForLabel15
 
     mov $0, %eax 
-    mov $2, %edx 
+    mov $2, %eax 
     add %eax, %edx 
     mov %edx,-72%(ebp) 
 
     mov 0 + 2(%rbp), %eax
     mov -60(%rbp), %eax
 
+    mov -24(%ebp) , %eax 
+    mov $1, %eax 
+    add %eax, %edx 
+    mov %edx,-24%(ebp) 
 
     jmp BeginForLabel14
 
@@ -5019,8 +4524,10 @@ lista:
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
-{Add}TRATAMIENTO PARA class ir.ast.MethodCallExpr y class ir.ast.IntLiteral PENDIENTE
-{Add}TRATAMIENTO PARA class java.lang.String PENDIENTE
+{Add1-2}CASO class ir.ast.MethodCallExpr PENDIENTE
+{Add2-2}CASO class ir.ast.IntLiteral PENDIENTE
+MethodCallExpr{name=par, args=[]} , 5
+0 + 0
 
 
 .globl	par
@@ -5057,6 +4564,7 @@ ARRAYACCESS
     call par
     movl %eax, RESULTLabel9(%rbp) 
 
+aca    mov $0,-36%(ebp) 
 
 .BeginForLabel13
 
@@ -5066,13 +4574,17 @@ ARRAYACCESS
     jnl EndForLabel14
 
     mov $0, %eax 
-    mov $2, %edx 
+    mov $2, %eax 
     add %eax, %edx 
     mov %edx,-56%(ebp) 
 
     mov 0 + 2(%rbp), %eax
     mov -44(%rbp), %eax
 
+    mov -24(%ebp) , %eax 
+    mov $1, %eax 
+    add %eax, %edx 
+    mov %edx,-24%(ebp) 
 
     jmp BeginForLabel13
 
@@ -5628,12 +5140,15 @@ lista:
 {RETURN, null, null, Result: 1}
 {LABEL, null, null, Result: EndMethod main}
 
-{Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
-{Idiv}TRATAMIENTO PARA class ir.ast.FloatLiteral PENDIENTE
+{Add1} CASO class ir.ast.FloatLiteral PENDIENTE
+{Add2} CASO class ir.ast.FloatLiteral PENDIENTE
+{Idiv2}TRATAMIENTO PARA class ir.ast.FloatLiteral PENDIENTE
+{Add1} CASO class ir.ast.FloatLiteral PENDIENTE
+{Add2} CASO class ir.ast.FloatLiteral PENDIENTE
+{Idiv2}TRATAMIENTO PARA class ir.ast.FloatLiteral PENDIENTE
+{Add1} CASO class ir.ast.FloatLiteral PENDIENTE
+{Add2} CASO class ir.ast.FloatLiteral PENDIENTE
+{Idiv2}TRATAMIENTO PARA class ir.ast.FloatLiteral PENDIENTE
 {And}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.VarLocation PENDIENTE
 
 
@@ -5674,6 +5189,8 @@ promedio:
 
     jne elseCondLabel10
 
+    add %eax, %edx 
+    mov %edx,-48%(ebp) 
 
 
     mov VarLocation{name=factorLabel15, type=float, expr=VarLocation{name=PLUSLabel14, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factorLabel16, type=float, expr=2.0, size=0}(%rbp), %eax
@@ -5714,6 +5231,8 @@ promedio:
 
     jne elseCondLabel27
 
+    add %eax, %edx 
+    mov %edx,-108%(ebp) 
 
 
     mov VarLocation{name=factorLabel32, type=float, expr=VarLocation{name=PLUSLabel31, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factorLabel33, type=float, expr=2.0, size=0}(%rbp), %eax
@@ -5754,6 +5273,8 @@ promedio:
 
     jne elseCondLabel44
 
+    add %eax, %edx 
+    mov %edx,-168%(ebp) 
 
 
     mov VarLocation{name=factorLabel49, type=float, expr=VarLocation{name=PLUSLabel48, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factorLabel50, type=float, expr=2.0, size=0}(%rbp), %eax
@@ -6161,7 +5682,7 @@ alo:
     jne elseCondLabel2
 
     mov $0, %eax 
-    mov $1, %edx 
+    mov $1, %eax 
     add %eax, %edx 
     mov %edx,-20%(ebp) 
 
@@ -6214,7 +5735,7 @@ PARAM
 PARAM
 
     mov $0, %eax 
-    mov $1, %edx 
+    mov $1, %eax 
     add %eax, %edx 
     mov %edx,-24%(ebp) 
 
@@ -6321,7 +5842,7 @@ inc:
     mov %rsp, %rbp
 
     mov $0, %eax 
-    mov $1, %edx 
+    mov $1, %eax 
     add %eax, %edx 
     mov %edx,-12%(ebp) 
 
@@ -6487,7 +6008,7 @@ lista:
 {LABEL, null, null, Result: EndMethod main}
 
 {Imul}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.IntLiteral PENDIENTE
-{Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
+{Sub}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
 
 
 .globl	maxcomdiv
@@ -6840,7 +6361,7 @@ alo:
     mov %rsp, %rbp
 
     mov $0, %eax 
-    mov $1, %edx 
+    mov $1, %eax 
     add %eax, %edx 
     mov %edx,-16%(ebp) 
 
@@ -6961,7 +6482,11 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=id, args=[9]}]}, null, Result: EXTERNINVKLabel79}
 {LABEL, null, null, Result: EndMethod main}
 
-{Add}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
+{Sub}TRATAMIENTO PARA class ir.ast.BinOpExpr y class ir.ast.BinOpExpr PENDIENTE
+PRIMERA EXPR 0 - 1 pv: 0 sv: 1
+{Add2-2}CASO class ir.ast.VarLocation PENDIENTE
+0 - 1 , VarLocation{name=MINUSLabel68, type=int, expr=0 * 0 - 0 * 0, size=0}
+-1 + 0
 
 
 .globl	id
@@ -7052,7 +6577,7 @@ id:
 .elseCondLabel26
 
     mov $0, %eax 
-    mov $1, %edx 
+    mov $1, %eax 
     add %eax, %edx 
     mov %edx,-132%(ebp) 
 
@@ -7109,7 +6634,7 @@ id:
     jne elseCondLabel49
 
     mov $0, %eax 
-    mov $1, %edx 
+    mov $1, %eax 
     add %eax, %edx 
     mov %edx,-200%(ebp) 
 
@@ -7147,6 +6672,7 @@ id:
     mov %eax,-252%(ebp)
 
 
+aca    mov $-1,-264%(ebp) 
 
     mov 0 - 1 + VarLocation{name=MINUSLabel68, type=int, expr=0 * 0 - 0 * 0, size=0}(%rbp), %eax
     mov -216(%rbp), %eax
@@ -7167,7 +6693,7 @@ id:
     mov -268(%rbp), %eax
 
     mov $0, %eax 
-    mov $1, %edx 
+    mov $1, %eax 
     add %eax, %edx 
     mov %edx,-288%(ebp) 
 
@@ -7289,7 +6815,7 @@ suma:
 .elseCondLabel10
 
     mov $0, %eax 
-    mov $0, %edx 
+    mov $0, %eax 
     add %eax, %edx 
     mov %edx,-44%(ebp) 
 
@@ -7367,7 +6893,8 @@ lista:
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=sumx, args=[6.0, 2]}]}, null, Result: EXTERNINVKLabel20}
 {LABEL, null, null, Result: EndMethod main}
 
-{Add}TRATAMIENTO PARA class ir.ast.FloatLiteral y class ir.ast.FloatLiteral PENDIENTE
+{Add1} CASO class ir.ast.FloatLiteral PENDIENTE
+{Add2} CASO class ir.ast.FloatLiteral PENDIENTE
 
 
 .globl	sumx
@@ -7396,12 +6923,14 @@ sumx:
 
     jne EndWhileLabel8
 
+    add %eax, %edx 
+    mov %edx,-48%(ebp) 
 
     mov 0.0 + 0.0(%rbp), %eax
     mov -36(%rbp), %eax
 
     mov $0, %eax 
-    mov $1, %edx 
+    mov $1, %eax 
     add %eax, %edx 
     mov %edx,-64%(ebp) 
 

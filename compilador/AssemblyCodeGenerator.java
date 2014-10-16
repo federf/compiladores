@@ -18,82 +18,127 @@ public class AssemblyCodeGenerator{
 	//cadena generada
 	String result="";
 
+	//metodo que dado un codigo de tres direcciones de una operacion aritmetica (suma, resta, mult o div)
+	//retorna true si sus operandos son VarLocation o IntLiteral (o FlaotLiteral - mas adelante)
+	public boolean cond_arith(TripletCode t){
+		return 
+		((t.getFirstDir() instanceof VarLocation || t.getFirstDir() instanceof IntLiteral || t.getFirstDir() instanceof FloatLiteral) 
+		&&
+		((t.getSecondDir() instanceof VarLocation || t.getSecondDir() instanceof IntLiteral || t.getSecondDir() instanceof FloatLiteral))
+		);
+	}
+
 	public void ASM_Add(TripletCode t){
 		
 		VarLocation res = (VarLocation)t.getResult();
 		int ResOff = res.getOffset();
 
-		if (t.getFirstDir() instanceof VarLocation && t.getSecondDir() instanceof VarLocation) {
+		//si los operandos del codigo de tres direcciones son VarLocation, IntLiteral o FloatLiteral
+		if(cond_arith(t)){
+			if(t.getFirstDir() instanceof VarLocation){
 			VarLocation  x = (VarLocation)t.getFirstDir();
-			VarLocation  y = (VarLocation)t.getSecondDir();
-
-			int XOff = x.getOffset();
-			int YOff = y.getOffset();
-
-			result = result +(
-
-			"    mov " + XOff + "(%ebp) , %eax \n"+
-			"    mov " + YOff + "(%ebp), %edx \n"+
-			"    add %eax, %edx \n"+
-			"    mov %edx," + ResOff + "%(ebp) \n");
-
-		}
-
-		if (t.getFirstDir() instanceof VarLocation && !(t.getSecondDir() instanceof VarLocation)) {
-			VarLocation  x = (VarLocation)t.getFirstDir();
-			if(t.getSecondDir() instanceof IntLiteral){
-				IntLiteral  y = (IntLiteral)t.getSecondDir();
-
-				int XOff = x.getOffset();
-
-				result = result +(
-
-				"    mov " + XOff + "(%ebp) , %eax \n"+
-				"    add $" +y.getStringValue() + ", %eax \n"+
-				"    mov %edx," + ResOff + "%(ebp) \n");	
+			int XOff=x.getOffset();
+			result+="    mov " + XOff + "(%ebp) , %eax \n";
 			}else{
-				System.out.println("{Add}TRATAMIENTO PARA " + t.getSecondDir().getClass() +" PENDIENTE");
+				if(t.getFirstDir() instanceof IntLiteral){
+					IntLiteral x=(IntLiteral) t.getFirstDir();
+					result+="    mov $" + x.getStringValue() + ", %eax \n";
+				}else{
+					System.out.println("{Add1} CASO "+t.getFirstDir().getClass()+" PENDIENTE");
+				}
 			}
-			
 
-		}
-
-		if ((t.getFirstDir() instanceof VarLocation) && t.getSecondDir() instanceof VarLocation) {
-			if(t.getFirstDir() instanceof IntLiteral){
-				IntLiteral  x = (IntLiteral)t.getFirstDir();
+			if(t.getSecondDir() instanceof VarLocation){
 				VarLocation  y = (VarLocation)t.getSecondDir();
-
-				int YOff = y.getOffset();
-
-				result = result +(
-
-				"    mov " + YOff + "(%ebp), %eax \n"+
-				"    add $" +x.getStringValue() + ", %eax \n"+
-				"    mov %edx," + ResOff + "%(ebp) \n");	
+				int YOff=y.getOffset();
+				result+="    mov " + YOff + "(%ebp) , %eax \n";
 			}else{
-				System.out.println("{Add}TRATAMIENTO PARA " + t.getFirstDir().getClass() +" PENDIENTE");
+				if(t.getSecondDir() instanceof IntLiteral){
+					IntLiteral y=(IntLiteral) t.getSecondDir();
+					result+="    mov $" + y.getStringValue() + ", %eax \n";
+				}else{
+					System.out.println("{Add2} CASO "+t.getSecondDir().getClass()+" PENDIENTE");
+				}
 			}
-			
 
-		}
-
-		if (!(t.getFirstDir() instanceof VarLocation) && !(t.getSecondDir() instanceof VarLocation)) {
-			if(t.getFirstDir() instanceof IntLiteral && t.getSecondDir() instanceof IntLiteral){
-				IntLiteral  x = (IntLiteral)t.getFirstDir();
-				IntLiteral  y = (IntLiteral)t.getSecondDir();
-
-				result = result +(
-
-				"    mov $" + x.getStringValue() + ", %eax \n"+
-				"    mov $" + y.getStringValue() + ", %edx \n"+
-				"    add %eax, %edx \n"+
-				"    mov %edx," + ResOff + "%(ebp) \n");
-			}else{
-				System.out.println("{Add}TRATAMIENTO PARA " + t.getFirstDir().getClass()+ " y "+ t.getSecondDir().getClass()+" PENDIENTE");
+			result+="    add %eax, %edx \n";
+			result+="    mov %edx," + ResOff + "%(ebp) \n";
+		}else{//caso contrario
+			//valores de las operaciones 
+			int firstOpValue=0;
+			int secondOpValue=0;
+			//si el 1er operando es una exp binaria, calculamos su valor
+			if(t.getFirstDir() instanceof BinOpExpr){
+				BinOpExpr primer=(BinOpExpr) t.getFirstDir();	
+				BinOpType operator=primer.getOperator();
+				String partes[]=primer.toString().split("\\"+operator.toString());
+				int primerValor=Integer.valueOf(partes[0].trim());
+				int segundoValor=Integer.valueOf(partes[1].trim());
+				System.out.println("PRIMERA EXPR "+primer+" pv: "+primerValor+" sv: "+segundoValor);
+				switch(operator){
+					case PLUS:
+						firstOpValue=(primerValor)+(segundoValor);
+						break;
+					case MINUS:
+						firstOpValue=(primerValor)-(segundoValor);
+						break;
+					case MULTIPLY:
+						firstOpValue=primerValor*segundoValor;
+						break;
+					case DIVIDE:
+						firstOpValue=(primerValor)/(segundoValor);
+						break;
+					case MOD:
+						firstOpValue=(primerValor)%(segundoValor);
+						break;
+				}
+			}else{//caso contrario
+				if(t.getFirstDir() instanceof UnaryOpExpr){//si es una operacion unaria (menos unario)
+					UnaryOpExpr primer=(UnaryOpExpr) t.getFirstDir();
+					firstOpValue=Integer.valueOf(primer.toString());
+				}else{
+					System.out.println("{Add1-2}CASO "+t.getFirstDir().getClass()+" PENDIENTE");
+				}
 			}
-			
+
+
+			//si el 2do operando es una exp binaria, calculamos su valor
+			if(t.getSecondDir() instanceof BinOpExpr){
+				BinOpExpr segunda=(BinOpExpr) t.getSecondDir();	
+				BinOpType operator=segunda.getOperator();
+				String partes[]=segunda.toString().split("\\"+operator.toString());
+				int primerValor=Integer.valueOf(partes[0].trim());
+				int segundoValor=Integer.valueOf(partes[1].trim());
+				System.out.println("SEGUNDA EXPR "+segunda+" pv: "+primerValor+" sv: "+segundoValor);
+				switch(operator){
+					case PLUS:
+						secondOpValue=(primerValor)+(segundoValor);
+						break;
+					case MINUS:
+						secondOpValue=(primerValor)-(segundoValor);
+						break;
+					case MULTIPLY:
+						secondOpValue=primerValor*segundoValor;
+						break;
+					case DIVIDE:
+						secondOpValue=(primerValor)/(segundoValor);
+						break;
+					case MOD:
+						secondOpValue=(primerValor)%(segundoValor);
+						break;
+				}
+			}else{//caso contrario
+				if(t.getSecondDir() instanceof UnaryOpExpr){//si es una operacion unaria (menos unario)
+					UnaryOpExpr segunda=(UnaryOpExpr) t.getSecondDir();
+					secondOpValue=Integer.valueOf(segunda.toString());
+				}else{
+					System.out.println("{Add2-2}CASO "+t.getSecondDir().getClass()+" PENDIENTE");
+				}
+			}
+			result+="    mov $"+(firstOpValue+secondOpValue)+","+ ResOff + "%(ebp) \n";
 		}
 	}
+	
 
 	public void ASM_Sub(TripletCode t){
 
@@ -128,7 +173,7 @@ public class AssemblyCodeGenerator{
 				"    sub %edx, %eax \n"+
 				"    mov %edx," + ResOff + "%(ebp) \n");
 			}else{
-				System.out.println("{Sub}TRATAMIENTO "+t.getSecondDir().getClass()+" PENDIENTE");
+				System.out.println("{Sub2}TRATAMIENTO "+t.getSecondDir().getClass()+" PENDIENTE");
 			}
 			
 
@@ -148,7 +193,7 @@ public class AssemblyCodeGenerator{
 				"    sub %edx, %eax\n"+
 				"    mov %edx," + ResOff + "%(ebp)\n");
 			}else{
-				System.out.println("{Sub}TRATAMIENTO "+t.getFirstDir().getClass()+" PENDIENTE");
+				System.out.println("{Sub1}TRATAMIENTO "+t.getFirstDir().getClass()+" PENDIENTE");
 			}
 
 		}
@@ -165,7 +210,7 @@ public class AssemblyCodeGenerator{
 				"    sub %eax, %edx\n"+
 				"    mov %edx," + ResOff + "%(ebp)\n");	
 			}else{
-				System.out.println("{Add}TRATAMIENTO PARA " + t.getFirstDir().getClass()+ " y "+ t.getSecondDir().getClass()+" PENDIENTE");
+				System.out.println("{Sub}TRATAMIENTO PARA " + t.getFirstDir().getClass()+ " y "+ t.getSecondDir().getClass()+" PENDIENTE");
 			}
 			
 
@@ -206,7 +251,7 @@ public class AssemblyCodeGenerator{
 				"    imul %edx, %eax \n"+
 				"    mov %eax," + ResOff + "%(ebp) \n");
 			}else{
-				System.out.println("{Imul}TRATAMIENTO PARA " + t.getSecondDir().getClass() +" PENDIENTE");
+				System.out.println("{Imul2}TRATAMIENTO PARA " + t.getSecondDir().getClass() +" PENDIENTE");
 			}
 			
 
@@ -226,7 +271,7 @@ public class AssemblyCodeGenerator{
 				"    imul %edx, %eax\n"+
 				"    mov %eax," + ResOff + "%(ebp)\n");
 			}else{
-				System.out.println("{Imul}TRATAMIENTO "+t.getFirstDir().getClass()+" PENDIENTE");
+				System.out.println("{Imul1}TRATAMIENTO "+t.getFirstDir().getClass()+" PENDIENTE");
 			}
 			
 
@@ -290,7 +335,7 @@ public class AssemblyCodeGenerator{
 				"    idiv %ecx\n"+
 				"    mov %ecx," + ResOff + "%(ebp) \n");
 			}else{
-				System.out.println("{Idiv}TRATAMIENTO PARA " + t.getSecondDir().getClass() +" PENDIENTE");
+				System.out.println("{Idiv2}TRATAMIENTO PARA " + t.getSecondDir().getClass() +" PENDIENTE");
 			}
 			
 
@@ -311,7 +356,7 @@ public class AssemblyCodeGenerator{
 				"    idiv %ecx\n"+
 				"    mov %ecx," + ResOff + "%(ebp)\n");
 			}else{
-				System.out.println("{Idiv}TRATAMIENTO "+t.getFirstDir().getClass()+" PENDIENTE");
+				System.out.println("{Idiv1}TRATAMIENTO "+t.getFirstDir().getClass()+" PENDIENTE");
 			}
 			
 
