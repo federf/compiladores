@@ -29,119 +29,174 @@ public class AssemblyCodeGenerator{
 	}
 
 	public void ASM_Add(TripletCode t){
-		
+
 		VarLocation res = (VarLocation)t.getResult();
 		int ResOff = res.getOffset();
 
 		//si el 1er operando es varlocation
 		if(t.getFirstDir() instanceof VarLocation){
-		VarLocation  x = (VarLocation)t.getFirstDir();
-		int XOff=x.getOffset();
-		result+="    mov " + XOff + "(%ebp) , %eax \n";
+			System.out.println("varlocation1");
+			VarLocation  x = (VarLocation)t.getFirstDir();
+			int XOff=x.getOffset();
+			result+="    mov " + XOff + "(%ebp) , %eax \n";
 		}else{
 			//sino, si es intliteral
 			if(t.getFirstDir() instanceof IntLiteral){
+				System.out.println("int");
 				IntLiteral x=(IntLiteral) t.getFirstDir();
 				result+="    mov $" + x.getStringValue() + ", %eax \n";
 			}else{
+
 				//si el operando es una operacion binaria o unaria
 				if(t.getFirstDir() instanceof BinOpExpr || t.getFirstDir() instanceof UnaryOpExpr){
 					//valor del operando en caso de ser un operacion binaria o unaria
 					int firstOpValue=0;
 					//si el 1er operando es una exp binaria, calculamos su valor
 					if(t.getFirstDir() instanceof BinOpExpr){
+						System.out.println("binop1");
+						//la obtenemos como operacion binaria
 						BinOpExpr primer=(BinOpExpr) t.getFirstDir();	
+						//obtenemos el operador
 						BinOpType operator=primer.getOperator();
-						String partes[]=primer.toString().split("\\"+operator.toString());
-						int primerValor=Integer.valueOf(partes[0].trim());
-						int segundoValor=Integer.valueOf(partes[1].trim());
-						System.out.println("PRIMERA EXPR "+primer+" pv: "+primerValor+" sv: "+segundoValor);
-						switch(operator){
-							case PLUS:
-								firstOpValue=(primerValor)+(segundoValor);
-								break;
-							case MINUS:
-								firstOpValue=(primerValor)-(segundoValor);
-								break;
-							case MULTIPLY:
-								firstOpValue=primerValor*segundoValor;
-								break;
-							case DIVIDE:
-								firstOpValue=(primerValor)/(segundoValor);
-								break;
-							case MOD:
-								firstOpValue=(primerValor)%(segundoValor);
-								break;
+
+						//primer y segundo operandos de la expression
+						Expression primExpr=primer.getLeftOperand();
+						Expression segExpr=primer.getRightOperand();
+
+						System.out.println("binaria : {add1}"+primer);
+						System.out.println("operando izq: "+primExpr);
+						System.out.println("operando der: "+segExpr);
+
+						//vemos que ambos operandos de la operacion binaria sean enteros
+						if(primExpr.getType().equals(Type.INT) && segExpr.getType().equals(Type.INT)){
+							int primerValor=Integer.valueOf(primExpr.toString());
+							int segundoValor=Integer.valueOf(segExpr.toString());
+							System.out.println("PRIMERA EXPR "+primer+" pv: "+primerValor+" sv: "+segundoValor);
+							switch(operator){
+								case PLUS:
+									firstOpValue=(primerValor)+(segundoValor);
+									break;
+								case MINUS:
+									firstOpValue=(primerValor)-(segundoValor);
+									break;
+								case MULTIPLY:
+									firstOpValue=primerValor*segundoValor;
+									break;
+								case DIVIDE:
+									firstOpValue=(primerValor)/(segundoValor);
+									break;
+								case MOD:
+									firstOpValue=(primerValor)%(segundoValor);
+									break;
+							}
+							result+="    mov $" + firstOpValue + ", %eax \n";
+						}else{
+							System.out.println("{ADD1}CASO BinOpExpr entre "+primExpr.getType()+" y "+segExpr.getType()+" pendiente");
 						}
-						result+="    mov $" + firstOpValue + ", %eax \n";
+
+						
 					}else{//caso contrario
 						if(t.getFirstDir() instanceof UnaryOpExpr){//si es una operacion unaria (menos unario)
+							System.out.println("unary1");
 							UnaryOpExpr primer=(UnaryOpExpr) t.getFirstDir();
-							firstOpValue=Integer.valueOf(primer.toString());
-
-							result+="    mov $" + firstOpValue + ", %eax \n";
+							System.out.println("unary "+primer+" type("+primer.getType()+")");
+							if(primer.getType().equals(Type.INT) ){
+								System.out.println("unaryint1");
+								firstOpValue=Integer.valueOf(primer.toString());
+								result+="    mov $" + firstOpValue + ", %eax \n";
+							}else{
+								System.out.println("nada1 "+primer.getType());
+								System.out.println("{ADD1}CASO UnaryOpExpr de "+primer.getType()+" pendiente");
+							}
+							
 						}
 					}
 				}else{
 				//caso floatliteral
-					System.out.println("{Add1} CASO "+t.getFirstDir().getClass()+" PENDIENTE");
+					System.out.println("{ADD1} CASO "+t.getFirstDir().getClass()+" PENDIENTE");
 				}
 			}
 		}
+
+		System.out.println("salio 1er");
+
 		//si el 2do operando es varlocation
 		if(t.getSecondDir() instanceof VarLocation){
+			System.out.println("VarLocation2");
 			VarLocation  y = (VarLocation)t.getSecondDir();
 			int YOff=y.getOffset();
 			result+="    mov " + YOff + "(%ebp) , %edx \n";
 		}else{
 			//sino, si es intliteral
 			if(t.getSecondDir() instanceof IntLiteral){
+				System.out.println("int2");
 				IntLiteral y=(IntLiteral) t.getSecondDir();
 				result+="    mov $" + y.getStringValue() + ", %edx \n";
 			}else{
 				//si el operando es una operacion binaria o unaria
 				if(t.getSecondDir() instanceof BinOpExpr || t.getSecondDir() instanceof UnaryOpExpr){
-					//valor del operando en caso de ser binopexpr o unaryopexpr
+					//valor del operando en caso de ser un operacion binaria o unaria
 					int secondOpValue=0;
-					//si el 2do operando es una exp binaria, calculamos su valor
+					//si el 1er operando es una exp binaria, calculamos su valor
 					if(t.getSecondDir() instanceof BinOpExpr){
+						System.out.println("binop2");
+						//la obtenemos como operacion binaria
 						BinOpExpr segunda=(BinOpExpr) t.getSecondDir();	
+						//obtenemos el operador
 						BinOpType operator=segunda.getOperator();
-						String partes[]=segunda.toString().split("\\"+operator.toString());
-						int primerValor=Integer.valueOf(partes[0].trim());
-						int segundoValor=Integer.valueOf(partes[1].trim());
-						System.out.println("SEGUNDA EXPR "+segunda+" pv: "+primerValor+" sv: "+segundoValor);
-						switch(operator){
-							case PLUS:
-								secondOpValue=(primerValor)+(segundoValor);
-								break;
-							case MINUS:
-								secondOpValue=(primerValor)-(segundoValor);
-								break;
-							case MULTIPLY:
-								secondOpValue=primerValor*segundoValor;
-								break;
-							case DIVIDE:
-								secondOpValue=(primerValor)/(segundoValor);
-								break;
-							case MOD:
-								secondOpValue=(primerValor)%(segundoValor);
-								break;
-						}
-						result+="    mov $" +secondOpValue+", %edx \n";
-						result+="    add %eax, %edx \n";
-					}else{//caso contrario es una expresion unaria
-						if(t.getSecondDir() instanceof UnaryOpExpr){//si es una operacion unaria (menos unario)
-							UnaryOpExpr segunda=(UnaryOpExpr) t.getSecondDir();
-							secondOpValue=Integer.valueOf(segunda.toString());
+
+						//primer y segundo operandos de la expression
+						Expression primExpr=segunda.getLeftOperand();
+						Expression segExpr=segunda.getRightOperand();
+
+						System.out.println("binaria : {add2}"+segunda);
+						System.out.println("operando izq: "+primExpr);
+						System.out.println("operando der: "+segExpr);
+
+						//vemos que ambos operandos de la operacion binaria sean enteros
+						if(primExpr.getType().equals(Type.INT) && segExpr.getType().equals(Type.INT)){
+							int primerValor=Integer.valueOf(primExpr.toString());
+							int segundoValor=Integer.valueOf(segExpr.toString());
+							System.out.println("SEGUNDA EXPR "+segunda+" pv: "+primerValor+" sv: "+segundoValor);
+							switch(operator){
+								case PLUS:
+									secondOpValue=(primerValor)+(segundoValor);
+									break;
+								case MINUS:
+									secondOpValue=(primerValor)-(segundoValor);
+									break;
+								case MULTIPLY:
+									secondOpValue=primerValor*segundoValor;
+									break;
+								case DIVIDE:
+									secondOpValue=(primerValor)/(segundoValor);
+									break;
+								case MOD:
+									secondOpValue=(primerValor)%(segundoValor);
+									break;
+							}
 							result+="    mov $" +secondOpValue+", %edx \n";
 							result+="    add %eax, %edx \n";
-
+						}else{
+							System.out.println("{ADD2}CASO BinOpExpr entre "+primExpr.getType()+" y "+segExpr.getType()+" pendiente");
+						}
+						
+					}else{//caso contrario es una expresion unaria
+						if(t.getSecondDir() instanceof UnaryOpExpr){//si es una operacion unaria (menos unario)
+							System.out.println("unary2");
+							UnaryOpExpr segunda=(UnaryOpExpr) t.getSecondDir();
+							if(segunda.getType().equals(Type.INT)){
+								secondOpValue=Integer.valueOf(segunda.toString());
+								result+="    mov $" +secondOpValue+", %edx \n";
+								result+="    add %eax, %edx \n";
+							}else{
+								System.out.println("{ADD2}CASO UnaryOpExpr de "+segunda.getType()+" pendiente");
+							}
 						}
 					}
 				}else{
 				//caso float
-				System.out.println("{Add2} CASO "+t.getSecondDir().getClass()+" PENDIENTE");
+				System.out.println("{ADD2} CASO "+t.getSecondDir().getClass()+" PENDIENTE");
 				}
 			}
 		}
@@ -172,42 +227,66 @@ public class AssemblyCodeGenerator{
 					//valor del operando en caso de ser un operacion binaria o unaria
 					int firstOpValue=0;
 					//si el 1er operando es una exp binaria, calculamos su valor
+					System.out.println("1er operacion es: -. . "+t.getFirstDir());
 					if(t.getFirstDir() instanceof BinOpExpr){
+						//la obtenemos como operacion binaria
 						BinOpExpr primer=(BinOpExpr) t.getFirstDir();	
+						//obtenemos el operador
 						BinOpType operator=primer.getOperator();
-						String partes[]=primer.toString().split("\\"+operator.toString());
-						int primerValor=Integer.valueOf(partes[0].trim());
-						int segundoValor=Integer.valueOf(partes[1].trim());
-						System.out.println("PRIMERA EXPR "+primer+" pv: "+primerValor+" sv: "+segundoValor);
-						switch(operator){
-							case PLUS:
-								firstOpValue=(primerValor)+(segundoValor);
-								break;
-							case MINUS:
-								firstOpValue=(primerValor)-(segundoValor);
-								break;
-							case MULTIPLY:
-								firstOpValue=primerValor*segundoValor;
-								break;
-							case DIVIDE:
-								firstOpValue=(primerValor)/(segundoValor);
-								break;
-							case MOD:
-								firstOpValue=(primerValor)%(segundoValor);
-								break;
+
+						//primer y segundo operandos de la expression
+						Expression primExpr=primer.getLeftOperand();
+						Expression segExpr=primer.getRightOperand();
+
+						System.out.println("binaria : {sub1}"+primer);
+						System.out.println("operando izq: "+primExpr);
+						System.out.println("operando der: "+segExpr);
+
+						//si ambos operandos son enteros
+						if(segExpr.getType().equals(Type.INT) && primExpr.getType().equals(Type.INT)){
+							int primerValor=Integer.valueOf(primExpr.toString());
+							int segundoValor=Integer.valueOf(segExpr.toString());
+							System.out.println("PRIMERA EXPR "+primer+" pv: "+primerValor+" sv: "+segundoValor);
+							switch(operator){
+								case PLUS:
+									firstOpValue=(primerValor)+(segundoValor);
+									break;
+								case MINUS:
+									firstOpValue=(primerValor)-(segundoValor);
+									break;
+								case MULTIPLY:
+									firstOpValue=primerValor*segundoValor;
+									break;
+								case DIVIDE:
+									firstOpValue=(primerValor)/(segundoValor);
+									break;
+								case MOD:
+									firstOpValue=(primerValor)%(segundoValor);
+									break;
+							}
+							result+="    mov $" + firstOpValue + ", %eax \n";
+						}else{
+
+							System.out.println("asdf asdf prim "+primExpr.toString()+" , seg "+segExpr.toString());
+							System.out.println(primExpr.getType());
+							System.out.println(segExpr.getType());
+							System.out.println("{SUB1}CASO BinOpExpr entre "+primExpr.getType()+" y "+segExpr.getType()+" pendiente");
 						}
-						result+="    mov $" + firstOpValue + ", %eax \n";
+						
 					}else{//caso contrario
 						if(t.getFirstDir() instanceof UnaryOpExpr){//si es una operacion unaria (menos unario)
 							UnaryOpExpr primer=(UnaryOpExpr) t.getFirstDir();
-							firstOpValue=Integer.valueOf(primer.toString());
-
-							result+="    mov $" + firstOpValue + ", %eax \n";
+							if(primer.getType().equals(Type.INT)){
+								firstOpValue=Integer.valueOf(primer.toString());
+								result+="    mov $" + firstOpValue + ", %eax \n";
+							}else{
+								System.out.println("{SUB1}CASO UnaryOpExpr "+primer.getType()+" pendiente");	
+							}
 						}
 					}
 				}else{
 				//caso floatliteral
-					System.out.println("{Sub1} CASO "+t.getFirstDir().getClass()+" PENDIENTE");
+					System.out.println("{SUB1} CASO "+t.getFirstDir().getClass()+" PENDIENTE");
 				}
 			}
 		}
@@ -228,43 +307,61 @@ public class AssemblyCodeGenerator{
 					int secondOpValue=0;
 					//si el 2do operando es una exp binaria, calculamos su valor
 					if(t.getSecondDir() instanceof BinOpExpr){
-						BinOpExpr segunda=(BinOpExpr) t.getSecondDir();	
+						//la obtenemos como operacion binaria
+						BinOpExpr segunda=(BinOpExpr) t.getFirstDir();	
+						//obtenemos el operador
 						BinOpType operator=segunda.getOperator();
-						String partes[]=segunda.toString().split("\\"+operator.toString());
-						int primerValor=Integer.valueOf(partes[0].trim());
-						int segundoValor=Integer.valueOf(partes[1].trim());
-						System.out.println("SEGUNDA EXPR "+segunda+" pv: "+primerValor+" sv: "+segundoValor);
-						switch(operator){
-							case PLUS:
-								secondOpValue=(primerValor)+(segundoValor);
-								break;
-							case MINUS:
-								secondOpValue=(primerValor)-(segundoValor);
-								break;
-							case MULTIPLY:
-								secondOpValue=primerValor*segundoValor;
-								break;
-							case DIVIDE:
-								secondOpValue=(primerValor)/(segundoValor);
-								break;
-							case MOD:
-								secondOpValue=(primerValor)%(segundoValor);
-								break;
-						}
-						result+="    mov $" +secondOpValue+", %edx \n";
-						result+="    sub %eax, %edx \n";
-					}else{//caso contrario es una expresion unaria
-						if(t.getSecondDir() instanceof UnaryOpExpr){//si es una operacion unaria (menos unario)
-							UnaryOpExpr segunda=(UnaryOpExpr) t.getSecondDir();
-							secondOpValue=Integer.valueOf(segunda.toString());
+
+						//primer y segundo operandos de la expression
+						Expression primExpr=segunda.getLeftOperand();
+						Expression segExpr=segunda.getRightOperand();
+
+						System.out.println("binaria {sub2}: "+segunda);
+						System.out.println("operando izq: "+primExpr);
+						System.out.println("operando der: "+segExpr);
+
+						if(primExpr.getType().equals(Type.INT) && segExpr.getType().equals(Type.INT)){
+							int primerValor=Integer.valueOf(primExpr.toString());
+							int segundoValor=Integer.valueOf(segExpr.toString());
+							System.out.println("SEGUNDA EXPR "+segunda+" pv: "+primerValor+" sv: "+segundoValor);
+							switch(operator){
+								case PLUS:
+									secondOpValue=(primerValor)+(segundoValor);
+									break;
+								case MINUS:
+									secondOpValue=(primerValor)-(segundoValor);
+									break;
+								case MULTIPLY:
+									secondOpValue=primerValor*segundoValor;
+									break;
+								case DIVIDE:
+									secondOpValue=(primerValor)/(segundoValor);
+									break;
+								case MOD:
+									secondOpValue=(primerValor)%(segundoValor);
+									break;
+							}
 							result+="    mov $" +secondOpValue+", %edx \n";
 							result+="    sub %eax, %edx \n";
-
+						}else{
+							System.out.println("{SUB2}CASO BinOpExpr entre "+primExpr.getType()+" y "+segExpr.getType()+" pendiente");
 						}
-					}
+					}else{//caso contrario
+						if(t.getSecondDir() instanceof UnaryOpExpr){//si es una operacion unaria (menos unario)
+							UnaryOpExpr segunda=(UnaryOpExpr) t.getSecondDir();
+							if(segunda.getType().equals(Type.INT)){
+								secondOpValue=Integer.valueOf(segunda.toString());
+								result+="    mov $" +secondOpValue+", %edx \n";
+								result+="    sub %eax, %edx \n";
+							}else{
+								System.out.println("{SUB2}CASO UnaryOpExpr "+segunda.getType()+" pendiente");
+							}
+
+                        }
+                    }
 				}else{
 				//caso float
-				System.out.println("{Sub2} CASO "+t.getSecondDir().getClass()+" PENDIENTE");
+				System.out.println("{SUB2} CASO "+t.getSecondDir().getClass()+" PENDIENTE");
 				}
 			}
 		}
@@ -279,12 +376,14 @@ public class AssemblyCodeGenerator{
 
 		//si el 1er operando es varlocation
 		if(t.getFirstDir() instanceof VarLocation){
-		VarLocation  x = (VarLocation)t.getFirstDir();
-		int XOff=x.getOffset();
-		result+="    mov " + XOff + "(%ebp) , %eax \n";
+			System.out.println("varlocation1");
+			VarLocation  x = (VarLocation)t.getFirstDir();
+			int XOff=x.getOffset();
+			result+="    mov " + XOff + "(%ebp) , %eax \n";
 		}else{
 			//sino, si es intliteral
 			if(t.getFirstDir() instanceof IntLiteral){
+				System.out.println("int1");
 				IntLiteral x=(IntLiteral) t.getFirstDir();
 				result+="    mov $" + x.getStringValue() + ", %eax \n";
 			}else{
@@ -294,52 +393,80 @@ public class AssemblyCodeGenerator{
 					int firstOpValue=0;
 					//si el 1er operando es una exp binaria, calculamos su valor
 					if(t.getFirstDir() instanceof BinOpExpr){
+						System.out.println("binop1");
+						//la obtenemos como operacion binaria
 						BinOpExpr primer=(BinOpExpr) t.getFirstDir();	
+						//obtenemos el operador
 						BinOpType operator=primer.getOperator();
-						String partes[]=primer.toString().split("\\"+operator.toString());
-						int primerValor=Integer.valueOf(partes[0].trim());
-						int segundoValor=Integer.valueOf(partes[1].trim());
-						System.out.println("PRIMERA EXPR "+primer+" pv: "+primerValor+" sv: "+segundoValor);
-						switch(operator){
-							case PLUS:
-								firstOpValue=(primerValor)+(segundoValor);
-								break;
-							case MINUS:
-								firstOpValue=(primerValor)-(segundoValor);
-								break;
-							case MULTIPLY:
-								firstOpValue=primerValor*segundoValor;
-								break;
-							case DIVIDE:
-								firstOpValue=(primerValor)/(segundoValor);
-								break;
-							case MOD:
-								firstOpValue=(primerValor)%(segundoValor);
-								break;
+
+						//primer y segundo operandos de la expression
+						Expression primExpr=primer.getLeftOperand();
+						Expression segExpr=primer.getRightOperand();
+
+						System.out.println("binaria : {imul1}"+primer);
+						System.out.println("operando izq: "+primExpr);
+						System.out.println("operando der: "+segExpr);
+
+						//vemos que ambos operandos de la operacion binaria sean enteros
+						if(primExpr.getType().equals(Type.INT) && segExpr.getType().equals(Type.INT)){
+							int primerValor=Integer.valueOf(primExpr.toString());
+							int segundoValor=Integer.valueOf(segExpr.toString());
+							System.out.println("PRIMERA EXPR "+primer+" pv: "+primerValor+" sv: "+segundoValor);
+							switch(operator){
+								case PLUS:
+									firstOpValue=(primerValor)+(segundoValor);
+									break;
+								case MINUS:
+									firstOpValue=(primerValor)-(segundoValor);
+									break;
+								case MULTIPLY:
+									firstOpValue=primerValor*segundoValor;
+									break;
+								case DIVIDE:
+									firstOpValue=(primerValor)/(segundoValor);
+									break;
+								case MOD:
+									firstOpValue=(primerValor)%(segundoValor);
+									break;
+							}
+							result+="    mov $" + firstOpValue + ", %eax \n";
+						}else{
+							System.out.println("{IMUL1}CASO BinOpExpr entre "+primExpr.getType()+" y "+segExpr.getType()+" pendiente");
 						}
-						result+="    mov $" + firstOpValue + ", %eax \n";
+
 					}else{//caso contrario
 						if(t.getFirstDir() instanceof UnaryOpExpr){//si es una operacion unaria (menos unario)
+							System.out.println("unary1");
 							UnaryOpExpr primer=(UnaryOpExpr) t.getFirstDir();
-							firstOpValue=Integer.valueOf(primer.toString());
+							//si la expression es entera
+							if(primer.getType().equals(Type.INT)){
+								firstOpValue=Integer.valueOf(primer.toString());
+								result+="    mov $" + firstOpValue + ", %eax \n";
+							}else{
+								System.out.println("nada1");
+								System.out.println("{IMUL1}CASO UnaryOpExpr de "+primer.getType()+" pendiente");
+							}
+							
 
-							result+="    mov $" + firstOpValue + ", %eax \n";
+							
 						}
 					}
 				}else{
 				//caso floatliteral
-					System.out.println("{Sub1} CASO "+t.getFirstDir().getClass()+" PENDIENTE");
+					System.out.println("{IMUL1} CASO "+t.getFirstDir().getClass()+" PENDIENTE");
 				}
 			}
 		}
 		//si el 2do operando es varlocation
 		if(t.getSecondDir() instanceof VarLocation){
+			System.out.println("varlocation2");
 			VarLocation  y = (VarLocation)t.getSecondDir();
 			int YOff=y.getOffset();
 			result+="    mov " + YOff + "(%ebp) , %edx \n";
 		}else{
 			//sino, si es intliteral
 			if(t.getSecondDir() instanceof IntLiteral){
+				System.out.println("int2");
 				IntLiteral y=(IntLiteral) t.getSecondDir();
 				result+="    mov $" + y.getStringValue() + ", %edx \n";
 			}else{
@@ -349,43 +476,66 @@ public class AssemblyCodeGenerator{
 					int secondOpValue=0;
 					//si el 2do operando es una exp binaria, calculamos su valor
 					if(t.getSecondDir() instanceof BinOpExpr){
-						BinOpExpr segunda=(BinOpExpr) t.getSecondDir();	
+						System.out.println("binop2");
+						//la obtenemos como operacion binaria
+						BinOpExpr segunda=(BinOpExpr) t.getFirstDir();	
+						//obtenemos el operador
 						BinOpType operator=segunda.getOperator();
-						String partes[]=segunda.toString().split("\\"+operator.toString());
-						int primerValor=Integer.valueOf(partes[0].trim());
-						int segundoValor=Integer.valueOf(partes[1].trim());
-						System.out.println("SEGUNDA EXPR "+segunda+" pv: "+primerValor+" sv: "+segundoValor);
-						switch(operator){
-							case PLUS:
-								secondOpValue=(primerValor)+(segundoValor);
-								break;
-							case MINUS:
-								secondOpValue=(primerValor)-(segundoValor);
-								break;
-							case MULTIPLY:
-								secondOpValue=primerValor*segundoValor;
-								break;
-							case DIVIDE:
-								secondOpValue=(primerValor)/(segundoValor);
-								break;
-							case MOD:
-								secondOpValue=(primerValor)%(segundoValor);
-								break;
-						}
-						result+="    mov $" +secondOpValue+", %edx \n";
-						result+="    imul %edx, %eax \n";
-					}else{//caso contrario es una expresion unaria
-						if(t.getSecondDir() instanceof UnaryOpExpr){//si es una operacion unaria (menos unario)
-							UnaryOpExpr segunda=(UnaryOpExpr) t.getSecondDir();
-							secondOpValue=Integer.valueOf(segunda.toString());
+
+						//primer y segundo operandos de la expression
+						Expression primExpr=segunda.getLeftOperand();
+						Expression segExpr=segunda.getRightOperand();
+
+						System.out.println("binaria {imul2}: "+segunda);
+						System.out.println("operando izq: "+primExpr);
+						System.out.println("operando der: "+segExpr);
+
+						//vemos que ambos operandos de la operacion binaria sean enteros
+						if(primExpr.getType().equals(Type.INT) && segExpr.getType().equals(Type.INT)){
+							int primerValor=Integer.parseInt(primExpr.toString());
+							int segundoValor=Integer.parseInt(segExpr.toString());
+							System.out.println("SEGUNDA EXPR "+segunda+" pv: "+primerValor+" sv: "+segundoValor);
+							switch(operator){
+								case PLUS:
+									secondOpValue=(primerValor)+(segundoValor);
+									break;
+								case MINUS:
+									secondOpValue=(primerValor)-(segundoValor);
+									break;
+								case MULTIPLY:
+									secondOpValue=primerValor*segundoValor;
+									break;
+								case DIVIDE:
+									secondOpValue=(primerValor)/(segundoValor);
+									break;
+								case MOD:
+									secondOpValue=(primerValor)%(segundoValor);
+									break;
+							}
 							result+="    mov $" +secondOpValue+", %edx \n";
 							result+="    imul %edx, %eax \n";
+						}else{
+							System.out.println("{IMUL2}CASO BinOpExpr entre "+primExpr.getType()+" y "+segExpr.getType()+" pendiente");
+						}
+						
+					}else{//caso contrario es una expresion unaria
+						if(t.getSecondDir() instanceof UnaryOpExpr){//si es una operacion unaria (menos unario)
+							System.out.println("unary2");
+							UnaryOpExpr segunda=(UnaryOpExpr) t.getSecondDir();
+							if(segunda.getType().equals(Type.INT)){
+								secondOpValue=Integer.valueOf(segunda.toString());
+								result+="    mov $" +secondOpValue+", %edx \n";
+								result+="    imul %edx, %eax \n";
+							}else{
+								System.out.println("nada2");
+								System.out.println("{IMUL2}CASO UnaryOpExpr de "+segunda.getType()+" pendiente");
+							}
 
 						}
 					}
 				}else{
 				//caso float
-				System.out.println("{Imul2} CASO "+t.getSecondDir().getClass()+" PENDIENTE");
+				System.out.println("{IMUL2} CASO "+t.getSecondDir().getClass()+" PENDIENTE");
 				}
 			}
 		}
@@ -416,11 +566,21 @@ public class AssemblyCodeGenerator{
 					int firstOpValue=0;
 					//si el 1er operando es una exp binaria, calculamos su valor
 					if(t.getFirstDir() instanceof BinOpExpr){
+						//la obtenemos como operacion binaria
 						BinOpExpr primer=(BinOpExpr) t.getFirstDir();	
+						//obtenemos el operador
 						BinOpType operator=primer.getOperator();
-						String partes[]=primer.toString().split("\\"+operator.toString());
-						int primerValor=Integer.valueOf(partes[0].trim());
-						int segundoValor=Integer.valueOf(partes[1].trim());
+
+						//primer y segundo operandos de la expression
+						Expression primExpr=primer.getLeftOperand();
+						Expression segExpr=primer.getRightOperand();
+
+						System.out.println("binaria {idiv1}: "+primer);
+						System.out.println("operando izq: "+primExpr);
+						System.out.println("operando der: "+segExpr);
+
+						int primerValor=Integer.valueOf(primExpr.toString());
+						int segundoValor=Integer.valueOf(segExpr.toString());
 						System.out.println("PRIMERA EXPR "+primer+" pv: "+primerValor+" sv: "+segundoValor);
 						switch(operator){
 							case PLUS:
@@ -471,11 +631,23 @@ public class AssemblyCodeGenerator{
 					int secondOpValue=0;
 					//si el 2do operando es una exp binaria, calculamos su valor
 					if(t.getSecondDir() instanceof BinOpExpr){
-						BinOpExpr segunda=(BinOpExpr) t.getSecondDir();	
+						
+						//la obtenemos como operacion binaria
+						BinOpExpr segunda=(BinOpExpr) t.getFirstDir();	
+						//obtenemos el operador
 						BinOpType operator=segunda.getOperator();
-						String partes[]=segunda.toString().split("\\"+operator.toString());
-						int primerValor=Integer.valueOf(partes[0].trim());
-						int segundoValor=Integer.valueOf(partes[1].trim());
+
+						//primer y segundo operandos de la expression
+						Expression primExpr=segunda.getLeftOperand();
+						Expression segExpr=segunda.getRightOperand();
+
+						System.out.println("binaria {idiv2}: "+segunda);
+						System.out.println("operando izq: "+primExpr);
+						System.out.println("operando der: "+segExpr);
+
+						int primerValor=Integer.valueOf(primExpr.toString());
+						int segundoValor=Integer.valueOf(segExpr.toString());
+
 						System.out.println("SEGUNDA EXPR "+segunda+" pv: "+primerValor+" sv: "+segundoValor);
 						switch(operator){
 							case PLUS:
@@ -900,7 +1072,7 @@ public class AssemblyCodeGenerator{
 	public String generate(LinkedList<TripletCode> list){
 		OrAndlabelInt=0;
 		for(TripletCode t: list){
-
+			System.out.println("procesando : . . . "+t);
 			switch(t.getOperator()){
 				
 				case PLUS:
@@ -1053,6 +1225,7 @@ public class AssemblyCodeGenerator{
 		   			result += "    movl $" + t.getFirstDir() + ", " + t.getResult() + "(%rbp)\n";
 		   			break;
 			}
+			System.out.println("finalizado.");
 		}
 		return result;
 	}

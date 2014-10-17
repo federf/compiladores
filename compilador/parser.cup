@@ -948,6 +948,7 @@
                                             if(e.getType().equals(Type.BOOLEAN) && c.getType().equals(Type.BOOLEAN)){
                                                 
                                                 BinOpExpr exp=new BinOpExpr(e.getExpr(),BinOpType.OR,c.getExpr());
+                                                exp.setType(Type.BOOLEAN);
 
                                                 VarLocation res=new VarLocation("DISYUNCION"+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 System.out.println("OFFSET = " + res.getOffset());
@@ -967,6 +968,7 @@
                                             if(c1.getType().equals(Type.BOOLEAN) && c2.getType().equals(Type.BOOLEAN)){
                                                 
                                                 BinOpExpr exp=new BinOpExpr(c1.getExpr(),BinOpType.AND,c2.getExpr());
+                                                exp.setType(Type.BOOLEAN);
                                                 VarLocation res=new VarLocation("CONJUNCION"+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES
@@ -986,6 +988,7 @@
                                             if(logicValidOperators(r1,r2)){
                                                 
                                                 BinOpExpr exp= new BinOpExpr(r1.getExpr(),BinOpType.CEQ,r2.getExpr());
+                                                exp.setType(Type.BOOLEAN);
                                                 VarLocation res=new VarLocation("CEQ"+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES
@@ -1004,6 +1007,7 @@
                                             if( logicValidOperators(r1,r2)){
                                                 
                                                 BinOpExpr exp= new BinOpExpr(r1.getExpr(),BinOpType.NEQ,r2.getExpr());
+                                                exp.setType(Type.BOOLEAN);
                                                 VarLocation res=new VarLocation("NEQ"+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES
@@ -1025,6 +1029,7 @@
                                             if(validOperators(s1,s2)){
                                                 
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.LE,s2.getExpr());
+                                                exp.setType(Type.BOOLEAN);
                                                 VarLocation res=new VarLocation("LE"+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES
@@ -1042,6 +1047,7 @@
                                             if(validOperators(s1,s2)){
                                                 
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.GE,s2.getExpr());
+                                                exp.setType(Type.BOOLEAN);
                                                 VarLocation res=new VarLocation("GE"+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES
@@ -1060,6 +1066,7 @@
                                             if(validOperators(s1,s2)){
                                                 
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.GEQ,s2.getExpr());
+                                                exp.setType(Type.BOOLEAN);
                                                 VarLocation res=new VarLocation("GEQ"+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES   
@@ -1078,6 +1085,7 @@
                                             if(validOperators(s1,s2)){
                                                 
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.LEQ,s2.getExpr());
+                                                exp.setType(Type.BOOLEAN);
                                                 VarLocation res=new VarLocation("LEQ"+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES 
@@ -1104,6 +1112,7 @@
                                                 ){
                                                     
                                                     BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.PLUS,s2.getExpr());
+                                                    exp.setType(Type.INT);
                                                     VarLocation res=new VarLocation("PLUS"+Labels.getLabel(),Type.INT,exp,0);
                                                     System.out.println("OFFSET = " + res.getOffset());
                                                     //CODIGO DE TRES DIRECCIONES
@@ -1112,6 +1121,7 @@
                                                     RESULT=res;
                                                 }else{
                                                     BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.PLUS,s2.getExpr());
+                                                    exp.setType(Type.FLOAT);
                                                     VarLocation res=new VarLocation("PLUS"+Labels.getLabel(),Type.FLOAT,exp,0);
                                                     System.out.println("OFFSET = " + res.getOffset());
                                                     //CODIGO DE TRES DIRECCIONES
@@ -1136,21 +1146,25 @@
                                                 (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))
                                                 ){
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MINUS,s2.getExpr());
+                                                exp.setType(Type.INT);
                                                 VarLocation res=new VarLocation("MINUS"+Labels.getLabel(),Type.INT,exp,0);
                                                 System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES
+                                                System.out.println("minus 1- "+s1.getExpr()+"("+s1.getType()+")"+" , "+s2.getExpr()+"("+s2.getType()+")");
                                                 TripletList.addLast(new TripletCode(TripletOperator.MINUS, s1.getExpr(), s2.getExpr(), res));
                                                 //FIN CODIGO TRES DIRECCIONES
                                                 RESULT=res;
-                                            }else{
-                                                BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MINUS,s2.getExpr());
-                                                VarLocation res=new VarLocation("MINUS"+Labels.getLabel(),Type.FLOAT,exp,0);
-                                                System.out.println("OFFSET = " + res.getOffset());
-                                                //CODIGO DE TRES DIRECCIONES 
-                                                TripletList.addLast(new TripletCode(TripletOperator.MINUS, s1.getExpr(), s2.getExpr(), res));
-                                                //FIN CODIGO TRES DIRECCIONES
-                                                RESULT=res;
-                                            }
+                                                }else{
+                                                    BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MINUS,s2.getExpr());
+                                                    exp.setType(Type.FLOAT);
+                                                    VarLocation res=new VarLocation("MINUS"+Labels.getLabel(),Type.FLOAT,exp,0);
+                                                    System.out.println("OFFSET = " + res.getOffset());
+                                                    System.out.println("minus 2- "+s1.getExpr()+"("+s1.getType()+")"+" , "+s2.getExpr()+"("+s2.getType()+")");
+                                                    //CODIGO DE TRES DIRECCIONES 
+                                                    TripletList.addLast(new TripletCode(TripletOperator.MINUS, s1.getExpr(), s2.getExpr(), res));
+                                                    //FIN CODIGO TRES DIRECCIONES
+                                                    RESULT=res;
+                                                }
                                         }else{
                                             //si no lo son mostramos un mensaje de error
                                             System.out.println("Error: "+BinOpType.MINUS.toString()+" can only be applied to Int or Float values");
@@ -1170,22 +1184,24 @@
                                                 (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INTARRAY))||
                                                 (s1.getType().equals(Type.INTARRAY) && s2.getType().equals(Type.INT))
                                                 ){
-                                                BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MULTIPLY,s2.getExpr());
-                                                VarLocation res=new VarLocation("MULTIPLY"+Labels.getLabel(),Type.INT,exp,0);
-                                                System.out.println("OFFSET = " + res.getOffset());
-                                                //CODIGO DE TRES DIRECCIONES
-                                                TripletList.addLast(new TripletCode(TripletOperator.MULTIPLY, s1.getExpr(), s2.getExpr(), res));
-                                                //FIN CODIGO TRES DIRECCIONES
-                                                RESULT=res;
-                                            }else{
-                                                BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MULTIPLY,s2.getExpr());
-                                                VarLocation res=new VarLocation("MULTIPLY"+Labels.getLabel(),Type.INT,exp,0);
-                                                System.out.println("OFFSET = " + res.getOffset());
-                                                //CODIGO DE TRES DIRECCIONES
-                                                TripletList.addLast(new TripletCode(TripletOperator.MULTIPLY, s1.getExpr(), s2.getExpr(), res));
-                                                //FIN CODIGO TRES DIRECCIONES
-                                                RESULT=res;
-                                            }
+                                                    BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MULTIPLY,s2.getExpr());
+                                                    exp.setType(Type.INT);
+                                                    VarLocation res=new VarLocation("MULTIPLY"+Labels.getLabel(),Type.INT,exp,0);
+                                                    System.out.println("OFFSET = " + res.getOffset());
+                                                    //CODIGO DE TRES DIRECCIONES
+                                                    TripletList.addLast(new TripletCode(TripletOperator.MULTIPLY, s1.getExpr(), s2.getExpr(), res));
+                                                    //FIN CODIGO TRES DIRECCIONES
+                                                    RESULT=res;
+                                                }else{
+                                                    BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MULTIPLY,s2.getExpr());
+                                                    exp.setType(Type.FLOAT);
+                                                    VarLocation res=new VarLocation("MULTIPLY"+Labels.getLabel(),Type.FLOAT,exp,0);
+                                                    System.out.println("OFFSET = " + res.getOffset());
+                                                    //CODIGO DE TRES DIRECCIONES
+                                                    TripletList.addLast(new TripletCode(TripletOperator.MULTIPLY, s1.getExpr(), s2.getExpr(), res));
+                                                    //FIN CODIGO TRES DIRECCIONES
+                                                    RESULT=res;
+                                                }
                                         }else{
                                             //si no lo son mostramos un mensaje de error
                                             System.out.println("Error: "+BinOpType.MULTIPLY.toString()+" can only be applied to Int or Float values");
@@ -1204,21 +1220,23 @@
                                                 ){
                                                 
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.DIVIDE,s2.getExpr());     
+                                                exp.setType(Type.INT);
                                                 VarLocation res=new VarLocation("DIVIDE"+Labels.getLabel(),Type.INT,exp,0); 
                                                 System.out.println("OFFSET = " + res.getOffset());                                
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.DIVIDE, s1.getExpr(), s2.getExpr(), res));          
                                                 //FIN CODIGO TRES DIRECCIONES
                                                 RESULT=res;
-                                            }else{
-                                                BinOpExpr exp=new BinOpExpr(s1,BinOpType.DIVIDE,s2);
-                                                VarLocation res=new VarLocation("DIVIDE"+Labels.getLabel(),Type.FLOAT,exp,0);
-                                                System.out.println("OFFSET = " + res.getOffset());
-                                                //CODIGO DE TRES DIRECCIONES
-                                                TripletList.addLast(new TripletCode(TripletOperator.DIVIDE, s1.getExpr(), s2.getExpr(), res));          
-                                                //FIN CODIGO TRES DIRECCIONES
-                                                RESULT=res;
-                                            }
+                                                }else{
+                                                    BinOpExpr exp=new BinOpExpr(s1,BinOpType.DIVIDE,s2);
+                                                    exp.setType(Type.FLOAT);
+                                                    VarLocation res=new VarLocation("DIVIDE"+Labels.getLabel(),Type.FLOAT,exp,0);
+                                                    System.out.println("OFFSET = " + res.getOffset());
+                                                    //CODIGO DE TRES DIRECCIONES
+                                                    TripletList.addLast(new TripletCode(TripletOperator.DIVIDE, s1.getExpr(), s2.getExpr(), res));          
+                                                    //FIN CODIGO TRES DIRECCIONES
+                                                    RESULT=res;
+                                                }
                                         }else{
                                             //si no lo son mostramos un mensaje de error
                                             System.out.println("Error: "+BinOpType.DIVIDE.toString()+" can only be applied to Int or Float values");
@@ -1235,6 +1253,7 @@
                                             ){
                                                
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MOD,s2.getExpr());  
+                                                exp.setType(Type.INT);                                            
                                                 VarLocation res=new VarLocation("MOD"+Labels.getLabel(),Type.INT,exp,0);  
                                                 System.out.println("OFFSET = " + res.getOffset());                                   
                                                 //CODIGO DE TRES DIRECCIONES
@@ -1255,6 +1274,7 @@
                                     if(f.getType().equals(Type.BOOLEAN)){
                                         
                                         UnaryOpExpr u=new UnaryOpExpr(UnaryOpType.NON, f.getExpr());
+                                        u.setType(Type.BOOLEAN);
                                         VarLocation res=new VarLocation("NON"+Labels.getLabel(),Type.BOOLEAN,u,0);
                                         System.out.println("OFFSET = " + res.getOffset());
                                         //CODIGO DE TRES DIRECCIONES
@@ -1271,6 +1291,7 @@
                                 //verificamos que el operando sea valido para la operacion
                                 if(f.getType().equals(Type.FLOAT)){ 
                                         UnaryOpExpr u=new UnaryOpExpr(UnaryOpType.MINUS,f.getExpr());
+                                        u.setType(Type.FLOAT);
                                         VarLocation res=new VarLocation("UNARYMINUS"+Labels.getLabel(),Type.FLOAT,u,0);
                                         System.out.println("OFFSET = " + res.getOffset());
                                         //CODIGO DE TRES DIRECCIONES
@@ -1281,6 +1302,7 @@
                                     }else{
                                         if(f.getType().equals(Type.INT)){                                        
                                             UnaryOpExpr u=new UnaryOpExpr(UnaryOpType.MINUS,f.getExpr());
+                                            u.setType(Type.INT);
                                             VarLocation res=new VarLocation("UNARYMINUS"+Labels.getLabel(),Type.INT,u,0);
                                             System.out.println("OFFSET = " + res.getOffset());
                                             //CODIGO DE TRES DIRECCIONES
