@@ -9,14 +9,6 @@
 ///////////////////////// TESTS CORRECTOS ////////////////////////////////////////
 ---------------- Test tests/test_correctos/factorial.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -28
-OFFSET = -36
-OFFSET = -48
-OFFSET = -52
-OFFSET = -64
-minus 1- 0(int) , 1(int)
 
 parseo exitoso
 tamaño lista de codigo tercetos: 22
@@ -64,8 +56,6 @@ finalizado.
 procesando : . . . {JNE, null, null, Result: EndWhileLabel8}
 finalizado.
 procesando : . . . {MULTIPLY(*), 0, 0, Result: VarLocation{name=MULTIPLYLabel11, type=int, expr=0 * 0, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 * 0, null, Result: VarLocation{name=total, type=int, expr=null, size=0}}
 finalizado.
@@ -171,17 +161,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/floatTest.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
-OFFSET = -12
-minus 2- 0.0(float) , 0.0(float)
-OFFSET = -12
-OFFSET = -12
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
-OFFSET = -24
-OFFSET = -32
-OFFSET = -68
 
 parseo exitoso
 tamaño lista de codigo tercetos: 45
@@ -243,8 +222,8 @@ finalizado.
 procesando : . . . {METHODDECL, Metodo{ name=div, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=a, value=null, size=0}, Simbolo{type=float, name=b, value=null, size=0}]}, null, Result: null}
 finalizado.
 procesando : . . . {DIVIDE(/), 0.0, 0.0, Result: VarLocation{name=DIVIDELabel3, type=float, expr=VarLocation{name=factorLabel1, type=float, expr=0.0, size=0} / VarLocation{name=factorLabel2, type=float, expr=0.0, size=0}, size=0}}
-{Sub1} CASO class ir.ast.FloatLiteral PENDIENTE
-{Sub2} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV1} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel1, type=float, expr=0.0, size=0} / VarLocation{name=factorLabel2, type=float, expr=0.0, size=0}}
 finalizado.
@@ -270,7 +249,6 @@ procesando : . . . {METHODDECL, Metodo{ name=sum, return_not_void=true, typeRetu
 finalizado.
 procesando : . . . {PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUSLabel9, type=float, expr=0.0 + 0.0, size=0}}
 {ADD1} CASO class ir.ast.FloatLiteral PENDIENTE
-salio 1er
 {ADD2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {RETURN, null, null, Result: 0.0 + 0.0}
@@ -476,12 +454,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/logicTest.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -20
-OFFSET = -32
-OFFSET = -36
-OFFSET = -48
-OFFSET = -52
 Error: Method pruebaLogica must return int
 
 parseo exitoso
@@ -594,9 +566,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/program.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
-OFFSET = -4
-OFFSET = -24
 
 parseo exitoso
 tamaño lista de codigo tercetos: 20
@@ -630,9 +599,6 @@ finalizado.
 procesando : . . . {METHODDECL, Metodo{ name=inc, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel3, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {RETURN, null, null, Result: 0 + 1}
 finalizado.
@@ -739,30 +705,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_arreglos2.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -16
-OFFSET = -28
-OFFSET = -40
-OFFSET = -48
-OFFSET = -60
-OFFSET = -76
-OFFSET = -88
-OFFSET = -4
-OFFSET = -16
-OFFSET = -28
-OFFSET = -36
-minus 1- 58(int) , VarLocation{name=UNARYMINUSLabel26, type=int, expr=-6, size=0}(int)
-OFFSET = -44
-OFFSET = -52
-OFFSET = -60
-OFFSET = -72
-OFFSET = -84
-OFFSET = -92
-OFFSET = -112
-OFFSET = -120
-minus 1- 7(int) , VarLocation{name=PLUSLabel44, type=int, expr=3 + 3, size=0}(int)
-OFFSET = -128
-OFFSET = -140
 
 parseo exitoso
 tamaño lista de codigo tercetos: 32
@@ -813,7 +755,6 @@ procesando : . . . {ASSIGN(=), 4, null, Result: VarLocation{name=A, type=int[], 
 finalizado.
 procesando : . . . {PLUS(+), 2.6, 0.0, Result: VarLocation{name=PLUSLabel7, type=float, expr=2.6 + 0.0, size=0}}
 {ADD1} CASO class ir.ast.FloatLiteral PENDIENTE
-salio 1er
 {ADD2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {ASSIGN(=), 2.6 + 0.0, null, Result: VarLocation{name=B, type=float[], expr=null, size=56}}
@@ -857,9 +798,6 @@ finalizado.
 procesando : . . . {ASSIGN(=), !VarLocation{name=factorLabel36, type=boolean, expr=VarLocation{name=LELabel35, type=boolean, expr=4 < 6, size=0}, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=10}}
 finalizado.
 procesando : . . . {PLUS(+), 3, 3, Result: VarLocation{name=PLUSLabel44, type=int, expr=3 + 3, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {MINUS(-), 7, VarLocation{name=PLUSLabel44, type=int, expr=3 + 3, size=0}, Result: VarLocation{name=MINUSLabel46, type=int, expr=7 - VarLocation{name=PLUSLabel44, type=int, expr=3 + 3, size=0}, size=0}}
 finalizado.
@@ -993,41 +931,6 @@ ARRAYACCESS
   
 ---------------- Test tests/test_correctos/test_arreglos.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
-OFFSET = -20
-OFFSET = -32
-minus 1- 1(int) , 0(int)
-OFFSET = -44
-OFFSET = -56
-minus 1- 1(int) , 1(int)
-OFFSET = -60
-OFFSET = -72
-OFFSET = -84
-minus 1- 0(int) , 0(int)
-OFFSET = -88
-OFFSET = -96
-OFFSET = -112
-OFFSET = -124
-OFFSET = -136
-OFFSET = -140
-OFFSET = -148
-OFFSET = -164
-OFFSET = -172
-OFFSET = -184
-OFFSET = -192
-OFFSET = -204
-OFFSET = -208
-OFFSET = -216
-OFFSET = -236
-OFFSET = -248
-minus 1- VarLocation{name=MULTIPLYLabel58, type=int, expr=5 * 9, size=0}(int) , 40(int)
-OFFSET = -252
-OFFSET = -260
-OFFSET = -272
-OFFSET = -280
-OFFSET = -296
-OFFSET = -300
-OFFSET = -312
 Error: Method pruArreglos must return int
 
 parseo exitoso
@@ -1137,8 +1040,6 @@ finalizado.
 procesando : . . . {MINUS(-), 1, 1, Result: VarLocation{name=MINUSLabel17, type=int, expr=1 - 1, size=0}}
 finalizado.
 procesando : . . . {MULTIPLY(*), 0, 5, Result: VarLocation{name=MULTIPLYLabel20, type=int, expr=0 * 5, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 * 5, null, Result: VarLocation{name=res, type=float[], expr=null, size=8}}
 finalizado.
@@ -1163,8 +1064,6 @@ finalizado.
 procesando : . . . {JNE, null, null, Result: EndWhileLabel31}
 finalizado.
 procesando : . . . {MULTIPLY(*), 0, 2, Result: VarLocation{name=MULTIPLYLabel35, type=int, expr=0 * 2, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 * 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=589}}
 finalizado.
@@ -1185,24 +1084,15 @@ finalizado.
 procesando : . . . {JNE, null, null, Result: EndWhileLabel42}
 finalizado.
 procesando : . . . {MULTIPLY(*), 0, 2, Result: VarLocation{name=MULTIPLYLabel46, type=int, expr=0 * 2, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {PLUS(+), 0 * 2, 8, Result: VarLocation{name=PLUSLabel48, type=int, expr=0 * 2 + 8, size=0}}
-binop1
-binaria : {add1}0 * 2
-operando izq: 0
-operando der: 2
-PRIMERA EXPR 0 * 2 pv: 0 sv: 2
-salio 1er
-int2
+
+Result = 0
 finalizado.
 procesando : . . . {ARRAYACCESS, A, VarLocation{name=PLUSLabel48, type=int, expr=0 * 2 + 8, size=0}, Result: ArrayAccessLabel49}
 finalizado.
 procesando : . . . {PLUS(+), ArrayLiteral{id=A, size=589}, 3, Result: VarLocation{name=PLUSLabel52, type=int, expr=ArrayLiteral{id=A, size=589} + 3, size=0}}
 {ADD1} CASO class ir.ast.ArrayLiteral PENDIENTE
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), ArrayLiteral{id=A, size=589} + 3, null, Result: VarLocation{name=B, type=float[], expr=null, size=56}}
 finalizado.
@@ -1215,8 +1105,6 @@ finalizado.
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 finalizado.
 procesando : . . . {MULTIPLY(*), 5, 9, Result: VarLocation{name=MULTIPLYLabel58, type=int, expr=5 * 9, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {MINUS(-), VarLocation{name=MULTIPLYLabel58, type=int, expr=5 * 9, size=0}, 40, Result: VarLocation{name=MINUSLabel61, type=int, expr=VarLocation{name=MULTIPLYLabel58, type=int, expr=5 * 9, size=0} - 40, size=0}}
 finalizado.
@@ -1230,17 +1118,10 @@ finalizado.
 procesando : . . . {JNE, null, null, Result: EndWhileLabel64}
 finalizado.
 procesando : . . . {MULTIPLY(*), 0, 2, Result: VarLocation{name=MULTIPLYLabel68, type=int, expr=0 * 2, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {PLUS(+), 0 * 2, 8, Result: VarLocation{name=PLUSLabel70, type=int, expr=0 * 2 + 8, size=0}}
-binop1
-binaria : {add1}0 * 2
-operando izq: 0
-operando der: 2
-PRIMERA EXPR 0 * 2 pv: 0 sv: 2
-salio 1er
-int2
+
+Result = 0
 finalizado.
 procesando : . . . {ARRAYACCESS, A, VarLocation{name=PLUSLabel70, type=int, expr=0 * 2 + 8, size=0}, Result: ArrayAccessLabel71}
 finalizado.
@@ -1253,9 +1134,6 @@ finalizado.
 procesando : . . . {ASSIGN(=), ArrayLiteral{id=A, size=589} > ArrayLiteral{id=B, size=56}, null, Result: VarLocation{name=C, type=boolean[], expr=null, size=5}}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel79, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 finalizado.
@@ -1584,18 +1462,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/testAssing.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
-OFFSET = -32
-OFFSET = -36
-OFFSET = -48
-OFFSET = -52
-OFFSET = -64
-OFFSET = -72
-OFFSET = -84
-OFFSET = -88
-OFFSET = -96
 
 parseo exitoso
 tamaño lista de codigo tercetos: 22
@@ -1635,16 +1501,10 @@ finalizado.
 procesando : . . . {ASSIGN(=), 2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
 finalizado.
 procesando : . . . {PLUS(+), 1, 0, Result: VarLocation{name=PLUSLabel5, type=int, expr=1 + 0, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 1 + 0, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 finalizado.
 procesando : . . . {PLUS(+), 0, 2, Result: VarLocation{name=PLUSLabel8, type=int, expr=0 + 2, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
 finalizado.
@@ -1758,12 +1618,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_bloques02.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -20
-OFFSET = -28
-OFFSET = -40
-OFFSET = -44
-OFFSET = -60
 
 parseo exitoso
 tamaño lista de codigo tercetos: 29
@@ -1816,9 +1670,6 @@ finalizado.
 procesando : . . . {JNE, null, null, Result: EndWhileLabel7}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel10, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 finalizado.
@@ -1956,11 +1807,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_bloques.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -20
-OFFSET = -28
-OFFSET = -40
-OFFSET = -52
 
 parseo exitoso
 tamaño lista de codigo tercetos: 28
@@ -2012,9 +1858,6 @@ finalizado.
 procesando : . . . {JNE, null, null, Result: EndWhileLabel7}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel10, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 finalizado.
@@ -2147,13 +1990,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_booleanos.ctds ... -------------------
 parseo iniciado
-OFFSET = -8
-OFFSET = -12
-OFFSET = -12
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
-OFFSET = -32
 
 parseo exitoso
 tamaño lista de codigo tercetos: 33
@@ -2374,11 +2210,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_break.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -20
-OFFSET = -28
-OFFSET = -40
-OFFSET = -52
 
 parseo exitoso
 tamaño lista de codigo tercetos: 28
@@ -2430,9 +2261,6 @@ finalizado.
 procesando : . . . {JNE, null, null, Result: EndWhileLabel7}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel10, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 finalizado.
@@ -2565,9 +2393,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_comentarios2.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
-OFFSET = -16
-OFFSET = -24
 Error: Method pruAritmetica must return int
 
 parseo exitoso
@@ -2695,10 +2520,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_comentarios.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
-OFFSET = -16
-OFFSET = -28
-OFFSET = -32
 Error: Method pruAritmetica must return int
 
 parseo exitoso
@@ -2738,9 +2559,6 @@ finalizado.
 procesando : . . . {JNE, null, null, Result: elseCondLabel4}
 finalizado.
 procesando : . . . {PLUS(+), 0, 5, Result: VarLocation{name=PLUSLabel8, type=int, expr=0 + 5, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 finalizado.
@@ -2836,62 +2654,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_condiciones.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
-OFFSET = -20
-OFFSET = -32
-OFFSET = -40
-OFFSET = -44
-OFFSET = -56
-OFFSET = -64
-OFFSET = -68
-OFFSET = -84
-OFFSET = -100
-OFFSET = -108
-OFFSET = -112
-OFFSET = -124
-OFFSET = -132
-OFFSET = -136
-OFFSET = -152
-OFFSET = -160
-OFFSET = -172
-OFFSET = -180
-OFFSET = -192
-OFFSET = -200
-OFFSET = -204
-OFFSET = -212
-OFFSET = -224
-OFFSET = -232
-OFFSET = -244
-OFFSET = -252
-OFFSET = -256
-OFFSET = -268
-OFFSET = -276
-OFFSET = -284
-OFFSET = -300
-OFFSET = -316
-OFFSET = -324
-OFFSET = -336
-OFFSET = -344
-OFFSET = -348
-OFFSET = -364
-OFFSET = -380
-OFFSET = -388
-OFFSET = -392
-OFFSET = -404
-OFFSET = -412
-OFFSET = -420
-OFFSET = -432
-OFFSET = -440
-OFFSET = -452
-OFFSET = -460
-OFFSET = -472
-OFFSET = -480
-OFFSET = -488
-OFFSET = -504
-OFFSET = -520
-OFFSET = -528
-OFFSET = -540
-OFFSET = -548
 
 parseo exitoso
 tamaño lista de codigo tercetos: 91
@@ -3556,24 +3318,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_continuebreak.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -16
-OFFSET = -24
-OFFSET = -40
-OFFSET = -48
-OFFSET = -60
-minus 2- 0.0(float) , 1(int)
-OFFSET = -72
-OFFSET = -84
-OFFSET = -88
-OFFSET = -100
-OFFSET = -108
-OFFSET = -112
-OFFSET = -120
-OFFSET = -128
-OFFSET = -136
-OFFSET = -144
 
 parseo exitoso
 tamaño lista de codigo tercetos: 45
@@ -3669,12 +3413,7 @@ procesando : . . . {MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLYLabe
 {IMUL2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {MULTIPLY(*), 0.0 * 0.0, 0, Result: VarLocation{name=MULTIPLYLabel28, type=float, expr=0.0 * 0.0 * 0, size=0}}
-binop1
-binaria : {imul1}0.0 * 0.0
-operando izq: 0.0
-operando der: 0.0
 {IMUL1}CASO BinOpExpr entre float y float pendiente
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0.0 * 0.0 * 0, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
 finalizado.
@@ -3694,12 +3433,7 @@ procesando : . . . {UNARYMINUS(-expr), 1000.2343, null, Result: VarLocation{name
 {Unary_Minus}IMPLEMENTAR CASO -(FLOAT)
 finalizado.
 procesando : . . . {PLUS(+), -1000.2343, 6752, Result: VarLocation{name=PLUSLabel32, type=float, expr=-1000.2343 + 6752, size=0}}
-unary1
-unary -1000.2343 type(float)
-nada1 float
 {ADD1}CASO UnaryOpExpr de float pendiente
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), -1000.2343 + 6752, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
 finalizado.
@@ -3714,7 +3448,8 @@ finalizado.
 procesando : . . . {UNARYMINUS(-expr), 2, null, Result: VarLocation{name=UNARYMINUSLabel34, type=int, expr=-2, size=0}}
 finalizado.
 procesando : . . . {MULTIPLY(*), -2, 0.0, Result: VarLocation{name=MULTIPLYLabel36, type=float, expr=-2 * 0.0, size=0}}
-unary1
+
+Result = -2
 {IMUL2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {RETURN, null, null, Result: -2 * 0.0}
@@ -3874,21 +3609,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_expresiones01.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -20
-OFFSET = -24
-OFFSET = -40
-OFFSET = -52
-OFFSET = -68
-OFFSET = -76
-OFFSET = -88
-minus 1- 0(int) , 1(int)
-OFFSET = -92
-OFFSET = -104
-OFFSET = -108
-OFFSET = -120
-OFFSET = -124
-OFFSET = -136
 
 parseo exitoso
 tamaño lista de codigo tercetos: 44
@@ -3982,8 +3702,6 @@ finalizado.
 procesando : . . . {ASSIGN(=), 0 - 1, null, Result: VarLocation{name=g, type=int, expr=null, size=0}}
 finalizado.
 procesando : . . . {MULTIPLY(*), 0, 2, Result: VarLocation{name=MULTIPLYLabel30, type=int, expr=0 * 2, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 * 2, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
 finalizado.
@@ -3992,14 +3710,11 @@ finalizado.
 procesando : . . . {LABEL, null, null, Result: EndWhileLabel24}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel33, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 finalizado.
 procesando : . . . {DIVIDE(/), 0.0, 2, Result: VarLocation{name=DIVIDELabel36, type=float, expr=VarLocation{name=factorLabel34, type=float, expr=0.0, size=0} / VarLocation{name=factorLabel35, type=int, expr=2, size=0}, size=0}}
-{Sub1} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV1} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel34, type=float, expr=0.0, size=0} / VarLocation{name=factorLabel35, type=int, expr=2, size=0}, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
 finalizado.
@@ -4177,17 +3892,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_expresiones02.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
-OFFSET = -32
-OFFSET = -36
-OFFSET = -48
-OFFSET = -52
-OFFSET = -60
-OFFSET = -72
-OFFSET = -84
-OFFSET = -96
 
 parseo exitoso
 tamaño lista de codigo tercetos: 27
@@ -4232,28 +3936,22 @@ finalizado.
 procesando : . . . {ASSIGN(=), 5, null, Result: VarLocation{name=c, type=int, expr=null, size=0}}
 finalizado.
 procesando : . . . {MULTIPLY(*), 0, 0, Result: VarLocation{name=MULTIPLYLabel5, type=int, expr=0 * 0, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 * 0, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 finalizado.
 procesando : . . . {PLUS(+), 0, 0, Result: VarLocation{name=PLUSLabel8, type=int, expr=0 + 0, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 0, null, Result: VarLocation{name=p, type=int, expr=null, size=0}}
 finalizado.
 procesando : . . . {ASSIGN(=), 3.14, null, Result: VarLocation{name=pi, type=float, expr=null, size=0}}
 finalizado.
 procesando : . . . {MULTIPLY(*), 2, 0.0, Result: VarLocation{name=MULTIPLYLabel12, type=float, expr=2 * 0.0, size=0}}
-int1
 {IMUL2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {ASSIGN(=), 2 * 0.0, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
 finalizado.
 procesando : . . . {DIVIDE(/), 0, 0.0, Result: VarLocation{name=DIVIDELabel15, type=float, expr=VarLocation{name=factorLabel13, type=int, expr=0, size=0} / VarLocation{name=factorLabel14, type=float, expr=0.0, size=0}, size=0}}
-{Sub2} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {GE(>), VarLocation{name=DIVIDELabel15, type=float, expr=VarLocation{name=factorLabel13, type=int, expr=0, size=0} / VarLocation{name=factorLabel14, type=float, expr=0.0, size=0}, size=0}, 5, Result: VarLocation{name=GELabel18, type=boolean, expr=VarLocation{name=DIVIDELabel15, type=float, expr=VarLocation{name=factorLabel13, type=int, expr=0, size=0} / VarLocation{name=factorLabel14, type=float, expr=0.0, size=0}, size=0} > 5, size=0}}
 finalizado.
@@ -4377,25 +4075,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_float01.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
-OFFSET = -36
-OFFSET = -40
-OFFSET = -48
-OFFSET = -52
-OFFSET = -60
-OFFSET = -72
-OFFSET = -80
-OFFSET = -92
-OFFSET = -96
-OFFSET = -108
-OFFSET = -116
-OFFSET = -124
-OFFSET = -136
-OFFSET = -148
-OFFSET = -4
-OFFSET = -12
 
 parseo exitoso
 tamaño lista de codigo tercetos: 47
@@ -4496,9 +4175,6 @@ finalizado.
 procesando : . . . {ASSIGN(=), 0.0 * 0.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel24, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 finalizado.
@@ -4515,8 +4191,8 @@ finalizado.
 procesando : . . . {JNE, null, null, Result: elseCondLabel29}
 finalizado.
 procesando : . . . {DIVIDE(/), 1.0, 0.0, Result: VarLocation{name=DIVIDELabel33, type=float, expr=VarLocation{name=factorLabel31, type=float, expr=1.0, size=0} / VarLocation{name=factorLabel32, type=float, expr=0.0, size=0}, size=0}}
-{Sub1} CASO class ir.ast.FloatLiteral PENDIENTE
-{Sub2} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV1} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel31, type=float, expr=1.0, size=0} / VarLocation{name=factorLabel32, type=float, expr=0.0, size=0}}
 finalizado.
@@ -4700,18 +4376,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_float02.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -28
-OFFSET = -40
-OFFSET = -44
-OFFSET = -60
-OFFSET = -64
-OFFSET = -76
-OFFSET = -80
-OFFSET = -88
-OFFSET = -4
-OFFSET = -12
 
 parseo exitoso
 tamaño lista de codigo tercetos: 32
@@ -4781,7 +4445,6 @@ procesando : . . . {JNE, null, null, Result: elseCondLabel16}
 finalizado.
 procesando : . . . {PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUSLabel20, type=float, expr=0.0 + 0.0, size=0}}
 {ADD1} CASO class ir.ast.FloatLiteral PENDIENTE
-salio 1er
 {ADD2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {ASSIGN(=), 0.0 + 0.0, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
@@ -4925,91 +4588,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_float03.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
-OFFSET = -36
-OFFSET = -40
-OFFSET = -48
-OFFSET = -52
-OFFSET = -68
-OFFSET = -80
-OFFSET = -84
-OFFSET = -92
-OFFSET = -104
-OFFSET = -112
-OFFSET = -116
-OFFSET = -128
-OFFSET = -136
-OFFSET = -144
-OFFSET = -156
-OFFSET = -168
-OFFSET = -4
-OFFSET = -12
-OFFSET = -16
-OFFSET = -24
-OFFSET = -28
-OFFSET = -36
-OFFSET = -40
-OFFSET = -48
-OFFSET = -52
-OFFSET = -64
-OFFSET = -72
-minus 2- 0.0 * 0.0(float) , 0.0(float)
-OFFSET = -76
-OFFSET = -84
-OFFSET = -92
-OFFSET = -100
-OFFSET = -116
-OFFSET = -128
-OFFSET = -132
-OFFSET = -140
-OFFSET = -156
-OFFSET = -172
-OFFSET = -184
-OFFSET = -196
-OFFSET = -200
-OFFSET = -224
-OFFSET = -228
-OFFSET = -240
-OFFSET = -244
-OFFSET = -260
-OFFSET = -268
-minus 2- 0.0(float) , VarLocation{name=DIVIDELabel105, type=float, expr=VarLocation{name=factorLabel103, type=float, expr=10.0, size=0} / VarLocation{name=factorLabel104, type=float, expr=2.0, size=0}, size=0}(float)
-OFFSET = -272
-OFFSET = -288
-OFFSET = -300
-OFFSET = -304
-OFFSET = -308
-OFFSET = -324
-OFFSET = -328
-OFFSET = -336
-minus 2- 35.0 + 4.0 * 0.0(float) , 498.0(float)
-OFFSET = -340
-OFFSET = -352
-minus 2- 3.2(float) , 0.0(float)
-OFFSET = -360
-minus 2- 3.2 - 0.0(float) , 12345.356(float)
-OFFSET = -364
-OFFSET = -376
-OFFSET = -380
-OFFSET = -392
-OFFSET = -396
-OFFSET = -408
-OFFSET = -412
-OFFSET = -424
-OFFSET = -428
-OFFSET = -432
-OFFSET = -444
-OFFSET = -452
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
-OFFSET = -24
-OFFSET = -32
-OFFSET = -40
-OFFSET = -44
-OFFSET = -72
 
 parseo exitoso
 tamaño lista de codigo tercetos: 150
@@ -5215,19 +4793,11 @@ procesando : . . . {MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLYLabe
 {IMUL2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {MULTIPLY(*), 0.0 * 0.0, 2, Result: VarLocation{name=MULTIPLYLabel26, type=float, expr=0.0 * 0.0 * 2, size=0}}
-binop1
-binaria : {imul1}0.0 * 0.0
-operando izq: 0.0
-operando der: 0.0
 {IMUL1}CASO BinOpExpr entre float y float pendiente
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0.0 * 0.0 * 2, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel29, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 finalizado.
@@ -5244,8 +4814,8 @@ finalizado.
 procesando : . . . {JNE, null, null, Result: elseCondLabel34}
 finalizado.
 procesando : . . . {DIVIDE(/), 1.0, 0.0, Result: VarLocation{name=DIVIDELabel38, type=float, expr=VarLocation{name=factorLabel36, type=float, expr=1.0, size=0} / VarLocation{name=factorLabel37, type=float, expr=0.0, size=0}, size=0}}
-{Sub1} CASO class ir.ast.FloatLiteral PENDIENTE
-{Sub2} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV1} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel36, type=float, expr=1.0, size=0} / VarLocation{name=factorLabel37, type=float, expr=0.0, size=0}}
 finalizado.
@@ -5293,13 +4863,6 @@ procesando : . . . {MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLYLabe
 {IMUL2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {MINUS(-), 0.0 * 0.0, 0.0, Result: VarLocation{name=MINUSLabel54, type=float, expr=0.0 * 0.0 - 0.0, size=0}}
-1er operacion es: -. . 0.0 * 0.0
-binaria : {sub1}0.0 * 0.0
-operando izq: 0.0
-operando der: 0.0
-asdf asdf prim 0.0 , seg 0.0
-float
-float
 {SUB1}CASO BinOpExpr entre float y float pendiente
 {SUB2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
@@ -5376,7 +4939,6 @@ procesando : . . . {JNE, null, null, Result: elseCondLabel97}
 finalizado.
 procesando : . . . {PLUS(+), 0.0, 2.0, Result: VarLocation{name=PLUSLabel101, type=float, expr=0.0 + 2.0, size=0}}
 {ADD1} CASO class ir.ast.FloatLiteral PENDIENTE
-salio 1er
 {ADD2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {ASSIGN(=), 0.0 + 2.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
@@ -5386,8 +4948,8 @@ finalizado.
 procesando : . . . {LABEL, null, null, Result: elseCondLabel97}
 finalizado.
 procesando : . . . {DIVIDE(/), 10.0, 2.0, Result: VarLocation{name=DIVIDELabel105, type=float, expr=VarLocation{name=factorLabel103, type=float, expr=10.0, size=0} / VarLocation{name=factorLabel104, type=float, expr=2.0, size=0}, size=0}}
-{Sub1} CASO class ir.ast.FloatLiteral PENDIENTE
-{Sub2} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV1} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {MINUS(-), 0.0, VarLocation{name=DIVIDELabel105, type=float, expr=VarLocation{name=factorLabel103, type=float, expr=10.0, size=0} / VarLocation{name=factorLabel104, type=float, expr=2.0, size=0}, size=0}, Result: VarLocation{name=MINUSLabel107, type=float, expr=0.0 - VarLocation{name=DIVIDELabel105, type=float, expr=VarLocation{name=factorLabel103, type=float, expr=10.0, size=0} / VarLocation{name=factorLabel104, type=float, expr=2.0, size=0}, size=0}, size=0}}
 {SUB1} CASO class ir.ast.FloatLiteral PENDIENTE
@@ -5419,21 +4981,9 @@ procesando : . . . {MULTIPLY(*), 4.0, 0.0, Result: VarLocation{name=MULTIPLYLabe
 finalizado.
 procesando : . . . {PLUS(+), 35.0, 4.0 * 0.0, Result: VarLocation{name=PLUSLabel122, type=float, expr=35.0 + 4.0 * 0.0, size=0}}
 {ADD1} CASO class ir.ast.FloatLiteral PENDIENTE
-salio 1er
-binop2
-binaria : {add2}4.0 * 0.0
-operando izq: 4.0
-operando der: 0.0
 {ADD2}CASO BinOpExpr entre float y float pendiente
 finalizado.
 procesando : . . . {MINUS(-), 35.0 + 4.0 * 0.0, 498.0, Result: VarLocation{name=MINUSLabel124, type=float, expr=35.0 + 4.0 * 0.0 - 498.0, size=0}}
-1er operacion es: -. . 35.0 + 4.0 * 0.0
-binaria : {sub1}35.0 + 4.0 * 0.0
-operando izq: 35.0
-operando der: 4.0 * 0.0
-asdf asdf prim 35.0 , seg 4.0 * 0.0
-float
-float
 {SUB1}CASO BinOpExpr entre float y float pendiente
 {SUB2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
@@ -5448,13 +4998,6 @@ procesando : . . . {MINUS(-), 3.2, 0.0, Result: VarLocation{name=MINUSLabel127, 
 {SUB2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {MINUS(-), 3.2 - 0.0, 12345.356, Result: VarLocation{name=MINUSLabel129, type=float, expr=3.2 - 0.0 - 12345.356, size=0}}
-1er operacion es: -. . 3.2 - 0.0
-binaria : {sub1}3.2 - 0.0
-operando izq: 3.2
-operando der: 0.0
-asdf asdf prim 3.2 , seg 0.0
-float
-float
 {SUB1}CASO BinOpExpr entre float y float pendiente
 {SUB2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
@@ -5463,9 +5006,6 @@ finalizado.
 procesando : . . . {LABEL, null, null, Result: endIfLabel117}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel132, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 finalizado.
@@ -5478,8 +5018,6 @@ procesando : . . . {UNARYMINUS(-expr), 0.0, null, Result: VarLocation{name=UNARY
 finalizado.
 procesando : . . . {MULTIPLY(*), 0.0, -0.0, Result: VarLocation{name=MULTIPLYLabel136, type=float, expr=0.0 * -0.0, size=0}}
 {IMUL1} CASO class ir.ast.FloatLiteral PENDIENTE
-unary2
-nada2
 {IMUL2}CASO UnaryOpExpr de float pendiente
 finalizado.
 procesando : . . . {MULTIPLY(*), 23.0, 0.0, Result: VarLocation{name=MULTIPLYLabel139, type=float, expr=23.0 * 0.0, size=0}}
@@ -5487,41 +5025,20 @@ procesando : . . . {MULTIPLY(*), 23.0, 0.0, Result: VarLocation{name=MULTIPLYLab
 {IMUL2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {PLUS(+), 0.0 * -0.0, 23.0 * 0.0, Result: VarLocation{name=PLUSLabel140, type=float, expr=0.0 * -0.0 + 23.0 * 0.0, size=0}}
-binop1
-binaria : {add1}0.0 * -0.0
-operando izq: 0.0
-operando der: -0.0
 {ADD1}CASO BinOpExpr entre float y float pendiente
-salio 1er
-binop2
-binaria : {add2}23.0 * 0.0
-operando izq: 23.0
-operando der: 0.0
 {ADD2}CASO BinOpExpr entre float y float pendiente
 finalizado.
 procesando : . . . {DIVIDE(/), 2.0, 4.0, Result: VarLocation{name=DIVIDELabel143, type=float, expr=VarLocation{name=factorLabel141, type=float, expr=2.0, size=0} / VarLocation{name=factorLabel142, type=float, expr=4.0, size=0}, size=0}}
-{Sub1} CASO class ir.ast.FloatLiteral PENDIENTE
-{Sub2} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV1} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {PLUS(+), 0.0 * -0.0 + 23.0 * 0.0, VarLocation{name=factorLabel141, type=float, expr=2.0, size=0} / VarLocation{name=factorLabel142, type=float, expr=4.0, size=0}, Result: VarLocation{name=PLUSLabel144, type=float, expr=0.0 * -0.0 + 23.0 * 0.0 + VarLocation{name=factorLabel141, type=float, expr=2.0, size=0} / VarLocation{name=factorLabel142, type=float, expr=4.0, size=0}, size=0}}
-binop1
-binaria : {add1}0.0 * -0.0 + 23.0 * 0.0
-operando izq: 0.0 * -0.0
-operando der: 23.0 * 0.0
 {ADD1}CASO BinOpExpr entre float y float pendiente
-salio 1er
-binop2
-binaria : {add2}VarLocation{name=factorLabel141, type=float, expr=2.0, size=0} / VarLocation{name=factorLabel142, type=float, expr=4.0, size=0}
-operando izq: VarLocation{name=factorLabel141, type=float, expr=2.0, size=0}
-operando der: VarLocation{name=factorLabel142, type=float, expr=4.0, size=0}
 {ADD2}CASO BinOpExpr entre float y float pendiente
 finalizado.
 procesando : . . . {ASSIGN(=), 0.0 * -0.0 + 23.0 * 0.0 + VarLocation{name=factorLabel141, type=float, expr=2.0, size=0} / VarLocation{name=factorLabel142, type=float, expr=4.0, size=0}, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel147, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
 finalizado.
@@ -5567,7 +5084,6 @@ procesando : . . . {ASSIGN(=), MethodCallExpr{name=potencia, args=[0.0, 2]}, nul
 finalizado.
 procesando : . . . {PLUS(+), 0.0, 2.0, Result: VarLocation{name=PLUSLabel163, type=float, expr=0.0 + 2.0, size=0}}
 {ADD1} CASO class ir.ast.FloatLiteral PENDIENTE
-salio 1er
 {ADD2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {METHODCALL, multiples, 2, Result: RESULTLabel164}
@@ -6003,38 +5519,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_float04.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
-OFFSET = -36
-OFFSET = -40
-OFFSET = -48
-OFFSET = -52
-OFFSET = -68
-OFFSET = -80
-OFFSET = -84
-OFFSET = -92
-OFFSET = -104
-OFFSET = -112
-OFFSET = -116
-OFFSET = -128
-OFFSET = -136
-OFFSET = -144
-OFFSET = -156
-OFFSET = -168
-OFFSET = -4
-OFFSET = -16
-OFFSET = -24
-OFFSET = -32
-OFFSET = -40
-OFFSET = -48
-OFFSET = -4
-OFFSET = -12
-OFFSET = -16
-OFFSET = -24
-OFFSET = -32
-OFFSET = -36
-OFFSET = -44
 
 parseo exitoso
 tamaño lista de codigo tercetos: 67
@@ -6157,19 +5641,12 @@ procesando : . . . {MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLYLabe
 {IMUL2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {MULTIPLY(*), 0.0 * 0.0, 2.0, Result: VarLocation{name=MULTIPLYLabel26, type=float, expr=0.0 * 0.0 * 2.0, size=0}}
-binop1
-binaria : {imul1}0.0 * 0.0
-operando izq: 0.0
-operando der: 0.0
 {IMUL1}CASO BinOpExpr entre float y float pendiente
 {IMUL2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {ASSIGN(=), 0.0 * 0.0 * 2.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel29, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 finalizado.
@@ -6186,8 +5663,8 @@ finalizado.
 procesando : . . . {JNE, null, null, Result: elseCondLabel34}
 finalizado.
 procesando : . . . {DIVIDE(/), 1.0, 0.0, Result: VarLocation{name=DIVIDELabel38, type=float, expr=VarLocation{name=factorLabel36, type=float, expr=1.0, size=0} / VarLocation{name=factorLabel37, type=float, expr=0.0, size=0}, size=0}}
-{Sub1} CASO class ir.ast.FloatLiteral PENDIENTE
-{Sub2} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV1} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel36, type=float, expr=1.0, size=0} / VarLocation{name=factorLabel37, type=float, expr=0.0, size=0}}
 finalizado.
@@ -6216,34 +5693,18 @@ procesando : . . . {MULTIPLY(*), 0.0, 0.0, Result: VarLocation{name=MULTIPLYLabe
 {IMUL2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {MULTIPLY(*), 0.0 * 0.0, 0.0, Result: VarLocation{name=MULTIPLYLabel46, type=float, expr=0.0 * 0.0 * 0.0, size=0}}
-binop1
-binaria : {imul1}0.0 * 0.0
-operando izq: 0.0
-operando der: 0.0
 {IMUL1}CASO BinOpExpr entre float y float pendiente
 {IMUL2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {MULTIPLY(*), 0.0 * 0.0 * 0.0, 0.0, Result: VarLocation{name=MULTIPLYLabel48, type=float, expr=0.0 * 0.0 * 0.0 * 0.0, size=0}}
-binop1
-binaria : {imul1}0.0 * 0.0 * 0.0
-operando izq: 0.0 * 0.0
-operando der: 0.0
 {IMUL1}CASO BinOpExpr entre float y float pendiente
 {IMUL2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {MULTIPLY(*), 0.0 * 0.0 * 0.0 * 0.0, 0.0, Result: VarLocation{name=MULTIPLYLabel50, type=float, expr=0.0 * 0.0 * 0.0 * 0.0 * 0.0, size=0}}
-binop1
-binaria : {imul1}0.0 * 0.0 * 0.0 * 0.0
-operando izq: 0.0 * 0.0 * 0.0
-operando der: 0.0
 {IMUL1}CASO BinOpExpr entre float y float pendiente
 {IMUL2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {MULTIPLY(*), 0.0 * 0.0 * 0.0 * 0.0 * 0.0, 0.0, Result: VarLocation{name=MULTIPLYLabel52, type=float, expr=0.0 * 0.0 * 0.0 * 0.0 * 0.0 * 0.0, size=0}}
-binop1
-binaria : {imul1}0.0 * 0.0 * 0.0 * 0.0 * 0.0
-operando izq: 0.0 * 0.0 * 0.0 * 0.0
-operando der: 0.0
 {IMUL1}CASO BinOpExpr entre float y float pendiente
 {IMUL2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
@@ -6485,14 +5946,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_floats05.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
-OFFSET = -12
-minus 2- 0.0(float) , 0.0(float)
-OFFSET = -12
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
-OFFSET = -24
 
 parseo exitoso
 tamaño lista de codigo tercetos: 32
@@ -6540,8 +5993,8 @@ finalizado.
 procesando : . . . {METHODDECL, Metodo{ name=div, return_not_void=true, typeReturn=float, parameters [Simbolo{type=float, name=a, value=null, size=0}, Simbolo{type=float, name=b, value=null, size=0}]}, null, Result: null}
 finalizado.
 procesando : . . . {DIVIDE(/), 0.0, 0.0, Result: VarLocation{name=DIVIDELabel3, type=float, expr=VarLocation{name=factorLabel1, type=float, expr=0.0, size=0} / VarLocation{name=factorLabel2, type=float, expr=0.0, size=0}, size=0}}
-{Sub1} CASO class ir.ast.FloatLiteral PENDIENTE
-{Sub2} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV1} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel1, type=float, expr=0.0, size=0} / VarLocation{name=factorLabel2, type=float, expr=0.0, size=0}}
 finalizado.
@@ -6567,7 +6020,6 @@ procesando : . . . {METHODDECL, Metodo{ name=sum, return_not_void=true, typeRetu
 finalizado.
 procesando : . . . {PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUSLabel9, type=float, expr=0.0 + 0.0, size=0}}
 {ADD1} CASO class ir.ast.FloatLiteral PENDIENTE
-salio 1er
 {ADD2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {RETURN, null, null, Result: 0.0 + 0.0}
@@ -6710,10 +6162,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_for01.ctds ... -------------------
 parseo iniciado
-OFFSET = -8
-OFFSET = -36
-OFFSET = -44
-OFFSET = -56
 
 parseo exitoso
 tamaño lista de codigo tercetos: 23
@@ -6756,8 +6204,6 @@ finalizado.
 procesando : . . . {RETURN, null, null, Result: ArrayLiteral{id=A, size=5}}
 finalizado.
 procesando : . . . {MULTIPLY(*), 0, 10, Result: VarLocation{name=MULTIPLYLabel9, type=int, expr=0 * 10, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {LABEL, null, null, Result: BeginForLabel10}
 finalizado.
@@ -6766,16 +6212,10 @@ finalizado.
 procesando : . . . {JNL, null, null, Result: EndForLabel11}
 finalizado.
 procesando : . . . {PLUS(+), 0, 2, Result: VarLocation{name=PLUSLabel15, type=int, expr=0 + 2, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
 finalizado.
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel6, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factorLabel6, type=int, expr=5, size=0}}
-varlocation1
-salio 1er
-int2
 finalizado.
 procesando : . . . {JMP, null, null, Result: BeginForLabel10}
 finalizado.
@@ -6875,9 +6315,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_for02.ctds ... -------------------
 parseo iniciado
-OFFSET = -8
-OFFSET = -36
-OFFSET = -48
 
 parseo exitoso
 tamaño lista de codigo tercetos: 22
@@ -6925,16 +6362,10 @@ finalizado.
 procesando : . . . {JNL, null, null, Result: EndForLabel9}
 finalizado.
 procesando : . . . {PLUS(+), 0, 2, Result: VarLocation{name=PLUSLabel13, type=int, expr=0 + 2, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
 finalizado.
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel6, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factorLabel6, type=int, expr=5, size=0}}
-varlocation1
-salio 1er
-int2
 finalizado.
 procesando : . . . {JMP, null, null, Result: BeginForLabel8}
 finalizado.
@@ -7030,10 +6461,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_for03.ctds ... -------------------
 parseo iniciado
-OFFSET = -8
-OFFSET = -32
-OFFSET = -40
-OFFSET = -52
 
 parseo exitoso
 tamaño lista de codigo tercetos: 23
@@ -7084,16 +6511,10 @@ finalizado.
 procesando : . . . {JNL, null, null, Result: EndForLabel10}
 finalizado.
 procesando : . . . {PLUS(+), 0, 2, Result: VarLocation{name=PLUSLabel14, type=int, expr=0 + 2, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
 finalizado.
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel6, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factorLabel6, type=int, expr=5, size=0}}
-varlocation1
-salio 1er
-int2
 finalizado.
 procesando : . . . {JMP, null, null, Result: BeginForLabel9}
 finalizado.
@@ -7193,12 +6614,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_for04.ctds ... -------------------
 parseo iniciado
-OFFSET = -8
-OFFSET = -32
-OFFSET = -44
-OFFSET = -48
-OFFSET = -60
-OFFSET = -72
 
 parseo exitoso
 tamaño lista de codigo tercetos: 25
@@ -7245,19 +6660,12 @@ finalizado.
 procesando : . . . {UNARYMINUS(-expr), 10, null, Result: VarLocation{name=UNARYMINUSLabel8, type=int, expr=-10, size=0}}
 finalizado.
 procesando : . . . {MULTIPLY(*), 11, 2, Result: VarLocation{name=MULTIPLYLabel11, type=int, expr=11 * 2, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {PLUS(+), -10, 11 * 2, Result: VarLocation{name=PLUSLabel12, type=int, expr=-10 + 11 * 2, size=0}}
-unary1
-unary -10 type(int)
-unaryint1
-salio 1er
-binop2
-binaria : {add2}11 * 2
-operando izq: 11
-operando der: 2
-SEGUNDA EXPR 11 * 2 pv: 11 sv: 2
+
+Result = -10
+
+Result = 22
 finalizado.
 procesando : . . . {LABEL, null, null, Result: BeginForLabel14}
 finalizado.
@@ -7266,16 +6674,10 @@ finalizado.
 procesando : . . . {JNL, null, null, Result: EndForLabel15}
 finalizado.
 procesando : . . . {PLUS(+), 0, 2, Result: VarLocation{name=PLUSLabel19, type=int, expr=0 + 2, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
 finalizado.
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel6, type=int, expr=0, size=0}, 1, Result: VarLocation{name=factorLabel6, type=int, expr=0, size=0}}
-varlocation1
-salio 1er
-int2
 finalizado.
 procesando : . . . {JMP, null, null, Result: BeginForLabel14}
 finalizado.
@@ -7384,10 +6786,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_for05.ctds ... -------------------
 parseo iniciado
-OFFSET = -8
-OFFSET = -36
-OFFSET = -44
-OFFSET = -56
 
 parseo exitoso
 tamaño lista de codigo tercetos: 29
@@ -7451,8 +6849,6 @@ procesando : . . . {METHODCALL, par, 0, Result: RESULTLabel9}
 finalizado.
 procesando : . . . {PLUS(+), MethodCallExpr{name=par, args=[]}, 5, Result: VarLocation{name=PLUSLabel12, type=int, expr=MethodCallExpr{name=par, args=[]} + 5, size=0}}
 {ADD1} CASO class ir.ast.MethodCallExpr PENDIENTE
-salio 1er
-int2
 finalizado.
 procesando : . . . {LABEL, null, null, Result: BeginForLabel13}
 finalizado.
@@ -7461,16 +6857,10 @@ finalizado.
 procesando : . . . {JNL, null, null, Result: EndForLabel14}
 finalizado.
 procesando : . . . {PLUS(+), 0, 2, Result: VarLocation{name=PLUSLabel18, type=int, expr=0 + 2, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 2, null, Result: VarLocation{name=A, type=int[], expr=null, size=5}}
 finalizado.
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel8, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, 1, Result: VarLocation{name=factorLabel8, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}}
-varlocation1
-salio 1er
-int2
 finalizado.
 procesando : . . . {JMP, null, null, Result: BeginForLabel13}
 finalizado.
@@ -7589,16 +6979,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_if_anidados.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
-OFFSET = -24
-OFFSET = -28
-OFFSET = -40
-minus 1- 0(int) , 0(int)
-OFFSET = -44
-OFFSET = -56
-minus 1- 0(int) , 0(int)
-OFFSET = -60
-OFFSET = -72
 Error: Method pruAritmetica must return int
 
 parseo exitoso
@@ -7680,8 +7060,6 @@ finalizado.
 procesando : . . . {LABEL, null, null, Result: elseCondLabel4}
 finalizado.
 procesando : . . . {MULTIPLY(*), 0, 5, Result: VarLocation{name=MULTIPLYLabel19, type=int, expr=0 * 5, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 * 5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 finalizado.
@@ -7840,16 +7218,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_if.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
-OFFSET = -16
-OFFSET = -28
-minus 1- 0(int) , 0(int)
-OFFSET = -40
-OFFSET = -44
-OFFSET = -56
-OFFSET = -60
-OFFSET = -72
-minus 1- 0(int) , 0(int)
 Error: Method pruAritmetica must return int
 
 parseo exitoso
@@ -7923,8 +7291,6 @@ finalizado.
 procesando : . . . {JNE, null, null, Result: elseCondLabel12}
 finalizado.
 procesando : . . . {MULTIPLY(*), 0, 5, Result: VarLocation{name=MULTIPLYLabel16, type=int, expr=0 * 5, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 * 5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 finalizado.
@@ -8091,12 +7457,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_logicos01.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -20
-OFFSET = -32
-OFFSET = -36
-OFFSET = -48
-OFFSET = -52
 Error: Method pruebaLogica must return int
 
 parseo exitoso
@@ -8209,26 +7569,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_logicos02.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
-OFFSET = -28
-OFFSET = -36
-OFFSET = -48
-OFFSET = -60
-OFFSET = -72
-OFFSET = -88
-OFFSET = -96
-OFFSET = -108
-OFFSET = -120
-OFFSET = -132
-OFFSET = -148
-OFFSET = -156
-OFFSET = -168
-OFFSET = -180
-OFFSET = -192
-OFFSET = -208
-OFFSET = -216
-OFFSET = -228
-OFFSET = -236
 
 parseo exitoso
 tamaño lista de codigo tercetos: 56
@@ -8309,11 +7649,10 @@ procesando : . . . {JNE, null, null, Result: elseCondLabel10}
 finalizado.
 procesando : . . . {PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUSLabel14, type=float, expr=0.0 + 0.0, size=0}}
 {ADD1} CASO class ir.ast.FloatLiteral PENDIENTE
-salio 1er
 {ADD2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {DIVIDE(/), VarLocation{name=PLUSLabel14, type=float, expr=0.0 + 0.0, size=0}, 2.0, Result: VarLocation{name=DIVIDELabel17, type=float, expr=VarLocation{name=factorLabel15, type=float, expr=VarLocation{name=PLUSLabel14, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factorLabel16, type=float, expr=2.0, size=0}, size=0}}
-{Sub2} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel15, type=float, expr=VarLocation{name=PLUSLabel14, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factorLabel16, type=float, expr=2.0, size=0}}
 finalizado.
@@ -8335,11 +7674,10 @@ procesando : . . . {JNE, null, null, Result: elseCondLabel27}
 finalizado.
 procesando : . . . {PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUSLabel31, type=float, expr=0.0 + 0.0, size=0}}
 {ADD1} CASO class ir.ast.FloatLiteral PENDIENTE
-salio 1er
 {ADD2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {DIVIDE(/), VarLocation{name=PLUSLabel31, type=float, expr=0.0 + 0.0, size=0}, 2.0, Result: VarLocation{name=DIVIDELabel34, type=float, expr=VarLocation{name=factorLabel32, type=float, expr=VarLocation{name=PLUSLabel31, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factorLabel33, type=float, expr=2.0, size=0}, size=0}}
-{Sub2} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel32, type=float, expr=VarLocation{name=PLUSLabel31, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factorLabel33, type=float, expr=2.0, size=0}}
 finalizado.
@@ -8361,11 +7699,10 @@ procesando : . . . {JNE, null, null, Result: elseCondLabel44}
 finalizado.
 procesando : . . . {PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUSLabel48, type=float, expr=0.0 + 0.0, size=0}}
 {ADD1} CASO class ir.ast.FloatLiteral PENDIENTE
-salio 1er
 {ADD2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {DIVIDE(/), VarLocation{name=PLUSLabel48, type=float, expr=0.0 + 0.0, size=0}, 2.0, Result: VarLocation{name=DIVIDELabel51, type=float, expr=VarLocation{name=factorLabel49, type=float, expr=VarLocation{name=PLUSLabel48, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factorLabel50, type=float, expr=2.0, size=0}, size=0}}
-{Sub2} CASO class ir.ast.FloatLiteral PENDIENTE
+{DIV2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel49, type=float, expr=VarLocation{name=PLUSLabel48, type=float, expr=0.0 + 0.0, size=0}, size=0} / VarLocation{name=factorLabel50, type=float, expr=2.0, size=0}}
 finalizado.
@@ -8637,13 +7974,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_mainSolo.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
-OFFSET = -24
-OFFSET = -36
-OFFSET = -48
-OFFSET = -52
 
 parseo exitoso
 tamaño lista de codigo tercetos: 11
@@ -8728,17 +8058,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_mcd.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
-OFFSET = -16
-OFFSET = -24
-OFFSET = -32
-OFFSET = -40
-OFFSET = -48
-OFFSET = -64
-OFFSET = -76
-OFFSET = -88
-OFFSET = -92
-OFFSET = -100
 
 parseo exitoso
 tamaño lista de codigo tercetos: 32
@@ -8949,10 +8268,7 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_metodos00.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -16
 Error: Method alo not declared
-OFFSET = -4
 Error: Method alo not declared
 ocurrio un error: null
 ---------------------------------------------------
@@ -8960,15 +8276,6 @@ ocurrio un error: null
   
 ---------------- Test tests/test_correctos/test_metodos01.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -16
-OFFSET = -8
-OFFSET = -20
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
-OFFSET = -32
-OFFSET = -48
 
 parseo exitoso
 tamaño lista de codigo tercetos: 25
@@ -9008,9 +8315,6 @@ finalizado.
 procesando : . . . {METHODDECL, Metodo{ name=alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel3, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 finalizado.
@@ -9026,9 +8330,6 @@ finalizado.
 procesando : . . . {PARAM, null, null, Result: 0}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel8, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 finalizado.
@@ -9052,8 +8353,6 @@ finalizado.
 procesando : . . . {ASSIGN(=), MethodCallExpr{name=alo2, args=[0]}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
 finalizado.
 procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel15, type=int, expr=3, size=0}, 0, Result: VarLocation{name=MULTIPLYLabel18, type=int, expr=VarLocation{name=factorLabel15, type=int, expr=3, size=0} * 0, size=0}}
-varlocation1
-int2
 finalizado.
 procesando : . . . {METHODCALL, alo2, 1, Result: RESULTLabel19}
 finalizado.
@@ -9152,17 +8451,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_metodos02.ctds ... -------------------
 parseo iniciado
-OFFSET = -8
-OFFSET = -20
-OFFSET = -24
-OFFSET = -36
-minus 1- 0(int) , 1(int)
-OFFSET = -12
-OFFSET = -24
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
-OFFSET = -48
 
 parseo exitoso
 tamaño lista de codigo tercetos: 36
@@ -9218,9 +8506,6 @@ finalizado.
 procesando : . . . {JNE, null, null, Result: elseCondLabel2}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel6, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 finalizado.
@@ -9255,9 +8540,6 @@ finalizado.
 procesando : . . . {PARAM, null, null, Result: 0}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel15, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 finalizado.
@@ -9281,8 +8563,6 @@ finalizado.
 procesando : . . . {ASSIGN(=), MethodCallExpr{name=alo2, args=[0]}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
 finalizado.
 procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel23, type=int, expr=3, size=0}, 0, Result: VarLocation{name=MULTIPLYLabel26, type=int, expr=VarLocation{name=factorLabel23, type=int, expr=3, size=0} * 0, size=0}}
-varlocation1
-int2
 finalizado.
 procesando : . . . {METHODCALL, alo, 2, Result: RESULTLabel27}
 finalizado.
@@ -9412,15 +8692,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_metodos03.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
-OFFSET = -16
-OFFSET = -20
-OFFSET = -24
-OFFSET = -36
-OFFSET = -40
-OFFSET = -52
-OFFSET = -4
-OFFSET = -16
 
 parseo exitoso
 tamaño lista de codigo tercetos: 30
@@ -9465,9 +8736,6 @@ finalizado.
 procesando : . . . {METHODDECL, Metodo{ name=inc, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel3, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {RETURN, null, null, Result: 0 + 1}
 finalizado.
@@ -9479,8 +8747,6 @@ finalizado.
 procesando : . . . {METHODDECL, Metodo{ name=resto, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0}, Simbolo{type=float, name=y, value=null, size=0}]}, null, Result: null}
 finalizado.
 procesando : . . . {MULTIPLY(*), 3, 2, Result: VarLocation{name=MULTIPLYLabel7, type=int, expr=3 * 2, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {GE(>), 0, 3 * 2, Result: VarLocation{name=GELabel8, type=boolean, expr=0 > 3 * 2, size=0}}
 {logic} FALTA CASO (2do param)class ir.ast.BinOpExpr
@@ -9631,10 +8897,7 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_metodos_externos01.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -16
 Error: Method alo not declared
-OFFSET = -4
 Error: Method alo not declared
 ocurrio un error: null
 ---------------------------------------------------
@@ -9642,22 +8905,6 @@ ocurrio un error: null
   
 ---------------- Test tests/test_correctos/test_metodos_externos02.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
-OFFSET = -16
-OFFSET = -24
-OFFSET = -32
-OFFSET = -40
-OFFSET = -48
-OFFSET = -64
-OFFSET = -76
-OFFSET = -88
-OFFSET = -92
-OFFSET = -100
-OFFSET = -4
-OFFSET = -32
-OFFSET = -44
-OFFSET = -48
-minus 2- 3.5 * 0(float) , 7 / 6(int)
 
 parseo exitoso
 tamaño lista de codigo tercetos: 36
@@ -9767,22 +9014,11 @@ procesando : . . . {PARAM, null, null, Result: 9}
 finalizado.
 procesando : . . . {MULTIPLY(*), 3.5, 0, Result: VarLocation{name=MULTIPLYLabel31, type=float, expr=3.5 * 0, size=0}}
 {IMUL1} CASO class ir.ast.FloatLiteral PENDIENTE
-int2
 finalizado.
 procesando : . . . {DIVIDE(/), 7, 6, Result: VarLocation{name=DIVIDELabel34, type=int, expr=7 / 6, size=0}}
 finalizado.
 procesando : . . . {MINUS(-), 3.5 * 0, 7 / 6, Result: VarLocation{name=MINUSLabel35, type=float, expr=3.5 * 0 - 7 / 6, size=0}}
-1er operacion es: -. . 3.5 * 0
-binaria : {sub1}3.5 * 0
-operando izq: 3.5
-operando der: 0
-asdf asdf prim 3.5 , seg 0
-float
-int
 {SUB1}CASO BinOpExpr entre float y int pendiente
-binaria {sub2}: 3.5 * 0
-operando izq: 3.5
-operando der: 0
 {SUB2}CASO BinOpExpr entre float y int pendiente
 finalizado.
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%d%f"}, StringLiteral{value="mcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}, 3.5 * 0 - 7 / 6]}, null, Result: EXTERNINVKLabel36}
@@ -9906,8 +9142,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_mod.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -20
 
 parseo exitoso
 tamaño lista de codigo tercetos: 11
@@ -9996,11 +9230,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_mult01.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -28
-OFFSET = -36
-OFFSET = -44
 
 parseo exitoso
 tamaño lista de codigo tercetos: 15
@@ -10033,30 +9262,90 @@ finalizado.
 procesando : . . . {ASSIGN(=), 2000, null, Result: VarLocation{name=d, type=int, expr=null, size=0}}
 finalizado.
 procesando : . . . {MULTIPLY(*), 0, 1000, Result: VarLocation{name=MULTIPLYLabel5, type=int, expr=0 * 1000, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {MULTIPLY(*), 0 * 1000, 0, Result: VarLocation{name=MULTIPLYLabel7, type=int, expr=0 * 1000 * 0, size=0}}
-binop1
-binaria : {imul1}0 * 1000
-operando izq: 0
-operando der: 1000
-PRIMERA EXPR 0 * 1000 pv: 0 sv: 1000
-int2
+
+Result = 0
 finalizado.
 procesando : . . . {MULTIPLY(*), 0 * 1000 * 0, 0, Result: VarLocation{name=MULTIPLYLabel9, type=int, expr=0 * 1000 * 0 * 0, size=0}}
-binop1
-binaria : {imul1}0 * 1000 * 0
-operando izq: 0 * 1000
-operando der: 0
-ocurrio un error: For input string: "0 * 1000"
+
+Result = 0
+finalizado.
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=MULTIPLYLabel9, type=int, expr=0 * 1000 * 0 * 0, size=0}}
+finalizado.
+procesando : . . . {LABEL, null, null, Result: EndMethod pruMult}
+finalizado.
+procesando : . . . {LABEL, null, null, Result: BeginMethod main}
+finalizado.
+
+procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
+finalizado.
+procesando : . . . {METHODCALL, pruMult, 1, Result: RESULTLabel12}
+finalizado.
+procesando : . . . {PARAM, null, null, Result: 2}
+finalizado.
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[2]}]}, null, Result: EXTERNINVKLabel14}
+finalizado.
+procesando : . . . {LABEL, null, null, Result: EndMethod main}
+finalizado.
+
+
+.globl	pruMult
+.type	pruMult, @function 
+pruMult: 
+    enter   $(4), $0 
+    push	%rbp
+    mov %rsp, %rbp
+
+    mov 5(%rbp), %eax
+    mov -4(%rbp), %eax
+
+    mov 2000(%rbp), %eax
+    mov -12(%rbp), %eax
+
+    mov $0, %eax 
+    mov $1000, %edx 
+    mov %eax,-28%(ebp) 
+
+    mov $0, %eax 
+    mov $0, %edx 
+    mov %eax,-36%(ebp) 
+
+    mov $0, %eax 
+    mov $0, %edx 
+    mov %eax,-44%(ebp) 
+
+    mov VarLocation{name=MULTIPLYLabel9, type=int, expr=0 * 1000 * 0 * 0, size=0}(%rbp), %eax
+
+    leave
+    ret
+
+
+
+.globl	main
+.type	main, @function 
+main: 
+    enter   $(0), $0 
+    push	%rbp
+    mov %rsp, %rbp
+
+    call pruMult
+    movl %eax, RESULTLabel12(%rbp) 
+
+PARAM
+
+    call "printf"
+    movl %eax, EXTERNINVKLabel14(%rbp) 
+
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_mult02.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -20
 
 parseo exitoso
 tamaño lista de codigo tercetos: 11
@@ -10083,8 +9372,6 @@ finalizado.
 procesando : . . . {ASSIGN(=), 5, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 finalizado.
 procesando : . . . {MULTIPLY(*), 0, 7, Result: VarLocation{name=MULTIPLYLabel4, type=int, expr=0 * 7, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=MULTIPLYLabel4, type=int, expr=0 * 7, size=0}}
 finalizado.
@@ -10146,8 +9433,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_prog_simple.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -16
 
 Error: Main Method Missing in Class prueba2
 parseo exitoso
@@ -10166,9 +9451,6 @@ finalizado.
 procesando : . . . {METHODDECL, Metodo{ name=alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=int, name=x, value=null, size=0}]}, null, Result: null}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel3, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 finalizado.
@@ -10199,38 +9481,6 @@ alo:
   
 ---------------- Test tests/test_correctos/test_retorno.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
-OFFSET = -36
-OFFSET = -44
-OFFSET = -60
-OFFSET = -76
-OFFSET = -84
-OFFSET = -100
-OFFSET = -104
-OFFSET = -116
-minus 1- 0(int) , 1(int)
-OFFSET = -120
-OFFSET = -132
-OFFSET = -144
-OFFSET = -160
-OFFSET = -168
-OFFSET = -184
-OFFSET = -188
-OFFSET = -200
-OFFSET = -212
-OFFSET = -216
-OFFSET = -228
-minus 1- 0(int) , 1(int)
-OFFSET = -240
-OFFSET = -252
-OFFSET = -256
-minus 1- 0 * 0(int) , 0 * 0(int)
-OFFSET = -264
-OFFSET = -268
-OFFSET = -276
-OFFSET = -288
 
 parseo exitoso
 tamaño lista de codigo tercetos: 69
@@ -10355,9 +9605,6 @@ finalizado.
 procesando : . . . {LABEL, null, null, Result: elseCondLabel26}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel33, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 finalizado.
@@ -10386,9 +9633,6 @@ finalizado.
 procesando : . . . {JNE, null, null, Result: elseCondLabel49}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel53, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 finalizado.
@@ -10405,327 +9649,22 @@ finalizado.
 procesando : . . . {MINUS(-), 0, 1, Result: VarLocation{name=MINUSLabel61, type=int, expr=0 - 1, size=0}}
 finalizado.
 procesando : . . . {MULTIPLY(*), 0, 0, Result: VarLocation{name=MULTIPLYLabel64, type=int, expr=0 * 0, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {MULTIPLY(*), 0, 0, Result: VarLocation{name=MULTIPLYLabel67, type=int, expr=0 * 0, size=0}}
-int1
-int2
 finalizado.
 procesando : . . . {MINUS(-), 0 * 0, 0 * 0, Result: VarLocation{name=MINUSLabel68, type=int, expr=0 * 0 - 0 * 0, size=0}}
-1er operacion es: -. . 0 * 0
-binaria : {sub1}0 * 0
-operando izq: 0
-operando der: 0
-PRIMERA EXPR 0 * 0 pv: 0 sv: 0
-binaria {sub2}: 0 * 0
-operando izq: 0
-operando der: 0
-SEGUNDA EXPR 0 * 0 pv: 0 sv: 0
+
+Result = 0
+
+Result = 0
 finalizado.
 procesando : . . . {PLUS(+), 0 - 1, VarLocation{name=MINUSLabel68, type=int, expr=0 * 0 - 0 * 0, size=0}, Result: VarLocation{name=PLUSLabel70, type=int, expr=0 - 1 + VarLocation{name=MINUSLabel68, type=int, expr=0 * 0 - 0 * 0, size=0}, size=0}}
-binop1
-binaria : {add1}0 - 1
-operando izq: 0
-operando der: 1
-PRIMERA EXPR 0 - 1 pv: 0 sv: 1
-salio 1er
-VarLocation2
-finalizado.
-procesando : . . . {ASSIGN(=), 0 - 1 + VarLocation{name=MINUSLabel68, type=int, expr=0 * 0 - 0 * 0, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-finalizado.
-procesando : . . . {JMP, null, null, Result: endIfLabel58}
-finalizado.
-procesando : . . . {LABEL, null, null, Result: elseCondLabel57}
-finalizado.
-procesando : . . . {LABEL, null, null, Result: endIfLabel58}
-finalizado.
-procesando : . . . {LABEL, null, null, Result: endIfLabel50}
-finalizado.
-procesando : . . . {JMP, null, null, Result: BeginWhileLabel44}
-finalizado.
-procesando : . . . {LABEL, null, null, Result: EndWhileLabel45}
-finalizado.
-procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-finalizado.
-procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel74, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
-finalizado.
-procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
-finalizado.
-procesando : . . . {JMP, null, null, Result: BeginWhileLabel8}
-finalizado.
-procesando : . . . {LABEL, null, null, Result: EndWhileLabel9}
-finalizado.
-procesando : . . . {RETURN, null, null, Result: 0}
-finalizado.
-procesando : . . . {LABEL, null, null, Result: EndMethod id}
-finalizado.
-procesando : . . . {LABEL, null, null, Result: BeginMethod main}
-finalizado.
-
-procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-finalizado.
-procesando : . . . {METHODCALL, id, 1, Result: RESULTLabel77}
-finalizado.
-procesando : . . . {PARAM, null, null, Result: 9}
-finalizado.
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=id, args=[9]}]}, null, Result: EXTERNINVKLabel79}
-finalizado.
-procesando : . . . {LABEL, null, null, Result: EndMethod main}
-finalizado.
-
-
-.globl	id
-.type	id, @function 
-id: 
-    enter   $(4), $0 
-    push	%rbp
-    mov %rsp, %rbp
-
-    mov 100(%rbp), %eax
-    mov -4(%rbp), %eax
-
-    mov 0(%rbp), %eax
-    mov -12(%rbp), %eax
-
-    mov 0(%rbp), %eax
-    mov -20(%rbp), %eax
-
-    movl	$0, %eax
-    cmpl	$0, %eax
-    setl	%al
-    movzbl %al, %eax
-    movl	%eax, -36(%rbp)
-
-.BeginWhileLabel8
-
-    mov true(%rbp), %eax
-    cmp -40(%rbp), %eax
-
-    jne EndWhileLabel9
-
-    mov 0(%rbp), %eax
-    mov -44(%rbp), %eax
-
-    movl	$0, %eax
-    cmpl	$0, %eax
-    setg	%al
-    movzbl %al, %eax
-    movl	%eax, -60(%rbp)
-
-    movl	$0, %eax
-    cmpl	$0, %eax
-    setl	%al
-    movzbl %al, %eax
-    movl	%eax, -76(%rbp)
-
-    cmp	$0, -60(%rbp)
-    jne .L0
-    cmp	$0, -76(%rbp)
-    je .L0
-    mov	$1, %eax
-    jmp .L1
-.L0:
-    movl	$0, %eax
-    jmp .L2
-.L1:
-    movl	%eax, -84(%rbp)
-.L2:
-
-.BeginWhileLabel21
-
-    mov true(%rbp), %eax
-    cmp -88(%rbp), %eax
-
-    jne EndWhileLabel22
-
-    movl	$0, %eax
-    cmpl	$0, %eax
-    setg	%al
-    movzbl %al, %eax
-    movl	%eax, -100(%rbp)
-
-    mov true(%rbp), %eax
-    cmp -100(%rbp), %eax
-
-    jne elseCondLabel26
-
-    mov $0, %eax 
-    mov $1, %edx 
-    mov %edx,-116%(ebp) 
-
-    mov 0 - 1(%rbp), %eax
-    mov -104(%rbp), %eax
-
-    jmp endIfLabel27
-
-.elseCondLabel26
-
-    mov $0, %eax 
-    mov $1, %edx 
-    mov %edx,-132%(ebp) 
-
-    mov 0 + 1(%rbp), %eax
-    mov -120(%rbp), %eax
-
-.endIfLabel27
-
-    jmp BeginWhileLabel21
-
-.EndWhileLabel22
-
-    movl	$0, %eax
-    cmpl	$0, %eax
-    setl	%al
-    movzbl %al, %eax
-    movl	%eax, -144(%rbp)
-
-    movl	$0, %eax
-    cmpl	$0, %eax
-    setg	%al
-    movzbl %al, %eax
-    movl	%eax, -160(%rbp)
-
-    cmp	$0, -144(%rbp)
-    jne .L3
-    cmp	$0, -160(%rbp)
-    je .L3
-    mov	$1, %eax
-    jmp .L4
-.L3:
-    movl	$0, %eax
-    jmp .L5
-.L4:
-    movl	%eax, -168(%rbp)
-.L5:
-
-.BeginWhileLabel44
-
-    mov true(%rbp), %eax
-    cmp -172(%rbp), %eax
-
-    jne EndWhileLabel45
-
-    movl	$0, %eax
-    cmpl	$0, %eax
-    setl	%al
-    movzbl %al, %eax
-    movl	%eax, -184(%rbp)
-
-    mov true(%rbp), %eax
-    cmp -184(%rbp), %eax
-
-    jne elseCondLabel49
-
-    mov $0, %eax 
-    mov $1, %edx 
-    mov %edx,-200%(ebp) 
-
-    mov 0 + 1(%rbp), %eax
-    mov -188(%rbp), %eax
-
-    jmp endIfLabel50
-
-.elseCondLabel49
-
-    movl	$0, %eax
-    cmpl	$0, %eax
-    sete %al
-    movzbl %al, %eax
-    movl	%eax, -212(%rbp)
-
-    mov true(%rbp), %eax
-    cmp -212(%rbp), %eax
-
-    jne elseCondLabel57
-
-    mov $0, %eax 
-    mov $1, %edx 
-    mov %edx,-228%(ebp) 
-
-    mov $0, %eax 
-    mov $0, %edx 
-    mov %eax,-240%(ebp) 
-
-    mov $0, %eax 
-    mov $0, %edx 
-    mov %eax,-252%(ebp) 
-
-    mov $0, %eax 
-    mov $0, %edx 
-    sub %eax, %edx 
-    mov %edx,-256%(ebp) 
-
-    mov $-1, %eax 
-    mov -256(%ebp) , %edx 
-    mov %edx,-264%(ebp) 
-
-    mov 0 - 1 + VarLocation{name=MINUSLabel68, type=int, expr=0 * 0 - 0 * 0, size=0}(%rbp), %eax
-    mov -216(%rbp), %eax
-
-    jmp endIfLabel58
-
-.elseCondLabel57
-
-.endIfLabel58
-
-.endIfLabel50
-
-    jmp BeginWhileLabel44
-
-.EndWhileLabel45
-
-    mov 0(%rbp), %eax
-    mov -268(%rbp), %eax
-
-    mov $0, %eax 
-    mov $1, %edx 
-    mov %edx,-288%(ebp) 
-
-    mov 0 + 1(%rbp), %eax
-    mov -276(%rbp), %eax
-
-    jmp BeginWhileLabel8
-
-.EndWhileLabel9
-
-    mov 0(%rbp), %eax
-
-    leave
-    ret
-
-
-
-.globl	main
-.type	main, @function 
-main: 
-    enter   $(0), $0 
-    push	%rbp
-    mov %rsp, %rbp
-
-    call id
-    movl %eax, RESULTLabel77(%rbp) 
-
-PARAM
-
-    call "printf"
-    movl %eax, EXTERNINVKLabel79(%rbp) 
-
-    leave
-    ret
-
-
+ocurrio un error: For input string: "- 1"
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_suma.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
-OFFSET = -28
-OFFSET = -44
 
 parseo exitoso
 tamaño lista de codigo tercetos: 26
@@ -10789,9 +9728,6 @@ finalizado.
 procesando : . . . {LABEL, null, null, Result: elseCondLabel10}
 finalizado.
 procesando : . . . {PLUS(+), 0, 0, Result: VarLocation{name=PLUSLabel15, type=int, expr=0 + 0, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {RETURN, null, null, Result: 0 + 0}
 finalizado.
@@ -10900,13 +9836,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_sumx.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -28
-OFFSET = -36
-OFFSET = -48
-OFFSET = -52
-OFFSET = -64
 
 parseo exitoso
 tamaño lista de codigo tercetos: 23
@@ -10956,15 +9885,11 @@ procesando : . . . {JNE, null, null, Result: EndWhileLabel8}
 finalizado.
 procesando : . . . {PLUS(+), 0.0, 0.0, Result: VarLocation{name=PLUSLabel11, type=float, expr=0.0 + 0.0, size=0}}
 {ADD1} CASO class ir.ast.FloatLiteral PENDIENTE
-salio 1er
 {ADD2} CASO class ir.ast.FloatLiteral PENDIENTE
 finalizado.
 procesando : . . . {ASSIGN(=), 0.0 + 0.0, null, Result: VarLocation{name=aux, type=float, expr=null, size=0}}
 finalizado.
 procesando : . . . {PLUS(+), 0, 1, Result: VarLocation{name=PLUSLabel14, type=int, expr=0 + 1, size=0}}
-int
-salio 1er
-int2
 finalizado.
 procesando : . . . {ASSIGN(=), 0 + 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 finalizado.
@@ -11068,13 +9993,6 @@ PARAM
   
 ---------------- Test tests/test_correctos/test_while.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -20
-OFFSET = -44
-OFFSET = -56
-OFFSET = -60
-OFFSET = -76
-OFFSET = -88
 
 parseo exitoso
 tamaño lista de codigo tercetos: 35
@@ -11349,10 +10267,7 @@ error de sintaxis: Linea 4.
   
 ---------------- Test tests/test_errores/error_class01.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -16
 Error: Method alo not declared
-OFFSET = -4
 Error: Method alo not declared
 ocurrio un error: null
 ---------------------------------------------------
@@ -11360,10 +10275,7 @@ ocurrio un error: null
   
 ---------------- Test tests/test_errores/error_class02.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -16
 Error: Method alo not declared
-OFFSET = -4
 Error: Method alo not declared
 ocurrio un error: null
 ---------------------------------------------------
@@ -11377,28 +10289,12 @@ error de sintaxis: Linea 3.
   
 ---------------- Test tests/test_errores/error_externinvk02.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -28
-OFFSET = -36
-OFFSET = -48
-OFFSET = -52
-OFFSET = -64
-minus 1- 0(int) , 1(int)
 error de sintaxis: Linea 23.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_externinvk.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -28
-OFFSET = -36
-OFFSET = -48
-OFFSET = -52
-OFFSET = -64
-minus 1- 0(int) , 1(int)
 error de sintaxis: Linea 22.
 ---------------------------------------------------
   
@@ -11411,22 +10307,7 @@ error de sintaxis: Linea 9.
   
 ---------------- Test tests/test_errores/error_float02.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
 error: 0 9 .
-OFFSET = -36
-OFFSET = -40
-OFFSET = -48
-OFFSET = -52
-OFFSET = -60
-OFFSET = -72
-OFFSET = -80
-OFFSET = -92
-OFFSET = -96
-OFFSET = -108
-OFFSET = -116
-OFFSET = -124
 error: 0 21 .
 error de sintaxis: Linea 22.
 ---------------------------------------------------
@@ -11434,87 +10315,48 @@ error de sintaxis: Linea 22.
   
 ---------------- Test tests/test_errores/error_float03.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
-OFFSET = -36
-OFFSET = -40
-OFFSET = -48
-OFFSET = -52
-OFFSET = -68
-OFFSET = -80
-OFFSET = -84
-OFFSET = -92
-OFFSET = -104
-OFFSET = -112
-OFFSET = -116
-OFFSET = -128
 error de sintaxis: Linea 29.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_float04.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -20
-OFFSET = -36
-OFFSET = -40
-OFFSET = -48
-OFFSET = -52
-OFFSET = -68
-OFFSET = -80
-OFFSET = -84
-OFFSET = -92
-OFFSET = -104
-OFFSET = -112
-OFFSET = -116
-OFFSET = -128
-OFFSET = -144
-OFFSET = -156
 error de sintaxis: Linea 41.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_for01.ctds ... -------------------
 parseo iniciado
-OFFSET = -8
 error de sintaxis: Linea 13.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_for02.ctds ... -------------------
 parseo iniciado
-OFFSET = -8
-OFFSET = -36
 error de sintaxis: Linea 13.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_for03.ctds ... -------------------
 parseo iniciado
-OFFSET = -8
 error de sintaxis: Linea 13.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_for04.ctds ... -------------------
 parseo iniciado
-OFFSET = -8
 error de sintaxis: Linea 13.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_for05.ctds ... -------------------
 parseo iniciado
-OFFSET = -8
 error de sintaxis: Linea 18.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_if01.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
 error de sintaxis: Linea 9.
 ---------------------------------------------------
   
@@ -11527,42 +10369,24 @@ error de sintaxis: Linea 8.
   
 ---------------- Test tests/test_errores/error_lineaerror02.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -24
-OFFSET = -36
-OFFSET = -44
 error de sintaxis: Linea 20.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_lineaerror.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -24
-OFFSET = -36
-OFFSET = -44
 error de sintaxis: Linea 20.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_break.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -20
-OFFSET = -28
-OFFSET = -40
-OFFSET = -52
-OFFSET = -56
-OFFSET = -64
 error de sintaxis: Linea 20.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_logicos02.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
 error: 0 4 &
 error de sintaxis: Linea 5.
 ---------------------------------------------------
@@ -11570,16 +10394,6 @@ error de sintaxis: Linea 5.
   
 ---------------- Test tests/test_errores/error_test_logicos.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
-OFFSET = -28
-OFFSET = -36
-OFFSET = -48
-OFFSET = -60
-OFFSET = -72
-OFFSET = -88
-OFFSET = -96
-OFFSET = -108
-OFFSET = -120
 ocurrio un error: null
 ---------------------------------------------------
   
@@ -11593,8 +10407,6 @@ error de sintaxis: Linea 11.
   
 ---------------- Test tests/test_errores/error_test_main02.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -16
 Error: Method Main must not have parameters
 Error: Method alo not declared
 error de sintaxis: Linea 14.
@@ -11615,40 +10427,19 @@ error de sintaxis: Linea 4.
   
 ---------------- Test tests/test_errores/error_test_metodos03.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -16
-OFFSET = -12
-OFFSET = -24
-OFFSET = -4
-OFFSET = -12
-OFFSET = -24
-OFFSET = -28
 error de sintaxis: Linea 19.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_metodos04.ctds ... -------------------
 parseo iniciado
-OFFSET = -8
-OFFSET = -20
-OFFSET = -24
-OFFSET = -32
-OFFSET = -40
-minus 1- -0(int) , 1(int)
 Error: Method alo3 not declared
-OFFSET = -12
-OFFSET = -24
 error de sintaxis: Linea 21.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_metodos05.ctds ... -------------------
 parseo iniciado
-OFFSET = -8
-OFFSET = -20
-OFFSET = -24
-OFFSET = -36
-minus 1- 0(int) , 1(int)
 error de sintaxis: Linea 15.
 ---------------------------------------------------
   
@@ -11668,9 +10459,6 @@ error de sintaxis: Linea 9.
   
 ---------------- Test tests/test_errores/error_test_multiplesMain.ctds ... -------------------
 parseo iniciado
-OFFSET = -4
-OFFSET = -12
-OFFSET = -24
 error de sintaxis: Linea 9.
 ---------------------------------------------------
   
@@ -11695,7 +10483,6 @@ error de sintaxis: Linea 3.
   
 ---------------- Test tests/test_errores/ifErrorTest.ctds ... -------------------
 parseo iniciado
-OFFSET = -12
 error de sintaxis: Linea 6.
 ---------------------------------------------------
   
