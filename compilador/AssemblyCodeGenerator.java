@@ -102,17 +102,7 @@ public class AssemblyCodeGenerator{
 
 	//cadena generada
 	String result="";
-
-	//metodo que dado un codigo de tres direcciones de una operacion aritmetica (suma, resta, mult o div)
-	//retorna true si sus operandos son VarLocation o IntLiteral (o FlaotLiteral - mas adelante)
-	public boolean cond_arith(TripletCode t){
-		return 
-		((t.getFirstDir() instanceof VarLocation || t.getFirstDir() instanceof IntLiteral || t.getFirstDir() instanceof FloatLiteral) 
-		&&
-		((t.getSecondDir() instanceof VarLocation || t.getSecondDir() instanceof IntLiteral || t.getSecondDir() instanceof FloatLiteral))
-		);
-	}
-
+	
 	public void ASM_Add(TripletCode t){
 
 		VarLocation res = (VarLocation)t.getResult();
