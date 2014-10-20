@@ -884,8 +884,8 @@ public class AssemblyCodeGenerator{
 
 	public void ASM_Method_Decl(TripletCode t){
 		Metodo m=(Metodo)t.getFirstDir();
-		result += ".globl	" + m.getName() + "\n";
-		result += ".type	" + m.getName() + ", @function \n";			
+		result += "    .globl	" + m.getName() + "\n";
+		result += "    .type	" + m.getName() + ", @function \n";			
 		result += m.getName() + ": \n";	
 		/*Dejamos espacio para los parametros del metodo*/
 		result += "    enter   $("+4 * m.getParametros().size() + "), $0 \n";
@@ -1106,12 +1106,14 @@ public class AssemblyCodeGenerator{
 			   		result+="\n";
 		   			ASM_Method_Decl(t);
 		   			break;
-		   		case CONST:
+		   		case GLOBAL:
 		   			result+="\n";
-		   			/*System.out.println(t.getFirstDir().getClass());
-		   			System.out.println("CONST "+t.getFirstDir());*/
-		   			
-		   			result += "    movl $" + t.getFirstDir() + ", " + t.getResult() + "(%rbp)\n";
+		   			if(t.getResult()==0){
+		   				result+="    .comm "+t.getSecondDir()+","+4+"\n";	
+		   			}else{
+		   				int res=(int)t.getResult();
+		   				result+="    .comm "+t.getSecondDir()+","+(4*res)+"\n";
+		   			}	   			
 		   			break;
 			}
 			System.out.println("finalizado.");

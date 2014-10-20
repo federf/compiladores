@@ -208,10 +208,9 @@
                         TS.agregarSimbolo(tipo_corriente, s.toString(), null, 0);
                         //CODIGO DE TRES DIRECCIONES  - guardamos la variable declarada y su tipo
                         
-
-                        /*System.out.println("ENTRO ACA "+s.toString() );
-                        TripletList.addLast(new TripletCode(TripletOperator.LABEL, tipo_corriente,null,s.toString())); */
-
+                        if(TS.getCorriente().esRaiz()){
+                            TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),0));
+                        }
                         //FIN CODIGO TRES DIRECCIONES
                         :} 
                         
@@ -221,22 +220,30 @@
                                                     //luego segun el ultimo tipo leido creamos el simbolo que representara al arreglo
                                                     switch (tipo_corriente){
                                                            case INT:
-                                                                   TS.agregarSimbolo(Type.INTARRAY, s.toString(), null, size);  
-                                                                   break;
+                                                                    TS.agregarSimbolo(Type.INTARRAY, s.toString(), null, size);  
+                                                                    //CODIGO DE TRES DIRECCIONES
+                                                                    if(TS.getCorriente().esRaiz()){
+                                                                        TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),i));
+                                                                    }
+                                                                    //FIN CODIGO TRES DIRECCIONES
+                                                                    break;
                                                            case FLOAT:
-                                                                   TS.agregarSimbolo(Type.FLOATARRAY, s.toString(), null, size);  
-                                                                   break;
+                                                                    TS.agregarSimbolo(Type.FLOATARRAY, s.toString(), null, size);  
+                                                                    //CODIGO DE TRES DIRECCIONES
+                                                                    if(TS.getCorriente().esRaiz()){
+                                                                        TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),i));
+                                                                    }
+                                                                    //FIN CODIGO TRES DIRECCIONES
+                                                                    break;
                                                            case BOOLEAN:
-                                                                   TS.agregarSimbolo(Type.BOOLARRAY, s.toString(), null, size); 
-                                                                   break;
+                                                                    TS.agregarSimbolo(Type.BOOLARRAY, s.toString(), null, size); 
+                                                                    //CODIGO DE TRES DIRECCIONES
+                                                                    if(TS.getCorriente().esRaiz()){
+                                                                        TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),i));
+                                                                    }
+                                                                    //FIN CODIGO TRES DIRECCIONES
+                                                                    break;
                                                     }
-                                                    //CODIGO DE TRES DIRECCIONES  - guardamos la variable declarada y su tipo}
-                                                    
-
-                                                    /*Simbolo ultimo=TS.obtenerSimbolo();
-                                                    TripletList.addLast(new TripletCode(TripletOperator.ARRAYLABEL, ultimo.getType(),i,s.toString()));*/
-
-                                                    //FIN CODIGO TRES DIRECCIONES
                                                     :} 
       ;
 
@@ -912,7 +919,7 @@
                                     System.out.println("Error: expression in array must be int");
                                     
                                 }else{
-                                    VarLocation v=new VarLocation((String)id,s.getType(),null,s.getSize());
+                                    VarLocation v=new VarLocation((String)id,s.getType(),e,s.getSize());
                                     //System.out.println("OFFSET = " + v.getOffset());
                                     v.setType(s.getType());
                                     RESULT=v ;
@@ -927,7 +934,7 @@
                                         System.out.println("Error: array index must be higher than zero");
                                         
                                     }else{
-                                        VarLocation v=new VarLocation((String)id,s.getType(),null,s.getSize());
+                                        VarLocation v=new VarLocation((String)id,s.getType(),e2,s.getSize());
                                         //System.out.println("OFFSET = " + v.getOffset());
                                         v.setType(s.getType());
                                         RESULT=v ;

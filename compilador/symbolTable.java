@@ -144,4 +144,8 @@ public class symbolTable {
         }
         return result;
     }
+
+    public Node getCorriente(){
+        return TablaDeSimbolos.getCorriente();
+    }
 }

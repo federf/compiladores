@@ -20,7 +20,9 @@ public class VarLocation extends Location {
         this.expr = expr;
         this.size = size;
         this.offset = off;
-
+        //para el tamaño de los arreglos
+        off = off - (size*4) ;
+        //cambiamos el offset para el proximo
         off = off - 4;
     }
 
@@ -38,7 +40,13 @@ public class VarLocation extends Location {
     }
 
     public int getOffset(){
-        return this.offset;
+        //si es una variable normal
+        if(this.size==0){
+            return this.offset;
+        }else{//sino, debe ser un arreglo
+        //retornamos el offset de su "ultima posicion", ya que se almacenan de atras hacia adelante
+            return this.offset-(this.size*4);
+        }
     }
     @Override
     public String toString() {
