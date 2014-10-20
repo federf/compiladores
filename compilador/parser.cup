@@ -207,6 +207,11 @@
     identifier::= ID:s {: //caso identificador ID
                         TS.agregarSimbolo(tipo_corriente, s.toString(), null, 0);
                         //CODIGO DE TRES DIRECCIONES  - guardamos la variable declarada y su tipo
+
+                        VarLocation arr;
+                        //la creamos como VarLocation para registrarla como tal
+                        arr=new VarLocation(s.toString(), tipo_corriente, null, 0);
+
                         
                         if(TS.getCorriente().esRaiz()){
                             TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),0));
@@ -215,12 +220,17 @@
                         :} 
                         
       | ID:s CORCHETE_IZQ INT_LITERAL:i CORCHETE_DER {: //caso arreglo ID[INT_LITERAL]
+                                                    VarLocation arr;
                                                     //convertimos el int_literal en string
                                                     int size= Integer.valueOf((String) i); 
                                                     //luego segun el ultimo tipo leido creamos el simbolo que representara al arreglo
                                                     switch (tipo_corriente){
                                                            case INT:
                                                                     TS.agregarSimbolo(Type.INTARRAY, s.toString(), null, size);  
+
+                                                                    //la creamos como VarLocation para registrarla como tal
+                                                                    arr=new VarLocation(s.toString(), Type.INTARRAY, null, size);
+
                                                                     //CODIGO DE TRES DIRECCIONES
                                                                     if(TS.getCorriente().esRaiz()){
                                                                         TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),i));
@@ -229,6 +239,10 @@
                                                                     break;
                                                            case FLOAT:
                                                                     TS.agregarSimbolo(Type.FLOATARRAY, s.toString(), null, size);  
+
+                                                                    //la creamos como VarLocation para registrarla como tal
+                                                                    arr=new VarLocation(s.toString(), Type.FLOATARRAY, null, size);
+
                                                                     //CODIGO DE TRES DIRECCIONES
                                                                     if(TS.getCorriente().esRaiz()){
                                                                         TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),i));
@@ -237,6 +251,10 @@
                                                                     break;
                                                            case BOOLEAN:
                                                                     TS.agregarSimbolo(Type.BOOLARRAY, s.toString(), null, size); 
+
+                                                                    //la creamos como VarLocation para registrarla como tal
+                                                                    arr=new VarLocation(s.toString(), Type.BOOLARRAY, null, size);
+
                                                                     //CODIGO DE TRES DIRECCIONES
                                                                     if(TS.getCorriente().esRaiz()){
                                                                         TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),i));
@@ -1390,6 +1408,8 @@
                                 System.out.println("Error: expression in array must be int");
                                 
                             }else{
+                                VarLocation arrAccess=new VarLocation(id.toString(),s.getType(), e,0);
+
                                 String LabelArrayAccess="ArrayAccess"+Labels.getLabel();
                                 TripletList.addLast(new TripletCode(TripletOperator.ARRAYACCESS,id, e,LabelArrayAccess));
                                 RESULT= new ArrayLiteral((String)id, s.getSize(), s.getType());

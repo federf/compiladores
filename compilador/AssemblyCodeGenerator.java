@@ -26,6 +26,7 @@ public class AssemblyCodeGenerator{
         //obtenemos la expression
         String input = expr;
         input = "0" + input;
+        input=input.trim();
         input = input.replaceAll("-","+-");
         //guardamos operandos y operadores en sus respectivas stacks
         String temp = "";
@@ -128,7 +129,7 @@ public class AssemblyCodeGenerator{
 					int firstOpValue=0;
 					//si el 1er operando es una exp binaria, calculamos su valor
 					if(t.getFirstDir() instanceof BinOpExpr){
-						//System.out.println("binop1");
+
 						//la obtenemos como operacion binaria
 						BinOpExpr primer=(BinOpExpr) t.getFirstDir();	
 						//obtenemos el operador
@@ -137,10 +138,6 @@ public class AssemblyCodeGenerator{
 						//primer y segundo operandos de la expression
 						Expression primExpr=primer.getLeftOperand();
 						Expression segExpr=primer.getRightOperand();
-
-						/*System.out.println("binaria : {add1}"+primer);
-						System.out.println("operando izq: "+primExpr);
-						System.out.println("operando der: "+segExpr);*/
 
 						//vemos que ambos operandos de la operacion binaria sean enteros
 						if(primExpr.getType().equals(Type.INT) && segExpr.getType().equals(Type.INT)){
@@ -153,11 +150,10 @@ public class AssemblyCodeGenerator{
 						
 					}else{//caso contrario
 						if(t.getFirstDir() instanceof UnaryOpExpr){//si es una operacion unaria (menos unario)
-							//System.out.println("unary1");
+
 							UnaryOpExpr primer=(UnaryOpExpr) t.getFirstDir();
-							//System.out.println("unary "+primer+" type("+primer.getType()+")");
+
 							if(primer.getType().equals(Type.INT) ){
-								//System.out.println("unaryint1");
 								firstOpValue=evaluateExpression(primer.toString());
 								result+="    mov $" + firstOpValue + ", %eax \n";
 							}else{

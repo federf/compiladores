@@ -40,7 +40,7 @@ public class BinOpExpr extends Expression {
 	
 	@Override
 	public String toString() {
-		return lOperand + " " + operator + " " + rOperand;
+		return lOperand + "" + operator + "" + rOperand;
 	}
 
 	@Override
