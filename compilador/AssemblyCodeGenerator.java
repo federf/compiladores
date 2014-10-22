@@ -953,6 +953,81 @@ public class AssemblyCodeGenerator{
 		}
 		
 	}
+
+	//registro de parametros de llamada a metodo
+	public void ASM_Params(TripletCode t){
+		//obtenemos la lista de parametros del metodo llamado
+    	LinkedList<Expression> params=(LinkedList<Expression>) t.getResult();
+    	//los parametros de agregan en orden inverso
+
+    	for(int i=params.size()-1; i>=0; i--){
+    		System.out.println("index: "+i+" tamaño: "+params.size());
+    		//si el parametro es una VarLocation obtenemos su offset
+    		if(params.get(i) instanceof VarLocation){
+    			VarLocation v=(VarLocation) params.get(i);
+    			if(i!=0){
+    				result+="    movl "+v.getOffset()+" , "+((i-1)*4)+"(%esp)";		
+    			}else{
+    				result+="    movl "+v.getOffset()+" , (%esp)";	
+    			}
+    			
+    		}else{//sino, debe ser un Literal o una llamada a metodo
+    			//si no es una llamada a metodo (deberia ser un literal entonces)
+    			if(!(params.get(i) instanceof MethodCallExpr)){
+    				//caso IntLiteral
+    				if(params.get(i) instanceof IntLiteral){
+    					IntLiteral p=(IntLiteral) params.get(i);
+    					if(i!=0){
+    						result+="    movl $"+evaluateExpression(p.toString())+" , "+((i-1)*4)+"(%esp)";	
+    					}else{
+    						result+="    movl $"+evaluateExpression(p.toString())+" , (%esp)";	
+    					}
+    					
+    				}else{
+    					//caso BoolLiteral
+	    				if(params.get(i) instanceof BoolLiteral){
+	    					BoolLiteral p=(BoolLiteral) params.get(i);
+	    					if(i!=0){
+	    						result+="    movl $"+p.toString()+" , "+((i-1)*4)+"(%esp)";	
+	    					}else{
+	    						result+="    movl $"+p.toString()+" , (%esp)";
+	    					}
+	    					
+	    				}else{
+	    					//caso FloatLiteral
+	    					if(params.get(i) instanceof FloatLiteral){
+	    						System.out.println("{PARAM} CASO FLAOTLITERAL PENDIENTE");
+	    					}else{
+	    						//si el parametro es una operacion binaria
+	    						if(params.get(i) instanceof BinOpExpr){
+	    							BinOpExpr b=(BinOpExpr) params.get(i);
+	    							Expression firstOp=b.getLeftOperand();
+	    							Expression secOp=b.getRightOperand();
+	    							//si es una binaria entre enteros
+	    							if(firstOp.getType().equals(Type.INT) && secOp.getType().equals(Type.INT)){
+	    								//la evaluamos
+	    								int opValue=evaluateExpression(b.toString());
+	    								if(i!=0){
+				    						result+="    movl $"+opValue+" , "+((i-1)*4)+"(%esp)";	
+				    					}else{
+				    						result+="    movl $"+opValue+" , (%esp)";
+				    					}
+	    							}
+	    						}else{
+	    							//demas casos
+    								System.out.println("{PARAM} FALTA CASO "+params.get(i).getClass());
+	    						}
+	    						
+	    					}
+	    					
+	    				}
+    				}
+    			}else{
+    				System.out.println("{PARAM} CASO METHODCALL PENDIENTE");
+    			}		    			
+    		}
+    	}
+	}
 	//metodo que dada una lista de codigos de 3 direcciones genera el codigo assembly correspondiente
 	public String generate(LinkedList<TripletCode> list){
 		OrAndlabelInt=0;
@@ -1046,13 +1121,7 @@ public class AssemblyCodeGenerator{
 			    case PARAM:
 			    	result+="\n";
 			    	result=result+ "PARAM\n";
-
-			    	/*Simbolo res=t.getResult();
-					if (res.getType().equals(Type.STRING) ) 
-						result += "movl		" + res.getValue() + ", %edi\n";
-					else
-						result += "movl		" + instr.getOperand1() + "(%rbp), %edi\n";
-					result += "movl	 	%edi, " + instr.getResult() + "(%rsp)\n"*/
+			    	ASM_Params(t);
 
 			    	break;
 			    case CMP:
@@ -1113,6 +1182,7 @@ public class AssemblyCodeGenerator{
 		   			break;
 			}
 			System.out.println("finalizado.");
+			System.out.println("");
 		}
 		return result;
 	}

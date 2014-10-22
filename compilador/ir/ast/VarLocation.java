@@ -19,7 +19,6 @@ public class VarLocation extends Location {
     }
 
     public VarLocation(String id, Type type, Expression expr, int size) {
-        System.out.println("datos: "+id+" , "+type+" , "+expr+" , "+size);
         //si la expression es null, entonces es una declaracion de variable
         //caso contrario, indicaria que estamos frente a un acceso de variable de tipo arreglo
 
@@ -52,7 +51,6 @@ public class VarLocation extends Location {
                     off = off - 4;    
                 }
                 //al tratarse de una declaracion, la guardamos en la lista
-                System.out.println("agrega: "+this);
                 vars.addLast(this);
             }else{
                 //al tratarse de un acceso, es a un arreglo, buscamos el arreglo para conocer su offset
@@ -92,7 +90,6 @@ public class VarLocation extends Location {
             this.offset = off;
             //cambiamos el offset para el proximo
             off = off - 4; 
-            System.out.println("agrega Label: "+this);
         }
         
     }
