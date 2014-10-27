@@ -430,7 +430,7 @@
                                                                     //l.setExpr(e.getExpr());
                                                                     //System.out.println("{id} "+l+", expression: "+e.getExpr());
                                                                     //CODIGO DE TRES DIRECCIONES
-                                                                    TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e.getExpr(), null,(VarLocation)l));
+                                                                    TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e, null,(VarLocation)l));
                                                                     //FIN CODIGO TRES DIRECCIONES
                                                                     RESULT=a; 
                                                                 }else{
@@ -488,7 +488,7 @@
                                                                                         AssignStmt a=new AssignStmt((Location)l, AssignOpType.ASSIGN, (Expression) e.getExpr()); 
                                                                                         //l.setExpr(e.getExpr());
                                                                                         //CODIGO DE TRES DIRECCIONES
-                                                                                        TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e.getExpr(), null,(VarLocation)l));
+                                                                                        TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e, null,(VarLocation)l));
                                                                                         //FIN CODIGO TRES DIRECCIONES
                                                                                         RESULT=a;
                                                                                     }else{
@@ -524,7 +524,7 @@
                                                                     //l.setExpr(e.getExpr());
                                                                     //System.out.println("{id} "+l+", expression: "+e.getExpr());
                                                                     //CODIGO DE TRES DIRECCIONES
-                                                                    TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e.getExpr(), null,(VarLocation)l));
+                                                                    TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e, null,(VarLocation)l));
                                                                     //FIN CODIGO TRES DIRECCIONES
                                                                     RESULT=a; 
                                                                 }else{
@@ -583,7 +583,7 @@
                                                                                         AssignStmt a=new AssignStmt((Location)l, AssignOpType.ASSIGN, (Expression) e.getExpr()); 
                                                                                         //l.setExpr(e.getExpr());
                                                                                         //CODIGO DE TRES DIRECCIONES
-                                                                                        TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e.getExpr(), null,(VarLocation)l));
+                                                                                        TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e, null,(VarLocation)l));
                                                                                         //FIN CODIGO TRES DIRECCIONES
                                                                                         RESULT=a;
                                                                                     }else{
@@ -746,7 +746,7 @@
                                                 case INTARRAY: case INT:
                                                     if(ult_metodo.getTypeReturn().equals(Type.INT)){
                                                         //CODIGO TRES DIRECCIONES
-                                                        TripletList.addLast(new TripletCode(TripletOperator.RETURN,null,null,e.getExpr()));
+                                                        TripletList.addLast(new TripletCode(TripletOperator.RETURN,null,null,e));
                                                         //FIN CODIGO TRES DIRECCIONES
                                                         RESULT=new ReturnStmt(e.getExpr());
                                                     }else{
@@ -757,7 +757,7 @@
                                                 case BOOLARRAY: case BOOLEAN:
                                                     if(ult_metodo.getTypeReturn().equals(Type.BOOLEAN)){
                                                         //CODIGO TRES DIRECCIONES
-                                                        TripletList.addLast(new TripletCode(TripletOperator.RETURN,null,null,e.getExpr()));
+                                                        TripletList.addLast(new TripletCode(TripletOperator.RETURN,null,null,e));
                                                         //FIN CODIGO TRES DIRECCIONES
                                                         RESULT=new ReturnStmt(e.getExpr());
                                                     }else{
@@ -768,7 +768,7 @@
                                                 case FLOATARRAY: case FLOAT:
                                                     if(ult_metodo.getTypeReturn().equals(Type.FLOAT) ){
                                                         //CODIGO TRES DIRECCIONES
-                                                        TripletList.addLast(new TripletCode(TripletOperator.RETURN,null,null,e.getExpr()));
+                                                        TripletList.addLast(new TripletCode(TripletOperator.RETURN,null,null,e));
                                                         //FIN CODIGO TRES DIRECCIONES
                                                         RESULT=new ReturnStmt(e.getExpr());
                                                     }else{
@@ -971,13 +971,17 @@
         | expr:e DISYUNCION conjunction:c {:
                                             if(e.getType().equals(Type.BOOLEAN) && c.getType().equals(Type.BOOLEAN)){
                                                 
+                                                //CREO DEBERIA MODIFICAR QUE LE PASO, EN LUGAR DE LOS DOS EXPRESIONES, TAL VEZ
+                                                //DEBERIA PASARLE EL OBJETO EN SI, EN ESTE CASO, e Y c COMO OBJETOS
+                                                //Y NO SOLO SUS EXPRESIONES, Y LO MISMO CON EL RESTO DE LAS OPERACIONES LOGICAS
+
                                                 BinOpExpr exp=new BinOpExpr(e.getExpr(),BinOpType.OR,c.getExpr());
                                                 exp.setType(Type.BOOLEAN);
 
                                                 VarLocation res=new VarLocation("DISYUNCION"+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 //System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES
-                                                TripletList.addLast(new TripletCode(TripletOperator.OR,e.getExpr(), c.getExpr(),res));
+                                                TripletList.addLast(new TripletCode(TripletOperator.OR,e, c,res));
                                                 //FIN CODIGO TRES DIRECCIONES
                                                 RESULT=res;
                                             }else{
@@ -996,7 +1000,7 @@
                                                 VarLocation res=new VarLocation("CONJUNCION"+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 //System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES
-                                                TripletList.addLast(new TripletCode(TripletOperator.AND, c1.getExpr(), c2.getExpr(), res));
+                                                TripletList.addLast(new TripletCode(TripletOperator.AND, c1, c2, res));
                                                 //FIN CODIGO TRES DIRECCIONES
                                                 RESULT=res;
                                             }else{
@@ -1016,7 +1020,7 @@
                                                 VarLocation res=new VarLocation("CEQ"+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 //System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES
-                                                TripletList.addLast(new TripletCode(TripletOperator.CEQ, r1.getExpr(), r2.getExpr(), res));
+                                                TripletList.addLast(new TripletCode(TripletOperator.CEQ, r1, r2, res));
                                                 //FIN CODIGO TRES DIRECCIONES
                                                 RESULT=res;
                                             }else{
@@ -1035,7 +1039,7 @@
                                                 VarLocation res=new VarLocation("NEQ"+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 //System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES
-                                                TripletList.addLast(new TripletCode(TripletOperator.NEQ, r1.getExpr(), r2.getExpr(), res));
+                                                TripletList.addLast(new TripletCode(TripletOperator.NEQ, r1, r2, res));
                                                 //FIN CODIGO TRES DIRECCIONES
                                                 RESULT=res;
                                             }else{
@@ -1057,7 +1061,7 @@
                                                 VarLocation res=new VarLocation("LE"+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 //System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES
-                                                TripletList.addLast(new TripletCode(TripletOperator.LE, s1.getExpr(), s2.getExpr(), res));
+                                                TripletList.addLast(new TripletCode(TripletOperator.LE, s1, s2, res));
                                                 //FIN CODIGO TRES DIRECCIONES
                                                 RESULT=res;
                                             }else{
@@ -1075,7 +1079,7 @@
                                                 VarLocation res=new VarLocation("GE"+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 //System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES
-                                                TripletList.addLast(new TripletCode(TripletOperator.GE, s1.getExpr(), s2.getExpr(), res));
+                                                TripletList.addLast(new TripletCode(TripletOperator.GE, s1, s2, res));
                                                 //FIN CODIGO TRES DIRECCIONES
                                                 RESULT=res;
                                             }else{
@@ -1094,7 +1098,7 @@
                                                 VarLocation res=new VarLocation("GEQ"+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 //System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES   
-                                                TripletList.addLast(new TripletCode(TripletOperator.GEQ, s1.getExpr(),s2.getExpr(),res));
+                                                TripletList.addLast(new TripletCode(TripletOperator.GEQ, s1,s2,res));
                                                 //FIN CODIGO TRES DIRECCIONES
                                                 RESULT=res;
                                             }else{
@@ -1113,7 +1117,7 @@
                                                 VarLocation res=new VarLocation("LEQ"+Labels.getLabel(),Type.BOOLEAN,exp,0);
                                                 //System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES 
-                                                TripletList.addLast(new TripletCode(TripletOperator.LEQ, s1.getExpr(), s2.getExpr(), res));
+                                                TripletList.addLast(new TripletCode(TripletOperator.LEQ, s1, s2, res));
                                                 //FIN CODIGO TRES DIRECCIONES
                                                 RESULT=res;
                                             }else{
@@ -1140,7 +1144,7 @@
                                                     VarLocation res=new VarLocation("PLUS"+Labels.getLabel(),Type.INT,exp,0);
                                                     //System.out.println("OFFSET = " + res.getOffset());
                                                     //CODIGO DE TRES DIRECCIONES
-                                                    TripletList.addLast(new TripletCode(TripletOperator.PLUS, s1.getExpr(), s2.getExpr(), res));
+                                                    TripletList.addLast(new TripletCode(TripletOperator.PLUS, s1, s2, res));
                                                     //FIN CODIGO TRES DIRECCIONES
                                                     RESULT=res;
                                                 }else{
@@ -1149,7 +1153,7 @@
                                                     VarLocation res=new VarLocation("PLUS"+Labels.getLabel(),Type.FLOAT,exp,0);
                                                     //System.out.println("OFFSET = " + res.getOffset());
                                                     //CODIGO DE TRES DIRECCIONES
-                                                    TripletList.addLast(new TripletCode(TripletOperator.PLUS, s1.getExpr(), s2.getExpr(), res));
+                                                    TripletList.addLast(new TripletCode(TripletOperator.PLUS, s1, s2, res));
                                                     //FIN CODIGO TRES DIRECCIONES
                                                     RESULT=res;
                                                 }
@@ -1174,7 +1178,7 @@
                                                 VarLocation res=new VarLocation("MINUS"+Labels.getLabel(),Type.INT,exp,0);
                                                 //System.out.println("OFFSET = " + res.getOffset());
                                                 //CODIGO DE TRES DIRECCIONES
-                                                TripletList.addLast(new TripletCode(TripletOperator.MINUS, s1.getExpr(), s2.getExpr(), res));
+                                                TripletList.addLast(new TripletCode(TripletOperator.MINUS, s1, s2, res));
                                                 //FIN CODIGO TRES DIRECCIONES
                                                 RESULT=res;
                                                 }else{
@@ -1183,7 +1187,7 @@
                                                     VarLocation res=new VarLocation("MINUS"+Labels.getLabel(),Type.FLOAT,exp,0);
                                                     //System.out.println("OFFSET = " + res.getOffset());
                                                     //CODIGO DE TRES DIRECCIONES 
-                                                    TripletList.addLast(new TripletCode(TripletOperator.MINUS, s1.getExpr(), s2.getExpr(), res));
+                                                    TripletList.addLast(new TripletCode(TripletOperator.MINUS, s1, s2, res));
                                                     //FIN CODIGO TRES DIRECCIONES
                                                     RESULT=res;
                                                 }
@@ -1211,7 +1215,7 @@
                                                     VarLocation res=new VarLocation("MULTIPLY"+Labels.getLabel(),Type.INT,exp,0);
                                                     //System.out.println("OFFSET = " + res.getOffset());
                                                     //CODIGO DE TRES DIRECCIONES
-                                                    TripletList.addLast(new TripletCode(TripletOperator.MULTIPLY, s1.getExpr(), s2.getExpr(), res));
+                                                    TripletList.addLast(new TripletCode(TripletOperator.MULTIPLY, s1, s2, res));
                                                     //FIN CODIGO TRES DIRECCIONES
                                                     RESULT=res;
                                                 }else{
@@ -1220,7 +1224,7 @@
                                                     VarLocation res=new VarLocation("MULTIPLY"+Labels.getLabel(),Type.FLOAT,exp,0);
                                                     //System.out.println("OFFSET = " + res.getOffset());
                                                     //CODIGO DE TRES DIRECCIONES
-                                                    TripletList.addLast(new TripletCode(TripletOperator.MULTIPLY, s1.getExpr(), s2.getExpr(), res));
+                                                    TripletList.addLast(new TripletCode(TripletOperator.MULTIPLY, s1, s2, res));
                                                     //FIN CODIGO TRES DIRECCIONES
                                                     RESULT=res;
                                                 }
@@ -1246,7 +1250,7 @@
                                                 VarLocation res=new VarLocation("DIVIDE"+Labels.getLabel(),Type.INT,exp,0); 
                                                 //System.out.println("OFFSET = " + res.getOffset());                                
                                                 //CODIGO DE TRES DIRECCIONES
-                                                TripletList.addLast(new TripletCode(TripletOperator.DIVIDE, s1.getExpr(), s2.getExpr(), res));          
+                                                TripletList.addLast(new TripletCode(TripletOperator.DIVIDE, s1, s2, res));          
                                                 //FIN CODIGO TRES DIRECCIONES
                                                 RESULT=res;
                                                 }else{
@@ -1255,7 +1259,7 @@
                                                     VarLocation res=new VarLocation("DIVIDE"+Labels.getLabel(),Type.FLOAT,exp,0);
                                                     //System.out.println("OFFSET = " + res.getOffset());
                                                     //CODIGO DE TRES DIRECCIONES
-                                                    TripletList.addLast(new TripletCode(TripletOperator.DIVIDE, s1.getExpr(), s2.getExpr(), res));          
+                                                    TripletList.addLast(new TripletCode(TripletOperator.DIVIDE, s1, s2, res));          
                                                     //FIN CODIGO TRES DIRECCIONES
                                                     RESULT=res;
                                                 }
@@ -1279,7 +1283,7 @@
                                                 VarLocation res=new VarLocation("MOD"+Labels.getLabel(),Type.INT,exp,0);  
                                                 //System.out.println("OFFSET = " + res.getOffset());                                   
                                                 //CODIGO DE TRES DIRECCIONES
-                                                TripletList.addLast(new TripletCode(TripletOperator.MOD, s1.getExpr(), s2.getExpr(), res));                   
+                                                TripletList.addLast(new TripletCode(TripletOperator.MOD, s1, s2, res));                   
                                                 //FIN CODIGO TRES DIRECCIONES
                                                 RESULT=res;
                                             }else{
@@ -1300,7 +1304,7 @@
                                         VarLocation res=new VarLocation("NON"+Labels.getLabel(),Type.BOOLEAN,u,0);
                                         //System.out.println("OFFSET = " + res.getOffset());
                                         //CODIGO DE TRES DIRECCIONES
-                                        TripletList.addLast(new TripletCode(TripletOperator.NON, f.getExpr(), null, res));
+                                        TripletList.addLast(new TripletCode(TripletOperator.NON, f, null, res));
                                         //FIN CODIGO TRES DIRECCIONES
                                         //u.setType(Type.BOOLEAN);
                                         RESULT=res;
@@ -1317,7 +1321,7 @@
                                         VarLocation res=new VarLocation("UNARYMINUS"+Labels.getLabel(),Type.FLOAT,u,0);
                                         //System.out.println("OFFSET = " + res.getOffset());
                                         //CODIGO DE TRES DIRECCIONES
-                                        TripletList.addLast(new TripletCode(TripletOperator.UNARYMINUS, f.getExpr(), null, res));
+                                        TripletList.addLast(new TripletCode(TripletOperator.UNARYMINUS, f, null, res));
                                         //FIN CODIGO TRES DIRECCIONES
                                         //u.setType(Type.FLOAT);
                                         RESULT= res;
@@ -1328,7 +1332,7 @@
                                             VarLocation res=new VarLocation("UNARYMINUS"+Labels.getLabel(),Type.INT,u,0);
                                             //System.out.println("OFFSET = " + res.getOffset());
                                             //CODIGO DE TRES DIRECCIONES
-                                            TripletList.addLast(new TripletCode(TripletOperator.UNARYMINUS, f.getExpr(), null, res));
+                                            TripletList.addLast(new TripletCode(TripletOperator.UNARYMINUS, f, null, res));
                                             //FIN CODIGO TRES DIRECCIONES
                                             //u.setType(Type.INT);
                                             RESULT= res;
