@@ -316,8 +316,8 @@
                         String labelEndMethod="EndMethod "+d;
                         //label de fin de metodo (CODIGO TRES DIRECCIONES)
                         TripletList.addLast(new TripletCode(TripletOperator.LABEL, null,null, labelEndMethod));
-
-
+                        //reseteamos la generacion de offsets al salir del cuerpo de un metodo
+                        VarLocation.resetOffset();
                         //luego de terminar de procesar el cuerpo del metodo, subimos de nivel dentro del arbol
                         TS.SubirNivel(); :}
                | type:t ID:g {:
@@ -374,6 +374,8 @@
                         :} block {:
                             String labelEndMethod="EndMethod "+g;
                             TripletList.addLast(new TripletCode(TripletOperator.LABEL,null,null,labelEndMethod));
+                            //reseteamos la generacion de offsets al salir del cuerpo de un metodo
+                            VarLocation.resetOffset();
                              //al terminar de procesar el cuerpo del metodo subimos de nivel
                             TS.SubirNivel();:}
                ;

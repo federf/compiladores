@@ -172,7 +172,6 @@ public class AssemblyCodeGenerator{
 
 		//si el 2do operando es varlocation
 		if(t.getSecondDir() instanceof VarLocation){
-			System.out.println("VarLocation2");
 			VarLocation  y = (VarLocation)t.getSecondDir();
 			int YOff=y.getOffset();
 			result+="    mov " + YOff + "(%rbp) , %rdx \n";
@@ -828,7 +827,7 @@ public class AssemblyCodeGenerator{
 			VarLocation firstOp=(VarLocation) t.getFirstDir();
 			result=result+"    mov " + firstOp.getOffset() + "(%rbp), %rax\n";
 		}else{
-			result=result+"    mov " + t.getFirstDir() + "(%rbp), %rax\n";
+			result=result+"    mov " + t.getFirstDir() + " (%rbp), %rax\n";
 		}
 		if(t.getResult() instanceof VarLocation){
 			VarLocation res=(VarLocation) t.getResult();
@@ -868,7 +867,21 @@ public class AssemblyCodeGenerator{
 			VarLocation secondOp=(VarLocation)t.getSecondDir();
 			result += "    mov " + secondOp.getOffset() + "(%rbp), %rax\n";	
 		}else{
-			result += "    mov " + t.getSecondDir() + "(%rbp), %rax\n";	
+			if(t.getSecondDir() instanceof IntLiteral){
+				IntLiteral i=(IntLiteral) t.getSecondDir();
+				result += "    mov $" +i.getStringValue() + ", %rax\n";	
+			}else{
+				if(t.getSecondDir() instanceof BoolLiteral){
+					BoolLiteral b=(BoolLiteral) t.getSecondDir();
+					if(b.getValue()){
+						result += "    mov $ 1, %rax\n";	
+					}else{
+						result += "    mov $ 0, %rax\n";	
+					}
+				}else{
+					System.out.println("{CMP} FALTA CASO "+t.getSecondDir().getClass());
+				}
+			}
 		}
 		if(t.getFirstDir() instanceof VarLocation){
 			VarLocation firstOp=(VarLocation)t.getFirstDir();
@@ -1165,7 +1178,7 @@ public class AssemblyCodeGenerator{
 			   	case METHODCALL:
 			   		result+="\n";
 			   		result += "    call " + t.getFirstDir() + "\n";		
-				  	if (t.getResult() != null){
+				  	/*if (t.getResult() != null){
 				  		if(t.getResult() instanceof VarLocation){
 				  			VarLocation v=(VarLocation)	t.getResult();
 				  			result += "    movl %rax, " + v.getOffset() + "(%rbp) \n";
@@ -1173,13 +1186,13 @@ public class AssemblyCodeGenerator{
 				  			System.out.println("{METHODCALL} FALTA CASO "+t.getResult().getClass());	
 				  		}
 				  		//result += "    movl %rax, " + t.getResult() + "(%rbp) \n";
-				  	}
+				  	}*/
 			   		break;
 			   	case EXTERNINVK:
 			   		result+="\n";
 			   		ExternInvkExpr mc=(ExternInvkExpr) t.getFirstDir();
 			   		result += "    call " + mc.getId() + "\n";		
-				  	if(t.getResult() != null){
+				  	/*if(t.getResult() != null){
 				  		if(t.getResult() instanceof VarLocation){
 				  			VarLocation v=(VarLocation)	t.getResult();
 				  			result += "    movl %rax, " + v.getOffset() + "(%rbp) \n";
@@ -1187,7 +1200,7 @@ public class AssemblyCodeGenerator{
 				  			System.out.println("{METHODCALL_E} FALTA CASO "+t.getResult().getClass());	
 				  		}
 				  		//result += "    movl %rax, " + t.getResult() + "(%rbp) \n";
-				  	}
+				  	}*/
 			   		break;
 			   	case ARRAYACCESS:
 			   		result+="\n";

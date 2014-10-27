@@ -58,6 +58,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel7}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel6, type=boolean, expr=VarLocation{name=GELabel5, type=boolean, expr=0>0, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel8}
@@ -101,11 +102,9 @@ Result = 3
 finalizado.
 
 procesando : . . . {METHODCALL, factorial, 1, Result: RESULTLabel17}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=factorial, args=[3]}]}, null, Result: EXTERNINVKLabel19}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -134,7 +133,6 @@ factorial:
 
 .BeginWhileLabel7:
 
-    mov true(%rbp), %rax
     cmp -40(%rbp), %rax
 
     jne EndWhileLabel8
@@ -276,7 +274,6 @@ procesando : . . . {METHODDECL, Metodo{ name=sum, return_not_void=true, typeRetu
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel7, type=float, expr=0.0, size=0}, VarLocation{name=factorLabel8, type=float, expr=0.0, size=0}, Result: VarLocation{name=PLUSLabel9, type=float, expr=0.0+0.0, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=PLUSLabel9, type=float, expr=0.0+0.0, size=0}}
@@ -331,7 +328,6 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, sum, 2, Result: RESULTLabel20}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0.0, 0.0]}
@@ -342,7 +338,6 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, div, 2, Result: RESULTLabel24}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}
@@ -353,7 +348,6 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, mult, 2, Result: RESULTLabel26}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel28, type=float, expr=0.0, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel29, type=float, expr=-0.0, size=0}}
@@ -367,7 +361,6 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, resta, 2, Result: RESULTLabel31}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=mult, args=[MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}, MethodCallExpr{name=resta, args=[-0.0, 0.0]}]}
@@ -378,11 +371,9 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, sum, 2, Result: RESULTLabel33}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandoFloatTest"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=mult, args=[MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}, MethodCallExpr{name=resta, args=[-0.0, 0.0]}]}]}, null, Result: EXTERNINVKLabel35}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -588,11 +579,9 @@ index: 0 tamaño: 1
 finalizado.
 
 procesando : . . . {METHODCALL, pruebaLogica, 1, Result: RESULTLabel15}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[true]}]}, null, Result: EXTERNINVKLabel17}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -723,7 +712,6 @@ procesando : . . . {METHODDECL, Metodo{ name=inc, return_not_void=true, typeRetu
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel1, type=int, expr=0, size=0}, VarLocation{name=factorLabel2, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel3, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=PLUSLabel3, type=int, expr=0+1, size=0}}
@@ -740,7 +728,6 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=false, typeRe
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="get_int", type=int, parameters=[]}, null, Result: EXTERNINVKLabel4}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [ExternInvkExpr{id="get_int", type=int, parameters=[]}]}
@@ -749,7 +736,6 @@ index: 0 tamaño: 1
 finalizado.
 
 procesando : . . . {METHODCALL, inc, 1, Result: RESULTLabel6}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel7, type=int, expr=MethodCallExpr{name=inc, args=[ExternInvkExpr{id="get_int", type=int, parameters=[]}]}, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
@@ -759,13 +745,13 @@ procesando : . . . {CEQ(==), VarLocation{name=factorLabel8, type=int, expr=0, si
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=CEQLabel10, type=boolean, expr=0==1, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel11}
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==1\n"}]}, null, Result: EXTERNINVKLabel13}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JMP, null, null, Result: endIfLabel12}
@@ -775,7 +761,6 @@ procesando : . . . {LABEL, null, null, Result: elseCondLabel11}
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==%d\n"}, 0]}, null, Result: EXTERNINVKLabel15}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: endIfLabel12}
@@ -826,7 +811,6 @@ PARAM
     movzbl %al, %rax
     movl	%rax, -28(%rbp)
 
-    mov true(%rbp), %rax
     cmp -28(%rbp), %rax
 
     jne elseCondLabel11
@@ -937,11 +921,9 @@ Result = 3
 finalizado.
 
 procesando : . . . {METHODCALL, pruAritmetica, 1, Result: RESULTLabel2}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[3]}]}, null, Result: EXTERNINVKLabel4}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -1026,14 +1008,12 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel2, type=int, expr=2, 
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel3, type=int, expr=1, size=0}, VarLocation{name=factorLabel4, type=int, expr=0, size=0}, Result: VarLocation{name=PLUSLabel5, type=int, expr=1+0, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel5, type=int, expr=1+0, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel6, type=int, expr=0, size=0}, VarLocation{name=factorLabel7, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel8, type=int, expr=0+2, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel8, type=int, expr=0+2, size=0}, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
@@ -1077,11 +1057,9 @@ Result = 5
 finalizado.
 
 procesando : . . . {METHODCALL, aritmTest, 1, Result: RESULTLabel20}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=aritmTest, args=[5]}]}, null, Result: EXTERNINVKLabel22}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -1219,13 +1197,13 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel6}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel5, type=boolean, expr=VarLocation{name=LELabel4, type=boolean, expr=0<10, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel7}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel8, type=int, expr=0, size=0}, VarLocation{name=factorLabel9, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel10, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel10, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
@@ -1238,6 +1216,7 @@ procesando : . . . {LE(<), VarLocation{name=factorLabel12, type=int, expr=0, siz
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=LELabel14, type=boolean, expr=0<0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel15}
@@ -1284,11 +1263,9 @@ Result = 1
 finalizado.
 
 procesando : . . . {METHODCALL, breaks, 1, Result: RESULTLabel19}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: EXTERNINVKLabel21}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel22, type=int, expr=1, size=0}}
@@ -1317,7 +1294,6 @@ breaks:
 
 .BeginWhileLabel6:
 
-    mov true(%rbp), %rax
     cmp -28(%rbp), %rax
 
     jne EndWhileLabel7
@@ -1338,7 +1314,6 @@ breaks:
     movzbl %al, %rax
     movl	%rax, -68(%rbp)
 
-    mov true(%rbp), %rax
     cmp -68(%rbp), %rax
 
     jne elseCondLabel15
@@ -1440,13 +1415,13 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel6}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel5, type=boolean, expr=VarLocation{name=LELabel4, type=boolean, expr=0<10, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel7}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel8, type=int, expr=0, size=0}, VarLocation{name=factorLabel9, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel10, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel10, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
@@ -1456,6 +1431,7 @@ procesando : . . . {LE(<), VarLocation{name=factorLabel11, type=int, expr=0, siz
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=LELabel13, type=boolean, expr=0<0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel14}
@@ -1502,11 +1478,9 @@ Result = 1
 finalizado.
 
 procesando : . . . {METHODCALL, breaks, 1, Result: RESULTLabel18}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: EXTERNINVKLabel20}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel21, type=int, expr=1, size=0}}
@@ -1535,7 +1509,6 @@ breaks:
 
 .BeginWhileLabel6:
 
-    mov true(%rbp), %rax
     cmp -28(%rbp), %rax
 
     jne EndWhileLabel7
@@ -1553,7 +1526,6 @@ breaks:
     movzbl %al, %rax
     movl	%rax, -56(%rbp)
 
-    mov true(%rbp), %rax
     cmp -56(%rbp), %rax
 
     jne elseCondLabel14
@@ -1709,7 +1681,6 @@ index: 0 tamaño: 1
 finalizado.
 
 procesando : . . . {METHODCALL, neg, 1, Result: RESULTLabel12}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel13, type=boolean, expr=MethodCallExpr{name=neg, args=[false]}, size=0}, null, Result: VarLocation{name=b, type=boolean, expr=null, size=0}}
@@ -1721,7 +1692,6 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, and, 2, Result: RESULTLabel16}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [false]}
@@ -1729,7 +1699,6 @@ index: 0 tamaño: 1
 finalizado.
 
 procesando : . . . {METHODCALL, neg, 1, Result: RESULTLabel19}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}
@@ -1740,14 +1709,12 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, or, 2, Result: RESULTLabel21}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel22, type=boolean, expr=MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}, size=0}, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: EXTERNINVKLabel24}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -1926,13 +1893,13 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel6}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel5, type=boolean, expr=VarLocation{name=LELabel4, type=boolean, expr=0<10, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel7}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel8, type=int, expr=0, size=0}, VarLocation{name=factorLabel9, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel10, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel10, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
@@ -1942,6 +1909,7 @@ procesando : . . . {LE(<), VarLocation{name=factorLabel11, type=int, expr=0, siz
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=LELabel13, type=boolean, expr=0<0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel14}
@@ -1988,11 +1956,9 @@ Result = 1
 finalizado.
 
 procesando : . . . {METHODCALL, breaks, 1, Result: RESULTLabel18}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: EXTERNINVKLabel20}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel21, type=int, expr=1, size=0}}
@@ -2021,7 +1987,6 @@ breaks:
 
 .BeginWhileLabel6:
 
-    mov true(%rbp), %rax
     cmp -28(%rbp), %rax
 
     jne EndWhileLabel7
@@ -2039,7 +2004,6 @@ breaks:
     movzbl %al, %rax
     movl	%rax, -56(%rbp)
 
-    mov true(%rbp), %rax
     cmp -56(%rbp), %rax
 
     jne elseCondLabel14
@@ -2125,6 +2089,7 @@ procesando : . . . {GE(>), VarLocation{name=factorLabel1, type=int, expr=0, size
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=GELabel3, type=boolean, expr=0>0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel4}
@@ -2165,11 +2130,9 @@ Result = 4
 finalizado.
 
 procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel11}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel13}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -2190,7 +2153,6 @@ pruAritmetica:
     movzbl %al, %rax
     movl	%rax, -16(%rbp)
 
-    mov true(%rbp), %rax
     cmp -16(%rbp), %rax
 
     jne elseCondLabel4
@@ -2271,13 +2233,13 @@ procesando : . . . {GE(>), VarLocation{name=factorLabel1, type=int, expr=0, size
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=GELabel3, type=boolean, expr=0>0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel4}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel6, type=int, expr=0, size=0}, VarLocation{name=factorLabel7, type=int, expr=5, size=0}, Result: VarLocation{name=PLUSLabel8, type=int, expr=0+5, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel8, type=int, expr=0+5, size=0}, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
@@ -2315,11 +2277,9 @@ Result = 4
 finalizado.
 
 procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel13}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel15}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -2340,7 +2300,6 @@ pruAritmetica:
     movzbl %al, %rax
     movl	%rax, -16(%rbp)
 
-    mov true(%rbp), %rax
     cmp -16(%rbp), %rax
 
     jne elseCondLabel4
@@ -2516,6 +2475,7 @@ procesando : . . . {AND(&&), VarLocation{name=CONJUNCIONLabel11, type=boolean, e
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=CONJUNCIONLabel17, type=boolean, expr=!VarLocation{name=CEQLabel3, type=boolean, expr=0==6, size=0}&&!VarLocation{name=CEQLabel8, type=boolean, expr=0==6, size=0}&&!VarLocation{name=CEQLabel14, type=boolean, expr=0==6, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel18}
@@ -2603,6 +2563,7 @@ procesando : . . . {OR(||), VarLocation{name=DISYUNCIONLabel55, type=boolean, ex
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=DISYUNCIONLabel73, type=boolean, expr=VarLocation{name=CONJUNCIONLabel36, type=boolean, expr=VarLocation{name=CEQLabel23, type=boolean, expr=0==6, size=0}&&!VarLocation{name=CEQLabel27, type=boolean, expr=0==6, size=0}&&!VarLocation{name=CEQLabel33, type=boolean, expr=0==6, size=0}, size=0}||VarLocation{name=CONJUNCIONLabel53, type=boolean, expr=!VarLocation{name=CEQLabel40, type=boolean, expr=0==6, size=0}&&VarLocation{name=CEQLabel45, type=boolean, expr=0==6, size=0}&&!VarLocation{name=CEQLabel50, type=boolean, expr=0==6, size=0}, size=0}||VarLocation{name=CONJUNCIONLabel71, type=boolean, expr=!VarLocation{name=CEQLabel58, type=boolean, expr=0==6, size=0}&&!VarLocation{name=CEQLabel63, type=boolean, expr=0==6, size=0}&&VarLocation{name=CEQLabel69, type=boolean, expr=0==6, size=0}, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel74}
@@ -2681,6 +2642,7 @@ procesando : . . . {OR(||), VarLocation{name=DISYUNCIONLabel109, type=boolean, e
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=DISYUNCIONLabel126, type=boolean, expr=VarLocation{name=CONJUNCIONLabel91, type=boolean, expr=VarLocation{name=CEQLabel79, type=boolean, expr=0==6, size=0}&&VarLocation{name=CEQLabel83, type=boolean, expr=0==6, size=0}&&!VarLocation{name=CEQLabel88, type=boolean, expr=0==6, size=0}, size=0}||VarLocation{name=CONJUNCIONLabel107, type=boolean, expr=VarLocation{name=CEQLabel95, type=boolean, expr=0==6, size=0}&&!VarLocation{name=CEQLabel99, type=boolean, expr=0==6, size=0}&&VarLocation{name=CEQLabel105, type=boolean, expr=0==6, size=0}, size=0}||VarLocation{name=CONJUNCIONLabel124, type=boolean, expr=!VarLocation{name=CEQLabel112, type=boolean, expr=0==6, size=0}&&VarLocation{name=CEQLabel117, type=boolean, expr=0==6, size=0}&&VarLocation{name=CEQLabel122, type=boolean, expr=0==6, size=0}, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel127}
@@ -2714,6 +2676,7 @@ procesando : . . . {AND(&&), VarLocation{name=CONJUNCIONLabel138, type=boolean, 
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=CONJUNCIONLabel143, type=boolean, expr=VarLocation{name=CEQLabel132, type=boolean, expr=0==6, size=0}&&VarLocation{name=CEQLabel136, type=boolean, expr=0==6, size=0}&&VarLocation{name=CEQLabel141, type=boolean, expr=0==6, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel144}
@@ -2754,11 +2717,9 @@ Result = 1
 finalizado.
 
 procesando : . . . {METHODCALL, dados, 3, Result: RESULTLabel150}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=dados, args=[1, 6, 9]}]}, null, Result: EXTERNINVKLabel152}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -2832,7 +2793,6 @@ dados:
     movl	%rax, -68(%rbp)
 .L5:
 
-    mov true(%rbp), %rax
     cmp -68(%rbp), %rax
 
     jne elseCondLabel18
@@ -3033,7 +2993,6 @@ dados:
     movl	%rax, -284(%rbp)
 .L29:
 
-    mov true(%rbp), %rax
     cmp -284(%rbp), %rax
 
     jne elseCondLabel74
@@ -3219,7 +3178,6 @@ dados:
     movl	%rax, -488(%rbp)
 .L53:
 
-    mov true(%rbp), %rax
     cmp -488(%rbp), %rax
 
     jne elseCondLabel127
@@ -3276,7 +3234,6 @@ dados:
     movl	%rax, -548(%rbp)
 .L59:
 
-    mov true(%rbp), %rax
     cmp -548(%rbp), %rax
 
     jne elseCondLabel144
@@ -3393,6 +3350,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel9}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel8, type=boolean, expr=VarLocation{name=GEQLabel7, type=boolean, expr=0.0>=0, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel10}
@@ -3408,6 +3366,7 @@ procesando : . . . {LE(<), VarLocation{name=factorLabel14, type=float, expr=0.0,
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=LELabel16, type=boolean, expr=0.0<0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel17}
@@ -3417,6 +3376,7 @@ procesando : . . . {NEQ(!=), VarLocation{name=factorLabel19, type=float, expr=0.
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=NEQLabel21, type=boolean, expr=0.0!=0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel22}
@@ -3453,7 +3413,6 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel29, type=floa
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=UNARYMINUSLabel30, type=float, expr=-1000.2343, size=0}, VarLocation{name=factorLabel31, type=int, expr=6752, size=0}, Result: VarLocation{name=PLUSLabel32, type=float, expr=-1000.2343+6752, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel32, type=float, expr=-1000.2343+6752, size=0}, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
@@ -3499,11 +3458,9 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, pruContinue, 2, Result: RESULTLabel39}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=pruContinue, args=[3.0, 2]}]}, null, Result: EXTERNINVKLabel41}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -3539,7 +3496,6 @@ pruContinue:
 
 .BeginWhileLabel9:
 
-    mov true(%rbp), %rax
     cmp -56(%rbp), %rax
 
     jne EndWhileLabel10
@@ -3557,7 +3513,6 @@ pruContinue:
     movzbl %al, %rax
     movl	%rax, -84(%rbp)
 
-    mov true(%rbp), %rax
     cmp -84(%rbp), %rax
 
     jne elseCondLabel17
@@ -3568,7 +3523,6 @@ pruContinue:
     movzbl %al, %rax
     movl	%rax, -96(%rbp)
 
-    mov true(%rbp), %rax
     cmp -96(%rbp), %rax
 
     jne elseCondLabel22
@@ -3717,6 +3671,7 @@ procesando : . . . {GE(>), VarLocation{name=factorLabel2, type=int, expr=0, size
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=GELabel4, type=boolean, expr=0>0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel5}
@@ -3729,6 +3684,7 @@ procesando : . . . {CEQ(==), VarLocation{name=factorLabel8, type=int, expr=0, si
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=CEQLabel10, type=boolean, expr=0==4, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel11}
@@ -3741,6 +3697,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel17}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel16, type=boolean, expr=VarLocation{name=LELabel15, type=boolean, expr=0<4, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel18}
@@ -3753,6 +3710,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel23}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel22, type=boolean, expr=VarLocation{name=GELabel21, type=boolean, expr=0>4, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel24}
@@ -3777,7 +3735,6 @@ procesando : . . . {LABEL, null, null, Result: EndWhileLabel24}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel31, type=int, expr=0, size=0}, VarLocation{name=factorLabel32, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel33, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel33, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
@@ -3833,11 +3790,9 @@ Result = 6
 finalizado.
 
 procesando : . . . {METHODCALL, prueba, 1, Result: RESULTLabel39}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: EXTERNINVKLabel41}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -3861,7 +3816,6 @@ prueba:
     movzbl %al, %rax
     movl	%rax, -32(%rbp)
 
-    mov true(%rbp), %rax
     cmp -32(%rbp), %rax
 
     jne elseCondLabel5
@@ -3875,7 +3829,6 @@ prueba:
     movzbl %al, %rax
     movl	%rax, -52(%rbp)
 
-    mov true(%rbp), %rax
     cmp -52(%rbp), %rax
 
     jne elseCondLabel11
@@ -3888,7 +3841,6 @@ prueba:
 
 .BeginWhileLabel17:
 
-    mov true(%rbp), %rax
     cmp -68(%rbp), %rax
 
     jne EndWhileLabel18
@@ -3901,7 +3853,6 @@ prueba:
 
 .BeginWhileLabel23:
 
-    mov true(%rbp), %rax
     cmp -84(%rbp), %rax
 
     jne EndWhileLabel24
@@ -4037,7 +3988,6 @@ procesando : . . . {ASSIGN(=), VarLocation{name=MULTIPLYLabel5, type=int, expr=0
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel6, type=int, expr=0, size=0}, VarLocation{name=factorLabel7, type=int, expr=0, size=0}, Result: VarLocation{name=PLUSLabel8, type=int, expr=0+0, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel8, type=int, expr=0+0, size=0}, null, Result: VarLocation{name=p, type=int, expr=null, size=0}}
@@ -4059,6 +4009,7 @@ procesando : . . . {GE(>), VarLocation{name=factorLabel16, type=float, expr=VarL
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=GELabel18, type=boolean, expr=VarLocation{name=DIVIDELabel15, type=float, expr=VarLocation{name=factorLabel13, type=int, expr=0, size=0}/VarLocation{name=factorLabel14, type=float, expr=0.0, size=0}, size=0}>5, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel19}
@@ -4096,11 +4047,9 @@ Result = 6
 finalizado.
 
 procesando : . . . {METHODCALL, prueba, 1, Result: RESULTLabel24}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: EXTERNINVKLabel26}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -4155,7 +4104,6 @@ prueba:
     movzbl %al, %rax
     movl	%rax, -116(%rbp)
 
-    mov true(%rbp), %rax
     cmp -116(%rbp), %rax
 
     jne elseCondLabel19
@@ -4270,6 +4218,7 @@ procesando : . . . {LE(<), VarLocation{name=factorLabel4, type=int, expr=0, size
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=LELabel6, type=boolean, expr=0<0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel7}
@@ -4303,6 +4252,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel17}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel16, type=boolean, expr=VarLocation{name=LEQLabel15, type=boolean, expr=0<=0, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel18}
@@ -4315,7 +4265,6 @@ procesando : . . . {ASSIGN(=), VarLocation{name=MULTIPLYLabel21, type=float, exp
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel22, type=int, expr=0, size=0}, VarLocation{name=factorLabel23, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel24, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel24, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
@@ -4334,6 +4283,7 @@ procesando : . . . {NON(!), VarLocation{name=factorLabel27, type=boolean, expr=V
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=NONLabel28, type=boolean, expr=!VarLocation{name=NONLabel26, type=boolean, expr=!false, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel29}
@@ -4385,14 +4335,12 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, potencia, 2, Result: RESULTLabel40}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel41, type=float, expr=MethodCallExpr{name=potencia, args=[0.0, 2]}, size=0}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: EXTERNINVKLabel43}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -4422,7 +4370,6 @@ potencia:
     movzbl %al, %rax
     movl	%rax, -48(%rbp)
 
-    mov true(%rbp), %rax
     cmp -48(%rbp), %rax
 
     jne elseCondLabel7
@@ -4456,7 +4403,6 @@ potencia:
 
 .BeginWhileLabel17:
 
-    mov true(%rbp), %rax
     cmp -88(%rbp), %rax
 
     jne EndWhileLabel18
@@ -4489,7 +4435,6 @@ potencia:
     movzbl %al, %rax 
     mov %rax, -136(%rbp) 
 
-    mov true(%rbp), %rax
     cmp -136(%rbp), %rax
 
     jne elseCondLabel29
@@ -4612,6 +4557,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel11}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel10, type=boolean, expr=VarLocation{name=DISYUNCIONLabel9, type=boolean, expr=0.0>0||0.0>0, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel12}
@@ -4621,13 +4567,13 @@ procesando : . . . {GE(>), VarLocation{name=factorLabel13, type=float, expr=0.0,
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=GELabel15, type=boolean, expr=0.0>0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel16}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel18, type=float, expr=0.0, size=0}, VarLocation{name=factorLabel19, type=float, expr=0.0, size=0}, Result: VarLocation{name=PLUSLabel20, type=float, expr=0.0+0.0, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel20, type=float, expr=0.0+0.0, size=0}, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
@@ -4676,14 +4622,12 @@ index: 0 tamaño: 1
 finalizado.
 
 procesando : . . . {METHODCALL, sumatoria, 1, Result: RESULTLabel26}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel27, type=float, expr=MethodCallExpr{name=sumatoria, args=[0.0]}, size=0}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: EXTERNINVKLabel29}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -4731,7 +4675,6 @@ sumatoria:
 
 .BeginWhileLabel11:
 
-    mov true(%rbp), %rax
     cmp -60(%rbp), %rax
 
     jne EndWhileLabel12
@@ -4742,7 +4685,6 @@ sumatoria:
     movzbl %al, %rax
     movl	%rax, -72(%rbp)
 
-    mov true(%rbp), %rax
     cmp -72(%rbp), %rax
 
     jne elseCondLabel16
@@ -4993,6 +4935,7 @@ procesando : . . . {LE(<), VarLocation{name=factorLabel4, type=int, expr=0, size
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=LELabel6, type=boolean, expr=0<0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel7}
@@ -5029,6 +4972,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel20}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel19, type=boolean, expr=VarLocation{name=DISYUNCIONLabel18, type=boolean, expr=0<0||0==0, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel21}
@@ -5044,7 +4988,6 @@ procesando : . . . {ASSIGN(=), VarLocation{name=MULTIPLYLabel26, type=float, exp
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel27, type=int, expr=0, size=0}, VarLocation{name=factorLabel28, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel29, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel29, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
@@ -5063,6 +5006,7 @@ procesando : . . . {NON(!), VarLocation{name=factorLabel32, type=boolean, expr=V
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=NONLabel33, type=boolean, expr=!VarLocation{name=NONLabel31, type=boolean, expr=!false, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel34}
@@ -5151,6 +5095,7 @@ procesando : . . . {GE(>), VarLocation{name=factorLabel59, type=float, expr=0.0,
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=GELabel61, type=boolean, expr=0.0>0.0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel62}
@@ -5160,6 +5105,7 @@ procesando : . . . {LE(<), VarLocation{name=factorLabel64, type=float, expr=0.0,
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=LELabel66, type=boolean, expr=0.0<0.0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel67}
@@ -5193,6 +5139,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel75}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel74, type=boolean, expr=VarLocation{name=LEQLabel73, type=boolean, expr=0<=0, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel76}
@@ -5205,6 +5152,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel80}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=LEQLabel79, type=boolean, expr=0<=0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel81}
@@ -5223,6 +5171,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel92}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel91, type=boolean, expr=VarLocation{name=factorLabel90, type=boolean, expr=VarLocation{name=factorLabel89, type=boolean, expr=VarLocation{name=DISYUNCIONLabel88, type=boolean, expr=0<0||0==0, size=0}, size=0}, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel93}
@@ -5232,13 +5181,13 @@ procesando : . . . {CEQ(==), VarLocation{name=factorLabel94, type=int, expr=0, s
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=CEQLabel96, type=boolean, expr=0==3, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel97}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel99, type=float, expr=0.0, size=0}, VarLocation{name=factorLabel100, type=float, expr=2.0, size=0}, Result: VarLocation{name=PLUSLabel101, type=float, expr=0.0+2.0, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel101, type=float, expr=0.0+2.0, size=0}, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
@@ -5281,6 +5230,7 @@ procesando : . . . {AND(&&), VarLocation{name=LELabel111, type=boolean, expr=0.0
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=CONJUNCIONLabel115, type=boolean, expr=0.0<0.0&&0.0<0.0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel116}
@@ -5290,7 +5240,6 @@ procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel119, type=float, ex
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel118, type=float, expr=35.0, size=0}, VarLocation{name=MULTIPLYLabel121, type=float, expr=4.0*0.0, size=0}, Result: VarLocation{name=PLUSLabel122, type=float, expr=35.0+4.0*0.0, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {MINUS(-), VarLocation{name=PLUSLabel122, type=float, expr=35.0+4.0*0.0, size=0}, VarLocation{name=factorLabel123, type=float, expr=498.0, size=0}, Result: VarLocation{name=MINUSLabel124, type=float, expr=35.0+4.0*0.0-498.0, size=0}}
@@ -5318,7 +5267,6 @@ procesando : . . . {LABEL, null, null, Result: endIfLabel117}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel130, type=int, expr=0, size=0}, VarLocation{name=factorLabel131, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel132, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel132, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
@@ -5340,21 +5288,18 @@ procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel137, type=float, ex
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=MULTIPLYLabel136, type=float, expr=0.0*-0.0, size=0}, VarLocation{name=MULTIPLYLabel139, type=float, expr=23.0*0.0, size=0}, Result: VarLocation{name=PLUSLabel140, type=float, expr=0.0*-0.0+23.0*0.0, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {DIVIDE(/), VarLocation{name=factorLabel141, type=float, expr=2.0, size=0}, VarLocation{name=factorLabel142, type=float, expr=4.0, size=0}, Result: VarLocation{name=DIVIDELabel143, type=float, expr=VarLocation{name=factorLabel141, type=float, expr=2.0, size=0}/VarLocation{name=factorLabel142, type=float, expr=4.0, size=0}, size=0}}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=PLUSLabel140, type=float, expr=0.0*-0.0+23.0*0.0, size=0}, VarLocation{name=DIVIDELabel143, type=float, expr=VarLocation{name=factorLabel141, type=float, expr=2.0, size=0}/VarLocation{name=factorLabel142, type=float, expr=4.0, size=0}, size=0}, Result: VarLocation{name=PLUSLabel144, type=float, expr=0.0*-0.0+23.0*0.0+VarLocation{name=factorLabel141, type=float, expr=2.0, size=0}/VarLocation{name=factorLabel142, type=float, expr=4.0, size=0}, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel144, type=float, expr=0.0*-0.0+23.0*0.0+VarLocation{name=factorLabel141, type=float, expr=2.0, size=0}/VarLocation{name=factorLabel142, type=float, expr=4.0, size=0}, size=0}, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel145, type=int, expr=0, size=0}, VarLocation{name=factorLabel146, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel147, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel147, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
@@ -5412,14 +5357,12 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, potencia, 2, Result: RESULTLabel158}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel159, type=float, expr=MethodCallExpr{name=potencia, args=[0.0, 2]}, size=0}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel161, type=float, expr=0.0, size=0}, VarLocation{name=factorLabel162, type=float, expr=2.0, size=0}, Result: VarLocation{name=PLUSLabel163, type=float, expr=0.0+2.0, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0.0, 0.0+2.0]}
@@ -5429,11 +5372,9 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, multiples, 2, Result: RESULTLabel164}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multiples, args=[0.0, 0.0+2.0]}]}, null, Result: EXTERNINVKLabel166}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -5469,7 +5410,6 @@ potencia:
     movzbl %al, %rax
     movl	%rax, -48(%rbp)
 
-    mov true(%rbp), %rax
     cmp -48(%rbp), %rax
 
     jne elseCondLabel7
@@ -5517,7 +5457,6 @@ potencia:
 
 .BeginWhileLabel20:
 
-    mov true(%rbp), %rax
     cmp -100(%rbp), %rax
 
     jne EndWhileLabel21
@@ -5554,7 +5493,6 @@ potencia:
     movzbl %al, %rax 
     mov %rax, -156(%rbp) 
 
-    mov true(%rbp), %rax
     cmp -156(%rbp), %rax
 
     jne elseCondLabel34
@@ -5648,7 +5586,6 @@ multiples:
     movzbl %al, %rax
     movl	%rax, -156(%rbp)
 
-    mov true(%rbp), %rax
     cmp -156(%rbp), %rax
 
     jne elseCondLabel62
@@ -5659,7 +5596,6 @@ multiples:
     movzbl %al, %rax
     movl	%rax, -168(%rbp)
 
-    mov true(%rbp), %rax
     cmp -168(%rbp), %rax
 
     jne elseCondLabel67
@@ -5688,7 +5624,6 @@ multiples:
 
 .BeginWhileLabel75:
 
-    mov true(%rbp), %rax
     cmp -200(%rbp), %rax
 
     jne EndWhileLabel76
@@ -5701,7 +5636,6 @@ multiples:
 
 .BeginWhileLabel80:
 
-    mov true(%rbp), %rax
     cmp -212(%rbp), %rax
 
     jne EndWhileLabel81
@@ -5733,7 +5667,6 @@ multiples:
 
 .BeginWhileLabel92:
 
-    mov true(%rbp), %rax
     cmp -252(%rbp), %rax
 
     jne EndWhileLabel93
@@ -5744,7 +5677,6 @@ multiples:
     movzbl %al, %rax
     movl	%rax, -264(%rbp)
 
-    mov true(%rbp), %rax
     cmp -264(%rbp), %rax
 
     jne elseCondLabel97
@@ -5805,7 +5737,6 @@ multiples:
     movl	%rax, -344(%rbp)
 .L8:
 
-    mov true(%rbp), %rax
     cmp -344(%rbp), %rax
 
     jne elseCondLabel116
@@ -6062,6 +5993,7 @@ procesando : . . . {LE(<), VarLocation{name=factorLabel4, type=int, expr=0, size
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=LELabel6, type=boolean, expr=0<0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel7}
@@ -6098,6 +6030,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel20}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel19, type=boolean, expr=VarLocation{name=DISYUNCIONLabel18, type=boolean, expr=0<0||0==0, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel21}
@@ -6113,7 +6046,6 @@ procesando : . . . {ASSIGN(=), VarLocation{name=MULTIPLYLabel26, type=float, exp
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel27, type=int, expr=0, size=0}, VarLocation{name=factorLabel28, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel29, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel29, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
@@ -6132,6 +6064,7 @@ procesando : . . . {NON(!), VarLocation{name=factorLabel32, type=boolean, expr=V
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=NONLabel33, type=boolean, expr=!VarLocation{name=NONLabel31, type=boolean, expr=!false, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel34}
@@ -6229,7 +6162,6 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, potencia, 2, Result: RESULTLabel62}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel63, type=float, expr=MethodCallExpr{name=potencia, args=[0.0, 2]}, size=0}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
@@ -6243,11 +6175,9 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, multRepeat, 2, Result: RESULTLabel66}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multRepeat, args=[0.0, 0.0]}]}, null, Result: EXTERNINVKLabel68}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -6283,7 +6213,6 @@ potencia:
     movzbl %al, %rax
     movl	%rax, -48(%rbp)
 
-    mov true(%rbp), %rax
     cmp -48(%rbp), %rax
 
     jne elseCondLabel7
@@ -6331,7 +6260,6 @@ potencia:
 
 .BeginWhileLabel20:
 
-    mov true(%rbp), %rax
     cmp -100(%rbp), %rax
 
     jne EndWhileLabel21
@@ -6368,7 +6296,6 @@ potencia:
     movzbl %al, %rax 
     mov %rax, -156(%rbp) 
 
-    mov true(%rbp), %rax
     cmp -156(%rbp), %rax
 
     jne elseCondLabel34
@@ -6562,7 +6489,6 @@ procesando : . . . {METHODDECL, Metodo{ name=sum, return_not_void=true, typeRetu
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel7, type=float, expr=0.0, size=0}, VarLocation{name=factorLabel8, type=float, expr=0.0, size=0}, Result: VarLocation{name=PLUSLabel9, type=float, expr=0.0+0.0, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=PLUSLabel9, type=float, expr=0.0+0.0, size=0}}
@@ -6598,7 +6524,6 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, resta, 2, Result: RESULTLabel16}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0.0, 0.0]}
@@ -6609,7 +6534,6 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, div, 2, Result: RESULTLabel20}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=resta, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}
@@ -6620,11 +6544,9 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, sum, 2, Result: RESULTLabel22}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandofuncionesflotantes"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=resta, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}]}, null, Result: EXTERNINVKLabel24}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -6842,6 +6764,7 @@ procesando : . . . {NEQ(!=), VarLocation{name=factorLabel1, type=int, expr=0, si
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=NEQLabel3, type=boolean, expr=0!=0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel4}
@@ -6851,6 +6774,7 @@ procesando : . . . {GE(>), VarLocation{name=factorLabel6, type=int, expr=0, size
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=GELabel8, type=boolean, expr=0>0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel9}
@@ -6912,15 +6836,12 @@ Result = 4
 finalizado.
 
 procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel23}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel25}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel26}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [4, 4]}
@@ -6933,11 +6854,9 @@ Result = 4
 finalizado.
 
 procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel29}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: EXTERNINVKLabel31}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [8, 5]}
@@ -6950,11 +6869,9 @@ Result = 8
 finalizado.
 
 procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel34}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: EXTERNINVKLabel36}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -6975,7 +6892,6 @@ pruAritmetica:
     movzbl %al, %rax
     movl	%rax, -16(%rbp)
 
-    mov true(%rbp), %rax
     cmp -16(%rbp), %rax
 
     jne elseCondLabel4
@@ -6986,7 +6902,6 @@ pruAritmetica:
     movzbl %al, %rax
     movl	%rax, -28(%rbp)
 
-    mov true(%rbp), %rax
     cmp -28(%rbp), %rax
 
     jne elseCondLabel9
@@ -7118,6 +7033,7 @@ procesando : . . . {GE(>), VarLocation{name=factorLabel1, type=int, expr=0, size
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=GELabel3, type=boolean, expr=0>0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel4}
@@ -7142,6 +7058,7 @@ procesando : . . . {CEQ(==), VarLocation{name=factorLabel9, type=int, expr=0, si
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=CEQLabel11, type=boolean, expr=0==0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel12}
@@ -7188,15 +7105,12 @@ Result = 4
 finalizado.
 
 procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel23}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel25}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel26}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [4, 4]}
@@ -7209,11 +7123,9 @@ Result = 4
 finalizado.
 
 procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel29}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: EXTERNINVKLabel31}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [8, 5]}
@@ -7226,11 +7138,9 @@ Result = 8
 finalizado.
 
 procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel34}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: EXTERNINVKLabel36}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -7251,7 +7161,6 @@ pruAritmetica:
     movzbl %al, %rax
     movl	%rax, -16(%rbp)
 
-    mov true(%rbp), %rax
     cmp -16(%rbp), %rax
 
     jne elseCondLabel4
@@ -7275,7 +7184,6 @@ pruAritmetica:
     movzbl %al, %rax
     movl	%rax, -44(%rbp)
 
-    mov true(%rbp), %rax
     cmp -44(%rbp), %rax
 
     jne elseCondLabel12
@@ -7404,11 +7312,9 @@ index: 0 tamaño: 1
 finalizado.
 
 procesando : . . . {METHODCALL, pruebaLogica, 1, Result: RESULTLabel15}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[false]}]}, null, Result: EXTERNINVKLabel17}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -7580,13 +7486,13 @@ procesando : . . . {AND(&&), VarLocation{name=factorLabel4, type=boolean, expr=V
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=CONJUNCIONLabel9, type=boolean, expr=VarLocation{name=GELabel3, type=boolean, expr=0.0>0.0, size=0}&&VarLocation{name=GELabel7, type=boolean, expr=0.0>0.0, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel10}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel12, type=float, expr=0.0, size=0}, VarLocation{name=factorLabel13, type=float, expr=0.0, size=0}, Result: VarLocation{name=PLUSLabel14, type=float, expr=0.0+0.0, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {DIVIDE(/), VarLocation{name=factorLabel15, type=float, expr=VarLocation{name=PLUSLabel14, type=float, expr=0.0+0.0, size=0}, size=0}, VarLocation{name=factorLabel16, type=float, expr=2.0, size=0}, Result: VarLocation{name=DIVIDELabel17, type=float, expr=VarLocation{name=factorLabel15, type=float, expr=VarLocation{name=PLUSLabel14, type=float, expr=0.0+0.0, size=0}, size=0}/VarLocation{name=factorLabel16, type=float, expr=2.0, size=0}, size=0}}
@@ -7614,13 +7520,13 @@ procesando : . . . {AND(&&), VarLocation{name=factorLabel21, type=boolean, expr=
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=CONJUNCIONLabel26, type=boolean, expr=VarLocation{name=GELabel20, type=boolean, expr=0.0>0.0, size=0}&&VarLocation{name=GELabel24, type=boolean, expr=0.0>0.0, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel27}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel29, type=float, expr=0.0, size=0}, VarLocation{name=factorLabel30, type=float, expr=0.0, size=0}, Result: VarLocation{name=PLUSLabel31, type=float, expr=0.0+0.0, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {DIVIDE(/), VarLocation{name=factorLabel32, type=float, expr=VarLocation{name=PLUSLabel31, type=float, expr=0.0+0.0, size=0}, size=0}, VarLocation{name=factorLabel33, type=float, expr=2.0, size=0}, Result: VarLocation{name=DIVIDELabel34, type=float, expr=VarLocation{name=factorLabel32, type=float, expr=VarLocation{name=PLUSLabel31, type=float, expr=0.0+0.0, size=0}, size=0}/VarLocation{name=factorLabel33, type=float, expr=2.0, size=0}, size=0}}
@@ -7648,13 +7554,13 @@ procesando : . . . {AND(&&), VarLocation{name=factorLabel38, type=boolean, expr=
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=CONJUNCIONLabel43, type=boolean, expr=VarLocation{name=GELabel37, type=boolean, expr=0.0>0.0, size=0}&&VarLocation{name=GELabel41, type=boolean, expr=0.0>0.0, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel44}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel46, type=float, expr=0.0, size=0}, VarLocation{name=factorLabel47, type=float, expr=0.0, size=0}, Result: VarLocation{name=PLUSLabel48, type=float, expr=0.0+0.0, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {DIVIDE(/), VarLocation{name=factorLabel49, type=float, expr=VarLocation{name=PLUSLabel48, type=float, expr=0.0+0.0, size=0}, size=0}, VarLocation{name=factorLabel50, type=float, expr=2.0, size=0}, Result: VarLocation{name=DIVIDELabel51, type=float, expr=VarLocation{name=factorLabel49, type=float, expr=VarLocation{name=PLUSLabel48, type=float, expr=0.0+0.0, size=0}, size=0}/VarLocation{name=factorLabel50, type=float, expr=2.0, size=0}, size=0}}
@@ -7688,6 +7594,7 @@ procesando : . . . {AND(&&), VarLocation{name=CONJUNCIONLabel60, type=boolean, e
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=CONJUNCIONLabel65, type=boolean, expr=VarLocation{name=CEQLabel54, type=boolean, expr=0.0==0.0, size=0}&&VarLocation{name=CEQLabel58, type=boolean, expr=0.0==0.0, size=0}&&VarLocation{name=CEQLabel63, type=boolean, expr=0.0==0.0, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel66}
@@ -7725,11 +7632,9 @@ index: 0 tamaño: 3
 finalizado.
 
 procesando : . . . {METHODCALL, promedio, 3, Result: RESULTLabel72}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=promedio, args=[3.3, 0.66, 10.0]}]}, null, Result: EXTERNINVKLabel74}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel75, type=int, expr=1, size=0}}
@@ -7772,7 +7677,6 @@ promedio:
     movl	%rax, -36(%rbp)
 .L2:
 
-    mov true(%rbp), %rax
     cmp -36(%rbp), %rax
 
     jne elseCondLabel10
@@ -7818,7 +7722,6 @@ promedio:
     movl	%rax, -96(%rbp)
 .L5:
 
-    mov true(%rbp), %rax
     cmp -96(%rbp), %rax
 
     jne elseCondLabel27
@@ -7864,7 +7767,6 @@ promedio:
     movl	%rax, -156(%rbp)
 .L8:
 
-    mov true(%rbp), %rax
     cmp -156(%rbp), %rax
 
     jne elseCondLabel44
@@ -7929,7 +7831,6 @@ promedio:
     movl	%rax, -236(%rbp)
 .L14:
 
-    mov true(%rbp), %rax
     cmp -236(%rbp), %rax
 
     jne elseCondLabel66
@@ -8017,7 +7918,6 @@ procesando : . . . {ASSIGN(=), VarLocation{name=DISYUNCIONLabel10, type=boolean,
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: EXTERNINVKLabel12}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -8137,6 +8037,7 @@ procesando : . . . {GE(>), VarLocation{name=factorLabel1, type=int, expr=0, size
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=GELabel3, type=boolean, expr=0>0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel4}
@@ -8173,6 +8074,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel16}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel15, type=boolean, expr=VarLocation{name=factorLabel14, type=boolean, expr=VarLocation{name=NEQLabel13, type=boolean, expr=0!=0, size=0}, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel17}
@@ -8219,11 +8121,9 @@ Result = 6
 finalizado.
 
 procesando : . . . {METHODCALL, maxcomdiv, 2, Result: RESULTLabel26}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="mcd%d"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: EXTERNINVKLabel28}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -8244,7 +8144,6 @@ maxcomdiv:
     movzbl %al, %rax
     movl	%rax, -24(%rbp)
 
-    mov true(%rbp), %rax
     cmp -24(%rbp), %rax
 
     jne elseCondLabel4
@@ -8278,7 +8177,6 @@ maxcomdiv:
 
 .BeginWhileLabel16:
 
-    mov true(%rbp), %rax
     cmp -84(%rbp), %rax
 
     jne EndWhileLabel17
@@ -8383,7 +8281,6 @@ procesando : . . . {METHODDECL, Metodo{ name=alo, return_not_void=false, typeRet
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel1, type=int, expr=0, size=0}, VarLocation{name=factorLabel2, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel3, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel3, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
@@ -8406,11 +8303,9 @@ Result = 0
 finalizado.
 
 procesando : . . . {METHODCALL, alo, 1, Result: RESULTLabel5}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel6, type=int, expr=0, size=0}, VarLocation{name=factorLabel7, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel8, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel8, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
@@ -8442,7 +8337,6 @@ Result = 0
 finalizado.
 
 procesando : . . . {METHODCALL, alo2, 1, Result: RESULTLabel13}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel14, type=int, expr=MethodCallExpr{name=alo2, args=[0]}, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
@@ -8514,13 +8408,13 @@ procesando : . . . {METHODDECL, Metodo{ name=alo, return_not_void=false, typeRet
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel1, type=boolean, expr=false, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel2}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel4, type=int, expr=0, size=0}, VarLocation{name=factorLabel5, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel6, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel6, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
@@ -8569,11 +8463,9 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, alo, 2, Result: RESULTLabel12}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel13, type=int, expr=0, size=0}, VarLocation{name=factorLabel14, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel15, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel15, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
@@ -8605,7 +8497,6 @@ Result = 0
 finalizado.
 
 procesando : . . . {METHODCALL, alo2, 1, Result: RESULTLabel20}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel21, type=int, expr=MethodCallExpr{name=alo2, args=[0]}, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
@@ -8679,7 +8570,6 @@ procesando : . . . {METHODDECL, Metodo{ name=inc, return_not_void=true, typeRetu
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel1, type=int, expr=0, size=0}, VarLocation{name=factorLabel2, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel3, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=PLUSLabel3, type=int, expr=0+1, size=0}}
@@ -8702,6 +8592,7 @@ procesando : . . . {GE(>), VarLocation{name=factorLabel4, type=int, expr=0, size
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=GELabel8, type=boolean, expr=0>3*2, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel9}
@@ -8751,7 +8642,6 @@ Result = 5
 finalizado.
 
 procesando : . . . {METHODCALL, inc, 1, Result: RESULTLabel21}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=inc, args=[5]}, 10.2]}
@@ -8762,7 +8652,6 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, resto, 2, Result: RESULTLabel24}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {ASSIGN(=), MethodCallExpr{name=resto, args=[MethodCallExpr{name=inc, args=[5]}, 10.2]}, null, Result: VarLocation{name=A, type=int[], expr=0, size=1}}
@@ -8810,7 +8699,6 @@ resto:
     movzbl %al, %rax
     movl	%rax, -24(%rbp)
 
-    mov true(%rbp), %rax
     cmp -24(%rbp), %rax
 
     jne elseCondLabel9
@@ -8861,7 +8749,7 @@ PARAM
 
     call resto
 
-    mov MethodCallExpr{name=resto, args=[MethodCallExpr{name=inc, args=[5]}, 10.2]}(%rbp), %rax
+    mov MethodCallExpr{name=resto, args=[MethodCallExpr{name=inc, args=[5]}, 10.2]} (%rbp), %rax
     mov -16(%rbp), %rax
 
     leave
@@ -8934,6 +8822,7 @@ procesando : . . . {GE(>), VarLocation{name=factorLabel1, type=int, expr=0, size
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=GELabel3, type=boolean, expr=0>0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel4}
@@ -8970,6 +8859,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel16}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel15, type=boolean, expr=VarLocation{name=factorLabel14, type=boolean, expr=VarLocation{name=NEQLabel13, type=boolean, expr=0!=0, size=0}, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel17}
@@ -9019,7 +8909,6 @@ Result = 6
 finalizado.
 
 procesando : . . . {METHODCALL, maxcomdiv, 2, Result: RESULTLabel27}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel29, type=float, expr=3.5, size=0}, VarLocation{name=factorLabel30, type=int, expr=0, size=0}, Result: VarLocation{name=MULTIPLYLabel31, type=float, expr=3.5*0, size=0}}
@@ -9032,7 +8921,6 @@ procesando : . . . {MINUS(-), VarLocation{name=MULTIPLYLabel31, type=float, expr
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%d%f"}, StringLiteral{value="mcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}, 3.5*0-7/6]}, null, Result: EXTERNINVKLabel36}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -9053,7 +8941,6 @@ maxcomdiv:
     movzbl %al, %rax
     movl	%rax, -24(%rbp)
 
-    mov true(%rbp), %rax
     cmp -24(%rbp), %rax
 
     jne elseCondLabel4
@@ -9087,7 +8974,6 @@ maxcomdiv:
 
 .BeginWhileLabel16:
 
-    mov true(%rbp), %rax
     cmp -84(%rbp), %rax
 
     jne EndWhileLabel17
@@ -9199,11 +9085,9 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {METHODCALL, pruAritmetica, 0, Result: RESULTLabel6}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[]}]}, null, Result: EXTERNINVKLabel8}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -9317,11 +9201,9 @@ Result = 2
 finalizado.
 
 procesando : . . . {METHODCALL, pruMult, 1, Result: RESULTLabel12}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[2]}]}, null, Result: EXTERNINVKLabel14}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -9428,11 +9310,9 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {METHODCALL, pruMult, 0, Result: RESULTLabel6}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[]}]}, null, Result: EXTERNINVKLabel8}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -9505,7 +9385,6 @@ procesando : . . . {METHODDECL, Metodo{ name=alo, return_not_void=false, typeRet
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel1, type=int, expr=0, size=0}, VarLocation{name=factorLabel2, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel3, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel3, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
@@ -9640,6 +9519,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel8}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel7, type=boolean, expr=VarLocation{name=LELabel6, type=boolean, expr=0<0, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel9}
@@ -9661,6 +9541,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel21}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel20, type=boolean, expr=VarLocation{name=DISYUNCIONLabel19, type=boolean, expr=VarLocation{name=GELabel13, type=boolean, expr=0>0, size=0}||VarLocation{name=LELabel17, type=boolean, expr=0<0, size=0}, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel22}
@@ -9670,6 +9551,7 @@ procesando : . . . {GE(>), VarLocation{name=factorLabel23, type=int, expr=0, siz
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=GELabel25, type=boolean, expr=0>0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel26}
@@ -9688,7 +9570,6 @@ procesando : . . . {LABEL, null, null, Result: elseCondLabel26}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel31, type=int, expr=0, size=0}, VarLocation{name=factorLabel32, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel33, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel33, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
@@ -9716,6 +9597,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel44}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel43, type=boolean, expr=VarLocation{name=DISYUNCIONLabel42, type=boolean, expr=VarLocation{name=LELabel36, type=boolean, expr=0<0, size=0}||VarLocation{name=GELabel40, type=boolean, expr=0>0, size=0}, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel45}
@@ -9725,13 +9607,13 @@ procesando : . . . {LE(<), VarLocation{name=factorLabel46, type=int, expr=0, siz
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=LELabel48, type=boolean, expr=0<0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel49}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel51, type=int, expr=0, size=0}, VarLocation{name=factorLabel52, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel53, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel53, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
@@ -9747,6 +9629,7 @@ procesando : . . . {CEQ(==), VarLocation{name=factorLabel54, type=int, expr=0, s
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=CEQLabel56, type=boolean, expr=0==0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel57}
@@ -9765,7 +9648,6 @@ procesando : . . . {MINUS(-), VarLocation{name=MULTIPLYLabel64, type=int, expr=0
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=MINUSLabel61, type=int, expr=0-1, size=0}, VarLocation{name=factorLabel69, type=int, expr=VarLocation{name=MINUSLabel68, type=int, expr=0*0-0*0, size=0}, size=0}, Result: VarLocation{name=PLUSLabel70, type=int, expr=0-1+VarLocation{name=MINUSLabel68, type=int, expr=0*0-0*0, size=0}, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel70, type=int, expr=0-1+VarLocation{name=MINUSLabel68, type=int, expr=0*0-0*0, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
@@ -9793,7 +9675,6 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel71, type=int, expr=0,
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel72, type=int, expr=0, size=0}, VarLocation{name=factorLabel73, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel74, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel74, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
@@ -9825,11 +9706,9 @@ Result = 9
 finalizado.
 
 procesando : . . . {METHODCALL, id, 1, Result: RESULTLabel77}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=id, args=[9]}]}, null, Result: EXTERNINVKLabel79}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -9861,7 +9740,6 @@ id:
 
 .BeginWhileLabel8:
 
-    mov true(%rbp), %rax
     cmp -52(%rbp), %rax
 
     jne EndWhileLabel9
@@ -9896,7 +9774,6 @@ id:
 
 .BeginWhileLabel21:
 
-    mov true(%rbp), %rax
     cmp -104(%rbp), %rax
 
     jne EndWhileLabel22
@@ -9907,7 +9784,6 @@ id:
     movzbl %al, %rax
     movl	%rax, -116(%rbp)
 
-    mov true(%rbp), %rax
     cmp -116(%rbp), %rax
 
     jne elseCondLabel26
@@ -9963,7 +9839,6 @@ id:
 
 .BeginWhileLabel44:
 
-    mov true(%rbp), %rax
     cmp -188(%rbp), %rax
 
     jne EndWhileLabel45
@@ -9974,7 +9849,6 @@ id:
     movzbl %al, %rax
     movl	%rax, -200(%rbp)
 
-    mov true(%rbp), %rax
     cmp -200(%rbp), %rax
 
     jne elseCondLabel49
@@ -9996,7 +9870,6 @@ id:
     movzbl %al, %rax
     movl	%rax, -228(%rbp)
 
-    mov true(%rbp), %rax
     cmp -228(%rbp), %rax
 
     jne elseCondLabel57
@@ -10122,6 +9995,7 @@ procesando : . . . {CEQ(==), VarLocation{name=factorLabel1, type=int, expr=0, si
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=CEQLabel3, type=boolean, expr=0==0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel4}
@@ -10140,6 +10014,7 @@ procesando : . . . {CEQ(==), VarLocation{name=factorLabel7, type=int, expr=0, si
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=CEQLabel9, type=boolean, expr=0==0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.Boolean
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: elseCondLabel10}
@@ -10155,7 +10030,6 @@ procesando : . . . {LABEL, null, null, Result: elseCondLabel10}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel13, type=int, expr=0, size=0}, VarLocation{name=factorLabel14, type=int, expr=0, size=0}, Result: VarLocation{name=PLUSLabel15, type=int, expr=0+0, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=PLUSLabel15, type=int, expr=0+0, size=0}}
@@ -10187,11 +10061,9 @@ Result = 4
 finalizado.
 
 procesando : . . . {METHODCALL, suma, 2, Result: RESULTLabel18}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=suma, args=[4, 9]}]}, null, Result: EXTERNINVKLabel20}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -10212,7 +10084,6 @@ suma:
     movzbl %al, %rax
     movl	%rax, -12(%rbp)
 
-    mov true(%rbp), %rax
     cmp -12(%rbp), %rax
 
     jne elseCondLabel4
@@ -10229,7 +10100,6 @@ suma:
     movzbl %al, %rax
     movl	%rax, -28(%rbp)
 
-    mov true(%rbp), %rax
     cmp -28(%rbp), %rax
 
     jne elseCondLabel10
@@ -10326,20 +10196,19 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel7}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel6, type=boolean, expr=VarLocation{name=LELabel5, type=boolean, expr=0<0, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel8}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel9, type=float, expr=0.0, size=0}, VarLocation{name=factorLabel10, type=float, expr=0.0, size=0}, Result: VarLocation{name=PLUSLabel11, type=float, expr=0.0+0.0, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel11, type=float, expr=0.0+0.0, size=0}, null, Result: VarLocation{name=aux, type=float, expr=null, size=0}}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel12, type=int, expr=0, size=0}, VarLocation{name=factorLabel13, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel14, type=int, expr=0+1, size=0}}
-VarLocation2
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel14, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
@@ -10373,11 +10242,9 @@ index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, sumx, 2, Result: RESULTLabel18}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=sumx, args=[6.0, 2]}]}, null, Result: EXTERNINVKLabel20}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -10406,7 +10273,6 @@ sumx:
 
 .BeginWhileLabel7:
 
-    mov true(%rbp), %rax
     cmp -40(%rbp), %rax
 
     jne EndWhileLabel8
@@ -10516,6 +10382,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel10}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel9, type=boolean, expr=VarLocation{name=factorLabel8, type=boolean, expr=VarLocation{name=factorLabel7, type=boolean, expr=VarLocation{name=factorLabel6, type=boolean, expr=VarLocation{name=factorLabel5, type=boolean, expr=VarLocation{name=NEQLabel4, type=boolean, expr=0!=0, size=0}, size=0}, size=0}, size=0}, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel11}
@@ -10546,6 +10413,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel19}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=NEQLabel18, type=boolean, expr=0!=0, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel20}
@@ -10567,6 +10435,7 @@ procesando : . . . {LABEL, null, null, Result: BeginWhileLabel25}
 finalizado.
 
 procesando : . . . {CMP, VarLocation{name=factorLabel24, type=boolean, expr=VarLocation{name=NEQLabel23, type=boolean, expr=0!=0, size=0}, size=0}, true, Result: null}
+{CMP} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {JNE, null, null, Result: EndWhileLabel26}
@@ -10601,11 +10470,9 @@ Result = 6
 finalizado.
 
 procesando : . . . {METHODCALL, maxcomdiv, 2, Result: RESULTLabel30}
-{METHODCALL} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%dMcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: EXTERNINVKLabel32}
-{METHODCALL_E} FALTA CASO class java.lang.String
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -10631,7 +10498,6 @@ maxcomdiv:
 
 .BeginWhileLabel10:
 
-    mov true(%rbp), %rax
     cmp -52(%rbp), %rax
 
     jne EndWhileLabel11
@@ -10661,7 +10527,6 @@ maxcomdiv:
 
 .BeginWhileLabel19:
 
-    mov true(%rbp), %rax
     cmp -88(%rbp), %rax
 
     jne EndWhileLabel20
@@ -10680,7 +10545,6 @@ maxcomdiv:
 
 .BeginWhileLabel25:
 
-    mov true(%rbp), %rax
     cmp -104(%rbp), %rax
 
     jne EndWhileLabel26
