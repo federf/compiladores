@@ -139,6 +139,7 @@ factorial:
 
     mov -48(%rbp) , %rax 
     mov -52(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-56%(rbp) 
 
     mov -56(%rbp), %rax
@@ -146,6 +147,7 @@ factorial:
 
     mov -64(%rbp) , %rax 
     mov -68(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-72%(rbp) 
 
     mov -72(%rbp), %rax
@@ -171,6 +173,7 @@ main:
 
 PARAM
     movl $3 , 8(%rsp)
+
     call factorial
 
     call printf
@@ -390,6 +393,8 @@ div:
 
     mov -4(%rbp) , %rax 
     mov -8(%rbp) , %rcx 
+	 cltd
++    idiv %rcx
     mov %rcx,-12%(rbp) 
 
     mov -12(%rbp), %rax
@@ -408,6 +413,7 @@ resta:
 
     mov -4(%rbp) , %rax 
     mov -8(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-12%(rbp) 
 
     mov -12(%rbp), %rax
@@ -426,6 +432,7 @@ sum:
 
     mov -4(%rbp) , %rax 
     mov -8(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-12%(rbp) 
 
     mov -12(%rbp), %rax
@@ -444,6 +451,7 @@ mult:
 
     mov -4(%rbp) , %rax 
     mov -8(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-12%(rbp) 
 
     mov -12(%rbp), %rax
@@ -779,6 +787,7 @@ inc:
 
     mov -4(%rbp) , %rax 
     mov -8(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-12%(rbp) 
 
     mov -12(%rbp), %rax
@@ -952,6 +961,7 @@ main:
 
 PARAM
     movl $3 , 8(%rsp)
+
     call pruAritmetica
 
     call printf
@@ -1082,6 +1092,7 @@ aritmTest:
 
     mov -32(%rbp) , %rax 
     mov -36(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-40%(rbp) 
 
     mov -40(%rbp), %rax
@@ -1089,6 +1100,7 @@ aritmTest:
 
     mov -48(%rbp) , %rax 
     mov -52(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-56%(rbp) 
 
     mov -56(%rbp), %rax
@@ -1096,6 +1108,8 @@ aritmTest:
 
     mov -64(%rbp) , %rax 
     mov -68(%rbp) , %rcx 
+	 cltd
++    idiv %rcx
     mov %rcx,-72%(rbp) 
 
     mov -76(%rbp), %rax
@@ -1131,6 +1145,7 @@ main:
 
 PARAM
     movl $5 , 8(%rsp)
+
     call aritmTest
 
     call printf
@@ -1299,6 +1314,7 @@ breaks:
 
     mov -40(%rbp) , %rax 
     mov -44(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-48%(rbp) 
 
     mov -48(%rbp), %rax
@@ -1348,6 +1364,7 @@ main:
 
 PARAM
     movl $1 , 8(%rsp)
+
     call breaks
 
     call printf
@@ -1514,6 +1531,7 @@ breaks:
 
     mov -36(%rbp) , %rax 
     mov -40(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-44%(rbp) 
 
     mov -44(%rbp), %rax
@@ -1560,6 +1578,7 @@ main:
 
 PARAM
     movl $1 , 8(%rsp)
+
     call breaks
 
     call printf
@@ -1992,6 +2011,7 @@ breaks:
 
     mov -36(%rbp) , %rax 
     mov -40(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-44%(rbp) 
 
     mov -44(%rbp), %rax
@@ -2038,6 +2058,7 @@ main:
 
 PARAM
     movl $1 , 8(%rsp)
+
     call breaks
 
     call printf
@@ -2182,7 +2203,9 @@ main:
     mov %rsp, %rbp
 
 PARAM
-    movl $8 , 8(%rsp)    movl $4 , 8(%rsp)
+    movl $8 , 12(%rsp)
+    movl $4 , 8(%rsp)
+
     call pruAritmetica
 
     call printf
@@ -2306,6 +2329,7 @@ pruAritmetica:
 
     mov -24(%rbp) , %rax 
     mov -28(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-32%(rbp) 
 
     mov -32(%rbp), %rax
@@ -2333,7 +2357,9 @@ main:
     mov %rsp, %rbp
 
 PARAM
-    movl $8 , 8(%rsp)    movl $4 , 8(%rsp)
+    movl $8 , 12(%rsp)
+    movl $4 , 8(%rsp)
+
     call pruAritmetica
 
     call printf
@@ -3259,7 +3285,10 @@ main:
     mov %rsp, %rbp
 
 PARAM
-    movl $9 , 12(%rsp)    movl $6 , 8(%rsp)    movl $1 , 8(%rsp)
+    movl $9 , 16(%rsp)
+    movl $6 , 12(%rsp)
+    movl $1 , 8(%rsp)
+
     call dados
 
     call printf
@@ -3500,6 +3529,7 @@ pruContinue:
 
     mov -64(%rbp) , %rax 
     mov -68(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-72%(rbp) 
 
     mov -72(%rbp), %rax
@@ -3529,10 +3559,12 @@ pruContinue:
 
     mov -104(%rbp) , %rax 
     mov -108(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-112%(rbp) 
 
     mov -112(%rbp) , %rax 
     mov -116(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-120%(rbp) 
 
     mov -120(%rbp), %rax
@@ -3556,6 +3588,7 @@ pruContinue:
 
     mov -132(%rbp) , %rax 
     mov -136(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-140%(rbp) 
 
     mov -140(%rbp), %rax
@@ -3575,6 +3608,7 @@ pruContinue:
 
     mov -148(%rbp) , %rax 
     mov -152(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-156%(rbp) 
 
     mov -156(%rbp), %rax
@@ -3592,7 +3626,8 @@ main:
     mov %rsp, %rbp
 
 PARAM
-    movl $2 , 8(%rsp)
+    movl $2 , 12(%rsp)
+
     call pruContinue
 
     call printf
@@ -3859,6 +3894,7 @@ prueba:
 
     mov -92(%rbp) , %rax 
     mov -96(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-100%(rbp) 
 
     mov -100(%rbp), %rax
@@ -3866,6 +3902,7 @@ prueba:
 
     mov -108(%rbp) , %rax 
     mov -112(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-116%(rbp) 
 
     mov -116(%rbp), %rax
@@ -3877,6 +3914,7 @@ prueba:
 
     mov -124(%rbp) , %rax 
     mov -128(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-132%(rbp) 
 
     mov -132(%rbp), %rax
@@ -3884,6 +3922,8 @@ prueba:
 
     mov -140(%rbp) , %rax 
     mov -144(%rbp) , %rcx 
+	 cltd
++    idiv %rcx
     mov %rcx,-148%(rbp) 
 
     mov -148(%rbp), %rax
@@ -3921,6 +3961,7 @@ main:
 
 PARAM
     movl $6 , 8(%rsp)
+
     call prueba
 
     call printf
@@ -4071,6 +4112,7 @@ prueba:
 
     mov -40(%rbp) , %rax 
     mov -44(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-48%(rbp) 
 
     mov -48(%rbp), %rax
@@ -4078,6 +4120,7 @@ prueba:
 
     mov -56(%rbp) , %rax 
     mov -60(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-64%(rbp) 
 
     mov -64(%rbp), %rax
@@ -4088,6 +4131,7 @@ prueba:
 
     mov -84(%rbp) , %rax 
     mov -88(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-92%(rbp) 
 
     mov -92(%rbp), %rax
@@ -4095,6 +4139,8 @@ prueba:
 
     mov -96(%rbp) , %rax 
     mov -100(%rbp) , %rcx 
+	 cltd
++    idiv %rcx
     mov %rcx,-104%(rbp) 
 
     movl	-108(%rbp), %rax
@@ -4132,6 +4178,7 @@ main:
 
 PARAM
     movl $6 , 8(%rsp)
+
     call prueba
 
     call printf
@@ -4408,6 +4455,7 @@ potencia:
 
     mov -96(%rbp) , %rax 
     mov -100(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-104%(rbp) 
 
     mov -104(%rbp), %rax
@@ -4415,6 +4463,7 @@ potencia:
 
     mov -112(%rbp) , %rax 
     mov -116(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-120%(rbp) 
 
     mov -120(%rbp), %rax
@@ -4441,6 +4490,8 @@ potencia:
 
     mov -140(%rbp) , %rax 
     mov -144(%rbp) , %rcx 
+	 cltd
++    idiv %rcx
     mov %rcx,-148%(rbp) 
 
     mov -148(%rbp), %rax
@@ -4475,7 +4526,8 @@ main:
     mov -12(%rbp), %rax
 
 PARAM
-    movl $2 , 8(%rsp)
+    movl $2 , 12(%rsp)
+
     call potencia
 
     mov -32(%rbp), %rax
@@ -4691,6 +4743,7 @@ sumatoria:
 
     mov -80(%rbp) , %rax 
     mov -84(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-88%(rbp) 
 
     mov -88(%rbp), %rax
@@ -5455,10 +5508,12 @@ potencia:
 
     mov -108(%rbp) , %rax 
     mov -112(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-116%(rbp) 
 
     mov -116(%rbp) , %rax 
     mov -120(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-124%(rbp) 
 
     mov -124(%rbp), %rax
@@ -5466,6 +5521,7 @@ potencia:
 
     mov -132(%rbp) , %rax 
     mov -136(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-140%(rbp) 
 
     mov -140(%rbp), %rax
@@ -5492,6 +5548,8 @@ potencia:
 
     mov -160(%rbp) , %rax 
     mov -164(%rbp) , %rcx 
+	 cltd
++    idiv %rcx
     mov %rcx,-168%(rbp) 
 
     mov -168(%rbp), %rax
@@ -5552,10 +5610,12 @@ multiples:
 
     mov -96(%rbp) , %rax 
     mov -100(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-104%(rbp) 
 
     mov -104(%rbp) , %rax 
     mov -108(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-112%(rbp) 
 
     mov -112(%rbp), %rax
@@ -5682,6 +5742,7 @@ multiples:
 
     mov -272(%rbp) , %rax 
     mov -276(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-280%(rbp) 
 
     mov -280(%rbp), %rax
@@ -5693,10 +5754,13 @@ multiples:
 
     mov -292(%rbp) , %rax 
     mov -296(%rbp) , %rcx 
+	 cltd
++    idiv %rcx
     mov %rcx,-300%(rbp) 
 
     mov -288(%rbp) , %rax 
     mov -304(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-308%(rbp) 
 
     mov -308(%rbp), %rax
@@ -5743,14 +5807,17 @@ multiples:
 
     mov -356(%rbp) , %rax 
     mov -360(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-364%(rbp) 
 
     mov -352(%rbp) , %rax 
     mov -364(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-368%(rbp) 
 
     mov -368(%rbp) , %rax 
     mov -372(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-376%(rbp) 
 
     mov -376(%rbp), %rax
@@ -5762,10 +5829,12 @@ multiples:
 
     mov -384(%rbp) , %rax 
     mov -388(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-392%(rbp) 
 
     mov -392(%rbp) , %rax 
     mov -396(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-400%(rbp) 
 
     mov -400(%rbp), %rax
@@ -5775,6 +5844,7 @@ multiples:
 
     mov -408(%rbp) , %rax 
     mov -412(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-416%(rbp) 
 
     mov -416(%rbp), %rax
@@ -5790,22 +5860,28 @@ multiples:
 
     mov -424(%rbp) , %rax 
     mov -432(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-436%(rbp) 
 
     mov -440(%rbp) , %rax 
     mov -444(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-448%(rbp) 
 
     mov -436(%rbp) , %rax 
     mov -448(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-452%(rbp) 
 
     mov -456(%rbp) , %rax 
     mov -460(%rbp) , %rcx 
+	 cltd
++    idiv %rcx
     mov %rcx,-464%(rbp) 
 
     mov -452(%rbp) , %rax 
     mov -464(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-468%(rbp) 
 
     mov -468(%rbp), %rax
@@ -5813,6 +5889,7 @@ multiples:
 
     mov -476(%rbp) , %rax 
     mov -480(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-484%(rbp) 
 
     mov -484(%rbp), %rax
@@ -5863,7 +5940,8 @@ main:
     mov -40(%rbp), %rax
 
 PARAM
-    movl $2 , 8(%rsp)
+    movl $2 , 12(%rsp)
+
     call potencia
 
     mov -64(%rbp), %rax
@@ -5871,6 +5949,7 @@ PARAM
 
     mov -72(%rbp) , %rax 
     mov -76(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-80%(rbp) 
 
 PARAM
@@ -6265,10 +6344,12 @@ potencia:
 
     mov -108(%rbp) , %rax 
     mov -112(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-116%(rbp) 
 
     mov -116(%rbp) , %rax 
     mov -120(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-124%(rbp) 
 
     mov -124(%rbp), %rax
@@ -6276,6 +6357,7 @@ potencia:
 
     mov -132(%rbp) , %rax 
     mov -136(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-140%(rbp) 
 
     mov -140(%rbp), %rax
@@ -6302,6 +6384,8 @@ potencia:
 
     mov -160(%rbp) , %rax 
     mov -164(%rbp) , %rcx 
+	 cltd
++    idiv %rcx
     mov %rcx,-168%(rbp) 
 
     mov -168(%rbp), %rax
@@ -6334,22 +6418,27 @@ multRepeat:
 
     mov -12(%rbp) , %rax 
     mov -16(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-20%(rbp) 
 
     mov -20(%rbp) , %rax 
     mov -24(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-28%(rbp) 
 
     mov -28(%rbp) , %rax 
     mov -32(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-36%(rbp) 
 
     mov -36(%rbp) , %rax 
     mov -40(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-44%(rbp) 
 
     mov -44(%rbp) , %rax 
     mov -48(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-52%(rbp) 
 
     mov -52(%rbp), %rax
@@ -6390,7 +6479,8 @@ main:
     mov -44(%rbp), %rax
 
 PARAM
-    movl $2 , 8(%rsp)
+    movl $2 , 12(%rsp)
+
     call potencia
 
     mov -64(%rbp), %rax
@@ -6563,6 +6653,8 @@ div:
 
     mov -4(%rbp) , %rax 
     mov -8(%rbp) , %rcx 
+	 cltd
++    idiv %rcx
     mov %rcx,-12%(rbp) 
 
     mov -12(%rbp), %rax
@@ -6581,6 +6673,7 @@ resta:
 
     mov -4(%rbp) , %rax 
     mov -8(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-12%(rbp) 
 
     mov -12(%rbp), %rax
@@ -6599,6 +6692,7 @@ sum:
 
     mov -4(%rbp) , %rax 
     mov -8(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-12%(rbp) 
 
     mov -12(%rbp), %rax
@@ -6908,6 +7002,7 @@ pruAritmetica:
 
     mov -36(%rbp) , %rax 
     mov -40(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-44%(rbp) 
 
     mov -44(%rbp), %rax
@@ -6919,6 +7014,7 @@ pruAritmetica:
 
     mov -52(%rbp) , %rax 
     mov -56(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-60%(rbp) 
 
     mov -60(%rbp), %rax
@@ -6932,6 +7028,7 @@ pruAritmetica:
 
     mov -68(%rbp) , %rax 
     mov -72(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-76%(rbp) 
 
     mov -76(%rbp), %rax
@@ -6952,7 +7049,9 @@ main:
     mov %rsp, %rbp
 
 PARAM
-    movl $8 , 8(%rsp)    movl $4 , 8(%rsp)
+    movl $8 , 12(%rsp)
+    movl $4 , 8(%rsp)
+
     call pruAritmetica
 
     call printf
@@ -6960,13 +7059,17 @@ PARAM
     call printf
 
 PARAM
-    movl $4 , 8(%rsp)    movl $4 , 8(%rsp)
+    movl $4 , 12(%rsp)
+    movl $4 , 8(%rsp)
+
     call pruAritmetica
 
     call printf
 
 PARAM
-    movl $5 , 8(%rsp)    movl $8 , 8(%rsp)
+    movl $5 , 12(%rsp)
+    movl $8 , 8(%rsp)
+
     call pruAritmetica
 
     call printf
@@ -7166,6 +7269,7 @@ pruAritmetica:
 
     mov -24(%rbp) , %rax 
     mov -28(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-32%(rbp) 
 
     mov -32(%rbp), %rax
@@ -7190,6 +7294,7 @@ pruAritmetica:
 
     mov -52(%rbp) , %rax 
     mov -56(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-60%(rbp) 
 
     mov -60(%rbp), %rax
@@ -7201,6 +7306,7 @@ pruAritmetica:
 
     mov -68(%rbp) , %rax 
     mov -72(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-76%(rbp) 
 
     mov -76(%rbp), %rax
@@ -7221,7 +7327,9 @@ main:
     mov %rsp, %rbp
 
 PARAM
-    movl $8 , 8(%rsp)    movl $4 , 8(%rsp)
+    movl $8 , 12(%rsp)
+    movl $4 , 8(%rsp)
+
     call pruAritmetica
 
     call printf
@@ -7229,13 +7337,17 @@ PARAM
     call printf
 
 PARAM
-    movl $4 , 8(%rsp)    movl $4 , 8(%rsp)
+    movl $4 , 12(%rsp)
+    movl $4 , 8(%rsp)
+
     call pruAritmetica
 
     call printf
 
 PARAM
-    movl $5 , 8(%rsp)    movl $8 , 8(%rsp)
+    movl $5 , 12(%rsp)
+    movl $8 , 8(%rsp)
+
     call pruAritmetica
 
     call printf
@@ -7680,10 +7792,13 @@ promedio:
 
     mov -40(%rbp) , %rax 
     mov -44(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-48%(rbp) 
 
     mov -52(%rbp) , %rax 
     mov -56(%rbp) , %rcx 
+	 cltd
++    idiv %rcx
     mov %rcx,-60%(rbp) 
 
     mov -60(%rbp), %rax
@@ -7726,10 +7841,13 @@ promedio:
 
     mov -100(%rbp) , %rax 
     mov -104(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-108%(rbp) 
 
     mov -112(%rbp) , %rax 
     mov -116(%rbp) , %rcx 
+	 cltd
++    idiv %rcx
     mov %rcx,-120%(rbp) 
 
     mov -120(%rbp), %rax
@@ -7772,10 +7890,13 @@ promedio:
 
     mov -160(%rbp) , %rax 
     mov -164(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-168%(rbp) 
 
     mov -172(%rbp) , %rax 
     mov -176(%rbp) , %rcx 
+	 cltd
++    idiv %rcx
     mov %rcx,-180%(rbp) 
 
     mov -180(%rbp), %rax
@@ -8214,7 +8335,9 @@ main:
     mov %rsp, %rbp
 
 PARAM
-    movl $9 , 8(%rsp)    movl $6 , 8(%rsp)
+    movl $9 , 12(%rsp)
+    movl $6 , 8(%rsp)
+
     call maxcomdiv
 
     call printf
@@ -8671,6 +8794,7 @@ inc:
 
     mov -4(%rbp) , %rax 
     mov -8(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-12%(rbp) 
 
     mov -12(%rbp), %rax
@@ -8689,6 +8813,7 @@ resto:
 
     mov -12(%rbp) , %rax 
     mov -16(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-20%(rbp) 
 
     movl	-8(%rbp), %rax
@@ -8704,6 +8829,8 @@ resto:
 
     mov -32(%rbp) , %rax 
     mov -36(%rbp) , %rcx 
+	 cltd
++    idiv %rcx
     mov %rcx,-40%(rbp) 
 
     mov -40(%rbp), %rax
@@ -8742,6 +8869,7 @@ main:
 
 PARAM
     movl $5 , 8(%rsp)
+
     call inc
 
 PARAM
@@ -9013,19 +9141,25 @@ main:
     mov -8(%rbp), %rax
 
 PARAM
-    movl $9 , 8(%rsp)    movl $6 , 8(%rsp)
+    movl $9 , 12(%rsp)
+    movl $6 , 8(%rsp)
+
     call maxcomdiv
 
     mov -28(%rbp) , %rax 
     mov -32(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-36%(rbp) 
 
     mov -40(%rbp) , %rax 
     mov -44(%rbp) , %rcx 
+	 cltd
++    idiv %rcx
     mov %rcx,-48%(rbp) 
 
     mov -36(%rbp) , %rax 
     mov -48(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-52%(rbp) 
 
     call printf
@@ -9225,14 +9359,17 @@ pruMult:
 
     mov -28(%rbp) , %rax 
     mov -32(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-36%(rbp) 
 
     mov -36(%rbp) , %rax 
     mov -40(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-44%(rbp) 
 
     mov -44(%rbp) , %rax 
     mov -48(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-52%(rbp) 
 
     mov -56(%rbp), %rax
@@ -9251,6 +9388,7 @@ main:
 
 PARAM
     movl $2 , 8(%rsp)
+
     call pruMult
 
     call printf
@@ -9331,6 +9469,7 @@ pruMult:
 
     mov -16(%rbp) , %rax 
     mov -20(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-24%(rbp) 
 
     mov -28(%rbp), %rax
@@ -9405,6 +9544,7 @@ alo:
 
     mov -8(%rbp) , %rax 
     mov -12(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-16%(rbp) 
 
     mov -16(%rbp), %rax
@@ -9786,6 +9926,7 @@ id:
 
     mov -124(%rbp) , %rax 
     mov -128(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-132%(rbp) 
 
     mov -132(%rbp), %rax
@@ -9797,6 +9938,7 @@ id:
 
     mov -140(%rbp) , %rax 
     mov -144(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-148%(rbp) 
 
     mov -148(%rbp), %rax
@@ -9853,6 +9995,7 @@ id:
 
     mov -208(%rbp) , %rax 
     mov -212(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-216%(rbp) 
 
     mov -216(%rbp), %rax
@@ -9875,22 +10018,27 @@ id:
 
     mov -236(%rbp) , %rax 
     mov -240(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-244%(rbp) 
 
     mov -248(%rbp) , %rax 
     mov -252(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-256%(rbp) 
 
     mov -260(%rbp) , %rax 
     mov -264(%rbp) , %rdx 
+    imul %rdx, %rax 
     mov %rax,-268%(rbp) 
 
     mov -256(%rbp) , %rax 
     mov -268(%rbp) , %rdx 
+    sub %rax, %rdx 
     mov %rdx,-272%(rbp) 
 
     mov -244(%rbp) , %rax 
     mov -276(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-280%(rbp) 
 
     mov -280(%rbp), %rax
@@ -9913,6 +10061,7 @@ id:
 
     mov -296(%rbp) , %rax 
     mov -300(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-304%(rbp) 
 
     mov -304(%rbp), %rax
@@ -9938,6 +10087,7 @@ main:
 
 PARAM
     movl $9 , 8(%rsp)
+
     call id
 
     call printf
@@ -10111,6 +10261,7 @@ suma:
 
     mov -36(%rbp) , %rax 
     mov -40(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-44%(rbp) 
 
     mov -44(%rbp), %rax
@@ -10132,7 +10283,9 @@ main:
     mov %rsp, %rbp
 
 PARAM
-    movl $9 , 8(%rsp)    movl $4 , 8(%rsp)
+    movl $9 , 12(%rsp)
+    movl $4 , 8(%rsp)
+
     call suma
 
     call printf
@@ -10278,6 +10431,7 @@ sumx:
 
     mov -48(%rbp) , %rax 
     mov -52(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-56%(rbp) 
 
     mov -56(%rbp), %rax
@@ -10285,6 +10439,7 @@ sumx:
 
     mov -64(%rbp) , %rax 
     mov -68(%rbp) , %rdx 
+    add %rax, %rdx 
     mov %rdx,-72%(rbp) 
 
     mov -72(%rbp), %rax
@@ -10309,7 +10464,8 @@ main:
     mov %rsp, %rbp
 
 PARAM
-    movl $2 , 8(%rsp)
+    movl $2 , 12(%rsp)
+
     call sumx
 
     call printf
@@ -10567,7 +10723,9 @@ main:
     mov %rsp, %rbp
 
 PARAM
-    movl $9 , 8(%rsp)    movl $6 , 8(%rsp)
+    movl $9 , 12(%rsp)
+    movl $6 , 8(%rsp)
+
     call maxcomdiv
 
     call printf

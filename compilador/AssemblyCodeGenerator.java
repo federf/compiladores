@@ -175,12 +175,14 @@ public class AssemblyCodeGenerator{
 			VarLocation  y = (VarLocation)t.getSecondDir();
 			int YOff=y.getOffset();
 			result+="    mov " + YOff + "(%rbp) , %rdx \n";
+			result+="    add %rax, %rdx \n";
 		}else{
 			//sino, si es intliteral
 			if(t.getSecondDir() instanceof IntLiteral){
 				//System.out.println("int2");
 				IntLiteral y=(IntLiteral) t.getSecondDir();
 				result+="    mov $" + y.getStringValue() + ", %rdx \n";
+				result+="    add %rax, %rdx \n";
 			}else{
 				//si el operando es una operacion binaria o unaria
 				if(t.getSecondDir() instanceof BinOpExpr || t.getSecondDir() instanceof UnaryOpExpr){
@@ -291,11 +293,13 @@ public class AssemblyCodeGenerator{
 			VarLocation  y = (VarLocation)t.getSecondDir();
 			int YOff=y.getOffset();
 			result+="    mov " + YOff + "(%rbp) , %rdx \n";
+			result+="    sub %rax, %rdx \n";
 		}else{
 			//sino, si es intliteral
 			if(t.getSecondDir() instanceof IntLiteral){
 				IntLiteral y=(IntLiteral) t.getSecondDir();
 				result+="    mov $" + y.getStringValue() + ", %rdx \n";
+				result+="    sub %rax, %rdx \n";
 			}else{
 				//si el operando es una operacion binaria o unaria
 				if(t.getSecondDir() instanceof BinOpExpr || t.getSecondDir() instanceof UnaryOpExpr){
@@ -407,12 +411,14 @@ public class AssemblyCodeGenerator{
 			VarLocation  y = (VarLocation)t.getSecondDir();
 			int YOff=y.getOffset();
 			result+="    mov " + YOff + "(%rbp) , %rdx \n";
+			result+="    imul %rdx, %rax \n";
 		}else{
 			//sino, si es intliteral
 			if(t.getSecondDir() instanceof IntLiteral){
 				//System.out.println("int2");
 				IntLiteral y=(IntLiteral) t.getSecondDir();
 				result+="    mov $" + y.getStringValue() + ", %rdx \n";
+				result+="    imul %rdx, %rax \n";
 			}else{
 				//si el operando es una operacion binaria o unaria
 				if(t.getSecondDir() instanceof BinOpExpr || t.getSecondDir() instanceof UnaryOpExpr){
@@ -521,11 +527,15 @@ public class AssemblyCodeGenerator{
 			VarLocation  y = (VarLocation)t.getSecondDir();
 			int YOff=y.getOffset();
 			result+="    mov " + YOff + "(%rbp) , %rcx \n";
+			result+="	 cltd\n+"; 
+			result+="    idiv %rcx\n";
 		}else{
 			//sino, si es intliteral
 			if(t.getSecondDir() instanceof IntLiteral){
 				IntLiteral y=(IntLiteral) t.getSecondDir();
 				result+="    mov $" + y.getStringValue() + ", %rcx \n";
+				result+="	 cltd\n+"; 
+				result+="    idiv %rcx\n";
 			}else{
 				//si el operando es una operacion binaria o unaria
 				if(t.getSecondDir() instanceof BinOpExpr || t.getSecondDir() instanceof UnaryOpExpr){
@@ -989,7 +999,7 @@ public class AssemblyCodeGenerator{
     		if(params.get(i) instanceof VarLocation){
     			VarLocation v=(VarLocation) params.get(i);
     			if(i!=0){
-    				result+="    movl "+v.getOffset()+" , "+((2+(i-1))*4)+"(%rsp)\n";		
+    				result+="    movl "+v.getOffset()+" , "+(((i+2))*4)+"(%rsp)\n";		
     			}else{
     				result+="    movl "+v.getOffset()+" , 8(%rsp)\n";	
     			}
@@ -1001,9 +1011,9 @@ public class AssemblyCodeGenerator{
     				if(params.get(i) instanceof IntLiteral){
     					IntLiteral p=(IntLiteral) params.get(i);
     					if(i!=0){
-    						result+="    movl $"+evaluateExpression(p.toString())+" , "+((2+(i-1))*4)+"(%rsp)";	
+    						result+="    movl $"+evaluateExpression(p.toString())+" , "+(((i+2))*4)+"(%rsp)\n";	
     					}else{
-    						result+="    movl $"+evaluateExpression(p.toString())+" , 8(%rsp)";	
+    						result+="    movl $"+evaluateExpression(p.toString())+" , 8(%rsp)\n";	
     					}
     					
     				}else{
