@@ -879,7 +879,17 @@ public class AssemblyCodeGenerator{
 						result += "    mov $ 0, %rax\n";	
 					}
 				}else{
-					System.out.println("{CMP} FALTA CASO "+t.getSecondDir().getClass());
+					if(t.getSecondDir() instanceof Boolean){
+						Boolean b=(Boolean) t.getSecondDir();
+						if(b){
+							result += "    mov $ 1, %rax\n";	
+						}else{
+							result += "    mov $ 0, %rax\n";	
+						}
+					}else{
+						System.out.println("{CMP} FALTA CASO "+t.getSecondDir().getClass());	
+					}
+					
 				}
 			}
 		}
@@ -1191,7 +1201,8 @@ public class AssemblyCodeGenerator{
 			   	case EXTERNINVK:
 			   		result+="\n";
 			   		ExternInvkExpr mc=(ExternInvkExpr) t.getFirstDir();
-			   		result += "    call " + mc.getId() + "\n";		
+			   		String id=mc.getId().substring(1, mc.getId().length()-1);
+			   		result += "    call " + id + "\n";		
 				  	/*if(t.getResult() != null){
 				  		if(t.getResult() instanceof VarLocation){
 				  			VarLocation v=(VarLocation)	t.getResult();

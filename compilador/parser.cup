@@ -694,7 +694,7 @@
                 //agregamos el Label de Begin While
                 TripletList.addLast(new TripletCode(TripletOperator.LABEL, null,null, LabelBegin));
                 //agrego la comparacion de la cond (expr) con true
-                TripletList.addLast(new TripletCode(TripletOperator.CMP, e, "true", null));
+                TripletList.addLast(new TripletCode(TripletOperator.CMP, e, true, null));
                 //si la condicion es falsa salto al else
                 TripletList.addLast(new TripletCode(TripletOperator.JNE, null, null, LabelEndWhile));
 
