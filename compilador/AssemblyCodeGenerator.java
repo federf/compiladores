@@ -1233,12 +1233,17 @@ public class AssemblyCodeGenerator{
 		   			break;
 		   		case GLOBAL:
 		   			result+="\n";
-		   			if(t.getResult()==0){
-		   				result+="    .comm "+t.getSecondDir()+","+4+"\n";	
+		   			if(t.getResult() instanceof Integer){
+		   				int y=(int) t.getResult();
+			   			if(y==0){
+			   				result+="    .comm "+t.getSecondDir()+","+4+"\n";	
+			   			}else{
+			   				int res=(int)t.getResult();
+			   				result+="    .comm "+t.getSecondDir()+","+(4*y)+"\n";
+			   			}	   			
 		   			}else{
-		   				int res=(int)t.getResult();
-		   				result+="    .comm "+t.getSecondDir()+","+(4*res)+"\n";
-		   			}	   			
+		   				System.out.println("{GLOBAL} FALTA CASO "+t.getResult().getClass());
+		   			}
 		   			break;
 			}
 			System.out.println("finalizado.");
