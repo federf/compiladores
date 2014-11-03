@@ -53,8 +53,8 @@ public class SymbolTree {
     }
 
     //metodo que agrega un simbolo al nivel corriente
-    public void addSimbolo(Type type, String name, String value, int size) {
-        Simbolo nuevo = new Simbolo(type, name, value, size);
+    public void addSimbolo(Type type, String name, String value, int size, int off) {
+        Simbolo nuevo = new Simbolo(type, name, value, size, off);
         //si el simbolo no existe en el nivel corriente
         if (this.corriente.getSimbolo(nuevo)==null) {
             //se lo agrega

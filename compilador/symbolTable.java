@@ -21,8 +21,8 @@ public class symbolTable {
     }
 
     //metodo que permite agregar un simbolo nuevo dentro del nivel corriente
-    public void agregarSimbolo(Type type, String name, String value, int size) {
-        this.TablaDeSimbolos.addSimbolo(type, name, value, size);
+    public void agregarSimbolo(Type type, String name, String value, int size, int offset) {
+        this.TablaDeSimbolos.addSimbolo(type, name, value, size, offset);
     }
 
     //metodo que permite agregar un metodo nuevo dentro del nivel corriente
@@ -43,9 +43,9 @@ public class symbolTable {
 
     //metodo que dado un simbolo verifica si fue declarado en el mismo o en algun nivel superior
     // (se utilizaria para ver si una variable fue declarada para poder ser usada)
-    public boolean simboloDeclarado(Type type, String name, String value, int size) {
+    public boolean simboloDeclarado(Type type, String name, String value, int size, int off) {
         //creamos el simbolo como tal
-        Simbolo s = new Simbolo(type, name, value, size);
+        Simbolo s = new Simbolo(type, name, value, size, off);
         //variable booleana de resultado
         boolean declarado = false;
         //nos situamos en el nivel corriente dentro del arbol
@@ -125,7 +125,7 @@ public class symbolTable {
         //creamos el metodo como tal para comparar
         LinkedList<Simbolo> params=new LinkedList();
         for(int i=0; i<paramTypes.size(); i++){
-            Simbolo actual=new Simbolo(paramTypes.get(i), ""+i+"",null, 0);
+            Simbolo actual=new Simbolo(paramTypes.get(i), ""+i+"",null, 0,i);
             params.add(actual);
         }
         //nos situamos en el nivel corriente dentro del arbol

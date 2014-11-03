@@ -91,7 +91,16 @@ public class VarLocation extends Location {
             //cambiamos el offset para el proximo
             off = off - 4; 
         }
-        
+   }
+
+
+    //CONSTRUCTOR ALTERNATIVO CON SET DEL OFFSET, para duplicacion solo
+    public VarLocation(String id, Type type, Expression expr, int size, int offs) {
+        this.id=id;
+        this.type = type;
+        this.expr = expr;
+        this.size = size;
+        this.offset = offs;
     }
 
     public void setSize(int size) {

@@ -36,6 +36,11 @@
     //para ifs
     LinkedList<String> IfsStack;
 
+    //int del ultimo offset leido
+    int ultOffsetLeido=0;
+    //nombre de la ultima variable buscada (vendria a ser la que tiene el ultimo offset leido)
+    String ultVarLeida="";
+
     //metodo que dadas dos VarLocation verifica si son operandos validos para: suma, resta, mult, division,LE,GE,GEQ,LEQ
     private boolean validOperators(VarLocation s1, VarLocation s2){
         return ((s1.getType().equals(Type.INT) && s2.getType().equals(Type.INT))||
@@ -167,20 +172,20 @@
     start with program;
 
     program::= CLASS ID:d {: mainDeclared=false; System.out.println("parseo iniciado"); :} body {:
-            System.out.println("");
-            if(!mainDeclared){
-                System.out.println("Error: Main Method Missing in Class "+d.toString());
-                
-            }
-            System.out.println("parseo exitoso");
-            System.out.println("tamaño lista de codigo tercetos: "+TripletList.size());
-            System.out.println("lista: ");
-            for(TripletCode t : TripletList){
-                System.out.println(t);
-            }
-            System.out.println();
-            AssemblyCodeGenerator ASMGenerator=new AssemblyCodeGenerator();
-            System.out.println(ASMGenerator.generate(TripletList));
+                System.out.println("");
+                if(!mainDeclared){
+                    System.out.println("Error: Main Method Missing in Class "+d.toString());
+                    
+                }
+                System.out.println("parseo exitoso");
+                System.out.println("tamaño lista de codigo tercetos: "+TripletList.size());
+                System.out.println("lista: ");
+                for(TripletCode t : TripletList){
+                    System.out.println(t);
+                }
+                System.out.println();
+                AssemblyCodeGenerator ASMGenerator=new AssemblyCodeGenerator();
+                System.out.println(ASMGenerator.generate(TripletList));
             :}
             ;
 
@@ -204,64 +209,64 @@
                 | identifiers COMA identifier
                 ;
 
-    identifier::= ID:s {: //caso identificador ID
-                        TS.agregarSimbolo(tipo_corriente, s.toString(), null, 0);
-                        //CODIGO DE TRES DIRECCIONES  - guardamos la variable declarada y su tipo
+    identifier::= ID:s {: //CODIGO DE TRES DIRECCIONES  - guardamos la variable declarada y su tipo
 
-                        VarLocation arr;
-                        //la creamos como VarLocation para registrarla como tal
-                        arr=new VarLocation(s.toString(), tipo_corriente, null, 0);
+                            VarLocation arr;
+                            //la creamos como VarLocation para registrarla como tal
+                            arr=new VarLocation(s.toString(), tipo_corriente, null, 0);
 
-                        
-                        if(TS.getCorriente().esRaiz()){
-                            TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),0));
-                        }
-                        //FIN CODIGO TRES DIRECCIONES
+                            //caso identificador ID
+                            TS.agregarSimbolo(tipo_corriente, s.toString(), null, 0, arr.getOffset());
+                              
+                            if(TS.getCorriente().esRaiz()){
+                                TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),0));
+                            }
+                            //FIN CODIGO TRES DIRECCIONES
                         :} 
                         
       | ID:s CORCHETE_IZQ INT_LITERAL:i CORCHETE_DER {: //caso arreglo ID[INT_LITERAL]
-                                                    VarLocation arr;
-                                                    //convertimos el int_literal en string
-                                                    int size= Integer.valueOf((String) i); 
-                                                    //luego segun el ultimo tipo leido creamos el simbolo que representara al arreglo
-                                                    switch (tipo_corriente){
-                                                           case INT:
-                                                                    TS.agregarSimbolo(Type.INTARRAY, s.toString(), null, size);  
+                                                        VarLocation arr;
+                                                        //convertimos el int_literal en string
+                                                        int size= Integer.valueOf((String) i); 
+                                                        //luego segun el ultimo tipo leido creamos el simbolo que representara al arreglo
+                                                        switch (tipo_corriente){
+                                                               case INT:
 
-                                                                    //la creamos como VarLocation para registrarla como tal
-                                                                    arr=new VarLocation(s.toString(), Type.INTARRAY, null, size);
+                                                                        //la creamos como VarLocation para registrarla como tal
+                                                                        arr=new VarLocation(s.toString(), Type.INTARRAY, null, size);
+                                                                        TS.agregarSimbolo(Type.INTARRAY, s.toString(), null, size, arr.getOffset());  
 
-                                                                    //CODIGO DE TRES DIRECCIONES
-                                                                    if(TS.getCorriente().esRaiz()){
-                                                                        TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),i));
-                                                                    }
-                                                                    //FIN CODIGO TRES DIRECCIONES
-                                                                    break;
-                                                           case FLOAT:
-                                                                    TS.agregarSimbolo(Type.FLOATARRAY, s.toString(), null, size);  
+                                                                        //CODIGO DE TRES DIRECCIONES
+                                                                        if(TS.getCorriente().esRaiz()){
+                                                                            TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),i));
+                                                                        }
+                                                                        //FIN CODIGO TRES DIRECCIONES
+                                                                        break;
+                                                               case FLOAT:
+                                                                        
 
-                                                                    //la creamos como VarLocation para registrarla como tal
-                                                                    arr=new VarLocation(s.toString(), Type.FLOATARRAY, null, size);
+                                                                        //la creamos como VarLocation para registrarla como tal
+                                                                        arr=new VarLocation(s.toString(), Type.FLOATARRAY, null, size);
+                                                                        TS.agregarSimbolo(Type.FLOATARRAY, s.toString(), null, size, arr.getOffset());  
+                                                                        //CODIGO DE TRES DIRECCIONES
+                                                                        if(TS.getCorriente().esRaiz()){
+                                                                            TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),i));
+                                                                        }
+                                                                        //FIN CODIGO TRES DIRECCIONES
+                                                                        break;
+                                                               case BOOLEAN:
+                                                                        
 
-                                                                    //CODIGO DE TRES DIRECCIONES
-                                                                    if(TS.getCorriente().esRaiz()){
-                                                                        TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),i));
-                                                                    }
-                                                                    //FIN CODIGO TRES DIRECCIONES
-                                                                    break;
-                                                           case BOOLEAN:
-                                                                    TS.agregarSimbolo(Type.BOOLARRAY, s.toString(), null, size); 
-
-                                                                    //la creamos como VarLocation para registrarla como tal
-                                                                    arr=new VarLocation(s.toString(), Type.BOOLARRAY, null, size);
-
-                                                                    //CODIGO DE TRES DIRECCIONES
-                                                                    if(TS.getCorriente().esRaiz()){
-                                                                        TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),i));
-                                                                    }
-                                                                    //FIN CODIGO TRES DIRECCIONES
-                                                                    break;
-                                                    }
+                                                                        //la creamos como VarLocation para registrarla como tal
+                                                                        arr=new VarLocation(s.toString(), Type.BOOLARRAY, null, size);
+                                                                        TS.agregarSimbolo(Type.BOOLARRAY, s.toString(), null, size, arr.getOffset()); 
+                                                                        //CODIGO DE TRES DIRECCIONES
+                                                                        if(TS.getCorriente().esRaiz()){
+                                                                            TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),i));
+                                                                        }
+                                                                        //FIN CODIGO TRES DIRECCIONES
+                                                                        break;
+                                                        }
                                                     :} 
       ;
 
@@ -300,7 +305,7 @@
                             //el cual corresponde al cuerpo del metodo leido
                             for(int i=0; i<e.getParametros().size(); i++){
                                 Simbolo actual = e.getParametros().get(i);
-                                TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
+                                TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize(),i);
                             }
                         }else{//sino, si el metodo leido fue main
                         //verificamos que no tiene parametros, ya que main no debe tener parametros
@@ -359,7 +364,7 @@
                             //el cual corresponde al cuerpo del metodo leido
                                 for(int i=0; i<e.getParametros().size(); i++){
                                 Simbolo actual = e.getParametros().get(i);
-                                TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize());
+                                TS.agregarSimbolo(actual.getType(), actual.getName(), actual.getValue(), actual.getSize(),i);
                                 }
                             }else{//sino, si el metodo leido fue main
                                 //verificamos que no tiene parametros, ya que main no debe tener parametros
@@ -370,14 +375,14 @@
                                     mainDeclared=false;
                                 }
                             }
-                            
-                        :} block {:
+                :} block {:
                             String labelEndMethod="EndMethod "+g;
                             TripletList.addLast(new TripletCode(TripletOperator.LABEL,null,null,labelEndMethod));
                             //reseteamos la generacion de offsets al salir del cuerpo de un metodo
                             VarLocation.resetOffset();
                              //al terminar de procesar el cuerpo del metodo subimos de nivel
-                            TS.SubirNivel();:}
+                            TS.SubirNivel();
+                :}
                ;
 
     block::= LLAVE_IZQ LLAVE_DER
@@ -397,7 +402,7 @@
                          ;
 
     parameterDeclaration::= type ID:a {: //creamos el nuevo simbolo con el tipo e id leidos 
-                                        Simbolo sym = new Simbolo(tipo_corriente, a.toString(), null, 0); 
+                                        Simbolo sym = new Simbolo(tipo_corriente, a.toString(), null, 0,0); 
                                         //y lo agregamos como parametro al ultimo metodo leido
                                         TS.obtenerMetodo().addParametro(sym); :}
                         ;
@@ -429,8 +434,6 @@
                                                                         (m.getTypeReturn().equals(Type.INT) || m.getTypeReturn().equals(Type.INTARRAY) )) && 
                                                                         (!l.getType().isArray())){ //si se realiza una asignacion con tipos identicos de location y expression (no array)
                                                                     AssignStmt a=new AssignStmt((Location)l, AssignOpType.ASSIGN, (Expression) e.getExpr());
-                                                                    //l.setExpr(e.getExpr());
-                                                                    //System.out.println("{id} "+l+", expression: "+e.getExpr());
                                                                     //CODIGO DE TRES DIRECCIONES
                                                                     TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e, null,(VarLocation)l));
                                                                     //FIN CODIGO TRES DIRECCIONES
@@ -439,7 +442,6 @@
                                                                     //si location es un array
                                                                     if(l.getType().isArray()){
                                                                         //arreglo de enteros expresion entero
-                                                                        //System.out.println("{array} "+l+", expression: "+e.getExpr());
                                                                         switch(l.getType()){
                                                                             //caso arreglo de enteros con valor entero
                                                                             case INTARRAY:
@@ -523,8 +525,6 @@
 
                                                                 ){ //si se realiza una asignacion con tipos identicos de location y expression (no array)
                                                                     AssignStmt a=new AssignStmt((Location)l, AssignOpType.ASSIGN, (Expression) e.getExpr()); 
-                                                                    //l.setExpr(e.getExpr());
-                                                                    //System.out.println("{id} "+l+", expression: "+e.getExpr());
                                                                     //CODIGO DE TRES DIRECCIONES
                                                                     TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e, null,(VarLocation)l));
                                                                     //FIN CODIGO TRES DIRECCIONES
@@ -532,7 +532,7 @@
                                                                 }else{
                                                                     
                                                                     //si location es un array
-                                                                    //System.out.println("{array} "+l+", expression: "+e.getExpr());
+                                                                    
                                                                     if(l.getType().isArray()){
                                                                         //arreglo de enteros expresion entero
                                                                         switch(l.getType()){
@@ -540,7 +540,6 @@
                                                                             case INTARRAY:
                                                                                 if(e.getType().equals(Type.INT)){
                                                                                     AssignStmt a=new AssignStmt((Location)l, ao, (Expression) e.getExpr()); 
-                                                                                    //l.setExpr(e.getExpr());
                                                                                     //CODIGO DE TRES DIRECCIONES
                                                                                     switch(ao){
                                                                                         case ASSIGN:TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e.getExpr(), null,(VarLocation)l));
@@ -625,108 +624,110 @@
                     //agregamos un label para el salto a else
                     TripletList.addLast(new TripletCode(TripletOperator.LABEL, null,null, IfsStack.get(IfsStack.size()-2)));
                 :} else_block:elseBlock {: 
-                //luego de procesar el bloque else (el cual es opcional)
-                if(e.getType().equals(Type.BOOLEAN)){ //si la expression es de tipo boolean
-                    IfStmt res=null;
-                    if(elseBlock!=null){ //si tiene else block
-                        res=new IfStmt(e.getExpr(),ifBlock,elseBlock);
-                    }else{//si no tiene else block
-                        res=new IfStmt(e.getExpr(), ifBlock);
-                    }
-                    //agregamos el label del fin del if
-                    TripletList.addLast(new TripletCode(TripletOperator.LABEL, null,null, IfsStack.getLast()));
-                    //removemos los labels creados al principio ya que no son de utilidad
-                    IfsStack.removeLast();
-                    IfsStack.removeLast();
-                    
+                    //luego de procesar el bloque else (el cual es opcional)
+                    if(e.getType().equals(Type.BOOLEAN)){ //si la expression es de tipo boolean
+                        IfStmt res=null;
+                        if(elseBlock!=null){ //si tiene else block
+                            res=new IfStmt(e.getExpr(),ifBlock,elseBlock);
+                        }else{//si no tiene else block
+                            res=new IfStmt(e.getExpr(), ifBlock);
+                        }
+                        //agregamos el label del fin del if
+                        TripletList.addLast(new TripletCode(TripletOperator.LABEL, null,null, IfsStack.getLast()));
+                        //removemos los labels creados al principio ya que no son de utilidad
+                        IfsStack.removeLast();
+                        IfsStack.removeLast();
+                        
 
-                    RESULT=res;
-                }else{//si la expression no es de tipo boolean se muestra un mensaje de error
-                    System.out.println("Error: Expression in If-Else statement must be Boolean");
-                    
-                } :}
+                        RESULT=res;
+                    }else{//si la expression no es de tipo boolean se muestra un mensaje de error
+                        System.out.println("Error: Expression in If-Else statement must be Boolean");
+                        
+                    } 
+                :}
              | FOR ID:id ASIGNACION expr:e1 COMA expr:e2 {: 
-                String BeginFor = "BeginFor"+Labels.getLabel(); //get(size-2)
-                ForsStack.addLast(BeginFor);
+                    String BeginFor = "BeginFor"+Labels.getLabel(); //get(size-2)
+                    ForsStack.addLast(BeginFor);
 
-                String EndFor = "EndFor"+Labels.getLabel(); //getLast()
-                ForsStack.addLast(EndFor);
-                
-                //creamos LABEL para el Begin del for
-                TripletList.addLast(new TripletCode(TripletOperator.LABEL, null, null, BeginFor));
-                //comparamos las dos expresiones
-                TripletList.addLast(new TripletCode(TripletOperator.CMP, e1, e2, null));
-                //si la primer expresion no es menor a la segunda, saltamos al final del ciclo
-                TripletList.addLast(new TripletCode(TripletOperator.JNL, null, null, EndFor));
-                TS.agregarNivel(); 
-                inLoop=true; 
+                    String EndFor = "EndFor"+Labels.getLabel(); //getLast()
+                    ForsStack.addLast(EndFor);
+                    
+                    //creamos LABEL para el Begin del for
+                    TripletList.addLast(new TripletCode(TripletOperator.LABEL, null, null, BeginFor));
+                    //comparamos las dos expresiones
+                    TripletList.addLast(new TripletCode(TripletOperator.CMP, e1, e2, null));
+                    //si la primer expresion no es menor a la segunda, saltamos al final del ciclo
+                    TripletList.addLast(new TripletCode(TripletOperator.JNL, null, null, EndFor));
+                    TS.agregarNivel(); 
+                    inLoop=true; 
                 :}  block:b {:
 
-                // Incrementa el contador
-                TripletList.addLast(new TripletCode(TripletOperator.PLUS, e1, new IntLiteral("1"), e1));
-                //vuelve al inicio del ciclo (antes de la evaluacion de la condicion)
-                TripletList.addLast(new TripletCode(TripletOperator.JMP, null, null, ForsStack.get(ForsStack.size()-2)));
-                //agregamos el label de fin del for
-                TripletList.addLast(new TripletCode(TripletOperator.LABEL, null, null, ForsStack.getLast()));
+                    // Incrementa el contador
+                    TripletList.addLast(new TripletCode(TripletOperator.PLUS, e1, new IntLiteral("1"), e1));
+                    //vuelve al inicio del ciclo (antes de la evaluacion de la condicion)
+                    TripletList.addLast(new TripletCode(TripletOperator.JMP, null, null, ForsStack.get(ForsStack.size()-2)));
+                    //agregamos el label de fin del for
+                    TripletList.addLast(new TripletCode(TripletOperator.LABEL, null, null, ForsStack.getLast()));
 
-                //si las expresiones son de tipo entero o se accede a un arreglo de INT
-                if( ( (e1.getType().equals(Type.INT) || (e1.getType().equals(Type.INTARRAY)) ) && (e2.getType().equals(Type.INT) || (e2.getType().equals(Type.INTARRAY) ) ) ) ){
-                    ForStmt forStmt=new ForStmt(id, e1.getExpr(), e2.getExpr(), b);
-                    RESULT=forStmt;
-                }else{
-                    System.out.println("Error: Expressions in For Statement must be Int");
-                    
-                }
-                if(inLoop){
-                    TS.SubirNivel();
-                    inLoop=false;
-                }
-                ForsStack.removeLast();
-                ForsStack.removeLast();
-            :}
-             | WHILE expr:e {: 
-                String LabelBegin="BeginWhile"+Labels.getLabel();
-                WhilesStack.addLast(LabelBegin);//get(size-2)
-                String LabelEndWhile="EndWhile"+Labels.getLabel();
-                WhilesStack.addLast(LabelEndWhile);//getLast
-                //agregamos un nuevo nivel para el cuerpo del ciclo
-                TS.agregarNivel();
-                //agregamos el Label de Begin While
-                TripletList.addLast(new TripletCode(TripletOperator.LABEL, null,null, LabelBegin));
-                //agrego la comparacion de la cond (expr) con true
-                TripletList.addLast(new TripletCode(TripletOperator.CMP, e, true, null));
-                //si la condicion es falsa salto al else
-                TripletList.addLast(new TripletCode(TripletOperator.JNE, null, null, LabelEndWhile));
+                    //si las expresiones son de tipo entero o se accede a un arreglo de INT
+                    if( ( (e1.getType().equals(Type.INT) || (e1.getType().equals(Type.INTARRAY)) ) && (e2.getType().equals(Type.INT) || (e2.getType().equals(Type.INTARRAY) ) ) ) ){
+                        ForStmt forStmt=new ForStmt(id, e1.getExpr(), e2.getExpr(), b);
+                        RESULT=forStmt;
+                    }else{
+                        System.out.println("Error: Expressions in For Statement must be Int");
+                        
+                    }
+                    if(inLoop){
+                        TS.SubirNivel();
+                        inLoop=false;
+                    }
+                    ForsStack.removeLast();
+                    ForsStack.removeLast();
+                :}
+             | WHILE expr:e 
+                 {: 
+                    String LabelBegin="BeginWhile"+Labels.getLabel();
+                    WhilesStack.addLast(LabelBegin);//get(size-2)
+                    String LabelEndWhile="EndWhile"+Labels.getLabel();
+                    WhilesStack.addLast(LabelEndWhile);//getLast
+                    //agregamos un nuevo nivel para el cuerpo del ciclo
+                    TS.agregarNivel();
+                    //agregamos el Label de Begin While
+                    TripletList.addLast(new TripletCode(TripletOperator.LABEL, null,null, LabelBegin));
+                    //agrego la comparacion de la cond (expr) con true
+                    TripletList.addLast(new TripletCode(TripletOperator.CMP, e, true, null));
+                    //si la condicion es falsa salto al else
+                    TripletList.addLast(new TripletCode(TripletOperator.JNE, null, null, LabelEndWhile));
 
-                //marcamos que nos encontramos dentro de un ciclo para habilitar el uso de sentencias 
-                // BREAK y CONTINUE
-                inLoop=true;
+                    //marcamos que nos encontramos dentro de un ciclo para habilitar el uso de sentencias 
+                    // BREAK y CONTINUE
+                    inLoop=true;
                 :} block:b {:
-                //si el tipo de la expression es correcto (es boolean)
-                if(e.getType().equals(Type.BOOLEAN)){
-                    //creamos el while como tal
-                    WhileStmt whileExpr=new WhileStmt(e.getExpr(), b);
-                    //y lo retornamos como resultado
-                    RESULT= whileExpr;
-                }else{
-                    //sino, mostramos un mensaje de error
-                    System.out.println("Error: Expression in While Statement must be Boolean");
-                    
-                }
-                //luego de haber terminado de procesar el while por completo
-                if(inLoop){
-                    //subimos de nivel en el arbol
-                    TS.SubirNivel();
-                    //marcamos que dejamos de estar en un ciclo
-                    inLoop=false;
-                }
-                //salto al inicio del while(antes de evaluar la condicion)
-                TripletList.addLast(new TripletCode(TripletOperator.JMP, null, null, WhilesStack.get(WhilesStack.size()-2)));
+                    //si el tipo de la expression es correcto (es boolean)
+                    if(e.getType().equals(Type.BOOLEAN)){
+                        //creamos el while como tal
+                        WhileStmt whileExpr=new WhileStmt(e.getExpr(), b);
+                        //y lo retornamos como resultado
+                        RESULT= whileExpr;
+                    }else{
+                        //sino, mostramos un mensaje de error
+                        System.out.println("Error: Expression in While Statement must be Boolean");
+                        
+                    }
+                    //luego de haber terminado de procesar el while por completo
+                    if(inLoop){
+                        //subimos de nivel en el arbol
+                        TS.SubirNivel();
+                        //marcamos que dejamos de estar en un ciclo
+                        inLoop=false;
+                    }
+                    //salto al inicio del while(antes de evaluar la condicion)
+                    TripletList.addLast(new TripletCode(TripletOperator.JMP, null, null, WhilesStack.get(WhilesStack.size()-2)));
 
-                //agregamos el LABEL de fin de While
-                TripletList.addLast(new TripletCode(TripletOperator.LABEL,null,null, WhilesStack.getLast())); 
-                WhilesStack.removeLast();
-                WhilesStack.removeLast();
+                    //agregamos el LABEL de fin de While
+                    TripletList.addLast(new TripletCode(TripletOperator.LABEL,null,null, WhilesStack.getLast())); 
+                    WhilesStack.removeLast();
+                    WhilesStack.removeLast();
                 :}
              | RETURN PUNTO_Y_COMA {:
                                     //verificamos que el ultimo metodo leido (el cual se esta procesando)
@@ -911,14 +912,12 @@
                   ;
 
     location::= ID:id {:
-                        Simbolo s=TS.buscarSimbolo((String)id); 
+                            Simbolo s=TS.buscarSimbolo((String)id); 
                             if(s==null){
                                 System.out.println("Error: Variable "+id+" not found");
-                                
-                                ////RESULT=null;
                             }else{
-                                VarLocation v=new VarLocation((String)id,s.getType(),null,s.getSize());
-                                //System.out.println("OFFSET = " + v.getOffset());
+                                VarLocation v=new VarLocation((String)id,s.getType(),null,s.getSize(),s.getOffset());
+                                
                                 v.setType(s.getType());
                                 RESULT=v ;
                             }
@@ -938,8 +937,8 @@
                                     System.out.println("Error: expression in array must be int");
                                     
                                 }else{
-                                    VarLocation v=new VarLocation((String)id,s.getType(),e,s.getSize());
-                                    //System.out.println("OFFSET = " + v.getOffset());
+                                    VarLocation v=new VarLocation((String)id,s.getType(),e,s.getSize(),s.getOffset());
+                                    
                                     v.setType(s.getType());
                                     RESULT=v ;
                                 }
@@ -953,8 +952,8 @@
                                         System.out.println("Error: array index must be higher than zero");
                                         
                                     }else{
-                                        VarLocation v=new VarLocation((String)id,s.getType(),e2,s.getSize());
-                                        //System.out.println("OFFSET = " + v.getOffset());
+                                        VarLocation v=new VarLocation((String)id,s.getType(),e2,s.getSize(),s.getOffset());
+                                        
                                         v.setType(s.getType());
                                         RESULT=v ;
                                     }
@@ -981,7 +980,7 @@
                                                 exp.setType(Type.BOOLEAN);
 
                                                 VarLocation res=new VarLocation("DISYUNCION"+Labels.getLabel(),Type.BOOLEAN,exp,0);
-                                                //System.out.println("OFFSET = " + res.getOffset());
+                                                
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.OR,e, c,res));
                                                 //FIN CODIGO TRES DIRECCIONES
@@ -1000,7 +999,7 @@
                                                 BinOpExpr exp=new BinOpExpr(c1.getExpr(),BinOpType.AND,c2.getExpr());
                                                 exp.setType(Type.BOOLEAN);
                                                 VarLocation res=new VarLocation("CONJUNCION"+Labels.getLabel(),Type.BOOLEAN,exp,0);
-                                                //System.out.println("OFFSET = " + res.getOffset());
+                                                
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.AND, c1, c2, res));
                                                 //FIN CODIGO TRES DIRECCIONES
@@ -1020,7 +1019,7 @@
                                                 BinOpExpr exp= new BinOpExpr(r1.getExpr(),BinOpType.CEQ,r2.getExpr());
                                                 exp.setType(Type.BOOLEAN);
                                                 VarLocation res=new VarLocation("CEQ"+Labels.getLabel(),Type.BOOLEAN,exp,0);
-                                                //System.out.println("OFFSET = " + res.getOffset());
+                                                
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.CEQ, r1, r2, res));
                                                 //FIN CODIGO TRES DIRECCIONES
@@ -1039,7 +1038,7 @@
                                                 BinOpExpr exp= new BinOpExpr(r1.getExpr(),BinOpType.NEQ,r2.getExpr());
                                                 exp.setType(Type.BOOLEAN);
                                                 VarLocation res=new VarLocation("NEQ"+Labels.getLabel(),Type.BOOLEAN,exp,0);
-                                                //System.out.println("OFFSET = " + res.getOffset());
+                                                
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.NEQ, r1, r2, res));
                                                 //FIN CODIGO TRES DIRECCIONES
@@ -1061,7 +1060,7 @@
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.LE,s2.getExpr());
                                                 exp.setType(Type.BOOLEAN);
                                                 VarLocation res=new VarLocation("LE"+Labels.getLabel(),Type.BOOLEAN,exp,0);
-                                                //System.out.println("OFFSET = " + res.getOffset());
+                                                
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.LE, s1, s2, res));
                                                 //FIN CODIGO TRES DIRECCIONES
@@ -1079,7 +1078,7 @@
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.GE,s2.getExpr());
                                                 exp.setType(Type.BOOLEAN);
                                                 VarLocation res=new VarLocation("GE"+Labels.getLabel(),Type.BOOLEAN,exp,0);
-                                                //System.out.println("OFFSET = " + res.getOffset());
+                                                
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.GE, s1, s2, res));
                                                 //FIN CODIGO TRES DIRECCIONES
@@ -1098,7 +1097,7 @@
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.GEQ,s2.getExpr());
                                                 exp.setType(Type.BOOLEAN);
                                                 VarLocation res=new VarLocation("GEQ"+Labels.getLabel(),Type.BOOLEAN,exp,0);
-                                                //System.out.println("OFFSET = " + res.getOffset());
+                                                
                                                 //CODIGO DE TRES DIRECCIONES   
                                                 TripletList.addLast(new TripletCode(TripletOperator.GEQ, s1,s2,res));
                                                 //FIN CODIGO TRES DIRECCIONES
@@ -1117,7 +1116,7 @@
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.LEQ,s2.getExpr());
                                                 exp.setType(Type.BOOLEAN);
                                                 VarLocation res=new VarLocation("LEQ"+Labels.getLabel(),Type.BOOLEAN,exp,0);
-                                                //System.out.println("OFFSET = " + res.getOffset());
+                                                
                                                 //CODIGO DE TRES DIRECCIONES 
                                                 TripletList.addLast(new TripletCode(TripletOperator.LEQ, s1, s2, res));
                                                 //FIN CODIGO TRES DIRECCIONES
@@ -1144,7 +1143,7 @@
                                                     BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.PLUS,s2.getExpr());
                                                     exp.setType(Type.INT);
                                                     VarLocation res=new VarLocation("PLUS"+Labels.getLabel(),Type.INT,exp,0);
-                                                    //System.out.println("OFFSET = " + res.getOffset());
+                                                    
                                                     //CODIGO DE TRES DIRECCIONES
                                                     TripletList.addLast(new TripletCode(TripletOperator.PLUS, s1, s2, res));
                                                     //FIN CODIGO TRES DIRECCIONES
@@ -1153,7 +1152,7 @@
                                                     BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.PLUS,s2.getExpr());
                                                     exp.setType(Type.FLOAT);
                                                     VarLocation res=new VarLocation("PLUS"+Labels.getLabel(),Type.FLOAT,exp,0);
-                                                    //System.out.println("OFFSET = " + res.getOffset());
+                                                    
                                                     //CODIGO DE TRES DIRECCIONES
                                                     TripletList.addLast(new TripletCode(TripletOperator.PLUS, s1, s2, res));
                                                     //FIN CODIGO TRES DIRECCIONES
@@ -1178,7 +1177,7 @@
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MINUS,s2.getExpr());
                                                 exp.setType(Type.INT);
                                                 VarLocation res=new VarLocation("MINUS"+Labels.getLabel(),Type.INT,exp,0);
-                                                //System.out.println("OFFSET = " + res.getOffset());
+                                                
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.MINUS, s1, s2, res));
                                                 //FIN CODIGO TRES DIRECCIONES
@@ -1187,7 +1186,7 @@
                                                     BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MINUS,s2.getExpr());
                                                     exp.setType(Type.FLOAT);
                                                     VarLocation res=new VarLocation("MINUS"+Labels.getLabel(),Type.FLOAT,exp,0);
-                                                    //System.out.println("OFFSET = " + res.getOffset());
+                                                    
                                                     //CODIGO DE TRES DIRECCIONES 
                                                     TripletList.addLast(new TripletCode(TripletOperator.MINUS, s1, s2, res));
                                                     //FIN CODIGO TRES DIRECCIONES
@@ -1215,7 +1214,7 @@
                                                     BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MULTIPLY,s2.getExpr());
                                                     exp.setType(Type.INT);
                                                     VarLocation res=new VarLocation("MULTIPLY"+Labels.getLabel(),Type.INT,exp,0);
-                                                    //System.out.println("OFFSET = " + res.getOffset());
+                                                    
                                                     //CODIGO DE TRES DIRECCIONES
                                                     TripletList.addLast(new TripletCode(TripletOperator.MULTIPLY, s1, s2, res));
                                                     //FIN CODIGO TRES DIRECCIONES
@@ -1224,7 +1223,7 @@
                                                     BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MULTIPLY,s2.getExpr());
                                                     exp.setType(Type.FLOAT);
                                                     VarLocation res=new VarLocation("MULTIPLY"+Labels.getLabel(),Type.FLOAT,exp,0);
-                                                    //System.out.println("OFFSET = " + res.getOffset());
+                                                    
                                                     //CODIGO DE TRES DIRECCIONES
                                                     TripletList.addLast(new TripletCode(TripletOperator.MULTIPLY, s1, s2, res));
                                                     //FIN CODIGO TRES DIRECCIONES
@@ -1250,7 +1249,7 @@
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.DIVIDE,s2.getExpr());     
                                                 exp.setType(Type.INT);
                                                 VarLocation res=new VarLocation("DIVIDE"+Labels.getLabel(),Type.INT,exp,0); 
-                                                //System.out.println("OFFSET = " + res.getOffset());                                
+                                                
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.DIVIDE, s1, s2, res));          
                                                 //FIN CODIGO TRES DIRECCIONES
@@ -1259,7 +1258,7 @@
                                                     BinOpExpr exp=new BinOpExpr(s1,BinOpType.DIVIDE,s2);
                                                     exp.setType(Type.FLOAT);
                                                     VarLocation res=new VarLocation("DIVIDE"+Labels.getLabel(),Type.FLOAT,exp,0);
-                                                    //System.out.println("OFFSET = " + res.getOffset());
+                                                    
                                                     //CODIGO DE TRES DIRECCIONES
                                                     TripletList.addLast(new TripletCode(TripletOperator.DIVIDE, s1, s2, res));          
                                                     //FIN CODIGO TRES DIRECCIONES
@@ -1283,7 +1282,7 @@
                                                 BinOpExpr exp=new BinOpExpr(s1.getExpr(),BinOpType.MOD,s2.getExpr());  
                                                 exp.setType(Type.INT);                                            
                                                 VarLocation res=new VarLocation("MOD"+Labels.getLabel(),Type.INT,exp,0);  
-                                                //System.out.println("OFFSET = " + res.getOffset());                                   
+                                                                             
                                                 //CODIGO DE TRES DIRECCIONES
                                                 TripletList.addLast(new TripletCode(TripletOperator.MOD, s1, s2, res));                   
                                                 //FIN CODIGO TRES DIRECCIONES
@@ -1296,7 +1295,35 @@
                                          :}
         ;
 
-    factor::=literal:l {: VarLocation res=new VarLocation("factor"+Labels.getLabel(),l.getType(),l,0); RESULT = res; :} 
+    factor::=literal:l {: 
+            //si lo que sube es un literal (int, float, bool, array o string)
+            if(l instanceof Literal){
+                switch(l.getType()){
+                    case INT:
+                        break;
+                    case FLOAT:
+                        break;
+                    case BOOLEAN:
+                        break;
+                    case STRING:
+                        break;
+                    case INTARRAY:
+                        break;
+                    case FLOATARRAY:
+                        break;
+                    case BOOLARRAY:
+                        break;
+                    case STRINGARRAY:
+                        break;
+                }
+            }
+            //si se leyo algun offset, es decir, se busco una variable ya declarada
+            if(ultOffsetLeido!=0){
+                VarLocation res=new VarLocation(ultVarLeida,l.getType(),l,0,ultOffsetLeido); RESULT = res;
+                ultOffsetLeido=0;
+                ultVarLeida="";
+            }else{
+                VarLocation res=new VarLocation("factor"+Labels.getLabel(),l.getType(),l,0); RESULT = res;} :}     
           | ADMIRACION factor:f {: 
                                     //verificamos que el operando sea valido para la operacion
                                     if(f.getType().equals(Type.BOOLEAN)){
@@ -1304,7 +1331,6 @@
                                         UnaryOpExpr u=new UnaryOpExpr(UnaryOpType.NON, f.getExpr());
                                         u.setType(Type.BOOLEAN);
                                         VarLocation res=new VarLocation("NON"+Labels.getLabel(),Type.BOOLEAN,u,0);
-                                        //System.out.println("OFFSET = " + res.getOffset());
                                         //CODIGO DE TRES DIRECCIONES
                                         TripletList.addLast(new TripletCode(TripletOperator.NON, f, null, res));
                                         //FIN CODIGO TRES DIRECCIONES
@@ -1321,22 +1347,19 @@
                                         UnaryOpExpr u=new UnaryOpExpr(UnaryOpType.MINUS,f.getExpr());
                                         u.setType(Type.FLOAT);
                                         VarLocation res=new VarLocation("UNARYMINUS"+Labels.getLabel(),Type.FLOAT,u,0);
-                                        //System.out.println("OFFSET = " + res.getOffset());
                                         //CODIGO DE TRES DIRECCIONES
                                         TripletList.addLast(new TripletCode(TripletOperator.UNARYMINUS, f, null, res));
                                         //FIN CODIGO TRES DIRECCIONES
-                                        //u.setType(Type.FLOAT);
                                         RESULT= res;
                                     }else{
                                         if(f.getType().equals(Type.INT)){                                        
                                             UnaryOpExpr u=new UnaryOpExpr(UnaryOpType.MINUS,f.getExpr());
                                             u.setType(Type.INT);
                                             VarLocation res=new VarLocation("UNARYMINUS"+Labels.getLabel(),Type.INT,u,0);
-                                            //System.out.println("OFFSET = " + res.getOffset());
+                                            
                                             //CODIGO DE TRES DIRECCIONES
                                             TripletList.addLast(new TripletCode(TripletOperator.UNARYMINUS, f, null, res));
                                             //FIN CODIGO TRES DIRECCIONES
-                                            //u.setType(Type.INT);
                                             RESULT= res;
                                             
                                         }else{
@@ -1350,53 +1373,53 @@
 
 
     literal::= INT_LITERAL:i {:
-                //CODIGO DE 3 DIRECCIONES
-                /*String IntLiteralLabel="IntLiteral"+Labels.getLabel();
-                TripletList.addLast(new TripletCode(TripletOperator.CONST, i, null, IntLiteralLabel));*/
-                //FIN CODIGO 3 DIRECCIONES
                 RESULT= new IntLiteral((String) i); 
                 :} //entero
            | FLOAT_LITERAL:f {:
-                //CODIGO DE 3 DIRECCIONES
-                /*String FloatLiteralLabel="FloatLiteral"+Labels.getLabel();
-                TripletList.addLast(new TripletCode(TripletOperator.CONST, f, null, FloatLiteralLabel));*/
-                //FIN CODIGO 3 DIRECCIONES
                 RESULT= new FloatLiteral((String) f); 
                 :} //real
            | bool_LITERAL:b {:
-                //CODIGO DE 3 DIRECCIONES
-                /*String BoolLiteralLabel="BoolLiteral"+Labels.getLabel();
-                TripletList.addLast(new TripletCode(TripletOperator.CONST, b, null, BoolLiteralLabel));*/
-                //FIN CODIGO 3 DIRECCIONES
                 RESULT = b;
                 :} //boolean (valor logico)
            | ID:id {: Simbolo s=TS.buscarSimbolo(id); //identificador
+                        //salvamos el offset y nombre de la ultima variable leida
+                        ultOffsetLeido=s.getOffset();
+                        ultVarLeida=s.getName();
+
                         switch(s.getType()){
                             case BOOLEAN:
                                 if(s.getValue()==null){
+                                    //System.out.println("crea BoolLiteral sin valor");
                                     RESULT= new BoolLiteral(false);
                                 }else{
+                                    //System.out.println("crea BoolLiteral con valor "+s.getValue());
                                     RESULT= new BoolLiteral(Boolean.valueOf(s.getValue()));
                                 }
                                 break;
                             case INT:
                                 if(s.getValue()==null){
+                                    //System.out.println("crea IntLiteral sin valor");
                                     RESULT= new IntLiteral("0");
                                 }else{
+                                    //System.out.println("crea IntLiteral con valor "+s.getValue());
                                     RESULT= new IntLiteral(s.getValue());
                                 }
                                 break;
                             case FLOAT:
                                 if(s.getValue()==null){
+                                    //System.out.println("crea FloatLiteral sin valor");
                                     RESULT= new FloatLiteral("0.0");
                                 }else{
+                                    //System.out.println("crea FloatLiteral con valor "+s.getValue());
                                     RESULT= new FloatLiteral(s.getValue());
                                 }
                                 break;
                             case STRING:
                                 if(s.getValue()==null){
+                                    //System.out.println("crea String sin valor");
                                     RESULT= new StringLiteral("");
                                 }else{
+                                    //System.out.println("crea String con valor "+s.getValue());
                                     RESULT= new StringLiteral(s.getValue());
                                 }
                                 break;
@@ -1413,7 +1436,7 @@
                                 System.out.println("Error: expression in array must be int");
                                 
                             }else{
-                                VarLocation arrAccess=new VarLocation(id.toString(),s.getType(), e,0);
+                                VarLocation arrAccess=new VarLocation(id.toString(),s.getType(), e,0,s.getOffset());
 
                                 String LabelArrayAccess="ArrayAccess"+Labels.getLabel();
                                 TripletList.addLast(new TripletCode(TripletOperator.ARRAYACCESS,id, e,LabelArrayAccess));

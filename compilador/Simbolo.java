@@ -18,13 +18,15 @@ public class Simbolo {
     String name;//nombre del simbolo
     String value;//valor (no estoy seguro que sea necesario)
     int size; //para el caso de arreglos
+    int offset;
 
     // constructor de clase
-    public Simbolo(Type type, String name, String value, int size) {
+    public Simbolo(Type type, String name, String value, int size, int offset) {
         this.type = type;
         this.name = name;
         this.value = value;
         this.size = size;
+        this.offset=offset;
     }
 
     public Type getType() {
@@ -59,9 +61,17 @@ public class Simbolo {
         this.size = size;
     }
 
+    public int getOffset() {
+        return offset;
+    }
+
+    public void setOffset(int o) {
+        this.offset=o;
+    }
+
     @Override
     public String toString() {
-        return "Simbolo{" + "type=" + type.toString() + ", name=" + name + ", value=" + value + ", size=" + size + '}';
+        return "Simbolo{" + "type=" + type.toString() + ", name=" + name + ", value=" + value + ", size=" + size +", offset="+ offset +'}';
     }
 
     public boolean equals(Simbolo obj) {
@@ -76,6 +86,9 @@ public class Simbolo {
             return false;
         }
         if(this.size!=other.size){
+            return false;
+        }
+        if(this.offset!=other.offset){
             return false;
         }
         return true;
