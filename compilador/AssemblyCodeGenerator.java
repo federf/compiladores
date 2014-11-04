@@ -833,12 +833,62 @@ public class AssemblyCodeGenerator{
 			VarLocation res=(VarLocation) t.getResult();
 			//si se trata de un factor (es un temporal)
 			if(firstOp.getId().contains("factor")){
-				result=result+"    mov $"+firstOp.getExpr()+","+res.getOffset() +"(%ebp)\n";	
+				System.out.println("ASSIGN CASO FACTOR "+firstOp);
+				if(firstOp.getExpr() instanceof VarLocation){
+					VarLocation e=(VarLocation) firstOp.getExpr();
+					result=result+" .1   mov $"+e.getExpr()+","+res.getOffset() +"(%ebp)\n";	
+				}else{
+					result=result+"    mov $"+firstOp.getExpr()+","+res.getOffset() +"(%ebp)\n";	
+				}
 			}else{//caso contrario, es otra VarLocation
 				result=result+"    mov " + firstOp.getOffset() + "(%ebp)"+","+res.getOffset() +"(%ebp)\n";	
 			}
 		}else{
-			result=result+"    mov " + t.getFirstDir() + " (%ebp), %eax\n";
+			if(!(t.getFirstDir() instanceof MethodCallExpr)){
+				System.out.println("{ASSIGN} de "+t.getFirstDir().getClass());
+				if(t.getFirstDir() instanceof BinOpExpr){
+					//la obtenemos como operacion binaria
+					BinOpExpr primer=(BinOpExpr) t.getFirstDir();
+
+					BinOpType operator=primer.getOperator();
+					//primer y segundo operandos de la expression
+					Expression primExpr=null;
+					if(primer.getLeftOperand() instanceof VarLocation){
+						primExpr=primer.getLeftOperand().getExpr();
+					}else{
+						primExpr=primer.getLeftOperand();	
+					}
+
+					Expression segExpr=null;
+					if(primer.getRightOperand() instanceof VarLocation){
+						segExpr=primer.getRightOperand().getExpr();
+					}else{
+						segExpr=primer.getRightOperand();	
+					}
+					String expresion=primExpr.toString()+""+operator.toString()+""+segExpr.toString();
+					expresion=expresion.replaceAll("--","+");
+
+					//vemos que ambos operandos de la operacion binaria sean enteros
+					if(primExpr.getType().equals(Type.INT) && segExpr.getType().equals(Type.INT)){
+						int firstOpValue=evaluateExpression(expresion);
+						result=result+"    mov $" +firstOpValue + ", %eax\n";		
+					}else{
+						System.out.println("{ASSIGN}CASO BinOpExpr entre "+primExpr.getType()+" y "+segExpr.getType()+" pendiente");
+					}
+				}else{
+					if(t.getFirstDir() instanceof UnaryOpExpr){
+						UnaryOpExpr uop=(UnaryOpExpr) t.getFirstDir();
+						int opValue=evaluateExpression(uop.toString());
+						result=result+"    mov $" +opValue+ ", %eax\n";		
+					}else{
+						System.out.println("{ASSIGN}2 FALTA CASO "+t.getFirstDir().getClass());
+					}
+					//result=result+"    mov " +evaluateExpression(t.getFirstDir().toString()) + " (%ebp), %eax\n";		
+				}
+			}else{
+				System.out.println("{ASSIGN} FALTA CASO "+t.getFirstDir().getClass());
+			}
+			
 		}
 	}
 
@@ -1009,9 +1059,19 @@ public class AssemblyCodeGenerator{
 	    				if(params.get(i) instanceof BoolLiteral){
 	    					BoolLiteral p=(BoolLiteral) params.get(i);
 	    					if(i!=0){
-	    						result+="    movl $"+p.toString()+" , "+((i-1)*4)+"(%esp)";	
+	    						if(p.getValue()){
+	    							result+="    movl $"+1+" , "+((i-1)*4)+"(%esp)";		
+	    						}else{
+	    							result+="    movl $"+0+" , "+((i-1)*4)+"(%esp)";	
+	    						}
+	    						
 	    					}else{
-	    						result+="    movl $"+p.toString()+" , (%esp)";
+	    						if(p.getValue()){
+	    							result+="    movl $"+1+" , (%esp)";	
+	    						}else{
+	    							result+="    movl $"+0+" , (%esp)";
+	    						}
+	    						
 	    					}
 	    					
 	    				}else{

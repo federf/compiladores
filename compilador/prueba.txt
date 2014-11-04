@@ -1,12 +1,5 @@
 parseo iniciado
 
-
-
-
-
-
-
-
 parseo exitoso
 tamaño lista de codigo tercetos: 8
 lista: 

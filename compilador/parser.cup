@@ -1296,34 +1296,23 @@
         ;
 
     factor::=literal:l {: 
-            //si lo que sube es un literal (int, float, bool, array o string)
-            if(l instanceof Literal){
-                switch(l.getType()){
-                    case INT:
-                        break;
-                    case FLOAT:
-                        break;
-                    case BOOLEAN:
-                        break;
-                    case STRING:
-                        break;
-                    case INTARRAY:
-                        break;
-                    case FLOATARRAY:
-                        break;
-                    case BOOLARRAY:
-                        break;
-                    case STRINGARRAY:
-                        break;
-                }
-            }
             //si se leyo algun offset, es decir, se busco una variable ya declarada
             if(ultOffsetLeido!=0){
-                VarLocation res=new VarLocation(ultVarLeida,l.getType(),l,0,ultOffsetLeido); RESULT = res;
+                VarLocation res=new VarLocation(ultVarLeida,l.getType(),l,0,ultOffsetLeido); 
+                RESULT = res;
                 ultOffsetLeido=0;
                 ultVarLeida="";
             }else{
-                VarLocation res=new VarLocation("factor"+Labels.getLabel(),l.getType(),l,0); RESULT = res;} :}     
+                VarLocation res;
+                if(l instanceof VarLocation){
+                    res=(VarLocation) l;
+                    RESULT=res;
+                }else{
+                    res=new VarLocation("factor"+Labels.getLabel(),l.getType(),l,0);     
+                    RESULT = res;
+                }
+            } 
+        :}     
           | ADMIRACION factor:f {: 
                                     //verificamos que el operando sea valido para la operacion
                                     if(f.getType().equals(Type.BOOLEAN)){
