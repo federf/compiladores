@@ -19,8 +19,10 @@ class Test_metodos {
 		return res;
 	}
 	int main() {
+				int a;
                 int A[1];
                 res = false;
-		A[0] = resto(inc(5),10.2);
+                a=inc(5);
+		A[0] = resto(a,10.2);
 	}
 }

@@ -13,14 +13,16 @@ boolean or(boolean a, boolean b){
 }
 void main(){
 
-    boolean a,b,c;
+    boolean a,b,c,d,e;
     int x,y;
     a= true;
     b= false;
     b= neg(a);
-    c= or(and(a,b), neg(b) );
+    c=and(a,b);
+    d=neg(b);
+    e= or(c, d );
 
-    externinvk("printf", boolean , c);
+    externinvk("printf", boolean , e);
 }
 
 }

@@ -18,13 +18,19 @@ float mult(float a, float b){
 
 void main(){
 
-    float x, y, z;
+    float a, b, c, d, x, y, z;
     
     x= 1.234;
     y= -27.5;
     z= -70.3;
     
-    externinvk("printf", float , "anidandoFloatTest", sum(mult(sum(y,x),div(x,z)),resta(-y,z)) );
+    a=sum(y,x);
+    b=div(x,z);
+    c=resta(-y,z);
+    d=mult(a,b);
+
+    externinvk("printf", float , "anidandoFloatTest",sum(d,c));
+
 }
 
 }

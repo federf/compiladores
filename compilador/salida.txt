@@ -118,45 +118,45 @@ finalizado.
     .type	factorial, @function 
 factorial: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $0,-4(%ebp)
+    movl $0,-4(%ebp)
 
-    mov $1,-8(%ebp)
+    movl $1,-8(%ebp)
 
     movl	-4(%ebp), %eax
     cmpl	-20(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -24(%ebp)
 
 .BeginWhileLabel5:
 
-    mov $ 1, %eax
-    cmp -24(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -24(%ebp), %eax
 
     jne EndWhileLabel6
 
-    mov -8(%ebp) , %eax 
-    mov -4(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-28(%ebp) 
+    movl -8(%ebp) , %eax 
+    movl -4(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-28(%ebp) 
 
-    mov -28(%ebp),-8(%ebp)
+    movl -28(%ebp),-8(%ebp)
 
-    mov -4(%ebp) , %eax 
-    mov -32(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-36(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -32(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-36(%ebp) 
 
-    mov -36(%ebp),-4(%ebp)
+    movl -36(%ebp),-4(%ebp)
 
     jmp BeginWhileLabel5
 
 .EndWhileLabel6:
 
-    mov -8(%ebp), %eax
+    movl -8(%ebp), %eax
 
     leave
     ret
@@ -167,8 +167,8 @@ factorial:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $3 , 8(%esp)
 
@@ -187,7 +187,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 40
+tamaño lista de codigo tercetos: 44
 lista: 
 {LABEL, null, null, Result: BeginMethod div}
 
@@ -223,16 +223,20 @@ lista:
 {ASSIGN(=), VarLocation{name=UNARYMINUSLabel13, type=float, expr=-70.3, size=0}, null, Result: VarLocation{name=z, type=float, expr=null, size=0}}
 {PARAM, null, null, Result: [0.0, 0.0]}
 {METHODCALL, sum, 2, Result: RESULTLabel14}
+{ASSIGN(=), VarLocation{name=factorLabel15, type=float, expr=MethodCallExpr{name=sum, args=[0.0, 0.0]}, size=0}, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
 {PARAM, null, null, Result: [0.0, 0.0]}
 {METHODCALL, div, 2, Result: RESULTLabel16}
-{PARAM, null, null, Result: [MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}
-{METHODCALL, mult, 2, Result: RESULTLabel18}
-{UNARYMINUS(-expr), VarLocation{name=y, type=float, expr=0.0, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel20, type=float, expr=-0.0, size=0}}
+{ASSIGN(=), VarLocation{name=factorLabel17, type=float, expr=MethodCallExpr{name=div, args=[0.0, 0.0]}, size=0}, null, Result: VarLocation{name=b, type=float, expr=null, size=0}}
+{UNARYMINUS(-expr), VarLocation{name=y, type=float, expr=0.0, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel18, type=float, expr=-0.0, size=0}}
 {PARAM, null, null, Result: [-0.0, 0.0]}
-{METHODCALL, resta, 2, Result: RESULTLabel21}
-{PARAM, null, null, Result: [MethodCallExpr{name=mult, args=[MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}, MethodCallExpr{name=resta, args=[-0.0, 0.0]}]}
+{METHODCALL, resta, 2, Result: RESULTLabel19}
+{ASSIGN(=), VarLocation{name=factorLabel20, type=float, expr=MethodCallExpr{name=resta, args=[-0.0, 0.0]}, size=0}, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
+{PARAM, null, null, Result: [0.0, 0.0]}
+{METHODCALL, mult, 2, Result: RESULTLabel21}
+{ASSIGN(=), VarLocation{name=factorLabel22, type=float, expr=MethodCallExpr{name=mult, args=[0.0, 0.0]}, size=0}, null, Result: VarLocation{name=d, type=float, expr=null, size=0}}
+{PARAM, null, null, Result: [0.0, 0.0]}
 {METHODCALL, sum, 2, Result: RESULTLabel23}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandoFloatTest"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=mult, args=[MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}, MethodCallExpr{name=resta, args=[-0.0, 0.0]}]}]}, null, Result: EXTERNINVKLabel25}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandoFloatTest"}, MethodCallExpr{name=sum, args=[0.0, 0.0]}]}, null, Result: EXTERNINVKLabel25}
 {LABEL, null, null, Result: EndMethod main}
 
 procesando : . . . {LABEL, null, null, Result: BeginMethod div}
@@ -332,6 +336,10 @@ finalizado.
 procesando : . . . {METHODCALL, sum, 2, Result: RESULTLabel14}
 finalizado.
 
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel15, type=float, expr=MethodCallExpr{name=sum, args=[0.0, 0.0]}, size=0}, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
+ASSIGN CASO FACTOR VarLocation{name=factorLabel15, type=float, expr=MethodCallExpr{name=sum, args=[0.0, 0.0]}, size=0}
+finalizado.
+
 procesando : . . . {PARAM, null, null, Result: [0.0, 0.0]}
 index: 1 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
@@ -342,17 +350,11 @@ finalizado.
 procesando : . . . {METHODCALL, div, 2, Result: RESULTLabel16}
 finalizado.
 
-procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}
-index: 1 tamaño: 2
-{PARAM} CASO METHODCALL PENDIENTE
-index: 0 tamaño: 2
-{PARAM} CASO METHODCALL PENDIENTE
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel17, type=float, expr=MethodCallExpr{name=div, args=[0.0, 0.0]}, size=0}, null, Result: VarLocation{name=b, type=float, expr=null, size=0}}
+ASSIGN CASO FACTOR VarLocation{name=factorLabel17, type=float, expr=MethodCallExpr{name=div, args=[0.0, 0.0]}, size=0}
 finalizado.
 
-procesando : . . . {METHODCALL, mult, 2, Result: RESULTLabel18}
-finalizado.
-
-procesando : . . . {UNARYMINUS(-expr), VarLocation{name=y, type=float, expr=0.0, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel20, type=float, expr=-0.0, size=0}}
+procesando : . . . {UNARYMINUS(-expr), VarLocation{name=y, type=float, expr=0.0, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel18, type=float, expr=-0.0, size=0}}
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [-0.0, 0.0]}
@@ -362,20 +364,38 @@ index: 0 tamaño: 2
 {PARAM} FALTA CASO class ir.ast.UnaryOpExpr
 finalizado.
 
-procesando : . . . {METHODCALL, resta, 2, Result: RESULTLabel21}
+procesando : . . . {METHODCALL, resta, 2, Result: RESULTLabel19}
 finalizado.
 
-procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=mult, args=[MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}, MethodCallExpr{name=resta, args=[-0.0, 0.0]}]}
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel20, type=float, expr=MethodCallExpr{name=resta, args=[-0.0, 0.0]}, size=0}, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
+ASSIGN CASO FACTOR VarLocation{name=factorLabel20, type=float, expr=MethodCallExpr{name=resta, args=[-0.0, 0.0]}, size=0}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [0.0, 0.0]}
 index: 1 tamaño: 2
-{PARAM} CASO METHODCALL PENDIENTE
+{PARAM} CASO FLAOTLITERAL PENDIENTE
 index: 0 tamaño: 2
-{PARAM} CASO METHODCALL PENDIENTE
+{PARAM} CASO FLAOTLITERAL PENDIENTE
+finalizado.
+
+procesando : . . . {METHODCALL, mult, 2, Result: RESULTLabel21}
+finalizado.
+
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel22, type=float, expr=MethodCallExpr{name=mult, args=[0.0, 0.0]}, size=0}, null, Result: VarLocation{name=d, type=float, expr=null, size=0}}
+ASSIGN CASO FACTOR VarLocation{name=factorLabel22, type=float, expr=MethodCallExpr{name=mult, args=[0.0, 0.0]}, size=0}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [0.0, 0.0]}
+index: 1 tamaño: 2
+{PARAM} CASO FLAOTLITERAL PENDIENTE
+index: 0 tamaño: 2
+{PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
 procesando : . . . {METHODCALL, sum, 2, Result: RESULTLabel23}
 finalizado.
 
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandoFloatTest"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=mult, args=[MethodCallExpr{name=sum, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}, MethodCallExpr{name=resta, args=[-0.0, 0.0]}]}]}, null, Result: EXTERNINVKLabel25}
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandoFloatTest"}, MethodCallExpr{name=sum, args=[0.0, 0.0]}]}, null, Result: EXTERNINVKLabel25}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -388,16 +408,16 @@ finalizado.
     .type	div, @function 
 div: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov -4(%ebp) , %eax 
-    mov 1(%ebp) , %ecx 
+    movl -4(%ebp) , %eax 
+    movl 1(%ebp) , %ecx 
 	 cltd
 +    idiv %ecx
-    mov %ecx,-8(%ebp) 
+    movl %ecx,-8(%ebp) 
 
-    mov -8(%ebp), %eax
+    movl -8(%ebp), %eax
 
     leave
     ret
@@ -409,15 +429,15 @@ div:
     .type	resta, @function 
 resta: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov -4(%ebp) , %eax 
-    mov 1(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-8(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl 1(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-8(%ebp) 
 
-    mov -8(%ebp), %eax
+    movl -8(%ebp), %eax
 
     leave
     ret
@@ -429,15 +449,15 @@ resta:
     .type	sum, @function 
 sum: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov -4(%ebp) , %eax 
-    mov 1(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-8(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl 1(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-8(%ebp) 
 
-    mov -8(%ebp), %eax
+    movl -8(%ebp), %eax
 
     leave
     ret
@@ -449,15 +469,15 @@ sum:
     .type	mult, @function 
 mult: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov -4(%ebp) , %eax 
-    mov 1(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-8(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl 1(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-8(%ebp) 
 
-    mov -8(%ebp), %eax
+    movl -8(%ebp), %eax
 
     leave
     ret
@@ -468,38 +488,46 @@ mult:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $1.234,-4(%ebp)
+    movl $1.234,-20(%ebp)
 
-    movl	-20(%ebp), %eax 
+    movl	-36(%ebp), %eax 
     negl	%eax 
-    movl	%eax, -24(%ebp) 
+    movl	%eax, -40(%ebp) 
 
-    mov -24(%ebp),-8(%ebp)
+    movl -40(%ebp),-24(%ebp)
 
-    movl	-28(%ebp), %eax 
+    movl	-44(%ebp), %eax 
     negl	%eax 
-    movl	%eax, -32(%ebp) 
+    movl	%eax, -48(%ebp) 
 
-    mov -32(%ebp),-12(%ebp)
+    movl -48(%ebp),-28(%ebp)
 
 
     call sum
 
+    movl $MethodCallExpr{name=sum, args=[0.0, 0.0]},-4(%ebp)
+
 
     call div
+
+    movl $MethodCallExpr{name=div, args=[0.0, 0.0]},-8(%ebp)
+
+    movl	-24(%ebp), %eax 
+    negl	%eax 
+    movl	%eax, -60(%ebp) 
+
+
+    call resta
+
+    movl $MethodCallExpr{name=resta, args=[-0.0, 0.0]},-12(%ebp)
 
 
     call mult
 
-    movl	-8(%ebp), %eax 
-    negl	%eax 
-    movl	%eax, -48(%ebp) 
-
-
-    call resta
+    movl $MethodCallExpr{name=mult, args=[0.0, 0.0]},-16(%ebp)
 
 
     call sum
@@ -600,16 +628,16 @@ finalizado.
     .type	pruebaLogica, @function 
 pruebaLogica: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $true,-4(%ebp)
+    movl $true,-4(%ebp)
 
-    cmp	$0, -8(%ebp)
+    cmpl	$0, -8(%ebp)
     jne .L0
-    cmp	$0, -4(%ebp)
+    cmpl	$0, -4(%ebp)
     je .L0
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L1
 .L0:
     movl	$0, %eax
@@ -618,16 +646,16 @@ pruebaLogica:
     movl	%eax, -12(%ebp)
 .L2:
 
-    cmp $0, -16(%ebp) 
+    cmpl $0, -16(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -20(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -20(%ebp) 
 
-    cmp	$0, -12(%ebp)
+    cmpl	$0, -12(%ebp)
     je .L3
-    cmp	$0, -20(%ebp)
+    cmpl	$0, -20(%ebp)
     je .L3
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L4
 .L3:
     movl	$0, %eax
@@ -636,16 +664,16 @@ pruebaLogica:
     movl	%eax, -24(%ebp)
 .L5:
 
-    cmp $0, -28(%ebp) 
+    cmpl $0, -28(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -32(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -32(%ebp) 
 
-    cmp	$0, -24(%ebp)
+    cmpl	$0, -24(%ebp)
     je .L6
-    cmp	$0, -32(%ebp)
+    cmpl	$0, -32(%ebp)
     je .L6
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L7
 .L6:
     movl	$0, %eax
@@ -663,8 +691,8 @@ pruebaLogica:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $1 , (%esp)
     call pruebaLogica
@@ -779,15 +807,15 @@ finalizado.
     .type	inc, @function 
 inc: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov -4(%ebp) , %eax 
-    mov -8(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-12(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -8(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-12(%ebp) 
 
-    mov -12(%ebp), %eax
+    movl -12(%ebp), %eax
 
     leave
     ret
@@ -798,24 +826,24 @@ inc:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     call get_int
 
 
     call inc
 
-    mov $MethodCallExpr{name=inc, args=[ExternInvkExpr{id="get_int", type=int, parameters=[]}]},-4(%ebp)
+    movl $MethodCallExpr{name=inc, args=[ExternInvkExpr{id="get_int", type=int, parameters=[]}]},-4(%ebp)
 
     movl	-4(%ebp), %eax
     cmpl	-16(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -20(%ebp)
 
-    mov $ 1, %eax
-    cmp -20(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -20(%ebp), %eax
 
     jne elseCondLabel10
 
@@ -858,7 +886,7 @@ lista:
 {GEQ(>=), VarLocation{name=factorLabel11, type=int, expr=0, size=0}, VarLocation{name=c, type=int, expr=0, size=0}, Result: VarLocation{name=GEQLabel12, type=boolean, expr=0>=0, size=0}}
 {ASSIGN(=), VarLocation{name=GEQLabel12, type=boolean, expr=0>=0, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=1, size=10}}
 {ARRAYACCESS, A, VarLocation{name=factorLabel13, type=int, expr=0, size=0}, Result: ArrayAccessLabel14}
-{RETURN, null, null, Result: VarLocation{name=factorLabel15, type=int[], expr=ArrayLiteral{id=A, size=5}, size=0}}
+{RETURN, null, null, Result: VarLocation{name=factorLabel15, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
 {LABEL, null, null, Result: EndMethod pruArreglos}
 {LABEL, null, null, Result: BeginMethod main}
 
@@ -875,9 +903,9 @@ lista:
 {PLUS(+), VarLocation{name=factorLabel33, type=int, expr=3, size=0}, VarLocation{name=factorLabel34, type=int, expr=3, size=0}, Result: VarLocation{name=PLUSLabel35, type=int, expr=3+3, size=0}}
 {MINUS(-), VarLocation{name=factorLabel32, type=int, expr=7, size=0}, VarLocation{name=PLUSLabel35, type=int, expr=3+3, size=0}, Result: VarLocation{name=MINUSLabel36, type=int, expr=7-3+3, size=0}}
 {ARRAYACCESS, A, VarLocation{name=MINUSLabel36, type=int, expr=7-3+3, size=0}, Result: ArrayAccessLabel37}
-{GEQ(>=), VarLocation{name=factorLabel31, type=int, expr=5, size=0}, VarLocation{name=factorLabel38, type=int[], expr=ArrayLiteral{id=A, size=5}, size=0}, Result: VarLocation{name=GEQLabel39, type=boolean, expr=5>=ArrayLiteral{id=A, size=5}, size=0}}
-{OR(||), VarLocation{name=GEQLabel39, type=boolean, expr=5>=ArrayLiteral{id=A, size=5}, size=0}, VarLocation{name=factorLabel40, type=boolean, expr=true, size=0}, Result: VarLocation{name=DISYUNCIONLabel41, type=boolean, expr=5>=ArrayLiteral{id=A, size=5}||true, size=0}}
-{ASSIGN(=), VarLocation{name=DISYUNCIONLabel41, type=boolean, expr=5>=ArrayLiteral{id=A, size=5}||true, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=3, size=10}}
+{GEQ(>=), VarLocation{name=factorLabel31, type=int, expr=5, size=0}, VarLocation{name=factorLabel38, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}, Result: VarLocation{name=GEQLabel39, type=boolean, expr=5>=ArrayLiteral{id=A, index=5}, size=0}}
+{OR(||), VarLocation{name=GEQLabel39, type=boolean, expr=5>=ArrayLiteral{id=A, index=5}, size=0}, VarLocation{name=factorLabel40, type=boolean, expr=true, size=0}, Result: VarLocation{name=DISYUNCIONLabel41, type=boolean, expr=5>=ArrayLiteral{id=A, index=5}||true, size=0}}
+{ASSIGN(=), VarLocation{name=DISYUNCIONLabel41, type=boolean, expr=5>=ArrayLiteral{id=A, index=5}||true, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=3, size=10}}
 {RETURN, null, null, Result: VarLocation{name=factorLabel42, type=int, expr=1, size=0}}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -935,7 +963,9 @@ finalizado.
 procesando : . . . {ARRAYACCESS, A, VarLocation{name=factorLabel13, type=int, expr=0, size=0}, Result: ArrayAccessLabel14}
 finalizado.
 
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel15, type=int[], expr=ArrayLiteral{id=A, size=5}, size=0}}
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel15, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
+buscado: A
+actual VarLocation{name=A, type=int[], expr=null, size=5}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod pruArreglos}
@@ -991,13 +1021,13 @@ finalizado.
 procesando : . . . {ARRAYACCESS, A, VarLocation{name=MINUSLabel36, type=int, expr=7-3+3, size=0}, Result: ArrayAccessLabel37}
 finalizado.
 
-procesando : . . . {GEQ(>=), VarLocation{name=factorLabel31, type=int, expr=5, size=0}, VarLocation{name=factorLabel38, type=int[], expr=ArrayLiteral{id=A, size=5}, size=0}, Result: VarLocation{name=GEQLabel39, type=boolean, expr=5>=ArrayLiteral{id=A, size=5}, size=0}}
+procesando : . . . {GEQ(>=), VarLocation{name=factorLabel31, type=int, expr=5, size=0}, VarLocation{name=factorLabel38, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}, Result: VarLocation{name=GEQLabel39, type=boolean, expr=5>=ArrayLiteral{id=A, index=5}, size=0}}
 finalizado.
 
-procesando : . . . {OR(||), VarLocation{name=GEQLabel39, type=boolean, expr=5>=ArrayLiteral{id=A, size=5}, size=0}, VarLocation{name=factorLabel40, type=boolean, expr=true, size=0}, Result: VarLocation{name=DISYUNCIONLabel41, type=boolean, expr=5>=ArrayLiteral{id=A, size=5}||true, size=0}}
+procesando : . . . {OR(||), VarLocation{name=GEQLabel39, type=boolean, expr=5>=ArrayLiteral{id=A, index=5}, size=0}, VarLocation{name=factorLabel40, type=boolean, expr=true, size=0}, Result: VarLocation{name=DISYUNCIONLabel41, type=boolean, expr=5>=ArrayLiteral{id=A, index=5}||true, size=0}}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=DISYUNCIONLabel41, type=boolean, expr=5>=ArrayLiteral{id=A, size=5}||true, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=3, size=10}}
+procesando : . . . {ASSIGN(=), VarLocation{name=DISYUNCIONLabel41, type=boolean, expr=5>=ArrayLiteral{id=A, index=5}||true, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=3, size=10}}
 finalizado.
 
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel42, type=int, expr=1, size=0}}
@@ -1018,37 +1048,37 @@ finalizado.
     .type	pruArreglos, @function 
 pruArreglos: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $8.87,-4(%ebp)
+    movl $8.87,-4(%ebp)
 
 
-    mov -24(%ebp) , %eax 
-    mov -4(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-28(%ebp) 
+    movl -24(%ebp) , %eax 
+    movl -4(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-28(%ebp) 
 
 
     movl	-36(%ebp), %eax
     cmpl	1(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -40(%ebp)
 
-    mov -40(%ebp),-336(%ebp)
+    movl -40(%ebp),-336(%ebp)
 
     movl	-48(%ebp), %eax
     cmpl	1(%ebp), %eax
     setge %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -52(%ebp)
 
-    mov -52(%ebp),-336(%ebp)
+    movl -52(%ebp),-336(%ebp)
 
 ARRAYACCESS
 
-    mov $ArrayLiteral{id=A, size=5}, %eax
+ ArrayLiteral   movl -24(%ebp), %eax
 
     leave
     ret
@@ -1059,64 +1089,64 @@ ARRAYACCESS
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $true,-300(%ebp)
+    movl $true,-300(%ebp)
 
     movl	-16(%ebp), %eax 
     negl	%eax 
     movl	%eax, -20(%ebp) 
 
-    mov -12(%ebp) , %eax 
-    mov -20(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-24(%ebp) 
+    movl -12(%ebp) , %eax 
+    movl -20(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-24(%ebp) 
 
-    mov $64, %eax
+    movl $64, %eax
 
     movl	-32(%ebp), %eax 
     negl	%eax 
     movl	%eax, -36(%ebp) 
 
-    mov $-2, %eax
+    movl $-2, %eax
 
     movl	-44(%ebp), %eax
     cmpl	-48(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -52(%ebp)
 
-    cmp $0, -52(%ebp) 
+    cmpl $0, -52(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -56(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -56(%ebp) 
 
-    mov -56(%ebp),-336(%ebp)
+    movl -56(%ebp),-336(%ebp)
 
-    mov -72(%ebp) , %eax 
-    mov -76(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-80(%ebp) 
+    movl -72(%ebp) , %eax 
+    movl -76(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-80(%ebp) 
 
-    mov -68(%ebp) , %eax 
-    mov -80(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-84(%ebp) 
+    movl -68(%ebp) , %eax 
+    movl -80(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-84(%ebp) 
 
 ARRAYACCESS
 
     movl	-64(%ebp), %eax
     cmpl	-88(%ebp), %eax
     setge %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -92(%ebp)
 
-    cmp	$0, -92(%ebp)
+    cmpl	$0, -92(%ebp)
     jne .L0
-    cmp	$0, -96(%ebp)
+    cmpl	$0, -96(%ebp)
     je .L0
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L1
 .L0:
     movl	$0, %eax
@@ -1125,9 +1155,9 @@ ARRAYACCESS
     movl	%eax, -100(%ebp)
 .L2:
 
-    mov -100(%ebp),-336(%ebp)
+    movl -100(%ebp),-336(%ebp)
 
-    mov $1, %eax
+    movl $1, %eax
 
     leave
     ret
@@ -1186,8 +1216,8 @@ lista:
 {MULTIPLY(*), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel34, type=int, expr=2, size=0}, Result: VarLocation{name=MULTIPLYLabel35, type=int, expr=0*2, size=0}}
 {PLUS(+), VarLocation{name=MULTIPLYLabel35, type=int, expr=0*2, size=0}, VarLocation{name=factorLabel36, type=int, expr=8, size=0}, Result: VarLocation{name=PLUSLabel37, type=int, expr=0*2+8, size=0}}
 {ARRAYACCESS, A, VarLocation{name=PLUSLabel37, type=int, expr=0*2+8, size=0}, Result: ArrayAccessLabel38}
-{PLUS(+), VarLocation{name=factorLabel39, type=int[], expr=ArrayLiteral{id=A, size=589}, size=0}, VarLocation{name=factorLabel40, type=int, expr=3, size=0}, Result: VarLocation{name=PLUSLabel41, type=int, expr=ArrayLiteral{id=A, size=589}+3, size=0}}
-{ASSIGN(=), ArrayLiteral{id=A, size=589}+3, null, Result: VarLocation{name=B, type=float[], expr=0, size=56}}
+{PLUS(+), VarLocation{name=factorLabel39, type=int[], expr=ArrayLiteral{id=A, index=589}, size=0}, VarLocation{name=factorLabel40, type=int, expr=3, size=0}, Result: VarLocation{name=PLUSLabel41, type=int, expr=ArrayLiteral{id=A, index=589}+3, size=0}}
+{ASSIGN(=), ArrayLiteral{id=A, index=589}+3, null, Result: VarLocation{name=B, type=float[], expr=0, size=56}}
 {ASSIGN(=), VarLocation{name=factorLabel42, type=int, expr=1, size=0}, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhileLabel32}
 {LABEL, null, null, Result: EndWhileLabel33}
@@ -1202,8 +1232,8 @@ lista:
 {PLUS(+), VarLocation{name=MULTIPLYLabel53, type=int, expr=0*2, size=0}, VarLocation{name=factorLabel54, type=int, expr=8, size=0}, Result: VarLocation{name=PLUSLabel55, type=int, expr=0*2+8, size=0}}
 {ARRAYACCESS, A, VarLocation{name=PLUSLabel55, type=int, expr=0*2+8, size=0}, Result: ArrayAccessLabel56}
 {ARRAYACCESS, B, VarLocation{name=i, type=int, expr=0, size=0}, Result: ArrayAccessLabel58}
-{GE(>), VarLocation{name=factorLabel57, type=int[], expr=ArrayLiteral{id=A, size=589}, size=0}, VarLocation{name=factorLabel59, type=float[], expr=ArrayLiteral{id=B, size=56}, size=0}, Result: VarLocation{name=GELabel60, type=boolean, expr=ArrayLiteral{id=A, size=589}>ArrayLiteral{id=B, size=56}, size=0}}
-{ASSIGN(=), VarLocation{name=GELabel60, type=boolean, expr=ArrayLiteral{id=A, size=589}>ArrayLiteral{id=B, size=56}, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=0, size=5}}
+{GE(>), VarLocation{name=factorLabel57, type=int[], expr=ArrayLiteral{id=A, index=589}, size=0}, VarLocation{name=factorLabel59, type=float[], expr=ArrayLiteral{id=B, index=56}, size=0}, Result: VarLocation{name=GELabel60, type=boolean, expr=ArrayLiteral{id=A, index=589}>ArrayLiteral{id=B, index=56}, size=0}}
+{ASSIGN(=), VarLocation{name=GELabel60, type=boolean, expr=ArrayLiteral{id=A, index=589}>ArrayLiteral{id=B, index=56}, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=0, size=5}}
 {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel61, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel62, type=int, expr=0+1, size=0}}
 {ASSIGN(=), VarLocation{name=PLUSLabel62, type=int, expr=0+1, size=0}, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhileLabel50}
@@ -1363,10 +1393,10 @@ finalizado.
 procesando : . . . {ARRAYACCESS, A, VarLocation{name=PLUSLabel37, type=int, expr=0*2+8, size=0}, Result: ArrayAccessLabel38}
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=factorLabel39, type=int[], expr=ArrayLiteral{id=A, size=589}, size=0}, VarLocation{name=factorLabel40, type=int, expr=3, size=0}, Result: VarLocation{name=PLUSLabel41, type=int, expr=ArrayLiteral{id=A, size=589}+3, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=factorLabel39, type=int[], expr=ArrayLiteral{id=A, index=589}, size=0}, VarLocation{name=factorLabel40, type=int, expr=3, size=0}, Result: VarLocation{name=PLUSLabel41, type=int, expr=ArrayLiteral{id=A, index=589}+3, size=0}}
 finalizado.
 
-procesando : . . . {ASSIGN(=), ArrayLiteral{id=A, size=589}+3, null, Result: VarLocation{name=B, type=float[], expr=0, size=56}}
+procesando : . . . {ASSIGN(=), ArrayLiteral{id=A, index=589}+3, null, Result: VarLocation{name=B, type=float[], expr=0, size=56}}
 {ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre int[] y int pendiente
 finalizado.
@@ -1415,10 +1445,10 @@ finalizado.
 procesando : . . . {ARRAYACCESS, B, VarLocation{name=i, type=int, expr=0, size=0}, Result: ArrayAccessLabel58}
 finalizado.
 
-procesando : . . . {GE(>), VarLocation{name=factorLabel57, type=int[], expr=ArrayLiteral{id=A, size=589}, size=0}, VarLocation{name=factorLabel59, type=float[], expr=ArrayLiteral{id=B, size=56}, size=0}, Result: VarLocation{name=GELabel60, type=boolean, expr=ArrayLiteral{id=A, size=589}>ArrayLiteral{id=B, size=56}, size=0}}
+procesando : . . . {GE(>), VarLocation{name=factorLabel57, type=int[], expr=ArrayLiteral{id=A, index=589}, size=0}, VarLocation{name=factorLabel59, type=float[], expr=ArrayLiteral{id=B, index=56}, size=0}, Result: VarLocation{name=GELabel60, type=boolean, expr=ArrayLiteral{id=A, index=589}>ArrayLiteral{id=B, index=56}, size=0}}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=GELabel60, type=boolean, expr=ArrayLiteral{id=A, size=589}>ArrayLiteral{id=B, size=56}, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=0, size=5}}
+procesando : . . . {ASSIGN(=), VarLocation{name=GELabel60, type=boolean, expr=ArrayLiteral{id=A, index=589}>ArrayLiteral{id=B, index=56}, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=0, size=5}}
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel61, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel62, type=int, expr=0+1, size=0}}
@@ -1477,26 +1507,26 @@ finalizado.
     .type	pruArreglos, @function 
 pruArreglos: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl	-44(%ebp), %eax
     cmpl	1(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -48(%ebp)
 
-    mov $ 1, %eax
-    cmp -48(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -48(%ebp), %eax
 
     jne elseCondLabel3
 
-    mov -56(%ebp) , %eax 
-    mov 1(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-60(%ebp) 
+    movl -56(%ebp) , %eax 
+    movl 1(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-60(%ebp) 
 
-    mov $1, %eax
+    movl $1, %eax
 
     jmp endIfLabel4
 
@@ -1507,139 +1537,139 @@ pruArreglos:
     movl	-64(%ebp), %eax
     cmpl	1(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -68(%ebp)
 
-    mov $ 1, %eax
-    cmp -68(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -68(%ebp), %eax
 
     jne elseCondLabel10
 
-    mov -72(%ebp) , %eax 
-    mov -76(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-80(%ebp) 
+    movl -72(%ebp) , %eax 
+    movl -76(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-80(%ebp) 
 
-    mov -84(%ebp) , %eax 
-    mov -88(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-92(%ebp) 
+    movl -84(%ebp) , %eax 
+    movl -88(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-92(%ebp) 
 
-    mov $0, %eax
+    movl $0, %eax
 
     jmp endIfLabel11
 
 .elseCondLabel10:
 
-    mov -96(%ebp) , %eax 
-    mov -100(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-104(%ebp) 
+    movl -96(%ebp) , %eax 
+    movl -100(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-104(%ebp) 
 
 
 .endIfLabel11:
 
-    mov $0,-40(%ebp)
+    movl $0,-40(%ebp)
 
     movl	-40(%ebp), %eax
     cmpl	-112(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -116(%ebp)
 
 .BeginWhileLabel24:
 
-    mov $ 1, %eax
-    cmp -116(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -116(%ebp), %eax
 
     jne EndWhileLabel25
 
-    mov -40(%ebp) , %eax 
-    mov -120(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-124(%ebp) 
+    movl -40(%ebp) , %eax 
+    movl -120(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-124(%ebp) 
 
-    mov $0, %eax
+    movl $0, %eax
 
-    mov $1,-40(%ebp)
+    movl $1,-40(%ebp)
 
     jmp BeginWhileLabel24
 
 .EndWhileLabel25:
 
-    mov $8,-40(%ebp)
+    movl $8,-40(%ebp)
 
     movl	-40(%ebp), %eax
     cmpl	-136(%ebp), %eax
     setge %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -140(%ebp)
 
 .BeginWhileLabel32:
 
-    mov $ 1, %eax
-    cmp -140(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -140(%ebp), %eax
 
     jne EndWhileLabel33
 
-    mov -40(%ebp) , %eax 
-    mov -144(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-148(%ebp) 
+    movl -40(%ebp) , %eax 
+    movl -144(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-148(%ebp) 
 
-    mov -148(%ebp) , %eax 
-    mov -152(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-156(%ebp) 
+    movl -148(%ebp) , %eax 
+    movl -152(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-156(%ebp) 
 
 ARRAYACCESS
 
-    mov -160(%ebp) , %eax 
-    mov -164(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-168(%ebp) 
+    movl -160(%ebp) , %eax 
+    movl -164(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-168(%ebp) 
 
 
-    mov $1,-40(%ebp)
+    movl $1,-40(%ebp)
 
     jmp BeginWhileLabel32
 
 .EndWhileLabel33:
 
-    mov $0,-40(%ebp)
+    movl $0,-40(%ebp)
 
-    mov -180(%ebp) , %eax 
-    mov -184(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-188(%ebp) 
+    movl -180(%ebp) , %eax 
+    movl -184(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-188(%ebp) 
 
-    mov -188(%ebp) , %eax 
-    mov -192(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-196(%ebp) 
+    movl -188(%ebp) , %eax 
+    movl -192(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-196(%ebp) 
 
     movl	-40(%ebp), %eax
     cmpl	-196(%ebp), %eax
     setle %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -200(%ebp)
 
 .BeginWhileLabel50:
 
-    mov $ 1, %eax
-    cmp -200(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -200(%ebp), %eax
 
     jne EndWhileLabel51
 
-    mov -40(%ebp) , %eax 
-    mov -204(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-208(%ebp) 
+    movl -40(%ebp) , %eax 
+    movl -204(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-208(%ebp) 
 
-    mov -208(%ebp) , %eax 
-    mov -212(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-216(%ebp) 
+    movl -208(%ebp) , %eax 
+    movl -212(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-216(%ebp) 
 
 ARRAYACCESS
 
@@ -1648,17 +1678,17 @@ ARRAYACCESS
     movl	-220(%ebp), %eax
     cmpl	-224(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -228(%ebp)
 
-    mov -228(%ebp),-2632(%ebp)
+    movl -228(%ebp),-2632(%ebp)
 
-    mov -40(%ebp) , %eax 
-    mov -232(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-236(%ebp) 
+    movl -40(%ebp) , %eax 
+    movl -232(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-236(%ebp) 
 
-    mov -236(%ebp),-40(%ebp)
+    movl -236(%ebp),-40(%ebp)
 
     jmp BeginWhileLabel50
 
@@ -1675,8 +1705,8 @@ ARRAYACCESS
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $8 , 12(%esp)
     movl $4 , 8(%esp)
@@ -1751,8 +1781,8 @@ finalizado.
     .type	pruAritmetica, @function 
 pruAritmetica: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     leave
     ret
@@ -1763,8 +1793,8 @@ pruAritmetica:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $3 , 8(%esp)
 
@@ -1892,47 +1922,47 @@ finalizado.
     .type	aritmTest, @function 
 aritmTest: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $1,-4(%ebp)
+    movl $1,-4(%ebp)
 
-    mov $2,-8(%ebp)
+    movl $2,-8(%ebp)
 
-    mov -20(%ebp) , %eax 
-    mov -4(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-24(%ebp) 
+    movl -20(%ebp) , %eax 
+    movl -4(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-24(%ebp) 
 
-    mov -24(%ebp),-4(%ebp)
+    movl -24(%ebp),-4(%ebp)
 
-    mov -4(%ebp) , %eax 
-    mov -28(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-32(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -28(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-32(%ebp) 
 
-    mov -32(%ebp),-8(%ebp)
+    movl -32(%ebp),-8(%ebp)
 
-    mov -4(%ebp) , %eax 
-    mov -36(%ebp) , %ecx 
+    movl -4(%ebp) , %eax 
+    movl -36(%ebp) , %ecx 
 	 cltd
 +    idiv %ecx
-    mov %ecx,-40(%ebp) 
+    movl %ecx,-40(%ebp) 
 
-    mov -40(%ebp),-4(%ebp)
+    movl -40(%ebp),-4(%ebp)
 
     movl	-44(%ebp), %eax 
     cltd
     idivl -4(%ebp)
     movl	%edx, -48(%ebp)
 
-    mov -48(%ebp),0(%ebp)
+    movl -48(%ebp),0(%ebp)
 
-    mov $1,-4(%ebp)
+    movl $1,-4(%ebp)
 
-    mov $2,-4(%ebp)
+    movl $2,-4(%ebp)
 
-    mov $0, %eax
+    movl $0, %eax
 
     leave
     ret
@@ -1943,8 +1973,8 @@ aritmTest:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $5 , 8(%esp)
 
@@ -2098,41 +2128,41 @@ finalizado.
     .type	breaks, @function 
 breaks: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $0,-4(%ebp)
+    movl $0,-4(%ebp)
 
     movl	-4(%ebp), %eax
     cmpl	-12(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -16(%ebp)
 
 .BeginWhileLabel4:
 
-    mov $ 1, %eax
-    cmp -16(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -16(%ebp), %eax
 
     jne EndWhileLabel5
 
-    mov -4(%ebp) , %eax 
-    mov -24(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-28(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -24(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-28(%ebp) 
 
-    mov -28(%ebp),-4(%ebp)
+    movl -28(%ebp),-4(%ebp)
 
-    mov $2.3,-20(%ebp)
+    movl $2.3,-20(%ebp)
 
     movl	-36(%ebp), %eax
     cmpl	-40(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -44(%ebp)
 
-    mov $ 1, %eax
-    cmp -44(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -44(%ebp), %eax
 
     jne elseCondLabel12
 
@@ -2150,7 +2180,7 @@ breaks:
 
 .EndWhileLabel5:
 
-    mov -4(%ebp), %eax
+    movl -4(%ebp), %eax
 
     leave
     ret
@@ -2161,8 +2191,8 @@ breaks:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $1 , 8(%esp)
 
@@ -2170,7 +2200,7 @@ main:
 
     call printf
 
-    mov $1, %eax
+    movl $1, %eax
 
     leave
     ret
@@ -2313,39 +2343,39 @@ finalizado.
     .type	breaks, @function 
 breaks: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $0,-4(%ebp)
+    movl $0,-4(%ebp)
 
     movl	-4(%ebp), %eax
     cmpl	-12(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -16(%ebp)
 
 .BeginWhileLabel4:
 
-    mov $ 1, %eax
-    cmp -16(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -16(%ebp), %eax
 
     jne EndWhileLabel5
 
-    mov -4(%ebp) , %eax 
-    mov -20(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-24(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -20(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-24(%ebp) 
 
-    mov -24(%ebp),-4(%ebp)
+    movl -24(%ebp),-4(%ebp)
 
     movl	-28(%ebp), %eax
     cmpl	-32(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -36(%ebp)
 
-    mov $ 1, %eax
-    cmp -36(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -36(%ebp), %eax
 
     jne elseCondLabel11
 
@@ -2363,7 +2393,7 @@ breaks:
 
 .EndWhileLabel5:
 
-    mov -4(%ebp), %eax
+    movl -4(%ebp), %eax
 
     leave
     ret
@@ -2374,8 +2404,8 @@ breaks:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $1 , 8(%esp)
 
@@ -2383,7 +2413,7 @@ main:
 
     call printf
 
-    mov $1, %eax
+    movl $1, %eax
 
     leave
     ret
@@ -2396,7 +2426,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 31
+tamaño lista de codigo tercetos: 33
 lista: 
 {LABEL, null, null, Result: BeginMethod neg}
 
@@ -2426,11 +2456,13 @@ lista:
 {ASSIGN(=), VarLocation{name=factorLabel10, type=boolean, expr=MethodCallExpr{name=neg, args=[false]}, size=0}, null, Result: VarLocation{name=b, type=boolean, expr=null, size=0}}
 {PARAM, null, null, Result: [false, false]}
 {METHODCALL, and, 2, Result: RESULTLabel11}
+{ASSIGN(=), VarLocation{name=factorLabel12, type=boolean, expr=MethodCallExpr{name=and, args=[false, false]}, size=0}, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
 {PARAM, null, null, Result: [false]}
 {METHODCALL, neg, 1, Result: RESULTLabel13}
-{PARAM, null, null, Result: [MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}
+{ASSIGN(=), VarLocation{name=factorLabel14, type=boolean, expr=MethodCallExpr{name=neg, args=[false]}, size=0}, null, Result: VarLocation{name=d, type=boolean, expr=null, size=0}}
+{PARAM, null, null, Result: [false, false]}
 {METHODCALL, or, 2, Result: RESULTLabel15}
-{ASSIGN(=), VarLocation{name=factorLabel16, type=boolean, expr=MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}, size=0}, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
+{ASSIGN(=), VarLocation{name=factorLabel16, type=boolean, expr=MethodCallExpr{name=or, args=[false, false]}, size=0}, null, Result: VarLocation{name=e, type=boolean, expr=null, size=0}}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: EXTERNINVKLabel17}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -2516,6 +2548,10 @@ finalizado.
 procesando : . . . {METHODCALL, and, 2, Result: RESULTLabel11}
 finalizado.
 
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel12, type=boolean, expr=MethodCallExpr{name=and, args=[false, false]}, size=0}, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
+ASSIGN CASO FACTOR VarLocation{name=factorLabel12, type=boolean, expr=MethodCallExpr{name=and, args=[false, false]}, size=0}
+finalizado.
+
 procesando : . . . {PARAM, null, null, Result: [false]}
 index: 0 tamaño: 1
 finalizado.
@@ -2523,18 +2559,20 @@ finalizado.
 procesando : . . . {METHODCALL, neg, 1, Result: RESULTLabel13}
 finalizado.
 
-procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel14, type=boolean, expr=MethodCallExpr{name=neg, args=[false]}, size=0}, null, Result: VarLocation{name=d, type=boolean, expr=null, size=0}}
+ASSIGN CASO FACTOR VarLocation{name=factorLabel14, type=boolean, expr=MethodCallExpr{name=neg, args=[false]}, size=0}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [false, false]}
 index: 1 tamaño: 2
-{PARAM} CASO METHODCALL PENDIENTE
 index: 0 tamaño: 2
-{PARAM} CASO METHODCALL PENDIENTE
 finalizado.
 
 procesando : . . . {METHODCALL, or, 2, Result: RESULTLabel15}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel16, type=boolean, expr=MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}, size=0}, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
-ASSIGN CASO FACTOR VarLocation{name=factorLabel16, type=boolean, expr=MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]}, size=0}
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel16, type=boolean, expr=MethodCallExpr{name=or, args=[false, false]}, size=0}, null, Result: VarLocation{name=e, type=boolean, expr=null, size=0}}
+ASSIGN CASO FACTOR VarLocation{name=factorLabel16, type=boolean, expr=MethodCallExpr{name=or, args=[false, false]}, size=0}
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: EXTERNINVKLabel17}
@@ -2550,15 +2588,15 @@ finalizado.
     .type	neg, @function 
 neg: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    cmp $0, -4(%ebp) 
+    cmpl $0, -4(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -8(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -8(%ebp) 
 
-    mov -8(%ebp), %eax
+    movl -8(%ebp), %eax
 
     leave
     ret
@@ -2570,14 +2608,14 @@ neg:
     .type	and, @function 
 and: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    cmp	$0, -4(%ebp)
+    cmpl	$0, -4(%ebp)
     je .L0
-    cmp	$0, 1(%ebp)
+    cmpl	$0, 1(%ebp)
     je .L0
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L1
 .L0:
     movl	$0, %eax
@@ -2586,7 +2624,7 @@ and:
     movl	%eax, -8(%ebp)
 .L2:
 
-    mov -8(%ebp), %eax
+    movl -8(%ebp), %eax
 
     leave
     ret
@@ -2598,14 +2636,14 @@ and:
     .type	or, @function 
 or: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    cmp	$0, -4(%ebp)
+    cmpl	$0, -4(%ebp)
     jne .L3
-    cmp	$0, 1(%ebp)
+    cmpl	$0, 1(%ebp)
     je .L3
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L4
 .L3:
     movl	$0, %eax
@@ -2614,7 +2652,7 @@ or:
     movl	%eax, -8(%ebp)
 .L5:
 
-    mov -8(%ebp), %eax
+    movl -8(%ebp), %eax
 
     leave
     ret
@@ -2625,28 +2663,32 @@ or:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $true,-4(%ebp)
+    movl $true,-4(%ebp)
 
-    mov $false,-8(%ebp)
+    movl $false,-8(%ebp)
 
     movl $0 , (%esp)
     call neg
 
-    mov $MethodCallExpr{name=neg, args=[false]},-8(%ebp)
+    movl $MethodCallExpr{name=neg, args=[false]},-8(%ebp)
 
     movl $0 , 0(%esp)    movl $0 , (%esp)
     call and
 
+    movl $MethodCallExpr{name=and, args=[false, false]},-12(%ebp)
+
     movl $0 , (%esp)
     call neg
 
+    movl $MethodCallExpr{name=neg, args=[false]},-16(%ebp)
 
+    movl $0 , 0(%esp)    movl $0 , (%esp)
     call or
 
-    mov $MethodCallExpr{name=or, args=[MethodCallExpr{name=and, args=[false, false]}, MethodCallExpr{name=neg, args=[false]}]},-12(%ebp)
+    movl $MethodCallExpr{name=or, args=[false, false]},-20(%ebp)
 
     call printf
 
@@ -2791,39 +2833,39 @@ finalizado.
     .type	breaks, @function 
 breaks: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $0,-4(%ebp)
+    movl $0,-4(%ebp)
 
     movl	-4(%ebp), %eax
     cmpl	-12(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -16(%ebp)
 
 .BeginWhileLabel4:
 
-    mov $ 1, %eax
-    cmp -16(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -16(%ebp), %eax
 
     jne EndWhileLabel5
 
-    mov -4(%ebp) , %eax 
-    mov -20(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-24(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -20(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-24(%ebp) 
 
-    mov -24(%ebp),-4(%ebp)
+    movl -24(%ebp),-4(%ebp)
 
     movl	-28(%ebp), %eax
     cmpl	-32(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -36(%ebp)
 
-    mov $ 1, %eax
-    cmp -36(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -36(%ebp), %eax
 
     jne elseCondLabel11
 
@@ -2841,7 +2883,7 @@ breaks:
 
 .EndWhileLabel5:
 
-    mov -4(%ebp), %eax
+    movl -4(%ebp), %eax
 
     leave
     ret
@@ -2852,8 +2894,8 @@ breaks:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $1 , 8(%esp)
 
@@ -2861,7 +2903,7 @@ main:
 
     call printf
 
-    mov $1, %eax
+    movl $1, %eax
 
     leave
     ret
@@ -2964,27 +3006,27 @@ finalizado.
     .type	pruAritmetica, @function 
 pruAritmetica: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl	-8(%ebp), %eax
     cmpl	1(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -12(%ebp)
 
-    mov $ 1, %eax
-    cmp -12(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -12(%ebp), %eax
 
     jne elseCondLabel3
 
-    mov $0,-4(%ebp)
+    movl $0,-4(%ebp)
 
     jmp endIfLabel4
 
 .elseCondLabel3:
 
-    mov 1(%ebp),-4(%ebp)
+    movl 1(%ebp),-4(%ebp)
 
 .endIfLabel4:
 
@@ -2997,8 +3039,8 @@ pruAritmetica:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $8 , 12(%esp)
     movl $4 , 8(%esp)
@@ -3111,32 +3153,32 @@ finalizado.
     .type	pruAritmetica, @function 
 pruAritmetica: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl	-8(%ebp), %eax
     cmpl	1(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -12(%ebp)
 
-    mov $ 1, %eax
-    cmp -12(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -12(%ebp), %eax
 
     jne elseCondLabel3
 
-    mov -16(%ebp) , %eax 
-    mov -20(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-24(%ebp) 
+    movl -16(%ebp) , %eax 
+    movl -20(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-24(%ebp) 
 
-    mov -24(%ebp),-4(%ebp)
+    movl -24(%ebp),-4(%ebp)
 
     jmp endIfLabel4
 
 .elseCondLabel3:
 
-    mov 1(%ebp),-4(%ebp)
+    movl 1(%ebp),-4(%ebp)
 
 .endIfLabel4:
 
@@ -3149,8 +3191,8 @@ pruAritmetica:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $8 , 12(%esp)
     movl $4 , 8(%esp)
@@ -3549,36 +3591,36 @@ finalizado.
     .type	dados, @function 
 dados: 
     enter   $(12), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl	-4(%ebp), %eax
     cmpl	-8(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -12(%ebp)
 
-    cmp $0, -12(%ebp) 
+    cmpl $0, -12(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -16(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -16(%ebp) 
 
     movl	1(%ebp), %eax
     cmpl	-20(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -24(%ebp)
 
-    cmp $0, -24(%ebp) 
+    cmpl $0, -24(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -28(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -28(%ebp) 
 
-    cmp	$0, -16(%ebp)
+    cmpl	$0, -16(%ebp)
     je .L0
-    cmp	$0, -28(%ebp)
+    cmpl	$0, -28(%ebp)
     je .L0
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L1
 .L0:
     movl	$0, %eax
@@ -3590,19 +3632,19 @@ dados:
     movl	2(%ebp), %eax
     cmpl	-36(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -40(%ebp)
 
-    cmp $0, -40(%ebp) 
+    cmpl $0, -40(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -44(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -44(%ebp) 
 
-    cmp	$0, -32(%ebp)
+    cmpl	$0, -32(%ebp)
     je .L3
-    cmp	$0, -44(%ebp)
+    cmpl	$0, -44(%ebp)
     je .L3
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L4
 .L3:
     movl	$0, %eax
@@ -3611,12 +3653,12 @@ dados:
     movl	%eax, -48(%ebp)
 .L5:
 
-    mov $ 1, %eax
-    cmp -48(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -48(%ebp), %eax
 
     jne elseCondLabel13
 
-    mov $1.00, %eax
+    movl $1.00, %eax
 
     jmp endIfLabel14
 
@@ -3627,25 +3669,25 @@ dados:
     movl	-56(%ebp), %eax
     cmpl	-60(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -64(%ebp)
 
     movl	1(%ebp), %eax
     cmpl	-68(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -72(%ebp)
 
-    cmp $0, -72(%ebp) 
+    cmpl $0, -72(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -76(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -76(%ebp) 
 
-    cmp	$0, -64(%ebp)
+    cmpl	$0, -64(%ebp)
     je .L6
-    cmp	$0, -76(%ebp)
+    cmpl	$0, -76(%ebp)
     je .L6
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L7
 .L6:
     movl	$0, %eax
@@ -3657,19 +3699,19 @@ dados:
     movl	2(%ebp), %eax
     cmpl	-84(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -88(%ebp)
 
-    cmp $0, -88(%ebp) 
+    cmpl $0, -88(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -92(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -92(%ebp) 
 
-    cmp	$0, -80(%ebp)
+    cmpl	$0, -80(%ebp)
     je .L9
-    cmp	$0, -92(%ebp)
+    cmpl	$0, -92(%ebp)
     je .L9
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L10
 .L9:
     movl	$0, %eax
@@ -3681,25 +3723,25 @@ dados:
     movl	-100(%ebp), %eax
     cmpl	-104(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -108(%ebp)
 
-    cmp $0, -108(%ebp) 
+    cmpl $0, -108(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -112(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -112(%ebp) 
 
     movl	1(%ebp), %eax
     cmpl	-116(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -120(%ebp)
 
-    cmp	$0, -112(%ebp)
+    cmpl	$0, -112(%ebp)
     je .L12
-    cmp	$0, -120(%ebp)
+    cmpl	$0, -120(%ebp)
     je .L12
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L13
 .L12:
     movl	$0, %eax
@@ -3711,19 +3753,19 @@ dados:
     movl	2(%ebp), %eax
     cmpl	-128(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -132(%ebp)
 
-    cmp $0, -132(%ebp) 
+    cmpl $0, -132(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -136(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -136(%ebp) 
 
-    cmp	$0, -124(%ebp)
+    cmpl	$0, -124(%ebp)
     je .L15
-    cmp	$0, -136(%ebp)
+    cmpl	$0, -136(%ebp)
     je .L15
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L16
 .L15:
     movl	$0, %eax
@@ -3732,11 +3774,11 @@ dados:
     movl	%eax, -140(%ebp)
 .L17:
 
-    cmp	$0, -96(%ebp)
+    cmpl	$0, -96(%ebp)
     jne .L18
-    cmp	$0, -140(%ebp)
+    cmpl	$0, -140(%ebp)
     je .L18
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L19
 .L18:
     movl	$0, %eax
@@ -3748,30 +3790,30 @@ dados:
     movl	-148(%ebp), %eax
     cmpl	-152(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -156(%ebp)
 
-    cmp $0, -156(%ebp) 
+    cmpl $0, -156(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -160(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -160(%ebp) 
 
     movl	1(%ebp), %eax
     cmpl	-164(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -168(%ebp)
 
-    cmp $0, -168(%ebp) 
+    cmpl $0, -168(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -172(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -172(%ebp) 
 
-    cmp	$0, -160(%ebp)
+    cmpl	$0, -160(%ebp)
     je .L21
-    cmp	$0, -172(%ebp)
+    cmpl	$0, -172(%ebp)
     je .L21
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L22
 .L21:
     movl	$0, %eax
@@ -3783,14 +3825,14 @@ dados:
     movl	2(%ebp), %eax
     cmpl	-180(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -184(%ebp)
 
-    cmp	$0, -176(%ebp)
+    cmpl	$0, -176(%ebp)
     je .L24
-    cmp	$0, -184(%ebp)
+    cmpl	$0, -184(%ebp)
     je .L24
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L25
 .L24:
     movl	$0, %eax
@@ -3799,11 +3841,11 @@ dados:
     movl	%eax, -188(%ebp)
 .L26:
 
-    cmp	$0, -144(%ebp)
+    cmpl	$0, -144(%ebp)
     jne .L27
-    cmp	$0, -188(%ebp)
+    cmpl	$0, -188(%ebp)
     je .L27
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L28
 .L27:
     movl	$0, %eax
@@ -3812,12 +3854,12 @@ dados:
     movl	%eax, -192(%ebp)
 .L29:
 
-    mov $ 1, %eax
-    cmp -192(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -192(%ebp), %eax
 
     jne elseCondLabel51
 
-    mov $4.00, %eax
+    movl $4.00, %eax
 
     jmp endIfLabel52
 
@@ -3828,20 +3870,20 @@ dados:
     movl	-200(%ebp), %eax
     cmpl	-204(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -208(%ebp)
 
     movl	1(%ebp), %eax
     cmpl	-212(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -216(%ebp)
 
-    cmp	$0, -208(%ebp)
+    cmpl	$0, -208(%ebp)
     je .L30
-    cmp	$0, -216(%ebp)
+    cmpl	$0, -216(%ebp)
     je .L30
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L31
 .L30:
     movl	$0, %eax
@@ -3853,19 +3895,19 @@ dados:
     movl	2(%ebp), %eax
     cmpl	-224(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -228(%ebp)
 
-    cmp $0, -228(%ebp) 
+    cmpl $0, -228(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -232(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -232(%ebp) 
 
-    cmp	$0, -220(%ebp)
+    cmpl	$0, -220(%ebp)
     je .L33
-    cmp	$0, -232(%ebp)
+    cmpl	$0, -232(%ebp)
     je .L33
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L34
 .L33:
     movl	$0, %eax
@@ -3877,25 +3919,25 @@ dados:
     movl	-240(%ebp), %eax
     cmpl	-244(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -248(%ebp)
 
     movl	1(%ebp), %eax
     cmpl	-252(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -256(%ebp)
 
-    cmp $0, -256(%ebp) 
+    cmpl $0, -256(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -260(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -260(%ebp) 
 
-    cmp	$0, -248(%ebp)
+    cmpl	$0, -248(%ebp)
     je .L36
-    cmp	$0, -260(%ebp)
+    cmpl	$0, -260(%ebp)
     je .L36
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L37
 .L36:
     movl	$0, %eax
@@ -3907,14 +3949,14 @@ dados:
     movl	2(%ebp), %eax
     cmpl	-268(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -272(%ebp)
 
-    cmp	$0, -264(%ebp)
+    cmpl	$0, -264(%ebp)
     je .L39
-    cmp	$0, -272(%ebp)
+    cmpl	$0, -272(%ebp)
     je .L39
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L40
 .L39:
     movl	$0, %eax
@@ -3923,11 +3965,11 @@ dados:
     movl	%eax, -276(%ebp)
 .L41:
 
-    cmp	$0, -236(%ebp)
+    cmpl	$0, -236(%ebp)
     jne .L42
-    cmp	$0, -276(%ebp)
+    cmpl	$0, -276(%ebp)
     je .L42
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L43
 .L42:
     movl	$0, %eax
@@ -3939,25 +3981,25 @@ dados:
     movl	-284(%ebp), %eax
     cmpl	-288(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -292(%ebp)
 
-    cmp $0, -292(%ebp) 
+    cmpl $0, -292(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -296(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -296(%ebp) 
 
     movl	1(%ebp), %eax
     cmpl	-300(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -304(%ebp)
 
-    cmp	$0, -296(%ebp)
+    cmpl	$0, -296(%ebp)
     je .L45
-    cmp	$0, -304(%ebp)
+    cmpl	$0, -304(%ebp)
     je .L45
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L46
 .L45:
     movl	$0, %eax
@@ -3969,14 +4011,14 @@ dados:
     movl	2(%ebp), %eax
     cmpl	-312(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -316(%ebp)
 
-    cmp	$0, -308(%ebp)
+    cmpl	$0, -308(%ebp)
     je .L48
-    cmp	$0, -316(%ebp)
+    cmpl	$0, -316(%ebp)
     je .L48
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L49
 .L48:
     movl	$0, %eax
@@ -3985,11 +4027,11 @@ dados:
     movl	%eax, -320(%ebp)
 .L50:
 
-    cmp	$0, -280(%ebp)
+    cmpl	$0, -280(%ebp)
     jne .L51
-    cmp	$0, -320(%ebp)
+    cmpl	$0, -320(%ebp)
     je .L51
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L52
 .L51:
     movl	$0, %eax
@@ -3998,12 +4040,12 @@ dados:
     movl	%eax, -324(%ebp)
 .L53:
 
-    mov $ 1, %eax
-    cmp -324(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -324(%ebp), %eax
 
     jne elseCondLabel86
 
-    mov $8.50, %eax
+    movl $8.50, %eax
 
     jmp endIfLabel87
 
@@ -4014,20 +4056,20 @@ dados:
     movl	-332(%ebp), %eax
     cmpl	-336(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -340(%ebp)
 
     movl	1(%ebp), %eax
     cmpl	-344(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -348(%ebp)
 
-    cmp	$0, -340(%ebp)
+    cmpl	$0, -340(%ebp)
     je .L54
-    cmp	$0, -348(%ebp)
+    cmpl	$0, -348(%ebp)
     je .L54
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L55
 .L54:
     movl	$0, %eax
@@ -4039,14 +4081,14 @@ dados:
     movl	2(%ebp), %eax
     cmpl	-356(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -360(%ebp)
 
-    cmp	$0, -352(%ebp)
+    cmpl	$0, -352(%ebp)
     je .L57
-    cmp	$0, -360(%ebp)
+    cmpl	$0, -360(%ebp)
     je .L57
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L58
 .L57:
     movl	$0, %eax
@@ -4055,12 +4097,12 @@ dados:
     movl	%eax, -364(%ebp)
 .L59:
 
-    mov $ 1, %eax
-    cmp -364(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -364(%ebp), %eax
 
     jne elseCondLabel98
 
-    mov $10.00, %eax
+    movl $10.00, %eax
 
     jmp endIfLabel99
 
@@ -4077,8 +4119,8 @@ dados:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $9 , 16(%esp)
     movl $6 , 12(%esp)
@@ -4296,72 +4338,72 @@ finalizado.
     .type	pruContinue, @function 
 pruContinue: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl	-16(%ebp), %eax 
     negl	%eax 
     movl	%eax, -20(%ebp) 
 
-    mov -20(%ebp),-12(%ebp)
+    movl -20(%ebp),-12(%ebp)
 
-    mov $23,-8(%ebp)
+    movl $23,-8(%ebp)
 
-    mov $23,-4(%ebp)
+    movl $23,-4(%ebp)
 
     movl	-4(%ebp), %eax
     cmpl	-32(%ebp), %eax
     setge %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -36(%ebp)
 
 .BeginWhileLabel7:
 
-    mov $ 1, %eax
-    cmp -36(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -36(%ebp), %eax
 
     jne EndWhileLabel8
 
-    mov -4(%ebp) , %eax 
-    mov -40(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-44(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -40(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-44(%ebp) 
 
-    mov -44(%ebp),-4(%ebp)
+    movl -44(%ebp),-4(%ebp)
 
     movl	-48(%ebp), %eax
     cmpl	1(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -52(%ebp)
 
-    mov $ 1, %eax
-    cmp -52(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -52(%ebp), %eax
 
     jne elseCondLabel13
 
     movl	-4(%ebp), %eax
     cmpl	-56(%ebp), %eax
     setgne %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -60(%ebp)
 
-    mov $ 1, %eax
-    cmp -60(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -60(%ebp), %eax
 
     jne elseCondLabel17
 
-    mov -12(%ebp) , %eax 
-    mov -64(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-68(%ebp) 
+    movl -12(%ebp) , %eax 
+    movl -64(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-68(%ebp) 
 
-    mov -68(%ebp) , %eax 
-    mov 1(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-72(%ebp) 
+    movl -68(%ebp) , %eax 
+    movl 1(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-72(%ebp) 
 
-    mov -72(%ebp),-12(%ebp)
+    movl -72(%ebp),-12(%ebp)
 
     jmp endIfLabel18
 
@@ -4379,12 +4421,12 @@ pruContinue:
     negl	%eax 
     movl	%eax, -80(%ebp) 
 
-    mov -80(%ebp) , %eax 
-    mov -84(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-88(%ebp) 
+    movl -80(%ebp) , %eax 
+    movl -84(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-88(%ebp) 
 
-    mov -88(%ebp),-12(%ebp)
+    movl -88(%ebp),-12(%ebp)
 
     jmp EndWhileLabel8
 
@@ -4398,12 +4440,12 @@ pruContinue:
     negl	%eax 
     movl	%eax, -96(%ebp) 
 
-    mov -96(%ebp) , %eax 
-    mov -12(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-100(%ebp) 
+    movl -96(%ebp) , %eax 
+    movl -12(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-100(%ebp) 
 
-    mov -100(%ebp), %eax
+    movl -100(%ebp), %eax
 
     leave
     ret
@@ -4414,8 +4456,8 @@ pruContinue:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $2 , 12(%esp)
 
@@ -4629,93 +4671,93 @@ finalizado.
     .type	prueba, @function 
 prueba: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $50,-12(%ebp)
+    movl $50,-12(%ebp)
 
     movl	-12(%ebp), %eax
     cmpl	-20(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -24(%ebp)
 
-    mov $ 1, %eax
-    cmp -24(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -24(%ebp), %eax
 
     jne elseCondLabel4
 
-    mov $4,-4(%ebp)
+    movl $4,-4(%ebp)
 
     movl	-4(%ebp), %eax
     cmpl	-32(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -36(%ebp)
 
-    mov $ 1, %eax
-    cmp -36(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -36(%ebp), %eax
 
     jne elseCondLabel9
 
     movl	-4(%ebp), %eax
     cmpl	-40(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -44(%ebp)
 
 .BeginWhileLabel13:
 
-    mov $ 1, %eax
-    cmp -44(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -44(%ebp), %eax
 
     jne EndWhileLabel14
 
     movl	-12(%ebp), %eax
     cmpl	-48(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -52(%ebp)
 
 .BeginWhileLabel17:
 
-    mov $ 1, %eax
-    cmp -52(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -52(%ebp), %eax
 
     jne EndWhileLabel18
 
-    mov -12(%ebp) , %eax 
-    mov -56(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-60(%ebp) 
+    movl -12(%ebp) , %eax 
+    movl -56(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-60(%ebp) 
 
-    mov -60(%ebp),-12(%ebp)
+    movl -60(%ebp),-12(%ebp)
 
-    mov -4(%ebp) , %eax 
-    mov -64(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-68(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -64(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-68(%ebp) 
 
-    mov -68(%ebp),-8(%ebp)
+    movl -68(%ebp),-8(%ebp)
 
     jmp BeginWhileLabel17
 
 .EndWhileLabel18:
 
-    mov -4(%ebp) , %eax 
-    mov -72(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-76(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -72(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-76(%ebp) 
 
-    mov -76(%ebp),-4(%ebp)
+    movl -76(%ebp),-4(%ebp)
 
-    mov -8(%ebp) , %eax 
-    mov -80(%ebp) , %ecx 
+    movl -8(%ebp) , %eax 
+    movl -80(%ebp) , %ecx 
 	 cltd
 +    idiv %ecx
-    mov %ecx,-84(%ebp) 
+    movl %ecx,-84(%ebp) 
 
-    mov -84(%ebp),-8(%ebp)
+    movl -84(%ebp),-8(%ebp)
 
     jmp BeginWhileLabel13
 
@@ -4733,7 +4775,7 @@ prueba:
 
 .endIfLabel5:
 
-    mov -8(%ebp), %eax
+    movl -8(%ebp), %eax
 
     leave
     ret
@@ -4744,8 +4786,8 @@ prueba:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $6 , 8(%esp)
 
@@ -4892,60 +4934,60 @@ finalizado.
     .type	prueba, @function 
 prueba: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $4,-12(%ebp)
+    movl $4,-12(%ebp)
 
-    mov $5,-16(%ebp)
+    movl $5,-16(%ebp)
 
-    mov -12(%ebp) , %eax 
-    mov -16(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-28(%ebp) 
+    movl -12(%ebp) , %eax 
+    movl -16(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-28(%ebp) 
 
-    mov -28(%ebp),-4(%ebp)
+    movl -28(%ebp),-4(%ebp)
 
-    mov -4(%ebp) , %eax 
-    mov -32(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-36(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -32(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-36(%ebp) 
 
-    mov -36(%ebp),0(%ebp)
+    movl -36(%ebp),0(%ebp)
 
-    mov $3.14,-40(%ebp)
+    movl $3.14,-40(%ebp)
 
-    mov -48(%ebp) , %eax 
-    mov -40(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-52(%ebp) 
+    movl -48(%ebp) , %eax 
+    movl -40(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-52(%ebp) 
 
-    mov -52(%ebp),-8(%ebp)
+    movl -52(%ebp),-8(%ebp)
 
-    mov -4(%ebp) , %eax 
-    mov -8(%ebp) , %ecx 
+    movl -4(%ebp) , %eax 
+    movl -8(%ebp) , %ecx 
 	 cltd
 +    idiv %ecx
-    mov %ecx,-56(%ebp) 
+    movl %ecx,-56(%ebp) 
 
     movl	-56(%ebp), %eax
     cmpl	-60(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -64(%ebp)
 
-    mov $ 1, %eax
-    cmp -64(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -64(%ebp), %eax
 
     jne elseCondLabel12
 
-    mov $1, %eax
+    movl $1, %eax
 
     jmp endIfLabel13
 
 .elseCondLabel12:
 
-    mov $0, %eax
+    movl $0, %eax
 
 .endIfLabel13:
 
@@ -4958,8 +5000,8 @@ prueba:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $6 , 8(%esp)
 
@@ -5186,23 +5228,23 @@ finalizado.
     .type	potencia, @function 
 potencia: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $false,-8(%ebp)
+    movl $false,-8(%ebp)
 
-    mov $1,-4(%ebp)
+    movl $1,-4(%ebp)
 
-    mov $1.0,-12(%ebp)
+    movl $1.0,-12(%ebp)
 
     movl	1(%ebp), %eax
     cmpl	-28(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -32(%ebp)
 
-    mov $ 1, %eax
-    cmp -32(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -32(%ebp), %eax
 
     jne elseCondLabel6
 
@@ -5210,14 +5252,14 @@ potencia:
     negl	%eax 
     movl	%eax, -36(%ebp) 
 
-    mov -36(%ebp),1(%ebp)
+    movl -36(%ebp),1(%ebp)
 
-    cmp $0, -8(%ebp) 
+    cmpl $0, -8(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -40(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -40(%ebp) 
 
-    mov -40(%ebp),-8(%ebp)
+    movl -40(%ebp),-8(%ebp)
 
     jmp endIfLabel7
 
@@ -5228,62 +5270,62 @@ potencia:
     movl	-4(%ebp), %eax
     cmpl	1(%ebp), %eax
     setle %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -44(%ebp)
 
 .BeginWhileLabel11:
 
-    mov $ 1, %eax
-    cmp -44(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -44(%ebp), %eax
 
     jne EndWhileLabel12
 
-    mov -12(%ebp) , %eax 
-    mov -48(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-52(%ebp) 
+    movl -12(%ebp) , %eax 
+    movl -48(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-52(%ebp) 
 
-    mov -52(%ebp),-12(%ebp)
+    movl -52(%ebp),-12(%ebp)
 
-    mov -4(%ebp) , %eax 
-    mov -56(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-60(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -56(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-60(%ebp) 
 
-    mov -60(%ebp),-4(%ebp)
+    movl -60(%ebp),-4(%ebp)
 
     jmp BeginWhileLabel11
 
 .EndWhileLabel12:
 
-    cmp $0, -8(%ebp) 
+    cmpl $0, -8(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -64(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -64(%ebp) 
 
-    cmp $0, -64(%ebp) 
+    cmpl $0, -64(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -68(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -68(%ebp) 
 
-    mov $ 1, %eax
-    cmp -68(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -68(%ebp), %eax
 
     jne elseCondLabel19
 
-    mov -72(%ebp) , %eax 
-    mov -12(%ebp) , %ecx 
+    movl -72(%ebp) , %eax 
+    movl -12(%ebp) , %ecx 
 	 cltd
 +    idiv %ecx
-    mov %ecx,-76(%ebp) 
+    movl %ecx,-76(%ebp) 
 
-    mov -76(%ebp), %eax
+    movl -76(%ebp), %eax
 
     jmp endIfLabel20
 
 .elseCondLabel19:
 
-    mov -12(%ebp), %eax
+    movl -12(%ebp), %eax
 
 .endIfLabel20:
 
@@ -5291,7 +5333,7 @@ potencia:
     negl	%eax 
     movl	%eax, -84(%ebp) 
 
-    mov -84(%ebp), %eax
+    movl -84(%ebp), %eax
 
     leave
     ret
@@ -5302,16 +5344,16 @@ potencia:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $8.0,-8(%ebp)
+    movl $8.0,-8(%ebp)
 
     movl $2 , 12(%esp)
 
     call potencia
 
-    mov $MethodCallExpr{name=potencia, args=[0.0, 2]},-4(%ebp)
+    movl $MethodCallExpr{name=potencia, args=[0.0, 2]},-4(%ebp)
 
     call printf
 
@@ -5475,30 +5517,30 @@ finalizado.
     .type	sumatoria, @function 
 sumatoria: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $0.0,-4(%ebp)
+    movl $0.0,-4(%ebp)
 
-    mov $0.0,-8(%ebp)
+    movl $0.0,-8(%ebp)
 
     movl	-8(%ebp), %eax
     cmpl	-24(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -28(%ebp)
 
     movl	-8(%ebp), %eax
     cmpl	-32(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -36(%ebp)
 
-    cmp	$0, -28(%ebp)
+    cmpl	$0, -28(%ebp)
     jne .L0
-    cmp	$0, -36(%ebp)
+    cmpl	$0, -36(%ebp)
     je .L0
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L1
 .L0:
     movl	$0, %eax
@@ -5509,28 +5551,28 @@ sumatoria:
 
 .BeginWhileLabel8:
 
-    mov $ 1, %eax
-    cmp -40(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -40(%ebp), %eax
 
     jne EndWhileLabel9
 
     movl	-8(%ebp), %eax
     cmpl	-44(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -48(%ebp)
 
-    mov $ 1, %eax
-    cmp -48(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -48(%ebp), %eax
 
     jne elseCondLabel12
 
-    mov -4(%ebp) , %eax 
-    mov -8(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-52(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -8(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-52(%ebp) 
 
-    mov -52(%ebp),-4(%ebp)
+    movl -52(%ebp),-4(%ebp)
 
     jmp endIfLabel13
 
@@ -5538,15 +5580,15 @@ sumatoria:
 
 .endIfLabel13:
 
-    mov $1.0,-8(%ebp)
+    movl $1.0,-8(%ebp)
 
     jmp BeginWhileLabel8
 
 .EndWhileLabel9:
 
-    mov -4(%ebp),-12(%ebp)
+    movl -4(%ebp),-12(%ebp)
 
-    mov -12(%ebp), %eax
+    movl -12(%ebp), %eax
 
     leave
     ret
@@ -5557,15 +5599,15 @@ sumatoria:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $8.0,-8(%ebp)
+    movl $8.0,-8(%ebp)
 
 
     call sumatoria
 
-    mov $MethodCallExpr{name=sumatoria, args=[0.0]},-4(%ebp)
+    movl $MethodCallExpr{name=sumatoria, args=[0.0]},-4(%ebp)
 
     call printf
 
@@ -6227,23 +6269,23 @@ finalizado.
     .type	potencia, @function 
 potencia: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $false,-8(%ebp)
+    movl $false,-8(%ebp)
 
-    mov $1,-4(%ebp)
+    movl $1,-4(%ebp)
 
-    mov $1.0,-12(%ebp)
+    movl $1.0,-12(%ebp)
 
     movl	1(%ebp), %eax
     cmpl	-28(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -32(%ebp)
 
-    mov $ 1, %eax
-    cmp -32(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -32(%ebp), %eax
 
     jne elseCondLabel6
 
@@ -6251,9 +6293,9 @@ potencia:
     negl	%eax 
     movl	%eax, -36(%ebp) 
 
-    mov -36(%ebp),1(%ebp)
+    movl -36(%ebp),1(%ebp)
 
-    mov $true,-8(%ebp)
+    movl $true,-8(%ebp)
 
     jmp endIfLabel7
 
@@ -6264,20 +6306,20 @@ potencia:
     movl	-4(%ebp), %eax
     cmpl	1(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -44(%ebp)
 
     movl	-4(%ebp), %eax
     cmpl	1(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -48(%ebp)
 
-    cmp	$0, -44(%ebp)
+    cmpl	$0, -44(%ebp)
     jne .L0
-    cmp	$0, -48(%ebp)
+    cmpl	$0, -48(%ebp)
     je .L0
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L1
 .L0:
     movl	$0, %eax
@@ -6288,62 +6330,62 @@ potencia:
 
 .BeginWhileLabel13:
 
-    mov $ 1, %eax
-    cmp -52(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -52(%ebp), %eax
 
     jne EndWhileLabel14
 
-    mov -12(%ebp) , %eax 
-    mov -56(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-60(%ebp) 
+    movl -12(%ebp) , %eax 
+    movl -56(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-60(%ebp) 
 
-    mov -60(%ebp) , %eax 
-    mov -64(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-68(%ebp) 
+    movl -60(%ebp) , %eax 
+    movl -64(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-68(%ebp) 
 
-    mov -68(%ebp),-12(%ebp)
+    movl -68(%ebp),-12(%ebp)
 
-    mov -4(%ebp) , %eax 
-    mov -72(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-76(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -72(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-76(%ebp) 
 
-    mov -76(%ebp),-4(%ebp)
+    movl -76(%ebp),-4(%ebp)
 
     jmp BeginWhileLabel13
 
 .EndWhileLabel14:
 
-    cmp $0, -8(%ebp) 
+    cmpl $0, -8(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -80(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -80(%ebp) 
 
-    cmp $0, -80(%ebp) 
+    cmpl $0, -80(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -84(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -84(%ebp) 
 
-    mov $ 1, %eax
-    cmp -84(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -84(%ebp), %eax
 
     jne elseCondLabel23
 
-    mov -88(%ebp) , %eax 
-    mov -12(%ebp) , %ecx 
+    movl -88(%ebp) , %eax 
+    movl -12(%ebp) , %ecx 
 	 cltd
 +    idiv %ecx
-    mov %ecx,-92(%ebp) 
+    movl %ecx,-92(%ebp) 
 
-    mov -92(%ebp), %eax
+    movl -92(%ebp), %eax
 
     jmp endIfLabel24
 
 .elseCondLabel23:
 
-    mov -12(%ebp), %eax
+    movl -12(%ebp), %eax
 
 .endIfLabel24:
 
@@ -6351,7 +6393,7 @@ potencia:
     negl	%eax 
     movl	%eax, -100(%ebp) 
 
-    mov -100(%ebp), %eax
+    movl -100(%ebp), %eax
 
     leave
     ret
@@ -6363,82 +6405,82 @@ potencia:
     .type	multiples, @function 
 multiples: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl	-44(%ebp), %eax 
     negl	%eax 
     movl	%eax, -48(%ebp) 
 
-    mov -48(%ebp),-4(%ebp)
+    movl -48(%ebp),-4(%ebp)
 
     movl	-52(%ebp), %eax 
     negl	%eax 
     movl	%eax, -56(%ebp) 
 
-    mov -56(%ebp),-12(%ebp)
+    movl -56(%ebp),-12(%ebp)
 
     movl	-60(%ebp), %eax 
     negl	%eax 
     movl	%eax, -64(%ebp) 
 
-    mov -64(%ebp),-16(%ebp)
+    movl -64(%ebp),-16(%ebp)
 
     movl	-68(%ebp), %eax 
     negl	%eax 
     movl	%eax, -72(%ebp) 
 
-    mov -72(%ebp),-8(%ebp)
+    movl -72(%ebp),-8(%ebp)
 
-    mov -4(%ebp) , %eax 
-    mov -8(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-76(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -8(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-76(%ebp) 
 
-    mov -76(%ebp) , %eax 
-    mov -16(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-80(%ebp) 
+    movl -76(%ebp) , %eax 
+    movl -16(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-80(%ebp) 
 
-    mov -80(%ebp),-20(%ebp)
+    movl -80(%ebp),-20(%ebp)
 
-    mov $0,-28(%ebp)
+    movl $0,-28(%ebp)
 
-    mov $0,-32(%ebp)
+    movl $0,-32(%ebp)
 
-    mov $0,-36(%ebp)
+    movl $0,-36(%ebp)
 
-    mov $5,-40(%ebp)
+    movl $5,-40(%ebp)
 
     movl	-100(%ebp), %eax
     cmpl	1(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -104(%ebp)
 
-    mov $ 1, %eax
-    cmp -104(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -104(%ebp), %eax
 
     jne elseCondLabel45
 
     movl	-20(%ebp), %eax
     cmpl	-4(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -108(%ebp)
 
-    mov $ 1, %eax
-    cmp -108(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -108(%ebp), %eax
 
     jne elseCondLabel48
 
-    mov $0.0,-24(%ebp)
+    movl $0.0,-24(%ebp)
 
     jmp endIfLabel49
 
 .elseCondLabel48:
 
-    mov 1(%ebp),-24(%ebp)
+    movl 1(%ebp),-24(%ebp)
 
 .endIfLabel49:
 
@@ -6449,46 +6491,46 @@ multiples:
     movl	-28(%ebp), %eax
     cmpl	-40(%ebp), %eax
     setle %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -116(%ebp)
 
 .BeginWhileLabel52:
 
-    mov $ 1, %eax
-    cmp -116(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -116(%ebp), %eax
 
     jne EndWhileLabel53
 
     movl	-32(%ebp), %eax
     cmpl	-40(%ebp), %eax
     setle %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -120(%ebp)
 
 .BeginWhileLabel55:
 
-    mov $ 1, %eax
-    cmp -120(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -120(%ebp), %eax
 
     jne EndWhileLabel56
 
     movl	-36(%ebp), %eax
     cmpl	-40(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -124(%ebp)
 
     movl	-36(%ebp), %eax
     cmpl	-40(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -128(%ebp)
 
-    cmp	$0, -124(%ebp)
+    cmpl	$0, -124(%ebp)
     jne .L3
-    cmp	$0, -128(%ebp)
+    cmpl	$0, -128(%ebp)
     je .L3
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L4
 .L3:
     movl	$0, %eax
@@ -6499,49 +6541,49 @@ multiples:
 
 .BeginWhileLabel60:
 
-    mov $ 1, %eax
-    cmp -132(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -132(%ebp), %eax
 
     jne EndWhileLabel61
 
     movl	-12(%ebp), %eax
     cmpl	-136(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -140(%ebp)
 
-    mov $ 1, %eax
-    cmp -140(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -140(%ebp), %eax
 
     jne elseCondLabel64
 
-    mov -24(%ebp) , %eax 
-    mov -144(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-148(%ebp) 
+    movl -24(%ebp) , %eax 
+    movl -144(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-148(%ebp) 
 
-    mov -148(%ebp),-24(%ebp)
+    movl -148(%ebp),-24(%ebp)
 
     jmp endIfLabel65
 
 .elseCondLabel64:
 
-    mov -152(%ebp) , %eax 
-    mov -156(%ebp) , %ecx 
+    movl -152(%ebp) , %eax 
+    movl -156(%ebp) , %ecx 
 	 cltd
 +    idiv %ecx
-    mov %ecx,-160(%ebp) 
+    movl %ecx,-160(%ebp) 
 
-    mov -24(%ebp) , %eax 
-    mov -160(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-164(%ebp) 
+    movl -24(%ebp) , %eax 
+    movl -160(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-164(%ebp) 
 
-    mov -164(%ebp),-24(%ebp)
+    movl -164(%ebp),-24(%ebp)
 
 .endIfLabel65:
 
-    mov $1,-36(%ebp)
+    movl $1,-36(%ebp)
 
     jmp BeginWhileLabel60
 
@@ -6550,20 +6592,20 @@ multiples:
     movl	-4(%ebp), %eax
     cmpl	-172(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -176(%ebp)
 
     movl	-180(%ebp), %eax
     cmpl	-184(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -188(%ebp)
 
-    cmp	$0, -176(%ebp)
+    cmpl	$0, -176(%ebp)
     je .L6
-    cmp	$0, -188(%ebp)
+    cmpl	$0, -188(%ebp)
     je .L6
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L7
 .L6:
     movl	$0, %eax
@@ -6572,52 +6614,52 @@ multiples:
     movl	%eax, -192(%ebp)
 .L8:
 
-    mov $ 1, %eax
-    cmp -192(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -192(%ebp), %eax
 
     jne elseCondLabel79
 
-    mov -200(%ebp) , %eax 
-    mov -24(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-204(%ebp) 
+    movl -200(%ebp) , %eax 
+    movl -24(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-204(%ebp) 
 
-    mov -196(%ebp) , %eax 
-    mov -204(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-208(%ebp) 
+    movl -196(%ebp) , %eax 
+    movl -204(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-208(%ebp) 
 
-    mov -208(%ebp) , %eax 
-    mov -212(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-216(%ebp) 
+    movl -208(%ebp) , %eax 
+    movl -212(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-216(%ebp) 
 
-    mov -216(%ebp),-24(%ebp)
+    movl -216(%ebp),-24(%ebp)
 
     jmp endIfLabel80
 
 .elseCondLabel79:
 
-    mov -220(%ebp) , %eax 
-    mov -24(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-224(%ebp) 
+    movl -220(%ebp) , %eax 
+    movl -24(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-224(%ebp) 
 
-    mov -224(%ebp) , %eax 
-    mov -228(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-232(%ebp) 
+    movl -224(%ebp) , %eax 
+    movl -228(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-232(%ebp) 
 
-    mov -232(%ebp),-24(%ebp)
+    movl -232(%ebp),-24(%ebp)
 
 .endIfLabel80:
 
-    mov -32(%ebp) , %eax 
-    mov -236(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-240(%ebp) 
+    movl -32(%ebp) , %eax 
+    movl -236(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-240(%ebp) 
 
-    mov -240(%ebp),-32(%ebp)
+    movl -240(%ebp),-32(%ebp)
 
     jmp BeginWhileLabel55
 
@@ -6627,40 +6669,40 @@ multiples:
     negl	%eax 
     movl	%eax, -248(%ebp) 
 
-    mov -24(%ebp) , %eax 
-    mov -248(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-252(%ebp) 
+    movl -24(%ebp) , %eax 
+    movl -248(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-252(%ebp) 
 
-    mov -256(%ebp) , %eax 
-    mov 1(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-260(%ebp) 
+    movl -256(%ebp) , %eax 
+    movl 1(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-260(%ebp) 
 
-    mov -252(%ebp) , %eax 
-    mov -260(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-264(%ebp) 
+    movl -252(%ebp) , %eax 
+    movl -260(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-264(%ebp) 
 
-    mov -268(%ebp) , %eax 
-    mov -272(%ebp) , %ecx 
+    movl -268(%ebp) , %eax 
+    movl -272(%ebp) , %ecx 
 	 cltd
 +    idiv %ecx
-    mov %ecx,-276(%ebp) 
+    movl %ecx,-276(%ebp) 
 
-    mov -264(%ebp) , %eax 
-    mov -276(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-280(%ebp) 
+    movl -264(%ebp) , %eax 
+    movl -276(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-280(%ebp) 
 
-    mov -280(%ebp),-24(%ebp)
+    movl -280(%ebp),-24(%ebp)
 
-    mov -28(%ebp) , %eax 
-    mov -284(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-288(%ebp) 
+    movl -28(%ebp) , %eax 
+    movl -284(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-288(%ebp) 
 
-    mov -288(%ebp),-28(%ebp)
+    movl -288(%ebp),-28(%ebp)
 
     jmp BeginWhileLabel52
 
@@ -6672,7 +6714,7 @@ multiples:
     negl	%eax 
     movl	%eax, -292(%ebp) 
 
-    mov -292(%ebp), %eax
+    movl -292(%ebp), %eax
 
     leave
     ret
@@ -6683,35 +6725,35 @@ multiples:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $80.0,-8(%ebp)
+    movl $80.0,-8(%ebp)
 
     movl	-16(%ebp), %eax 
     negl	%eax 
     movl	%eax, -20(%ebp) 
 
-    mov -20(%ebp),-24(%ebp)
+    movl -20(%ebp),-24(%ebp)
 
-    mov $4.3,-16(%ebp)
+    movl $4.3,-16(%ebp)
 
     movl	-28(%ebp), %eax 
     negl	%eax 
     movl	%eax, -32(%ebp) 
 
-    mov -32(%ebp),-20(%ebp)
+    movl -32(%ebp),-20(%ebp)
 
     movl $2 , 12(%esp)
 
     call potencia
 
-    mov $MethodCallExpr{name=potencia, args=[0.0, 2]},-4(%ebp)
+    movl $MethodCallExpr{name=potencia, args=[0.0, 2]},-4(%ebp)
 
-    mov -4(%ebp) , %eax 
-    mov -44(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-48(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -44(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-48(%ebp) 
 
 
     call multiples
@@ -7039,23 +7081,23 @@ finalizado.
     .type	potencia, @function 
 potencia: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $false,-8(%ebp)
+    movl $false,-8(%ebp)
 
-    mov $1,-4(%ebp)
+    movl $1,-4(%ebp)
 
-    mov $1.0,-12(%ebp)
+    movl $1.0,-12(%ebp)
 
     movl	1(%ebp), %eax
     cmpl	-28(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -32(%ebp)
 
-    mov $ 1, %eax
-    cmp -32(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -32(%ebp), %eax
 
     jne elseCondLabel6
 
@@ -7063,9 +7105,9 @@ potencia:
     negl	%eax 
     movl	%eax, -36(%ebp) 
 
-    mov -36(%ebp),1(%ebp)
+    movl -36(%ebp),1(%ebp)
 
-    mov $true,-8(%ebp)
+    movl $true,-8(%ebp)
 
     jmp endIfLabel7
 
@@ -7076,20 +7118,20 @@ potencia:
     movl	-4(%ebp), %eax
     cmpl	1(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -44(%ebp)
 
     movl	-4(%ebp), %eax
     cmpl	1(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -48(%ebp)
 
-    cmp	$0, -44(%ebp)
+    cmpl	$0, -44(%ebp)
     jne .L0
-    cmp	$0, -48(%ebp)
+    cmpl	$0, -48(%ebp)
     je .L0
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L1
 .L0:
     movl	$0, %eax
@@ -7100,62 +7142,62 @@ potencia:
 
 .BeginWhileLabel13:
 
-    mov $ 1, %eax
-    cmp -52(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -52(%ebp), %eax
 
     jne EndWhileLabel14
 
-    mov -12(%ebp) , %eax 
-    mov -56(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-60(%ebp) 
+    movl -12(%ebp) , %eax 
+    movl -56(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-60(%ebp) 
 
-    mov -60(%ebp) , %eax 
-    mov -64(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-68(%ebp) 
+    movl -60(%ebp) , %eax 
+    movl -64(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-68(%ebp) 
 
-    mov -68(%ebp),-12(%ebp)
+    movl -68(%ebp),-12(%ebp)
 
-    mov -4(%ebp) , %eax 
-    mov -72(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-76(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -72(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-76(%ebp) 
 
-    mov -76(%ebp),-4(%ebp)
+    movl -76(%ebp),-4(%ebp)
 
     jmp BeginWhileLabel13
 
 .EndWhileLabel14:
 
-    cmp $0, -8(%ebp) 
+    cmpl $0, -8(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -80(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -80(%ebp) 
 
-    cmp $0, -80(%ebp) 
+    cmpl $0, -80(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -84(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -84(%ebp) 
 
-    mov $ 1, %eax
-    cmp -84(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -84(%ebp), %eax
 
     jne elseCondLabel23
 
-    mov -88(%ebp) , %eax 
-    mov -12(%ebp) , %ecx 
+    movl -88(%ebp) , %eax 
+    movl -12(%ebp) , %ecx 
 	 cltd
 +    idiv %ecx
-    mov %ecx,-92(%ebp) 
+    movl %ecx,-92(%ebp) 
 
-    mov -92(%ebp), %eax
+    movl -92(%ebp), %eax
 
     jmp endIfLabel24
 
 .elseCondLabel23:
 
-    mov -12(%ebp), %eax
+    movl -12(%ebp), %eax
 
 .endIfLabel24:
 
@@ -7163,7 +7205,7 @@ potencia:
     negl	%eax 
     movl	%eax, -100(%ebp) 
 
-    mov -100(%ebp), %eax
+    movl -100(%ebp), %eax
 
     leave
     ret
@@ -7175,37 +7217,37 @@ potencia:
     .type	multRepeat, @function 
 multRepeat: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov 1(%ebp) , %eax 
-    mov 1(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-8(%ebp) 
+    movl 1(%ebp) , %eax 
+    movl 1(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-8(%ebp) 
 
-    mov -8(%ebp) , %eax 
-    mov -12(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-16(%ebp) 
+    movl -8(%ebp) , %eax 
+    movl -12(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-16(%ebp) 
 
-    mov -16(%ebp) , %eax 
-    mov -20(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-24(%ebp) 
+    movl -16(%ebp) , %eax 
+    movl -20(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-24(%ebp) 
 
-    mov -24(%ebp) , %eax 
-    mov -28(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-32(%ebp) 
+    movl -24(%ebp) , %eax 
+    movl -28(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-32(%ebp) 
 
-    mov -32(%ebp) , %eax 
-    mov 1(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-36(%ebp) 
+    movl -32(%ebp) , %eax 
+    movl 1(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-36(%ebp) 
 
-    mov -36(%ebp),-4(%ebp)
+    movl -36(%ebp),-4(%ebp)
 
-    mov -4(%ebp), %eax
+    movl -4(%ebp), %eax
 
     leave
     ret
@@ -7216,30 +7258,30 @@ multRepeat:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl	-12(%ebp), %eax 
     negl	%eax 
     movl	%eax, -16(%ebp) 
 
-    mov -16(%ebp),-12(%ebp)
+    movl -16(%ebp),-12(%ebp)
 
-    mov $4.3,-4(%ebp)
+    movl $4.3,-4(%ebp)
 
     movl	-24(%ebp), %eax 
     negl	%eax 
     movl	%eax, -28(%ebp) 
 
-    mov -28(%ebp),-8(%ebp)
+    movl -28(%ebp),-8(%ebp)
 
-    mov $80.0,-8(%ebp)
+    movl $80.0,-8(%ebp)
 
     movl $2 , 12(%esp)
 
     call potencia
 
-    mov $MethodCallExpr{name=potencia, args=[0.0, 2]},-4(%ebp)
+    movl $MethodCallExpr{name=potencia, args=[0.0, 2]},-4(%ebp)
 
 
     call multRepeat
@@ -7257,7 +7299,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 29
+tamaño lista de codigo tercetos: 31
 lista: 
 {LABEL, null, null, Result: BeginMethod div}
 
@@ -7286,11 +7328,13 @@ lista:
 {ASSIGN(=), VarLocation{name=factorLabel10, type=float, expr=3.5698, size=0}, null, Result: VarLocation{name=z, type=float, expr=null, size=0}}
 {PARAM, null, null, Result: [0.0, 0.0]}
 {METHODCALL, resta, 2, Result: RESULTLabel11}
+{ASSIGN(=), VarLocation{name=factorLabel12, type=float, expr=MethodCallExpr{name=resta, args=[0.0, 0.0]}, size=0}, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
 {PARAM, null, null, Result: [0.0, 0.0]}
 {METHODCALL, div, 2, Result: RESULTLabel13}
-{PARAM, null, null, Result: [MethodCallExpr{name=resta, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}
+{ASSIGN(=), VarLocation{name=factorLabel14, type=float, expr=MethodCallExpr{name=div, args=[0.0, 0.0]}, size=0}, null, Result: VarLocation{name=b, type=float, expr=null, size=0}}
+{PARAM, null, null, Result: [0.0, 0.0]}
 {METHODCALL, sum, 2, Result: RESULTLabel15}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandofuncionesflotantes"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=resta, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}]}, null, Result: EXTERNINVKLabel17}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandofuncionesflotantes"}, MethodCallExpr{name=sum, args=[0.0, 0.0]}]}, null, Result: EXTERNINVKLabel17}
 {LABEL, null, null, Result: EndMethod main}
 
 procesando : . . . {LABEL, null, null, Result: BeginMethod div}
@@ -7372,6 +7416,10 @@ finalizado.
 procesando : . . . {METHODCALL, resta, 2, Result: RESULTLabel11}
 finalizado.
 
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel12, type=float, expr=MethodCallExpr{name=resta, args=[0.0, 0.0]}, size=0}, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
+ASSIGN CASO FACTOR VarLocation{name=factorLabel12, type=float, expr=MethodCallExpr{name=resta, args=[0.0, 0.0]}, size=0}
+finalizado.
+
 procesando : . . . {PARAM, null, null, Result: [0.0, 0.0]}
 index: 1 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
@@ -7382,17 +7430,21 @@ finalizado.
 procesando : . . . {METHODCALL, div, 2, Result: RESULTLabel13}
 finalizado.
 
-procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=resta, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel14, type=float, expr=MethodCallExpr{name=div, args=[0.0, 0.0]}, size=0}, null, Result: VarLocation{name=b, type=float, expr=null, size=0}}
+ASSIGN CASO FACTOR VarLocation{name=factorLabel14, type=float, expr=MethodCallExpr{name=div, args=[0.0, 0.0]}, size=0}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [0.0, 0.0]}
 index: 1 tamaño: 2
-{PARAM} CASO METHODCALL PENDIENTE
+{PARAM} CASO FLAOTLITERAL PENDIENTE
 index: 0 tamaño: 2
-{PARAM} CASO METHODCALL PENDIENTE
+{PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
 procesando : . . . {METHODCALL, sum, 2, Result: RESULTLabel15}
 finalizado.
 
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandofuncionesflotantes"}, MethodCallExpr{name=sum, args=[MethodCallExpr{name=resta, args=[0.0, 0.0]}, MethodCallExpr{name=div, args=[0.0, 0.0]}]}]}, null, Result: EXTERNINVKLabel17}
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandofuncionesflotantes"}, MethodCallExpr{name=sum, args=[0.0, 0.0]}]}, null, Result: EXTERNINVKLabel17}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -7405,16 +7457,16 @@ finalizado.
     .type	div, @function 
 div: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov -4(%ebp) , %eax 
-    mov 1(%ebp) , %ecx 
+    movl -4(%ebp) , %eax 
+    movl 1(%ebp) , %ecx 
 	 cltd
 +    idiv %ecx
-    mov %ecx,-8(%ebp) 
+    movl %ecx,-8(%ebp) 
 
-    mov -8(%ebp), %eax
+    movl -8(%ebp), %eax
 
     leave
     ret
@@ -7426,15 +7478,15 @@ div:
     .type	resta, @function 
 resta: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov -4(%ebp) , %eax 
-    mov 1(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-8(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl 1(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-8(%ebp) 
 
-    mov -8(%ebp), %eax
+    movl -8(%ebp), %eax
 
     leave
     ret
@@ -7446,15 +7498,15 @@ resta:
     .type	sum, @function 
 sum: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov -4(%ebp) , %eax 
-    mov 1(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-8(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl 1(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-8(%ebp) 
 
-    mov -8(%ebp), %eax
+    movl -8(%ebp), %eax
 
     leave
     ret
@@ -7465,24 +7517,28 @@ sum:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $6.982,-4(%ebp)
+    movl $6.982,-12(%ebp)
 
-    movl	-20(%ebp), %eax 
+    movl	-28(%ebp), %eax 
     negl	%eax 
-    movl	%eax, -24(%ebp) 
+    movl	%eax, -32(%ebp) 
 
-    mov -24(%ebp),-8(%ebp)
+    movl -32(%ebp),-16(%ebp)
 
-    mov $3.5698,-12(%ebp)
+    movl $3.5698,-20(%ebp)
 
 
     call resta
 
+    movl $MethodCallExpr{name=resta, args=[0.0, 0.0]},-4(%ebp)
+
 
     call div
+
+    movl $MethodCallExpr{name=div, args=[0.0, 0.0]},-8(%ebp)
 
 
     call sum
@@ -7510,7 +7566,7 @@ lista:
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0, offset=0}, Simbolo{type=int, name=c, value=null, size=0, offset=0}]}, null, Result: null}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
 {ARRAYACCESS, A, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: ArrayAccessLabel4}
-{RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, size=5}, size=0}}
+{RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
 {MULTIPLY(*), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel7, type=int, expr=10, size=0}, Result: VarLocation{name=MULTIPLYLabel8, type=int, expr=0*10, size=0}}
 {LABEL, null, null, Result: BeginForLabel9}
 {CMP, VarLocation{name=factorLabel6, type=int, expr=5, size=0}, VarLocation{name=MULTIPLYLabel8, type=int, expr=0*10, size=0}, Result: null}
@@ -7557,7 +7613,9 @@ finalizado.
 procesando : . . . {ARRAYACCESS, A, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: ArrayAccessLabel4}
 finalizado.
 
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, size=5}, size=0}}
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
+buscado: A
+actual VarLocation{name=A, type=int[], expr=null, size=5}
 finalizado.
 
 procesando : . . . {MULTIPLY(*), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel7, type=int, expr=10, size=0}, Result: VarLocation{name=MULTIPLYLabel8, type=int, expr=0*10, size=0}}
@@ -7631,37 +7689,37 @@ finalizado.
     .type	pruArreglos, @function 
 pruArreglos: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
 
 ARRAYACCESS
 
-    mov $ArrayLiteral{id=A, size=5}, %eax
+ ArrayLiteral   movl -24(%ebp), %eax
 
-    mov -4(%ebp) , %eax 
-    mov -28(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-32(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -28(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-32(%ebp) 
 
 .BeginForLabel9:
 
-    mov -32(%ebp), %eax
-    cmp -24(%ebp), %eax
+    movl -32(%ebp), %eax
+    cmpl -24(%ebp), %eax
 
     jnl EndForLabel10
 
-    mov -4(%ebp) , %eax 
-    mov -36(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-40(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -36(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-40(%ebp) 
 
-    mov $2, %eax
+    movl $2, %eax
 
-    mov -24(%ebp) , %eax 
-    mov $1, %edx 
-    add %eax, %edx 
-    mov %edx,-24(%ebp) 
+    movl -24(%ebp) , %eax 
+    movl $1, %edx 
+    addl %eax, %edx 
+    movl %edx,-24(%ebp) 
 
     jmp BeginForLabel9
 
@@ -7676,8 +7734,8 @@ ARRAYACCESS
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $8 , 12(%esp)
     movl $4 , 8(%esp)
@@ -7686,7 +7744,7 @@ main:
 
     call printf
 
-    mov $1, %eax
+    movl $1, %eax
 
     leave
     ret
@@ -7709,7 +7767,7 @@ lista:
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0, offset=0}, Simbolo{type=int, name=c, value=null, size=0, offset=0}]}, null, Result: null}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
 {ARRAYACCESS, A, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: ArrayAccessLabel4}
-{RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, size=5}, size=0}}
+{RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
 {LABEL, null, null, Result: BeginForLabel8}
 {CMP, VarLocation{name=factorLabel6, type=int, expr=5, size=0}, VarLocation{name=factorLabel7, type=int, expr=10, size=0}, Result: null}
 {JNL, null, null, Result: EndForLabel9}
@@ -7755,7 +7813,9 @@ finalizado.
 procesando : . . . {ARRAYACCESS, A, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: ArrayAccessLabel4}
 finalizado.
 
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, size=5}, size=0}}
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
+buscado: A
+actual VarLocation{name=A, type=int[], expr=null, size=5}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: BeginForLabel8}
@@ -7826,32 +7886,32 @@ finalizado.
     .type	pruArreglos, @function 
 pruArreglos: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
 
 ARRAYACCESS
 
-    mov $ArrayLiteral{id=A, size=5}, %eax
+ ArrayLiteral   movl -24(%ebp), %eax
 
 .BeginForLabel8:
 
-    mov -28(%ebp), %eax
-    cmp -24(%ebp), %eax
+    movl -28(%ebp), %eax
+    cmpl -24(%ebp), %eax
 
     jnl EndForLabel9
 
-    mov -4(%ebp) , %eax 
-    mov -32(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-36(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -32(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-36(%ebp) 
 
-    mov $2, %eax
+    movl $2, %eax
 
-    mov -24(%ebp) , %eax 
-    mov $1, %edx 
-    add %eax, %edx 
-    mov %edx,-24(%ebp) 
+    movl -24(%ebp) , %eax 
+    movl $1, %edx 
+    addl %eax, %edx 
+    movl %edx,-24(%ebp) 
 
     jmp BeginForLabel8
 
@@ -7866,8 +7926,8 @@ ARRAYACCESS
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $8 , 12(%esp)
     movl $4 , 8(%esp)
@@ -7876,7 +7936,7 @@ main:
 
     call printf
 
-    mov $1, %eax
+    movl $1, %eax
 
     leave
     ret
@@ -7899,7 +7959,7 @@ lista:
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0, offset=0}, Simbolo{type=int, name=c, value=null, size=0, offset=0}]}, null, Result: null}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
 {ARRAYACCESS, A, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: ArrayAccessLabel4}
-{RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, size=5}, size=0}}
+{RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
 {UNARYMINUS(-expr), VarLocation{name=factorLabel7, type=int, expr=10, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel8, type=int, expr=-10, size=0}}
 {LABEL, null, null, Result: BeginForLabel9}
 {CMP, VarLocation{name=factorLabel6, type=int, expr=5, size=0}, VarLocation{name=UNARYMINUSLabel8, type=int, expr=-10, size=0}, Result: null}
@@ -7946,7 +8006,9 @@ finalizado.
 procesando : . . . {ARRAYACCESS, A, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: ArrayAccessLabel4}
 finalizado.
 
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, size=5}, size=0}}
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
+buscado: A
+actual VarLocation{name=A, type=int[], expr=null, size=5}
 finalizado.
 
 procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel7, type=int, expr=10, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel8, type=int, expr=-10, size=0}}
@@ -8020,13 +8082,13 @@ finalizado.
     .type	pruArreglos, @function 
 pruArreglos: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
 
 ARRAYACCESS
 
-    mov $ArrayLiteral{id=A, size=5}, %eax
+ ArrayLiteral   movl -24(%ebp), %eax
 
     movl	-28(%ebp), %eax 
     negl	%eax 
@@ -8034,22 +8096,22 @@ ARRAYACCESS
 
 .BeginForLabel9:
 
-    mov -32(%ebp), %eax
-    cmp -24(%ebp), %eax
+    movl -32(%ebp), %eax
+    cmpl -24(%ebp), %eax
 
     jnl EndForLabel10
 
-    mov -4(%ebp) , %eax 
-    mov -36(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-40(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -36(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-40(%ebp) 
 
-    mov $2, %eax
+    movl $2, %eax
 
-    mov -24(%ebp) , %eax 
-    mov $1, %edx 
-    add %eax, %edx 
-    mov %edx,-24(%ebp) 
+    movl -24(%ebp) , %eax 
+    movl $1, %edx 
+    addl %eax, %edx 
+    movl %edx,-24(%ebp) 
 
     jmp BeginForLabel9
 
@@ -8064,8 +8126,8 @@ ARRAYACCESS
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $8 , 12(%esp)
     movl $4 , 8(%esp)
@@ -8074,7 +8136,7 @@ main:
 
     call printf
 
-    mov $1, %eax
+    movl $1, %eax
 
     leave
     ret
@@ -8097,7 +8159,7 @@ lista:
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0, offset=0}, Simbolo{type=int, name=c, value=null, size=0, offset=0}]}, null, Result: null}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
 {ARRAYACCESS, A, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: ArrayAccessLabel4}
-{RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, size=5}, size=0}}
+{RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
 {UNARYMINUS(-expr), VarLocation{name=factorLabel7, type=int, expr=10, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel8, type=int, expr=-10, size=0}}
 {MULTIPLY(*), VarLocation{name=factorLabel9, type=int, expr=11, size=0}, VarLocation{name=factorLabel10, type=int, expr=2, size=0}, Result: VarLocation{name=MULTIPLYLabel11, type=int, expr=11*2, size=0}}
 {PLUS(+), VarLocation{name=UNARYMINUSLabel8, type=int, expr=-10, size=0}, VarLocation{name=MULTIPLYLabel11, type=int, expr=11*2, size=0}, Result: VarLocation{name=PLUSLabel12, type=int, expr=-10+11*2, size=0}}
@@ -8146,7 +8208,9 @@ finalizado.
 procesando : . . . {ARRAYACCESS, A, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: ArrayAccessLabel4}
 finalizado.
 
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, size=5}, size=0}}
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
+buscado: A
+actual VarLocation{name=A, type=int[], expr=null, size=5}
 finalizado.
 
 procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel7, type=int, expr=10, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel8, type=int, expr=-10, size=0}}
@@ -8226,46 +8290,46 @@ finalizado.
     .type	pruArreglos, @function 
 pruArreglos: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
 
 ARRAYACCESS
 
-    mov $ArrayLiteral{id=A, size=5}, %eax
+ ArrayLiteral   movl -24(%ebp), %eax
 
     movl	-28(%ebp), %eax 
     negl	%eax 
     movl	%eax, -32(%ebp) 
 
-    mov -36(%ebp) , %eax 
-    mov -40(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-44(%ebp) 
+    movl -36(%ebp) , %eax 
+    movl -40(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-44(%ebp) 
 
-    mov -32(%ebp) , %eax 
-    mov -44(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-48(%ebp) 
+    movl -32(%ebp) , %eax 
+    movl -44(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-48(%ebp) 
 
 .BeginForLabel13:
 
-    mov -48(%ebp), %eax
-    cmp -24(%ebp), %eax
+    movl -48(%ebp), %eax
+    cmpl -24(%ebp), %eax
 
     jnl EndForLabel14
 
-    mov -4(%ebp) , %eax 
-    mov -52(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-56(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -52(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-56(%ebp) 
 
-    mov $2, %eax
+    movl $2, %eax
 
-    mov -24(%ebp) , %eax 
-    mov $1, %edx 
-    add %eax, %edx 
-    mov %edx,-24(%ebp) 
+    movl -24(%ebp) , %eax 
+    movl $1, %edx 
+    addl %eax, %edx 
+    movl %edx,-24(%ebp) 
 
     jmp BeginForLabel13
 
@@ -8280,8 +8344,8 @@ ARRAYACCESS
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $8 , 12(%esp)
     movl $4 , 8(%esp)
@@ -8290,7 +8354,7 @@ main:
 
     call printf
 
-    mov $1, %eax
+    movl $1, %eax
 
     leave
     ret
@@ -8318,7 +8382,7 @@ lista:
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0, offset=0}, Simbolo{type=int, name=c, value=null, size=0, offset=0}]}, null, Result: null}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
 {ARRAYACCESS, A, VarLocation{name=factorLabel4, type=int, expr=1, size=0}, Result: ArrayAccessLabel5}
-{RETURN, null, null, Result: VarLocation{name=factorLabel6, type=int[], expr=ArrayLiteral{id=A, size=5}, size=0}}
+{RETURN, null, null, Result: VarLocation{name=factorLabel6, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
 {METHODCALL, par, 0, Result: RESULTLabel7}
 {METHODCALL, par, 0, Result: RESULTLabel9}
 {PLUS(+), VarLocation{name=factorLabel10, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, VarLocation{name=factorLabel11, type=int, expr=5, size=0}, Result: VarLocation{name=PLUSLabel12, type=int, expr=MethodCallExpr{name=par, args=[]}+5, size=0}}
@@ -8380,7 +8444,9 @@ finalizado.
 procesando : . . . {ARRAYACCESS, A, VarLocation{name=factorLabel4, type=int, expr=1, size=0}, Result: ArrayAccessLabel5}
 finalizado.
 
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel6, type=int[], expr=ArrayLiteral{id=A, size=5}, size=0}}
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel6, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
+buscado: A
+actual VarLocation{name=A, type=int[], expr=null, size=5}
 finalizado.
 
 procesando : . . . {METHODCALL, par, 0, Result: RESULTLabel7}
@@ -8459,10 +8525,10 @@ finalizado.
     .globl	par
     .type	par, @function 
 par: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $15, %eax
+    movl $15, %eax
 
     leave
     ret
@@ -8474,41 +8540,41 @@ par:
     .type	pruArreglos, @function 
 pruArreglos: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
 
 ARRAYACCESS
 
-    mov $ArrayLiteral{id=A, size=5}, %eax
+ ArrayLiteral   movl -24(%ebp), %eax
 
     call par
 
     call par
 
-    mov -28(%ebp) , %eax 
-    mov -32(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-36(%ebp) 
+    movl -28(%ebp) , %eax 
+    movl -32(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-36(%ebp) 
 
 .BeginForLabel13:
 
-    mov -36(%ebp), %eax
-    cmp -24(%ebp), %eax
+    movl -36(%ebp), %eax
+    cmpl -24(%ebp), %eax
 
     jnl EndForLabel14
 
-    mov -4(%ebp) , %eax 
-    mov -40(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-44(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -40(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-44(%ebp) 
 
-    mov $2, %eax
+    movl $2, %eax
 
-    mov -24(%ebp) , %eax 
-    mov $1, %edx 
-    add %eax, %edx 
-    mov %edx,-24(%ebp) 
+    movl -24(%ebp) , %eax 
+    movl $1, %edx 
+    addl %eax, %edx 
+    movl %edx,-24(%ebp) 
 
     jmp BeginForLabel13
 
@@ -8523,8 +8589,8 @@ ARRAYACCESS
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $8 , 12(%esp)
     movl $4 , 8(%esp)
@@ -8533,7 +8599,7 @@ main:
 
     call printf
 
-    mov $1, %eax
+    movl $1, %eax
 
     leave
     ret
@@ -8715,48 +8781,48 @@ finalizado.
     .type	pruAritmetica, @function 
 pruAritmetica: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl	-8(%ebp), %eax
     cmpl	1(%ebp), %eax
     setgne %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -12(%ebp)
 
-    mov $ 1, %eax
-    cmp -12(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -12(%ebp), %eax
 
     jne elseCondLabel3
 
     movl	-16(%ebp), %eax
     cmpl	1(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -20(%ebp)
 
-    mov $ 1, %eax
-    cmp -20(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -20(%ebp), %eax
 
     jne elseCondLabel7
 
-    mov -24(%ebp) , %eax 
-    mov 1(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-28(%ebp) 
+    movl -24(%ebp) , %eax 
+    movl 1(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-28(%ebp) 
 
-    mov -28(%ebp),-4(%ebp)
+    movl -28(%ebp),-4(%ebp)
 
     jmp endIfLabel8
 
 .elseCondLabel7:
 
-    mov 1(%ebp) , %eax 
-    mov -32(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-36(%ebp) 
+    movl 1(%ebp) , %eax 
+    movl -32(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-36(%ebp) 
 
-    mov -36(%ebp),-4(%ebp)
+    movl -36(%ebp),-4(%ebp)
 
 .endIfLabel8:
 
@@ -8764,12 +8830,12 @@ pruAritmetica:
 
 .elseCondLabel3:
 
-    mov -40(%ebp) , %eax 
-    mov -44(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-48(%ebp) 
+    movl -40(%ebp) , %eax 
+    movl -44(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-48(%ebp) 
 
-    mov -48(%ebp),-4(%ebp)
+    movl -48(%ebp),-4(%ebp)
 
 .endIfLabel4:
 
@@ -8782,8 +8848,8 @@ pruAritmetica:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $8 , 12(%esp)
     movl $4 , 8(%esp)
@@ -8988,26 +9054,26 @@ finalizado.
     .type	pruAritmetica, @function 
 pruAritmetica: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl	-8(%ebp), %eax
     cmpl	1(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -12(%ebp)
 
-    mov $ 1, %eax
-    cmp -12(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -12(%ebp), %eax
 
     jne elseCondLabel3
 
-    mov -16(%ebp) , %eax 
-    mov 1(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-20(%ebp) 
+    movl -16(%ebp) , %eax 
+    movl 1(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-20(%ebp) 
 
-    mov -20(%ebp),-4(%ebp)
+    movl -20(%ebp),-4(%ebp)
 
     jmp endIfLabel4
 
@@ -9018,31 +9084,31 @@ pruAritmetica:
     movl	-24(%ebp), %eax
     cmpl	1(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -28(%ebp)
 
-    mov $ 1, %eax
-    cmp -28(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -28(%ebp), %eax
 
     jne elseCondLabel9
 
-    mov -32(%ebp) , %eax 
-    mov -36(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-40(%ebp) 
+    movl -32(%ebp) , %eax 
+    movl -36(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-40(%ebp) 
 
-    mov -40(%ebp),-4(%ebp)
+    movl -40(%ebp),-4(%ebp)
 
     jmp endIfLabel10
 
 .elseCondLabel9:
 
-    mov 1(%ebp) , %eax 
-    mov -44(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-48(%ebp) 
+    movl 1(%ebp) , %eax 
+    movl -44(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-48(%ebp) 
 
-    mov -48(%ebp),-4(%ebp)
+    movl -48(%ebp),-4(%ebp)
 
 .endIfLabel10:
 
@@ -9055,8 +9121,8 @@ pruAritmetica:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $8 , 12(%esp)
     movl $4 , 8(%esp)
@@ -9169,16 +9235,16 @@ finalizado.
     .type	pruebaLogica, @function 
 pruebaLogica: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $true,-4(%ebp)
+    movl $true,-4(%ebp)
 
-    cmp	$0, -12(%ebp)
+    cmpl	$0, -12(%ebp)
     jne .L0
-    cmp	$0, -4(%ebp)
+    cmpl	$0, -4(%ebp)
     je .L0
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L1
 .L0:
     movl	$0, %eax
@@ -9187,16 +9253,16 @@ pruebaLogica:
     movl	%eax, -16(%ebp)
 .L2:
 
-    cmp $0, -20(%ebp) 
+    cmpl $0, -20(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -24(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -24(%ebp) 
 
-    cmp	$0, -16(%ebp)
+    cmpl	$0, -16(%ebp)
     je .L3
-    cmp	$0, -24(%ebp)
+    cmpl	$0, -24(%ebp)
     je .L3
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L4
 .L3:
     movl	$0, %eax
@@ -9205,16 +9271,16 @@ pruebaLogica:
     movl	%eax, -28(%ebp)
 .L5:
 
-    cmp $0, -32(%ebp) 
+    cmpl $0, -32(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -36(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -36(%ebp) 
 
-    cmp	$0, -28(%ebp)
+    cmpl	$0, -28(%ebp)
     je .L6
-    cmp	$0, -36(%ebp)
+    cmpl	$0, -36(%ebp)
     je .L6
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L7
 .L6:
     movl	$0, %eax
@@ -9232,8 +9298,8 @@ pruebaLogica:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $0 , (%esp)
     call pruebaLogica
@@ -9487,26 +9553,26 @@ finalizado.
     .type	promedio, @function 
 promedio: 
     enter   $(12), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl	-4(%ebp), %eax
     cmpl	2(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -8(%ebp)
 
     movl	1(%ebp), %eax
     cmpl	2(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -12(%ebp)
 
-    cmp	$0, -8(%ebp)
+    cmpl	$0, -8(%ebp)
     je .L0
-    cmp	$0, -12(%ebp)
+    cmpl	$0, -12(%ebp)
     je .L0
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L1
 .L0:
     movl	$0, %eax
@@ -9515,23 +9581,23 @@ promedio:
     movl	%eax, -16(%ebp)
 .L2:
 
-    mov $ 1, %eax
-    cmp -16(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -16(%ebp), %eax
 
     jne elseCondLabel5
 
-    mov -20(%ebp) , %eax 
-    mov 1(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-24(%ebp) 
+    movl -20(%ebp) , %eax 
+    movl 1(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-24(%ebp) 
 
-    mov -24(%ebp) , %eax 
-    mov -28(%ebp) , %ecx 
+    movl -24(%ebp) , %eax 
+    movl -28(%ebp) , %ecx 
 	 cltd
 +    idiv %ecx
-    mov %ecx,-32(%ebp) 
+    movl %ecx,-32(%ebp) 
 
-    mov -32(%ebp), %eax
+    movl -32(%ebp), %eax
 
     jmp endIfLabel6
 
@@ -9542,20 +9608,20 @@ promedio:
     movl	-36(%ebp), %eax
     cmpl	1(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -40(%ebp)
 
     movl	2(%ebp), %eax
     cmpl	1(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -44(%ebp)
 
-    cmp	$0, -40(%ebp)
+    cmpl	$0, -40(%ebp)
     je .L3
-    cmp	$0, -44(%ebp)
+    cmpl	$0, -44(%ebp)
     je .L3
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L4
 .L3:
     movl	$0, %eax
@@ -9564,23 +9630,23 @@ promedio:
     movl	%eax, -48(%ebp)
 .L5:
 
-    mov $ 1, %eax
-    cmp -48(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -48(%ebp), %eax
 
     jne elseCondLabel15
 
-    mov -52(%ebp) , %eax 
-    mov 2(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-56(%ebp) 
+    movl -52(%ebp) , %eax 
+    movl 2(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-56(%ebp) 
 
-    mov -56(%ebp) , %eax 
-    mov -60(%ebp) , %ecx 
+    movl -56(%ebp) , %eax 
+    movl -60(%ebp) , %ecx 
 	 cltd
 +    idiv %ecx
-    mov %ecx,-64(%ebp) 
+    movl %ecx,-64(%ebp) 
 
-    mov -64(%ebp), %eax
+    movl -64(%ebp), %eax
 
     jmp endIfLabel16
 
@@ -9591,20 +9657,20 @@ promedio:
     movl	1(%ebp), %eax
     cmpl	-68(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -72(%ebp)
 
     movl	2(%ebp), %eax
     cmpl	-76(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -80(%ebp)
 
-    cmp	$0, -72(%ebp)
+    cmpl	$0, -72(%ebp)
     je .L6
-    cmp	$0, -80(%ebp)
+    cmpl	$0, -80(%ebp)
     je .L6
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L7
 .L6:
     movl	$0, %eax
@@ -9613,23 +9679,23 @@ promedio:
     movl	%eax, -84(%ebp)
 .L8:
 
-    mov $ 1, %eax
-    cmp -84(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -84(%ebp), %eax
 
     jne elseCondLabel26
 
-    mov 2(%ebp) , %eax 
-    mov 1(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-88(%ebp) 
+    movl 2(%ebp) , %eax 
+    movl 1(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-88(%ebp) 
 
-    mov -88(%ebp) , %eax 
-    mov -92(%ebp) , %ecx 
+    movl -88(%ebp) , %eax 
+    movl -92(%ebp) , %ecx 
 	 cltd
 +    idiv %ecx
-    mov %ecx,-96(%ebp) 
+    movl %ecx,-96(%ebp) 
 
-    mov -96(%ebp), %eax
+    movl -96(%ebp), %eax
 
     jmp endIfLabel27
 
@@ -9640,20 +9706,20 @@ promedio:
     movl	-100(%ebp), %eax
     cmpl	1(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -104(%ebp)
 
     movl	-108(%ebp), %eax
     cmpl	2(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -112(%ebp)
 
-    cmp	$0, -104(%ebp)
+    cmpl	$0, -104(%ebp)
     je .L9
-    cmp	$0, -112(%ebp)
+    cmpl	$0, -112(%ebp)
     je .L9
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L10
 .L9:
     movl	$0, %eax
@@ -9665,14 +9731,14 @@ promedio:
     movl	1(%ebp), %eax
     cmpl	2(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -120(%ebp)
 
-    cmp	$0, -116(%ebp)
+    cmpl	$0, -116(%ebp)
     je .L12
-    cmp	$0, -120(%ebp)
+    cmpl	$0, -120(%ebp)
     je .L12
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L13
 .L12:
     movl	$0, %eax
@@ -9681,12 +9747,12 @@ promedio:
     movl	%eax, -124(%ebp)
 .L14:
 
-    mov $ 1, %eax
-    cmp -124(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -124(%ebp), %eax
 
     jne elseCondLabel38
 
-    mov $0.0, %eax
+    movl $0.0, %eax
 
     jmp endIfLabel39
 
@@ -9703,15 +9769,15 @@ promedio:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
 
     call promedio
 
     call printf
 
-    mov $1, %eax
+    movl $1, %eax
 
     leave
     ret
@@ -9780,23 +9846,23 @@ finalizado.
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $true,-4(%ebp)
+    movl $true,-4(%ebp)
 
-    cmp $0, -4(%ebp) 
+    cmpl $0, -4(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -28(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -28(%ebp) 
 
-    mov -28(%ebp),-8(%ebp)
+    movl -28(%ebp),-8(%ebp)
 
-    cmp	$0, -4(%ebp)
+    cmpl	$0, -4(%ebp)
     je .L0
-    cmp	$0, -8(%ebp)
+    cmpl	$0, -8(%ebp)
     je .L0
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L1
 .L0:
     movl	$0, %eax
@@ -9805,16 +9871,16 @@ main:
     movl	%eax, -32(%ebp)
 .L2:
 
-    cmp $0, -8(%ebp) 
+    cmpl $0, -8(%ebp) 
     sete %al 
-    movzbl %al, %eax 
-    mov %eax, -36(%ebp) 
+    movlzbl %al, %eax 
+    movl %eax, -36(%ebp) 
 
-    cmp	$0, -32(%ebp)
+    cmpl	$0, -32(%ebp)
     jne .L3
-    cmp	$0, -36(%ebp)
+    cmpl	$0, -36(%ebp)
     je .L3
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L4
 .L3:
     movl	$0, %eax
@@ -9823,7 +9889,7 @@ main:
     movl	%eax, -40(%ebp)
 .L5:
 
-    mov -40(%ebp),-12(%ebp)
+    movl -40(%ebp),-12(%ebp)
 
     call printf
 
@@ -9985,46 +10051,46 @@ finalizado.
     .type	maxcomdiv, @function 
 maxcomdiv: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl	-16(%ebp), %eax
     cmpl	1(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -20(%ebp)
 
-    mov $ 1, %eax
-    cmp -20(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -20(%ebp), %eax
 
     jne elseCondLabel3
 
-    mov $0,-4(%ebp)
+    movl $0,-4(%ebp)
 
-    mov 1(%ebp),-8(%ebp)
+    movl 1(%ebp),-8(%ebp)
 
     jmp endIfLabel4
 
 .elseCondLabel3:
 
-    mov 1(%ebp),-4(%ebp)
+    movl 1(%ebp),-4(%ebp)
 
-    mov $0,-8(%ebp)
+    movl $0,-8(%ebp)
 
 .endIfLabel4:
 
-    mov $1,-12(%ebp)
+    movl $1,-12(%ebp)
 
     movl	-12(%ebp), %eax
     cmpl	-36(%ebp), %eax
     setgne %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -40(%ebp)
 
 .BeginWhileLabel10:
 
-    mov $ 1, %eax
-    cmp -40(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -40(%ebp), %eax
 
     jne EndWhileLabel11
 
@@ -10033,17 +10099,17 @@ maxcomdiv:
     idivl -4(%ebp)
     movl	%edx, -44(%ebp)
 
-    mov -44(%ebp),-12(%ebp)
+    movl -44(%ebp),-12(%ebp)
 
-    mov -8(%ebp),-4(%ebp)
+    movl -8(%ebp),-4(%ebp)
 
-    mov -12(%ebp),-8(%ebp)
+    movl -12(%ebp),-8(%ebp)
 
     jmp BeginWhileLabel10
 
 .EndWhileLabel11:
 
-    mov -4(%ebp), %eax
+    movl -4(%ebp), %eax
 
     leave
     ret
@@ -10054,8 +10120,8 @@ maxcomdiv:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $9 , 12(%esp)
     movl $6 , 8(%esp)
@@ -10218,15 +10284,15 @@ finalizado.
     .type	alo, @function 
 alo: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov -4(%ebp) , %eax 
-    mov -8(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-12(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -8(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-12(%ebp) 
 
-    mov -12(%ebp),0(%ebp)
+    movl -12(%ebp),0(%ebp)
 
     leave
     ret
@@ -10238,21 +10304,21 @@ alo:
     .type	alo2, @function 
 alo2: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $0 , 8(%esp)
 
     call alo
 
-    mov -8(%ebp) , %eax 
-    mov -12(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-16(%ebp) 
+    movl -8(%ebp) , %eax 
+    movl -12(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-16(%ebp) 
 
-    mov -16(%ebp),0(%ebp)
+    movl -16(%ebp),0(%ebp)
 
-    mov $0, %eax
+    movl $0, %eax
 
     leave
     ret
@@ -10263,28 +10329,28 @@ alo2:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $7,-4(%ebp)
+    movl $7,-4(%ebp)
 
-    mov $8.0,-4(%ebp)
+    movl $8.0,-4(%ebp)
 
     movl $0 , 8(%esp)
 
     call alo2
 
-    mov $MethodCallExpr{name=alo2, args=[0]},-4(%ebp)
+    movl $MethodCallExpr{name=alo2, args=[0]},-4(%ebp)
 
-    mov -20(%ebp) , %eax 
-    mov -4(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-24(%ebp) 
+    movl -20(%ebp) , %eax 
+    movl -4(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-24(%ebp) 
 
     movl $0 , (%esp)
     call alo2
 
-    mov $MethodCallExpr{name=alo2, args=[3*0]},-4(%ebp)
+    movl $MethodCallExpr{name=alo2, args=[3*0]},-4(%ebp)
 
     leave
     ret
@@ -10471,31 +10537,31 @@ finalizado.
     .type	alo, @function 
 alo: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $ 1, %eax
-    cmp -4(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -4(%ebp), %eax
 
     jne elseCondLabel2
 
-    mov 1(%ebp) , %eax 
-    mov -8(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-12(%ebp) 
+    movl 1(%ebp) , %eax 
+    movl -8(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-12(%ebp) 
 
-    mov -12(%ebp),1(%ebp)
+    movl -12(%ebp),1(%ebp)
 
     jmp endIfLabel3
 
 .elseCondLabel2:
 
-    mov 1(%ebp) , %eax 
-    mov -16(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-20(%ebp) 
+    movl 1(%ebp) , %eax 
+    movl -16(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-20(%ebp) 
 
-    mov -20(%ebp),1(%ebp)
+    movl -20(%ebp),1(%ebp)
 
 .endIfLabel3:
 
@@ -10509,8 +10575,8 @@ alo:
     .type	Alo, @function 
 Alo: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     leave
     ret
@@ -10522,21 +10588,21 @@ Alo:
     .type	alo2, @function 
 alo2: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $0 , 12(%esp)
     movl $1 , (%esp)
     call alo
 
-    mov -12(%ebp) , %eax 
-    mov -16(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-20(%ebp) 
+    movl -12(%ebp) , %eax 
+    movl -16(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-20(%ebp) 
 
-    mov -20(%ebp),0(%ebp)
+    movl -20(%ebp),0(%ebp)
 
-    mov $0, %eax
+    movl $0, %eax
 
     leave
     ret
@@ -10547,23 +10613,23 @@ alo2:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $7,-4(%ebp)
+    movl $7,-4(%ebp)
 
-    mov $8.0,-4(%ebp)
+    movl $8.0,-4(%ebp)
 
     movl $0 , 8(%esp)
 
     call alo2
 
-    mov $MethodCallExpr{name=alo2, args=[0]},-4(%ebp)
+    movl $MethodCallExpr{name=alo2, args=[0]},-4(%ebp)
 
-    mov -24(%ebp) , %eax 
-    mov -4(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-28(%ebp) 
+    movl -24(%ebp) , %eax 
+    movl -4(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-28(%ebp) 
 
     movl $0 , 0(%esp)    movl $0 , (%esp)
     call alo
@@ -10579,7 +10645,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 30
+tamaño lista de codigo tercetos: 31
 lista: 
 {null, boolean, res, Result: 0}
 {LABEL, null, null, Result: BeginMethod inc}
@@ -10609,10 +10675,11 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), VarLocation{name=factorLabel17, type=boolean, expr=false, size=0}, null, Result: VarLocation{name=res, type=boolean, expr=null, size=0}}
 {PARAM, null, null, Result: [5]}
-{METHODCALL, inc, 1, Result: RESULTLabel20}
-{PARAM, null, null, Result: [MethodCallExpr{name=inc, args=[5]}, 10.2]}
+{METHODCALL, inc, 1, Result: RESULTLabel19}
+{ASSIGN(=), VarLocation{name=factorLabel20, type=int, expr=MethodCallExpr{name=inc, args=[5]}, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{PARAM, null, null, Result: [0, 10.2]}
 {METHODCALL, resto, 2, Result: RESULTLabel23}
-{ASSIGN(=), MethodCallExpr{name=resto, args=[MethodCallExpr{name=inc, args=[5]}, 10.2]}, null, Result: VarLocation{name=A, type=int[], expr=0, size=1}}
+{ASSIGN(=), MethodCallExpr{name=resto, args=[0, 10.2]}, null, Result: VarLocation{name=A, type=int[], expr=0, size=1}}
 {LABEL, null, null, Result: EndMethod main}
 
 procesando : . . . {null, boolean, res, Result: 0}
@@ -10697,20 +10764,25 @@ index: 0 tamaño: 1
 Result = 5
 finalizado.
 
-procesando : . . . {METHODCALL, inc, 1, Result: RESULTLabel20}
+procesando : . . . {METHODCALL, inc, 1, Result: RESULTLabel19}
 finalizado.
 
-procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=inc, args=[5]}, 10.2]}
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel20, type=int, expr=MethodCallExpr{name=inc, args=[5]}, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+ASSIGN CASO FACTOR VarLocation{name=factorLabel20, type=int, expr=MethodCallExpr{name=inc, args=[5]}, size=0}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [0, 10.2]}
 index: 1 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 index: 0 tamaño: 2
-{PARAM} CASO METHODCALL PENDIENTE
+
+Result = 0
 finalizado.
 
 procesando : . . . {METHODCALL, resto, 2, Result: RESULTLabel23}
 finalizado.
 
-procesando : . . . {ASSIGN(=), MethodCallExpr{name=resto, args=[MethodCallExpr{name=inc, args=[5]}, 10.2]}, null, Result: VarLocation{name=A, type=int[], expr=0, size=1}}
+procesando : . . . {ASSIGN(=), MethodCallExpr{name=resto, args=[0, 10.2]}, null, Result: VarLocation{name=A, type=int[], expr=0, size=1}}
 {ASSIGN} FALTA CASO class ir.ast.MethodCallExpr
 finalizado.
 
@@ -10726,15 +10798,15 @@ finalizado.
     .type	inc, @function 
 inc: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov -4(%ebp) , %eax 
-    mov -8(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-12(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -8(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-12(%ebp) 
 
-    mov -12(%ebp), %eax
+    movl -12(%ebp), %eax
 
     leave
     ret
@@ -10746,32 +10818,32 @@ inc:
     .type	resto, @function 
 resto: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov -12(%ebp) , %eax 
-    mov -16(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-20(%ebp) 
+    movl -12(%ebp) , %eax 
+    movl -16(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-20(%ebp) 
 
     movl	-8(%ebp), %eax
     cmpl	-20(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -24(%ebp)
 
-    mov $ 1, %eax
-    cmp -24(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -24(%ebp), %eax
 
     jne elseCondLabel9
 
-    mov -28(%ebp) , %eax 
-    mov -32(%ebp) , %ecx 
+    movl -28(%ebp) , %eax 
+    movl -32(%ebp) , %ecx 
 	 cltd
 +    idiv %ecx
-    mov %ecx,-36(%ebp) 
+    movl %ecx,-36(%ebp) 
 
-    mov -36(%ebp),-4(%ebp)
+    movl -36(%ebp),-4(%ebp)
 
     jmp endIfLabel10
 
@@ -10782,11 +10854,11 @@ resto:
     idivl -40(%ebp)
     movl	%edx, -48(%ebp)
 
-    mov -48(%ebp),-4(%ebp)
+    movl -48(%ebp),-4(%ebp)
 
 .endIfLabel10:
 
-    mov -4(%ebp), %eax
+    movl -4(%ebp), %eax
 
     leave
     ret
@@ -10797,15 +10869,18 @@ resto:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $false,-4(%ebp)
+    movl $false,-4(%ebp)
 
     movl $5 , 8(%esp)
 
     call inc
 
+    movl $MethodCallExpr{name=inc, args=[5]},-4(%ebp)
+
+    movl $0 , 8(%esp)
 
     call resto
 
@@ -10993,46 +11068,46 @@ finalizado.
     .type	maxcomdiv, @function 
 maxcomdiv: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl	-16(%ebp), %eax
     cmpl	1(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -20(%ebp)
 
-    mov $ 1, %eax
-    cmp -20(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -20(%ebp), %eax
 
     jne elseCondLabel3
 
-    mov $0,-4(%ebp)
+    movl $0,-4(%ebp)
 
-    mov 1(%ebp),-8(%ebp)
+    movl 1(%ebp),-8(%ebp)
 
     jmp endIfLabel4
 
 .elseCondLabel3:
 
-    mov 1(%ebp),-4(%ebp)
+    movl 1(%ebp),-4(%ebp)
 
-    mov $0,-8(%ebp)
+    movl $0,-8(%ebp)
 
 .endIfLabel4:
 
-    mov $1,-12(%ebp)
+    movl $1,-12(%ebp)
 
     movl	-12(%ebp), %eax
     cmpl	-36(%ebp), %eax
     setgne %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -40(%ebp)
 
 .BeginWhileLabel10:
 
-    mov $ 1, %eax
-    cmp -40(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -40(%ebp), %eax
 
     jne EndWhileLabel11
 
@@ -11041,17 +11116,17 @@ maxcomdiv:
     idivl -4(%ebp)
     movl	%edx, -44(%ebp)
 
-    mov -44(%ebp),-12(%ebp)
+    movl -44(%ebp),-12(%ebp)
 
-    mov -8(%ebp),-4(%ebp)
+    movl -8(%ebp),-4(%ebp)
 
-    mov -12(%ebp),-8(%ebp)
+    movl -12(%ebp),-8(%ebp)
 
     jmp BeginWhileLabel10
 
 .EndWhileLabel11:
 
-    mov -4(%ebp), %eax
+    movl -4(%ebp), %eax
 
     leave
     ret
@@ -11062,31 +11137,31 @@ maxcomdiv:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $10000,-4(%ebp)
+    movl $10000,-4(%ebp)
 
     movl $9 , 12(%esp)
     movl $6 , 8(%esp)
 
     call maxcomdiv
 
-    mov -24(%ebp) , %eax 
-    mov -4(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-28(%ebp) 
+    movl -24(%ebp) , %eax 
+    movl -4(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-28(%ebp) 
 
-    mov -32(%ebp) , %eax 
-    mov -36(%ebp) , %ecx 
+    movl -32(%ebp) , %eax 
+    movl -36(%ebp) , %ecx 
 	 cltd
 +    idiv %ecx
-    mov %ecx,-40(%ebp) 
+    movl %ecx,-40(%ebp) 
 
-    mov -28(%ebp) , %eax 
-    mov -40(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-44(%ebp) 
+    movl -28(%ebp) , %eax 
+    movl -40(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-44(%ebp) 
 
     call printf
 
@@ -11159,17 +11234,17 @@ finalizado.
     .globl	pruAritmetica
     .type	pruAritmetica, @function 
 pruAritmetica: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $90,-4(%ebp)
+    movl $90,-4(%ebp)
 
     movl	-12(%ebp), %eax 
     cltd
     idivl -4(%ebp)
     movl	%edx, -16(%ebp)
 
-    mov -16(%ebp), %eax
+    movl -16(%ebp), %eax
 
     leave
     ret
@@ -11180,8 +11255,8 @@ pruAritmetica:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     call pruAritmetica
 
@@ -11277,29 +11352,29 @@ finalizado.
     .type	pruMult, @function 
 pruMult: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $5,-4(%ebp)
+    movl $5,-4(%ebp)
 
-    mov $2000,-8(%ebp)
+    movl $2000,-8(%ebp)
 
-    mov -4(%ebp) , %eax 
-    mov -20(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-24(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -20(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-24(%ebp) 
 
-    mov -24(%ebp) , %eax 
-    mov -28(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-32(%ebp) 
+    movl -24(%ebp) , %eax 
+    movl -28(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-32(%ebp) 
 
-    mov -32(%ebp) , %eax 
-    mov -8(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-36(%ebp) 
+    movl -32(%ebp) , %eax 
+    movl -8(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-36(%ebp) 
 
-    mov -36(%ebp), %eax
+    movl -36(%ebp), %eax
 
     leave
     ret
@@ -11310,8 +11385,8 @@ pruMult:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $2 , 8(%esp)
 
@@ -11388,17 +11463,17 @@ finalizado.
     .globl	pruMult
     .type	pruMult, @function 
 pruMult: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $5,-4(%ebp)
+    movl $5,-4(%ebp)
 
-    mov -4(%ebp) , %eax 
-    mov -12(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-16(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -12(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-16(%ebp) 
 
-    mov -16(%ebp), %eax
+    movl -16(%ebp), %eax
 
     leave
     ret
@@ -11409,8 +11484,8 @@ pruMult:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     call pruMult
 
@@ -11466,15 +11541,15 @@ finalizado.
     .type	alo, @function 
 alo: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov -4(%ebp) , %eax 
-    mov -8(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-12(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -8(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-12(%ebp) 
 
-    mov -12(%ebp),0(%ebp)
+    movl -12(%ebp),0(%ebp)
 
     leave
     ret
@@ -11784,47 +11859,47 @@ finalizado.
     .type	id, @function 
 id: 
     enter   $(4), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $100,-4(%ebp)
+    movl $100,-4(%ebp)
 
-    mov $0,-8(%ebp)
+    movl $0,-8(%ebp)
 
-    mov $0,-12(%ebp)
+    movl $0,-12(%ebp)
 
     movl	-8(%ebp), %eax
     cmpl	-4(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -28(%ebp)
 
 .BeginWhileLabel5:
 
-    mov $ 1, %eax
-    cmp -28(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -28(%ebp), %eax
 
     jne EndWhileLabel6
 
-    mov $0,-32(%ebp)
+    movl $0,-32(%ebp)
 
     movl	-40(%ebp), %eax
     cmpl	-44(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -48(%ebp)
 
     movl	-52(%ebp), %eax
     cmpl	-56(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -60(%ebp)
 
-    cmp	$0, -48(%ebp)
+    cmpl	$0, -48(%ebp)
     jne .L0
-    cmp	$0, -60(%ebp)
+    cmpl	$0, -60(%ebp)
     je .L0
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L1
 .L0:
     movl	$0, %eax
@@ -11835,39 +11910,39 @@ id:
 
 .BeginWhileLabel15:
 
-    mov $ 1, %eax
-    cmp -64(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -64(%ebp), %eax
 
     jne EndWhileLabel16
 
     movl	-68(%ebp), %eax
     cmpl	-72(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -76(%ebp)
 
-    mov $ 1, %eax
-    cmp -76(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -76(%ebp), %eax
 
     jne elseCondLabel20
 
-    mov -80(%ebp) , %eax 
-    mov -84(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-88(%ebp) 
+    movl -80(%ebp) , %eax 
+    movl -84(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-88(%ebp) 
 
-    mov -88(%ebp),0(%ebp)
+    movl -88(%ebp),0(%ebp)
 
     jmp endIfLabel21
 
 .elseCondLabel20:
 
-    mov -92(%ebp) , %eax 
-    mov -96(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-100(%ebp) 
+    movl -92(%ebp) , %eax 
+    movl -96(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-100(%ebp) 
 
-    mov -100(%ebp),0(%ebp)
+    movl -100(%ebp),0(%ebp)
 
 .endIfLabel21:
 
@@ -11878,20 +11953,20 @@ id:
     movl	-104(%ebp), %eax
     cmpl	-32(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -108(%ebp)
 
     movl	-112(%ebp), %eax
     cmpl	-32(%ebp), %eax
     setg	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -116(%ebp)
 
-    cmp	$0, -108(%ebp)
+    cmpl	$0, -108(%ebp)
     jne .L3
-    cmp	$0, -116(%ebp)
+    cmpl	$0, -116(%ebp)
     je .L3
-    mov	$1, %eax
+    movl	$1, %eax
     jmp .L4
 .L3:
     movl	$0, %eax
@@ -11902,28 +11977,28 @@ id:
 
 .BeginWhileLabel33:
 
-    mov $ 1, %eax
-    cmp -120(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -120(%ebp), %eax
 
     jne EndWhileLabel34
 
     movl	-124(%ebp), %eax
     cmpl	-32(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -128(%ebp)
 
-    mov $ 1, %eax
-    cmp -128(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -128(%ebp), %eax
 
     jne elseCondLabel37
 
-    mov -132(%ebp) , %eax 
-    mov -136(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-140(%ebp) 
+    movl -132(%ebp) , %eax 
+    movl -136(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-140(%ebp) 
 
-    mov -140(%ebp),0(%ebp)
+    movl -140(%ebp),0(%ebp)
 
     jmp endIfLabel38
 
@@ -11932,40 +12007,40 @@ id:
     movl	-144(%ebp), %eax
     cmpl	-148(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -152(%ebp)
 
-    mov $ 1, %eax
-    cmp -152(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -152(%ebp), %eax
 
     jne elseCondLabel45
 
-    mov -156(%ebp) , %eax 
-    mov -160(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-164(%ebp) 
+    movl -156(%ebp) , %eax 
+    movl -160(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-164(%ebp) 
 
-    mov -8(%ebp) , %eax 
-    mov -168(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-172(%ebp) 
+    movl -8(%ebp) , %eax 
+    movl -168(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-172(%ebp) 
 
-    mov -8(%ebp) , %eax 
-    mov -176(%ebp) , %edx 
-    imul %edx, %eax 
-    mov %eax,-180(%ebp) 
+    movl -8(%ebp) , %eax 
+    movl -176(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-180(%ebp) 
 
-    mov -172(%ebp) , %eax 
-    mov -180(%ebp) , %edx 
-    sub %eax, %edx 
-    mov %edx,-184(%ebp) 
+    movl -172(%ebp) , %eax 
+    movl -180(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-184(%ebp) 
 
-    mov -164(%ebp) , %eax 
-    mov -184(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-188(%ebp) 
+    movl -164(%ebp) , %eax 
+    movl -184(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-188(%ebp) 
 
-    mov -188(%ebp),0(%ebp)
+    movl -188(%ebp),0(%ebp)
 
     jmp endIfLabel46
 
@@ -11979,20 +12054,20 @@ id:
 
 .EndWhileLabel34:
 
-    mov -12(%ebp),0(%ebp)
+    movl -12(%ebp),0(%ebp)
 
-    mov -8(%ebp) , %eax 
-    mov -192(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-196(%ebp) 
+    movl -8(%ebp) , %eax 
+    movl -192(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-196(%ebp) 
 
-    mov -196(%ebp),-8(%ebp)
+    movl -196(%ebp),-8(%ebp)
 
     jmp BeginWhileLabel5
 
 .EndWhileLabel6:
 
-    mov $0, %eax
+    movl $0, %eax
 
     leave
     ret
@@ -12003,8 +12078,8 @@ id:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $9 , 8(%esp)
 
@@ -12143,21 +12218,21 @@ finalizado.
     .type	suma, @function 
 suma: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl	-4(%ebp), %eax
     cmpl	-8(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -12(%ebp)
 
-    mov $ 1, %eax
-    cmp -12(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -12(%ebp), %eax
 
     jne elseCondLabel4
 
-    mov 1(%ebp), %eax
+    movl 1(%ebp), %eax
 
     jmp endIfLabel5
 
@@ -12166,26 +12241,26 @@ suma:
     movl	1(%ebp), %eax
     cmpl	-16(%ebp), %eax
     sete %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -20(%ebp)
 
-    mov $ 1, %eax
-    cmp -20(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -20(%ebp), %eax
 
     jne elseCondLabel8
 
-    mov $0, %eax
+    movl $0, %eax
 
     jmp endIfLabel9
 
 .elseCondLabel8:
 
-    mov -28(%ebp) , %eax 
-    mov 1(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-32(%ebp) 
+    movl -28(%ebp) , %eax 
+    movl 1(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-32(%ebp) 
 
-    mov -32(%ebp), %eax
+    movl -32(%ebp), %eax
 
 .endIfLabel9:
 
@@ -12200,8 +12275,8 @@ suma:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $9 , 12(%esp)
     movl $4 , 8(%esp)
@@ -12330,45 +12405,45 @@ finalizado.
     .type	sumx, @function 
 sumx: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $0,-4(%ebp)
+    movl $0,-4(%ebp)
 
-    mov $0,-8(%ebp)
+    movl $0,-8(%ebp)
 
     movl	-8(%ebp), %eax
     cmpl	1(%ebp), %eax
     setl	%al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -20(%ebp)
 
 .BeginWhileLabel4:
 
-    mov $ 1, %eax
-    cmp -20(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -20(%ebp), %eax
 
     jne EndWhileLabel5
 
-    mov -4(%ebp) , %eax 
-    mov -24(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-28(%ebp) 
+    movl -4(%ebp) , %eax 
+    movl -24(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-28(%ebp) 
 
-    mov -28(%ebp),-4(%ebp)
+    movl -28(%ebp),-4(%ebp)
 
-    mov -8(%ebp) , %eax 
-    mov -32(%ebp) , %edx 
-    add %eax, %edx 
-    mov %edx,-36(%ebp) 
+    movl -8(%ebp) , %eax 
+    movl -32(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-36(%ebp) 
 
-    mov -36(%ebp),-8(%ebp)
+    movl -36(%ebp),-8(%ebp)
 
     jmp BeginWhileLabel4
 
 .EndWhileLabel5:
 
-    mov -4(%ebp), %eax
+    movl -4(%ebp), %eax
 
     leave
     ret
@@ -12379,8 +12454,8 @@ sumx:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $2 , 12(%esp)
 
@@ -12556,21 +12631,21 @@ finalizado.
     .type	maxcomdiv, @function 
 maxcomdiv: 
     enter   $(8), $0 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
-    mov $1,-12(%ebp)
+    movl $1,-12(%ebp)
 
     movl	-12(%ebp), %eax
     cmpl	-20(%ebp), %eax
     setgne %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -24(%ebp)
 
 .BeginWhileLabel4:
 
-    mov $ 1, %eax
-    cmp -24(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -24(%ebp), %eax
 
     jne EndWhileLabel5
 
@@ -12579,9 +12654,9 @@ maxcomdiv:
     idivl -4(%ebp)
     movl	%edx, -28(%ebp)
 
-    mov -28(%ebp),-12(%ebp)
+    movl -28(%ebp),-12(%ebp)
 
-    mov -8(%ebp),-4(%ebp)
+    movl -8(%ebp),-4(%ebp)
 
     jmp BeginWhileLabel4
 
@@ -12592,13 +12667,13 @@ maxcomdiv:
     movl	-12(%ebp), %eax
     cmpl	-32(%ebp), %eax
     setgne %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -36(%ebp)
 
 .BeginWhileLabel9:
 
-    mov $ 1, %eax
-    cmp -36(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -36(%ebp), %eax
 
     jne EndWhileLabel10
 
@@ -12611,13 +12686,13 @@ maxcomdiv:
     movl	-12(%ebp), %eax
     cmpl	-40(%ebp), %eax
     setgne %al
-    movzbl %al, %eax
+    movlzbl %al, %eax
     movl	%eax, -44(%ebp)
 
 .BeginWhileLabel13:
 
-    mov $ 1, %eax
-    cmp -44(%ebp), %eax
+    movl $ 1, %eax
+    cmpl -44(%ebp), %eax
 
     jne EndWhileLabel14
 
@@ -12625,7 +12700,7 @@ maxcomdiv:
 
 .EndWhileLabel14:
 
-    mov -4(%ebp), %eax
+    movl -4(%ebp), %eax
 
     leave
     ret
@@ -12636,8 +12711,8 @@ maxcomdiv:
     .globl	main
     .type	main, @function 
 main: 
-    push	%ebp
-    mov %esp, %ebp
+    pushl	%ebp
+    movl %esp, %ebp
 
     movl $9 , 12(%esp)
     movl $6 , 8(%esp)

@@ -15,11 +15,11 @@ import ir.ASTVisitor;
 public class ArrayLiteral extends Literal{
     
     private String id;
-    private int size;
+    private int index;
 
-    public ArrayLiteral(String id, int size, Type t) {
+    public ArrayLiteral(String id, int index, Type t) {
         this.id = id;
-        this.size = size;
+        this.index = index;
         this.type=t;
     }
     
@@ -32,6 +32,14 @@ public class ArrayLiteral extends Literal{
         this.type=t;
     }
 
+    public String getId(){
+        return this.id;
+    }
+
+    public int getIndex(){
+        return this.index;
+    }
+
     @Override
     public <T> T accept(ASTVisitor<T> v) {
         return v.visit(this);
@@ -39,7 +47,7 @@ public class ArrayLiteral extends Literal{
 
     @Override
     public String toString() {
-        return "ArrayLiteral{" + "id=" + id + ", size=" + size + '}';
+        return "ArrayLiteral{" + "id=" + id + ", index=" + index + '}';
     }
     
     

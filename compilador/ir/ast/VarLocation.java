@@ -91,7 +91,7 @@ public class VarLocation extends Location {
             //cambiamos el offset para el proximo
             off = off - 4; 
         }
-   }
+    }
 
 
     //CONSTRUCTOR ALTERNATIVO CON SET DEL OFFSET, para duplicacion solo
@@ -105,6 +105,10 @@ public class VarLocation extends Location {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public int getSize(){
+        return this.size;
     }
     
     
@@ -136,7 +140,7 @@ public class VarLocation extends Location {
     }
 
     //metodo que dado el nombre de una varlocation busca su declaracion
-    private VarLocation search(String id){
+    public VarLocation search(String id){
         System.out.println("buscado: "+id);
         for(VarLocation v : vars){
             System.out.println("actual "+v);
