@@ -162,6 +162,10 @@ public class VarLocation extends Location {
         Stack<Double> valtmp = new Stack<Double>();
         //obtenemos la expression
         String input = expr;
+        //si la expresion pasada contiene una division por cero, retornamos cero
+        if(input.contains("%0")){
+            return 0;
+        }
         input = "0" + input;
         input=input.trim();
         input = input.replaceAll("-","+-");

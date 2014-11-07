@@ -4,7 +4,9 @@ class Program {
     }//d
     void main() {
         int y;
-        y=inc(externinvk("get_int", int));
+        int z;
+        z=externinvk("get_int", int);
+        y=inc(z);
         if(y == 1) {
             externinvk("printf", void, "y==1\n");
         } else {

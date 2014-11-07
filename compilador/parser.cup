@@ -526,7 +526,14 @@
                                                                 ){ //si se realiza una asignacion con tipos identicos de location y expression (no array)
                                                                     AssignStmt a=new AssignStmt((Location)l, AssignOpType.ASSIGN, (Expression) e.getExpr()); 
                                                                     //CODIGO DE TRES DIRECCIONES
-                                                                    TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e, null,(VarLocation)l));
+                                                                    switch(ao){
+                                                                        case ASSIGN:TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e.getExpr(), null,(VarLocation)l));
+                                                                            break;
+                                                                        case INCREMENT:TripletList.addLast(new TripletCode(TripletOperator.INCREMENT,e.getExpr(), null,(VarLocation)l));
+                                                                            break;
+                                                                        case DECREMENT:TripletList.addLast(new TripletCode(TripletOperator.DECREMENT,e.getExpr(), null,(VarLocation)l));
+                                                                            break;
+                                                                    }
                                                                     //FIN CODIGO TRES DIRECCIONES
                                                                     RESULT=a; 
                                                                 }else{

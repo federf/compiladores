@@ -25,6 +25,10 @@ public class AssemblyCodeGenerator{
         Stack<Double> valtmp = new Stack<Double>();
         //obtenemos la expression
         String input = expr;
+        //si la expresion pasada contiene una division por 0 se retorna 0
+        if(input.contains("%0")){
+        	return 0;
+        }
         input = "0" + input;
         input=input.trim();
         input = input.replaceAll("-","+-");
@@ -1149,6 +1153,80 @@ public class AssemblyCodeGenerator{
     		}
     	}
 	}
+
+
+
+	public void ASM_Increment(TripletCode t){
+		VarLocation res=(VarLocation) t.getResult();
+    	//si la expresion es un entero
+    	if(t.getFirstDir() instanceof IntLiteral){
+    		IntLiteral i=(IntLiteral) t.getFirstDir();
+    		int opValue=evaluateExpression(i.getStringValue());
+    		result+="    addl $"+opValue+", "+res.getOffset()+"(%ebp)\n";
+    	}else{//sino
+    		//si es un VarLocation
+    		if(t.getFirstDir() instanceof VarLocation){
+    			VarLocation v=(VarLocation) t.getFirstDir();
+    			result+="    movl "+v.getOffset()+"(%ebp), %eax\n";
+    			result+="    addl %eax, "+res.getOffset()+"(%ebp)\n";
+    		}else{
+    			//si es una operacion Binaria
+    			if(t.getFirstDir() instanceof BinOpExpr){
+    				BinOpExpr bop=(BinOpExpr)t.getFirstDir();
+    				//obtenemos ambos operandos
+    				Expression firstOp=bop.getLeftOperand();
+    				Expression secOp=bop.getRightOperand();
+    				//si ambos son enteros
+    				if(firstOp.getType().equals(Type.INT) && secOp.getType().equals(Type.INT)){
+    					int opValue=evaluateExpression(bop.toString());
+    					result+="    addl $"+opValue+", "+res.getOffset()+"(%ebp)\n";	
+    				}else{
+    					System.out.println("{INCREMENT} FALTA CASO BinOpExpr entre "+firstOp.getType()+" y "+secOp.getType());
+    				}
+    			}else{
+    				System.out.println("{INCREMENT} FALTA CASO "+t.getFirstDir().getClass());	
+    			}
+    			
+    		}
+
+    	}
+	}
+
+	public void ASM_Decrement(TripletCode t){
+		VarLocation res=(VarLocation) t.getResult();
+		//si la expresion es un entero
+		if(t.getFirstDir() instanceof IntLiteral){
+			IntLiteral i=(IntLiteral) t.getFirstDir();
+			int opValue=evaluateExpression(i.getStringValue());
+			result+="    subl $"+opValue+", "+res.getOffset()+"(%ebp)\n";
+		}else{//sino
+			//si es un VarLocation
+			if(t.getFirstDir() instanceof VarLocation){
+				VarLocation v=(VarLocation) t.getFirstDir();
+				result+="    movl "+v.getOffset()+"(%ebp), %eax\n";
+				result+="    subl %eax, "+res.getOffset()+"(%ebp)\n";
+			}else{
+				//si es una operacion Binaria
+    			if(t.getFirstDir() instanceof BinOpExpr){
+    				BinOpExpr bop=(BinOpExpr)t.getFirstDir();
+    				//obtenemos ambos operandos
+    				Expression firstOp=bop.getLeftOperand();
+    				Expression secOp=bop.getRightOperand();
+    				//si ambos son enteros
+    				if(firstOp.getType().equals(Type.INT) && secOp.getType().equals(Type.INT)){
+    					int opValue=evaluateExpression(bop.toString());
+    					result+="    subl $"+opValue+", "+res.getOffset()+"(%ebp)\n";	
+    				}else{
+    					System.out.println("{DECREMENT} FALTA CASO BinOpExpr entre "+firstOp.getType()+" y "+secOp.getType());
+    				}
+    			}else{
+    				System.out.println("{DECREMENT} FALTA CASO "+t.getFirstDir().getClass());	
+    			}
+			}
+
+		}
+	}
+
 	//metodo que dada una lista de codigos de 3 direcciones genera el codigo assembly correspondiente
 	public String generate(LinkedList<TripletCode> list){
 		OrAndlabelInt=0;
@@ -1221,11 +1299,15 @@ public class AssemblyCodeGenerator{
 			        break;
 			    case INCREMENT:
 			    	result+="\n";
-			    	result=result+ "INCREMENT(+=)\n"; 
+
+			    	ASM_Increment(t);
+
 			    	break;
 			    case DECREMENT:
 			    	result+="\n";
-			    	result=result+ "DECREMENT(-=)\n"; 
+					
+					ASM_Decrement(t);
+
 			    	break;
 			    case LABEL:
 			    	result+="\n";
