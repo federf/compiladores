@@ -824,28 +824,50 @@ public class AssemblyCodeGenerator{
 	}
 
 	public void ASM_Assing(TripletCode t){
+		
 		//al tratarse de una asignacion, el tercer parametro siempre sera VarLocation
 		//por lo tanto solo nos fijamos que es el 1er parametro
+		//obtenemos la variable en que se guardara
+		VarLocation res=(VarLocation) t.getResult();
+
 		if(t.getFirstDir() instanceof VarLocation){
 			//obtenemos el valor a asignar
-			VarLocation firstOp=(VarLocation) t.getFirstDir();
-			//obtenemos la variable en que se guardara
-			VarLocation res=(VarLocation) t.getResult();
+			VarLocation firstOp=(VarLocation) t.getFirstDir();	
 			//si se trata de un factor (es un temporal)
 			if(firstOp.getId().contains("factor")){
-				System.out.println("ASSIGN CASO FACTOR "+firstOp);
 				if(firstOp.getExpr() instanceof VarLocation){
 					VarLocation e=(VarLocation) firstOp.getExpr();
 					result=result+"    movl $"+e.getExpr()+","+res.getOffset() +"(%ebp)\n";	
 				}else{
-					result=result+"    movl $"+firstOp.getExpr()+","+res.getOffset() +"(%ebp)\n";	
+					if(firstOp.getExpr() instanceof MethodCallExpr){	
+						//si se trata de una llamada a un metodo como factor de una operacion, obtenemos su resultado
+						//que siempre se guarda en eax y lo movemos a donde se necesita
+						result=result+"    movl %eax,"+res.getOffset() +"(%ebp)\n";	
+					}else{
+						if(firstOp.getExpr() instanceof BoolLiteral){
+							BoolLiteral b=(BoolLiteral) firstOp.getExpr();
+							if(b.getValue()){
+								result=result+"    movl $1,"+res.getOffset() +"(%ebp)\n";				
+							}else{
+								result=result+"    movl $0,"+res.getOffset() +"(%ebp)\n";				
+							}
+						}else{
+							result=result+"    movl $"+firstOp.getExpr()+","+res.getOffset() +"(%ebp)\n";			
+						}
+						
+					}
+					
 				}
 			}else{//caso contrario, es otra VarLocation
 				result=result+"    movl " + firstOp.getOffset() + "(%ebp)"+","+res.getOffset() +"(%ebp)\n";	
 			}
 		}else{
-			if(!(t.getFirstDir() instanceof MethodCallExpr)){
+			//si el valor proviene de una llamada a un metodo
+			if(t.getFirstDir() instanceof MethodCallExpr){
+				result+="MethodCallExpr    movl %eax, "+res.getOffset()+"(%ebp)";	
+			}else{//si no proviene de una llamada a un metodo
 				System.out.println("{ASSIGN} de "+t.getFirstDir().getClass());
+				//si se trata de una operacion binaria
 				if(t.getFirstDir() instanceof BinOpExpr){
 					//la obtenemos como operacion binaria
 					BinOpExpr primer=(BinOpExpr) t.getFirstDir();
@@ -871,24 +893,26 @@ public class AssemblyCodeGenerator{
 					//vemos que ambos operandos de la operacion binaria sean enteros
 					if(primExpr.getType().equals(Type.INT) && segExpr.getType().equals(Type.INT)){
 						int firstOpValue=evaluateExpression(expresion);
-						result=result+"    movl $" +firstOpValue + ", %eax\n";		
+						result=result+"    movl $" +firstOpValue + ", "+res.getOffset()+"(%ebp)\n";		
 					}else{
 						System.out.println("{ASSIGN}CASO BinOpExpr entre "+primExpr.getType()+" y "+segExpr.getType()+" pendiente");
 					}
-				}else{
+				}else{//sino, debe tratarse de una operacion unaria
 					if(t.getFirstDir() instanceof UnaryOpExpr){
 						UnaryOpExpr uop=(UnaryOpExpr) t.getFirstDir();
 						int opValue=evaluateExpression(uop.toString());
-						result=result+"    movl $" +opValue+ ", %eax\n";		
+						result=result+"    movl $" +opValue+ ", "+res.getOffset()+"(%ebp)\n";		
 					}else{
-						System.out.println("{ASSIGN}2 FALTA CASO "+t.getFirstDir().getClass());
+						//si se trata de un IntLiteral
+						if(t.getFirstDir() instanceof IntLiteral){
+							IntLiteral i=(IntLiteral) t.getFirstDir();
+							result=result+"    movl $" +i.getValue()+ ", "+res.getOffset()+"(%ebp)\n";			
+						}else{
+							System.out.println("{ASSIGN}2 FALTA CASO "+t.getFirstDir().getClass());	
+						}
 					}
-					//result=result+"    movl " +evaluateExpression(t.getFirstDir().toString()) + " (%ebp), %eax\n";		
 				}
-			}else{
-				System.out.println("{ASSIGN} FALTA CASO "+t.getFirstDir().getClass());
-			}
-			
+			}			
 		}
 	}
 
@@ -1095,8 +1119,24 @@ public class AssemblyCodeGenerator{
 				    					}
 	    							}
 	    						}else{
-	    							//demas casos
-    								System.out.println("{PARAM} FALTA CASO "+params.get(i).getClass());
+	    							//si es una operacion binaria
+	    							if(params.get(i) instanceof UnaryOpExpr){
+	    								UnaryOpExpr uop=(UnaryOpExpr)params.get(i);
+										if(uop.getType().equals(Type.INT)){
+											int opValue=evaluateExpression(uop.toString());
+											if(i!=0){
+					    						result+="    movl $"+opValue+" , "+((i-1)*4)+"(%esp)";	
+					    					}else{
+					    						result+="    movl $"+opValue+" , (%esp)";
+					    					}
+										}else{
+											System.out.println("{PARAM} FALTA CASO UnaryOpExpr "+uop.getType());		
+										}				
+	    							}else{
+	    								//demas casos
+    									System.out.println("{PARAM} FALTA CASO "+params.get(i).getClass());	
+	    							}
+	    							
 	    						}
 	    						
 	    					}
@@ -1290,6 +1330,7 @@ public class AssemblyCodeGenerator{
 			   				result+="    .comm "+t.getSecondDir()+","+(4*y)+"\n";
 			   			}	   			
 		   			}else{
+		   				System.out.println("{GLOBAL} "+t);
 		   				System.out.println("{GLOBAL} FALTA CASO "+t.getResult().getClass());
 		   			}
 		   			break;

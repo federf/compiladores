@@ -238,7 +238,7 @@
 
                                                                         //CODIGO DE TRES DIRECCIONES
                                                                         if(TS.getCorriente().esRaiz()){
-                                                                            TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),i));
+                                                                            TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),size));
                                                                         }
                                                                         //FIN CODIGO TRES DIRECCIONES
                                                                         break;
@@ -250,7 +250,7 @@
                                                                         TS.agregarSimbolo(Type.FLOATARRAY, s.toString(), null, size, arr.getOffset());  
                                                                         //CODIGO DE TRES DIRECCIONES
                                                                         if(TS.getCorriente().esRaiz()){
-                                                                            TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),i));
+                                                                            TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),size));
                                                                         }
                                                                         //FIN CODIGO TRES DIRECCIONES
                                                                         break;
@@ -262,7 +262,7 @@
                                                                         TS.agregarSimbolo(Type.BOOLARRAY, s.toString(), null, size, arr.getOffset()); 
                                                                         //CODIGO DE TRES DIRECCIONES
                                                                         if(TS.getCorriente().esRaiz()){
-                                                                            TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),i));
+                                                                            TripletList.addLast(new TripletCode(TripletOperator.GLOBAL, tipo_corriente,s.toString(),size));
                                                                         }
                                                                         //FIN CODIGO TRES DIRECCIONES
                                                                         break;
