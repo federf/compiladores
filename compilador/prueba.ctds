@@ -1,14 +1,15 @@
 class a{
+	
 	int main(){
-		int x;
-		int y;
-		int res;
-
-		x=2;
-		y=4;
-
-		res=x+y;
-
-		return 0;
+	    int A[5] ;
+		int C[10];
+		int d;
+		A[1] = 58 - (-6) ;
+		
+		d=A[1];
+		C[3] = d ;
+	    
+	    return 1;
+	    
 	}
 }

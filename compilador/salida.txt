@@ -46,11 +46,9 @@ procesando : . . . {METHODDECL, Metodo{ name=factorial, return_not_void=true, ty
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 1, null, Result: VarLocation{name=total, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {GE(>), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel3, type=int, expr=0, size=0}, Result: VarLocation{name=GELabel4, type=boolean, expr=0>0, size=0}}
@@ -69,7 +67,6 @@ procesando : . . . {MULTIPLY(*), VarLocation{name=total, type=int, expr=0, size=
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0*0, null, Result: VarLocation{name=total, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 0
 finalizado.
@@ -78,7 +75,6 @@ procesando : . . . {MINUS(-), VarLocation{name=i, type=int, expr=0, size=0}, Var
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0-1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = -1
 finalizado.
@@ -317,7 +313,6 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=false, typeRe
 finalizado.
 
 procesando : . . . {ASSIGN(=), 1.234, null, Result: VarLocation{name=x, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -325,7 +320,6 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel10, type=floa
 finalizado.
 
 procesando : . . . {ASSIGN(=), -27.5, null, Result: VarLocation{name=y, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 
 Result = -27
 finalizado.
@@ -334,7 +328,6 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel12, type=floa
 finalizado.
 
 procesando : . . . {ASSIGN(=), -70.3, null, Result: VarLocation{name=z, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 
 Result = -70
 finalizado.
@@ -421,9 +414,9 @@ div:
     movl %esp, %ebp
 
     movl -4(%ebp) , %eax 
-    movl 1(%ebp) , %ecx 
+    movl 1(%ebp) , %ecx
 	 cltd
-+    idiv %ecx
+    idiv %ecx
     movl %ecx,-8(%ebp) 
 
     movl -8(%ebp), %eax
@@ -586,8 +579,6 @@ procesando : . . . {METHODDECL, Metodo{ name=pruebaLogica, return_not_void=true,
 finalizado.
 
 procesando : . . . {ASSIGN(=), true, null, Result: VarLocation{name=bool, type=boolean, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BoolLiteral
-{ASSIGN}2 FALTA CASO class ir.ast.BoolLiteral
 finalizado.
 
 procesando : . . . {OR(||), VarLocation{name=factorLabel2, type=boolean, expr=false, size=0}, VarLocation{name=bool, type=boolean, expr=false, size=0}, Result: VarLocation{name=DISYUNCIONLabel3, type=boolean, expr=false||false, size=0}}
@@ -640,6 +631,7 @@ pruebaLogica:
     pushl	%ebp
     movl %esp, %ebp
 
+    movl $1, -4(%ebp)
 
     cmpl	$0, -8(%ebp)
     jne .L0
@@ -771,8 +763,6 @@ procesando : . . . {EXTERNINVK, ExternInvkExpr{id="get_int", type=int, parameter
 finalizado.
 
 procesando : . . . {ASSIGN(=), ExternInvkExpr{id="get_int", type=int, parameters=[]}, null, Result: VarLocation{name=z, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.ExternInvkExpr
-{ASSIGN}2 FALTA CASO class ir.ast.ExternInvkExpr
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0]}
@@ -845,7 +835,7 @@ main:
 
     call get_int
 
-
+    movl %eax, -8(%ebp)
     movl $0 , 8(%esp)
 
     call inc
@@ -884,7 +874,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 36
+tamaño lista de codigo tercetos: 34
 lista: 
 {null, int, A, Result: 5}
 {null, float, B, Result: 56}
@@ -901,28 +891,26 @@ lista:
 {ASSIGN(=), VarLocation{name=LELabel9, type=boolean, expr=0<0, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=0, size=10}}
 {GEQ(>=), VarLocation{name=factorLabel11, type=int, expr=0, size=0}, VarLocation{name=c, type=int, expr=0, size=0}, Result: VarLocation{name=GEQLabel12, type=boolean, expr=0>=0, size=0}}
 {ASSIGN(=), VarLocation{name=GEQLabel12, type=boolean, expr=0>=0, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=1, size=10}}
-{ARRAYACCESS, A, VarLocation{name=factorLabel13, type=int, expr=0, size=0}, Result: ArrayAccessLabel14}
-{RETURN, null, null, Result: VarLocation{name=factorLabel15, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
+{RETURN, null, null, Result: VarLocation{name=factorLabel14, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=factorLabel13, type=int, expr=0, size=0}}, size=0}}
 {LABEL, null, null, Result: EndMethod pruArreglos}
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {ASSIGN(=), true, null, Result: VarLocation{name=y, type=boolean, expr=null, size=0}}
-{UNARYMINUS(-expr), VarLocation{name=factorLabel19, type=int, expr=6, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel20, type=int, expr=-6, size=0}}
-{MINUS(-), VarLocation{name=factorLabel18, type=int, expr=58, size=0}, VarLocation{name=UNARYMINUSLabel20, type=int, expr=-6, size=0}, Result: VarLocation{name=MINUSLabel21, type=int, expr=58--6, size=0}}
+{UNARYMINUS(-expr), VarLocation{name=factorLabel18, type=int, expr=6, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel19, type=int, expr=-6, size=0}}
+{MINUS(-), VarLocation{name=factorLabel17, type=int, expr=58, size=0}, VarLocation{name=UNARYMINUSLabel19, type=int, expr=-6, size=0}, Result: VarLocation{name=MINUSLabel20, type=int, expr=58--6, size=0}}
 {ASSIGN(=), 58--6, null, Result: VarLocation{name=A, type=int[], expr=1, size=5}}
-{UNARYMINUS(-expr), VarLocation{name=factorLabel23, type=float, expr=2.6, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel24, type=float, expr=-2.6, size=0}}
+{UNARYMINUS(-expr), VarLocation{name=factorLabel22, type=float, expr=2.6, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel23, type=float, expr=-2.6, size=0}}
 {ASSIGN(=), -2.6, null, Result: VarLocation{name=B, type=float[], expr=0, size=56}}
-{LE(<), VarLocation{name=factorLabel26, type=int, expr=4, size=0}, VarLocation{name=factorLabel27, type=int, expr=6, size=0}, Result: VarLocation{name=LELabel28, type=boolean, expr=4<6, size=0}}
-{NON(!), VarLocation{name=LELabel28, type=boolean, expr=4<6, size=0}, null, Result: VarLocation{name=NONLabel29, type=boolean, expr=!4<6, size=0}}
-{ASSIGN(=), VarLocation{name=NONLabel29, type=boolean, expr=!4<6, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=2, size=10}}
-{PLUS(+), VarLocation{name=factorLabel33, type=int, expr=3, size=0}, VarLocation{name=factorLabel34, type=int, expr=3, size=0}, Result: VarLocation{name=PLUSLabel35, type=int, expr=3+3, size=0}}
-{MINUS(-), VarLocation{name=factorLabel32, type=int, expr=7, size=0}, VarLocation{name=PLUSLabel35, type=int, expr=3+3, size=0}, Result: VarLocation{name=MINUSLabel36, type=int, expr=7-3+3, size=0}}
-{ARRAYACCESS, A, VarLocation{name=MINUSLabel36, type=int, expr=7-3+3, size=0}, Result: ArrayAccessLabel37}
-{GEQ(>=), VarLocation{name=factorLabel31, type=int, expr=5, size=0}, VarLocation{name=factorLabel38, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}, Result: VarLocation{name=GEQLabel39, type=boolean, expr=5>=ArrayLiteral{id=A, index=5}, size=0}}
-{OR(||), VarLocation{name=GEQLabel39, type=boolean, expr=5>=ArrayLiteral{id=A, index=5}, size=0}, VarLocation{name=factorLabel40, type=boolean, expr=true, size=0}, Result: VarLocation{name=DISYUNCIONLabel41, type=boolean, expr=5>=ArrayLiteral{id=A, index=5}||true, size=0}}
-{ASSIGN(=), VarLocation{name=DISYUNCIONLabel41, type=boolean, expr=5>=ArrayLiteral{id=A, index=5}||true, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=3, size=10}}
-{RETURN, null, null, Result: VarLocation{name=factorLabel42, type=int, expr=1, size=0}}
+{LE(<), VarLocation{name=factorLabel25, type=int, expr=4, size=0}, VarLocation{name=factorLabel26, type=int, expr=6, size=0}, Result: VarLocation{name=LELabel27, type=boolean, expr=4<6, size=0}}
+{NON(!), VarLocation{name=LELabel27, type=boolean, expr=4<6, size=0}, null, Result: VarLocation{name=NONLabel28, type=boolean, expr=!4<6, size=0}}
+{ASSIGN(=), VarLocation{name=NONLabel28, type=boolean, expr=!4<6, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=2, size=10}}
+{PLUS(+), VarLocation{name=factorLabel32, type=int, expr=3, size=0}, VarLocation{name=factorLabel33, type=int, expr=3, size=0}, Result: VarLocation{name=PLUSLabel34, type=int, expr=3+3, size=0}}
+{MINUS(-), VarLocation{name=factorLabel31, type=int, expr=7, size=0}, VarLocation{name=PLUSLabel34, type=int, expr=3+3, size=0}, Result: VarLocation{name=MINUSLabel35, type=int, expr=7-3+3, size=0}}
+{GEQ(>=), VarLocation{name=factorLabel30, type=int, expr=5, size=0}, VarLocation{name=factorLabel36, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=MINUSLabel35, type=int, expr=7-3+3, size=0}}, size=0}, Result: VarLocation{name=GEQLabel37, type=boolean, expr=5>=ArrayLiteral{id=A, index=VarLocation{name=MINUSLabel35, type=int, expr=7-3+3, size=0}}, size=0}}
+{OR(||), VarLocation{name=GEQLabel37, type=boolean, expr=5>=ArrayLiteral{id=A, index=VarLocation{name=MINUSLabel35, type=int, expr=7-3+3, size=0}}, size=0}, VarLocation{name=factorLabel38, type=boolean, expr=true, size=0}, Result: VarLocation{name=DISYUNCIONLabel39, type=boolean, expr=5>=ArrayLiteral{id=A, index=VarLocation{name=MINUSLabel35, type=int, expr=7-3+3, size=0}}||true, size=0}}
+{ASSIGN(=), VarLocation{name=DISYUNCIONLabel39, type=boolean, expr=5>=ArrayLiteral{id=A, index=VarLocation{name=MINUSLabel35, type=int, expr=7-3+3, size=0}}||true, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=3, size=10}}
+{RETURN, null, null, Result: VarLocation{name=factorLabel40, type=int, expr=1, size=0}}
 {LABEL, null, null, Result: EndMethod main}
 
 procesando : . . . {null, int, A, Result: 5}
@@ -945,19 +933,16 @@ procesando : . . . {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, 
 finalizado.
 
 procesando : . . . {ASSIGN(=), 8.87, null, Result: VarLocation{name=y, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 4, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel5, type=float, expr=2.6, size=0}, VarLocation{name=y, type=float, expr=0.0, size=0}, Result: VarLocation{name=PLUSLabel6, type=float, expr=2.6+0.0, size=0}}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 2.6+0.0, null, Result: VarLocation{name=B, type=float[], expr=55, size=56}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre float y float pendiente
 finalizado.
 
@@ -973,12 +958,13 @@ finalizado.
 procesando : . . . {ASSIGN(=), VarLocation{name=GEQLabel12, type=boolean, expr=0>=0, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=1, size=10}}
 finalizado.
 
-procesando : . . . {ARRAYACCESS, A, VarLocation{name=factorLabel13, type=int, expr=0, size=0}, Result: ArrayAccessLabel14}
-finalizado.
-
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel15, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel14, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=factorLabel13, type=int, expr=0, size=0}}, size=0}}
 buscado: A
 actual VarLocation{name=A, type=int[], expr=null, size=5}
+{RETURN} ArrayLiteral expr: VarLocation{name=factorLabel13, type=int, expr=0, size=0} , class ir.ast.VarLocation
+
+Result = 0
+expr evaluada: 0
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod pruArreglos}
@@ -992,59 +978,52 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {ASSIGN(=), true, null, Result: VarLocation{name=y, type=boolean, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BoolLiteral
-{ASSIGN}2 FALTA CASO class ir.ast.BoolLiteral
 finalizado.
 
-procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel19, type=int, expr=6, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel20, type=int, expr=-6, size=0}}
+procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel18, type=int, expr=6, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel19, type=int, expr=-6, size=0}}
 finalizado.
 
-procesando : . . . {MINUS(-), VarLocation{name=factorLabel18, type=int, expr=58, size=0}, VarLocation{name=UNARYMINUSLabel20, type=int, expr=-6, size=0}, Result: VarLocation{name=MINUSLabel21, type=int, expr=58--6, size=0}}
+procesando : . . . {MINUS(-), VarLocation{name=factorLabel17, type=int, expr=58, size=0}, VarLocation{name=UNARYMINUSLabel19, type=int, expr=-6, size=0}, Result: VarLocation{name=MINUSLabel20, type=int, expr=58--6, size=0}}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 58--6, null, Result: VarLocation{name=A, type=int[], expr=1, size=5}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 64
 finalizado.
 
-procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel23, type=float, expr=2.6, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel24, type=float, expr=-2.6, size=0}}
+procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel22, type=float, expr=2.6, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel23, type=float, expr=-2.6, size=0}}
 finalizado.
 
 procesando : . . . {ASSIGN(=), -2.6, null, Result: VarLocation{name=B, type=float[], expr=0, size=56}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 
 Result = -2
 finalizado.
 
-procesando : . . . {LE(<), VarLocation{name=factorLabel26, type=int, expr=4, size=0}, VarLocation{name=factorLabel27, type=int, expr=6, size=0}, Result: VarLocation{name=LELabel28, type=boolean, expr=4<6, size=0}}
+procesando : . . . {LE(<), VarLocation{name=factorLabel25, type=int, expr=4, size=0}, VarLocation{name=factorLabel26, type=int, expr=6, size=0}, Result: VarLocation{name=LELabel27, type=boolean, expr=4<6, size=0}}
 finalizado.
 
-procesando : . . . {NON(!), VarLocation{name=LELabel28, type=boolean, expr=4<6, size=0}, null, Result: VarLocation{name=NONLabel29, type=boolean, expr=!4<6, size=0}}
+procesando : . . . {NON(!), VarLocation{name=LELabel27, type=boolean, expr=4<6, size=0}, null, Result: VarLocation{name=NONLabel28, type=boolean, expr=!4<6, size=0}}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=NONLabel29, type=boolean, expr=!4<6, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=2, size=10}}
+procesando : . . . {ASSIGN(=), VarLocation{name=NONLabel28, type=boolean, expr=!4<6, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=2, size=10}}
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=factorLabel33, type=int, expr=3, size=0}, VarLocation{name=factorLabel34, type=int, expr=3, size=0}, Result: VarLocation{name=PLUSLabel35, type=int, expr=3+3, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=factorLabel32, type=int, expr=3, size=0}, VarLocation{name=factorLabel33, type=int, expr=3, size=0}, Result: VarLocation{name=PLUSLabel34, type=int, expr=3+3, size=0}}
 finalizado.
 
-procesando : . . . {MINUS(-), VarLocation{name=factorLabel32, type=int, expr=7, size=0}, VarLocation{name=PLUSLabel35, type=int, expr=3+3, size=0}, Result: VarLocation{name=MINUSLabel36, type=int, expr=7-3+3, size=0}}
+procesando : . . . {MINUS(-), VarLocation{name=factorLabel31, type=int, expr=7, size=0}, VarLocation{name=PLUSLabel34, type=int, expr=3+3, size=0}, Result: VarLocation{name=MINUSLabel35, type=int, expr=7-3+3, size=0}}
 finalizado.
 
-procesando : . . . {ARRAYACCESS, A, VarLocation{name=MINUSLabel36, type=int, expr=7-3+3, size=0}, Result: ArrayAccessLabel37}
+procesando : . . . {GEQ(>=), VarLocation{name=factorLabel30, type=int, expr=5, size=0}, VarLocation{name=factorLabel36, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=MINUSLabel35, type=int, expr=7-3+3, size=0}}, size=0}, Result: VarLocation{name=GEQLabel37, type=boolean, expr=5>=ArrayLiteral{id=A, index=VarLocation{name=MINUSLabel35, type=int, expr=7-3+3, size=0}}, size=0}}
 finalizado.
 
-procesando : . . . {GEQ(>=), VarLocation{name=factorLabel31, type=int, expr=5, size=0}, VarLocation{name=factorLabel38, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}, Result: VarLocation{name=GEQLabel39, type=boolean, expr=5>=ArrayLiteral{id=A, index=5}, size=0}}
+procesando : . . . {OR(||), VarLocation{name=GEQLabel37, type=boolean, expr=5>=ArrayLiteral{id=A, index=VarLocation{name=MINUSLabel35, type=int, expr=7-3+3, size=0}}, size=0}, VarLocation{name=factorLabel38, type=boolean, expr=true, size=0}, Result: VarLocation{name=DISYUNCIONLabel39, type=boolean, expr=5>=ArrayLiteral{id=A, index=VarLocation{name=MINUSLabel35, type=int, expr=7-3+3, size=0}}||true, size=0}}
 finalizado.
 
-procesando : . . . {OR(||), VarLocation{name=GEQLabel39, type=boolean, expr=5>=ArrayLiteral{id=A, index=5}, size=0}, VarLocation{name=factorLabel40, type=boolean, expr=true, size=0}, Result: VarLocation{name=DISYUNCIONLabel41, type=boolean, expr=5>=ArrayLiteral{id=A, index=5}||true, size=0}}
+procesando : . . . {ASSIGN(=), VarLocation{name=DISYUNCIONLabel39, type=boolean, expr=5>=ArrayLiteral{id=A, index=VarLocation{name=MINUSLabel35, type=int, expr=7-3+3, size=0}}||true, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=3, size=10}}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=DISYUNCIONLabel41, type=boolean, expr=5>=ArrayLiteral{id=A, index=5}||true, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=3, size=10}}
-finalizado.
-
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel42, type=int, expr=1, size=0}}
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel40, type=int, expr=1, size=0}}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -1093,9 +1072,7 @@ pruArreglos:
 
     movl -52(%ebp),-336(%ebp)
 
-ARRAYACCESS
-
- ArrayLiteral   movl -24(%ebp), %eax
+    movl -44(%ebp), %eax
 
     leave
     ret
@@ -1109,6 +1086,7 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
+    movl $1, -300(%ebp)
 
     movl	-16(%ebp), %eax 
     negl	%eax 
@@ -1150,8 +1128,6 @@ main:
     subl %eax, %edx 
     movl %edx,-84(%ebp) 
 
-ARRAYACCESS
-
     movl	-64(%ebp), %eax
     cmpl	-88(%ebp), %eax
     setge %al
@@ -1187,7 +1163,7 @@ parseo iniciado
 Error: Method pruArreglos must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 73
+tamaño lista de codigo tercetos: 69
 lista: 
 {null, int, A, Result: 589}
 {null, float, B, Result: 56}
@@ -1231,38 +1207,34 @@ lista:
 {JNE, null, null, Result: EndWhileLabel33}
 {MULTIPLY(*), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel34, type=int, expr=2, size=0}, Result: VarLocation{name=MULTIPLYLabel35, type=int, expr=0*2, size=0}}
 {PLUS(+), VarLocation{name=MULTIPLYLabel35, type=int, expr=0*2, size=0}, VarLocation{name=factorLabel36, type=int, expr=8, size=0}, Result: VarLocation{name=PLUSLabel37, type=int, expr=0*2+8, size=0}}
-{ARRAYACCESS, A, VarLocation{name=PLUSLabel37, type=int, expr=0*2+8, size=0}, Result: ArrayAccessLabel38}
-{PLUS(+), VarLocation{name=factorLabel39, type=int[], expr=ArrayLiteral{id=A, index=589}, size=0}, VarLocation{name=factorLabel40, type=int, expr=3, size=0}, Result: VarLocation{name=PLUSLabel41, type=int, expr=ArrayLiteral{id=A, index=589}+3, size=0}}
-{ASSIGN(=), ArrayLiteral{id=A, index=589}+3, null, Result: VarLocation{name=B, type=float[], expr=0, size=56}}
+{PLUS(+), VarLocation{name=factorLabel38, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=PLUSLabel37, type=int, expr=0*2+8, size=0}}, size=0}, VarLocation{name=factorLabel39, type=int, expr=3, size=0}, Result: VarLocation{name=PLUSLabel40, type=int, expr=ArrayLiteral{id=A, index=VarLocation{name=PLUSLabel37, type=int, expr=0*2+8, size=0}}+3, size=0}}
+{ASSIGN(=), ArrayLiteral{id=A, index=VarLocation{name=PLUSLabel37, type=int, expr=0*2+8, size=0}}+3, null, Result: VarLocation{name=B, type=float[], expr=0, size=56}}
 {DECREMENT(-=), 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
 {JMP, null, null, Result: BeginWhileLabel32}
 {LABEL, null, null, Result: EndWhileLabel33}
 {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{MULTIPLY(*), VarLocation{name=factorLabel44, type=int, expr=5, size=0}, VarLocation{name=factorLabel45, type=int, expr=9, size=0}, Result: VarLocation{name=MULTIPLYLabel46, type=int, expr=5*9, size=0}}
-{MINUS(-), VarLocation{name=MULTIPLYLabel46, type=int, expr=5*9, size=0}, VarLocation{name=factorLabel47, type=int, expr=40, size=0}, Result: VarLocation{name=MINUSLabel48, type=int, expr=5*9-40, size=0}}
-{LEQ(<=), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=MINUSLabel48, type=int, expr=5*9-40, size=0}, Result: VarLocation{name=LEQLabel49, type=boolean, expr=0<=5*9-40, size=0}}
-{LABEL, null, null, Result: BeginWhileLabel50}
-{CMP, VarLocation{name=LEQLabel49, type=boolean, expr=0<=5*9-40, size=0}, true, Result: null}
-{JNE, null, null, Result: EndWhileLabel51}
-{MULTIPLY(*), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel52, type=int, expr=2, size=0}, Result: VarLocation{name=MULTIPLYLabel53, type=int, expr=0*2, size=0}}
-{PLUS(+), VarLocation{name=MULTIPLYLabel53, type=int, expr=0*2, size=0}, VarLocation{name=factorLabel54, type=int, expr=8, size=0}, Result: VarLocation{name=PLUSLabel55, type=int, expr=0*2+8, size=0}}
-{ARRAYACCESS, A, VarLocation{name=PLUSLabel55, type=int, expr=0*2+8, size=0}, Result: ArrayAccessLabel56}
-{ARRAYACCESS, B, VarLocation{name=i, type=int, expr=0, size=0}, Result: ArrayAccessLabel58}
-{GE(>), VarLocation{name=factorLabel57, type=int[], expr=ArrayLiteral{id=A, index=589}, size=0}, VarLocation{name=factorLabel59, type=float[], expr=ArrayLiteral{id=B, index=56}, size=0}, Result: VarLocation{name=GELabel60, type=boolean, expr=ArrayLiteral{id=A, index=589}>ArrayLiteral{id=B, index=56}, size=0}}
-{ASSIGN(=), VarLocation{name=GELabel60, type=boolean, expr=ArrayLiteral{id=A, index=589}>ArrayLiteral{id=B, index=56}, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=0, size=5}}
-{PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel61, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel62, type=int, expr=0+1, size=0}}
+{MULTIPLY(*), VarLocation{name=factorLabel43, type=int, expr=5, size=0}, VarLocation{name=factorLabel44, type=int, expr=9, size=0}, Result: VarLocation{name=MULTIPLYLabel45, type=int, expr=5*9, size=0}}
+{MINUS(-), VarLocation{name=MULTIPLYLabel45, type=int, expr=5*9, size=0}, VarLocation{name=factorLabel46, type=int, expr=40, size=0}, Result: VarLocation{name=MINUSLabel47, type=int, expr=5*9-40, size=0}}
+{LEQ(<=), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=MINUSLabel47, type=int, expr=5*9-40, size=0}, Result: VarLocation{name=LEQLabel48, type=boolean, expr=0<=5*9-40, size=0}}
+{LABEL, null, null, Result: BeginWhileLabel49}
+{CMP, VarLocation{name=LEQLabel48, type=boolean, expr=0<=5*9-40, size=0}, true, Result: null}
+{JNE, null, null, Result: EndWhileLabel50}
+{MULTIPLY(*), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel51, type=int, expr=2, size=0}, Result: VarLocation{name=MULTIPLYLabel52, type=int, expr=0*2, size=0}}
+{PLUS(+), VarLocation{name=MULTIPLYLabel52, type=int, expr=0*2, size=0}, VarLocation{name=factorLabel53, type=int, expr=8, size=0}, Result: VarLocation{name=PLUSLabel54, type=int, expr=0*2+8, size=0}}
+{GE(>), VarLocation{name=factorLabel55, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=PLUSLabel54, type=int, expr=0*2+8, size=0}}, size=0}, VarLocation{name=factorLabel56, type=float[], expr=ArrayLiteral{id=B, index=VarLocation{name=i, type=int, expr=0, size=0}}, size=0}, Result: VarLocation{name=GELabel57, type=boolean, expr=ArrayLiteral{id=A, index=VarLocation{name=PLUSLabel54, type=int, expr=0*2+8, size=0}}>ArrayLiteral{id=B, index=VarLocation{name=i, type=int, expr=0, size=0}}, size=0}}
+{ASSIGN(=), VarLocation{name=GELabel57, type=boolean, expr=ArrayLiteral{id=A, index=VarLocation{name=PLUSLabel54, type=int, expr=0*2+8, size=0}}>ArrayLiteral{id=B, index=VarLocation{name=i, type=int, expr=0, size=0}}, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=0, size=5}}
+{PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel58, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel59, type=int, expr=0+1, size=0}}
 {ASSIGN(=), 0+1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{JMP, null, null, Result: BeginWhileLabel50}
-{LABEL, null, null, Result: EndWhileLabel51}
-{ARRAYACCESS, res, VarLocation{name=factorLabel63, type=int, expr=0, size=0}, Result: ArrayAccessLabel64}
+{JMP, null, null, Result: BeginWhileLabel49}
+{LABEL, null, null, Result: EndWhileLabel50}
 {LABEL, null, null, Result: EndMethod pruArreglos}
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [4, 8]}
-{METHODCALL, pruArreglos, 2, Result: RESULTLabel68}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel70}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel71}
+{METHODCALL, pruArreglos, 2, Result: RESULTLabel64}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel66}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel67}
 {LABEL, null, null, Result: EndMethod main}
 
 procesando : . . . {null, int, A, Result: 589}
@@ -1294,7 +1266,6 @@ procesando : . . . {MINUS(-), VarLocation{name=factorLabel6, type=int, expr=1, s
 finalizado.
 
 procesando : . . . {ASSIGN(=), 1-0, null, Result: VarLocation{name=res, type=float[], expr=0, size=8}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -1324,7 +1295,6 @@ procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel15, type=int, expr=
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0*5, null, Result: VarLocation{name=res, type=float[], expr=VarLocation{name=MINUSLabel14, type=int, expr=1-1, size=0}, size=8}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 0
 finalizado.
@@ -1339,14 +1309,12 @@ procesando : . . . {MINUS(-), VarLocation{name=factorLabel18, type=int, expr=0, 
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=res, type=float[], expr=VarLocation{name=MINUSLabel20, type=int, expr=0-0, size=0}, size=8}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: endIfLabel11}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {LE(<), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel22, type=int, expr=589, size=0}, Result: VarLocation{name=LELabel23, type=boolean, expr=0<589, size=0}}
@@ -1365,7 +1333,6 @@ procesando : . . . {MULTIPLY(*), VarLocation{name=i, type=int, expr=0, size=0}, 
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0*2, null, Result: VarLocation{name=A, type=int[], expr=0, size=589}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 0
 finalizado.
@@ -1382,7 +1349,6 @@ procesando : . . . {LABEL, null, null, Result: EndWhileLabel25}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 8, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {GEQ(>=), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel30, type=int, expr=0, size=0}, Result: VarLocation{name=GEQLabel31, type=boolean, expr=0>=0, size=0}}
@@ -1403,14 +1369,10 @@ finalizado.
 procesando : . . . {PLUS(+), VarLocation{name=MULTIPLYLabel35, type=int, expr=0*2, size=0}, VarLocation{name=factorLabel36, type=int, expr=8, size=0}, Result: VarLocation{name=PLUSLabel37, type=int, expr=0*2+8, size=0}}
 finalizado.
 
-procesando : . . . {ARRAYACCESS, A, VarLocation{name=PLUSLabel37, type=int, expr=0*2+8, size=0}, Result: ArrayAccessLabel38}
+procesando : . . . {PLUS(+), VarLocation{name=factorLabel38, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=PLUSLabel37, type=int, expr=0*2+8, size=0}}, size=0}, VarLocation{name=factorLabel39, type=int, expr=3, size=0}, Result: VarLocation{name=PLUSLabel40, type=int, expr=ArrayLiteral{id=A, index=VarLocation{name=PLUSLabel37, type=int, expr=0*2+8, size=0}}+3, size=0}}
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=factorLabel39, type=int[], expr=ArrayLiteral{id=A, index=589}, size=0}, VarLocation{name=factorLabel40, type=int, expr=3, size=0}, Result: VarLocation{name=PLUSLabel41, type=int, expr=ArrayLiteral{id=A, index=589}+3, size=0}}
-finalizado.
-
-procesando : . . . {ASSIGN(=), ArrayLiteral{id=A, index=589}+3, null, Result: VarLocation{name=B, type=float[], expr=0, size=56}}
-{ASSIGN} de class ir.ast.BinOpExpr
+procesando : . . . {ASSIGN(=), ArrayLiteral{id=A, index=VarLocation{name=PLUSLabel37, type=int, expr=0*2+8, size=0}}+3, null, Result: VarLocation{name=B, type=float[], expr=0, size=56}}
 {ASSIGN}CASO BinOpExpr entre int[] y int pendiente
 finalizado.
 
@@ -1426,61 +1388,50 @@ procesando : . . . {LABEL, null, null, Result: EndWhileLabel33}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
-procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel44, type=int, expr=5, size=0}, VarLocation{name=factorLabel45, type=int, expr=9, size=0}, Result: VarLocation{name=MULTIPLYLabel46, type=int, expr=5*9, size=0}}
+procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel43, type=int, expr=5, size=0}, VarLocation{name=factorLabel44, type=int, expr=9, size=0}, Result: VarLocation{name=MULTIPLYLabel45, type=int, expr=5*9, size=0}}
 finalizado.
 
-procesando : . . . {MINUS(-), VarLocation{name=MULTIPLYLabel46, type=int, expr=5*9, size=0}, VarLocation{name=factorLabel47, type=int, expr=40, size=0}, Result: VarLocation{name=MINUSLabel48, type=int, expr=5*9-40, size=0}}
+procesando : . . . {MINUS(-), VarLocation{name=MULTIPLYLabel45, type=int, expr=5*9, size=0}, VarLocation{name=factorLabel46, type=int, expr=40, size=0}, Result: VarLocation{name=MINUSLabel47, type=int, expr=5*9-40, size=0}}
 finalizado.
 
-procesando : . . . {LEQ(<=), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=MINUSLabel48, type=int, expr=5*9-40, size=0}, Result: VarLocation{name=LEQLabel49, type=boolean, expr=0<=5*9-40, size=0}}
+procesando : . . . {LEQ(<=), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=MINUSLabel47, type=int, expr=5*9-40, size=0}, Result: VarLocation{name=LEQLabel48, type=boolean, expr=0<=5*9-40, size=0}}
 finalizado.
 
-procesando : . . . {LABEL, null, null, Result: BeginWhileLabel50}
+procesando : . . . {LABEL, null, null, Result: BeginWhileLabel49}
 finalizado.
 
-procesando : . . . {CMP, VarLocation{name=LEQLabel49, type=boolean, expr=0<=5*9-40, size=0}, true, Result: null}
+procesando : . . . {CMP, VarLocation{name=LEQLabel48, type=boolean, expr=0<=5*9-40, size=0}, true, Result: null}
 finalizado.
 
-procesando : . . . {JNE, null, null, Result: EndWhileLabel51}
+procesando : . . . {JNE, null, null, Result: EndWhileLabel50}
 finalizado.
 
-procesando : . . . {MULTIPLY(*), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel52, type=int, expr=2, size=0}, Result: VarLocation{name=MULTIPLYLabel53, type=int, expr=0*2, size=0}}
+procesando : . . . {MULTIPLY(*), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel51, type=int, expr=2, size=0}, Result: VarLocation{name=MULTIPLYLabel52, type=int, expr=0*2, size=0}}
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=MULTIPLYLabel53, type=int, expr=0*2, size=0}, VarLocation{name=factorLabel54, type=int, expr=8, size=0}, Result: VarLocation{name=PLUSLabel55, type=int, expr=0*2+8, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=MULTIPLYLabel52, type=int, expr=0*2, size=0}, VarLocation{name=factorLabel53, type=int, expr=8, size=0}, Result: VarLocation{name=PLUSLabel54, type=int, expr=0*2+8, size=0}}
 finalizado.
 
-procesando : . . . {ARRAYACCESS, A, VarLocation{name=PLUSLabel55, type=int, expr=0*2+8, size=0}, Result: ArrayAccessLabel56}
+procesando : . . . {GE(>), VarLocation{name=factorLabel55, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=PLUSLabel54, type=int, expr=0*2+8, size=0}}, size=0}, VarLocation{name=factorLabel56, type=float[], expr=ArrayLiteral{id=B, index=VarLocation{name=i, type=int, expr=0, size=0}}, size=0}, Result: VarLocation{name=GELabel57, type=boolean, expr=ArrayLiteral{id=A, index=VarLocation{name=PLUSLabel54, type=int, expr=0*2+8, size=0}}>ArrayLiteral{id=B, index=VarLocation{name=i, type=int, expr=0, size=0}}, size=0}}
 finalizado.
 
-procesando : . . . {ARRAYACCESS, B, VarLocation{name=i, type=int, expr=0, size=0}, Result: ArrayAccessLabel58}
+procesando : . . . {ASSIGN(=), VarLocation{name=GELabel57, type=boolean, expr=ArrayLiteral{id=A, index=VarLocation{name=PLUSLabel54, type=int, expr=0*2+8, size=0}}>ArrayLiteral{id=B, index=VarLocation{name=i, type=int, expr=0, size=0}}, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=0, size=5}}
 finalizado.
 
-procesando : . . . {GE(>), VarLocation{name=factorLabel57, type=int[], expr=ArrayLiteral{id=A, index=589}, size=0}, VarLocation{name=factorLabel59, type=float[], expr=ArrayLiteral{id=B, index=56}, size=0}, Result: VarLocation{name=GELabel60, type=boolean, expr=ArrayLiteral{id=A, index=589}>ArrayLiteral{id=B, index=56}, size=0}}
-finalizado.
-
-procesando : . . . {ASSIGN(=), VarLocation{name=GELabel60, type=boolean, expr=ArrayLiteral{id=A, index=589}>ArrayLiteral{id=B, index=56}, size=0}, null, Result: VarLocation{name=C, type=boolean[], expr=0, size=5}}
-finalizado.
-
-procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel61, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel62, type=int, expr=0+1, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel58, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel59, type=int, expr=0+1, size=0}}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
 
-procesando : . . . {JMP, null, null, Result: BeginWhileLabel50}
+procesando : . . . {JMP, null, null, Result: BeginWhileLabel49}
 finalizado.
 
-procesando : . . . {LABEL, null, null, Result: EndWhileLabel51}
-finalizado.
-
-procesando : . . . {ARRAYACCESS, res, VarLocation{name=factorLabel63, type=int, expr=0, size=0}, Result: ArrayAccessLabel64}
+procesando : . . . {LABEL, null, null, Result: EndWhileLabel50}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod pruArreglos}
@@ -1502,13 +1453,13 @@ index: 0 tamaño: 2
 Result = 4
 finalizado.
 
-procesando : . . . {METHODCALL, pruArreglos, 2, Result: RESULTLabel68}
+procesando : . . . {METHODCALL, pruArreglos, 2, Result: RESULTLabel64}
 finalizado.
 
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel70}
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel66}
 finalizado.
 
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel71}
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel67}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -1643,8 +1594,6 @@ pruArreglos:
     addl %eax, %edx 
     movl %edx,-156(%ebp) 
 
-ARRAYACCESS
-
     movl -160(%ebp) , %eax 
     movl -164(%ebp) , %edx 
     addl %eax, %edx 
@@ -1675,12 +1624,12 @@ ARRAYACCESS
     movlzbl %al, %eax
     movl	%eax, -200(%ebp)
 
-.BeginWhileLabel50:
+.BeginWhileLabel49:
 
     movl $ 1, %eax
     cmpl -200(%ebp), %eax
 
-    jne EndWhileLabel51
+    jne EndWhileLabel50
 
     movl -40(%ebp) , %eax 
     movl -204(%ebp) , %edx 
@@ -1691,10 +1640,6 @@ ARRAYACCESS
     movl -212(%ebp) , %edx 
     addl %eax, %edx 
     movl %edx,-216(%ebp) 
-
-ARRAYACCESS
-
-ARRAYACCESS
 
     movl	-220(%ebp), %eax
     cmpl	-224(%ebp), %eax
@@ -1711,11 +1656,9 @@ ARRAYACCESS
 
     movl $1, -40(%ebp)
 
-    jmp BeginWhileLabel50
+    jmp BeginWhileLabel49
 
-.EndWhileLabel51:
-
-ARRAYACCESS
+.EndWhileLabel50:
 
     leave
     ret
@@ -1869,18 +1812,15 @@ procesando : . . . {METHODDECL, Metodo{ name=aritmTest, return_not_void=true, ty
 finalizado.
 
 procesando : . . . {ASSIGN(=), 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=factorLabel3, type=int, expr=1, size=0}, VarLocation{name=a, type=int, expr=0, size=0}, Result: VarLocation{name=PLUSLabel4, type=int, expr=1+0, size=0}}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 1+0, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -1889,7 +1829,6 @@ procesando : . . . {PLUS(+), VarLocation{name=a, type=int, expr=0, size=0}, VarL
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 2
 finalizado.
@@ -1898,7 +1837,6 @@ procesando : . . . {DIVIDE(/), VarLocation{name=a, type=int, expr=0, size=0}, Va
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0/0, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 0
 finalizado.
@@ -1907,7 +1845,6 @@ procesando : . . . {MOD(%), VarLocation{name=a, type=int, expr=0, size=0}, VarLo
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0%3, null, Result: VarLocation{name=c, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 ocurrio un error: For input string: "00%3"
 ---------------------------------------------------
   
@@ -1958,7 +1895,6 @@ procesando : . . . {METHODDECL, Metodo{ name=breaks, return_not_void=true, typeR
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {LE(<), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel2, type=int, expr=10, size=0}, Result: VarLocation{name=LELabel3, type=boolean, expr=0<10, size=0}}
@@ -1977,13 +1913,11 @@ procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarL
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
 
 procesando : . . . {ASSIGN(=), 2.3, null, Result: VarLocation{name=j, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -2180,7 +2114,6 @@ procesando : . . . {METHODDECL, Metodo{ name=breaks, return_not_void=true, typeR
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {LE(<), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel2, type=int, expr=10, size=0}, Result: VarLocation{name=LELabel3, type=boolean, expr=0<10, size=0}}
@@ -2199,7 +2132,6 @@ procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarL
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -2451,13 +2383,9 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=false, typeRe
 finalizado.
 
 procesando : . . . {ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BoolLiteral
-{ASSIGN}2 FALTA CASO class ir.ast.BoolLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), false, null, Result: VarLocation{name=b, type=boolean, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BoolLiteral
-{ASSIGN}2 FALTA CASO class ir.ast.BoolLiteral
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [false]}
@@ -2593,7 +2521,9 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
+    movl $1, -4(%ebp)
 
+    movl $0, -8(%ebp)
 
     movl $0 , (%esp)
     call neg
@@ -2669,7 +2599,6 @@ procesando : . . . {METHODDECL, Metodo{ name=breaks, return_not_void=true, typeR
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {LE(<), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel2, type=int, expr=10, size=0}, Result: VarLocation{name=LELabel3, type=boolean, expr=0<10, size=0}}
@@ -2688,7 +2617,6 @@ procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarL
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -2884,7 +2812,6 @@ procesando : . . . {JNE, null, null, Result: elseCondLabel3}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {JMP, null, null, Result: endIfLabel4}
@@ -2894,7 +2821,6 @@ procesando : . . . {LABEL, null, null, Result: elseCondLabel3}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: endIfLabel4}
@@ -3033,7 +2959,6 @@ procesando : . . . {PLUS(+), VarLocation{name=factorLabel5, type=int, expr=0, si
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 5
 finalizado.
@@ -3045,7 +2970,6 @@ procesando : . . . {LABEL, null, null, Result: elseCondLabel3}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: endIfLabel4}
@@ -4134,17 +4058,14 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel1, type=int, 
 finalizado.
 
 procesando : . . . {ASSIGN(=), -1, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 
 Result = -1
 finalizado.
 
 procesando : . . . {ASSIGN(=), 23, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 23, null, Result: VarLocation{name=i, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {GEQ(>=), VarLocation{name=i, type=float, expr=0.0, size=0}, VarLocation{name=factorLabel5, type=int, expr=0, size=0}, Result: VarLocation{name=GEQLabel6, type=boolean, expr=0.0>=0, size=0}}
@@ -4163,7 +4084,6 @@ procesando : . . . {MINUS(-), VarLocation{name=i, type=float, expr=0.0, size=0},
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0.0-1, null, Result: VarLocation{name=i, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre float y int pendiente
 finalizado.
 
@@ -4192,7 +4112,6 @@ procesando : . . . {MULTIPLY(*), VarLocation{name=MULTIPLYLabel20, type=float, e
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0.0*0.0*0, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre float y int pendiente
 finalizado.
 
@@ -4221,7 +4140,6 @@ procesando : . . . {PLUS(+), VarLocation{name=UNARYMINUSLabel23, type=float, exp
 finalizado.
 
 procesando : . . . {ASSIGN(=), -1000.2343+6752, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre float y int pendiente
 finalizado.
 
@@ -4472,7 +4390,6 @@ procesando : . . . {METHODDECL, Metodo{ name=prueba, return_not_void=true, typeR
 finalizado.
 
 procesando : . . . {ASSIGN(=), 50, null, Result: VarLocation{name=g, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {GE(>), VarLocation{name=g, type=int, expr=0, size=0}, VarLocation{name=factorLabel2, type=int, expr=0, size=0}, Result: VarLocation{name=GELabel3, type=boolean, expr=0>0, size=0}}
@@ -4485,7 +4402,6 @@ procesando : . . . {JNE, null, null, Result: elseCondLabel4}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 4, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {CEQ(==), VarLocation{name=a, type=int, expr=0, size=0}, VarLocation{name=factorLabel7, type=int, expr=4, size=0}, Result: VarLocation{name=CEQLabel8, type=boolean, expr=0==4, size=0}}
@@ -4525,7 +4441,6 @@ procesando : . . . {MINUS(-), VarLocation{name=g, type=int, expr=0, size=0}, Var
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0-1, null, Result: VarLocation{name=g, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = -1
 finalizado.
@@ -4534,7 +4449,6 @@ procesando : . . . {MULTIPLY(*), VarLocation{name=a, type=int, expr=0, size=0}, 
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0*2, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 0
 finalizado.
@@ -4549,7 +4463,6 @@ procesando : . . . {PLUS(+), VarLocation{name=a, type=int, expr=0, size=0}, VarL
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -4558,7 +4471,6 @@ procesando : . . . {DIVIDE(/), VarLocation{name=c, type=float, expr=0.0, size=0}
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=c, type=float, expr=0.0, size=0}/VarLocation{name=factorLabel25, type=int, expr=2, size=0}, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre float y int pendiente
 finalizado.
 
@@ -4702,9 +4614,9 @@ prueba:
     movl $1, -4(%ebp)
 
     movl -8(%ebp) , %eax 
-    movl -80(%ebp) , %ecx 
+    movl -80(%ebp) , %ecx
 	 cltd
-+    idiv %ecx
+    idiv %ecx
     movl %ecx,-84(%ebp) 
 
 
@@ -4795,18 +4707,15 @@ procesando : . . . {METHODDECL, Metodo{ name=prueba, return_not_void=true, typeR
 finalizado.
 
 procesando : . . . {ASSIGN(=), 4, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 5, null, Result: VarLocation{name=c, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {MULTIPLY(*), VarLocation{name=b, type=int, expr=0, size=0}, VarLocation{name=c, type=int, expr=0, size=0}, Result: VarLocation{name=MULTIPLYLabel3, type=int, expr=0*0, size=0}}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0*0, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 0
 finalizado.
@@ -4815,13 +4724,11 @@ procesando : . . . {PLUS(+), VarLocation{name=a, type=int, expr=0, size=0}, VarL
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+0, null, Result: VarLocation{name=p, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 0
 finalizado.
 
 procesando : . . . {ASSIGN(=), 3.14, null, Result: VarLocation{name=pi, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -4829,7 +4736,6 @@ procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel7, type=int, expr=2
 finalizado.
 
 procesando : . . . {ASSIGN(=), 2*0.0, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre int y float pendiente
 finalizado.
 
@@ -4921,9 +4827,9 @@ prueba:
 
 
     movl -4(%ebp) , %eax 
-    movl -8(%ebp) , %ecx 
+    movl -8(%ebp) , %ecx
 	 cltd
-+    idiv %ecx
+    idiv %ecx
     movl %ecx,-56(%ebp) 
 
     movl	-56(%ebp), %eax
@@ -5035,16 +4941,12 @@ procesando : . . . {METHODDECL, Metodo{ name=potencia, return_not_void=true, typ
 finalizado.
 
 procesando : . . . {ASSIGN(=), false, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BoolLiteral
-{ASSIGN}2 FALTA CASO class ir.ast.BoolLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 1.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -5061,7 +4963,6 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=n, type=int, expr=0, siz
 finalizado.
 
 procesando : . . . {ASSIGN(=), -0, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 
 Result = 0
 finalizado.
@@ -5070,7 +4971,6 @@ procesando : . . . {NON(!), VarLocation{name=neg, type=boolean, expr=false, size
 finalizado.
 
 procesando : . . . {ASSIGN(=), !false, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 ocurrio un error: For input string: "0!false"
 ---------------------------------------------------
   
@@ -5124,12 +5024,10 @@ procesando : . . . {METHODDECL, Metodo{ name=sumatoria, return_not_void=true, ty
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0.0, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0.0, null, Result: VarLocation{name=i, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -5164,7 +5062,6 @@ procesando : . . . {PLUS(+), VarLocation{name=total, type=float, expr=0.0, size=
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0.0+0.0, null, Result: VarLocation{name=total, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre float y float pendiente
 finalizado.
 
@@ -5188,7 +5085,6 @@ procesando : . . . {LABEL, null, null, Result: EndWhileLabel9}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -5206,7 +5102,6 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=false, typeRe
 finalizado.
 
 procesando : . . . {ASSIGN(=), 8.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -5507,16 +5402,12 @@ procesando : . . . {METHODDECL, Metodo{ name=potencia, return_not_void=true, typ
 finalizado.
 
 procesando : . . . {ASSIGN(=), false, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BoolLiteral
-{ASSIGN}2 FALTA CASO class ir.ast.BoolLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 1.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -5533,14 +5424,11 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=n, type=int, expr=0, siz
 finalizado.
 
 procesando : . . . {ASSIGN(=), -0, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 
 Result = 0
 finalizado.
 
 procesando : . . . {ASSIGN(=), true, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BoolLiteral
-{ASSIGN}2 FALTA CASO class ir.ast.BoolLiteral
 finalizado.
 
 procesando : . . . {JMP, null, null, Result: endIfLabel7}
@@ -5577,7 +5465,6 @@ procesando : . . . {MULTIPLY(*), VarLocation{name=MULTIPLYLabel16, type=float, e
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0.0*0.0*2, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre float y int pendiente
 finalizado.
 
@@ -5585,7 +5472,6 @@ procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarL
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -5646,7 +5532,6 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel29, type=floa
 finalizado.
 
 procesando : . . . {ASSIGN(=), -2.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 
 Result = -2
 finalizado.
@@ -5655,7 +5540,6 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel31, type=int,
 finalizado.
 
 procesando : . . . {ASSIGN(=), -2, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 
 Result = -2
 finalizado.
@@ -5664,7 +5548,6 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel33, type=floa
 finalizado.
 
 procesando : . . . {ASSIGN(=), -3.0, null, Result: VarLocation{name=w, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 
 Result = -3
 finalizado.
@@ -5673,7 +5556,6 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel35, type=floa
 finalizado.
 
 procesando : . . . {ASSIGN(=), -3.0, null, Result: VarLocation{name=z, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 
 Result = -3
 finalizado.
@@ -5685,24 +5567,19 @@ procesando : . . . {MINUS(-), VarLocation{name=MULTIPLYLabel37, type=float, expr
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0.0*0.0-0.0, null, Result: VarLocation{name=m, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre float y float pendiente
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=k, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 5, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {GE(>), VarLocation{name=factorLabel43, type=float, expr=0.0, size=0}, VarLocation{name=y, type=float, expr=0.0, size=0}, Result: VarLocation{name=GELabel44, type=boolean, expr=0.0>0.0, size=0}}
@@ -5724,7 +5601,6 @@ procesando : . . . {JNE, null, null, Result: elseCondLabel48}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -5735,7 +5611,6 @@ procesando : . . . {LABEL, null, null, Result: elseCondLabel48}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -5803,7 +5678,6 @@ procesando : . . . {PLUS(+), VarLocation{name=res, type=float, expr=0.0, size=0}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0.0+2.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre float y float pendiente
 finalizado.
 
@@ -5820,7 +5694,6 @@ procesando : . . . {MINUS(-), VarLocation{name=res, type=float, expr=0.0, size=0
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0.0-VarLocation{name=factorLabel68, type=float, expr=10.0, size=0}/VarLocation{name=factorLabel69, type=float, expr=2.0, size=0}, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre float y float pendiente
 finalizado.
 
@@ -5863,7 +5736,6 @@ procesando : . . . {MINUS(-), VarLocation{name=PLUSLabel84, type=float, expr=35.
 finalizado.
 
 procesando : . . . {ASSIGN(=), 35.0+4.0*0.0-498.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre float y float pendiente
 finalizado.
 
@@ -5880,7 +5752,6 @@ procesando : . . . {MINUS(-), VarLocation{name=MINUSLabel88, type=float, expr=3.
 finalizado.
 
 procesando : . . . {ASSIGN(=), 3.2-0.0-12345.356, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre float y float pendiente
 finalizado.
 
@@ -5891,7 +5762,6 @@ procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarL
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -5921,7 +5791,6 @@ procesando : . . . {PLUS(+), VarLocation{name=PLUSLabel98, type=float, expr=0.0*
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0.0*-0.0+23.0*0.0+VarLocation{name=factorLabel99, type=float, expr=2.0, size=0}/VarLocation{name=factorLabel100, type=float, expr=4.0, size=0}, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre float y float pendiente
 finalizado.
 
@@ -5929,7 +5798,6 @@ procesando : . . . {PLUS(+), VarLocation{name=j, type=int, expr=0, size=0}, VarL
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -5960,7 +5828,6 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=false, typeRe
 finalizado.
 
 procesando : . . . {ASSIGN(=), 80.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -5968,13 +5835,11 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel107, type=flo
 finalizado.
 
 procesando : . . . {ASSIGN(=), -15.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 
 Result = -15
 finalizado.
 
 procesando : . . . {ASSIGN(=), 4.3, null, Result: VarLocation{name=w, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -5982,7 +5847,6 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel110, type=flo
 finalizado.
 
 procesando : . . . {ASSIGN(=), -7.6, null, Result: VarLocation{name=m, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 
 Result = -7
 finalizado.
@@ -6035,6 +5899,7 @@ potencia:
     pushl	%ebp
     movl %esp, %ebp
 
+    movl $0, -8(%ebp)
 
     movl $1, -4(%ebp)
 
@@ -6056,6 +5921,7 @@ potencia:
 
     movl $0, 1(%ebp)
 
+    movl $1, -8(%ebp)
 
     jmp endIfLabel7
 
@@ -6133,9 +5999,9 @@ potencia:
     jne elseCondLabel23
 
     movl -88(%ebp) , %eax 
-    movl -12(%ebp) , %ecx 
+    movl -12(%ebp) , %ecx
 	 cltd
-+    idiv %ecx
+    idiv %ecx
     movl %ecx,-92(%ebp) 
 
     movl -92(%ebp), %eax
@@ -6324,9 +6190,9 @@ multiples:
 .elseCondLabel64:
 
     movl -152(%ebp) , %eax 
-    movl -156(%ebp) , %ecx 
+    movl -156(%ebp) , %ecx
 	 cltd
-+    idiv %ecx
+    idiv %ecx
     movl %ecx,-160(%ebp) 
 
     movl -24(%ebp) , %eax 
@@ -6437,9 +6303,9 @@ multiples:
     movl %edx,-264(%ebp) 
 
     movl -268(%ebp) , %eax 
-    movl -272(%ebp) , %ecx 
+    movl -272(%ebp) , %ecx
 	 cltd
-+    idiv %ecx
+    idiv %ecx
     movl %ecx,-276(%ebp) 
 
     movl -264(%ebp) , %eax 
@@ -6611,16 +6477,12 @@ procesando : . . . {METHODDECL, Metodo{ name=potencia, return_not_void=true, typ
 finalizado.
 
 procesando : . . . {ASSIGN(=), false, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BoolLiteral
-{ASSIGN}2 FALTA CASO class ir.ast.BoolLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 1.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -6637,14 +6499,11 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=n, type=int, expr=0, siz
 finalizado.
 
 procesando : . . . {ASSIGN(=), -0, null, Result: VarLocation{name=n, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 
 Result = 0
 finalizado.
 
 procesando : . . . {ASSIGN(=), true, null, Result: VarLocation{name=neg, type=boolean, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BoolLiteral
-{ASSIGN}2 FALTA CASO class ir.ast.BoolLiteral
 finalizado.
 
 procesando : . . . {JMP, null, null, Result: endIfLabel7}
@@ -6681,7 +6540,6 @@ procesando : . . . {MULTIPLY(*), VarLocation{name=MULTIPLYLabel16, type=float, e
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0.0*0.0*2.0, null, Result: VarLocation{name=prod, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre float y float pendiente
 finalizado.
 
@@ -6689,7 +6547,6 @@ procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarL
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -6762,7 +6619,6 @@ procesando : . . . {MULTIPLY(*), VarLocation{name=MULTIPLYLabel35, type=float, e
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0.0*0.0*0.0*0.0*0.0*0.0, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre float y float pendiente
 finalizado.
 
@@ -6783,13 +6639,11 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel37, type=floa
 finalizado.
 
 procesando : . . . {ASSIGN(=), -15.0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 
 Result = -15
 finalizado.
 
 procesando : . . . {ASSIGN(=), 4.3, null, Result: VarLocation{name=w, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -6797,13 +6651,11 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel40, type=floa
 finalizado.
 
 procesando : . . . {ASSIGN(=), -7.6, null, Result: VarLocation{name=m, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 
 Result = -7
 finalizado.
 
 procesando : . . . {ASSIGN(=), 80.0, null, Result: VarLocation{name=a, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -6853,6 +6705,7 @@ potencia:
     pushl	%ebp
     movl %esp, %ebp
 
+    movl $0, -8(%ebp)
 
     movl $1, -4(%ebp)
 
@@ -6874,6 +6727,7 @@ potencia:
 
     movl $0, 1(%ebp)
 
+    movl $1, -8(%ebp)
 
     jmp endIfLabel7
 
@@ -6951,9 +6805,9 @@ potencia:
     jne elseCondLabel23
 
     movl -88(%ebp) , %eax 
-    movl -12(%ebp) , %ecx 
+    movl -12(%ebp) , %ecx
 	 cltd
-+    idiv %ecx
+    idiv %ecx
     movl %ecx,-92(%ebp) 
 
     movl -92(%ebp), %eax
@@ -7155,7 +7009,6 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=false, typeRe
 finalizado.
 
 procesando : . . . {ASSIGN(=), 6.982, null, Result: VarLocation{name=x, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -7163,13 +7016,11 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel8, type=float
 finalizado.
 
 procesando : . . . {ASSIGN(=), -002.5, null, Result: VarLocation{name=y, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 
 Result = -2
 finalizado.
 
 procesando : . . . {ASSIGN(=), 3.5698, null, Result: VarLocation{name=z, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -7226,9 +7077,9 @@ div:
     movl %esp, %ebp
 
     movl -4(%ebp) , %eax 
-    movl 1(%ebp) , %ecx 
+    movl 1(%ebp) , %ecx
 	 cltd
-+    idiv %ecx
+    idiv %ecx
     movl %ecx,-8(%ebp) 
 
     movl -8(%ebp), %eax
@@ -7319,207 +7170,6 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 25
-lista: 
-{null, int, A, Result: 5}
-{null, float, B, Result: 56}
-{null, boolean, C, Result: 10}
-{LABEL, null, null, Result: BeginMethod pruArreglos}
-
-{METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0, offset=0}, Simbolo{type=int, name=c, value=null, size=0, offset=0}]}, null, Result: null}
-{ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{ARRAYACCESS, A, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: ArrayAccessLabel4}
-{RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
-{MULTIPLY(*), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel7, type=int, expr=10, size=0}, Result: VarLocation{name=MULTIPLYLabel8, type=int, expr=0*10, size=0}}
-{LABEL, null, null, Result: BeginForLabel9}
-{CMP, VarLocation{name=factorLabel6, type=int, expr=5, size=0}, VarLocation{name=MULTIPLYLabel8, type=int, expr=0*10, size=0}, Result: null}
-{JNL, null, null, Result: EndForLabel10}
-{PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel11, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel12, type=int, expr=0+2, size=0}}
-{ASSIGN(=), 0+2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{PLUS(+), VarLocation{name=factorLabel6, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factorLabel6, type=int, expr=5, size=0}}
-{JMP, null, null, Result: BeginForLabel9}
-{LABEL, null, null, Result: EndForLabel10}
-{LABEL, null, null, Result: EndMethod pruArreglos}
-{LABEL, null, null, Result: BeginMethod main}
-
-{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{PARAM, null, null, Result: [4, 8]}
-{METHODCALL, pruArreglos, 2, Result: RESULTLabel15}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel17}
-{RETURN, null, null, Result: VarLocation{name=factorLabel18, type=int, expr=1, size=0}}
-{LABEL, null, null, Result: EndMethod main}
-
-procesando : . . . {null, int, A, Result: 5}
-finalizado.
-
-procesando : . . . {null, float, B, Result: 56}
-finalizado.
-
-procesando : . . . {null, boolean, C, Result: 10}
-finalizado.
-
-procesando : . . . {LABEL, null, null, Result: BeginMethod pruArreglos}
-finalizado.
-
-
-procesando : . . . {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0, offset=0}, Simbolo{type=int, name=c, value=null, size=0, offset=0}]}, null, Result: null}
-finalizado.
-
-procesando : . . . {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{ASSIGN} de class ir.ast.IntLiteral
-finalizado.
-
-procesando : . . . {ARRAYACCESS, A, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: ArrayAccessLabel4}
-finalizado.
-
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
-buscado: A
-actual VarLocation{name=A, type=int[], expr=null, size=5}
-finalizado.
-
-procesando : . . . {MULTIPLY(*), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel7, type=int, expr=10, size=0}, Result: VarLocation{name=MULTIPLYLabel8, type=int, expr=0*10, size=0}}
-finalizado.
-
-procesando : . . . {LABEL, null, null, Result: BeginForLabel9}
-finalizado.
-
-procesando : . . . {CMP, VarLocation{name=factorLabel6, type=int, expr=5, size=0}, VarLocation{name=MULTIPLYLabel8, type=int, expr=0*10, size=0}, Result: null}
-finalizado.
-
-procesando : . . . {JNL, null, null, Result: EndForLabel10}
-finalizado.
-
-procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel11, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel12, type=int, expr=0+2, size=0}}
-finalizado.
-
-procesando : . . . {ASSIGN(=), 0+2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{ASSIGN} de class ir.ast.BinOpExpr
-
-Result = 2
-finalizado.
-
-procesando : . . . {PLUS(+), VarLocation{name=factorLabel6, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factorLabel6, type=int, expr=5, size=0}}
-finalizado.
-
-procesando : . . . {JMP, null, null, Result: BeginForLabel9}
-finalizado.
-
-procesando : . . . {LABEL, null, null, Result: EndForLabel10}
-finalizado.
-
-procesando : . . . {LABEL, null, null, Result: EndMethod pruArreglos}
-finalizado.
-
-procesando : . . . {LABEL, null, null, Result: BeginMethod main}
-finalizado.
-
-
-procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-finalizado.
-
-procesando : . . . {PARAM, null, null, Result: [4, 8]}
-index: 1 tamaño: 2
-
-Result = 8
-index: 0 tamaño: 2
-
-Result = 4
-finalizado.
-
-procesando : . . . {METHODCALL, pruArreglos, 2, Result: RESULTLabel15}
-finalizado.
-
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel17}
-finalizado.
-
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel18, type=int, expr=1, size=0}}
-finalizado.
-
-procesando : . . . {LABEL, null, null, Result: EndMethod main}
-finalizado.
-
-
-    .comm A,20
-
-    .comm B,224
-
-    .comm C,40
-
-
-    .text
-    .globl	pruArreglos
-    .type	pruArreglos, @function 
-pruArreglos: 
-    enter   $(8), $0 
-    pushl	%ebp
-    movl %esp, %ebp
-
-    movl $2, -44(%ebp)
-
-ARRAYACCESS
-
- ArrayLiteral   movl -24(%ebp), %eax
-
-    movl -4(%ebp) , %eax 
-    movl -28(%ebp) , %edx 
-    imull %edx, %eax 
-    movl %eax,-32(%ebp) 
-
-.BeginForLabel9:
-
-    movl -32(%ebp), %eax
-    cmpl -24(%ebp), %eax
-
-    jnl EndForLabel10
-
-    movl -4(%ebp) , %eax 
-    movl -36(%ebp) , %edx 
-    addl %eax, %edx 
-    movl %edx,-40(%ebp) 
-
-    movl $2, -44(%ebp)
-
-    movl -24(%ebp) , %eax 
-    movl $1, %edx 
-    addl %eax, %edx 
-    movl %edx,-24(%ebp) 
-
-    jmp BeginForLabel9
-
-.EndForLabel10:
-
-    leave
-    ret
-
-
-
-    .text
-    .globl	main
-    .type	main, @function 
-main: 
-    pushl	%ebp
-    movl %esp, %ebp
-
-    movl $8 , 12(%esp)
-    movl $4 , 8(%esp)
-
-    call pruArreglos
-
-    call printf
-
-    movl $1, %eax
-
-    leave
-    ret
-
-
----------------------------------------------------
-  
-  
----------------- Test tests/test_correctos/test_for02.ctds ... -------------------
-parseo iniciado
-
-parseo exitoso
 tamaño lista de codigo tercetos: 24
 lista: 
 {null, int, A, Result: 5}
@@ -7529,14 +7179,14 @@ lista:
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0, offset=0}, Simbolo{type=int, name=c, value=null, size=0, offset=0}]}, null, Result: null}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{ARRAYACCESS, A, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: ArrayAccessLabel4}
-{RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
+{RETURN, null, null, Result: VarLocation{name=factorLabel4, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=factorLabel3, type=int, expr=1, size=0}}, size=0}}
+{MULTIPLY(*), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel6, type=int, expr=10, size=0}, Result: VarLocation{name=MULTIPLYLabel7, type=int, expr=0*10, size=0}}
 {LABEL, null, null, Result: BeginForLabel8}
-{CMP, VarLocation{name=factorLabel6, type=int, expr=5, size=0}, VarLocation{name=factorLabel7, type=int, expr=10, size=0}, Result: null}
+{CMP, VarLocation{name=factorLabel5, type=int, expr=5, size=0}, VarLocation{name=MULTIPLYLabel7, type=int, expr=0*10, size=0}, Result: null}
 {JNL, null, null, Result: EndForLabel9}
 {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel10, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel11, type=int, expr=0+2, size=0}}
 {ASSIGN(=), 0+2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{PLUS(+), VarLocation{name=factorLabel6, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factorLabel6, type=int, expr=5, size=0}}
+{PLUS(+), VarLocation{name=factorLabel5, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factorLabel5, type=int, expr=5, size=0}}
 {JMP, null, null, Result: BeginForLabel8}
 {LABEL, null, null, Result: EndForLabel9}
 {LABEL, null, null, Result: EndMethod pruArreglos}
@@ -7566,21 +7216,24 @@ procesando : . . . {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, 
 finalizado.
 
 procesando : . . . {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
-procesando : . . . {ARRAYACCESS, A, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: ArrayAccessLabel4}
-finalizado.
-
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel4, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=factorLabel3, type=int, expr=1, size=0}}, size=0}}
 buscado: A
 actual VarLocation{name=A, type=int[], expr=null, size=5}
+{RETURN} ArrayLiteral expr: VarLocation{name=factorLabel3, type=int, expr=1, size=0} , class ir.ast.VarLocation
+
+Result = 1
+expr evaluada: 1
+finalizado.
+
+procesando : . . . {MULTIPLY(*), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel6, type=int, expr=10, size=0}, Result: VarLocation{name=MULTIPLYLabel7, type=int, expr=0*10, size=0}}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: BeginForLabel8}
 finalizado.
 
-procesando : . . . {CMP, VarLocation{name=factorLabel6, type=int, expr=5, size=0}, VarLocation{name=factorLabel7, type=int, expr=10, size=0}, Result: null}
+procesando : . . . {CMP, VarLocation{name=factorLabel5, type=int, expr=5, size=0}, VarLocation{name=MULTIPLYLabel7, type=int, expr=0*10, size=0}, Result: null}
 finalizado.
 
 procesando : . . . {JNL, null, null, Result: EndForLabel9}
@@ -7590,12 +7243,11 @@ procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarL
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 2
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=factorLabel6, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factorLabel6, type=int, expr=5, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=factorLabel5, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factorLabel5, type=int, expr=5, size=0}}
 finalizado.
 
 procesando : . . . {JMP, null, null, Result: BeginForLabel8}
@@ -7653,21 +7305,24 @@ pruArreglos:
 
     movl $2, -44(%ebp)
 
-ARRAYACCESS
+    movl -40(%ebp), %eax
 
- ArrayLiteral   movl -24(%ebp), %eax
+    movl -4(%ebp) , %eax 
+    movl -28(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-32(%ebp) 
 
 .BeginForLabel8:
 
-    movl -28(%ebp), %eax
+    movl -32(%ebp), %eax
     cmpl -24(%ebp), %eax
 
     jnl EndForLabel9
 
     movl -4(%ebp) , %eax 
-    movl -32(%ebp) , %edx 
+    movl -36(%ebp) , %edx 
     addl %eax, %edx 
-    movl %edx,-36(%ebp) 
+    movl %edx,-40(%ebp) 
 
     movl $2, -44(%ebp)
 
@@ -7708,11 +7363,11 @@ main:
 ---------------------------------------------------
   
   
----------------- Test tests/test_correctos/test_for03.ctds ... -------------------
+---------------- Test tests/test_correctos/test_for02.ctds ... -------------------
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 25
+tamaño lista de codigo tercetos: 23
 lista: 
 {null, int, A, Result: 5}
 {null, float, B, Result: 56}
@@ -7721,25 +7376,23 @@ lista:
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0, offset=0}, Simbolo{type=int, name=c, value=null, size=0, offset=0}]}, null, Result: null}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{ARRAYACCESS, A, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: ArrayAccessLabel4}
-{RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
-{UNARYMINUS(-expr), VarLocation{name=factorLabel7, type=int, expr=10, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel8, type=int, expr=-10, size=0}}
-{LABEL, null, null, Result: BeginForLabel9}
-{CMP, VarLocation{name=factorLabel6, type=int, expr=5, size=0}, VarLocation{name=UNARYMINUSLabel8, type=int, expr=-10, size=0}, Result: null}
-{JNL, null, null, Result: EndForLabel10}
-{PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel11, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel12, type=int, expr=0+2, size=0}}
+{RETURN, null, null, Result: VarLocation{name=factorLabel4, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=factorLabel3, type=int, expr=1, size=0}}, size=0}}
+{LABEL, null, null, Result: BeginForLabel7}
+{CMP, VarLocation{name=factorLabel5, type=int, expr=5, size=0}, VarLocation{name=factorLabel6, type=int, expr=10, size=0}, Result: null}
+{JNL, null, null, Result: EndForLabel8}
+{PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel9, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel10, type=int, expr=0+2, size=0}}
 {ASSIGN(=), 0+2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{PLUS(+), VarLocation{name=factorLabel6, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factorLabel6, type=int, expr=5, size=0}}
-{JMP, null, null, Result: BeginForLabel9}
-{LABEL, null, null, Result: EndForLabel10}
+{PLUS(+), VarLocation{name=factorLabel5, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factorLabel5, type=int, expr=5, size=0}}
+{JMP, null, null, Result: BeginForLabel7}
+{LABEL, null, null, Result: EndForLabel8}
 {LABEL, null, null, Result: EndMethod pruArreglos}
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [4, 8]}
-{METHODCALL, pruArreglos, 2, Result: RESULTLabel15}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel17}
-{RETURN, null, null, Result: VarLocation{name=factorLabel18, type=int, expr=1, size=0}}
+{METHODCALL, pruArreglos, 2, Result: RESULTLabel13}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel15}
+{RETURN, null, null, Result: VarLocation{name=factorLabel16, type=int, expr=1, size=0}}
 {LABEL, null, null, Result: EndMethod main}
 
 procesando : . . . {null, int, A, Result: 5}
@@ -7759,45 +7412,41 @@ procesando : . . . {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, 
 finalizado.
 
 procesando : . . . {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
-procesando : . . . {ARRAYACCESS, A, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: ArrayAccessLabel4}
-finalizado.
-
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel4, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=factorLabel3, type=int, expr=1, size=0}}, size=0}}
 buscado: A
 actual VarLocation{name=A, type=int[], expr=null, size=5}
+{RETURN} ArrayLiteral expr: VarLocation{name=factorLabel3, type=int, expr=1, size=0} , class ir.ast.VarLocation
+
+Result = 1
+expr evaluada: 1
 finalizado.
 
-procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel7, type=int, expr=10, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel8, type=int, expr=-10, size=0}}
+procesando : . . . {LABEL, null, null, Result: BeginForLabel7}
 finalizado.
 
-procesando : . . . {LABEL, null, null, Result: BeginForLabel9}
+procesando : . . . {CMP, VarLocation{name=factorLabel5, type=int, expr=5, size=0}, VarLocation{name=factorLabel6, type=int, expr=10, size=0}, Result: null}
 finalizado.
 
-procesando : . . . {CMP, VarLocation{name=factorLabel6, type=int, expr=5, size=0}, VarLocation{name=UNARYMINUSLabel8, type=int, expr=-10, size=0}, Result: null}
+procesando : . . . {JNL, null, null, Result: EndForLabel8}
 finalizado.
 
-procesando : . . . {JNL, null, null, Result: EndForLabel10}
-finalizado.
-
-procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel11, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel12, type=int, expr=0+2, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel9, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel10, type=int, expr=0+2, size=0}}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 2
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=factorLabel6, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factorLabel6, type=int, expr=5, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=factorLabel5, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factorLabel5, type=int, expr=5, size=0}}
 finalizado.
 
-procesando : . . . {JMP, null, null, Result: BeginForLabel9}
+procesando : . . . {JMP, null, null, Result: BeginForLabel7}
 finalizado.
 
-procesando : . . . {LABEL, null, null, Result: EndForLabel10}
+procesando : . . . {LABEL, null, null, Result: EndForLabel8}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod pruArreglos}
@@ -7819,13 +7468,13 @@ index: 0 tamaño: 2
 Result = 4
 finalizado.
 
-procesando : . . . {METHODCALL, pruArreglos, 2, Result: RESULTLabel15}
+procesando : . . . {METHODCALL, pruArreglos, 2, Result: RESULTLabel13}
 finalizado.
 
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel17}
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel15}
 finalizado.
 
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel18, type=int, expr=1, size=0}}
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel16, type=int, expr=1, size=0}}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -7849,20 +7498,210 @@ pruArreglos:
 
     movl $2, -44(%ebp)
 
-ARRAYACCESS
+    movl -40(%ebp), %eax
 
- ArrayLiteral   movl -24(%ebp), %eax
+.BeginForLabel7:
+
+    movl -28(%ebp), %eax
+    cmpl -24(%ebp), %eax
+
+    jnl EndForLabel8
+
+    movl -4(%ebp) , %eax 
+    movl -32(%ebp) , %edx 
+    addl %eax, %edx 
+    movl %edx,-36(%ebp) 
+
+    movl $2, -44(%ebp)
+
+    movl -24(%ebp) , %eax 
+    movl $1, %edx 
+    addl %eax, %edx 
+    movl %edx,-24(%ebp) 
+
+    jmp BeginForLabel7
+
+.EndForLabel8:
+
+    leave
+    ret
+
+
+
+    .text
+    .globl	main
+    .type	main, @function 
+main: 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl $8 , 12(%esp)
+    movl $4 , 8(%esp)
+
+    call pruArreglos
+
+    call printf
+
+    movl $1, %eax
+
+    leave
+    ret
+
+
+---------------------------------------------------
+  
+  
+---------------- Test tests/test_correctos/test_for03.ctds ... -------------------
+parseo iniciado
+
+parseo exitoso
+tamaño lista de codigo tercetos: 24
+lista: 
+{null, int, A, Result: 5}
+{null, float, B, Result: 56}
+{null, boolean, C, Result: 10}
+{LABEL, null, null, Result: BeginMethod pruArreglos}
+
+{METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0, offset=0}, Simbolo{type=int, name=c, value=null, size=0, offset=0}]}, null, Result: null}
+{ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
+{RETURN, null, null, Result: VarLocation{name=factorLabel4, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=factorLabel3, type=int, expr=1, size=0}}, size=0}}
+{UNARYMINUS(-expr), VarLocation{name=factorLabel6, type=int, expr=10, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel7, type=int, expr=-10, size=0}}
+{LABEL, null, null, Result: BeginForLabel8}
+{CMP, VarLocation{name=factorLabel5, type=int, expr=5, size=0}, VarLocation{name=UNARYMINUSLabel7, type=int, expr=-10, size=0}, Result: null}
+{JNL, null, null, Result: EndForLabel9}
+{PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel10, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel11, type=int, expr=0+2, size=0}}
+{ASSIGN(=), 0+2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
+{PLUS(+), VarLocation{name=factorLabel5, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factorLabel5, type=int, expr=5, size=0}}
+{JMP, null, null, Result: BeginForLabel8}
+{LABEL, null, null, Result: EndForLabel9}
+{LABEL, null, null, Result: EndMethod pruArreglos}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
+{PARAM, null, null, Result: [4, 8]}
+{METHODCALL, pruArreglos, 2, Result: RESULTLabel14}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel16}
+{RETURN, null, null, Result: VarLocation{name=factorLabel17, type=int, expr=1, size=0}}
+{LABEL, null, null, Result: EndMethod main}
+
+procesando : . . . {null, int, A, Result: 5}
+finalizado.
+
+procesando : . . . {null, float, B, Result: 56}
+finalizado.
+
+procesando : . . . {null, boolean, C, Result: 10}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: BeginMethod pruArreglos}
+finalizado.
+
+
+procesando : . . . {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0, offset=0}, Simbolo{type=int, name=c, value=null, size=0, offset=0}]}, null, Result: null}
+finalizado.
+
+procesando : . . . {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
+finalizado.
+
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel4, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=factorLabel3, type=int, expr=1, size=0}}, size=0}}
+buscado: A
+actual VarLocation{name=A, type=int[], expr=null, size=5}
+{RETURN} ArrayLiteral expr: VarLocation{name=factorLabel3, type=int, expr=1, size=0} , class ir.ast.VarLocation
+
+Result = 1
+expr evaluada: 1
+finalizado.
+
+procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel6, type=int, expr=10, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel7, type=int, expr=-10, size=0}}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: BeginForLabel8}
+finalizado.
+
+procesando : . . . {CMP, VarLocation{name=factorLabel5, type=int, expr=5, size=0}, VarLocation{name=UNARYMINUSLabel7, type=int, expr=-10, size=0}, Result: null}
+finalizado.
+
+procesando : . . . {JNL, null, null, Result: EndForLabel9}
+finalizado.
+
+procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel10, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel11, type=int, expr=0+2, size=0}}
+finalizado.
+
+procesando : . . . {ASSIGN(=), 0+2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
+
+Result = 2
+finalizado.
+
+procesando : . . . {PLUS(+), VarLocation{name=factorLabel5, type=int, expr=5, size=0}, 1, Result: VarLocation{name=factorLabel5, type=int, expr=5, size=0}}
+finalizado.
+
+procesando : . . . {JMP, null, null, Result: BeginForLabel8}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: EndForLabel9}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: EndMethod pruArreglos}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: BeginMethod main}
+finalizado.
+
+
+procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [4, 8]}
+index: 1 tamaño: 2
+
+Result = 8
+index: 0 tamaño: 2
+
+Result = 4
+finalizado.
+
+procesando : . . . {METHODCALL, pruArreglos, 2, Result: RESULTLabel14}
+finalizado.
+
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel16}
+finalizado.
+
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel17, type=int, expr=1, size=0}}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: EndMethod main}
+finalizado.
+
+
+    .comm A,20
+
+    .comm B,224
+
+    .comm C,40
+
+
+    .text
+    .globl	pruArreglos
+    .type	pruArreglos, @function 
+pruArreglos: 
+    enter   $(8), $0 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl $2, -44(%ebp)
+
+    movl -40(%ebp), %eax
 
     movl	-28(%ebp), %eax 
     negl	%eax 
     movl	%eax, -32(%ebp) 
 
-.BeginForLabel9:
+.BeginForLabel8:
 
     movl -32(%ebp), %eax
     cmpl -24(%ebp), %eax
 
-    jnl EndForLabel10
+    jnl EndForLabel9
 
     movl -4(%ebp) , %eax 
     movl -36(%ebp) , %edx 
@@ -7876,9 +7715,9 @@ ARRAYACCESS
     addl %eax, %edx 
     movl %edx,-24(%ebp) 
 
-    jmp BeginForLabel9
+    jmp BeginForLabel8
 
-.EndForLabel10:
+.EndForLabel9:
 
     leave
     ret
@@ -7912,7 +7751,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 27
+tamaño lista de codigo tercetos: 26
 lista: 
 {null, int, A, Result: 5}
 {null, float, B, Result: 56}
@@ -7921,27 +7760,26 @@ lista:
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0, offset=0}, Simbolo{type=int, name=c, value=null, size=0, offset=0}]}, null, Result: null}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{ARRAYACCESS, A, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: ArrayAccessLabel4}
-{RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
-{UNARYMINUS(-expr), VarLocation{name=factorLabel7, type=int, expr=10, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel8, type=int, expr=-10, size=0}}
-{MULTIPLY(*), VarLocation{name=factorLabel9, type=int, expr=11, size=0}, VarLocation{name=factorLabel10, type=int, expr=2, size=0}, Result: VarLocation{name=MULTIPLYLabel11, type=int, expr=11*2, size=0}}
-{PLUS(+), VarLocation{name=UNARYMINUSLabel8, type=int, expr=-10, size=0}, VarLocation{name=MULTIPLYLabel11, type=int, expr=11*2, size=0}, Result: VarLocation{name=PLUSLabel12, type=int, expr=-10+11*2, size=0}}
-{LABEL, null, null, Result: BeginForLabel13}
-{CMP, VarLocation{name=factorLabel6, type=int, expr=0, size=0}, VarLocation{name=PLUSLabel12, type=int, expr=-10+11*2, size=0}, Result: null}
-{JNL, null, null, Result: EndForLabel14}
-{PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel15, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel16, type=int, expr=0+2, size=0}}
+{RETURN, null, null, Result: VarLocation{name=factorLabel4, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=factorLabel3, type=int, expr=1, size=0}}, size=0}}
+{UNARYMINUS(-expr), VarLocation{name=factorLabel6, type=int, expr=10, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel7, type=int, expr=-10, size=0}}
+{MULTIPLY(*), VarLocation{name=factorLabel8, type=int, expr=11, size=0}, VarLocation{name=factorLabel9, type=int, expr=2, size=0}, Result: VarLocation{name=MULTIPLYLabel10, type=int, expr=11*2, size=0}}
+{PLUS(+), VarLocation{name=UNARYMINUSLabel7, type=int, expr=-10, size=0}, VarLocation{name=MULTIPLYLabel10, type=int, expr=11*2, size=0}, Result: VarLocation{name=PLUSLabel11, type=int, expr=-10+11*2, size=0}}
+{LABEL, null, null, Result: BeginForLabel12}
+{CMP, VarLocation{name=factorLabel5, type=int, expr=0, size=0}, VarLocation{name=PLUSLabel11, type=int, expr=-10+11*2, size=0}, Result: null}
+{JNL, null, null, Result: EndForLabel13}
+{PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel14, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel15, type=int, expr=0+2, size=0}}
 {ASSIGN(=), 0+2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{PLUS(+), VarLocation{name=factorLabel6, type=int, expr=0, size=0}, 1, Result: VarLocation{name=factorLabel6, type=int, expr=0, size=0}}
-{JMP, null, null, Result: BeginForLabel13}
-{LABEL, null, null, Result: EndForLabel14}
+{PLUS(+), VarLocation{name=factorLabel5, type=int, expr=0, size=0}, 1, Result: VarLocation{name=factorLabel5, type=int, expr=0, size=0}}
+{JMP, null, null, Result: BeginForLabel12}
+{LABEL, null, null, Result: EndForLabel13}
 {LABEL, null, null, Result: EndMethod pruArreglos}
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [4, 8]}
-{METHODCALL, pruArreglos, 2, Result: RESULTLabel19}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel21}
-{RETURN, null, null, Result: VarLocation{name=factorLabel22, type=int, expr=1, size=0}}
+{METHODCALL, pruArreglos, 2, Result: RESULTLabel18}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel20}
+{RETURN, null, null, Result: VarLocation{name=factorLabel21, type=int, expr=1, size=0}}
 {LABEL, null, null, Result: EndMethod main}
 
 procesando : . . . {null, int, A, Result: 5}
@@ -7961,51 +7799,50 @@ procesando : . . . {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, 
 finalizado.
 
 procesando : . . . {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
-procesando : . . . {ARRAYACCESS, A, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: ArrayAccessLabel4}
-finalizado.
-
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel4, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=factorLabel3, type=int, expr=1, size=0}}, size=0}}
 buscado: A
 actual VarLocation{name=A, type=int[], expr=null, size=5}
+{RETURN} ArrayLiteral expr: VarLocation{name=factorLabel3, type=int, expr=1, size=0} , class ir.ast.VarLocation
+
+Result = 1
+expr evaluada: 1
 finalizado.
 
-procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel7, type=int, expr=10, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel8, type=int, expr=-10, size=0}}
+procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel6, type=int, expr=10, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel7, type=int, expr=-10, size=0}}
 finalizado.
 
-procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel9, type=int, expr=11, size=0}, VarLocation{name=factorLabel10, type=int, expr=2, size=0}, Result: VarLocation{name=MULTIPLYLabel11, type=int, expr=11*2, size=0}}
+procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel8, type=int, expr=11, size=0}, VarLocation{name=factorLabel9, type=int, expr=2, size=0}, Result: VarLocation{name=MULTIPLYLabel10, type=int, expr=11*2, size=0}}
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=UNARYMINUSLabel8, type=int, expr=-10, size=0}, VarLocation{name=MULTIPLYLabel11, type=int, expr=11*2, size=0}, Result: VarLocation{name=PLUSLabel12, type=int, expr=-10+11*2, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=UNARYMINUSLabel7, type=int, expr=-10, size=0}, VarLocation{name=MULTIPLYLabel10, type=int, expr=11*2, size=0}, Result: VarLocation{name=PLUSLabel11, type=int, expr=-10+11*2, size=0}}
 finalizado.
 
-procesando : . . . {LABEL, null, null, Result: BeginForLabel13}
+procesando : . . . {LABEL, null, null, Result: BeginForLabel12}
 finalizado.
 
-procesando : . . . {CMP, VarLocation{name=factorLabel6, type=int, expr=0, size=0}, VarLocation{name=PLUSLabel12, type=int, expr=-10+11*2, size=0}, Result: null}
+procesando : . . . {CMP, VarLocation{name=factorLabel5, type=int, expr=0, size=0}, VarLocation{name=PLUSLabel11, type=int, expr=-10+11*2, size=0}, Result: null}
 finalizado.
 
-procesando : . . . {JNL, null, null, Result: EndForLabel14}
+procesando : . . . {JNL, null, null, Result: EndForLabel13}
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel15, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel16, type=int, expr=0+2, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel14, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel15, type=int, expr=0+2, size=0}}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 2
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=factorLabel6, type=int, expr=0, size=0}, 1, Result: VarLocation{name=factorLabel6, type=int, expr=0, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=factorLabel5, type=int, expr=0, size=0}, 1, Result: VarLocation{name=factorLabel5, type=int, expr=0, size=0}}
 finalizado.
 
-procesando : . . . {JMP, null, null, Result: BeginForLabel13}
+procesando : . . . {JMP, null, null, Result: BeginForLabel12}
 finalizado.
 
-procesando : . . . {LABEL, null, null, Result: EndForLabel14}
+procesando : . . . {LABEL, null, null, Result: EndForLabel13}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod pruArreglos}
@@ -8027,13 +7864,13 @@ index: 0 tamaño: 2
 Result = 4
 finalizado.
 
-procesando : . . . {METHODCALL, pruArreglos, 2, Result: RESULTLabel19}
+procesando : . . . {METHODCALL, pruArreglos, 2, Result: RESULTLabel18}
 finalizado.
 
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel21}
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel20}
 finalizado.
 
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel22, type=int, expr=1, size=0}}
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel21, type=int, expr=1, size=0}}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -8057,9 +7894,7 @@ pruArreglos:
 
     movl $2, -44(%ebp)
 
-ARRAYACCESS
-
- ArrayLiteral   movl -24(%ebp), %eax
+    movl -40(%ebp), %eax
 
     movl	-28(%ebp), %eax 
     negl	%eax 
@@ -8075,12 +7910,12 @@ ARRAYACCESS
     addl %eax, %edx 
     movl %edx,-48(%ebp) 
 
-.BeginForLabel13:
+.BeginForLabel12:
 
     movl -48(%ebp), %eax
     cmpl -24(%ebp), %eax
 
-    jnl EndForLabel14
+    jnl EndForLabel13
 
     movl -4(%ebp) , %eax 
     movl -52(%ebp) , %edx 
@@ -8094,9 +7929,9 @@ ARRAYACCESS
     addl %eax, %edx 
     movl %edx,-24(%ebp) 
 
-    jmp BeginForLabel13
+    jmp BeginForLabel12
 
-.EndForLabel14:
+.EndForLabel13:
 
     leave
     ret
@@ -8130,7 +7965,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 31
+tamaño lista de codigo tercetos: 30
 lista: 
 {null, int, A, Result: 5}
 {null, float, B, Result: 56}
@@ -8144,27 +7979,26 @@ lista:
 
 {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=b, value=null, size=0, offset=0}, Simbolo{type=int, name=c, value=null, size=0, offset=0}]}, null, Result: null}
 {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{ARRAYACCESS, A, VarLocation{name=factorLabel4, type=int, expr=1, size=0}, Result: ArrayAccessLabel5}
-{RETURN, null, null, Result: VarLocation{name=factorLabel6, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
-{METHODCALL, par, 0, Result: RESULTLabel7}
-{METHODCALL, par, 0, Result: RESULTLabel9}
-{PLUS(+), VarLocation{name=factorLabel10, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, VarLocation{name=factorLabel11, type=int, expr=5, size=0}, Result: VarLocation{name=PLUSLabel12, type=int, expr=MethodCallExpr{name=par, args=[]}+5, size=0}}
-{LABEL, null, null, Result: BeginForLabel13}
-{CMP, VarLocation{name=factorLabel8, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, VarLocation{name=PLUSLabel12, type=int, expr=MethodCallExpr{name=par, args=[]}+5, size=0}, Result: null}
-{JNL, null, null, Result: EndForLabel14}
-{PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel15, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel16, type=int, expr=0+2, size=0}}
+{RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=factorLabel4, type=int, expr=1, size=0}}, size=0}}
+{METHODCALL, par, 0, Result: RESULTLabel6}
+{METHODCALL, par, 0, Result: RESULTLabel8}
+{PLUS(+), VarLocation{name=factorLabel9, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, VarLocation{name=factorLabel10, type=int, expr=5, size=0}, Result: VarLocation{name=PLUSLabel11, type=int, expr=MethodCallExpr{name=par, args=[]}+5, size=0}}
+{LABEL, null, null, Result: BeginForLabel12}
+{CMP, VarLocation{name=factorLabel7, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, VarLocation{name=PLUSLabel11, type=int, expr=MethodCallExpr{name=par, args=[]}+5, size=0}, Result: null}
+{JNL, null, null, Result: EndForLabel13}
+{PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel14, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel15, type=int, expr=0+2, size=0}}
 {ASSIGN(=), 0+2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{PLUS(+), VarLocation{name=factorLabel8, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, 1, Result: VarLocation{name=factorLabel8, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}}
-{JMP, null, null, Result: BeginForLabel13}
-{LABEL, null, null, Result: EndForLabel14}
+{PLUS(+), VarLocation{name=factorLabel7, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, 1, Result: VarLocation{name=factorLabel7, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}}
+{JMP, null, null, Result: BeginForLabel12}
+{LABEL, null, null, Result: EndForLabel13}
 {LABEL, null, null, Result: EndMethod pruArreglos}
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [4, 8]}
-{METHODCALL, pruArreglos, 2, Result: RESULTLabel19}
-{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel21}
-{RETURN, null, null, Result: VarLocation{name=factorLabel22, type=int, expr=1, size=0}}
+{METHODCALL, pruArreglos, 2, Result: RESULTLabel18}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel20}
+{RETURN, null, null, Result: VarLocation{name=factorLabel21, type=int, expr=1, size=0}}
 {LABEL, null, null, Result: EndMethod main}
 
 procesando : . . . {null, int, A, Result: 5}
@@ -8197,51 +8031,50 @@ procesando : . . . {METHODDECL, Metodo{ name=pruArreglos, return_not_void=true, 
 finalizado.
 
 procesando : . . . {ASSIGN(=), 2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
-procesando : . . . {ARRAYACCESS, A, VarLocation{name=factorLabel4, type=int, expr=1, size=0}, Result: ArrayAccessLabel5}
-finalizado.
-
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel6, type=int[], expr=ArrayLiteral{id=A, index=5}, size=0}}
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int[], expr=ArrayLiteral{id=A, index=VarLocation{name=factorLabel4, type=int, expr=1, size=0}}, size=0}}
 buscado: A
 actual VarLocation{name=A, type=int[], expr=null, size=5}
+{RETURN} ArrayLiteral expr: VarLocation{name=factorLabel4, type=int, expr=1, size=0} , class ir.ast.VarLocation
+
+Result = 1
+expr evaluada: 1
 finalizado.
 
-procesando : . . . {METHODCALL, par, 0, Result: RESULTLabel7}
+procesando : . . . {METHODCALL, par, 0, Result: RESULTLabel6}
 finalizado.
 
-procesando : . . . {METHODCALL, par, 0, Result: RESULTLabel9}
+procesando : . . . {METHODCALL, par, 0, Result: RESULTLabel8}
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=factorLabel10, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, VarLocation{name=factorLabel11, type=int, expr=5, size=0}, Result: VarLocation{name=PLUSLabel12, type=int, expr=MethodCallExpr{name=par, args=[]}+5, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=factorLabel9, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, VarLocation{name=factorLabel10, type=int, expr=5, size=0}, Result: VarLocation{name=PLUSLabel11, type=int, expr=MethodCallExpr{name=par, args=[]}+5, size=0}}
 finalizado.
 
-procesando : . . . {LABEL, null, null, Result: BeginForLabel13}
+procesando : . . . {LABEL, null, null, Result: BeginForLabel12}
 finalizado.
 
-procesando : . . . {CMP, VarLocation{name=factorLabel8, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, VarLocation{name=PLUSLabel12, type=int, expr=MethodCallExpr{name=par, args=[]}+5, size=0}, Result: null}
+procesando : . . . {CMP, VarLocation{name=factorLabel7, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, VarLocation{name=PLUSLabel11, type=int, expr=MethodCallExpr{name=par, args=[]}+5, size=0}, Result: null}
 finalizado.
 
-procesando : . . . {JNL, null, null, Result: EndForLabel14}
+procesando : . . . {JNL, null, null, Result: EndForLabel13}
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel15, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel16, type=int, expr=0+2, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=factorLabel14, type=int, expr=2, size=0}, Result: VarLocation{name=PLUSLabel15, type=int, expr=0+2, size=0}}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+2, null, Result: VarLocation{name=A, type=int[], expr=0, size=5}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 2
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=factorLabel8, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, 1, Result: VarLocation{name=factorLabel8, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=factorLabel7, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}, 1, Result: VarLocation{name=factorLabel7, type=int, expr=MethodCallExpr{name=par, args=[]}, size=0}}
 finalizado.
 
-procesando : . . . {JMP, null, null, Result: BeginForLabel13}
+procesando : . . . {JMP, null, null, Result: BeginForLabel12}
 finalizado.
 
-procesando : . . . {LABEL, null, null, Result: EndForLabel14}
+procesando : . . . {LABEL, null, null, Result: EndForLabel13}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod pruArreglos}
@@ -8263,13 +8096,13 @@ index: 0 tamaño: 2
 Result = 4
 finalizado.
 
-procesando : . . . {METHODCALL, pruArreglos, 2, Result: RESULTLabel19}
+procesando : . . . {METHODCALL, pruArreglos, 2, Result: RESULTLabel18}
 finalizado.
 
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel21}
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel20}
 finalizado.
 
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel22, type=int, expr=1, size=0}}
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel21, type=int, expr=1, size=0}}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -8307,9 +8140,7 @@ pruArreglos:
 
     movl $2, -44(%ebp)
 
-ARRAYACCESS
-
- ArrayLiteral   movl -24(%ebp), %eax
+    movl -40(%ebp), %eax
 
     call par
 
@@ -8320,12 +8151,12 @@ ARRAYACCESS
     addl %eax, %edx 
     movl %edx,-36(%ebp) 
 
-.BeginForLabel13:
+.BeginForLabel12:
 
     movl -36(%ebp), %eax
     cmpl -24(%ebp), %eax
 
-    jnl EndForLabel14
+    jnl EndForLabel13
 
     movl -4(%ebp) , %eax 
     movl -40(%ebp) , %edx 
@@ -8339,9 +8170,9 @@ ARRAYACCESS
     addl %eax, %edx 
     movl %edx,-24(%ebp) 
 
-    jmp BeginForLabel13
+    jmp BeginForLabel12
 
-.EndForLabel14:
+.EndForLabel13:
 
     leave
     ret
@@ -8444,7 +8275,6 @@ procesando : . . . {MINUS(-), VarLocation{name=factorLabel9, type=int, expr=0, s
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0-0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 0
 finalizado.
@@ -8459,7 +8289,6 @@ procesando : . . . {MINUS(-), VarLocation{name=c, type=int, expr=0, size=0}, Var
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0-0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 0
 finalizado.
@@ -8477,7 +8306,6 @@ procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel13, type=int, expr=
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0*5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 0
 finalizado.
@@ -8717,7 +8545,6 @@ procesando : . . . {MINUS(-), VarLocation{name=factorLabel5, type=int, expr=0, s
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0-0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 0
 finalizado.
@@ -8744,7 +8571,6 @@ procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel11, type=int, expr=
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0*5, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 0
 finalizado.
@@ -8759,7 +8585,6 @@ procesando : . . . {MINUS(-), VarLocation{name=c, type=int, expr=0, size=0}, Var
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0-0, null, Result: VarLocation{name=res, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 0
 finalizado.
@@ -8968,8 +8793,6 @@ procesando : . . . {METHODDECL, Metodo{ name=pruebaLogica, return_not_void=true,
 finalizado.
 
 procesando : . . . {ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BoolLiteral
-{ASSIGN}2 FALTA CASO class ir.ast.BoolLiteral
 finalizado.
 
 procesando : . . . {OR(||), VarLocation{name=factorLabel2, type=boolean, expr=false, size=0}, VarLocation{name=a, type=boolean, expr=false, size=0}, Result: VarLocation{name=DISYUNCIONLabel3, type=boolean, expr=false||false, size=0}}
@@ -9020,6 +8843,7 @@ pruebaLogica:
     pushl	%ebp
     movl %esp, %ebp
 
+    movl $1, -4(%ebp)
 
     cmpl	$0, -12(%ebp)
     jne .L0
@@ -9373,9 +9197,9 @@ promedio:
     movl %edx,-24(%ebp) 
 
     movl -24(%ebp) , %eax 
-    movl -28(%ebp) , %ecx 
+    movl -28(%ebp) , %ecx
 	 cltd
-+    idiv %ecx
+    idiv %ecx
     movl %ecx,-32(%ebp) 
 
     movl -32(%ebp), %eax
@@ -9422,9 +9246,9 @@ promedio:
     movl %edx,-56(%ebp) 
 
     movl -56(%ebp) , %eax 
-    movl -60(%ebp) , %ecx 
+    movl -60(%ebp) , %ecx
 	 cltd
-+    idiv %ecx
+    idiv %ecx
     movl %ecx,-64(%ebp) 
 
     movl -64(%ebp), %eax
@@ -9471,9 +9295,9 @@ promedio:
     movl %edx,-88(%ebp) 
 
     movl -88(%ebp) , %eax 
-    movl -92(%ebp) , %ecx 
+    movl -92(%ebp) , %ecx
 	 cltd
-+    idiv %ecx
+    idiv %ecx
     movl %ecx,-96(%ebp) 
 
     movl -96(%ebp), %eax
@@ -9594,15 +9418,12 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=false, typeRe
 finalizado.
 
 procesando : . . . {ASSIGN(=), true, null, Result: VarLocation{name=a, type=boolean, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BoolLiteral
-{ASSIGN}2 FALTA CASO class ir.ast.BoolLiteral
 finalizado.
 
 procesando : . . . {NON(!), VarLocation{name=a, type=boolean, expr=false, size=0}, null, Result: VarLocation{name=NONLabel2, type=boolean, expr=!false, size=0}}
 finalizado.
 
 procesando : . . . {ASSIGN(=), !false, null, Result: VarLocation{name=b, type=boolean, expr=null, size=0}}
-{ASSIGN} de class ir.ast.UnaryOpExpr
 ocurrio un error: For input string: "0!false"
 ---------------------------------------------------
   
@@ -9664,11 +9485,9 @@ procesando : . . . {JNE, null, null, Result: elseCondLabel3}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {JMP, null, null, Result: endIfLabel4}
@@ -9678,18 +9497,15 @@ procesando : . . . {LABEL, null, null, Result: elseCondLabel3}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: endIfLabel4}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 1, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {NEQ(!=), VarLocation{name=resto, type=int, expr=0, size=0}, VarLocation{name=factorLabel8, type=int, expr=0, size=0}, Result: VarLocation{name=NEQLabel9, type=boolean, expr=0!=0, size=0}}
@@ -9708,15 +9524,12 @@ procesando : . . . {MOD(%), VarLocation{name=dividendo, type=int, expr=0, size=0
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0%0, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {JMP, null, null, Result: BeginWhileLabel10}
@@ -9907,7 +9720,6 @@ procesando : . . . {PLUS(+), VarLocation{name=factorLabel1, type=int, expr=0, si
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -9935,7 +9747,6 @@ procesando : . . . {PLUS(+), VarLocation{name=factorLabel6, type=int, expr=0, si
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -9954,11 +9765,9 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=false, typeRe
 finalizado.
 
 procesando : . . . {ASSIGN(=), 7, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 8.0, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -10141,7 +9950,6 @@ procesando : . . . {PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarL
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -10156,7 +9964,6 @@ procesando : . . . {MINUS(-), VarLocation{name=x, type=int, expr=0, size=0}, Var
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0-1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = -1
 finalizado.
@@ -10198,7 +10005,6 @@ procesando : . . . {PLUS(+), VarLocation{name=factorLabel11, type=int, expr=0, s
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -10217,11 +10023,9 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=false, typeRe
 finalizado.
 
 procesando : . . . {ASSIGN(=), 7, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 8.0, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.FloatLiteral
 {ASSIGN}2 FALTA CASO class ir.ast.FloatLiteral
 finalizado.
 
@@ -10448,7 +10252,6 @@ procesando : . . . {DIVIDE(/), VarLocation{name=factorLabel11, type=int, expr=0,
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0/3, null, Result: VarLocation{name=res, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 0
 finalizado.
@@ -10463,7 +10266,6 @@ procesando : . . . {MOD(%), VarLocation{name=factorLabel14, type=int, expr=0, si
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0%2, null, Result: VarLocation{name=res, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 ocurrio un error: For input string: "00%2"
 ---------------------------------------------------
   
@@ -10537,11 +10339,9 @@ procesando : . . . {JNE, null, null, Result: elseCondLabel3}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {JMP, null, null, Result: endIfLabel4}
@@ -10551,18 +10351,15 @@ procesando : . . . {LABEL, null, null, Result: elseCondLabel3}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: endIfLabel4}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 1, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {NEQ(!=), VarLocation{name=resto, type=int, expr=0, size=0}, VarLocation{name=factorLabel8, type=int, expr=0, size=0}, Result: VarLocation{name=NEQLabel9, type=boolean, expr=0!=0, size=0}}
@@ -10581,15 +10378,12 @@ procesando : . . . {MOD(%), VarLocation{name=dividendo, type=int, expr=0, size=0
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0%0, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=dividendo, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=divisor, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {JMP, null, null, Result: BeginWhileLabel10}
@@ -10612,7 +10406,6 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {ASSIGN(=), 10000, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [6, 9]}
@@ -10734,9 +10527,9 @@ main:
     movl %eax,-28(%ebp) 
 
     movl -32(%ebp) , %eax 
-    movl -36(%ebp) , %ecx 
+    movl -36(%ebp) , %ecx
 	 cltd
-+    idiv %ecx
+    idiv %ecx
     movl %ecx,-40(%ebp) 
 
     movl -28(%ebp) , %eax 
@@ -10781,7 +10574,6 @@ procesando : . . . {METHODDECL, Metodo{ name=pruAritmetica, return_not_void=true
 finalizado.
 
 procesando : . . . {ASSIGN(=), 90, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {MOD(%), VarLocation{name=a, type=int, expr=0, size=0}, VarLocation{name=factorLabel2, type=int, expr=7, size=0}, Result: VarLocation{name=MODLabel3, type=int, expr=0%7, size=0}}
@@ -10882,11 +10674,9 @@ procesando : . . . {METHODDECL, Metodo{ name=pruMult, return_not_void=true, type
 finalizado.
 
 procesando : . . . {ASSIGN(=), 5, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 2000, null, Result: VarLocation{name=d, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {MULTIPLY(*), VarLocation{name=a, type=int, expr=0, size=0}, VarLocation{name=factorLabel3, type=int, expr=1000, size=0}, Result: VarLocation{name=MULTIPLYLabel4, type=int, expr=0*1000, size=0}}
@@ -11010,7 +10800,6 @@ procesando : . . . {METHODDECL, Metodo{ name=pruMult, return_not_void=true, type
 finalizado.
 
 procesando : . . . {ASSIGN(=), 5, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {MULTIPLY(*), VarLocation{name=a, type=int, expr=0, size=0}, VarLocation{name=factorLabel2, type=int, expr=7, size=0}, Result: VarLocation{name=MULTIPLYLabel3, type=int, expr=0*7, size=0}}
@@ -11108,7 +10897,6 @@ procesando : . . . {PLUS(+), VarLocation{name=factorLabel1, type=int, expr=0, si
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -11228,15 +11016,12 @@ procesando : . . . {METHODDECL, Metodo{ name=id, return_not_void=true, typeRetur
 finalizado.
 
 procesando : . . . {ASSIGN(=), 100, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=z, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {LE(<), VarLocation{name=j, type=int, expr=0, size=0}, VarLocation{name=i, type=int, expr=0, size=0}, Result: VarLocation{name=LELabel4, type=boolean, expr=0<0, size=0}}
@@ -11252,7 +11037,6 @@ procesando : . . . {JNE, null, null, Result: EndWhileLabel6}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {GE(>), VarLocation{name=factorLabel8, type=int, expr=0, size=0}, VarLocation{name=factorLabel9, type=int, expr=0, size=0}, Result: VarLocation{name=GELabel10, type=boolean, expr=0>0, size=0}}
@@ -11286,7 +11070,6 @@ procesando : . . . {MINUS(-), VarLocation{name=factorLabel22, type=int, expr=0, 
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0-1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = -1
 finalizado.
@@ -11301,7 +11084,6 @@ procesando : . . . {PLUS(+), VarLocation{name=factorLabel25, type=int, expr=0, s
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -11346,7 +11128,6 @@ procesando : . . . {PLUS(+), VarLocation{name=factorLabel39, type=int, expr=0, s
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -11382,7 +11163,6 @@ procesando : . . . {PLUS(+), VarLocation{name=MINUSLabel49, type=int, expr=0-1, 
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0-1+0*0-0*0, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = -1
 finalizado.
@@ -11406,14 +11186,12 @@ procesando : . . . {LABEL, null, null, Result: EndWhileLabel34}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {PLUS(+), VarLocation{name=j, type=int, expr=0, size=0}, VarLocation{name=factorLabel56, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel57, type=int, expr=0+1, size=0}}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=j, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -11798,11 +11576,9 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {ASSIGN(=), 3, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 1, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {INCREMENT(+=), 2, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
@@ -11961,11 +11737,9 @@ procesando : . . . {METHODDECL, Metodo{ name=sumx, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=aux, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {LE(<), VarLocation{name=i, type=int, expr=0, size=0}, VarLocation{name=n, type=int, expr=0, size=0}, Result: VarLocation{name=LELabel3, type=boolean, expr=0<0, size=0}}
@@ -11984,7 +11758,6 @@ procesando : . . . {PLUS(+), VarLocation{name=aux, type=float, expr=0.0, size=0}
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0.0+0.0, null, Result: VarLocation{name=aux, type=float, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 {ASSIGN}CASO BinOpExpr entre float y float pendiente
 finalizado.
 
@@ -11992,7 +11765,6 @@ procesando : . . . {PLUS(+), VarLocation{name=i, type=int, expr=0, size=0}, VarL
 finalizado.
 
 procesando : . . . {ASSIGN(=), 0+1, null, Result: VarLocation{name=i, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.BinOpExpr
 
 Result = 1
 finalizado.
@@ -12155,7 +11927,6 @@ procesando : . . . {METHODDECL, Metodo{ name=maxcomdiv, return_not_void=true, ty
 finalizado.
 
 procesando : . . . {ASSIGN(=), 1, null, Result: VarLocation{name=resto, type=int, expr=null, size=0}}
-{ASSIGN} de class ir.ast.IntLiteral
 finalizado.
 
 procesando : . . . {NEQ(!=), VarLocation{name=resto, type=int, expr=0, size=0}, VarLocation{name=factorLabel2, type=int, expr=0, size=0}, Result: VarLocation{name=NEQLabel3, type=boolean, expr=0!=0, size=0}}

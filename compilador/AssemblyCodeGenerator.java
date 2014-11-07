@@ -530,15 +530,15 @@ public class AssemblyCodeGenerator{
 		if(t.getSecondDir() instanceof VarLocation){
 			VarLocation  y = (VarLocation)t.getSecondDir();
 			int YOff=y.getOffset();
-			result+="    movl " + YOff + "(%ebp) , %ecx \n";
-			result+="	 cltd\n+"; 
+			result+="    movl " + YOff + "(%ebp) , %ecx\n";
+			result+="	 cltd\n"; 
 			result+="    idiv %ecx\n";
 		}else{
 			//sino, si es intliteral
 			if(t.getSecondDir() instanceof IntLiteral){
 				IntLiteral y=(IntLiteral) t.getSecondDir();
 				result+="    movl $" + y.getStringValue() + ", %ecx \n";
-				result+="	 cltd\n+"; 
+				result+="	 cltd\n"; 
 				result+="    idiv %ecx\n";
 			}else{
 				//si el operando es una operacion binaria o unaria
@@ -561,7 +561,7 @@ public class AssemblyCodeGenerator{
 						if(primExpr.getType().equals(Type.INT) && segExpr.getType().equals(Type.INT)){
 							secondOpValue=evaluateExpression(segunda.toString());
 							result+="    movl $" +secondOpValue+", %ecx \n";
-							result+="	 cltd\n+";
+							result+="	 cltd\n";
 							result+="    idiv %ecx\n";
 						}else{
 							System.out.println("{DIV2} CASO "+primExpr.getType()+" y "+ segExpr.getType()+" PENDIENTE");
@@ -572,7 +572,7 @@ public class AssemblyCodeGenerator{
 							UnaryOpExpr segunda=(UnaryOpExpr) t.getSecondDir();
 							secondOpValue=evaluateExpression(segunda.toString());
 							result+="    movl $" +secondOpValue+", %ecx \n";
-							result+="	 cltd\n+"; 
+							result+="	 cltd\n"; 
 							result+="    idiv %ecx\n";
 
 						}
@@ -867,10 +867,9 @@ public class AssemblyCodeGenerator{
 			}
 		}else{
 			//si el valor proviene de una llamada a un metodo
-			if(t.getFirstDir() instanceof MethodCallExpr){
-				result+="MethodCallExpr    movl %eax, "+res.getOffset()+"(%ebp)";	
+			if(t.getFirstDir() instanceof MethodCallExpr || t.getFirstDir() instanceof ExternInvkExpr){
+				result+="    movl %eax, "+res.getOffset()+"(%ebp)";	
 			}else{//si no proviene de una llamada a un metodo
-				System.out.println("{ASSIGN} de "+t.getFirstDir().getClass());
 				//si se trata de una operacion binaria
 				if(t.getFirstDir() instanceof BinOpExpr){
 					//la obtenemos como operacion binaria
@@ -911,8 +910,29 @@ public class AssemblyCodeGenerator{
 						if(t.getFirstDir() instanceof IntLiteral){
 							IntLiteral i=(IntLiteral) t.getFirstDir();
 							result=result+"    movl $" +i.getValue()+ ", "+res.getOffset()+"(%ebp)\n";			
-						}else{
-							System.out.println("{ASSIGN}2 FALTA CASO "+t.getFirstDir().getClass());	
+						}else{//sino
+							//si se trata de un acceso de a un arreglo
+							if(t.getFirstDir() instanceof ArrayLiteral){
+								ArrayLiteral arr=(ArrayLiteral) t.getFirstDir();
+								//buscamos el offset de la declaracion del arreglo
+								VarLocation v=res.search(arr.getId());
+								System.out.println("{ASSIGN} ArrayLiteral expr: "+arr.getIndex()+" , "+arr.getIndex().getClass());
+								int index=evaluateExpression(arr.getIndex().getExpr().toString());
+								System.out.println("expr evaluada: "+index);
+								result=result+"    movl " +(v.getOffset()-((v.getSize()-index)*4))+ "(%ebp), "+res.getOffset()+"(%ebp)\n";
+							}else{//sino
+								//si es un BoolLiteral
+								if(t.getFirstDir() instanceof BoolLiteral){
+									BoolLiteral b=(BoolLiteral)t.getFirstDir();
+									if(b.getValue()){
+										result=result+"    movl $1, "+res.getOffset()+"(%ebp)\n";			
+									}else{
+										result=result+"    movl $0, "+res.getOffset()+"(%ebp)\n";			
+									} 
+								}else{
+									System.out.println("{ASSIGN}2 FALTA CASO "+t.getFirstDir().getClass());		
+								}
+							}
 						}
 					}
 				}
@@ -1329,8 +1349,11 @@ public class AssemblyCodeGenerator{
 									//buscamos el offset en que se declaro
 									VarLocation res=v.search(arr.getId());
 									if(res!=null){
-										offset=(res.getOffset()-((res.getSize()-(arr.getIndex()))*4));
-										result += " ArrayLiteral   movl " + offset + "(%ebp), %eax\n";	
+										System.out.println("{RETURN} ArrayLiteral expr: "+arr.getIndex()+" , "+arr.getIndex().getClass());
+										int index=evaluateExpression(arr.getIndex().getExpr().toString());
+										System.out.println("expr evaluada: "+index);
+										offset=(res.getOffset()-((res.getSize()-index)*4));
+										result += "    movl " + offset + "(%ebp), %eax\n";
 									}else{	
 										System.out.println("ArrayLiteral no encontrado");
 									}

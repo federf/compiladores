@@ -15,9 +15,9 @@ import ir.ASTVisitor;
 public class ArrayLiteral extends Literal{
     
     private String id;
-    private int index;
+    private Expression index;
 
-    public ArrayLiteral(String id, int index, Type t) {
+    public ArrayLiteral(String id, Expression index, Type t) {
         this.id = id;
         this.index = index;
         this.type=t;
@@ -36,7 +36,7 @@ public class ArrayLiteral extends Literal{
         return this.id;
     }
 
-    public int getIndex(){
+    public Expression getIndex(){
         return this.index;
     }
 

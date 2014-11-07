@@ -1433,10 +1433,10 @@
                                 
                             }else{
                                 VarLocation arrAccess=new VarLocation(id.toString(),s.getType(), e,0,s.getOffset());
-
-                                String LabelArrayAccess="ArrayAccess"+Labels.getLabel();
-                                TripletList.addLast(new TripletCode(TripletOperator.ARRAYACCESS,id, e,LabelArrayAccess));
-                                RESULT= new ArrayLiteral((String)id, s.getSize(), s.getType());
+                                //CREO NO ES NECESARIO TENERLO
+                                //String LabelArrayAccess="ArrayAccess"+Labels.getLabel();
+                                //TripletList.addLast(new TripletCode(TripletOperator.ARRAYACCESS,id, e,LabelArrayAccess));
+                                RESULT= new ArrayLiteral((String)id, e, s.getType());
                             }
                         }else{
                             System.out.println("Error: Variable "+id+" is not an array");
