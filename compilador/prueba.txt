@@ -1,18 +1,15 @@
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 10
+tamaño lista de codigo tercetos: 7
 lista: 
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
-{UNARYMINUS(-expr), VarLocation{name=factorLabel3, type=int, expr=6, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel4, type=int, expr=-6, size=0}}
-{MINUS(-), VarLocation{name=factorLabel2, type=int, expr=58, size=0}, VarLocation{name=UNARYMINUSLabel4, type=int, expr=-6, size=0}, Result: VarLocation{name=MINUSLabel5, type=int, expr=58--6, size=0}}
-{ASSIGN(=), 58--6, null, Result: VarLocation{name=A, type=int[], expr=1, size=5}}
-{ARRAYACCESS, A, VarLocation{name=factorLabel6, type=int, expr=1, size=0}, Result: ArrayAccessLabel7}
-{ASSIGN(=), ArrayLiteral{id=A, index=5}, null, Result: VarLocation{name=d, type=int, expr=null, size=0}}
-{ASSIGN(=), 0, null, Result: VarLocation{name=C, type=int[], expr=3, size=10}}
-{RETURN, null, null, Result: VarLocation{name=factorLabel10, type=int, expr=1, size=0}}
+{MINUS(-), VarLocation{name=factorLabel3, type=int, expr=5, size=0}, VarLocation{name=factorLabel4, type=int, expr=4, size=0}, Result: VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}}
+{MULTIPLY(*), VarLocation{name=factorLabel2, type=int, expr=3, size=0}, VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}, Result: VarLocation{name=MULTIPLYLabel6, type=int, expr=VarLocation{name=factorLabel2, type=int, expr=3, size=0}*VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}, size=0}}
+{PLUS(+), VarLocation{name=factorLabel1, type=int, expr=2, size=0}, VarLocation{name=MULTIPLYLabel6, type=int, expr=VarLocation{name=factorLabel2, type=int, expr=3, size=0}*VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}, size=0}, Result: VarLocation{name=PLUSLabel7, type=int, expr=VarLocation{name=factorLabel1, type=int, expr=2, size=0}+VarLocation{name=MULTIPLYLabel6, type=int, expr=VarLocation{name=factorLabel2, type=int, expr=3, size=0}*VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}, size=0}, size=0}}
+{ASSIGN(=), VarLocation{name=PLUSLabel7, type=int, expr=VarLocation{name=factorLabel1, type=int, expr=2, size=0}+VarLocation{name=MULTIPLYLabel6, type=int, expr=VarLocation{name=factorLabel2, type=int, expr=3, size=0}*VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}, size=0}, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 {LABEL, null, null, Result: EndMethod main}
 
 procesando : . . . {LABEL, null, null, Result: BeginMethod main}
@@ -22,29 +19,16 @@ finalizado.
 procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 finalizado.
 
-procesando : . . . {UNARYMINUS(-expr), VarLocation{name=factorLabel3, type=int, expr=6, size=0}, null, Result: VarLocation{name=UNARYMINUSLabel4, type=int, expr=-6, size=0}}
+procesando : . . . {MINUS(-), VarLocation{name=factorLabel3, type=int, expr=5, size=0}, VarLocation{name=factorLabel4, type=int, expr=4, size=0}, Result: VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}}
 finalizado.
 
-procesando : . . . {MINUS(-), VarLocation{name=factorLabel2, type=int, expr=58, size=0}, VarLocation{name=UNARYMINUSLabel4, type=int, expr=-6, size=0}, Result: VarLocation{name=MINUSLabel5, type=int, expr=58--6, size=0}}
+procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel2, type=int, expr=3, size=0}, VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}, Result: VarLocation{name=MULTIPLYLabel6, type=int, expr=VarLocation{name=factorLabel2, type=int, expr=3, size=0}*VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}, size=0}}
 finalizado.
 
-procesando : . . . {ASSIGN(=), 58--6, null, Result: VarLocation{name=A, type=int[], expr=1, size=5}}
-
-Result = 64
+procesando : . . . {PLUS(+), VarLocation{name=factorLabel1, type=int, expr=2, size=0}, VarLocation{name=MULTIPLYLabel6, type=int, expr=VarLocation{name=factorLabel2, type=int, expr=3, size=0}*VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}, size=0}, Result: VarLocation{name=PLUSLabel7, type=int, expr=VarLocation{name=factorLabel1, type=int, expr=2, size=0}+VarLocation{name=MULTIPLYLabel6, type=int, expr=VarLocation{name=factorLabel2, type=int, expr=3, size=0}*VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}, size=0}, size=0}}
 finalizado.
 
-procesando : . . . {ARRAYACCESS, A, VarLocation{name=factorLabel6, type=int, expr=1, size=0}, Result: ArrayAccessLabel7}
-finalizado.
-
-procesando : . . . {ASSIGN(=), ArrayLiteral{id=A, index=5}, null, Result: VarLocation{name=d, type=int, expr=null, size=0}}
-buscado: A
-actual VarLocation{name=A, type=int[], expr=null, size=5}
-finalizado.
-
-procesando : . . . {ASSIGN(=), 0, null, Result: VarLocation{name=C, type=int[], expr=3, size=10}}
-finalizado.
-
-procesando : . . . {RETURN, null, null, Result: VarLocation{name=factorLabel10, type=int, expr=1, size=0}}
+procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel7, type=int, expr=VarLocation{name=factorLabel1, type=int, expr=2, size=0}+VarLocation{name=MULTIPLYLabel6, type=int, expr=VarLocation{name=factorLabel2, type=int, expr=3, size=0}*VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}, size=0}, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
@@ -59,24 +43,22 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl	-84(%ebp), %eax 
-    negl	%eax 
-    movl	%eax, -88(%ebp) 
-
-    movl -80(%ebp) , %eax 
-    movl -88(%ebp) , %edx 
+    movl $5, %eax 
+    movl $4 , %edx 
     subl %eax, %edx 
-    movl %edx,-92(%ebp) 
+    movl %edx,-24(%ebp) 
 
-    movl $64, -44(%ebp)
+    movl $3 , %eax 
+    movl -24(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-28(%ebp) 
 
-ARRAYACCESS
+    movl $2, %eax 
+    movl $-28, %edx 
+    addl %eax, %edx 
+    movl %edx,-32(%ebp) 
 
-    movl -9(%ebp), -72(%ebp)
-
-    movl $0, -108(%ebp)
-
-    movl $1, %eax
+    movl -32(%ebp),-4(%ebp)
 
     leave
     ret

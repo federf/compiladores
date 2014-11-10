@@ -1,15 +1,7 @@
 class a{
 	
 	int main(){
-	    int A[5] ;
-		int C[10];
-		int d;
-		A[1] = 58 - (-6) ;
-		
-		d=A[1];
-		C[3] = d ;
-	    
-	    return 1;
-	    
+	    int a;
+	    a=2+3*(5-4);
 	}
 }

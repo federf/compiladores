@@ -115,10 +115,19 @@ public class AssemblyCodeGenerator{
 
 		//si el 1er operando es varlocation
 		if(t.getFirstDir() instanceof VarLocation){
-			//System.out.println("varlocation1");
 			VarLocation  x = (VarLocation)t.getFirstDir();
-			int XOff=x.getOffset();
-			result+="    movl " + XOff + "(%ebp) , %eax \n";
+			if(x.getId().contains("factor")){
+				if(x.getExpr() instanceof VarLocation){
+					VarLocation e=(VarLocation)x.getExpr();
+					result+="    movl " + e.getOffset() + "(%ebp) , %eax \n";	
+				}else{
+					result+="    movl $" + x.getExpr()+", %eax \n";	
+				}
+			}else{
+				int XOff=x.getOffset();
+				result+="    movl " + XOff + "(%ebp) , %eax \n";	
+			}
+			
 		}else{
 			//sino, si es intliteral
 			if(t.getFirstDir() instanceof IntLiteral){
@@ -176,9 +185,18 @@ public class AssemblyCodeGenerator{
 
 		//si el 2do operando es varlocation
 		if(t.getSecondDir() instanceof VarLocation){
+
 			VarLocation  y = (VarLocation)t.getSecondDir();
-			int YOff=y.getOffset();
-			result+="    movl " + YOff + "(%ebp) , %edx \n";
+			if(y.getId().contains("factor")){
+				if(y.getExpr() instanceof VarLocation){
+					VarLocation e=(VarLocation)y.getExpr();
+					result+="    movl " + e.getOffset() + "(%ebp) , %edx \n";
+				}else{
+					result+="    movl $"+ y.getExpr()+", %edx \n";
+				}
+			}else{
+				result+="    movl $"+ y.getOffset()+", %edx \n";
+			}
 			result+="    addl %eax, %edx \n";
 		}else{
 			//sino, si es intliteral
@@ -244,9 +262,17 @@ public class AssemblyCodeGenerator{
 
 		//si el 1er operando es varlocation
 		if(t.getFirstDir() instanceof VarLocation){
-		VarLocation  x = (VarLocation)t.getFirstDir();
-		int XOff=x.getOffset();
-		result+="    movl " + XOff + "(%ebp) , %eax \n";
+			VarLocation  x = (VarLocation)t.getFirstDir();
+			if(x.getId().contains("factor")){
+				if(x.getExpr() instanceof VarLocation){
+					VarLocation e=(VarLocation)x.getExpr();
+					result+="    movl $" + e.getOffset() + "(%ebp) , %eax \n";
+				}else{
+					result+="    movl $" + x.getExpr() + ", %eax \n";
+				}
+			}else{
+				result+="    movl " + x.getOffset() + "(%ebp) , %eax \n";
+			}
 		}else{
 			//sino, si es intliteral
 			if(t.getFirstDir() instanceof IntLiteral){
@@ -295,8 +321,18 @@ public class AssemblyCodeGenerator{
 		//si el 2do operando es varlocation
 		if(t.getSecondDir() instanceof VarLocation){
 			VarLocation  y = (VarLocation)t.getSecondDir();
-			int YOff=y.getOffset();
-			result+="    movl " + YOff + "(%ebp) , %edx \n";
+			if(y.getId().contains("factor")){
+				if(y.getExpr() instanceof VarLocation){
+					VarLocation e=(VarLocation)y.getExpr();
+					result+="    movl " + e.getOffset() + "(%ebp) , %edx \n";	
+				}else{
+					result+="    movl $" + y.getExpr() + " , %edx \n";		
+				}
+			}else{
+				int YOff=y.getOffset();
+				result+="    movl " + YOff + "(%ebp) , %edx \n";	
+			}
+			
 			result+="    subl %eax, %edx \n";
 		}else{
 			//sino, si es intliteral
@@ -355,10 +391,19 @@ public class AssemblyCodeGenerator{
 
 		//si el 1er operando es varlocation
 		if(t.getFirstDir() instanceof VarLocation){
-			//System.out.println("varlocation1");
 			VarLocation  x = (VarLocation)t.getFirstDir();
-			int XOff=x.getOffset();
-			result+="    movl " + XOff + "(%ebp) , %eax \n";
+			if(x.getId().contains("factor")){
+				if(x.getExpr() instanceof VarLocation){
+					VarLocation e=(VarLocation)x.getExpr();
+					result+="    movl " + e.getOffset() + "(%ebp) , %eax \n";
+				}else{
+					result+="    movl $" +x.getExpr() + " , %eax \n";
+				}
+			}else{
+				int XOff=x.getOffset();
+				result+="    movl " + XOff + "(%ebp) , %eax \n";
+			}
+		
 		}else{
 			//sino, si es intliteral
 			if(t.getFirstDir() instanceof IntLiteral){
@@ -411,10 +456,19 @@ public class AssemblyCodeGenerator{
 		}
 		//si el 2do operando es varlocation
 		if(t.getSecondDir() instanceof VarLocation){
-			//System.out.println("varlocation2");
+			
 			VarLocation  y = (VarLocation)t.getSecondDir();
-			int YOff=y.getOffset();
-			result+="    movl " + YOff + "(%ebp) , %edx \n";
+			if(y.getId().contains("factor")){
+				if(y.getExpr() instanceof VarLocation){
+					VarLocation e=(VarLocation)y.getExpr();
+					result+="    movl " + e.getOffset() + "(%ebp) , %edx \n";	
+				}else{
+					result+="    movl $" + y.getExpr() + ", %edx \n";	
+				}
+			}else{
+				int YOff=y.getOffset();
+				result+="    movl " + YOff + "(%ebp) , %edx \n";	
+			}
 			result+="    imull %edx, %eax \n";
 		}else{
 			//sino, si es intliteral
@@ -480,9 +534,19 @@ public class AssemblyCodeGenerator{
 
 		//si el 1er operando es varlocation
 		if(t.getFirstDir() instanceof VarLocation){
-		VarLocation  x = (VarLocation)t.getFirstDir();
-		int XOff=x.getOffset();
-		result+="    movl " + XOff + "(%ebp) , %eax \n";
+			VarLocation  x = (VarLocation)t.getFirstDir();
+			if(x.getId().contains("factor")){
+				if(x.getExpr() instanceof VarLocation){
+					VarLocation e=(VarLocation)x.getExpr();
+					result+="    movl " + e.getOffset() + "(%ebp) , %eax \n";	
+				}else{
+					result+="    movl $" + x.getExpr() + " , %eax \n";	
+				}
+			}else{
+				int XOff=x.getOffset();
+				result+="    movl " + XOff + "(%ebp) , %eax \n";	
+			}
+			
 		}else{
 			//sino, si es intliteral
 			if(t.getFirstDir() instanceof IntLiteral){
@@ -529,8 +593,18 @@ public class AssemblyCodeGenerator{
 		//si el 2do operando es varlocation
 		if(t.getSecondDir() instanceof VarLocation){
 			VarLocation  y = (VarLocation)t.getSecondDir();
-			int YOff=y.getOffset();
-			result+="    movl " + YOff + "(%ebp) , %ecx\n";
+			if(y.getId().contains("factor")){
+				if(y.getExpr() instanceof VarLocation){
+					VarLocation e=(VarLocation)y.getExpr();
+					result+="    movl " + e.getOffset() + "(%ebp) , %ecx\n";	
+				}else{
+					result+="    movl $" + y.getExpr() + " , %ecx\n";	
+				}
+			}else{
+				int YOff=y.getOffset();
+				result+="    movl " + YOff + "(%ebp) , %ecx\n";	
+			}
+			
 			result+="	 cltd\n"; 
 			result+="    idiv %ecx\n";
 		}else{
@@ -833,7 +907,6 @@ public class AssemblyCodeGenerator{
 		//por lo tanto solo nos fijamos que es el 1er parametro
 		//obtenemos la variable en que se guardara
 		VarLocation res=(VarLocation) t.getResult();
-
 		if(t.getFirstDir() instanceof VarLocation){
 			//obtenemos el valor a asignar
 			VarLocation firstOp=(VarLocation) t.getFirstDir();	
@@ -843,7 +916,7 @@ public class AssemblyCodeGenerator{
 					VarLocation e=(VarLocation) firstOp.getExpr();
 					result=result+"    movl $"+e.getExpr()+","+res.getOffset() +"(%ebp)\n";	
 				}else{
-					if(firstOp.getExpr() instanceof MethodCallExpr){	
+					if(firstOp.getExpr() instanceof MethodCallExpr){
 						//si se trata de una llamada a un metodo como factor de una operacion, obtenemos su resultado
 						//que siempre se guarda en eax y lo movemos a donde se necesita
 						result=result+"    movl %eax,"+res.getOffset() +"(%ebp)\n";	
