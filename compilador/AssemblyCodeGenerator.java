@@ -1492,7 +1492,7 @@ public class AssemblyCodeGenerator{
 			   		ExternInvkExpr mc=(ExternInvkExpr) t.getFirstDir();
 			   		String id=mc.getId().substring(1, mc.getId().length()-1);
 			   		if(id=="printf"){
-			   			result += "    call " + id + "\n";
+			   			result += "    call imprimir\n";
 			   		}else{
 			   			result += "    call " + id + "\n";
 			   		}
