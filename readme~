@@ -12,4 +12,3 @@ el resultado de la evaluacion de los test sera guardado en un archivo llamado "s
 "compilador" donde se encuentran los archivos lexer.lex, parser.cup y Compilador.java
 
 Se incluye un script para limpieza del proyecto (borra los archivos .class y algunos archivos que no son necesarios)
-
