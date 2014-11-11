@@ -152,6 +152,11 @@ public class VarLocation extends Location {
         return null;
     }
 
+    //metodo que permite agregar un VarLocation a la lista de declaraciones
+    public void addVarLocation(VarLocation v){
+        vars.addLast(v);
+    }
+
     //Metodo que dada una expression aritmetica (String) devuelve su resultado en forma de un Int
     public int evaluateExpression(String expr){ 
         //creamos los stacks para operandos y operadores

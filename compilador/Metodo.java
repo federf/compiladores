@@ -136,4 +136,16 @@ public class Metodo {
         }
         return mismosParam;
     }
+
+    //metodo que dado un Metodo y un Simbolo devuelve el indice en que se ubica
+    //dicho simbolo en la lista de parametros de la declaracion del simbolo o -1 en caso de no
+    //ser parametro
+    public int esParametro(Simbolo s){
+        for(int i=0; i<this.getParametros().size(); i++){
+            if(s.getName().equals(this.getParametros().get(i).getName())){
+                return i;
+            }
+        }
+        return -1;
+    }
 }

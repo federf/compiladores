@@ -2,6 +2,9 @@ class a{
 	
 	int main(){
 	    int a;
+	    boolean b;
 	    a=2+3*(5-4);
+	    
+	    b=(true || (2<3));
 	}
 }

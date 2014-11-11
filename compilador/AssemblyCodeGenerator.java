@@ -1158,9 +1158,9 @@ public class AssemblyCodeGenerator{
     		if(params.get(i) instanceof VarLocation){
     			VarLocation v=(VarLocation) params.get(i);
     			if(i!=0){
-    				result+="    movl "+v.getOffset()+" , "+(((i+2))*4)+"(%esp)\n";		
+    				result+="    movl "+v.getOffset()+"(%esp) , "+(((i+2))*4)+"(%esp)\n";		
     			}else{
-    				result+="    movl "+v.getOffset()+" , 8(%esp)\n";	
+    				result+="    movl "+v.getOffset()+"(%esp) , 8(%esp)\n";	
     			}
     			
     		}else{//sino, debe ser un Literal o una llamada a metodo

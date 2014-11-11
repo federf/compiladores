@@ -1,0 +1,15 @@
+class print_test{
+	int main(){
+		int x;
+		int y;
+		int res;
+
+		x=2;
+		y=4;
+		res=x+y;
+
+		externinvk("imprimir",int, res);//tratar con call
+
+		return 0;
+	}
+}

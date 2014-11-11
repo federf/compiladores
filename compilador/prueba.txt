@@ -1,7 +1,7 @@
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 7
+tamaño lista de codigo tercetos: 10
 lista: 
 {LABEL, null, null, Result: BeginMethod main}
 
@@ -10,6 +10,9 @@ lista:
 {MULTIPLY(*), VarLocation{name=factorLabel2, type=int, expr=3, size=0}, VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}, Result: VarLocation{name=MULTIPLYLabel6, type=int, expr=VarLocation{name=factorLabel2, type=int, expr=3, size=0}*VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}, size=0}}
 {PLUS(+), VarLocation{name=factorLabel1, type=int, expr=2, size=0}, VarLocation{name=MULTIPLYLabel6, type=int, expr=VarLocation{name=factorLabel2, type=int, expr=3, size=0}*VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}, size=0}, Result: VarLocation{name=PLUSLabel7, type=int, expr=VarLocation{name=factorLabel1, type=int, expr=2, size=0}+VarLocation{name=MULTIPLYLabel6, type=int, expr=VarLocation{name=factorLabel2, type=int, expr=3, size=0}*VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}, size=0}, size=0}}
 {ASSIGN(=), VarLocation{name=PLUSLabel7, type=int, expr=VarLocation{name=factorLabel1, type=int, expr=2, size=0}+VarLocation{name=MULTIPLYLabel6, type=int, expr=VarLocation{name=factorLabel2, type=int, expr=3, size=0}*VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}, size=0}, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
+{LE(<), VarLocation{name=factorLabel9, type=int, expr=2, size=0}, VarLocation{name=factorLabel10, type=int, expr=3, size=0}, Result: VarLocation{name=LELabel11, type=boolean, expr=VarLocation{name=factorLabel9, type=int, expr=2, size=0}<VarLocation{name=factorLabel10, type=int, expr=3, size=0}, size=0}}
+{OR(||), VarLocation{name=factorLabel8, type=boolean, expr=true, size=0}, VarLocation{name=LELabel11, type=boolean, expr=VarLocation{name=factorLabel9, type=int, expr=2, size=0}<VarLocation{name=factorLabel10, type=int, expr=3, size=0}, size=0}, Result: VarLocation{name=DISYUNCIONLabel12, type=boolean, expr=VarLocation{name=factorLabel8, type=boolean, expr=true, size=0}||VarLocation{name=LELabel11, type=boolean, expr=VarLocation{name=factorLabel9, type=int, expr=2, size=0}<VarLocation{name=factorLabel10, type=int, expr=3, size=0}, size=0}, size=0}}
+{ASSIGN(=), VarLocation{name=DISYUNCIONLabel12, type=boolean, expr=VarLocation{name=factorLabel8, type=boolean, expr=true, size=0}||VarLocation{name=LELabel11, type=boolean, expr=VarLocation{name=factorLabel9, type=int, expr=2, size=0}<VarLocation{name=factorLabel10, type=int, expr=3, size=0}, size=0}, size=0}, null, Result: VarLocation{name=b, type=boolean, expr=null, size=0}}
 {LABEL, null, null, Result: EndMethod main}
 
 procesando : . . . {LABEL, null, null, Result: BeginMethod main}
@@ -31,6 +34,15 @@ finalizado.
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel7, type=int, expr=VarLocation{name=factorLabel1, type=int, expr=2, size=0}+VarLocation{name=MULTIPLYLabel6, type=int, expr=VarLocation{name=factorLabel2, type=int, expr=3, size=0}*VarLocation{name=MINUSLabel5, type=int, expr=VarLocation{name=factorLabel3, type=int, expr=5, size=0}-VarLocation{name=factorLabel4, type=int, expr=4, size=0}, size=0}, size=0}, size=0}, null, Result: VarLocation{name=a, type=int, expr=null, size=0}}
 finalizado.
 
+procesando : . . . {LE(<), VarLocation{name=factorLabel9, type=int, expr=2, size=0}, VarLocation{name=factorLabel10, type=int, expr=3, size=0}, Result: VarLocation{name=LELabel11, type=boolean, expr=VarLocation{name=factorLabel9, type=int, expr=2, size=0}<VarLocation{name=factorLabel10, type=int, expr=3, size=0}, size=0}}
+finalizado.
+
+procesando : . . . {OR(||), VarLocation{name=factorLabel8, type=boolean, expr=true, size=0}, VarLocation{name=LELabel11, type=boolean, expr=VarLocation{name=factorLabel9, type=int, expr=2, size=0}<VarLocation{name=factorLabel10, type=int, expr=3, size=0}, size=0}, Result: VarLocation{name=DISYUNCIONLabel12, type=boolean, expr=VarLocation{name=factorLabel8, type=boolean, expr=true, size=0}||VarLocation{name=LELabel11, type=boolean, expr=VarLocation{name=factorLabel9, type=int, expr=2, size=0}<VarLocation{name=factorLabel10, type=int, expr=3, size=0}, size=0}, size=0}}
+finalizado.
+
+procesando : . . . {ASSIGN(=), VarLocation{name=DISYUNCIONLabel12, type=boolean, expr=VarLocation{name=factorLabel8, type=boolean, expr=true, size=0}||VarLocation{name=LELabel11, type=boolean, expr=VarLocation{name=factorLabel9, type=int, expr=2, size=0}<VarLocation{name=factorLabel10, type=int, expr=3, size=0}, size=0}, size=0}, null, Result: VarLocation{name=b, type=boolean, expr=null, size=0}}
+finalizado.
+
 procesando : . . . {LABEL, null, null, Result: EndMethod main}
 finalizado.
 
@@ -46,19 +58,40 @@ main:
     movl $5, %eax 
     movl $4 , %edx 
     subl %eax, %edx 
-    movl %edx,-24(%ebp) 
+    movl %edx,-28(%ebp) 
 
     movl $3 , %eax 
-    movl -24(%ebp) , %edx 
+    movl -28(%ebp) , %edx 
     imull %edx, %eax 
-    movl %eax,-28(%ebp) 
+    movl %eax,-32(%ebp) 
 
     movl $2, %eax 
-    movl $-28, %edx 
+    movl $-32, %edx 
     addl %eax, %edx 
-    movl %edx,-32(%ebp) 
+    movl %edx,-36(%ebp) 
 
-    movl -32(%ebp),-4(%ebp)
+    movl -36(%ebp),-4(%ebp)
+
+    movl	-44(%ebp), %eax
+    cmpl	-48(%ebp), %eax
+    setl	%al
+    movlzbl %al, %eax
+    movl	%eax, -52(%ebp)
+
+    cmpl	$0, -40(%ebp)
+    jne .L0
+    cmpl	$0, -52(%ebp)
+    je .L0
+    movl	$1, %eax
+    jmp .L1
+.L0:
+    movl	$0, %eax
+    jmp .L2
+.L1:
+    movl	%eax, -56(%ebp)
+.L2:
+
+    movl -56(%ebp),-8(%ebp)
 
     leave
     ret
