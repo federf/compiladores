@@ -1151,9 +1151,8 @@ public class AssemblyCodeGenerator{
 		//obtenemos la lista de parametros del metodo llamado
     	LinkedList<Expression> params=(LinkedList<Expression>) t.getResult();
     	//los parametros de agregan en orden inverso
-
     	for(int i=params.size()-1; i>=0; i--){
-    		System.out.println("index: "+i+" tamaño: "+params.size());
+
     		//si el parametro es una VarLocation obtenemos su offset
     		if(params.get(i) instanceof VarLocation){
     			VarLocation v=(VarLocation) params.get(i);
@@ -1169,6 +1168,7 @@ public class AssemblyCodeGenerator{
     				//caso IntLiteral
     				if(params.get(i) instanceof IntLiteral){
     					IntLiteral p=(IntLiteral) params.get(i);
+   
     					if(i!=0){
     						result+="    movl $"+evaluateExpression(p.toString())+" , "+(((i+2))*4)+"(%esp)\n";	
     					}else{
@@ -1178,6 +1178,7 @@ public class AssemblyCodeGenerator{
     				}else{
     					//caso BoolLiteral
 	    				if(params.get(i) instanceof BoolLiteral){
+	   
 	    					BoolLiteral p=(BoolLiteral) params.get(i);
 	    					if(i!=0){
 	    						if(p.getValue()){
@@ -1202,12 +1203,14 @@ public class AssemblyCodeGenerator{
 	    					}else{
 	    						//si el parametro es una operacion binaria
 	    						if(params.get(i) instanceof BinOpExpr){
+	    	
 	    							BinOpExpr b=(BinOpExpr) params.get(i);
 	    							Expression firstOp=b.getLeftOperand();
 	    							Expression secOp=b.getRightOperand();
 	    							//si es una binaria entre enteros
 	    							if(firstOp.getType().equals(Type.INT) && secOp.getType().equals(Type.INT)){
 	    								//la evaluamos
+	    								System.out.println("{PARAMS} expr: "+b.toString());
 	    								int opValue=evaluateExpression(b.toString());
 	    								if(i!=0){
 				    						result+="    movl $"+opValue+" , "+((i-1)*4)+"(%esp)";	
@@ -1218,6 +1221,7 @@ public class AssemblyCodeGenerator{
 	    						}else{
 	    							//si es una operacion binaria
 	    							if(params.get(i) instanceof UnaryOpExpr){
+	    		
 	    								UnaryOpExpr uop=(UnaryOpExpr)params.get(i);
 										if(uop.getType().equals(Type.INT)){
 											int opValue=evaluateExpression(uop.toString());
@@ -1487,7 +1491,12 @@ public class AssemblyCodeGenerator{
 			   		result+="\n";
 			   		ExternInvkExpr mc=(ExternInvkExpr) t.getFirstDir();
 			   		String id=mc.getId().substring(1, mc.getId().length()-1);
-			   		result += "    call " + id + "\n";
+			   		if(id=="printf"){
+			   			result += "    call " + id + "\n";
+			   		}else{
+			   			result += "    call " + id + "\n";
+			   		}
+			   		
 			   		break;
 			   	case ARRAYACCESS:
 			   		result+="\n";

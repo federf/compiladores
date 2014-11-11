@@ -14,7 +14,7 @@ IF
 ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 22
+tamaño lista de codigo tercetos: 23
 lista: 
 {LABEL, null, null, Result: BeginMethod factorial}
 
@@ -38,6 +38,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [3]}
 {METHODCALL, factorial, 1, Result: RESULTLabel10}
+{PARAM, null, null, Result: [MethodCallExpr{name=factorial, args=[3]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=factorial, args=[3]}]}, null, Result: EXTERNINVKLabel12}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -98,12 +99,15 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [3]}
-index: 0 tamaño: 1
 
 Result = 3
 finalizado.
 
 procesando : . . . {METHODCALL, factorial, 1, Result: RESULTLabel10}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=factorial, args=[3]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=factorial, args=[3]}]}, null, Result: EXTERNINVKLabel12}
@@ -175,6 +179,7 @@ main:
 
     call factorial
 
+
     call printf
 
     leave
@@ -212,7 +217,7 @@ ELSE
 ultOffsetLeido: 12
 
 parseo exitoso
-tamaño lista de codigo tercetos: 44
+tamaño lista de codigo tercetos: 45
 lista: 
 {LABEL, null, null, Result: BeginMethod div}
 
@@ -261,6 +266,7 @@ lista:
 {ASSIGN(=), VarLocation{name=factorLabel18, type=float, expr=MethodCallExpr{name=mult, args=[0.0, 0.0]}, size=0}, null, Result: VarLocation{name=d, type=float, expr=null, size=0}}
 {PARAM, null, null, Result: [0.0, 0.0]}
 {METHODCALL, sum, 2, Result: RESULTLabel19}
+{PARAM, null, null, Result: [StringLiteral{value="anidandoFloatTest"}, MethodCallExpr{name=sum, args=[0.0, 0.0]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandoFloatTest"}, MethodCallExpr{name=sum, args=[0.0, 0.0]}]}, null, Result: EXTERNINVKLabel21}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -351,9 +357,7 @@ procesando : . . . {ASSIGN(=), VarLocation{name=UNARYMINUSLabel9, type=float, ex
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0.0, 0.0]}
-index: 1 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
-index: 0 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
@@ -364,9 +368,7 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel11, type=float, expr=
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0.0, 0.0]}
-index: 1 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
-index: 0 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
@@ -380,9 +382,7 @@ procesando : . . . {UNARYMINUS(-expr), VarLocation{name=y, type=float, expr=0.0,
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [-VarLocation{name=y, type=float, expr=0.0, size=0}, 0.0]}
-index: 1 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
-index: 0 tamaño: 2
 {PARAM} FALTA CASO UnaryOpExpr float
 finalizado.
 
@@ -393,9 +393,7 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel16, type=float, expr=
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0.0, 0.0]}
-index: 1 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
-index: 0 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
@@ -406,13 +404,16 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel18, type=float, expr=
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0.0, 0.0]}
-index: 1 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
-index: 0 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
 procesando : . . . {METHODCALL, sum, 2, Result: RESULTLabel19}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="anidandoFloatTest"}, MethodCallExpr{name=sum, args=[0.0, 0.0]}]}
+{PARAM} CASO METHODCALL 
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandoFloatTest"}, MethodCallExpr{name=sum, args=[0.0, 0.0]}]}, null, Result: EXTERNINVKLabel21}
@@ -552,6 +553,7 @@ main:
 
     call sum
 
+
     call printf
 
     leave
@@ -569,7 +571,7 @@ ultOffsetLeido: 8
 Error: Method pruebaLogica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 16
+tamaño lista de codigo tercetos: 17
 lista: 
 {null, boolean, bool, Result: 0}
 {LABEL, null, null, Result: BeginMethod pruebaLogica}
@@ -587,6 +589,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [true]}
 {METHODCALL, pruebaLogica, 1, Result: RESULTLabel10}
+{PARAM, null, null, Result: [MethodCallExpr{name=pruebaLogica, args=[true]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[true]}]}, null, Result: EXTERNINVKLabel12}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -629,10 +632,13 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [true]}
-index: 0 tamaño: 1
 finalizado.
 
 procesando : . . . {METHODCALL, pruebaLogica, 1, Result: RESULTLabel10}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=pruebaLogica, args=[true]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[true]}]}, null, Result: EXTERNINVKLabel12}
@@ -719,6 +725,7 @@ main:
     movl $1 , (%esp)
     call pruebaLogica
 
+
     call printf
 
     leave
@@ -732,7 +739,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 9
+tamaño lista de codigo tercetos: 10
 lista: 
 {LABEL, null, null, Result: BeginMethod main}
 
@@ -741,6 +748,7 @@ lista:
 {ASSIGN(=), VarLocation{name=factorLabel2, type=int, expr=4, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
 {PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=y, type=int, expr=0, size=0}, Result: VarLocation{name=PLUSLabel3, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=y, type=int, expr=0, size=0}, size=0}}
 {ASSIGN(=), VarLocation{name=PLUSLabel3, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=y, type=int, expr=0, size=0}, size=0}, null, Result: VarLocation{name=res, type=int, expr=null, size=0}}
+{PARAM, null, null, Result: [0]}
 {EXTERNINVK, ExternInvkExpr{id="imprimir", type=int, parameters=[0]}, null, Result: EXTERNINVKLabel4}
 {RETURN, null, null, Result: VarLocation{name=factorLabel5, type=int, expr=0, size=0}}
 {LABEL, null, null, Result: EndMethod main}
@@ -762,6 +770,11 @@ procesando : . . . {PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarL
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel3, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=y, type=int, expr=0, size=0}, size=0}, null, Result: VarLocation{name=res, type=int, expr=null, size=0}}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [0]}
+
+Result = 0
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="imprimir", type=int, parameters=[0]}, null, Result: EXTERNINVKLabel4}
@@ -793,6 +806,8 @@ main:
 
     movl -24(%ebp),-12(%ebp)
 
+    movl $0 , 8(%esp)
+
     call imprimir
 
     movl $0, %eax
@@ -811,7 +826,7 @@ IF
 ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 21
+tamaño lista de codigo tercetos: 24
 lista: 
 {LABEL, null, null, Result: BeginMethod inc}
 
@@ -822,6 +837,7 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
+{PARAM, null, null, Result: null}
 {EXTERNINVK, ExternInvkExpr{id="get_int", type=int, parameters=[]}, null, Result: EXTERNINVKLabel3}
 {ASSIGN(=), VarLocation{name=factorLabel4, type=int, expr=ExternInvkExpr{id="get_int", type=int, parameters=[]}, size=0}, null, Result: VarLocation{name=z, type=int, expr=null, size=0}}
 {PARAM, null, null, Result: [0]}
@@ -830,9 +846,11 @@ lista:
 {CEQ(==), VarLocation{name=y, type=int, expr=0, size=0}, VarLocation{name=factorLabel7, type=int, expr=1, size=0}, Result: VarLocation{name=CEQLabel8, type=boolean, expr=VarLocation{name=y, type=int, expr=0, size=0}==VarLocation{name=factorLabel7, type=int, expr=1, size=0}, size=0}}
 {CMP, VarLocation{name=CEQLabel8, type=boolean, expr=VarLocation{name=y, type=int, expr=0, size=0}==VarLocation{name=factorLabel7, type=int, expr=1, size=0}, size=0}, true, Result: null}
 {JNE, null, null, Result: elseCondLabel9}
+{PARAM, null, null, Result: [StringLiteral{value="y==1\n"}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==1\n"}]}, null, Result: EXTERNINVKLabel11}
 {JMP, null, null, Result: endIfLabel10}
 {LABEL, null, null, Result: elseCondLabel9}
+{PARAM, null, null, Result: [StringLiteral{value="y==%d\n"}, 0]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==%d\n"}, 0]}, null, Result: EXTERNINVKLabel12}
 {LABEL, null, null, Result: endIfLabel10}
 {LABEL, null, null, Result: EndMethod main}
@@ -860,115 +878,8 @@ finalizado.
 procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
 finalizado.
 
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="get_int", type=int, parameters=[]}, null, Result: EXTERNINVKLabel3}
-finalizado.
-
-procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel4, type=int, expr=ExternInvkExpr{id="get_int", type=int, parameters=[]}, size=0}, null, Result: VarLocation{name=z, type=int, expr=null, size=0}}
-finalizado.
-
-procesando : . . . {PARAM, null, null, Result: [0]}
-index: 0 tamaño: 1
-
-Result = 0
-finalizado.
-
-procesando : . . . {METHODCALL, inc, 1, Result: RESULTLabel5}
-finalizado.
-
-procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel6, type=int, expr=MethodCallExpr{name=inc, args=[0]}, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
-finalizado.
-
-procesando : . . . {CEQ(==), VarLocation{name=y, type=int, expr=0, size=0}, VarLocation{name=factorLabel7, type=int, expr=1, size=0}, Result: VarLocation{name=CEQLabel8, type=boolean, expr=VarLocation{name=y, type=int, expr=0, size=0}==VarLocation{name=factorLabel7, type=int, expr=1, size=0}, size=0}}
-finalizado.
-
-procesando : . . . {CMP, VarLocation{name=CEQLabel8, type=boolean, expr=VarLocation{name=y, type=int, expr=0, size=0}==VarLocation{name=factorLabel7, type=int, expr=1, size=0}, size=0}, true, Result: null}
-finalizado.
-
-procesando : . . . {JNE, null, null, Result: elseCondLabel9}
-finalizado.
-
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==1\n"}]}, null, Result: EXTERNINVKLabel11}
-finalizado.
-
-procesando : . . . {JMP, null, null, Result: endIfLabel10}
-finalizado.
-
-procesando : . . . {LABEL, null, null, Result: elseCondLabel9}
-finalizado.
-
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==%d\n"}, 0]}, null, Result: EXTERNINVKLabel12}
-finalizado.
-
-procesando : . . . {LABEL, null, null, Result: endIfLabel10}
-finalizado.
-
-procesando : . . . {LABEL, null, null, Result: EndMethod main}
-finalizado.
-
-
-
-    .text
-    .globl	inc
-    .type	inc, @function 
-inc: 
-    enter   $(4), $0 
-    pushl	%ebp
-    movl %esp, %ebp
-
-    movl 8(%ebp) , %eax 
-    movl $1, %edx 
-    addl %eax, %edx 
-    movl %edx,-8(%ebp) 
-
-    movl -8(%ebp), %eax
-
-    leave
-    ret
-
-
-
-    .text
-    .globl	main
-    .type	main, @function 
-main: 
-    pushl	%ebp
-    movl %esp, %ebp
-
-    call get_int
-
-    movl $ExternInvkExpr{id="get_int", type=int, parameters=[]},-8(%ebp)
-
-    movl $0 , 8(%esp)
-
-    call inc
-
-    movl %eax,-4(%ebp)
-
-    movl	-4(%ebp), %eax
-    cmpl	-20(%ebp), %eax
-    sete %al
-    movlzbl %al, %eax
-    movl	%eax, -24(%ebp)
-
-    movl $ 1, %eax
-    cmpl -24(%ebp), %eax
-
-    jne elseCondLabel9
-
-    call printf
-
-    jmp endIfLabel10
-
-.elseCondLabel9:
-
-    call printf
-
-.endIfLabel10:
-
-    leave
-    ret
-
-
+procesando : . . . {PARAM, null, null, Result: null}
+ocurrio un error: null
 ---------------------------------------------------
   
   
@@ -1300,7 +1211,7 @@ ultOffsetLeido: 12
 Error: Method pruArreglos must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 69
+tamaño lista de codigo tercetos: 71
 lista: 
 {null, int, A, Result: 589}
 {null, float, B, Result: 56}
@@ -1370,7 +1281,9 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [4, 8]}
 {METHODCALL, pruArreglos, 2, Result: RESULTLabel59}
+{PARAM, null, null, Result: [MethodCallExpr{name=pruArreglos, args=[4, 8]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel61}
+{PARAM, null, null, Result: null}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel62}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -1569,10 +1482,8 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [4, 8]}
-index: 1 tamaño: 2
 
 Result = 8
-index: 0 tamaño: 2
 
 Result = 4
 finalizado.
@@ -1580,238 +1491,15 @@ finalizado.
 procesando : . . . {METHODCALL, pruArreglos, 2, Result: RESULTLabel59}
 finalizado.
 
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=pruArreglos, args=[4, 8]}]}
+{PARAM} CASO METHODCALL 
+finalizado.
+
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel61}
 finalizado.
 
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel62}
-finalizado.
-
-procesando : . . . {LABEL, null, null, Result: EndMethod main}
-finalizado.
-
-
-    .comm A,2356
-
-    .comm B,224
-
-    .comm C,20
-
-
-    .text
-    .globl	pruArreglos
-    .type	pruArreglos, @function 
-pruArreglos: 
-    enter   $(8), $0 
-    pushl	%ebp
-    movl %esp, %ebp
-
-    movl	8(%ebp), %eax
-    cmpl	12(%ebp), %eax
-    setg	%al
-    movlzbl %al, %eax
-    movl	%eax, -44(%ebp)
-
-    movl $ 1, %eax
-    cmpl -44(%ebp), %eax
-
-    jne elseCondLabel2
-
-    movl $1, %eax 
-    movl 12(%ebp) , %edx 
-    subl %eax, %edx 
-    movl %edx,-56(%ebp) 
-
-    movl -56(%ebp),-68(%ebp)
-
-    jmp endIfLabel3
-
-.elseCondLabel2:
-
-.endIfLabel3:
-
-    movl	8(%ebp), %eax
-    cmpl	12(%ebp), %eax
-    sete %al
-    movlzbl %al, %eax
-    movl	%eax, -60(%ebp)
-
-    movl $ 1, %eax
-    cmpl -60(%ebp), %eax
-
-    jne elseCondLabel8
-
-    movl $1, %eax 
-    movl $1 , %edx 
-    subl %eax, %edx 
-    movl %edx,-72(%ebp) 
-
-    movl 8(%ebp) , %eax 
-    movl $5, %edx 
-    imull %edx, %eax 
-    movl %eax,-80(%ebp) 
-
-    movl -80(%ebp),-68(%ebp)
-
-    jmp endIfLabel9
-
-.elseCondLabel8:
-
-    movl 8(%ebp) , %eax 
-    movl 8(%ebp) , %edx 
-    subl %eax, %edx 
-    movl %edx,-84(%ebp) 
-
-    movl 12(%ebp),-68(%ebp)
-
-.endIfLabel9:
-
-    movl $0,-40(%ebp)
-
-    movl	-40(%ebp), %eax
-    cmpl	-92(%ebp), %eax
-    setl	%al
-    movlzbl %al, %eax
-    movl	%eax, -96(%ebp)
-
-.BeginWhileLabel19:
-
-    movl $ 1, %eax
-    cmpl -96(%ebp), %eax
-
-    jne EndWhileLabel20
-
-    movl -40(%ebp) , %eax 
-    movl $2, %edx 
-    imull %edx, %eax 
-    movl %eax,-104(%ebp) 
-
-    movl -104(%ebp),-4716(%ebp)
-
-    movl -108(%ebp), %eax
-    addl %eax, -40(%ebp)
-
-    jmp BeginWhileLabel19
-
-.EndWhileLabel20:
-
-    movl $8,-40(%ebp)
-
-    movl	-40(%ebp), %eax
-    cmpl	-116(%ebp), %eax
-    setge %al
-    movlzbl %al, %eax
-    movl	%eax, -120(%ebp)
-
-.BeginWhileLabel27:
-
-    movl $ 1, %eax
-    cmpl -120(%ebp), %eax
-
-    jne EndWhileLabel28
-
-    movl -40(%ebp) , %eax 
-    movl $2, %edx 
-    imull %edx, %eax 
-    movl %eax,-128(%ebp) 
-
-    movl -128(%ebp) , %eax 
-    movl $8, %edx 
-    addl %eax, %edx 
-    movl %edx,-136(%ebp) 
-
-    movl $ArrayLiteral{id=A, index=VarLocation{name=PLUSLabel32, type=int, expr=VarLocation{name=MULTIPLYLabel30, type=int, expr=VarLocation{name=i, type=int, expr=0, size=0}*VarLocation{name=factorLabel29, type=int, expr=2, size=0}, size=0}+VarLocation{name=factorLabel31, type=int, expr=8, size=0}, size=0}}, %eax 
-    movl $3, %edx 
-    addl %eax, %edx 
-    movl %edx,-148(%ebp) 
-
-    movl -148(%ebp),-2812(%ebp)
-
-    movl -152(%ebp), %eax
-    subl %eax, -40(%ebp)
-
-    jmp BeginWhileLabel27
-
-.EndWhileLabel28:
-
-    movl $0,-40(%ebp)
-
-    movl $5 , %eax 
-    movl $9, %edx 
-    imull %edx, %eax 
-    movl %eax,-168(%ebp) 
-
-    movl -168(%ebp) , %eax 
-    movl $40 , %edx 
-    subl %eax, %edx 
-    movl %edx,-176(%ebp) 
-
-    movl	-40(%ebp), %eax
-    cmpl	-176(%ebp), %eax
-    setle %al
-    movlzbl %al, %eax
-    movl	%eax, -180(%ebp)
-
-.BeginWhileLabel44:
-
-    movl $ 1, %eax
-    cmpl -180(%ebp), %eax
-
-    jne EndWhileLabel45
-
-    movl -40(%ebp) , %eax 
-    movl $2, %edx 
-    imull %edx, %eax 
-    movl %eax,-188(%ebp) 
-
-    movl -188(%ebp) , %eax 
-    movl $8, %edx 
-    addl %eax, %edx 
-    movl %edx,-196(%ebp) 
-
-    movl	-200(%ebp), %eax
-    cmpl	-204(%ebp), %eax
-    setg	%al
-    movlzbl %al, %eax
-    movl	%eax, -208(%ebp)
-
-    movl -208(%ebp),-2632(%ebp)
-
-    movl -40(%ebp) , %eax 
-    movl $1, %edx 
-    addl %eax, %edx 
-    movl %edx,-216(%ebp) 
-
-    movl -216(%ebp),-40(%ebp)
-
-    jmp BeginWhileLabel44
-
-.EndWhileLabel45:
-
-    leave
-    ret
-
-
-
-    .text
-    .globl	main
-    .type	main, @function 
-main: 
-    pushl	%ebp
-    movl %esp, %ebp
-
-    movl $8 , 12(%esp)
-    movl $4 , 8(%esp)
-
-    call pruArreglos
-
-    call printf
-
-    call printf
-
-    leave
-    ret
-
-
+procesando : . . . {PARAM, null, null, Result: null}
+ocurrio un error: null
 ---------------------------------------------------
   
   
@@ -1819,7 +1507,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 9
+tamaño lista de codigo tercetos: 10
 lista: 
 {LABEL, null, null, Result: BeginMethod pruAritmetica}
 
@@ -1830,6 +1518,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [3]}
 {METHODCALL, pruAritmetica, 1, Result: RESULTLabel2}
+{PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[3]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[3]}]}, null, Result: EXTERNINVKLabel4}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -1851,12 +1540,15 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [3]}
-index: 0 tamaño: 1
 
 Result = 3
 finalizado.
 
 procesando : . . . {METHODCALL, pruAritmetica, 1, Result: RESULTLabel2}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[3]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[3]}]}, null, Result: EXTERNINVKLabel4}
@@ -1891,6 +1583,7 @@ main:
 
     call pruAritmetica
 
+
     call printf
 
     leave
@@ -1910,7 +1603,7 @@ IF
 ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 22
+tamaño lista de codigo tercetos: 23
 lista: 
 {LABEL, null, null, Result: BeginMethod aritmTest}
 
@@ -1934,6 +1627,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [5]}
 {METHODCALL, aritmTest, 1, Result: RESULTLabel13}
+{PARAM, null, null, Result: [MethodCallExpr{name=aritmTest, args=[5]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=aritmTest, args=[5]}]}, null, Result: EXTERNINVKLabel15}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -1994,12 +1688,15 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [5]}
-index: 0 tamaño: 1
 
 Result = 5
 finalizado.
 
 procesando : . . . {METHODCALL, aritmTest, 1, Result: RESULTLabel13}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=aritmTest, args=[5]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=aritmTest, args=[5]}]}, null, Result: EXTERNINVKLabel15}
@@ -2075,6 +1772,7 @@ main:
 
     call aritmTest
 
+
     call printf
 
     leave
@@ -2091,7 +1789,7 @@ IF
 ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 29
+tamaño lista de codigo tercetos: 30
 lista: 
 {LABEL, null, null, Result: BeginMethod breaks}
 
@@ -2121,6 +1819,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [1]}
 {METHODCALL, breaks, 1, Result: RESULTLabel14}
+{PARAM, null, null, Result: [StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: EXTERNINVKLabel16}
 {RETURN, null, null, Result: VarLocation{name=factorLabel17, type=int, expr=1, size=0}}
 {LABEL, null, null, Result: EndMethod main}
@@ -2200,12 +1899,16 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [1]}
-index: 0 tamaño: 1
 
 Result = 1
 finalizado.
 
 procesando : . . . {METHODCALL, breaks, 1, Result: RESULTLabel14}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}
+{PARAM} CASO METHODCALL 
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: EXTERNINVKLabel16}
@@ -2294,6 +1997,7 @@ main:
 
     call breaks
 
+
     call printf
 
     movl $1, %eax
@@ -2312,7 +2016,7 @@ IF
 ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 28
+tamaño lista de codigo tercetos: 29
 lista: 
 {LABEL, null, null, Result: BeginMethod breaks}
 
@@ -2341,6 +2045,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [1]}
 {METHODCALL, breaks, 1, Result: RESULTLabel13}
+{PARAM, null, null, Result: [StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: EXTERNINVKLabel15}
 {RETURN, null, null, Result: VarLocation{name=factorLabel16, type=int, expr=1, size=0}}
 {LABEL, null, null, Result: EndMethod main}
@@ -2417,12 +2122,16 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [1]}
-index: 0 tamaño: 1
 
 Result = 1
 finalizado.
 
 procesando : . . . {METHODCALL, breaks, 1, Result: RESULTLabel13}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}
+{PARAM} CASO METHODCALL 
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: EXTERNINVKLabel15}
@@ -2509,6 +2218,7 @@ main:
 
     call breaks
 
+
     call printf
 
     movl $1, %eax
@@ -2539,7 +2249,7 @@ ELSE
 ultOffsetLeido: 12
 
 parseo exitoso
-tamaño lista de codigo tercetos: 33
+tamaño lista de codigo tercetos: 34
 lista: 
 {LABEL, null, null, Result: BeginMethod neg}
 
@@ -2576,6 +2286,7 @@ lista:
 {PARAM, null, null, Result: [false, false]}
 {METHODCALL, or, 2, Result: RESULTLabel12}
 {ASSIGN(=), VarLocation{name=factorLabel13, type=boolean, expr=MethodCallExpr{name=or, args=[false, false]}, size=0}, null, Result: VarLocation{name=e, type=boolean, expr=null, size=0}}
+{PARAM, null, null, Result: [false]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: EXTERNINVKLabel14}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -2641,7 +2352,6 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel5, type=boolean, expr
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [false]}
-index: 0 tamaño: 1
 finalizado.
 
 procesando : . . . {METHODCALL, neg, 1, Result: RESULTLabel6}
@@ -2651,8 +2361,6 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel7, type=boolean, expr
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [false, false]}
-index: 1 tamaño: 2
-index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, and, 2, Result: RESULTLabel8}
@@ -2662,7 +2370,6 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel9, type=boolean, expr
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [false]}
-index: 0 tamaño: 1
 finalizado.
 
 procesando : . . . {METHODCALL, neg, 1, Result: RESULTLabel10}
@@ -2672,14 +2379,15 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel11, type=boolean, exp
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [false, false]}
-index: 1 tamaño: 2
-index: 0 tamaño: 2
 finalizado.
 
 procesando : . . . {METHODCALL, or, 2, Result: RESULTLabel12}
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel13, type=boolean, expr=MethodCallExpr{name=or, args=[false, false]}, size=0}, null, Result: VarLocation{name=e, type=boolean, expr=null, size=0}}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [false]}
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: EXTERNINVKLabel14}
@@ -2797,6 +2505,7 @@ main:
 
     movl %eax,-20(%ebp)
 
+    movl $0 , (%esp)
     call printf
 
     leave
@@ -2813,7 +2522,7 @@ IF
 ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 28
+tamaño lista de codigo tercetos: 29
 lista: 
 {LABEL, null, null, Result: BeginMethod breaks}
 
@@ -2842,6 +2551,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [1]}
 {METHODCALL, breaks, 1, Result: RESULTLabel13}
+{PARAM, null, null, Result: [StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: EXTERNINVKLabel15}
 {RETURN, null, null, Result: VarLocation{name=factorLabel16, type=int, expr=1, size=0}}
 {LABEL, null, null, Result: EndMethod main}
@@ -2918,12 +2628,16 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [1]}
-index: 0 tamaño: 1
 
 Result = 1
 finalizado.
 
 procesando : . . . {METHODCALL, breaks, 1, Result: RESULTLabel13}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}
+{PARAM} CASO METHODCALL 
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=breaks, args=[1]}]}, null, Result: EXTERNINVKLabel15}
@@ -3010,6 +2724,7 @@ main:
 
     call breaks
 
+
     call printf
 
     movl $1, %eax
@@ -3038,7 +2753,7 @@ ultOffsetLeido: 12
 Error: Method pruAritmetica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 17
+tamaño lista de codigo tercetos: 18
 lista: 
 {LABEL, null, null, Result: BeginMethod pruAritmetica}
 
@@ -3057,6 +2772,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [4, 8]}
 {METHODCALL, pruAritmetica, 2, Result: RESULTLabel6}
+{PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel8}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -3102,15 +2818,17 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [4, 8]}
-index: 1 tamaño: 2
 
 Result = 8
-index: 0 tamaño: 2
 
 Result = 4
 finalizado.
 
 procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel6}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel8}
@@ -3167,6 +2885,7 @@ main:
 
     call pruAritmetica
 
+
     call printf
 
     leave
@@ -3193,7 +2912,7 @@ ultOffsetLeido: 12
 Error: Method pruAritmetica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 18
+tamaño lista de codigo tercetos: 19
 lista: 
 {LABEL, null, null, Result: BeginMethod pruAritmetica}
 
@@ -3213,6 +2932,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [4, 8]}
 {METHODCALL, pruAritmetica, 2, Result: RESULTLabel8}
+{PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel10}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -3261,15 +2981,17 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [4, 8]}
-index: 1 tamaño: 2
 
 Result = 8
-index: 0 tamaño: 2
 
 Result = 4
 finalizado.
 
 procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel8}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel10}
@@ -3330,6 +3052,7 @@ main:
     movl $4 , 8(%esp)
 
     call pruAritmetica
+
 
     call printf
 
@@ -3416,7 +3139,7 @@ ELSE
 ultOffsetLeido: 12
 
 parseo exitoso
-tamaño lista de codigo tercetos: 89
+tamaño lista de codigo tercetos: 90
 lista: 
 {LABEL, null, null, Result: BeginMethod dados}
 
@@ -3507,6 +3230,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [1, 6, 9]}
 {METHODCALL, dados, 3, Result: RESULTLabel96}
+{PARAM, null, null, Result: [MethodCallExpr{name=dados, args=[1, 6, 9]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=dados, args=[1, 6, 9]}]}, null, Result: EXTERNINVKLabel98}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -3768,18 +3492,19 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [1, 6, 9]}
-index: 2 tamaño: 3
 
 Result = 9
-index: 1 tamaño: 3
 
 Result = 6
-index: 0 tamaño: 3
 
 Result = 1
 finalizado.
 
 procesando : . . . {METHODCALL, dados, 3, Result: RESULTLabel96}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=dados, args=[1, 6, 9]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=dados, args=[1, 6, 9]}]}, null, Result: EXTERNINVKLabel98}
@@ -4332,6 +4057,7 @@ main:
 
     call dados
 
+
     call printf
 
     leave
@@ -4357,7 +4083,7 @@ ELSE
 ultOffsetLeido: 12
 
 parseo exitoso
-tamaño lista de codigo tercetos: 44
+tamaño lista de codigo tercetos: 45
 lista: 
 {LABEL, null, null, Result: BeginMethod pruContinue}
 
@@ -4403,6 +4129,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [3.0, 2]}
 {METHODCALL, pruContinue, 2, Result: RESULTLabel29}
+{PARAM, null, null, Result: [MethodCallExpr{name=pruContinue, args=[3.0, 2]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=pruContinue, args=[3.0, 2]}]}, null, Result: EXTERNINVKLabel31}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -4529,14 +4256,16 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [3.0, 2]}
-index: 1 tamaño: 2
 
 Result = 2
-index: 0 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
 procesando : . . . {METHODCALL, pruContinue, 2, Result: RESULTLabel29}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=pruContinue, args=[3.0, 2]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=pruContinue, args=[3.0, 2]}]}, null, Result: EXTERNINVKLabel31}
@@ -4677,6 +4406,7 @@ main:
 
     call pruContinue
 
+
     call printf
 
     leave
@@ -4690,7 +4420,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 44
+tamaño lista de codigo tercetos: 45
 lista: 
 {LABEL, null, null, Result: BeginMethod prueba}
 
@@ -4736,6 +4466,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [6]}
 {METHODCALL, prueba, 1, Result: RESULTLabel28}
+{PARAM, null, null, Result: [MethodCallExpr{name=prueba, args=[6]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: EXTERNINVKLabel30}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -4862,12 +4593,15 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [6]}
-index: 0 tamaño: 1
 
 Result = 6
 finalizado.
 
 procesando : . . . {METHODCALL, prueba, 1, Result: RESULTLabel28}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=prueba, args=[6]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: EXTERNINVKLabel30}
@@ -5005,6 +4739,7 @@ main:
 
     call prueba
 
+
     call printf
 
     leave
@@ -5021,7 +4756,7 @@ IF
 ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 27
+tamaño lista de codigo tercetos: 28
 lista: 
 {LABEL, null, null, Result: BeginMethod prueba}
 
@@ -5050,6 +4785,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [6]}
 {METHODCALL, prueba, 1, Result: RESULTLabel16}
+{PARAM, null, null, Result: [MethodCallExpr{name=prueba, args=[6]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: EXTERNINVKLabel18}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -5125,12 +4861,15 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [6]}
-index: 0 tamaño: 1
 
 Result = 6
 finalizado.
 
 procesando : . . . {METHODCALL, prueba, 1, Result: RESULTLabel16}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=prueba, args=[6]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=prueba, args=[6]}]}, null, Result: EXTERNINVKLabel18}
@@ -5219,6 +4958,7 @@ main:
 
     call prueba
 
+
     call printf
 
     leave
@@ -5244,7 +4984,7 @@ IF
 ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 46
+tamaño lista de codigo tercetos: 47
 lista: 
 {LABEL, null, null, Result: BeginMethod potencia}
 
@@ -5292,6 +5032,7 @@ lista:
 {PARAM, null, null, Result: [0.0, 2]}
 {METHODCALL, potencia, 2, Result: RESULTLabel26}
 {ASSIGN(=), VarLocation{name=factorLabel27, type=float, expr=MethodCallExpr{name=potencia, args=[0.0, 2]}, size=0}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
+{PARAM, null, null, Result: [StringLiteral{value="%f"}, 0.0]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: EXTERNINVKLabel28}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -5421,10 +5162,8 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel24, type=float, expr=
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0.0, 2]}
-index: 1 tamaño: 2
 
 Result = 2
-index: 0 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
@@ -5432,6 +5171,11 @@ procesando : . . . {METHODCALL, potencia, 2, Result: RESULTLabel26}
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel27, type=float, expr=MethodCallExpr{name=potencia, args=[0.0, 2]}, size=0}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="%f"}, 0.0]}
+{PARAM} CASO FLAOTLITERAL PENDIENTE
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: EXTERNINVKLabel28}
@@ -5574,6 +5318,7 @@ main:
 
     movl %eax,-4(%ebp)
 
+
     call printf
 
     leave
@@ -5590,7 +5335,7 @@ IF
 ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 32
+tamaño lista de codigo tercetos: 33
 lista: 
 {LABEL, null, null, Result: BeginMethod sumatoria}
 
@@ -5624,6 +5369,7 @@ lista:
 {PARAM, null, null, Result: [0.0]}
 {METHODCALL, sumatoria, 1, Result: RESULTLabel16}
 {ASSIGN(=), VarLocation{name=factorLabel17, type=float, expr=MethodCallExpr{name=sumatoria, args=[0.0]}, size=0}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
+{PARAM, null, null, Result: [StringLiteral{value="%f"}, 0.0]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: EXTERNINVKLabel18}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -5711,7 +5457,6 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel15, type=float, expr=
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0.0]}
-index: 0 tamaño: 1
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
@@ -5719,6 +5464,11 @@ procesando : . . . {METHODCALL, sumatoria, 1, Result: RESULTLabel16}
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel17, type=float, expr=MethodCallExpr{name=sumatoria, args=[0.0]}, size=0}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="%f"}, 0.0]}
+{PARAM} CASO FLAOTLITERAL PENDIENTE
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, 0.0]}, null, Result: EXTERNINVKLabel18}
@@ -5827,6 +5577,7 @@ main:
 
     movl %eax,-4(%ebp)
 
+
     call printf
 
     leave
@@ -5879,7 +5630,7 @@ ELSE
 ultOffsetLeido: 12
 
 parseo exitoso
-tamaño lista de codigo tercetos: 151
+tamaño lista de codigo tercetos: 152
 lista: 
 {null, float, w, Result: 0}
 {null, float, m, Result: 0}
@@ -6033,6 +5784,7 @@ lista:
 {PLUS(+), VarLocation{name=f, type=float, expr=0.0, size=0}, VarLocation{name=factorLabel109, type=float, expr=2.0, size=0}, Result: VarLocation{name=PLUSLabel110, type=float, expr=VarLocation{name=f, type=float, expr=0.0, size=0}+VarLocation{name=factorLabel109, type=float, expr=2.0, size=0}, size=0}}
 {PARAM, null, null, Result: [0.0, VarLocation{name=f, type=float, expr=0.0, size=0}+VarLocation{name=factorLabel109, type=float, expr=2.0, size=0}]}
 {METHODCALL, multiples, 2, Result: RESULTLabel111}
+{PARAM, null, null, Result: [StringLiteral{value="%f"}, MethodCallExpr{name=multiples, args=[0.0, VarLocation{name=f, type=float, expr=0.0, size=0}+VarLocation{name=factorLabel109, type=float, expr=2.0, size=0}]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multiples, args=[0.0, VarLocation{name=f, type=float, expr=0.0, size=0}+VarLocation{name=factorLabel109, type=float, expr=2.0, size=0}]}]}, null, Result: EXTERNINVKLabel113}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -6469,10 +6221,8 @@ procesando : . . . {ASSIGN(=), VarLocation{name=UNARYMINUSLabel105, type=float, 
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0.0, 2]}
-index: 1 tamaño: 2
 
 Result = 2
-index: 0 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
@@ -6486,12 +6236,15 @@ procesando : . . . {PLUS(+), VarLocation{name=f, type=float, expr=0.0, size=0}, 
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0.0, VarLocation{name=f, type=float, expr=0.0, size=0}+VarLocation{name=factorLabel109, type=float, expr=2.0, size=0}]}
-index: 1 tamaño: 2
-index: 0 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
 procesando : . . . {METHODCALL, multiples, 2, Result: RESULTLabel111}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="%f"}, MethodCallExpr{name=multiples, args=[0.0, VarLocation{name=f, type=float, expr=0.0, size=0}+VarLocation{name=factorLabel109, type=float, expr=2.0, size=0}]}]}
+{PARAM} CASO METHODCALL 
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multiples, args=[0.0, VarLocation{name=f, type=float, expr=0.0, size=0}+VarLocation{name=factorLabel109, type=float, expr=2.0, size=0}]}]}, null, Result: EXTERNINVKLabel113}
@@ -7003,6 +6756,7 @@ main:
 
     call multiples
 
+
     call printf
 
     leave
@@ -7049,7 +6803,7 @@ ELSE
 ultOffsetLeido: 12
 
 parseo exitoso
-tamaño lista de codigo tercetos: 68
+tamaño lista de codigo tercetos: 69
 lista: 
 {null, float, w, Result: 0}
 {null, float, m, Result: 0}
@@ -7120,6 +6874,7 @@ lista:
 {ASSIGN(=), VarLocation{name=factorLabel41, type=float, expr=MethodCallExpr{name=potencia, args=[0.0, 2]}, size=0}, null, Result: VarLocation{name=f, type=float, expr=null, size=0}}
 {PARAM, null, null, Result: [0.0, 0.0]}
 {METHODCALL, multRepeat, 2, Result: RESULTLabel42}
+{PARAM, null, null, Result: [StringLiteral{value="%f"}, MethodCallExpr{name=multRepeat, args=[0.0, 0.0]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multRepeat, args=[0.0, 0.0]}]}, null, Result: EXTERNINVKLabel44}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -7310,10 +7065,8 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel38, type=float, expr=
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0.0, 2]}
-index: 1 tamaño: 2
 
 Result = 2
-index: 0 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
@@ -7324,13 +7077,16 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel41, type=float, expr=
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0.0, 0.0]}
-index: 1 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
-index: 0 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
 procesando : . . . {METHODCALL, multRepeat, 2, Result: RESULTLabel42}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="%f"}, MethodCallExpr{name=multRepeat, args=[0.0, 0.0]}]}
+{PARAM} CASO METHODCALL 
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%f"}, MethodCallExpr{name=multRepeat, args=[0.0, 0.0]}]}, null, Result: EXTERNINVKLabel44}
@@ -7557,6 +7313,7 @@ main:
 
     call multRepeat
 
+
     call printf
 
     leave
@@ -7588,7 +7345,7 @@ ELSE
 ultOffsetLeido: 12
 
 parseo exitoso
-tamaño lista de codigo tercetos: 31
+tamaño lista de codigo tercetos: 32
 lista: 
 {LABEL, null, null, Result: BeginMethod div}
 
@@ -7623,6 +7380,7 @@ lista:
 {ASSIGN(=), VarLocation{name=factorLabel11, type=float, expr=MethodCallExpr{name=div, args=[0.0, 0.0]}, size=0}, null, Result: VarLocation{name=b, type=float, expr=null, size=0}}
 {PARAM, null, null, Result: [0.0, 0.0]}
 {METHODCALL, sum, 2, Result: RESULTLabel12}
+{PARAM, null, null, Result: [StringLiteral{value="anidandofuncionesflotantes"}, MethodCallExpr{name=sum, args=[0.0, 0.0]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandofuncionesflotantes"}, MethodCallExpr{name=sum, args=[0.0, 0.0]}]}, null, Result: EXTERNINVKLabel14}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -7694,9 +7452,7 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel7, type=float, expr=3
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0.0, 0.0]}
-index: 1 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
-index: 0 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
@@ -7707,9 +7463,7 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel9, type=float, expr=M
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0.0, 0.0]}
-index: 1 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
-index: 0 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
@@ -7720,13 +7474,16 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel11, type=float, expr=
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0.0, 0.0]}
-index: 1 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
-index: 0 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
 procesando : . . . {METHODCALL, sum, 2, Result: RESULTLabel12}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="anidandofuncionesflotantes"}, MethodCallExpr{name=sum, args=[0.0, 0.0]}]}
+{PARAM} CASO METHODCALL 
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="anidandofuncionesflotantes"}, MethodCallExpr{name=sum, args=[0.0, 0.0]}]}, null, Result: EXTERNINVKLabel14}
@@ -7828,6 +7585,7 @@ main:
 
     call sum
 
+
     call printf
 
     leave
@@ -7841,7 +7599,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 24
+tamaño lista de codigo tercetos: 25
 lista: 
 {null, int, A, Result: 5}
 {null, float, B, Result: 56}
@@ -7866,6 +7624,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [4, 8]}
 {METHODCALL, pruArreglos, 2, Result: RESULTLabel14}
+{PARAM, null, null, Result: [StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel16}
 {RETURN, null, null, Result: VarLocation{name=factorLabel17, type=int, expr=1, size=0}}
 {LABEL, null, null, Result: EndMethod main}
@@ -7936,15 +7695,18 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [4, 8]}
-index: 1 tamaño: 2
 
 Result = 8
-index: 0 tamaño: 2
 
 Result = 4
 finalizado.
 
 procesando : . . . {METHODCALL, pruArreglos, 2, Result: RESULTLabel14}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}
+{PARAM} CASO METHODCALL 
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel16}
@@ -8021,6 +7783,7 @@ main:
 
     call pruArreglos
 
+
     call printf
 
     movl $1, %eax
@@ -8036,7 +7799,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 23
+tamaño lista de codigo tercetos: 24
 lista: 
 {null, int, A, Result: 5}
 {null, float, B, Result: 56}
@@ -8060,6 +7823,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [4, 8]}
 {METHODCALL, pruArreglos, 2, Result: RESULTLabel13}
+{PARAM, null, null, Result: [StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel15}
 {RETURN, null, null, Result: VarLocation{name=factorLabel16, type=int, expr=1, size=0}}
 {LABEL, null, null, Result: EndMethod main}
@@ -8127,15 +7891,18 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [4, 8]}
-index: 1 tamaño: 2
 
 Result = 8
-index: 0 tamaño: 2
 
 Result = 4
 finalizado.
 
 procesando : . . . {METHODCALL, pruArreglos, 2, Result: RESULTLabel13}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}
+{PARAM} CASO METHODCALL 
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel15}
@@ -8207,6 +7974,7 @@ main:
 
     call pruArreglos
 
+
     call printf
 
     movl $1, %eax
@@ -8222,7 +7990,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 24
+tamaño lista de codigo tercetos: 25
 lista: 
 {null, int, A, Result: 5}
 {null, float, B, Result: 56}
@@ -8247,6 +8015,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [4, 8]}
 {METHODCALL, pruArreglos, 2, Result: RESULTLabel14}
+{PARAM, null, null, Result: [StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel16}
 {RETURN, null, null, Result: VarLocation{name=factorLabel17, type=int, expr=1, size=0}}
 {LABEL, null, null, Result: EndMethod main}
@@ -8317,15 +8086,18 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [4, 8]}
-index: 1 tamaño: 2
 
 Result = 8
-index: 0 tamaño: 2
 
 Result = 4
 finalizado.
 
 procesando : . . . {METHODCALL, pruArreglos, 2, Result: RESULTLabel14}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}
+{PARAM} CASO METHODCALL 
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel16}
@@ -8401,6 +8173,7 @@ main:
 
     call pruArreglos
 
+
     call printf
 
     movl $1, %eax
@@ -8416,7 +8189,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 26
+tamaño lista de codigo tercetos: 27
 lista: 
 {null, int, A, Result: 5}
 {null, float, B, Result: 56}
@@ -8443,6 +8216,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [4, 8]}
 {METHODCALL, pruArreglos, 2, Result: RESULTLabel18}
+{PARAM, null, null, Result: [StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel20}
 {RETURN, null, null, Result: VarLocation{name=factorLabel21, type=int, expr=1, size=0}}
 {LABEL, null, null, Result: EndMethod main}
@@ -8519,15 +8293,18 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [4, 8]}
-index: 1 tamaño: 2
 
 Result = 8
-index: 0 tamaño: 2
 
 Result = 4
 finalizado.
 
 procesando : . . . {METHODCALL, pruArreglos, 2, Result: RESULTLabel18}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}
+{PARAM} CASO METHODCALL 
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel20}
@@ -8613,6 +8390,7 @@ main:
 
     call pruArreglos
 
+
     call printf
 
     movl $1, %eax
@@ -8628,7 +8406,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 30
+tamaño lista de codigo tercetos: 31
 lista: 
 {null, int, A, Result: 5}
 {null, float, B, Result: 56}
@@ -8660,6 +8438,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [4, 8]}
 {METHODCALL, pruArreglos, 2, Result: RESULTLabel18}
+{PARAM, null, null, Result: [StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel20}
 {RETURN, null, null, Result: VarLocation{name=factorLabel21, type=int, expr=1, size=0}}
 {LABEL, null, null, Result: EndMethod main}
@@ -8749,15 +8528,18 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [4, 8]}
-index: 1 tamaño: 2
 
 Result = 8
-index: 0 tamaño: 2
 
 Result = 4
 finalizado.
 
 procesando : . . . {METHODCALL, pruArreglos, 2, Result: RESULTLabel18}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}
+{PARAM} CASO METHODCALL 
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[StringLiteral{value="%d resultado : "}, MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel20}
@@ -8852,6 +8634,7 @@ main:
 
     call pruArreglos
 
+
     call printf
 
     movl $1, %eax
@@ -8895,7 +8678,7 @@ ultOffsetLeido: 8
 Error: Method pruAritmetica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 34
+tamaño lista de codigo tercetos: 38
 lista: 
 {LABEL, null, null, Result: BeginMethod pruAritmetica}
 
@@ -8924,13 +8707,17 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [4, 8]}
 {METHODCALL, pruAritmetica, 2, Result: RESULTLabel13}
+{PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel15}
+{PARAM, null, null, Result: null}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel16}
 {PARAM, null, null, Result: [4, 4]}
 {METHODCALL, pruAritmetica, 2, Result: RESULTLabel19}
+{PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: EXTERNINVKLabel21}
 {PARAM, null, null, Result: [8, 5]}
 {METHODCALL, pruAritmetica, 2, Result: RESULTLabel24}
+{PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: EXTERNINVKLabel26}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -9006,10 +8793,8 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [4, 8]}
-index: 1 tamaño: 2
 
 Result = 8
-index: 0 tamaño: 2
 
 Result = 4
 finalizado.
@@ -9017,149 +8802,15 @@ finalizado.
 procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel13}
 finalizado.
 
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}
+{PARAM} CASO METHODCALL 
+finalizado.
+
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel15}
 finalizado.
 
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel16}
-finalizado.
-
-procesando : . . . {PARAM, null, null, Result: [4, 4]}
-index: 1 tamaño: 2
-
-Result = 4
-index: 0 tamaño: 2
-
-Result = 4
-finalizado.
-
-procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel19}
-finalizado.
-
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: EXTERNINVKLabel21}
-finalizado.
-
-procesando : . . . {PARAM, null, null, Result: [8, 5]}
-index: 1 tamaño: 2
-
-Result = 5
-index: 0 tamaño: 2
-
-Result = 8
-finalizado.
-
-procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel24}
-finalizado.
-
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: EXTERNINVKLabel26}
-finalizado.
-
-procesando : . . . {LABEL, null, null, Result: EndMethod main}
-finalizado.
-
-
-
-    .text
-    .globl	pruAritmetica
-    .type	pruAritmetica, @function 
-pruAritmetica: 
-    enter   $(8), $0 
-    pushl	%ebp
-    movl %esp, %ebp
-
-    movl	8(%ebp), %eax
-    cmpl	12(%ebp), %eax
-    setgne %al
-    movlzbl %al, %eax
-    movl	%eax, -8(%ebp)
-
-    movl $ 1, %eax
-    cmpl -8(%ebp), %eax
-
-    jne elseCondLabel2
-
-    movl	8(%ebp), %eax
-    cmpl	12(%ebp), %eax
-    setg	%al
-    movlzbl %al, %eax
-    movl	%eax, -12(%ebp)
-
-    movl $ 1, %eax
-    cmpl -12(%ebp), %eax
-
-    jne elseCondLabel5
-
-    movl 8(%ebp) , %eax 
-    movl 12(%ebp) , %edx 
-    subl %eax, %edx 
-    movl %edx,-16(%ebp) 
-
-    movl -16(%ebp),-4(%ebp)
-
-    jmp endIfLabel6
-
-.elseCondLabel5:
-
-    movl 12(%ebp) , %eax 
-    movl 8(%ebp) , %edx 
-    subl %eax, %edx 
-    movl %edx,-20(%ebp) 
-
-    movl -20(%ebp),-4(%ebp)
-
-.endIfLabel6:
-
-    jmp endIfLabel3
-
-.elseCondLabel2:
-
-    movl 8(%ebp) , %eax 
-    movl $5, %edx 
-    imull %edx, %eax 
-    movl %eax,-28(%ebp) 
-
-    movl -28(%ebp),-4(%ebp)
-
-.endIfLabel3:
-
-    leave
-    ret
-
-
-
-    .text
-    .globl	main
-    .type	main, @function 
-main: 
-    pushl	%ebp
-    movl %esp, %ebp
-
-    movl $8 , 12(%esp)
-    movl $4 , 8(%esp)
-
-    call pruAritmetica
-
-    call printf
-
-    call printf
-
-    movl $4 , 12(%esp)
-    movl $4 , 8(%esp)
-
-    call pruAritmetica
-
-    call printf
-
-    movl $5 , 12(%esp)
-    movl $8 , 8(%esp)
-
-    call pruAritmetica
-
-    call printf
-
-    leave
-    ret
-
-
+procesando : . . . {PARAM, null, null, Result: null}
+ocurrio un error: null
 ---------------------------------------------------
   
   
@@ -9195,7 +8846,7 @@ ultOffsetLeido: 8
 Error: Method pruAritmetica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 34
+tamaño lista de codigo tercetos: 38
 lista: 
 {LABEL, null, null, Result: BeginMethod pruAritmetica}
 
@@ -9224,13 +8875,17 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [4, 8]}
 {METHODCALL, pruAritmetica, 2, Result: RESULTLabel13}
+{PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel15}
+{PARAM, null, null, Result: null}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel16}
 {PARAM, null, null, Result: [4, 4]}
 {METHODCALL, pruAritmetica, 2, Result: RESULTLabel19}
+{PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: EXTERNINVKLabel21}
 {PARAM, null, null, Result: [8, 5]}
 {METHODCALL, pruAritmetica, 2, Result: RESULTLabel24}
+{PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: EXTERNINVKLabel26}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -9306,10 +8961,8 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [4, 8]}
-index: 1 tamaño: 2
 
 Result = 8
-index: 0 tamaño: 2
 
 Result = 4
 finalizado.
@@ -9317,149 +8970,15 @@ finalizado.
 procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel13}
 finalizado.
 
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}
+{PARAM} CASO METHODCALL 
+finalizado.
+
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel15}
 finalizado.
 
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel16}
-finalizado.
-
-procesando : . . . {PARAM, null, null, Result: [4, 4]}
-index: 1 tamaño: 2
-
-Result = 4
-index: 0 tamaño: 2
-
-Result = 4
-finalizado.
-
-procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel19}
-finalizado.
-
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: EXTERNINVKLabel21}
-finalizado.
-
-procesando : . . . {PARAM, null, null, Result: [8, 5]}
-index: 1 tamaño: 2
-
-Result = 5
-index: 0 tamaño: 2
-
-Result = 8
-finalizado.
-
-procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel24}
-finalizado.
-
-procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: EXTERNINVKLabel26}
-finalizado.
-
-procesando : . . . {LABEL, null, null, Result: EndMethod main}
-finalizado.
-
-
-
-    .text
-    .globl	pruAritmetica
-    .type	pruAritmetica, @function 
-pruAritmetica: 
-    enter   $(8), $0 
-    pushl	%ebp
-    movl %esp, %ebp
-
-    movl	8(%ebp), %eax
-    cmpl	12(%ebp), %eax
-    setg	%al
-    movlzbl %al, %eax
-    movl	%eax, -8(%ebp)
-
-    movl $ 1, %eax
-    cmpl -8(%ebp), %eax
-
-    jne elseCondLabel2
-
-    movl 8(%ebp) , %eax 
-    movl 12(%ebp) , %edx 
-    subl %eax, %edx 
-    movl %edx,-12(%ebp) 
-
-    movl -12(%ebp),-4(%ebp)
-
-    jmp endIfLabel3
-
-.elseCondLabel2:
-
-.endIfLabel3:
-
-    movl	8(%ebp), %eax
-    cmpl	12(%ebp), %eax
-    sete %al
-    movlzbl %al, %eax
-    movl	%eax, -16(%ebp)
-
-    movl $ 1, %eax
-    cmpl -16(%ebp), %eax
-
-    jne elseCondLabel6
-
-    movl 8(%ebp) , %eax 
-    movl $5, %edx 
-    imull %edx, %eax 
-    movl %eax,-24(%ebp) 
-
-    movl -24(%ebp),-4(%ebp)
-
-    jmp endIfLabel7
-
-.elseCondLabel6:
-
-    movl 12(%ebp) , %eax 
-    movl 8(%ebp) , %edx 
-    subl %eax, %edx 
-    movl %edx,-28(%ebp) 
-
-    movl -28(%ebp),-4(%ebp)
-
-.endIfLabel7:
-
-    leave
-    ret
-
-
-
-    .text
-    .globl	main
-    .type	main, @function 
-main: 
-    pushl	%ebp
-    movl %esp, %ebp
-
-    movl $8 , 12(%esp)
-    movl $4 , 8(%esp)
-
-    call pruAritmetica
-
-    call printf
-
-    call printf
-
-    movl $4 , 12(%esp)
-    movl $4 , 8(%esp)
-
-    call pruAritmetica
-
-    call printf
-
-    movl $5 , 12(%esp)
-    movl $8 , 8(%esp)
-
-    call pruAritmetica
-
-    call printf
-
-    leave
-    ret
-
-
+procesando : . . . {PARAM, null, null, Result: null}
+ocurrio un error: null
 ---------------------------------------------------
   
   
@@ -9471,7 +8990,7 @@ ultOffsetLeido: 8
 Error: Method pruebaLogica must return int
 
 parseo exitoso
-tamaño lista de codigo tercetos: 15
+tamaño lista de codigo tercetos: 16
 lista: 
 {LABEL, null, null, Result: BeginMethod pruebaLogica}
 
@@ -9488,6 +9007,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [false]}
 {METHODCALL, pruebaLogica, 1, Result: RESULTLabel10}
+{PARAM, null, null, Result: [MethodCallExpr{name=pruebaLogica, args=[false]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[false]}]}, null, Result: EXTERNINVKLabel12}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -9527,10 +9047,13 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [false]}
-index: 0 tamaño: 1
 finalizado.
 
 procesando : . . . {METHODCALL, pruebaLogica, 1, Result: RESULTLabel10}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=pruebaLogica, args=[false]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruebaLogica, args=[false]}]}, null, Result: EXTERNINVKLabel12}
@@ -9614,6 +9137,7 @@ main:
 
     movl $0 , (%esp)
     call pruebaLogica
+
 
     call printf
 
@@ -9703,7 +9227,7 @@ IF
 ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 54
+tamaño lista de codigo tercetos: 55
 lista: 
 {LABEL, null, null, Result: BeginMethod promedio}
 
@@ -9758,6 +9282,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [3.3, 0.66, 10.0]}
 {METHODCALL, promedio, 3, Result: RESULTLabel35}
+{PARAM, null, null, Result: [StringLiteral{value="%f resultado : "}, MethodCallExpr{name=promedio, args=[3.3, 0.66, 10.0]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=promedio, args=[3.3, 0.66, 10.0]}]}, null, Result: EXTERNINVKLabel37}
 {RETURN, null, null, Result: VarLocation{name=factorLabel38, type=int, expr=1, size=0}}
 {LABEL, null, null, Result: EndMethod main}
@@ -9912,15 +9437,17 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [3.3, 0.66, 10.0]}
-index: 2 tamaño: 3
 {PARAM} CASO FLAOTLITERAL PENDIENTE
-index: 1 tamaño: 3
 {PARAM} CASO FLAOTLITERAL PENDIENTE
-index: 0 tamaño: 3
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
 procesando : . . . {METHODCALL, promedio, 3, Result: RESULTLabel35}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="%f resultado : "}, MethodCallExpr{name=promedio, args=[3.3, 0.66, 10.0]}]}
+{PARAM} CASO METHODCALL 
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%f resultado : "}, MethodCallExpr{name=promedio, args=[3.3, 0.66, 10.0]}]}, null, Result: EXTERNINVKLabel37}
@@ -10161,6 +9688,7 @@ main:
 
     call promedio
 
+
     call printf
 
     movl $1, %eax
@@ -10176,7 +9704,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 11
+tamaño lista de codigo tercetos: 12
 lista: 
 {LABEL, null, null, Result: BeginMethod main}
 
@@ -10188,6 +9716,7 @@ lista:
 {NON(!), VarLocation{name=b, type=boolean, expr=false, size=0}, null, Result: VarLocation{name=NONLabel4, type=boolean, expr=!VarLocation{name=b, type=boolean, expr=false, size=0}, size=0}}
 {OR(||), VarLocation{name=CONJUNCIONLabel3, type=boolean, expr=VarLocation{name=a, type=boolean, expr=false, size=0}&&VarLocation{name=b, type=boolean, expr=false, size=0}, size=0}, VarLocation{name=NONLabel4, type=boolean, expr=!VarLocation{name=b, type=boolean, expr=false, size=0}, size=0}, Result: VarLocation{name=DISYUNCIONLabel5, type=boolean, expr=VarLocation{name=CONJUNCIONLabel3, type=boolean, expr=VarLocation{name=a, type=boolean, expr=false, size=0}&&VarLocation{name=b, type=boolean, expr=false, size=0}, size=0}||VarLocation{name=NONLabel4, type=boolean, expr=!VarLocation{name=b, type=boolean, expr=false, size=0}, size=0}, size=0}}
 {ASSIGN(=), VarLocation{name=DISYUNCIONLabel5, type=boolean, expr=VarLocation{name=CONJUNCIONLabel3, type=boolean, expr=VarLocation{name=a, type=boolean, expr=false, size=0}&&VarLocation{name=b, type=boolean, expr=false, size=0}, size=0}||VarLocation{name=NONLabel4, type=boolean, expr=!VarLocation{name=b, type=boolean, expr=false, size=0}, size=0}, size=0}, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
+{PARAM, null, null, Result: [false]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: EXTERNINVKLabel6}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -10217,6 +9746,9 @@ procesando : . . . {OR(||), VarLocation{name=CONJUNCIONLabel3, type=boolean, exp
 finalizado.
 
 procesando : . . . {ASSIGN(=), VarLocation{name=DISYUNCIONLabel5, type=boolean, expr=VarLocation{name=CONJUNCIONLabel3, type=boolean, expr=VarLocation{name=a, type=boolean, expr=false, size=0}&&VarLocation{name=b, type=boolean, expr=false, size=0}, size=0}||VarLocation{name=NONLabel4, type=boolean, expr=!VarLocation{name=b, type=boolean, expr=false, size=0}, size=0}, size=0}, null, Result: VarLocation{name=c, type=boolean, expr=null, size=0}}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [false]}
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=boolean, parameters=[false]}, null, Result: EXTERNINVKLabel6}
@@ -10276,6 +9808,7 @@ main:
 
     movl -40(%ebp),-12(%ebp)
 
+    movl $0 , (%esp)
     call printf
 
     leave
@@ -10307,7 +9840,7 @@ IF
 ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 31
+tamaño lista de codigo tercetos: 32
 lista: 
 {LABEL, null, null, Result: BeginMethod maxcomdiv}
 
@@ -10340,6 +9873,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [6, 9]}
 {METHODCALL, maxcomdiv, 2, Result: RESULTLabel12}
+{PARAM, null, null, Result: [StringLiteral{value="mcd%d"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="mcd%d"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: EXTERNINVKLabel14}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -10427,15 +9961,18 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [6, 9]}
-index: 1 tamaño: 2
 
 Result = 9
-index: 0 tamaño: 2
 
 Result = 6
 finalizado.
 
 procesando : . . . {METHODCALL, maxcomdiv, 2, Result: RESULTLabel12}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="mcd%d"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}
+{PARAM} CASO METHODCALL 
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="mcd%d"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: EXTERNINVKLabel14}
@@ -10528,6 +10065,7 @@ main:
 
     call maxcomdiv
 
+
     call printf
 
     leave
@@ -10539,9 +10077,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_metodos00.ctds ... -------------------
 parseo iniciado
-simbolo: x
-IF
-ultOffsetLeido: 8
 Error: Method alo not declared
 Error: Method alo not declared
 ocurrio un error: null
@@ -10559,41 +10094,39 @@ ultOffsetLeido: 8
 simbolo: x
 IF
 ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 26
+tamaño lista de codigo tercetos: 27
 lista: 
 {null, float, c, Result: 0}
 {LABEL, null, null, Result: BeginMethod alo}
 
 {METHODDECL, Metodo{ name=alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=int, name=x, value=null, size=0, offset=0}]}, null, Result: null}
-{PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel1, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel2, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel1, type=int, expr=1, size=0}, size=0}}
-{ASSIGN(=), VarLocation{name=PLUSLabel2, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel1, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{PLUS(+), VarLocation{name=factorLabel1, type=int, expr=0, size=0}, VarLocation{name=factorLabel2, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel3, type=int, expr=VarLocation{name=factorLabel1, type=int, expr=0, size=0}+VarLocation{name=factorLabel2, type=int, expr=1, size=0}, size=0}}
+{ASSIGN(=), VarLocation{name=PLUSLabel3, type=int, expr=VarLocation{name=factorLabel1, type=int, expr=0, size=0}+VarLocation{name=factorLabel2, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {LABEL, null, null, Result: EndMethod alo}
 {LABEL, null, null, Result: BeginMethod alo2}
 
 {METHODDECL, Metodo{ name=alo2, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0, offset=0}]}, null, Result: null}
 {PARAM, null, null, Result: [0]}
-{METHODCALL, alo, 1, Result: RESULTLabel3}
-{PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel4, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel5, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel4, type=int, expr=1, size=0}, size=0}}
-{ASSIGN(=), VarLocation{name=PLUSLabel5, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel4, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{METHODCALL, alo, 1, Result: RESULTLabel4}
+{PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel5, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel6, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel5, type=int, expr=1, size=0}, size=0}}
+{ASSIGN(=), VarLocation{name=PLUSLabel6, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel5, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {RETURN, null, null, Result: VarLocation{name=x, type=int, expr=0, size=0}}
 {LABEL, null, null, Result: EndMethod alo2}
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{ASSIGN(=), VarLocation{name=factorLabel6, type=int, expr=7, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
-{ASSIGN(=), VarLocation{name=factorLabel7, type=float, expr=8.0, size=0}, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
+{ASSIGN(=), VarLocation{name=factorLabel7, type=int, expr=7, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
+{ASSIGN(=), VarLocation{name=factorLabel8, type=float, expr=8.0, size=0}, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
 {PARAM, null, null, Result: [0]}
-{METHODCALL, alo2, 1, Result: RESULTLabel8}
-{ASSIGN(=), VarLocation{name=factorLabel9, type=int, expr=MethodCallExpr{name=alo2, args=[0]}, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
-{MULTIPLY(*), VarLocation{name=factorLabel10, type=int, expr=3, size=0}, VarLocation{name=y, type=int, expr=0, size=0}, Result: VarLocation{name=MULTIPLYLabel11, type=int, expr=VarLocation{name=factorLabel10, type=int, expr=3, size=0}*VarLocation{name=y, type=int, expr=0, size=0}, size=0}}
-{PARAM, null, null, Result: [VarLocation{name=factorLabel10, type=int, expr=3, size=0}*VarLocation{name=y, type=int, expr=0, size=0}]}
-{METHODCALL, alo2, 1, Result: RESULTLabel12}
-{ASSIGN(=), VarLocation{name=factorLabel13, type=int, expr=MethodCallExpr{name=alo2, args=[VarLocation{name=factorLabel10, type=int, expr=3, size=0}*VarLocation{name=y, type=int, expr=0, size=0}]}, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
+{METHODCALL, alo2, 1, Result: RESULTLabel9}
+{ASSIGN(=), VarLocation{name=factorLabel10, type=int, expr=MethodCallExpr{name=alo2, args=[0]}, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
+{MULTIPLY(*), VarLocation{name=factorLabel11, type=int, expr=3, size=0}, VarLocation{name=y, type=int, expr=0, size=0}, Result: VarLocation{name=MULTIPLYLabel12, type=int, expr=VarLocation{name=factorLabel11, type=int, expr=3, size=0}*VarLocation{name=y, type=int, expr=0, size=0}, size=0}}
+{ASSIGN(=), VarLocation{name=MULTIPLYLabel12, type=int, expr=VarLocation{name=factorLabel11, type=int, expr=3, size=0}*VarLocation{name=y, type=int, expr=0, size=0}, size=0}, null, Result: VarLocation{name=z, type=int, expr=null, size=0}}
+{PARAM, null, null, Result: [0]}
+{METHODCALL, alo2, 1, Result: RESULTLabel13}
+{ASSIGN(=), VarLocation{name=factorLabel14, type=int, expr=MethodCallExpr{name=alo2, args=[0]}, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
 {LABEL, null, null, Result: EndMethod main}
 
 procesando : . . . {null, float, c, Result: 0}
@@ -10606,10 +10139,10 @@ finalizado.
 procesando : . . . {METHODDECL, Metodo{ name=alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=int, name=x, value=null, size=0, offset=0}]}, null, Result: null}
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel1, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel2, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel1, type=int, expr=1, size=0}, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=factorLabel1, type=int, expr=0, size=0}, VarLocation{name=factorLabel2, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel3, type=int, expr=VarLocation{name=factorLabel1, type=int, expr=0, size=0}+VarLocation{name=factorLabel2, type=int, expr=1, size=0}, size=0}}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel2, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel1, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel3, type=int, expr=VarLocation{name=factorLabel1, type=int, expr=0, size=0}+VarLocation{name=factorLabel2, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod alo}
@@ -10623,18 +10156,17 @@ procesando : . . . {METHODDECL, Metodo{ name=alo2, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0]}
-index: 0 tamaño: 1
 
 Result = 0
 finalizado.
 
-procesando : . . . {METHODCALL, alo, 1, Result: RESULTLabel3}
+procesando : . . . {METHODCALL, alo, 1, Result: RESULTLabel4}
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel4, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel5, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel4, type=int, expr=1, size=0}, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel5, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel6, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel5, type=int, expr=1, size=0}, size=0}}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel5, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel4, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel6, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel5, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 finalizado.
 
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=x, type=int, expr=0, size=0}}
@@ -10650,44 +10182,132 @@ finalizado.
 procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel6, type=int, expr=7, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel7, type=int, expr=7, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel7, type=float, expr=8.0, size=0}, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel8, type=float, expr=8.0, size=0}, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0]}
-index: 0 tamaño: 1
 
 Result = 0
 finalizado.
 
-procesando : . . . {METHODCALL, alo2, 1, Result: RESULTLabel8}
+procesando : . . . {METHODCALL, alo2, 1, Result: RESULTLabel9}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel9, type=int, expr=MethodCallExpr{name=alo2, args=[0]}, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel10, type=int, expr=MethodCallExpr{name=alo2, args=[0]}, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
 finalizado.
 
-procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel10, type=int, expr=3, size=0}, VarLocation{name=y, type=int, expr=0, size=0}, Result: VarLocation{name=MULTIPLYLabel11, type=int, expr=VarLocation{name=factorLabel10, type=int, expr=3, size=0}*VarLocation{name=y, type=int, expr=0, size=0}, size=0}}
+procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel11, type=int, expr=3, size=0}, VarLocation{name=y, type=int, expr=0, size=0}, Result: VarLocation{name=MULTIPLYLabel12, type=int, expr=VarLocation{name=factorLabel11, type=int, expr=3, size=0}*VarLocation{name=y, type=int, expr=0, size=0}, size=0}}
 finalizado.
 
-procesando : . . . {PARAM, null, null, Result: [VarLocation{name=factorLabel10, type=int, expr=3, size=0}*VarLocation{name=y, type=int, expr=0, size=0}]}
-index: 0 tamaño: 1
-ocurrio un error: For input string: "0VarLocation{name=factorLabel10, type=int, expr=3, size=0}"
+procesando : . . . {ASSIGN(=), VarLocation{name=MULTIPLYLabel12, type=int, expr=VarLocation{name=factorLabel11, type=int, expr=3, size=0}*VarLocation{name=y, type=int, expr=0, size=0}, size=0}, null, Result: VarLocation{name=z, type=int, expr=null, size=0}}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [0]}
+
+Result = 0
+finalizado.
+
+procesando : . . . {METHODCALL, alo2, 1, Result: RESULTLabel13}
+finalizado.
+
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel14, type=int, expr=MethodCallExpr{name=alo2, args=[0]}, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: EndMethod main}
+finalizado.
+
+
+    .comm c,4
+
+
+    .text
+    .globl	alo
+    .type	alo, @function 
+alo: 
+    enter   $(4), $0 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl $0, %eax 
+    movl $1, %edx 
+    addl %eax, %edx 
+    movl %edx,-12(%ebp) 
+
+    movl -12(%ebp),0(%ebp)
+
+    leave
+    ret
+
+
+
+    .text
+    .globl	alo2
+    .type	alo2, @function 
+alo2: 
+    enter   $(4), $0 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl $0 , 8(%esp)
+
+    call alo
+
+    movl 8(%ebp) , %eax 
+    movl $1, %edx 
+    addl %eax, %edx 
+    movl %edx,-8(%ebp) 
+
+    movl -8(%ebp),0(%ebp)
+
+    movl 8(%ebp), %eax
+
+    leave
+    ret
+
+
+
+    .text
+    .globl	main
+    .type	main, @function 
+main: 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl $7,-4(%ebp)
+
+    movl $8.0,-4(%ebp)
+
+    movl $0 , 8(%esp)
+
+    call alo2
+
+    movl %eax,-4(%ebp)
+
+    movl $3 , %eax 
+    movl -4(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-28(%ebp) 
+
+    movl -28(%ebp),-8(%ebp)
+
+    movl $0 , 8(%esp)
+
+    call alo2
+
+    movl %eax,-4(%ebp)
+
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_metodos02.ctds ... -------------------
 parseo iniciado
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: x
-ELSE
-ultOffsetLeido: 12
-simbolo: x
-ELSE
-ultOffsetLeido: 12
 simbolo: x
 IF
 ultOffsetLeido: 8
@@ -10699,21 +10319,21 @@ IF
 ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 35
+tamaño lista de codigo tercetos: 36
 lista: 
 {null, float, c, Result: 0}
 {LABEL, null, null, Result: BeginMethod alo}
 
 {METHODDECL, Metodo{ name=alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=boolean, name=b, value=null, size=0, offset=0}, Simbolo{type=int, name=x, value=null, size=0, offset=0}]}, null, Result: null}
-{CMP, VarLocation{name=b, type=boolean, expr=false, size=0}, true, Result: null}
-{JNE, null, null, Result: elseCondLabel1}
-{PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel4, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel3, type=int, expr=1, size=0}, size=0}}
-{ASSIGN(=), VarLocation{name=PLUSLabel4, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel3, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{JMP, null, null, Result: endIfLabel2}
-{LABEL, null, null, Result: elseCondLabel1}
-{MINUS(-), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel5, type=int, expr=1, size=0}, Result: VarLocation{name=MINUSLabel6, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}-VarLocation{name=factorLabel5, type=int, expr=1, size=0}, size=0}}
-{ASSIGN(=), VarLocation{name=MINUSLabel6, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}-VarLocation{name=factorLabel5, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
-{LABEL, null, null, Result: endIfLabel2}
+{CMP, VarLocation{name=factorLabel1, type=boolean, expr=false, size=0}, true, Result: null}
+{JNE, null, null, Result: elseCondLabel2}
+{PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel4, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel5, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel4, type=int, expr=1, size=0}, size=0}}
+{ASSIGN(=), VarLocation{name=PLUSLabel5, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel4, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{JMP, null, null, Result: endIfLabel3}
+{LABEL, null, null, Result: elseCondLabel2}
+{MINUS(-), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel6, type=int, expr=1, size=0}, Result: VarLocation{name=MINUSLabel7, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}-VarLocation{name=factorLabel6, type=int, expr=1, size=0}, size=0}}
+{ASSIGN(=), VarLocation{name=MINUSLabel7, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}-VarLocation{name=factorLabel6, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{LABEL, null, null, Result: endIfLabel3}
 {LABEL, null, null, Result: EndMethod alo}
 {LABEL, null, null, Result: BeginMethod Alo}
 
@@ -10723,22 +10343,23 @@ lista:
 
 {METHODDECL, Metodo{ name=alo2, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0, offset=0}]}, null, Result: null}
 {PARAM, null, null, Result: [true, 0]}
-{METHODCALL, alo, 2, Result: RESULTLabel8}
-{PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel9, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel10, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel9, type=int, expr=1, size=0}, size=0}}
-{ASSIGN(=), VarLocation{name=PLUSLabel10, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel9, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{METHODCALL, alo, 2, Result: RESULTLabel9}
+{PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel10, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel11, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel10, type=int, expr=1, size=0}, size=0}}
+{ASSIGN(=), VarLocation{name=PLUSLabel11, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel10, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {RETURN, null, null, Result: VarLocation{name=x, type=int, expr=0, size=0}}
 {LABEL, null, null, Result: EndMethod alo2}
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{ASSIGN(=), VarLocation{name=factorLabel11, type=int, expr=7, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
-{ASSIGN(=), VarLocation{name=factorLabel12, type=float, expr=8.0, size=0}, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
+{ASSIGN(=), VarLocation{name=factorLabel12, type=int, expr=7, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
+{ASSIGN(=), VarLocation{name=factorLabel13, type=float, expr=8.0, size=0}, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
 {PARAM, null, null, Result: [0]}
-{METHODCALL, alo2, 1, Result: RESULTLabel13}
-{ASSIGN(=), VarLocation{name=factorLabel14, type=int, expr=MethodCallExpr{name=alo2, args=[0]}, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
+{METHODCALL, alo2, 1, Result: RESULTLabel14}
+{ASSIGN(=), VarLocation{name=factorLabel15, type=int, expr=MethodCallExpr{name=alo2, args=[0]}, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
 {MULTIPLY(*), VarLocation{name=factorLabel16, type=int, expr=3, size=0}, VarLocation{name=y, type=int, expr=0, size=0}, Result: VarLocation{name=MULTIPLYLabel17, type=int, expr=VarLocation{name=factorLabel16, type=int, expr=3, size=0}*VarLocation{name=y, type=int, expr=0, size=0}, size=0}}
-{PARAM, null, null, Result: [false, VarLocation{name=factorLabel16, type=int, expr=3, size=0}*VarLocation{name=y, type=int, expr=0, size=0}]}
-{METHODCALL, alo, 2, Result: RESULTLabel18}
+{ASSIGN(=), VarLocation{name=MULTIPLYLabel17, type=int, expr=VarLocation{name=factorLabel16, type=int, expr=3, size=0}*VarLocation{name=y, type=int, expr=0, size=0}, size=0}, null, Result: VarLocation{name=z, type=int, expr=null, size=0}}
+{PARAM, null, null, Result: [false, 0]}
+{METHODCALL, alo, 2, Result: RESULTLabel19}
 {LABEL, null, null, Result: EndMethod main}
 
 procesando : . . . {null, float, c, Result: 0}
@@ -10751,31 +10372,31 @@ finalizado.
 procesando : . . . {METHODDECL, Metodo{ name=alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=boolean, name=b, value=null, size=0, offset=0}, Simbolo{type=int, name=x, value=null, size=0, offset=0}]}, null, Result: null}
 finalizado.
 
-procesando : . . . {CMP, VarLocation{name=b, type=boolean, expr=false, size=0}, true, Result: null}
+procesando : . . . {CMP, VarLocation{name=factorLabel1, type=boolean, expr=false, size=0}, true, Result: null}
 finalizado.
 
-procesando : . . . {JNE, null, null, Result: elseCondLabel1}
+procesando : . . . {JNE, null, null, Result: elseCondLabel2}
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel3, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel4, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel3, type=int, expr=1, size=0}, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel4, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel5, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel4, type=int, expr=1, size=0}, size=0}}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel4, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel3, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel5, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel4, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 finalizado.
 
-procesando : . . . {JMP, null, null, Result: endIfLabel2}
+procesando : . . . {JMP, null, null, Result: endIfLabel3}
 finalizado.
 
-procesando : . . . {LABEL, null, null, Result: elseCondLabel1}
+procesando : . . . {LABEL, null, null, Result: elseCondLabel2}
 finalizado.
 
-procesando : . . . {MINUS(-), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel5, type=int, expr=1, size=0}, Result: VarLocation{name=MINUSLabel6, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}-VarLocation{name=factorLabel5, type=int, expr=1, size=0}, size=0}}
+procesando : . . . {MINUS(-), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel6, type=int, expr=1, size=0}, Result: VarLocation{name=MINUSLabel7, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}-VarLocation{name=factorLabel6, type=int, expr=1, size=0}, size=0}}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=MINUSLabel6, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}-VarLocation{name=factorLabel5, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+procesando : . . . {ASSIGN(=), VarLocation{name=MINUSLabel7, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}-VarLocation{name=factorLabel6, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 finalizado.
 
-procesando : . . . {LABEL, null, null, Result: endIfLabel2}
+procesando : . . . {LABEL, null, null, Result: endIfLabel3}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod alo}
@@ -10799,19 +10420,17 @@ procesando : . . . {METHODDECL, Metodo{ name=alo2, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [true, 0]}
-index: 1 tamaño: 2
 
 Result = 0
-index: 0 tamaño: 2
 finalizado.
 
-procesando : . . . {METHODCALL, alo, 2, Result: RESULTLabel8}
+procesando : . . . {METHODCALL, alo, 2, Result: RESULTLabel9}
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel9, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel10, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel9, type=int, expr=1, size=0}, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel10, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel11, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel10, type=int, expr=1, size=0}, size=0}}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel10, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel9, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel11, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel10, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 finalizado.
 
 procesando : . . . {RETURN, null, null, Result: VarLocation{name=x, type=int, expr=0, size=0}}
@@ -10827,30 +10446,153 @@ finalizado.
 procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel11, type=int, expr=7, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel12, type=int, expr=7, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel12, type=float, expr=8.0, size=0}, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel13, type=float, expr=8.0, size=0}, null, Result: VarLocation{name=c, type=float, expr=null, size=0}}
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0]}
-index: 0 tamaño: 1
 
 Result = 0
 finalizado.
 
-procesando : . . . {METHODCALL, alo2, 1, Result: RESULTLabel13}
+procesando : . . . {METHODCALL, alo2, 1, Result: RESULTLabel14}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel14, type=int, expr=MethodCallExpr{name=alo2, args=[0]}, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel15, type=int, expr=MethodCallExpr{name=alo2, args=[0]}, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
 finalizado.
 
 procesando : . . . {MULTIPLY(*), VarLocation{name=factorLabel16, type=int, expr=3, size=0}, VarLocation{name=y, type=int, expr=0, size=0}, Result: VarLocation{name=MULTIPLYLabel17, type=int, expr=VarLocation{name=factorLabel16, type=int, expr=3, size=0}*VarLocation{name=y, type=int, expr=0, size=0}, size=0}}
 finalizado.
 
-procesando : . . . {PARAM, null, null, Result: [false, VarLocation{name=factorLabel16, type=int, expr=3, size=0}*VarLocation{name=y, type=int, expr=0, size=0}]}
-index: 1 tamaño: 2
-ocurrio un error: For input string: "0VarLocation{name=factorLabel16, type=int, expr=3, size=0}"
+procesando : . . . {ASSIGN(=), VarLocation{name=MULTIPLYLabel17, type=int, expr=VarLocation{name=factorLabel16, type=int, expr=3, size=0}*VarLocation{name=y, type=int, expr=0, size=0}, size=0}, null, Result: VarLocation{name=z, type=int, expr=null, size=0}}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [false, 0]}
+
+Result = 0
+finalizado.
+
+procesando : . . . {METHODCALL, alo, 2, Result: RESULTLabel19}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: EndMethod main}
+finalizado.
+
+
+    .comm c,4
+
+
+    .text
+    .globl	alo
+    .type	alo, @function 
+alo: 
+    enter   $(8), $0 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl $ 1, %eax
+    cmpl -4(%ebp), %eax
+
+    jne elseCondLabel2
+
+    movl 1(%ebp) , %eax 
+    movl $1, %edx 
+    addl %eax, %edx 
+    movl %edx,-12(%ebp) 
+
+    movl -12(%ebp),1(%ebp)
+
+    jmp endIfLabel3
+
+.elseCondLabel2:
+
+    movl 1(%ebp) , %eax 
+    movl $1 , %edx 
+    subl %eax, %edx 
+    movl %edx,-20(%ebp) 
+
+    movl -20(%ebp),1(%ebp)
+
+.endIfLabel3:
+
+    leave
+    ret
+
+
+
+    .text
+    .globl	Alo
+    .type	Alo, @function 
+Alo: 
+    enter   $(8), $0 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    leave
+    ret
+
+
+
+    .text
+    .globl	alo2
+    .type	alo2, @function 
+alo2: 
+    enter   $(4), $0 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl $0 , 12(%esp)
+    movl $1 , (%esp)
+    call alo
+
+    movl 8(%ebp) , %eax 
+    movl $1, %edx 
+    addl %eax, %edx 
+    movl %edx,-12(%ebp) 
+
+    movl -12(%ebp),0(%ebp)
+
+    movl 8(%ebp), %eax
+
+    leave
+    ret
+
+
+
+    .text
+    .globl	main
+    .type	main, @function 
+main: 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl $7,-4(%ebp)
+
+    movl $8.0,-4(%ebp)
+
+    movl $0 , 8(%esp)
+
+    call alo2
+
+    movl %eax,-4(%ebp)
+
+    movl $3 , %eax 
+    movl -4(%ebp) , %edx 
+    imull %edx, %eax 
+    movl %eax,-28(%ebp) 
+
+    movl -28(%ebp),-8(%ebp)
+
+    movl $0 , 12(%esp)
+    movl $0 , (%esp)
+    call alo
+
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -10983,7 +10725,6 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel13, type=boolean, exp
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [5]}
-index: 0 tamaño: 1
 
 Result = 5
 finalizado.
@@ -10995,9 +10736,7 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel16, type=int, expr=Me
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [0, 10.2]}
-index: 1 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
-index: 0 tamaño: 2
 
 Result = 0
 finalizado.
@@ -11151,7 +10890,7 @@ IF
 ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 35
+tamaño lista de codigo tercetos: 36
 lista: 
 {LABEL, null, null, Result: BeginMethod maxcomdiv}
 
@@ -11188,6 +10927,7 @@ lista:
 {MULTIPLY(*), VarLocation{name=factorLabel15, type=float, expr=3.5, size=0}, VarLocation{name=a, type=int, expr=0, size=0}, Result: VarLocation{name=MULTIPLYLabel16, type=float, expr=VarLocation{name=factorLabel15, type=float, expr=3.5, size=0}*VarLocation{name=a, type=int, expr=0, size=0}, size=0}}
 {DIVIDE(/), VarLocation{name=factorLabel17, type=int, expr=7, size=0}, VarLocation{name=factorLabel18, type=int, expr=6, size=0}, Result: VarLocation{name=DIVIDELabel19, type=int, expr=VarLocation{name=factorLabel17, type=int, expr=7, size=0}/VarLocation{name=factorLabel18, type=int, expr=6, size=0}, size=0}}
 {MINUS(-), VarLocation{name=MULTIPLYLabel16, type=float, expr=VarLocation{name=factorLabel15, type=float, expr=3.5, size=0}*VarLocation{name=a, type=int, expr=0, size=0}, size=0}, VarLocation{name=DIVIDELabel19, type=int, expr=VarLocation{name=factorLabel17, type=int, expr=7, size=0}/VarLocation{name=factorLabel18, type=int, expr=6, size=0}, size=0}, Result: VarLocation{name=MINUSLabel20, type=float, expr=VarLocation{name=MULTIPLYLabel16, type=float, expr=VarLocation{name=factorLabel15, type=float, expr=3.5, size=0}*VarLocation{name=a, type=int, expr=0, size=0}, size=0}-VarLocation{name=DIVIDELabel19, type=int, expr=VarLocation{name=factorLabel17, type=int, expr=7, size=0}/VarLocation{name=factorLabel18, type=int, expr=6, size=0}, size=0}, size=0}}
+{PARAM, null, null, Result: [StringLiteral{value="%d%f"}, StringLiteral{value="mcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}, VarLocation{name=MULTIPLYLabel16, type=float, expr=VarLocation{name=factorLabel15, type=float, expr=3.5, size=0}*VarLocation{name=a, type=int, expr=0, size=0}, size=0}-VarLocation{name=DIVIDELabel19, type=int, expr=VarLocation{name=factorLabel17, type=int, expr=7, size=0}/VarLocation{name=factorLabel18, type=int, expr=6, size=0}, size=0}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%d%f"}, StringLiteral{value="mcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}, VarLocation{name=MULTIPLYLabel16, type=float, expr=VarLocation{name=factorLabel15, type=float, expr=3.5, size=0}*VarLocation{name=a, type=int, expr=0, size=0}, size=0}-VarLocation{name=DIVIDELabel19, type=int, expr=VarLocation{name=factorLabel17, type=int, expr=7, size=0}/VarLocation{name=factorLabel18, type=int, expr=6, size=0}, size=0}]}, null, Result: EXTERNINVKLabel21}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -11278,10 +11018,8 @@ procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel10, type=int, expr=10
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [6, 9]}
-index: 1 tamaño: 2
 
 Result = 9
-index: 0 tamaño: 2
 
 Result = 6
 finalizado.
@@ -11296,6 +11034,12 @@ procesando : . . . {DIVIDE(/), VarLocation{name=factorLabel17, type=int, expr=7,
 finalizado.
 
 procesando : . . . {MINUS(-), VarLocation{name=MULTIPLYLabel16, type=float, expr=VarLocation{name=factorLabel15, type=float, expr=3.5, size=0}*VarLocation{name=a, type=int, expr=0, size=0}, size=0}, VarLocation{name=DIVIDELabel19, type=int, expr=VarLocation{name=factorLabel17, type=int, expr=7, size=0}/VarLocation{name=factorLabel18, type=int, expr=6, size=0}, size=0}, Result: VarLocation{name=MINUSLabel20, type=float, expr=VarLocation{name=MULTIPLYLabel16, type=float, expr=VarLocation{name=factorLabel15, type=float, expr=3.5, size=0}*VarLocation{name=a, type=int, expr=0, size=0}, size=0}-VarLocation{name=DIVIDELabel19, type=int, expr=VarLocation{name=factorLabel17, type=int, expr=7, size=0}/VarLocation{name=factorLabel18, type=int, expr=6, size=0}, size=0}, size=0}}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="%d%f"}, StringLiteral{value="mcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}, VarLocation{name=MULTIPLYLabel16, type=float, expr=VarLocation{name=factorLabel15, type=float, expr=3.5, size=0}*VarLocation{name=a, type=int, expr=0, size=0}, size=0}-VarLocation{name=DIVIDELabel19, type=int, expr=VarLocation{name=factorLabel17, type=int, expr=7, size=0}/VarLocation{name=factorLabel18, type=int, expr=6, size=0}, size=0}]}
+{PARAM} CASO METHODCALL 
+{PARAM} FALTA CASO class ir.ast.StringLiteral
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%d%f"}, StringLiteral{value="mcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}, VarLocation{name=MULTIPLYLabel16, type=float, expr=VarLocation{name=factorLabel15, type=float, expr=3.5, size=0}*VarLocation{name=a, type=int, expr=0, size=0}, size=0}-VarLocation{name=DIVIDELabel19, type=int, expr=VarLocation{name=factorLabel17, type=int, expr=7, size=0}/VarLocation{name=factorLabel18, type=int, expr=6, size=0}, size=0}]}, null, Result: EXTERNINVKLabel21}
@@ -11406,6 +11150,7 @@ main:
     subl %eax, %edx 
     movl %edx,-44(%ebp) 
 
+
     call printf
 
     leave
@@ -11419,7 +11164,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 11
+tamaño lista de codigo tercetos: 12
 lista: 
 {LABEL, null, null, Result: BeginMethod pruAritmetica}
 
@@ -11432,6 +11177,7 @@ lista:
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {METHODCALL, pruAritmetica, 0, Result: RESULTLabel4}
+{PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[]}]}, null, Result: EXTERNINVKLabel6}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -11462,6 +11208,10 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {METHODCALL, pruAritmetica, 0, Result: RESULTLabel4}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[]}]}, null, Result: EXTERNINVKLabel6}
@@ -11502,6 +11252,7 @@ main:
 
     call pruAritmetica
 
+
     call printf
 
     leave
@@ -11518,7 +11269,7 @@ IF
 ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 15
+tamaño lista de codigo tercetos: 16
 lista: 
 {LABEL, null, null, Result: BeginMethod pruMult}
 
@@ -11535,6 +11286,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [2]}
 {METHODCALL, pruMult, 1, Result: RESULTLabel8}
+{PARAM, null, null, Result: [MethodCallExpr{name=pruMult, args=[2]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[2]}]}, null, Result: EXTERNINVKLabel10}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -11574,12 +11326,15 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [2]}
-index: 0 tamaño: 1
 
 Result = 2
 finalizado.
 
 procesando : . . . {METHODCALL, pruMult, 1, Result: RESULTLabel8}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=pruMult, args=[2]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[2]}]}, null, Result: EXTERNINVKLabel10}
@@ -11635,6 +11390,7 @@ main:
 
     call pruMult
 
+
     call printf
 
     leave
@@ -11648,7 +11404,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 11
+tamaño lista de codigo tercetos: 12
 lista: 
 {LABEL, null, null, Result: BeginMethod pruMult}
 
@@ -11661,6 +11417,7 @@ lista:
 
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {METHODCALL, pruMult, 0, Result: RESULTLabel4}
+{PARAM, null, null, Result: [MethodCallExpr{name=pruMult, args=[]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[]}]}, null, Result: EXTERNINVKLabel6}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -11691,6 +11448,10 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {METHODCALL, pruMult, 0, Result: RESULTLabel4}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=pruMult, args=[]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruMult, args=[]}]}, null, Result: EXTERNINVKLabel6}
@@ -11731,6 +11492,7 @@ main:
 
     call pruMult
 
+
     call printf
 
     leave
@@ -11742,9 +11504,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_prog_simple.ctds ... -------------------
 parseo iniciado
-simbolo: x
-IF
-ultOffsetLeido: 8
 
 Error: Main Method Missing in Class prueba2
 parseo exitoso
@@ -11754,8 +11513,8 @@ lista:
 {LABEL, null, null, Result: BeginMethod alo}
 
 {METHODDECL, Metodo{ name=alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=int, name=x, value=null, size=0, offset=0}]}, null, Result: null}
-{PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel1, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel2, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel1, type=int, expr=1, size=0}, size=0}}
-{ASSIGN(=), VarLocation{name=PLUSLabel2, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel1, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{PLUS(+), VarLocation{name=factorLabel1, type=int, expr=0, size=0}, VarLocation{name=factorLabel2, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel3, type=int, expr=VarLocation{name=factorLabel1, type=int, expr=0, size=0}+VarLocation{name=factorLabel2, type=int, expr=1, size=0}, size=0}}
+{ASSIGN(=), VarLocation{name=PLUSLabel3, type=int, expr=VarLocation{name=factorLabel1, type=int, expr=0, size=0}+VarLocation{name=factorLabel2, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 {LABEL, null, null, Result: EndMethod alo}
 
 procesando : . . . {null, float, c, Result: 0}
@@ -11768,10 +11527,10 @@ finalizado.
 procesando : . . . {METHODDECL, Metodo{ name=alo, return_not_void=false, typeReturn=void, parameters [Simbolo{type=int, name=x, value=null, size=0, offset=0}]}, null, Result: null}
 finalizado.
 
-procesando : . . . {PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel1, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel2, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel1, type=int, expr=1, size=0}, size=0}}
+procesando : . . . {PLUS(+), VarLocation{name=factorLabel1, type=int, expr=0, size=0}, VarLocation{name=factorLabel2, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel3, type=int, expr=VarLocation{name=factorLabel1, type=int, expr=0, size=0}+VarLocation{name=factorLabel2, type=int, expr=1, size=0}, size=0}}
 finalizado.
 
-procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel2, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel1, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel3, type=int, expr=VarLocation{name=factorLabel1, type=int, expr=0, size=0}+VarLocation{name=factorLabel2, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
 finalizado.
 
 procesando : . . . {LABEL, null, null, Result: EndMethod alo}
@@ -11789,12 +11548,12 @@ alo:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl 8(%ebp) , %eax 
+    movl $0, %eax 
     movl $1, %edx 
     addl %eax, %edx 
-    movl %edx,-8(%ebp) 
+    movl %edx,-12(%ebp) 
 
-    movl -8(%ebp),0(%ebp)
+    movl -12(%ebp),0(%ebp)
 
     leave
     ret
@@ -11858,7 +11617,7 @@ IF
 ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 69
+tamaño lista de codigo tercetos: 70
 lista: 
 {LABEL, null, null, Result: BeginMethod id}
 
@@ -11929,6 +11688,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [9]}
 {METHODCALL, id, 1, Result: RESULTLabel43}
+{PARAM, null, null, Result: [MethodCallExpr{name=id, args=[9]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=id, args=[9]}]}, null, Result: EXTERNINVKLabel45}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -12130,12 +11890,15 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [9]}
-index: 0 tamaño: 1
 
 Result = 9
 finalizado.
 
 procesando : . . . {METHODCALL, id, 1, Result: RESULTLabel43}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=id, args=[9]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=id, args=[9]}]}, null, Result: EXTERNINVKLabel45}
@@ -12377,6 +12140,7 @@ main:
 
     call id
 
+
     call printf
 
     leave
@@ -12408,7 +12172,7 @@ ELSE
 ultOffsetLeido: 12
 
 parseo exitoso
-tamaño lista de codigo tercetos: 29
+tamaño lista de codigo tercetos: 30
 lista: 
 {LABEL, null, null, Result: BeginMethod suma}
 
@@ -12439,6 +12203,7 @@ lista:
 {INCREMENT(+=), VarLocation{name=a, type=int, expr=0, size=0}, null, Result: VarLocation{name=b, type=int, expr=null, size=0}}
 {PARAM, null, null, Result: [4, 9]}
 {METHODCALL, suma, 2, Result: RESULTLabel15}
+{PARAM, null, null, Result: [MethodCallExpr{name=suma, args=[4, 9]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=suma, args=[4, 9]}]}, null, Result: EXTERNINVKLabel17}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -12520,15 +12285,17 @@ procesando : . . . {INCREMENT(+=), VarLocation{name=a, type=int, expr=0, size=0}
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [4, 9]}
-index: 1 tamaño: 2
 
 Result = 9
-index: 0 tamaño: 2
 
 Result = 4
 finalizado.
 
 procesando : . . . {METHODCALL, suma, 2, Result: RESULTLabel15}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=suma, args=[4, 9]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=suma, args=[4, 9]}]}, null, Result: EXTERNINVKLabel17}
@@ -12619,6 +12386,7 @@ main:
 
     call suma
 
+
     call printf
 
     leave
@@ -12638,7 +12406,7 @@ IF
 ultOffsetLeido: 8
 
 parseo exitoso
-tamaño lista de codigo tercetos: 22
+tamaño lista de codigo tercetos: 23
 lista: 
 {LABEL, null, null, Result: BeginMethod sumx}
 
@@ -12662,6 +12430,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [6.0, 2]}
 {METHODCALL, sumx, 2, Result: RESULTLabel11}
+{PARAM, null, null, Result: [MethodCallExpr{name=sumx, args=[6.0, 2]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=sumx, args=[6.0, 2]}]}, null, Result: EXTERNINVKLabel13}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -12722,14 +12491,16 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [6.0, 2]}
-index: 1 tamaño: 2
 
 Result = 2
-index: 0 tamaño: 2
 {PARAM} CASO FLAOTLITERAL PENDIENTE
 finalizado.
 
 procesando : . . . {METHODCALL, sumx, 2, Result: RESULTLabel11}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=sumx, args=[6.0, 2]}]}
+{PARAM} CASO METHODCALL 
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[MethodCallExpr{name=sumx, args=[6.0, 2]}]}, null, Result: EXTERNINVKLabel13}
@@ -12801,6 +12572,7 @@ main:
 
     call sumx
 
+
     call printf
 
     leave
@@ -12814,7 +12586,7 @@ main:
 parseo iniciado
 
 parseo exitoso
-tamaño lista de codigo tercetos: 34
+tamaño lista de codigo tercetos: 35
 lista: 
 {LABEL, null, null, Result: BeginMethod maxcomdiv}
 
@@ -12850,6 +12622,7 @@ lista:
 {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
 {PARAM, null, null, Result: [6, 9]}
 {METHODCALL, maxcomdiv, 2, Result: RESULTLabel17}
+{PARAM, null, null, Result: [StringLiteral{value="%dMcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%dMcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: EXTERNINVKLabel19}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -12946,15 +12719,18 @@ procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeRet
 finalizado.
 
 procesando : . . . {PARAM, null, null, Result: [6, 9]}
-index: 1 tamaño: 2
 
 Result = 9
-index: 0 tamaño: 2
 
 Result = 6
 finalizado.
 
 procesando : . . . {METHODCALL, maxcomdiv, 2, Result: RESULTLabel17}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="%dMcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}
+{PARAM} CASO METHODCALL 
+{PARAM} FALTA CASO class ir.ast.StringLiteral
 finalizado.
 
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=float, parameters=[StringLiteral{value="%dMcd"}, MethodCallExpr{name=maxcomdiv, args=[6, 9]}]}, null, Result: EXTERNINVKLabel19}
@@ -13060,6 +12836,7 @@ main:
 
     call maxcomdiv
 
+
     call printf
 
     leave
@@ -13120,9 +12897,6 @@ error de sintaxis: Linea 4.
   
 ---------------- Test tests/test_errores/error_class01.ctds ... -------------------
 parseo iniciado
-simbolo: x
-IF
-ultOffsetLeido: 8
 Error: Method alo not declared
 Error: Method alo not declared
 ocurrio un error: null
@@ -13131,9 +12905,6 @@ ocurrio un error: null
   
 ---------------- Test tests/test_errores/error_class02.ctds ... -------------------
 parseo iniciado
-simbolo: x
-IF
-ultOffsetLeido: 8
 Error: Method alo not declared
 Error: Method alo not declared
 ocurrio un error: null
@@ -13362,9 +13133,6 @@ error de sintaxis: Linea 11.
   
 ---------------- Test tests/test_errores/error_test_main02.ctds ... -------------------
 parseo iniciado
-simbolo: x
-IF
-ultOffsetLeido: 8
 Error: Method Main must not have parameters
 Error: Method alo not declared
 error de sintaxis: Linea 14.
@@ -13386,9 +13154,6 @@ error de sintaxis: Linea 4.
 ---------------- Test tests/test_errores/error_test_metodos03.ctds ... -------------------
 parseo iniciado
 simbolo: x
-ELSE
-ultOffsetLeido: 12
-simbolo: x
 IF
 ultOffsetLeido: 8
 simbolo: x
@@ -13403,15 +13168,6 @@ error de sintaxis: Linea 19.
   
 ---------------- Test tests/test_errores/error_test_metodos04.ctds ... -------------------
 parseo iniciado
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: x
-ELSE
-ultOffsetLeido: 12
-simbolo: x
-ELSE
-ultOffsetLeido: 12
 simbolo: x
 IF
 ultOffsetLeido: 8
@@ -13428,15 +13184,6 @@ error de sintaxis: Linea 21.
   
 ---------------- Test tests/test_errores/error_test_metodos05.ctds ... -------------------
 parseo iniciado
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: x
-ELSE
-ultOffsetLeido: 12
-simbolo: x
-ELSE
-ultOffsetLeido: 12
 error de sintaxis: Linea 15.
 ---------------------------------------------------
   

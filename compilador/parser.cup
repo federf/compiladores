@@ -25,6 +25,8 @@
     boolean inIfElse; 
     //variable booleana que indicaria que se encuentra dentro de un ciclo
     boolean inLoop;
+    //variable booleana que indicaria que estamos dentro del cuerpo de un metodo
+    boolean inMethod;
     //lista de codigo de tercetos/triplas
     LinkedList<TripletCode> TripletList;
 
@@ -387,6 +389,8 @@
                                     mainDeclared=false;
                                 }
                             }
+                            //declaramos que entraremos al cuerpo de un metodo
+                            inMethod=true;
                 :} block {:
                             String labelEndMethod="EndMethod "+g;
                             TripletList.addLast(new TripletCode(TripletOperator.LABEL,null,null,labelEndMethod));
@@ -394,6 +398,8 @@
                             VarLocation.resetOffset();
                              //al terminar de procesar el cuerpo del metodo subimos de nivel
                             TS.SubirNivel();
+                            //seteamos la variable inMethod en falso al salir del cuepor del metodo
+                            inMethod=false;
                 :}
                ;
 
@@ -899,6 +905,9 @@
                |  EXTERNINVK PARENTESIS_IZQ STRING_LITERAL:s COMA type_or_void:t COMA externinvk_args:args PARENTESIS_DER {:
                         ExternInvkExpr res=new ExternInvkExpr(s,args,t);
                         //CODIGO DE 3 DIRECCIONES
+                        //agregamos los parametros del metodo a la pila
+                        TripletList.addLast(new TripletCode(TripletOperator.PARAM, null,null,args));
+
                         String resultLabel="EXTERNINVK"+Labels.getLabel();
                         TripletList.addLast(new TripletCode(TripletOperator.EXTERNINVK, res,null,resultLabel));//!!VERIFICAR 
                         //FIN CODIGO 3 DIRECCIONES
@@ -907,6 +916,9 @@
                |  EXTERNINVK PARENTESIS_IZQ STRING_LITERAL:s COMA type_or_void:t PARENTESIS_DER {: 
                     ExternInvkExpr res=new ExternInvkExpr(s,new LinkedList(),t);
                     //CODIGO DE 3 DIRECCIONES
+                    //agregamos los parametros del metodo a la pila
+                    TripletList.addLast(new TripletCode(TripletOperator.PARAM, null,null,null));
+
                     String resultLabel="EXTERNINVK"+Labels.getLabel(); 
                     TripletList.addLast(new TripletCode(TripletOperator.EXTERNINVK, res,null,resultLabel)); //!!VERIFICAR 
                     //FIN CODIGO 3 DIRECCIONES
@@ -1391,27 +1403,36 @@
                 :} //boolean (valor logico)
            | ID:id {:   Simbolo s=TS.buscarSimbolo(id); //identificador
                         //salvamos el offset y nombre de la ultima variable leida
-                        //si el simbolo leido es un parametro del metodo leido
-                        int paramIndex=ult_metodo.esParametro(s);
-                        if(paramIndex>=0){
-                            //calculamos su offset
-                            //cantidad de parametros del metodo
-                            int cantParams=ult_metodo.getParametros().size();
-                            System.out.println("simbolo: "+s.getName());
-                            if(paramIndex==0){
-                                System.out.println("IF");
-                                ultOffsetLeido=8;
+                        //si estamos dentro de un metodo
+                        if(inMethod){
+                            //si el simbolo leido es un parametro del metodo leido
+
+                            int paramIndex=ult_metodo.esParametro(s);
+                            if(paramIndex>=0){
+                                //calculamos su offset
+                                //cantidad de parametros del metodo
+                                int cantParams=ult_metodo.getParametros().size();
+                                System.out.println("simbolo: "+s.getName());
+                                if(paramIndex==0){
+                                    System.out.println("IF");
+                                    ultOffsetLeido=8;
+                                }else{
+                                    System.out.println("ELSE");
+                                    ultOffsetLeido=(((cantParams)-paramIndex)+2)*4;    
+                                }
+                                System.out.println("ultOffsetLeido: "+ultOffsetLeido);
+                                
                             }else{
-                                System.out.println("ELSE");
-                                ultOffsetLeido=(((cantParams)-paramIndex)+2)*4;    
-                            }
-                            System.out.println("ultOffsetLeido: "+ultOffsetLeido);
-                            
+                                //sino, utilizamos el de su declaracion, ya que se trata de una variable declarada
+                                //la cual no es un parametro del metodo
+                                ultOffsetLeido=s.getOffset();
+                            }    
                         }else{
                             //sino, utilizamos el de su declaracion, ya que se trata de una variable declarada
                             //la cual no es un parametro del metodo
                             ultOffsetLeido=s.getOffset();
                         }
+                        
                         
                         ultVarLeida=s.getName();
 

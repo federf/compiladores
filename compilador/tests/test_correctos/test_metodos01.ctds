@@ -13,11 +13,12 @@ class test_metodos{
    }
  
    void main(){
-        int y;
+        int y,z;
         y = 7;
         c = 8.0;
         y = alo2(y);
-        y = alo2((3)*y);
+        z=(3)*y;
+        y = alo2(z);
         return;
    }
 
