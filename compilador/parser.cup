@@ -173,19 +173,11 @@
 
     start with program;
 
-    program::= CLASS ID:d {: mainDeclared=false; System.out.println("parseo iniciado"); :} body {:
-                System.out.println("");
+    program::= CLASS ID:d {: mainDeclared=false; :} body {:
                 if(!mainDeclared){
                     System.out.println("Error: Main Method Missing in Class "+d.toString());
                     
                 }
-                System.out.println("parseo exitoso");
-                System.out.println("tamaño lista de codigo tercetos: "+TripletList.size());
-                System.out.println("lista: ");
-                for(TripletCode t : TripletList){
-                    System.out.println(t);
-                }
-                System.out.println();
                 AssemblyCodeGenerator ASMGenerator=new AssemblyCodeGenerator();
                 System.out.println(ASMGenerator.generate(TripletList));
             :}
@@ -465,7 +457,6 @@
                                                                             case INTARRAY:
                                                                                 if(m.getTypeReturn().equals(Type.INT)){
                                                                                     AssignStmt a=new AssignStmt((Location)l, ao, (Expression) e.getExpr()); 
-                                                                                    //l.setExpr(e.getExpr());
                                                                                     //CODIGO DE TRES DIRECCIONES
                                                                                     switch(ao){
                                                                                         case ASSIGN:TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e, null,(VarLocation)l));
@@ -486,7 +477,6 @@
                                                                             case FLOATARRAY:
                                                                                 if(m.getTypeReturn().equals(Type.FLOAT) || m.getTypeReturn().equals(Type.INT)){
                                                                                     AssignStmt a=new AssignStmt((Location)l, ao, (Expression) e.getExpr()); 
-                                                                                    //l.setExpr(e.getExpr());
                                                                                     //CODIGO DE TRES DIRECCIONES
                                                                                     switch(ao){
                                                                                         case ASSIGN:TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e, null,(VarLocation)l));
@@ -508,7 +498,6 @@
                                                                                 if(m.getTypeReturn().equals(Type.BOOLEAN)){
                                                                                     if(ao.toString().equals("=")){
                                                                                         AssignStmt a=new AssignStmt((Location)l, AssignOpType.ASSIGN, (Expression) e.getExpr()); 
-                                                                                        //l.setExpr(e.getExpr());
                                                                                         //CODIGO DE TRES DIRECCIONES
                                                                                         TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e, null,(VarLocation)l));
                                                                                         //FIN CODIGO TRES DIRECCIONES
@@ -585,7 +574,6 @@
                                                                             case FLOATARRAY:
                                                                                 if(e.getType().equals(Type.FLOAT) || e.getType().equals(Type.INT)){
                                                                                     AssignStmt a=new AssignStmt((Location)l, ao, (Expression) e.getExpr()); 
-                                                                                    //l.setExpr(e.getExpr());
                                                                                     //CODIGO DE TRES DIRECCIONES
                                                                                     switch(ao){
                                                                                         case ASSIGN:TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e, null,(VarLocation)l));
@@ -607,7 +595,6 @@
                                                                                 if(e.getType().equals(Type.BOOLEAN)){
                                                                                     if(ao.toString().equals("=")){
                                                                                         AssignStmt a=new AssignStmt((Location)l, AssignOpType.ASSIGN, (Expression) e.getExpr()); 
-                                                                                        //l.setExpr(e.getExpr());
                                                                                         //CODIGO DE TRES DIRECCIONES
                                                                                         TripletList.addLast(new TripletCode(TripletOperator.ASSIGN,e, null,(VarLocation)l));
                                                                                         //FIN CODIGO TRES DIRECCIONES
@@ -1354,7 +1341,6 @@
                                         //CODIGO DE TRES DIRECCIONES
                                         TripletList.addLast(new TripletCode(TripletOperator.NON, f, null, res));
                                         //FIN CODIGO TRES DIRECCIONES
-                                        //u.setType(Type.BOOLEAN);
                                         RESULT=res;
                                     }else{
                                         //si no lo es mostramos un mensaje de error
@@ -1437,37 +1423,29 @@
                         switch(s.getType()){
                             case BOOLEAN:
                                 if(s.getValue()==null){
-                                    //System.out.println("crea BoolLiteral sin valor");
                                     RESULT= new BoolLiteral(false);
                                 }else{
-                                    //System.out.println("crea BoolLiteral con valor "+s.getValue());
                                     RESULT= new BoolLiteral(Boolean.valueOf(s.getValue()));
                                 }
                                 break;
                             case INT:
                                 if(s.getValue()==null){
-                                    //System.out.println("crea IntLiteral sin valor");
                                     RESULT= new IntLiteral("0");
                                 }else{
-                                    //System.out.println("crea IntLiteral con valor "+s.getValue());
                                     RESULT= new IntLiteral(s.getValue());
                                 }
                                 break;
                             case FLOAT:
                                 if(s.getValue()==null){
-                                    //System.out.println("crea FloatLiteral sin valor");
                                     RESULT= new FloatLiteral("0.0");
                                 }else{
-                                    //System.out.println("crea FloatLiteral con valor "+s.getValue());
                                     RESULT= new FloatLiteral(s.getValue());
                                 }
                                 break;
                             case STRING:
                                 if(s.getValue()==null){
-                                    //System.out.println("crea String sin valor");
                                     RESULT= new StringLiteral("");
                                 }else{
-                                    //System.out.println("crea String con valor "+s.getValue());
                                     RESULT= new StringLiteral(s.getValue());
                                 }
                                 break;

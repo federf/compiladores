@@ -98,7 +98,6 @@ public class Metodo {
 
     @Override
     public String toString() {
-        System.out.println("");
         return "Metodo{" + " name=" + this.name + ", return_not_void=" + this.return_not_void + ", typeReturn=" + this.typeReturn.toString() +", parameters "+this.parametros +'}';
     }
 

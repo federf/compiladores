@@ -1,10 +1,8 @@
-
-
     .text
-    .globl	main
-    .type	main, @function 
+    .globl  main
+    .type   main, @function 
 main: 
-    pushl	%ebp
+    pushl   %ebp
     movl %esp, %ebp
 
     movl $5, %eax 
@@ -22,17 +20,11 @@ main:
     addl %eax, %edx 
     movl %edx,-32(%ebp) 
 
-    movl -32(%ebp),%eax
-    movl %eax, -4(%ebp)
+    movl -32(%ebp),-4(%ebp)
 
     movl $0 , 8(%esp)
 
     call imprimir
-    movl $0, %eax
-
-    movl $27, %eax
 
     leave
     ret
-
-
