@@ -25,12 +25,9 @@ main:
     movl -32(%ebp),%eax
     movl %eax, -4(%ebp)
 
-    movl $0 , 8(%esp)
+    movl $0 , 0(%esp)
 
     call imprimir
-    movl $0, %eax
-
-    movl $27, %eax
 
     leave
     ret

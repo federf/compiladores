@@ -3,13 +3,14 @@ class print_test{
 		int x;
 		int y;
 		int res;
+		int n;
 
 		x=2;
 		y=4;
 		res=x+y;
 
-		externinvk("imprimir",int, res);//tratar con call
+		n=externinvk("imprimir",int, res);//tratar con call
 
-		return 0;
+		return 10;
 	}
 }

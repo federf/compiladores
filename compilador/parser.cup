@@ -306,10 +306,10 @@
                                 Simbolo actual = e.getParametros().get(i);
                                 if(i!=0){
                                     //creamos el parametro como VarLocation para darle un offset
-                                    VarLocation p=new VarLocation(actual.getName(), actual.getType(),null,actual.getSize(),(((i+2))*4));
+                                    VarLocation p=new VarLocation(actual.getName(), actual.getType(),null,actual.getSize(),(i*4));
                                     p.addVarLocation(p);
                                 }else{
-                                    VarLocation p=new VarLocation(actual.getName(), actual.getType(),null,actual.getSize(),8);
+                                    VarLocation p=new VarLocation(actual.getName(), actual.getType(),null,actual.getSize(),0);
                                     p.addVarLocation(p);
                                 }
                             }
@@ -925,7 +925,7 @@
                    | externinvk_args:list COMA externinvk_arg:arg {:list.add(arg); RESULT=list;  :}
                    ;
 
-    externinvk_arg::= expr:e {: RESULT=e.getExpr();:}
+    externinvk_arg::= expr:e {: RESULT=e;:}
                   | STRING_LITERAL:str {: StringLiteral s=new StringLiteral(str); RESULT=s;:}
                   ;
 

@@ -1143,21 +1143,25 @@ public class AssemblyCodeGenerator{
 
 	//registro de parametros de llamada a metodo
 	public void ASM_Params(TripletCode t){
+		System.out.println(t);
 		//obtenemos la lista de parametros del metodo llamado
     	LinkedList<Expression> params=(LinkedList<Expression>) t.getResult();
     	//si tiene parametros
     	if(params.size()!=0){
+
     		//los parametros de agregan en orden inverso
 	    	for(int i=params.size()-1; i>=0; i--){
 
+	    		System.out.println(params.get(i)+" , "+params.get(i).getClass());
 	    		//si el parametro es una VarLocation obtenemos su offset
 	    		if(params.get(i) instanceof VarLocation){
 	    			VarLocation v=(VarLocation) params.get(i);
 	    			if(i!=0){
 	    				result+="    movl "+v.getOffset()+"(%esp) , %eax\n";		
-	    				result+="    movl %eax,"+(((i+2))*4)+"(%esp)\n";
+	    				result+="    movl %eax,"+(i*4)+"(%esp)\n";
 	    			}else{
-	    				result+="    movl "+v.getOffset()+"(%esp) , 8(%esp)\n";	
+	    				result+="    movl "+v.getOffset()+"(%esp) , %eax\n";	
+	    				result+="    movl %eax, 0(%esp)";
 	    			}
 	    			
 	    		}else{//sino, debe ser un Literal o una llamada a metodo
@@ -1168,9 +1172,9 @@ public class AssemblyCodeGenerator{
 	    					IntLiteral p=(IntLiteral) params.get(i);
 	   
 	    					if(i!=0){
-	    						result+="    movl $"+evaluateExpression(p.toString())+" , "+(((i+2))*4)+"(%esp)\n";	
+	    						result+="    movl $"+evaluateExpression(p.toString())+" , "+(i*4)+"(%esp)\n";	
 	    					}else{
-	    						result+="    movl $"+evaluateExpression(p.toString())+" , 8(%esp)\n";	
+	    						result+="    movl $"+evaluateExpression(p.toString())+" , 0(%esp)\n";	
 	    					}
 	    					
 	    				}else{
@@ -1180,16 +1184,16 @@ public class AssemblyCodeGenerator{
 		    					BoolLiteral p=(BoolLiteral) params.get(i);
 		    					if(i!=0){
 		    						if(p.getValue()){
-		    							result+="    movl $"+1+" , "+((i-1)*4)+"(%esp)";		
+		    							result+="    movl $"+1+" , "+(i*4)+"(%esp)";		
 		    						}else{
-		    							result+="    movl $"+0+" , "+((i-1)*4)+"(%esp)";	
+		    							result+="    movl $"+0+" , "+(i*4)+"(%esp)";	
 		    						}
 		    						
 		    					}else{
 		    						if(p.getValue()){
-		    							result+="    movl $"+1+" , (%esp)";	
+		    							result+="    movl $"+1+" , 0(%esp)";	
 		    						}else{
-		    							result+="    movl $"+0+" , (%esp)";
+		    							result+="    movl $"+0+" , 0(%esp)";
 		    						}
 		    						
 		    					}
@@ -1211,7 +1215,7 @@ public class AssemblyCodeGenerator{
 		    								//System.outprintln("{PARAMS} expr: "+b.toString());
 		    								int opValue=evaluateExpression(b.toString());
 		    								if(i!=0){
-					    						result+="    movl $"+opValue+" , "+((i-1)*4)+"(%esp)";	
+					    						result+="    movl $"+opValue+" , "+(i*4)+"(%esp)";	
 					    					}else{
 					    						result+="    movl $"+opValue+" , (%esp)";
 					    					}
@@ -1224,7 +1228,7 @@ public class AssemblyCodeGenerator{
 											if(uop.getType().equals(Type.INT)){
 												int opValue=evaluateExpression(uop.toString());
 												if(i!=0){
-						    						result+="    movl $"+opValue+" , "+((i-1)*4)+"(%esp)";	
+						    						result+="    movl $"+opValue+" , "+(i*4)+"(%esp)";	
 						    					}else{
 						    						result+="    movl $"+opValue+" , (%esp)";
 						    					}
@@ -1250,8 +1254,6 @@ public class AssemblyCodeGenerator{
     	}
     	
 	}
-
-
 
 	public void ASM_Increment(TripletCode t){
 		VarLocation res=(VarLocation) t.getResult();

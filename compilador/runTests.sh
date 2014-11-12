@@ -26,7 +26,7 @@ files=`ls tests/test_correctos/*.ctds`
 
 for file in $files ; do 
 	echo "---------------- Test $file ... -------------------" 
-        java $comp $file 
+        java $comp $file > AssemblerCode/$file.s
 	echo "---------------------------------------------------" 
         echo "  "
         echo "  "
