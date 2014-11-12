@@ -9,9 +9,6 @@
 ///////////////////////// TESTS CORRECTOS ////////////////////////////////////////
 ---------------- Test tests/test_correctos/factorial.ctds ... -------------------
 parseo iniciado
-simbolo: n
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 23
@@ -191,30 +188,6 @@ main:
   
 ---------------- Test tests/test_correctos/floatTest.ctds ... -------------------
 parseo iniciado
-simbolo: a
-IF
-ultOffsetLeido: 8
-simbolo: b
-ELSE
-ultOffsetLeido: 12
-simbolo: a
-IF
-ultOffsetLeido: 8
-simbolo: b
-ELSE
-ultOffsetLeido: 12
-simbolo: a
-IF
-ultOffsetLeido: 8
-simbolo: b
-ELSE
-ultOffsetLeido: 12
-simbolo: a
-IF
-ultOffsetLeido: 8
-simbolo: b
-ELSE
-ultOffsetLeido: 12
 
 parseo exitoso
 tamaño lista de codigo tercetos: 45
@@ -565,9 +538,6 @@ main:
   
 ---------------- Test tests/test_correctos/logicTest.ctds ... -------------------
 parseo iniciado
-simbolo: b
-IF
-ultOffsetLeido: 8
 Error: Method pruebaLogica must return int
 
 parseo exitoso
@@ -821,9 +791,6 @@ main:
   
 ---------------- Test tests/test_correctos/program.ctds ... -------------------
 parseo iniciado
-simbolo: x
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 24
@@ -837,7 +804,7 @@ lista:
 {LABEL, null, null, Result: BeginMethod main}
 
 {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
-{PARAM, null, null, Result: null}
+{PARAM, null, null, Result: []}
 {EXTERNINVK, ExternInvkExpr{id="get_int", type=int, parameters=[]}, null, Result: EXTERNINVKLabel3}
 {ASSIGN(=), VarLocation{name=factorLabel4, type=int, expr=ExternInvkExpr{id="get_int", type=int, parameters=[]}, size=0}, null, Result: VarLocation{name=z, type=int, expr=null, size=0}}
 {PARAM, null, null, Result: [0]}
@@ -878,25 +845,136 @@ finalizado.
 procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=false, typeReturn=void, parameters []}, null, Result: null}
 finalizado.
 
-procesando : . . . {PARAM, null, null, Result: null}
-ocurrio un error: null
+procesando : . . . {PARAM, null, null, Result: []}
+finalizado.
+
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="get_int", type=int, parameters=[]}, null, Result: EXTERNINVKLabel3}
+finalizado.
+
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel4, type=int, expr=ExternInvkExpr{id="get_int", type=int, parameters=[]}, size=0}, null, Result: VarLocation{name=z, type=int, expr=null, size=0}}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [0]}
+
+Result = 0
+finalizado.
+
+procesando : . . . {METHODCALL, inc, 1, Result: RESULTLabel5}
+finalizado.
+
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel6, type=int, expr=MethodCallExpr{name=inc, args=[0]}, size=0}, null, Result: VarLocation{name=y, type=int, expr=null, size=0}}
+finalizado.
+
+procesando : . . . {CEQ(==), VarLocation{name=y, type=int, expr=0, size=0}, VarLocation{name=factorLabel7, type=int, expr=1, size=0}, Result: VarLocation{name=CEQLabel8, type=boolean, expr=VarLocation{name=y, type=int, expr=0, size=0}==VarLocation{name=factorLabel7, type=int, expr=1, size=0}, size=0}}
+finalizado.
+
+procesando : . . . {CMP, VarLocation{name=CEQLabel8, type=boolean, expr=VarLocation{name=y, type=int, expr=0, size=0}==VarLocation{name=factorLabel7, type=int, expr=1, size=0}, size=0}, true, Result: null}
+finalizado.
+
+procesando : . . . {JNE, null, null, Result: elseCondLabel9}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="y==1\n"}]}
+{PARAM} FALTA CASO class ir.ast.StringLiteral
+finalizado.
+
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==1\n"}]}, null, Result: EXTERNINVKLabel11}
+finalizado.
+
+procesando : . . . {JMP, null, null, Result: endIfLabel10}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: elseCondLabel9}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="y==%d\n"}, 0]}
+
+Result = 0
+{PARAM} FALTA CASO class ir.ast.StringLiteral
+finalizado.
+
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="y==%d\n"}, 0]}, null, Result: EXTERNINVKLabel12}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: endIfLabel10}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: EndMethod main}
+finalizado.
+
+
+
+    .text
+    .globl	inc
+    .type	inc, @function 
+inc: 
+    enter   $(4), $0 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl 8(%ebp) , %eax 
+    movl $1, %edx 
+    addl %eax, %edx 
+    movl %edx,-8(%ebp) 
+
+    movl -8(%ebp), %eax
+
+    leave
+    ret
+
+
+
+    .text
+    .globl	main
+    .type	main, @function 
+main: 
+    pushl	%ebp
+    movl %esp, %ebp
+
+
+    call get_int
+
+    movl $ExternInvkExpr{id="get_int", type=int, parameters=[]},-8(%ebp)
+
+    movl $0 , 8(%esp)
+
+    call inc
+
+    movl %eax,-4(%ebp)
+
+    movl	-4(%ebp), %eax
+    cmpl	-20(%ebp), %eax
+    sete %al
+    movlzbl %al, %eax
+    movl	%eax, -24(%ebp)
+
+    movl $ 1, %eax
+    cmpl -24(%ebp), %eax
+
+    jne elseCondLabel9
+
+
+    call printf
+
+    jmp endIfLabel10
+
+.elseCondLabel9:
+
+    movl $0 , 12(%esp)
+
+    call printf
+
+.endIfLabel10:
+
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_arreglos2.ctds ... -------------------
 parseo iniciado
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
 
 parseo exitoso
 tamaño lista de codigo tercetos: 34
@@ -1181,33 +1259,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_arreglos.ctds ... -------------------
 parseo iniciado
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
-simbolo: c
-ELSE
-ultOffsetLeido: 12
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
 Error: Method pruArreglos must return int
 
 parseo exitoso
@@ -1283,7 +1334,7 @@ lista:
 {METHODCALL, pruArreglos, 2, Result: RESULTLabel59}
 {PARAM, null, null, Result: [MethodCallExpr{name=pruArreglos, args=[4, 8]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel61}
-{PARAM, null, null, Result: null}
+{PARAM, null, null, Result: []}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel62}
 {LABEL, null, null, Result: EndMethod main}
 
@@ -1498,8 +1549,240 @@ finalizado.
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruArreglos, args=[4, 8]}]}, null, Result: EXTERNINVKLabel61}
 finalizado.
 
-procesando : . . . {PARAM, null, null, Result: null}
-ocurrio un error: null
+procesando : . . . {PARAM, null, null, Result: []}
+finalizado.
+
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel62}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: EndMethod main}
+finalizado.
+
+
+    .comm A,2356
+
+    .comm B,224
+
+    .comm C,20
+
+
+    .text
+    .globl	pruArreglos
+    .type	pruArreglos, @function 
+pruArreglos: 
+    enter   $(8), $0 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl	8(%ebp), %eax
+    cmpl	12(%ebp), %eax
+    setg	%al
+    movlzbl %al, %eax
+    movl	%eax, -44(%ebp)
+
+    movl $ 1, %eax
+    cmpl -44(%ebp), %eax
+
+    jne elseCondLabel2
+
+    movl $1, %eax 
+    movl 12(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-56(%ebp) 
+
+    movl -56(%ebp),-68(%ebp)
+
+    jmp endIfLabel3
+
+.elseCondLabel2:
+
+.endIfLabel3:
+
+    movl	8(%ebp), %eax
+    cmpl	12(%ebp), %eax
+    sete %al
+    movlzbl %al, %eax
+    movl	%eax, -60(%ebp)
+
+    movl $ 1, %eax
+    cmpl -60(%ebp), %eax
+
+    jne elseCondLabel8
+
+    movl $1, %eax 
+    movl $1 , %edx 
+    subl %eax, %edx 
+    movl %edx,-72(%ebp) 
+
+    movl 8(%ebp) , %eax 
+    movl $5, %edx 
+    imull %edx, %eax 
+    movl %eax,-80(%ebp) 
+
+    movl -80(%ebp),-68(%ebp)
+
+    jmp endIfLabel9
+
+.elseCondLabel8:
+
+    movl 8(%ebp) , %eax 
+    movl 8(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-84(%ebp) 
+
+    movl 12(%ebp),-68(%ebp)
+
+.endIfLabel9:
+
+    movl $0,-40(%ebp)
+
+    movl	-40(%ebp), %eax
+    cmpl	-92(%ebp), %eax
+    setl	%al
+    movlzbl %al, %eax
+    movl	%eax, -96(%ebp)
+
+.BeginWhileLabel19:
+
+    movl $ 1, %eax
+    cmpl -96(%ebp), %eax
+
+    jne EndWhileLabel20
+
+    movl -40(%ebp) , %eax 
+    movl $2, %edx 
+    imull %edx, %eax 
+    movl %eax,-104(%ebp) 
+
+    movl -104(%ebp),-4716(%ebp)
+
+    movl -108(%ebp), %eax
+    addl %eax, -40(%ebp)
+
+    jmp BeginWhileLabel19
+
+.EndWhileLabel20:
+
+    movl $8,-40(%ebp)
+
+    movl	-40(%ebp), %eax
+    cmpl	-116(%ebp), %eax
+    setge %al
+    movlzbl %al, %eax
+    movl	%eax, -120(%ebp)
+
+.BeginWhileLabel27:
+
+    movl $ 1, %eax
+    cmpl -120(%ebp), %eax
+
+    jne EndWhileLabel28
+
+    movl -40(%ebp) , %eax 
+    movl $2, %edx 
+    imull %edx, %eax 
+    movl %eax,-128(%ebp) 
+
+    movl -128(%ebp) , %eax 
+    movl $8, %edx 
+    addl %eax, %edx 
+    movl %edx,-136(%ebp) 
+
+    movl $ArrayLiteral{id=A, index=VarLocation{name=PLUSLabel32, type=int, expr=VarLocation{name=MULTIPLYLabel30, type=int, expr=VarLocation{name=i, type=int, expr=0, size=0}*VarLocation{name=factorLabel29, type=int, expr=2, size=0}, size=0}+VarLocation{name=factorLabel31, type=int, expr=8, size=0}, size=0}}, %eax 
+    movl $3, %edx 
+    addl %eax, %edx 
+    movl %edx,-148(%ebp) 
+
+    movl -148(%ebp),-2812(%ebp)
+
+    movl -152(%ebp), %eax
+    subl %eax, -40(%ebp)
+
+    jmp BeginWhileLabel27
+
+.EndWhileLabel28:
+
+    movl $0,-40(%ebp)
+
+    movl $5 , %eax 
+    movl $9, %edx 
+    imull %edx, %eax 
+    movl %eax,-168(%ebp) 
+
+    movl -168(%ebp) , %eax 
+    movl $40 , %edx 
+    subl %eax, %edx 
+    movl %edx,-176(%ebp) 
+
+    movl	-40(%ebp), %eax
+    cmpl	-176(%ebp), %eax
+    setle %al
+    movlzbl %al, %eax
+    movl	%eax, -180(%ebp)
+
+.BeginWhileLabel44:
+
+    movl $ 1, %eax
+    cmpl -180(%ebp), %eax
+
+    jne EndWhileLabel45
+
+    movl -40(%ebp) , %eax 
+    movl $2, %edx 
+    imull %edx, %eax 
+    movl %eax,-188(%ebp) 
+
+    movl -188(%ebp) , %eax 
+    movl $8, %edx 
+    addl %eax, %edx 
+    movl %edx,-196(%ebp) 
+
+    movl	-200(%ebp), %eax
+    cmpl	-204(%ebp), %eax
+    setg	%al
+    movlzbl %al, %eax
+    movl	%eax, -208(%ebp)
+
+    movl -208(%ebp),-2632(%ebp)
+
+    movl -40(%ebp) , %eax 
+    movl $1, %edx 
+    addl %eax, %edx 
+    movl %edx,-216(%ebp) 
+
+    movl -216(%ebp),-40(%ebp)
+
+    jmp BeginWhileLabel44
+
+.EndWhileLabel45:
+
+    leave
+    ret
+
+
+
+    .text
+    .globl	main
+    .type	main, @function 
+main: 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl $8 , 12(%esp)
+    movl $4 , 8(%esp)
+
+    call pruArreglos
+
+
+    call printf
+
+
+    call printf
+
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
@@ -1595,12 +1878,6 @@ main:
   
 ---------------- Test tests/test_correctos/testAssing.ctds ... -------------------
 parseo iniciado
-simbolo: c
-IF
-ultOffsetLeido: 8
-simbolo: c
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 23
@@ -1784,9 +2061,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_bloques02.ctds ... -------------------
 parseo iniciado
-simbolo: g
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 30
@@ -2011,9 +2285,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_bloques.ctds ... -------------------
 parseo iniciado
-simbolo: g
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 29
@@ -2232,21 +2503,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_booleanos.ctds ... -------------------
 parseo iniciado
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: a
-IF
-ultOffsetLeido: 8
-simbolo: b
-ELSE
-ultOffsetLeido: 12
-simbolo: a
-IF
-ultOffsetLeido: 8
-simbolo: b
-ELSE
-ultOffsetLeido: 12
 
 parseo exitoso
 tamaño lista de codigo tercetos: 34
@@ -2517,9 +2773,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_break.ctds ... -------------------
 parseo iniciado
-simbolo: g
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 29
@@ -2738,18 +2991,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_comentarios2.ctds ... -------------------
 parseo iniciado
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
 Error: Method pruAritmetica must return int
 
 parseo exitoso
@@ -2897,18 +3138,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_comentarios.ctds ... -------------------
 parseo iniciado
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
 Error: Method pruAritmetica must return int
 
 parseo exitoso
@@ -3065,78 +3294,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_condiciones.ctds ... -------------------
 parseo iniciado
-simbolo: d1
-IF
-ultOffsetLeido: 8
-simbolo: d2
-ELSE
-ultOffsetLeido: 16
-simbolo: d3
-ELSE
-ultOffsetLeido: 12
-simbolo: d1
-IF
-ultOffsetLeido: 8
-simbolo: d2
-ELSE
-ultOffsetLeido: 16
-simbolo: d3
-ELSE
-ultOffsetLeido: 12
-simbolo: d1
-IF
-ultOffsetLeido: 8
-simbolo: d2
-ELSE
-ultOffsetLeido: 16
-simbolo: d3
-ELSE
-ultOffsetLeido: 12
-simbolo: d1
-IF
-ultOffsetLeido: 8
-simbolo: d2
-ELSE
-ultOffsetLeido: 16
-simbolo: d3
-ELSE
-ultOffsetLeido: 12
-simbolo: d1
-IF
-ultOffsetLeido: 8
-simbolo: d2
-ELSE
-ultOffsetLeido: 16
-simbolo: d3
-ELSE
-ultOffsetLeido: 12
-simbolo: d1
-IF
-ultOffsetLeido: 8
-simbolo: d2
-ELSE
-ultOffsetLeido: 16
-simbolo: d3
-ELSE
-ultOffsetLeido: 12
-simbolo: d1
-IF
-ultOffsetLeido: 8
-simbolo: d2
-ELSE
-ultOffsetLeido: 16
-simbolo: d3
-ELSE
-ultOffsetLeido: 12
-simbolo: d1
-IF
-ultOffsetLeido: 8
-simbolo: d2
-ELSE
-ultOffsetLeido: 16
-simbolo: d3
-ELSE
-ultOffsetLeido: 12
 
 parseo exitoso
 tamaño lista de codigo tercetos: 90
@@ -4069,18 +4226,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_continuebreak.ctds ... -------------------
 parseo iniciado
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: b
-ELSE
-ultOffsetLeido: 12
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: b
-ELSE
-ultOffsetLeido: 12
 
 parseo exitoso
 tamaño lista de codigo tercetos: 45
@@ -4751,9 +4896,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_expresiones02.ctds ... -------------------
 parseo iniciado
-simbolo: p
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 28
@@ -4970,18 +5112,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_float01.ctds ... -------------------
 parseo iniciado
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: x
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 47
@@ -5330,9 +5460,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_float02.ctds ... -------------------
 parseo iniciado
-simbolo: b
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 33
@@ -5589,45 +5716,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_float03.ctds ... -------------------
 parseo iniciado
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: y
-ELSE
-ultOffsetLeido: 12
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: y
-ELSE
-ultOffsetLeido: 12
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: y
-ELSE
-ultOffsetLeido: 12
 
 parseo exitoso
 tamaño lista de codigo tercetos: 152
@@ -6768,39 +6856,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_float04.ctds ... -------------------
 parseo iniciado
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: a
-ELSE
-ultOffsetLeido: 12
-simbolo: a
-ELSE
-ultOffsetLeido: 12
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: a
-ELSE
-ultOffsetLeido: 12
 
 parseo exitoso
 tamaño lista de codigo tercetos: 69
@@ -7325,24 +7380,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_floats05.ctds ... -------------------
 parseo iniciado
-simbolo: a
-IF
-ultOffsetLeido: 8
-simbolo: b
-ELSE
-ultOffsetLeido: 12
-simbolo: a
-IF
-ultOffsetLeido: 8
-simbolo: b
-ELSE
-ultOffsetLeido: 12
-simbolo: a
-IF
-ultOffsetLeido: 8
-simbolo: b
-ELSE
-ultOffsetLeido: 12
 
 parseo exitoso
 tamaño lista de codigo tercetos: 32
@@ -8648,33 +8685,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_if_anidados.ctds ... -------------------
 parseo iniciado
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
-simbolo: c
-ELSE
-ultOffsetLeido: 12
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: b
-IF
-ultOffsetLeido: 8
 Error: Method pruAritmetica must return int
 
 parseo exitoso
@@ -8709,7 +8719,7 @@ lista:
 {METHODCALL, pruAritmetica, 2, Result: RESULTLabel13}
 {PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel15}
-{PARAM, null, null, Result: null}
+{PARAM, null, null, Result: []}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel16}
 {PARAM, null, null, Result: [4, 4]}
 {METHODCALL, pruAritmetica, 2, Result: RESULTLabel19}
@@ -8809,40 +8819,162 @@ finalizado.
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel15}
 finalizado.
 
-procesando : . . . {PARAM, null, null, Result: null}
-ocurrio un error: null
+procesando : . . . {PARAM, null, null, Result: []}
+finalizado.
+
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel16}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [4, 4]}
+
+Result = 4
+
+Result = 4
+finalizado.
+
+procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel19}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}
+{PARAM} CASO METHODCALL 
+finalizado.
+
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: EXTERNINVKLabel21}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [8, 5]}
+
+Result = 5
+
+Result = 8
+finalizado.
+
+procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel24}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}
+{PARAM} CASO METHODCALL 
+finalizado.
+
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: EXTERNINVKLabel26}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: EndMethod main}
+finalizado.
+
+
+
+    .text
+    .globl	pruAritmetica
+    .type	pruAritmetica, @function 
+pruAritmetica: 
+    enter   $(8), $0 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl	8(%ebp), %eax
+    cmpl	12(%ebp), %eax
+    setgne %al
+    movlzbl %al, %eax
+    movl	%eax, -8(%ebp)
+
+    movl $ 1, %eax
+    cmpl -8(%ebp), %eax
+
+    jne elseCondLabel2
+
+    movl	8(%ebp), %eax
+    cmpl	12(%ebp), %eax
+    setg	%al
+    movlzbl %al, %eax
+    movl	%eax, -12(%ebp)
+
+    movl $ 1, %eax
+    cmpl -12(%ebp), %eax
+
+    jne elseCondLabel5
+
+    movl 8(%ebp) , %eax 
+    movl 12(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-16(%ebp) 
+
+    movl -16(%ebp),-4(%ebp)
+
+    jmp endIfLabel6
+
+.elseCondLabel5:
+
+    movl 12(%ebp) , %eax 
+    movl 8(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-20(%ebp) 
+
+    movl -20(%ebp),-4(%ebp)
+
+.endIfLabel6:
+
+    jmp endIfLabel3
+
+.elseCondLabel2:
+
+    movl 8(%ebp) , %eax 
+    movl $5, %edx 
+    imull %edx, %eax 
+    movl %eax,-28(%ebp) 
+
+    movl -28(%ebp),-4(%ebp)
+
+.endIfLabel3:
+
+    leave
+    ret
+
+
+
+    .text
+    .globl	main
+    .type	main, @function 
+main: 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl $8 , 12(%esp)
+    movl $4 , 8(%esp)
+
+    call pruAritmetica
+
+
+    call printf
+
+
+    call printf
+
+    movl $4 , 12(%esp)
+    movl $4 , 8(%esp)
+
+    call pruAritmetica
+
+
+    call printf
+
+    movl $5 , 12(%esp)
+    movl $8 , 8(%esp)
+
+    call pruAritmetica
+
+
+    call printf
+
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_if.ctds ... -------------------
 parseo iniciado
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
-simbolo: b
-IF
-ultOffsetLeido: 8
 Error: Method pruAritmetica must return int
 
 parseo exitoso
@@ -8877,7 +9009,7 @@ lista:
 {METHODCALL, pruAritmetica, 2, Result: RESULTLabel13}
 {PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel15}
-{PARAM, null, null, Result: null}
+{PARAM, null, null, Result: []}
 {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel16}
 {PARAM, null, null, Result: [4, 4]}
 {METHODCALL, pruAritmetica, 2, Result: RESULTLabel19}
@@ -8977,16 +9109,162 @@ finalizado.
 procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 8]}]}, null, Result: EXTERNINVKLabel15}
 finalizado.
 
-procesando : . . . {PARAM, null, null, Result: null}
-ocurrio un error: null
+procesando : . . . {PARAM, null, null, Result: []}
+finalizado.
+
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[]}, null, Result: EXTERNINVKLabel16}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [4, 4]}
+
+Result = 4
+
+Result = 4
+finalizado.
+
+procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel19}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}
+{PARAM} CASO METHODCALL 
+finalizado.
+
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[4, 4]}]}, null, Result: EXTERNINVKLabel21}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [8, 5]}
+
+Result = 5
+
+Result = 8
+finalizado.
+
+procesando : . . . {METHODCALL, pruAritmetica, 2, Result: RESULTLabel24}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}
+{PARAM} CASO METHODCALL 
+finalizado.
+
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=int, parameters=[MethodCallExpr{name=pruAritmetica, args=[8, 5]}]}, null, Result: EXTERNINVKLabel26}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: EndMethod main}
+finalizado.
+
+
+
+    .text
+    .globl	pruAritmetica
+    .type	pruAritmetica, @function 
+pruAritmetica: 
+    enter   $(8), $0 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl	8(%ebp), %eax
+    cmpl	12(%ebp), %eax
+    setg	%al
+    movlzbl %al, %eax
+    movl	%eax, -8(%ebp)
+
+    movl $ 1, %eax
+    cmpl -8(%ebp), %eax
+
+    jne elseCondLabel2
+
+    movl 8(%ebp) , %eax 
+    movl 12(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-12(%ebp) 
+
+    movl -12(%ebp),-4(%ebp)
+
+    jmp endIfLabel3
+
+.elseCondLabel2:
+
+.endIfLabel3:
+
+    movl	8(%ebp), %eax
+    cmpl	12(%ebp), %eax
+    sete %al
+    movlzbl %al, %eax
+    movl	%eax, -16(%ebp)
+
+    movl $ 1, %eax
+    cmpl -16(%ebp), %eax
+
+    jne elseCondLabel6
+
+    movl 8(%ebp) , %eax 
+    movl $5, %edx 
+    imull %edx, %eax 
+    movl %eax,-24(%ebp) 
+
+    movl -24(%ebp),-4(%ebp)
+
+    jmp endIfLabel7
+
+.elseCondLabel6:
+
+    movl 12(%ebp) , %eax 
+    movl 8(%ebp) , %edx 
+    subl %eax, %edx 
+    movl %edx,-28(%ebp) 
+
+    movl -28(%ebp),-4(%ebp)
+
+.endIfLabel7:
+
+    leave
+    ret
+
+
+
+    .text
+    .globl	main
+    .type	main, @function 
+main: 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl $8 , 12(%esp)
+    movl $4 , 8(%esp)
+
+    call pruAritmetica
+
+
+    call printf
+
+
+    call printf
+
+    movl $4 , 12(%esp)
+    movl $4 , 8(%esp)
+
+    call pruAritmetica
+
+
+    call printf
+
+    movl $5 , 12(%esp)
+    movl $8 , 8(%esp)
+
+    call pruAritmetica
+
+
+    call printf
+
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_logicos01.ctds ... -------------------
 parseo iniciado
-simbolo: i
-IF
-ultOffsetLeido: 8
 Error: Method pruebaLogica must return int
 
 parseo exitoso
@@ -9150,81 +9428,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_logicos02.ctds ... -------------------
 parseo iniciado
-simbolo: nota1
-IF
-ultOffsetLeido: 8
-simbolo: nota3
-ELSE
-ultOffsetLeido: 12
-simbolo: nota2
-ELSE
-ultOffsetLeido: 16
-simbolo: nota3
-ELSE
-ultOffsetLeido: 12
-simbolo: nota1
-IF
-ultOffsetLeido: 8
-simbolo: nota2
-ELSE
-ultOffsetLeido: 16
-simbolo: nota1
-IF
-ultOffsetLeido: 8
-simbolo: nota2
-ELSE
-ultOffsetLeido: 16
-simbolo: nota3
-ELSE
-ultOffsetLeido: 12
-simbolo: nota2
-ELSE
-ultOffsetLeido: 16
-simbolo: nota1
-IF
-ultOffsetLeido: 8
-simbolo: nota3
-ELSE
-ultOffsetLeido: 12
-simbolo: nota2
-ELSE
-ultOffsetLeido: 16
-simbolo: nota1
-IF
-ultOffsetLeido: 8
-simbolo: nota3
-ELSE
-ultOffsetLeido: 12
-simbolo: nota1
-IF
-ultOffsetLeido: 8
-simbolo: nota3
-ELSE
-ultOffsetLeido: 12
-simbolo: nota2
-ELSE
-ultOffsetLeido: 16
-simbolo: nota1
-IF
-ultOffsetLeido: 8
-simbolo: nota2
-ELSE
-ultOffsetLeido: 16
-simbolo: nota1
-IF
-ultOffsetLeido: 8
-simbolo: nota3
-ELSE
-ultOffsetLeido: 12
-simbolo: nota2
-ELSE
-ultOffsetLeido: 16
-simbolo: nota3
-ELSE
-ultOffsetLeido: 12
-simbolo: nota1
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 55
@@ -9820,24 +10023,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_mcd.ctds ... -------------------
 parseo iniciado
-simbolo: a
-IF
-ultOffsetLeido: 8
-simbolo: b
-ELSE
-ultOffsetLeido: 12
-simbolo: a
-IF
-ultOffsetLeido: 8
-simbolo: b
-ELSE
-ultOffsetLeido: 12
-simbolo: b
-ELSE
-ultOffsetLeido: 12
-simbolo: a
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 32
@@ -10085,15 +10270,6 @@ ocurrio un error: null
   
 ---------------- Test tests/test_correctos/test_metodos01.ctds ... -------------------
 parseo iniciado
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 27
@@ -10308,15 +10484,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_metodos02.ctds ... -------------------
 parseo iniciado
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 36
@@ -10598,18 +10765,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_metodos03.ctds ... -------------------
 parseo iniciado
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 31
@@ -10856,38 +11011,225 @@ main:
   
 ---------------- Test tests/test_correctos/test_metodos_externos01.ctds ... -------------------
 parseo iniciado
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-Error: Method alo not declared
-Error: Method alo not declared
-ocurrio un error: null
+
+parseo exitoso
+tamaño lista de codigo tercetos: 28
+lista: 
+{null, float, c, Result: 0}
+{LABEL, null, null, Result: BeginMethod alo}
+
+{METHODDECL, Metodo{ name=alo, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0, offset=0}]}, null, Result: null}
+{PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel1, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel2, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel1, type=int, expr=1, size=0}, size=0}}
+{ASSIGN(=), VarLocation{name=PLUSLabel2, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel1, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{RETURN, null, null, Result: VarLocation{name=x, type=int, expr=0, size=0}}
+{LABEL, null, null, Result: EndMethod alo}
+{LABEL, null, null, Result: BeginMethod alo_2}
+
+{METHODDECL, Metodo{ name=alo_2, return_not_void=false, typeReturn=void, parameters [Simbolo{type=int, name=x, value=null, size=0, offset=0}]}, null, Result: null}
+{PARAM, null, null, Result: [2]}
+{METHODCALL, alo, 1, Result: RESULTLabel4}
+{PARAM, null, null, Result: [2]}
+{METHODCALL, alo, 1, Result: RESULTLabel6}
+{PLUS(+), VarLocation{name=factorLabel7, type=int, expr=MethodCallExpr{name=alo, args=[2]}, size=0}, VarLocation{name=factorLabel8, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel9, type=int, expr=VarLocation{name=factorLabel7, type=int, expr=MethodCallExpr{name=alo, args=[2]}, size=0}+VarLocation{name=factorLabel8, type=int, expr=1, size=0}, size=0}}
+{ASSIGN(=), VarLocation{name=PLUSLabel9, type=int, expr=VarLocation{name=factorLabel7, type=int, expr=MethodCallExpr{name=alo, args=[2]}, size=0}+VarLocation{name=factorLabel8, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{LABEL, null, null, Result: EndMethod alo_2}
+{LABEL, null, null, Result: BeginMethod main}
+
+{METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
+{PARAM, null, null, Result: [5]}
+{METHODCALL, alo, 1, Result: RESULTLabel11}
+{ASSIGN(=), VarLocation{name=factorLabel12, type=int, expr=MethodCallExpr{name=alo, args=[5]}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+{PARAM, null, null, Result: [StringLiteral{value="-estoEsUnaPrueba"}]}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="-estoEsUnaPrueba"}]}, null, Result: EXTERNINVKLabel13}
+{PARAM, null, null, Result: [StringLiteral{value="%d"}, 0]}
+{EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%d"}, 0]}, null, Result: EXTERNINVKLabel14}
+{PARAM, null, null, Result: []}
+{EXTERNINVK, ExternInvkExpr{id="/home/programas/primer_primo_par", type=int, parameters=[]}, null, Result: EXTERNINVKLabel15}
+{LABEL, null, null, Result: EndMethod main}
+
+procesando : . . . {null, float, c, Result: 0}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: BeginMethod alo}
+finalizado.
+
+
+procesando : . . . {METHODDECL, Metodo{ name=alo, return_not_void=true, typeReturn=int, parameters [Simbolo{type=int, name=x, value=null, size=0, offset=0}]}, null, Result: null}
+finalizado.
+
+procesando : . . . {PLUS(+), VarLocation{name=x, type=int, expr=0, size=0}, VarLocation{name=factorLabel1, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel2, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel1, type=int, expr=1, size=0}, size=0}}
+finalizado.
+
+procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel2, type=int, expr=VarLocation{name=x, type=int, expr=0, size=0}+VarLocation{name=factorLabel1, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+finalizado.
+
+procesando : . . . {RETURN, null, null, Result: VarLocation{name=x, type=int, expr=0, size=0}}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: EndMethod alo}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: BeginMethod alo_2}
+finalizado.
+
+
+procesando : . . . {METHODDECL, Metodo{ name=alo_2, return_not_void=false, typeReturn=void, parameters [Simbolo{type=int, name=x, value=null, size=0, offset=0}]}, null, Result: null}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [2]}
+
+Result = 2
+finalizado.
+
+procesando : . . . {METHODCALL, alo, 1, Result: RESULTLabel4}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [2]}
+
+Result = 2
+finalizado.
+
+procesando : . . . {METHODCALL, alo, 1, Result: RESULTLabel6}
+finalizado.
+
+procesando : . . . {PLUS(+), VarLocation{name=factorLabel7, type=int, expr=MethodCallExpr{name=alo, args=[2]}, size=0}, VarLocation{name=factorLabel8, type=int, expr=1, size=0}, Result: VarLocation{name=PLUSLabel9, type=int, expr=VarLocation{name=factorLabel7, type=int, expr=MethodCallExpr{name=alo, args=[2]}, size=0}+VarLocation{name=factorLabel8, type=int, expr=1, size=0}, size=0}}
+finalizado.
+
+procesando : . . . {ASSIGN(=), VarLocation{name=PLUSLabel9, type=int, expr=VarLocation{name=factorLabel7, type=int, expr=MethodCallExpr{name=alo, args=[2]}, size=0}+VarLocation{name=factorLabel8, type=int, expr=1, size=0}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: EndMethod alo_2}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: BeginMethod main}
+finalizado.
+
+
+procesando : . . . {METHODDECL, Metodo{ name=main, return_not_void=true, typeReturn=int, parameters []}, null, Result: null}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [5]}
+
+Result = 5
+finalizado.
+
+procesando : . . . {METHODCALL, alo, 1, Result: RESULTLabel11}
+finalizado.
+
+procesando : . . . {ASSIGN(=), VarLocation{name=factorLabel12, type=int, expr=MethodCallExpr{name=alo, args=[5]}, size=0}, null, Result: VarLocation{name=x, type=int, expr=null, size=0}}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="-estoEsUnaPrueba"}]}
+{PARAM} FALTA CASO class ir.ast.StringLiteral
+finalizado.
+
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="-estoEsUnaPrueba"}]}, null, Result: EXTERNINVKLabel13}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: [StringLiteral{value="%d"}, 0]}
+
+Result = 0
+{PARAM} FALTA CASO class ir.ast.StringLiteral
+finalizado.
+
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="printf", type=void, parameters=[StringLiteral{value="%d"}, 0]}, null, Result: EXTERNINVKLabel14}
+finalizado.
+
+procesando : . . . {PARAM, null, null, Result: []}
+finalizado.
+
+procesando : . . . {EXTERNINVK, ExternInvkExpr{id="/home/programas/primer_primo_par", type=int, parameters=[]}, null, Result: EXTERNINVKLabel15}
+finalizado.
+
+procesando : . . . {LABEL, null, null, Result: EndMethod main}
+finalizado.
+
+
+    .comm c,4
+
+
+    .text
+    .globl	alo
+    .type	alo, @function 
+alo: 
+    enter   $(4), $0 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl 8(%ebp) , %eax 
+    movl $1, %edx 
+    addl %eax, %edx 
+    movl %edx,-8(%ebp) 
+
+    movl -8(%ebp),0(%ebp)
+
+    movl 8(%ebp), %eax
+
+    leave
+    ret
+
+
+
+    .text
+    .globl	alo_2
+    .type	alo_2, @function 
+alo_2: 
+    enter   $(4), $0 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl $2 , 8(%esp)
+
+    call alo
+
+    movl $2 , 8(%esp)
+
+    call alo
+
+    movl $MethodCallExpr{name=alo, args=[2]}, %eax 
+    movl $1, %edx 
+    addl %eax, %edx 
+    movl %edx,-20(%ebp) 
+
+    movl -20(%ebp),12(%ebp)
+
+    leave
+    ret
+
+
+
+    .text
+    .globl	main
+    .type	main, @function 
+main: 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl $5 , 8(%esp)
+
+    call alo
+
+    movl %eax,-4(%ebp)
+
+
+    call printf
+
+    movl $0 , 12(%esp)
+
+    call printf
+
+
+    call /home/programas/primer_primo_par
+
+    leave
+    ret
+
+
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_correctos/test_metodos_externos02.ctds ... -------------------
 parseo iniciado
-simbolo: a
-IF
-ultOffsetLeido: 8
-simbolo: b
-ELSE
-ultOffsetLeido: 12
-simbolo: a
-IF
-ultOffsetLeido: 8
-simbolo: b
-ELSE
-ultOffsetLeido: 12
-simbolo: b
-ELSE
-ultOffsetLeido: 12
-simbolo: a
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 36
@@ -11264,9 +11606,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_mult01.ctds ... -------------------
 parseo iniciado
-simbolo: c
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 16
@@ -11564,57 +11903,6 @@ alo:
   
 ---------------- Test tests/test_correctos/test_retorno.ctds ... -------------------
 parseo iniciado
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 70
@@ -12152,24 +12440,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_suma.ctds ... -------------------
 parseo iniciado
-simbolo: num1
-IF
-ultOffsetLeido: 8
-simbolo: num2
-ELSE
-ultOffsetLeido: 12
-simbolo: num2
-ELSE
-ultOffsetLeido: 12
-simbolo: num1
-IF
-ultOffsetLeido: 8
-simbolo: num1
-IF
-ultOffsetLeido: 8
-simbolo: num2
-ELSE
-ultOffsetLeido: 12
 
 parseo exitoso
 tamaño lista de codigo tercetos: 30
@@ -12398,12 +12668,6 @@ main:
   
 ---------------- Test tests/test_correctos/test_sumx.ctds ... -------------------
 parseo iniciado
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: x
-IF
-ultOffsetLeido: 8
 
 parseo exitoso
 tamaño lista de codigo tercetos: 23
@@ -12938,18 +13202,6 @@ error de sintaxis: Linea 9.
 ---------------- Test tests/test_errores/error_float02.ctds ... -------------------
 parseo iniciado
 error: 0 9 .
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: x
-IF
-ultOffsetLeido: 8
 error: 0 21 .
 error de sintaxis: Linea 22.
 ---------------------------------------------------
@@ -12957,42 +13209,12 @@ error de sintaxis: Linea 22.
   
 ---------------- Test tests/test_errores/error_float03.ctds ... -------------------
 parseo iniciado
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: x
-IF
-ultOffsetLeido: 8
 error de sintaxis: Linea 29.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_float04.ctds ... -------------------
 parseo iniciado
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: n
-ELSE
-ultOffsetLeido: 12
-simbolo: x
-IF
-ultOffsetLeido: 8
 error de sintaxis: Linea 41.
 ---------------------------------------------------
   
@@ -13029,12 +13251,6 @@ error de sintaxis: Linea 18.
   
 ---------------- Test tests/test_errores/error_if01.ctds ... -------------------
 parseo iniciado
-simbolo: b
-IF
-ultOffsetLeido: 8
-simbolo: c
-ELSE
-ultOffsetLeido: 12
 error de sintaxis: Linea 9.
 ---------------------------------------------------
   
@@ -13059,21 +13275,12 @@ error de sintaxis: Linea 20.
   
 ---------------- Test tests/test_errores/error_test_break.ctds ... -------------------
 parseo iniciado
-simbolo: g
-IF
-ultOffsetLeido: 8
 error de sintaxis: Linea 20.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_logicos02.ctds ... -------------------
 parseo iniciado
-simbolo: nota1
-IF
-ultOffsetLeido: 8
-simbolo: nota3
-ELSE
-ultOffsetLeido: 12
 error: 0 4 &
 error de sintaxis: Linea 5.
 ---------------------------------------------------
@@ -13081,45 +13288,6 @@ error de sintaxis: Linea 5.
   
 ---------------- Test tests/test_errores/error_test_logicos.ctds ... -------------------
 parseo iniciado
-simbolo: nota1
-IF
-ultOffsetLeido: 8
-simbolo: nota3
-ELSE
-ultOffsetLeido: 12
-simbolo: nota2
-ELSE
-ultOffsetLeido: 16
-simbolo: nota3
-ELSE
-ultOffsetLeido: 12
-simbolo: nota1
-IF
-ultOffsetLeido: 8
-simbolo: nota2
-ELSE
-ultOffsetLeido: 16
-simbolo: nota1
-IF
-ultOffsetLeido: 8
-simbolo: nota2
-ELSE
-ultOffsetLeido: 16
-simbolo: nota3
-ELSE
-ultOffsetLeido: 12
-simbolo: nota2
-ELSE
-ultOffsetLeido: 16
-simbolo: nota1
-IF
-ultOffsetLeido: 8
-simbolo: nota3
-ELSE
-ultOffsetLeido: 12
-simbolo: nota2
-ELSE
-ultOffsetLeido: 16
 ocurrio un error: null
 ---------------------------------------------------
   
@@ -13153,31 +13321,13 @@ error de sintaxis: Linea 4.
   
 ---------------- Test tests/test_errores/error_test_metodos03.ctds ... -------------------
 parseo iniciado
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
 error de sintaxis: Linea 19.
 ---------------------------------------------------
   
   
 ---------------- Test tests/test_errores/error_test_metodos04.ctds ... -------------------
 parseo iniciado
-simbolo: x
-IF
-ultOffsetLeido: 8
 Error: Method alo3 not declared
-simbolo: x
-IF
-ultOffsetLeido: 8
-simbolo: x
-IF
-ultOffsetLeido: 8
 error de sintaxis: Linea 21.
 ---------------------------------------------------
   
@@ -13227,12 +13377,6 @@ error de sintaxis: Linea 3.
   
 ---------------- Test tests/test_errores/ifErrorTest.ctds ... -------------------
 parseo iniciado
-simbolo: b
-ELSE
-ultOffsetLeido: 16
-simbolo: c
-ELSE
-ultOffsetLeido: 12
 error de sintaxis: Linea 6.
 ---------------------------------------------------
   

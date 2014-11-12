@@ -1150,105 +1150,109 @@ public class AssemblyCodeGenerator{
 	public void ASM_Params(TripletCode t){
 		//obtenemos la lista de parametros del metodo llamado
     	LinkedList<Expression> params=(LinkedList<Expression>) t.getResult();
-    	//los parametros de agregan en orden inverso
-    	for(int i=params.size()-1; i>=0; i--){
+    	//si tiene parametros
+    	if(params.size()!=0){
+    		//los parametros de agregan en orden inverso
+	    	for(int i=params.size()-1; i>=0; i--){
 
-    		//si el parametro es una VarLocation obtenemos su offset
-    		if(params.get(i) instanceof VarLocation){
-    			VarLocation v=(VarLocation) params.get(i);
-    			if(i!=0){
-    				result+="    movl "+v.getOffset()+"(%esp) , "+(((i+2))*4)+"(%esp)\n";		
-    			}else{
-    				result+="    movl "+v.getOffset()+"(%esp) , 8(%esp)\n";	
-    			}
-    			
-    		}else{//sino, debe ser un Literal o una llamada a metodo
-    			//si no es una llamada a metodo (deberia ser un literal entonces)
-    			if(!(params.get(i) instanceof MethodCallExpr)){
-    				//caso IntLiteral
-    				if(params.get(i) instanceof IntLiteral){
-    					IntLiteral p=(IntLiteral) params.get(i);
-   
-    					if(i!=0){
-    						result+="    movl $"+evaluateExpression(p.toString())+" , "+(((i+2))*4)+"(%esp)\n";	
-    					}else{
-    						result+="    movl $"+evaluateExpression(p.toString())+" , 8(%esp)\n";	
-    					}
-    					
-    				}else{
-    					//caso BoolLiteral
-	    				if(params.get(i) instanceof BoolLiteral){
+	    		//si el parametro es una VarLocation obtenemos su offset
+	    		if(params.get(i) instanceof VarLocation){
+	    			VarLocation v=(VarLocation) params.get(i);
+	    			if(i!=0){
+	    				result+="    movl "+v.getOffset()+"(%esp) , "+(((i+2))*4)+"(%esp)\n";		
+	    			}else{
+	    				result+="    movl "+v.getOffset()+"(%esp) , 8(%esp)\n";	
+	    			}
+	    			
+	    		}else{//sino, debe ser un Literal o una llamada a metodo
+	    			//si no es una llamada a metodo (deberia ser un literal entonces)
+	    			if(!(params.get(i) instanceof MethodCallExpr)){
+	    				//caso IntLiteral
+	    				if(params.get(i) instanceof IntLiteral){
+	    					IntLiteral p=(IntLiteral) params.get(i);
 	   
-	    					BoolLiteral p=(BoolLiteral) params.get(i);
 	    					if(i!=0){
-	    						if(p.getValue()){
-	    							result+="    movl $"+1+" , "+((i-1)*4)+"(%esp)";		
-	    						}else{
-	    							result+="    movl $"+0+" , "+((i-1)*4)+"(%esp)";	
-	    						}
-	    						
+	    						result+="    movl $"+evaluateExpression(p.toString())+" , "+(((i+2))*4)+"(%esp)\n";	
 	    					}else{
-	    						if(p.getValue()){
-	    							result+="    movl $"+1+" , (%esp)";	
-	    						}else{
-	    							result+="    movl $"+0+" , (%esp)";
-	    						}
-	    						
+	    						result+="    movl $"+evaluateExpression(p.toString())+" , 8(%esp)\n";	
 	    					}
 	    					
 	    				}else{
-	    					//caso FloatLiteral
-	    					if(params.get(i) instanceof FloatLiteral){
-	    						System.out.println("{PARAM} CASO FLAOTLITERAL PENDIENTE");
-	    					}else{
-	    						//si el parametro es una operacion binaria
-	    						if(params.get(i) instanceof BinOpExpr){
-	    	
-	    							BinOpExpr b=(BinOpExpr) params.get(i);
-	    							Expression firstOp=b.getLeftOperand();
-	    							Expression secOp=b.getRightOperand();
-	    							//si es una binaria entre enteros
-	    							if(firstOp.getType().equals(Type.INT) && secOp.getType().equals(Type.INT)){
-	    								//la evaluamos
-	    								System.out.println("{PARAMS} expr: "+b.toString());
-	    								int opValue=evaluateExpression(b.toString());
-	    								if(i!=0){
-				    						result+="    movl $"+opValue+" , "+((i-1)*4)+"(%esp)";	
-				    					}else{
-				    						result+="    movl $"+opValue+" , (%esp)";
-				    					}
-	    							}
-	    						}else{
-	    							//si es una operacion binaria
-	    							if(params.get(i) instanceof UnaryOpExpr){
-	    		
-	    								UnaryOpExpr uop=(UnaryOpExpr)params.get(i);
-										if(uop.getType().equals(Type.INT)){
-											int opValue=evaluateExpression(uop.toString());
-											if(i!=0){
+	    					//caso BoolLiteral
+		    				if(params.get(i) instanceof BoolLiteral){
+		   
+		    					BoolLiteral p=(BoolLiteral) params.get(i);
+		    					if(i!=0){
+		    						if(p.getValue()){
+		    							result+="    movl $"+1+" , "+((i-1)*4)+"(%esp)";		
+		    						}else{
+		    							result+="    movl $"+0+" , "+((i-1)*4)+"(%esp)";	
+		    						}
+		    						
+		    					}else{
+		    						if(p.getValue()){
+		    							result+="    movl $"+1+" , (%esp)";	
+		    						}else{
+		    							result+="    movl $"+0+" , (%esp)";
+		    						}
+		    						
+		    					}
+		    					
+		    				}else{
+		    					//caso FloatLiteral
+		    					if(params.get(i) instanceof FloatLiteral){
+		    						System.out.println("{PARAM} CASO FLAOTLITERAL PENDIENTE");
+		    					}else{
+		    						//si el parametro es una operacion binaria
+		    						if(params.get(i) instanceof BinOpExpr){
+		    	
+		    							BinOpExpr b=(BinOpExpr) params.get(i);
+		    							Expression firstOp=b.getLeftOperand();
+		    							Expression secOp=b.getRightOperand();
+		    							//si es una binaria entre enteros
+		    							if(firstOp.getType().equals(Type.INT) && secOp.getType().equals(Type.INT)){
+		    								//la evaluamos
+		    								System.out.println("{PARAMS} expr: "+b.toString());
+		    								int opValue=evaluateExpression(b.toString());
+		    								if(i!=0){
 					    						result+="    movl $"+opValue+" , "+((i-1)*4)+"(%esp)";	
 					    					}else{
 					    						result+="    movl $"+opValue+" , (%esp)";
 					    					}
-										}else{
-											System.out.println("{PARAM} FALTA CASO UnaryOpExpr "+uop.getType());		
-										}				
-	    							}else{
-	    								//demas casos
-    									System.out.println("{PARAM} FALTA CASO "+params.get(i).getClass());	
-	    							}
-	    							
-	    						}
-	    						
-	    					}
-	    					
+		    							}
+		    						}else{
+		    							//si es una operacion binaria
+		    							if(params.get(i) instanceof UnaryOpExpr){
+		    		
+		    								UnaryOpExpr uop=(UnaryOpExpr)params.get(i);
+											if(uop.getType().equals(Type.INT)){
+												int opValue=evaluateExpression(uop.toString());
+												if(i!=0){
+						    						result+="    movl $"+opValue+" , "+((i-1)*4)+"(%esp)";	
+						    					}else{
+						    						result+="    movl $"+opValue+" , (%esp)";
+						    					}
+											}else{
+												System.out.println("{PARAM} FALTA CASO UnaryOpExpr "+uop.getType());		
+											}				
+		    							}else{
+		    								//demas casos
+	    									System.out.println("{PARAM} FALTA CASO "+params.get(i).getClass());	
+		    							}
+		    							
+		    						}
+		    						
+		    					}
+		    					
+		    				}
 	    				}
-    				}
-    			}else{
-    				System.out.println("{PARAM} CASO METHODCALL ");
-    			}		    			
-    		}
+	    			}else{
+	    				System.out.println("{PARAM} CASO METHODCALL ");
+	    			}		    			
+	    		}
+	    	}
     	}
+    	
 	}
 
 

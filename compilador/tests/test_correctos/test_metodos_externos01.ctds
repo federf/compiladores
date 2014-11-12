@@ -7,14 +7,16 @@ class test_externinvk{
    }
 
    void alo_2(int x){
-      alo();
-      x=  alo() + 1;
+      alo(2);
+      x=  alo(2) + 1;
       return; //probando return solo
    }
 
    int main(){
+    int x;
+    x=alo(5);
     externinvk("printf", void , "-estoEsUnaPrueba");
-    externinvk("printf", void , "%d",alo_1(5));
+    externinvk("printf", void , "%d",x);
     externinvk("/home/programas/primer_primo_par", int ); //podria no tener argumentos
 }
 

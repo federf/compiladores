@@ -917,7 +917,7 @@
                     ExternInvkExpr res=new ExternInvkExpr(s,new LinkedList(),t);
                     //CODIGO DE 3 DIRECCIONES
                     //agregamos los parametros del metodo a la pila
-                    TripletList.addLast(new TripletCode(TripletOperator.PARAM, null,null,null));
+                    TripletList.addLast(new TripletCode(TripletOperator.PARAM, null,null,new LinkedList()));
 
                     String resultLabel="EXTERNINVK"+Labels.getLabel(); 
                     TripletList.addLast(new TripletCode(TripletOperator.EXTERNINVK, res,null,resultLabel)); //!!VERIFICAR 
@@ -1412,15 +1412,13 @@
                                 //calculamos su offset
                                 //cantidad de parametros del metodo
                                 int cantParams=ult_metodo.getParametros().size();
-                                System.out.println("simbolo: "+s.getName());
+                                
                                 if(paramIndex==0){
-                                    System.out.println("IF");
                                     ultOffsetLeido=8;
                                 }else{
-                                    System.out.println("ELSE");
                                     ultOffsetLeido=(((cantParams)-paramIndex)+2)*4;    
                                 }
-                                System.out.println("ultOffsetLeido: "+ultOffsetLeido);
+                                
                                 
                             }else{
                                 //sino, utilizamos el de su declaracion, ya que se trata de una variable declarada
