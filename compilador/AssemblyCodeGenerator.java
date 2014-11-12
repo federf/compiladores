@@ -1498,10 +1498,6 @@ public class AssemblyCodeGenerator{
 			   		}
 			   		
 			   		break;
-			   	case ARRAYACCESS:
-			   		result+="\n";
-			   		result=result+ "ARRAYACCESS\n"; 
-			   		break;
 			   	case METHODDECL:
 			   		result+="\n";
 		   			ASM_Method_Decl(t);

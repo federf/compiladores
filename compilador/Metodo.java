@@ -142,7 +142,10 @@ public class Metodo {
     //ser parametro
     public int esParametro(Simbolo s){
         for(int i=0; i<this.getParametros().size(); i++){
-            if((s.getName().equals(this.getParametros().get(i).getName())) && s.getType().equals(this.getParametros().get(i).getType()){
+            if(
+                (s.getName().equals(this.getParametros().get(i).getName())) 
+                && 
+                (s.getType().equals(this.getParametros().get(i).getType()))){
                 return i;
             }
         }
