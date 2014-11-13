@@ -1,8 +1,3 @@
-{PARAM, null, null, Result: [0.0]}
-0.0 , class ir.ast.FloatLiteral
-{PARAM, null, null, Result: [StringLiteral{value="%f"}, VarLocation{name=f, type=float, expr=0.0, size=0}]}
-VarLocation{name=f, type=float, expr=0.0, size=0} , class ir.ast.VarLocation
-StringLiteral{value="%f"} , class ir.ast.StringLiteral
 
 
     .text
@@ -61,7 +56,7 @@ sumatoria:
 
     jne elseCondLabel11
 
-    movl -4(%ebp) , %eax 
+    movl -4(%ebp), %eax 
     movl -8(%ebp), %edx 
     addl %eax, %edx 
     movl %edx,-48(%ebp) 
@@ -106,7 +101,7 @@ main:
 
     movl %eax,-4(%ebp)
 
-    movl -4(%esp) , %eax
+    movl -4(%esp), %eax
     movl %eax,4(%esp)
 
     call imprimir

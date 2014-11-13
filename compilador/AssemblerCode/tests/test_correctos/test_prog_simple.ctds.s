@@ -11,7 +11,7 @@ alo:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl 12(%ebp) , %eax 
+    movl 20(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-8(%ebp) 

@@ -1,15 +1,3 @@
-{PARAM, null, null, Result: [2]}
-2 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [2]}
-2 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [5]}
-5 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [StringLiteral{value="-estoEsUnaPrueba"}]}
-StringLiteral{value="-estoEsUnaPrueba"} , class ir.ast.StringLiteral
-{PARAM, null, null, Result: [StringLiteral{value="%d"}, VarLocation{name=x, type=int, expr=0, size=0}]}
-VarLocation{name=x, type=int, expr=0, size=0} , class ir.ast.VarLocation
-StringLiteral{value="%d"} , class ir.ast.StringLiteral
-{PARAM, null, null, Result: []}
 
     .comm c,4
 
@@ -22,7 +10,7 @@ alo:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl 8(%ebp) , %eax 
+    movl 8(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-8(%ebp) 
@@ -30,7 +18,7 @@ alo:
     movl -8(%ebp),%eax
     movl %eax, 0(%ebp)
 
-    movl 8(%ebp), %eax
+    movl 0(%ebp), %eax
 
     leave
     ret
@@ -45,11 +33,11 @@ alo_2:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $2 , 0(%esp)
+    movl $2, 0(%esp)
 
     call alo
 
-    movl $2 , 0(%esp)
+    movl $2, 0(%esp)
 
     call alo
 
@@ -73,7 +61,7 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $5 , 0(%esp)
+    movl $5, 0(%esp)
 
     call alo
 
@@ -82,7 +70,7 @@ main:
 
     call imprimir
 
-    movl -4(%esp) , %eax
+    movl -4(%esp), %eax
     movl %eax,4(%esp)
 
     call imprimir

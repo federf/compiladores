@@ -69,7 +69,7 @@ main:
     movl	%eax, -20(%ebp) 
 
     movl $58, %eax 
-    movl -20(%ebp) , %edx 
+    movl -20(%ebp), %edx 
     subl %eax, %edx 
     movl %eax,-24(%ebp) 
 
@@ -103,7 +103,7 @@ main:
     movl %edx,-80(%ebp) 
 
     movl $7, %eax 
-    movl -80(%ebp) , %edx 
+    movl -80(%ebp), %edx 
     subl %eax, %edx 
     movl %eax,-84(%ebp) 
 

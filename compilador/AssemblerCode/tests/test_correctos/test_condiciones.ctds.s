@@ -1,9 +1,3 @@
-{PARAM, null, null, Result: [1, 6, 9]}
-9 , class ir.ast.IntLiteral
-6 , class ir.ast.IntLiteral
-1 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [VarLocation{name=factorLabel97, type=float, expr=MethodCallExpr{name=dados, args=[1, 6, 9]}, size=0}]}
-VarLocation{name=factorLabel97, type=float, expr=MethodCallExpr{name=dados, args=[1, 6, 9]}, size=0} , class ir.ast.VarLocation
 
 
     .text
@@ -25,7 +19,7 @@ dados:
     movlzbl %al, %eax 
     movl %eax, -12(%ebp) 
 
-    movl	16(%ebp), %eax
+    movl	12(%ebp), %eax
     cmpl	-16(%ebp), %eax
     sete %al
     movlzbl %al, %eax
@@ -49,7 +43,7 @@ dados:
     movl	%eax, -28(%ebp)
 .L2:
 
-    movl	12(%ebp), %eax
+    movl	16(%ebp), %eax
     cmpl	-32(%ebp), %eax
     sete %al
     movlzbl %al, %eax
@@ -92,7 +86,7 @@ dados:
     movlzbl %al, %eax
     movl	%eax, -56(%ebp)
 
-    movl	16(%ebp), %eax
+    movl	12(%ebp), %eax
     cmpl	-60(%ebp), %eax
     sete %al
     movlzbl %al, %eax
@@ -116,7 +110,7 @@ dados:
     movl	%eax, -72(%ebp)
 .L8:
 
-    movl	12(%ebp), %eax
+    movl	16(%ebp), %eax
     cmpl	-76(%ebp), %eax
     sete %al
     movlzbl %al, %eax
@@ -151,7 +145,7 @@ dados:
     movlzbl %al, %eax 
     movl %eax, -100(%ebp) 
 
-    movl	16(%ebp), %eax
+    movl	12(%ebp), %eax
     cmpl	-104(%ebp), %eax
     sete %al
     movlzbl %al, %eax
@@ -170,7 +164,7 @@ dados:
     movl	%eax, -112(%ebp)
 .L14:
 
-    movl	12(%ebp), %eax
+    movl	16(%ebp), %eax
     cmpl	-116(%ebp), %eax
     sete %al
     movlzbl %al, %eax
@@ -218,7 +212,7 @@ dados:
     movlzbl %al, %eax 
     movl %eax, -144(%ebp) 
 
-    movl	16(%ebp), %eax
+    movl	12(%ebp), %eax
     cmpl	-148(%ebp), %eax
     sete %al
     movlzbl %al, %eax
@@ -242,7 +236,7 @@ dados:
     movl	%eax, -160(%ebp)
 .L23:
 
-    movl	12(%ebp), %eax
+    movl	16(%ebp), %eax
     cmpl	-164(%ebp), %eax
     sete %al
     movlzbl %al, %eax
@@ -293,7 +287,7 @@ dados:
     movlzbl %al, %eax
     movl	%eax, -188(%ebp)
 
-    movl	16(%ebp), %eax
+    movl	12(%ebp), %eax
     cmpl	-192(%ebp), %eax
     sete %al
     movlzbl %al, %eax
@@ -312,7 +306,7 @@ dados:
     movl	%eax, -200(%ebp)
 .L32:
 
-    movl	12(%ebp), %eax
+    movl	16(%ebp), %eax
     cmpl	-204(%ebp), %eax
     sete %al
     movlzbl %al, %eax
@@ -342,7 +336,7 @@ dados:
     movlzbl %al, %eax
     movl	%eax, -224(%ebp)
 
-    movl	16(%ebp), %eax
+    movl	12(%ebp), %eax
     cmpl	-228(%ebp), %eax
     sete %al
     movlzbl %al, %eax
@@ -366,7 +360,7 @@ dados:
     movl	%eax, -240(%ebp)
 .L38:
 
-    movl	12(%ebp), %eax
+    movl	16(%ebp), %eax
     cmpl	-244(%ebp), %eax
     sete %al
     movlzbl %al, %eax
@@ -409,7 +403,7 @@ dados:
     movlzbl %al, %eax 
     movl %eax, -268(%ebp) 
 
-    movl	16(%ebp), %eax
+    movl	12(%ebp), %eax
     cmpl	-272(%ebp), %eax
     sete %al
     movlzbl %al, %eax
@@ -428,7 +422,7 @@ dados:
     movl	%eax, -280(%ebp)
 .L47:
 
-    movl	12(%ebp), %eax
+    movl	16(%ebp), %eax
     cmpl	-284(%ebp), %eax
     sete %al
     movlzbl %al, %eax
@@ -479,7 +473,7 @@ dados:
     movlzbl %al, %eax
     movl	%eax, -308(%ebp)
 
-    movl	16(%ebp), %eax
+    movl	12(%ebp), %eax
     cmpl	-312(%ebp), %eax
     sete %al
     movlzbl %al, %eax
@@ -498,7 +492,7 @@ dados:
     movl	%eax, -320(%ebp)
 .L56:
 
-    movl	12(%ebp), %eax
+    movl	16(%ebp), %eax
     cmpl	-324(%ebp), %eax
     sete %al
     movlzbl %al, %eax
@@ -542,14 +536,15 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $9 , 8(%esp)
-    movl $6 , 4(%esp)
-    movl $1 , 0(%esp)
+    movl $9, 8(%esp)
+    movl $6, 4(%esp)
+    movl $1, 0(%esp)
 
     call dados
 
-    movl -16(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl -16(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
     leave

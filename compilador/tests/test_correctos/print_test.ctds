@@ -1,16 +1,22 @@
 class print_test{
+	int inc(int i){
+		return i+1;
+	}
+
 	int main(){
 		int x;
 		int y;
 		int res;
 		int n;
+		int incr;
 
 		x=2;
 		y=4;
 		res=x+y;
+		incr=inc(2);
 
-		n=externinvk("imprimir",int, res);//tratar con call
+		n=externinvk("imprimir",int, incr);//tratar con call
 
-		return 10;
+		return n;
 	}
 }

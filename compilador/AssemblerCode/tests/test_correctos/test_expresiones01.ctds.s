@@ -1,7 +1,3 @@
-{PARAM, null, null, Result: [6]}
-6 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [VarLocation{name=factorLabel29, type=float, expr=MethodCallExpr{name=prueba, args=[6]}, size=0}]}
-VarLocation{name=factorLabel29, type=float, expr=MethodCallExpr{name=prueba, args=[6]}, size=0} , class ir.ast.VarLocation
 
 
     .text
@@ -64,15 +60,15 @@ prueba:
 
     jne EndWhileLabel18
 
-    movl -12(%ebp) , %eax 
-    movl $1 , %edx 
+    movl -12(%ebp), %eax 
+    movl $1, %edx 
     subl %eax, %edx 
     movl %eax,-60(%ebp) 
 
     movl -60(%ebp),%eax
     movl %eax, -12(%ebp)
 
-    movl -4(%ebp) , %eax 
+    movl -4(%ebp), %eax 
     movl $2, %edx 
     imull %edx, %eax 
     movl %eax,-68(%ebp) 
@@ -84,7 +80,7 @@ prueba:
 
 .EndWhileLabel18:
 
-    movl -4(%ebp) , %eax 
+    movl -4(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-76(%ebp) 
@@ -92,8 +88,8 @@ prueba:
     movl -76(%ebp),%eax
     movl %eax, -4(%ebp)
 
-    movl -8(%ebp) , %eax 
-    movl $2 , %ecx
+    movl -8(%ebp), %eax 
+    movl $2, %ecx
 	 cltd
     idiv %ecx
     movl %ecx,-84(%ebp) 
@@ -131,12 +127,13 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $6 , 0(%esp)
+    movl $6, 0(%esp)
 
     call prueba
 
-    movl -8(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl -8(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
     leave

@@ -1,10 +1,3 @@
-{PARAM, null, null, Result: [3.3, 0.66, 10.0]}
-10.0 , class ir.ast.FloatLiteral
-0.66 , class ir.ast.FloatLiteral
-3.3 , class ir.ast.FloatLiteral
-{PARAM, null, null, Result: [StringLiteral{value="%f resultado : "}, VarLocation{name=factorLabel36, type=float, expr=MethodCallExpr{name=promedio, args=[3.3, 0.66, 10.0]}, size=0}]}
-VarLocation{name=factorLabel36, type=float, expr=MethodCallExpr{name=promedio, args=[3.3, 0.66, 10.0]}, size=0} , class ir.ast.VarLocation
-StringLiteral{value="%f resultado : "} , class ir.ast.StringLiteral
 
 
     .text
@@ -16,13 +9,13 @@ promedio:
     movl %esp, %ebp
 
     movl	8(%ebp), %eax
-    cmpl	12(%ebp), %eax
+    cmpl	16(%ebp), %eax
     setg	%al
     movlzbl %al, %eax
     movl	%eax, -4(%ebp)
 
-    movl	16(%ebp), %eax
-    cmpl	12(%ebp), %eax
+    movl	12(%ebp), %eax
+    cmpl	16(%ebp), %eax
     setg	%al
     movlzbl %al, %eax
     movl	%eax, -8(%ebp)
@@ -45,13 +38,13 @@ promedio:
 
     jne elseCondLabel4
 
-    movl 8(%ebp) , %eax 
-    movl 16(%ebp), %edx 
+    movl 8(%ebp), %eax 
+    movl 12(%ebp), %edx 
     addl %eax, %edx 
     movl %edx,-16(%ebp) 
 
-    movl -16(%ebp) , %eax 
-    movl $2.0 , %ecx
+    movl -16(%ebp), %eax 
+    movl $2.0, %ecx
 	 cltd
     idiv %ecx
     movl %ecx,-24(%ebp) 
@@ -65,13 +58,13 @@ promedio:
 .endIfLabel5:
 
     movl	8(%ebp), %eax
-    cmpl	16(%ebp), %eax
+    cmpl	12(%ebp), %eax
     setg	%al
     movlzbl %al, %eax
     movl	%eax, -28(%ebp)
 
-    movl	12(%ebp), %eax
-    cmpl	16(%ebp), %eax
+    movl	16(%ebp), %eax
+    cmpl	12(%ebp), %eax
     setg	%al
     movlzbl %al, %eax
     movl	%eax, -32(%ebp)
@@ -94,13 +87,13 @@ promedio:
 
     jne elseCondLabel12
 
-    movl 8(%ebp) , %eax 
-    movl 12(%ebp), %edx 
+    movl 8(%ebp), %eax 
+    movl 16(%ebp), %edx 
     addl %eax, %edx 
     movl %edx,-40(%ebp) 
 
-    movl -40(%ebp) , %eax 
-    movl $2.0 , %ecx
+    movl -40(%ebp), %eax 
+    movl $2.0, %ecx
 	 cltd
     idiv %ecx
     movl %ecx,-48(%ebp) 
@@ -113,13 +106,13 @@ promedio:
 
 .endIfLabel13:
 
-    movl	16(%ebp), %eax
+    movl	12(%ebp), %eax
     cmpl	8(%ebp), %eax
     setg	%al
     movlzbl %al, %eax
     movl	%eax, -52(%ebp)
 
-    movl	12(%ebp), %eax
+    movl	16(%ebp), %eax
     cmpl	8(%ebp), %eax
     setg	%al
     movlzbl %al, %eax
@@ -143,13 +136,13 @@ promedio:
 
     jne elseCondLabel20
 
-    movl 12(%ebp) , %eax 
-    movl 16(%ebp), %edx 
+    movl 16(%ebp), %eax 
+    movl 12(%ebp), %edx 
     addl %eax, %edx 
     movl %edx,-64(%ebp) 
 
-    movl -64(%ebp) , %eax 
-    movl $2.0 , %ecx
+    movl -64(%ebp), %eax 
+    movl $2.0, %ecx
 	 cltd
     idiv %ecx
     movl %ecx,-72(%ebp) 
@@ -163,13 +156,13 @@ promedio:
 .endIfLabel21:
 
     movl	8(%ebp), %eax
-    cmpl	16(%ebp), %eax
+    cmpl	12(%ebp), %eax
     sete %al
     movlzbl %al, %eax
     movl	%eax, -76(%ebp)
 
     movl	8(%ebp), %eax
-    cmpl	12(%ebp), %eax
+    cmpl	16(%ebp), %eax
     sete %al
     movlzbl %al, %eax
     movl	%eax, -80(%ebp)
@@ -187,8 +180,8 @@ promedio:
     movl	%eax, -84(%ebp)
 .L11:
 
-    movl	16(%ebp), %eax
-    cmpl	12(%ebp), %eax
+    movl	12(%ebp), %eax
+    cmpl	16(%ebp), %eax
     sete %al
     movlzbl %al, %eax
     movl	%eax, -88(%ebp)
@@ -211,7 +204,7 @@ promedio:
 
     jne elseCondLabel30
 
-    movl 8(%ebp), %eax
+    movl 0(%ebp), %eax
 
     jmp endIfLabel31
 
@@ -234,7 +227,7 @@ main:
 
     call promedio
 
-    movl -16(%esp) , %eax
+    movl -16(%esp), %eax
     movl %eax,4(%esp)
 
     call imprimir

@@ -1,8 +1,3 @@
-{PARAM, null, null, Result: [6.0, 2]}
-2 , class ir.ast.IntLiteral
-6.0 , class ir.ast.FloatLiteral
-{PARAM, null, null, Result: [VarLocation{name=factorLabel12, type=float, expr=MethodCallExpr{name=sumx, args=[6.0, 2]}, size=0}]}
-VarLocation{name=factorLabel12, type=float, expr=MethodCallExpr{name=sumx, args=[6.0, 2]}, size=0} , class ir.ast.VarLocation
 
 
     .text
@@ -30,7 +25,7 @@ sumx:
 
     jne EndWhileLabel5
 
-    movl -4(%ebp) , %eax 
+    movl -4(%ebp), %eax 
     movl 8(%ebp), %edx 
     addl %eax, %edx 
     movl %edx,-24(%ebp) 
@@ -38,7 +33,7 @@ sumx:
     movl -24(%ebp),%eax
     movl %eax, -4(%ebp)
 
-    movl -8(%ebp) , %eax 
+    movl -8(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-32(%ebp) 
@@ -64,12 +59,13 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $2 , 4(%esp)
+    movl $2, 4(%esp)
 
     call sumx
 
-    movl -12(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl -12(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
     leave

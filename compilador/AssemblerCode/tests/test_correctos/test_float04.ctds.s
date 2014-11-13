@@ -1,12 +1,3 @@
-{PARAM, null, null, Result: [0.0, 2]}
-2 , class ir.ast.IntLiteral
-0.0 , class ir.ast.FloatLiteral
-{PARAM, null, null, Result: [0.0, 0.0]}
-0.0 , class ir.ast.FloatLiteral
-0.0 , class ir.ast.FloatLiteral
-{PARAM, null, null, Result: [StringLiteral{value="%f"}, VarLocation{name=factorLabel43, type=float, expr=MethodCallExpr{name=multRepeat, args=[0.0, 0.0]}, size=0}]}
-VarLocation{name=factorLabel43, type=float, expr=MethodCallExpr{name=multRepeat, args=[0.0, 0.0]}, size=0} , class ir.ast.VarLocation
-StringLiteral{value="%f"} , class ir.ast.StringLiteral
 
     .comm w,4
 
@@ -87,12 +78,12 @@ potencia:
 
     jne EndWhileLabel14
 
-    movl -12(%ebp) , %eax 
-    movl 8(%ebp) , %edx 
+    movl -12(%ebp), %eax 
+    movl 8(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-56(%ebp) 
 
-    movl -56(%ebp) , %eax 
+    movl -56(%ebp), %eax 
     movl $2.0, %edx 
     imull %edx, %eax 
     movl %eax,-64(%ebp) 
@@ -100,7 +91,7 @@ potencia:
     movl -64(%ebp),%eax
     movl %eax, -12(%ebp)
 
-    movl -4(%ebp) , %eax 
+    movl -4(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-72(%ebp) 
@@ -127,8 +118,8 @@ potencia:
 
     jne elseCondLabel22
 
-    movl $1.0 , %eax 
-    movl -12(%ebp) , %ecx
+    movl $1.0, %eax 
+    movl -12(%ebp), %ecx
 	 cltd
     idiv %ecx
     movl %ecx,-88(%ebp) 
@@ -162,28 +153,28 @@ multRepeat:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl 12(%ebp) , %eax 
-    movl 12(%ebp) , %edx 
+    movl 12(%ebp), %eax 
+    movl 12(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-8(%ebp) 
 
-    movl -8(%ebp) , %eax 
-    movl 8(%ebp) , %edx 
+    movl -8(%ebp), %eax 
+    movl 8(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-12(%ebp) 
 
-    movl -12(%ebp) , %eax 
-    movl 8(%ebp) , %edx 
+    movl -12(%ebp), %eax 
+    movl 8(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-16(%ebp) 
 
-    movl -16(%ebp) , %eax 
-    movl 8(%ebp) , %edx 
+    movl -16(%ebp), %eax 
+    movl 8(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-20(%ebp) 
 
-    movl -20(%ebp) , %eax 
-    movl 12(%ebp) , %edx 
+    movl -20(%ebp), %eax 
+    movl 12(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-24(%ebp) 
 
@@ -222,7 +213,7 @@ main:
 
     movl $80.0,-8(%ebp)
 
-    movl $2 , 4(%esp)
+    movl $2, 4(%esp)
 
     call potencia
 
@@ -231,7 +222,7 @@ main:
 
     call multRepeat
 
-    movl -44(%esp) , %eax
+    movl -44(%esp), %eax
     movl %eax,4(%esp)
 
     call imprimir

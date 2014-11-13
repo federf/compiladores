@@ -1,8 +1,3 @@
-{PARAM, null, null, Result: [1]}
-1 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [StringLiteral{value="%f resultado : "}, VarLocation{name=factorLabel14, type=int, expr=MethodCallExpr{name=breaks, args=[1]}, size=0}]}
-VarLocation{name=factorLabel14, type=int, expr=MethodCallExpr{name=breaks, args=[1]}, size=0} , class ir.ast.VarLocation
-StringLiteral{value="%f resultado : "} , class ir.ast.StringLiteral
 
 
     .text
@@ -28,7 +23,7 @@ breaks:
 
     jne EndWhileLabel5
 
-    movl -4(%ebp) , %eax 
+    movl -4(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-24(%ebp) 
@@ -75,11 +70,11 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $1 , 0(%esp)
+    movl $1, 0(%esp)
 
     call breaks
 
-    movl -8(%esp) , %eax
+    movl -8(%esp), %eax
     movl %eax,4(%esp)
 
     call imprimir

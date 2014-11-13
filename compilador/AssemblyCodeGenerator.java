@@ -111,20 +111,28 @@ public class AssemblyCodeGenerator{
 
 		VarLocation res = (VarLocation)t.getResult();
 		int ResOff = res.getOffset();
-
 		//si el 1er operando es varlocation
 		if(t.getFirstDir() instanceof VarLocation){
 			VarLocation  x = (VarLocation)t.getFirstDir();
 			if(x.getId().contains("factor")){
 				if(x.getExpr() instanceof VarLocation){
 					VarLocation e=(VarLocation)x.getExpr();
-					result+="    movl " + e.getOffset() + "(%ebp) , %eax \n";	
+					if(e.getOffset()>=0){
+						result+="    movl " + (e.getOffset()+8) + "(%ebp), %eax \n";	
+					}else{
+						result+="    movl " + e.getOffset() + "(%ebp), %eax \n";	
+					}
 				}else{
 					result+="    movl $" + x.getExpr()+", %eax \n";	
 				}
 			}else{
 				int XOff=x.getOffset();
-				result+="    movl " + XOff + "(%ebp) , %eax \n";	
+				if(XOff>=0){
+					result+="    movl " + (XOff+8) + "(%ebp), %eax \n";
+				}else{
+					result+="    movl " + XOff + "(%ebp), %eax \n";		
+				}
+				
 			}
 			
 		}else{
@@ -187,16 +195,25 @@ public class AssemblyCodeGenerator{
 			if(y.getId().contains("factor")){
 				if(y.getExpr() instanceof VarLocation){
 					VarLocation e=(VarLocation)y.getExpr();
-					result+="    movl " + e.getOffset() + "(%ebp) , %edx \n";
+					if(e.getOffset()>=0){
+						result+="    movl " + (e.getOffset()+8) + "(%ebp), %edx \n";
+					}else{
+						result+="    movl " + e.getOffset() + "(%ebp), %edx \n";
+					}
 				}else{
 					result+="    movl $"+ y.getExpr()+", %edx \n";
 				}
 			}else{
-				result+="    movl "+ y.getOffset()+"(%ebp), %edx \n";
+				if(y.getOffset()>=0){
+					result+="    movl "+ (y.getOffset()+8)+"(%ebp), %edx \n";
+				}else{
+					result+="    movl "+ y.getOffset()+"(%ebp), %edx \n";	
+				}
+				
 			}
 			result+="    addl %eax, %edx \n";
 		}else{
-			//sino, si es intliteral
+			//sino, si es intliteral|
 			if(t.getSecondDir() instanceof IntLiteral){
 				IntLiteral y=(IntLiteral) t.getSecondDir();
 				result+="    movl $" + y.getStringValue() + ", %edx \n";
@@ -260,12 +277,21 @@ public class AssemblyCodeGenerator{
 			if(x.getId().contains("factor")){
 				if(x.getExpr() instanceof VarLocation){
 					VarLocation e=(VarLocation)x.getExpr();
-					result+="    movl $" + e.getOffset() + "(%ebp) , %eax \n";
+					if(e.getOffset()>=0){
+						result+="    movl $" + (e.getOffset()+8) + "(%ebp), %eax \n";
+					}else{
+						result+="    movl $" + e.getOffset() + "(%ebp), %eax \n";
+					}
 				}else{
 					result+="    movl $" + x.getExpr() + ", %eax \n";
 				}
 			}else{
-				result+="    movl " + x.getOffset() + "(%ebp) , %eax \n";
+				if(x.getOffset()>=0){
+					result+="    movl " + (x.getOffset()+8) + "(%ebp), %eax \n";
+				}else{
+					result+="    movl " + x.getOffset() + "(%ebp), %eax \n";
+				}
+				
 			}
 		}else{
 			//sino, si es intliteral
@@ -317,13 +343,22 @@ public class AssemblyCodeGenerator{
 			if(y.getId().contains("factor")){
 				if(y.getExpr() instanceof VarLocation){
 					VarLocation e=(VarLocation)y.getExpr();
-					result+="    movl " + e.getOffset() + "(%ebp) , %edx \n";	
+					if(e.getOffset()>=0){
+						result+="    movl " + (e.getOffset()+8) + "(%ebp), %edx \n";	
+					}else{
+						result+="    movl " + e.getOffset() + "(%ebp), %edx \n";	
+					}
 				}else{
-					result+="    movl $" + y.getExpr() + " , %edx \n";		
+					result+="    movl $" + y.getExpr() + ", %edx \n";		
 				}
 			}else{
 				int YOff=y.getOffset();
-				result+="    movl " + YOff + "(%ebp) , %edx \n";	
+				if(YOff>=0){
+					result+="    movl " +(YOff+8) + "(%ebp), %edx \n";							
+				}else{
+					result+="    movl " + YOff + "(%ebp), %edx \n";		
+				}
+				
 			}
 			
 			result+="    subl %eax, %edx \n";
@@ -388,13 +423,22 @@ public class AssemblyCodeGenerator{
 			if(x.getId().contains("factor")){
 				if(x.getExpr() instanceof VarLocation){
 					VarLocation e=(VarLocation)x.getExpr();
-					result+="    movl " + e.getOffset() + "(%ebp) , %eax \n";
+					if(e.getOffset()>=0){
+						result+="    movl " + (e.getOffset()+8) + "(%ebp), %eax \n";
+					}else{
+						result+="    movl " + e.getOffset() + "(%ebp), %eax \n";
+					}
 				}else{
-					result+="    movl $" +x.getExpr() + " , %eax \n";
+					result+="    movl $" +x.getExpr() + ", %eax \n";
 				}
 			}else{
 				int XOff=x.getOffset();
-				result+="    movl " + XOff + "(%ebp) , %eax \n";
+				if(XOff>=0){
+					result+="    movl " + (XOff+8) + "(%ebp), %eax \n";
+				}else{
+					result+="    movl " + XOff + "(%ebp), %eax \n";	
+				}
+				
 			}
 		
 		}else{
@@ -450,13 +494,22 @@ public class AssemblyCodeGenerator{
 			if(y.getId().contains("factor")){
 				if(y.getExpr() instanceof VarLocation){
 					VarLocation e=(VarLocation)y.getExpr();
-					result+="    movl " + e.getOffset() + "(%ebp) , %edx \n";	
+					if(e.getOffset()>=0){
+						result+="    movl " + (e.getOffset()+8) + "(%ebp), %edx \n";	
+					}else{
+						result+="    movl " + e.getOffset() + "(%ebp), %edx \n";	
+					}
 				}else{
 					result+="    movl $" + y.getExpr() + ", %edx \n";	
 				}
 			}else{
 				int YOff=y.getOffset();
-				result+="    movl " + YOff + "(%ebp) , %edx \n";	
+				if(YOff>=0){
+					result+="    movl " + (YOff+8) + "(%ebp), %edx \n";	
+				}else{
+					result+="    movl " + YOff + "(%ebp), %edx \n";		
+				}
+				
 			}
 			result+="    imull %edx, %eax \n";
 		}else{
@@ -523,13 +576,22 @@ public class AssemblyCodeGenerator{
 			if(x.getId().contains("factor")){
 				if(x.getExpr() instanceof VarLocation){
 					VarLocation e=(VarLocation)x.getExpr();
-					result+="    movl " + e.getOffset() + "(%ebp) , %eax \n";	
+					if(e.getOffset()>=0){
+						result+="    movl " + (e.getOffset()+8) + "(%ebp), %eax \n";		
+					}else{
+						result+="    movl " + e.getOffset() + "(%ebp), %eax \n";	
+					}
 				}else{
-					result+="    movl $" + x.getExpr() + " , %eax \n";	
+					result+="    movl $" + x.getExpr() + ", %eax \n";	
 				}
 			}else{
 				int XOff=x.getOffset();
-				result+="    movl " + XOff + "(%ebp) , %eax \n";	
+				if(XOff>=0){
+					result+="    movl " + (XOff+8) + "(%ebp), %eax \n";	
+				}else{
+					result+="    movl " + XOff + "(%ebp), %eax \n";		
+				}
+				
 			}
 			
 		}else{
@@ -581,13 +643,22 @@ public class AssemblyCodeGenerator{
 			if(y.getId().contains("factor")){
 				if(y.getExpr() instanceof VarLocation){
 					VarLocation e=(VarLocation)y.getExpr();
-					result+="    movl " + e.getOffset() + "(%ebp) , %ecx\n";	
+					if(e.getOffset()>=0){
+						result+="    movl " + (e.getOffset()+8) + "(%ebp), %ecx\n";	
+					}else{
+						result+="    movl " + e.getOffset() + "(%ebp), %ecx\n";	
+					}
 				}else{
-					result+="    movl $" + y.getExpr() + " , %ecx\n";	
+					result+="    movl $" + y.getExpr() + ", %ecx\n";	
 				}
 			}else{
 				int YOff=y.getOffset();
-				result+="    movl " + YOff + "(%ebp) , %ecx\n";	
+				if(YOff>=0){
+					result+="    movl " + (YOff+8) + "(%ebp), %ecx\n";	
+				}else{
+					result+="    movl " + YOff + "(%ebp), %ecx\n";		
+				}
+				
 			}
 			
 			result+="	 cltd\n"; 
@@ -656,7 +727,11 @@ public class AssemblyCodeGenerator{
 			        	//obtenemos su offset
 			        	VarLocation op=(VarLocation) t.getFirstDir();
 			        	int offset1=op.getOffset();
-			        	result += "    movl	" + offset1 + "(%ebp), %eax\n";	
+			        	if(offset1>=0){
+			        		result += "    movl	" + (offset1+8) + "(%ebp), %eax\n";	
+			        	}else{
+			        		result += "    movl	" + offset1 + "(%ebp), %eax\n";	
+			        	}
 			        }else{ //caso contrario debe ser Int o Float
 			        	//caso int
 			        	if(t.getFirstDir() instanceof IntLiteral){
@@ -678,7 +753,11 @@ public class AssemblyCodeGenerator{
 			        	//obtenemos su offset
 			        	VarLocation op=(VarLocation) t.getSecondDir();
 			        	int offset2=op.getOffset();
-			        	result += "    cmpl	" + offset2 + "(%ebp), %eax\n";	
+			        	if(offset2>=0){
+			        		result += "    cmpl	" + (offset2+8) + "(%ebp), %eax\n";		
+			        	}else{
+			        		result += "    cmpl	" + offset2 + "(%ebp), %eax\n";	
+			        	}
 			        }else{ //caso contrario debe ser Int o Float
 			        	//caso int
 			        	if(t.getSecondDir() instanceof IntLiteral){
@@ -727,8 +806,13 @@ public class AssemblyCodeGenerator{
         	//obtenemos sus offset y con el mismo trabajamos
         	int operandOffSet=op.getOffset();
         	int resOffSet=res.getOffset();
+        	if(operandOffSet>=0){
+        		result += "    cmpl $0, " + (operandOffSet+8) + "(%ebp) \n";	
+        	}else{
+        		result += "    cmpl $0, " + operandOffSet + "(%ebp) \n";
+        	}
 
-	        result += "    cmpl $0, " + operandOffSet + "(%ebp) \n";
+	        
 			result += "    sete %al \n";
 			result += "    movlzbl %al, %eax \n";
 			result += "    movl %eax, " + resOffSet + "(%ebp) \n";
@@ -739,7 +823,7 @@ public class AssemblyCodeGenerator{
         	//obtenemos sus offset y con el mismo trabajamos
         	int resOffSet=res.getOffset();
         	if (op.toString().equals("true")){//por convencion tomaremos 1 como true y 0 como false
-        		result += "    cmpl $0, " + 1 + "(%ebp) \n";	
+        		result += "    cmpl $0, " + 1 + "(%ebp) \n";	//CORREGIR°!!!!!
         	}else{
         		result += "    cmpl $0, " + 0 + "(%ebp) \n";
         	}
@@ -759,7 +843,12 @@ public class AssemblyCodeGenerator{
 	    	int operandOffSet=op.getOffset();
 	    	int resOffSet=res.getOffset();
 
-	        result += "    movl	" + operandOffSet + "(%ebp), %eax \n";
+	    	if(operandOffSet>=0){
+	    		result += "    movl	" + (operandOffSet+8) + "(%ebp), %eax \n";
+	    	}else{
+	    		result += "    movl	" + operandOffSet + "(%ebp), %eax \n";	
+	    	}
+	        
 			result += "    negl	%eax \n";
 			result += "    movl	%eax, " + resOffSet + "(%ebp) \n";
 
@@ -785,7 +874,11 @@ public class AssemblyCodeGenerator{
 		//si el 2do operando es una varlocation obtenemos su offset
 		if(t.getSecondDir() instanceof VarLocation){
 			VarLocation secOp=(VarLocation) t.getSecondDir();
-			result += "    movl	" + secOp.getOffset() + "(%ebp), %eax \n";
+			if(secOp.getOffset()>=0){
+				result += "    movl	" + (secOp.getOffset()+8) + "(%ebp), %eax \n";	
+			}else{
+				result += "    movl	" + secOp.getOffset() + "(%ebp), %eax \n";	
+			}
 		}else{
 			//si es una operacion binaria o unaria
 			if(t.getSecondDir() instanceof BinOpExpr || t.getSecondDir() instanceof UnaryOpExpr){
@@ -929,7 +1022,12 @@ public class AssemblyCodeGenerator{
 					
 				}
 			}else{//caso contrario, es otra VarLocation
-				result=result+"    movl " + firstOp.getOffset() + "(%ebp)"+",%eax\n";	
+				if(firstOp.getOffset()>=0){
+					result=result+"    movl " + (firstOp.getOffset()+8) + "(%ebp)"+",%eax\n";		
+				}else{
+					result=result+"    movl " + firstOp.getOffset() + "(%ebp)"+",%eax\n";	
+				}
+				
 				result=result+"    movl %eax, "+res.getOffset() +"(%ebp)\n";
 			}
 		}else{
@@ -983,7 +1081,7 @@ public class AssemblyCodeGenerator{
 								ArrayLiteral arr=(ArrayLiteral) t.getFirstDir();
 								//buscamos el offset de la declaracion del arreglo
 								VarLocation v=res.search(arr.getId());
-								//System.outprintln("{ASSIGN} ArrayLiteral expr: "+arr.getIndex()+" , "+arr.getIndex().getClass());
+								//System.outprintln("{ASSIGN} ArrayLiteral expr: "+arr.getIndex()+", "+arr.getIndex().getClass());
 								int index=evaluateExpression(arr.getIndex().getExpr().toString());
 								//System.outprintln("expr evaluada: "+index);
 								result=result+"    movl " +(v.getOffset()-((v.getSize()-index)*4))+ "(%ebp), %eax\n";
@@ -1026,7 +1124,11 @@ public class AssemblyCodeGenerator{
 	public void ASM_Cmp(TripletCode t){
 		if(t.getSecondDir() instanceof VarLocation){
 			VarLocation secondOp=(VarLocation)t.getSecondDir();
-			result += "    movl " + secondOp.getOffset() + "(%ebp), %eax\n";	
+			if(secondOp.getOffset()>=0){
+				result += "    movl " + (secondOp.getOffset()+8) + "(%ebp), %eax\n";	
+			}else{
+				result += "    movl " + secondOp.getOffset() + "(%ebp), %eax\n";	
+			}
 		}else{
 			if(t.getSecondDir() instanceof IntLiteral){
 				IntLiteral i=(IntLiteral) t.getSecondDir();
@@ -1056,7 +1158,12 @@ public class AssemblyCodeGenerator{
 		}
 		if(t.getFirstDir() instanceof VarLocation){
 			VarLocation firstOp=(VarLocation)t.getFirstDir();
-			result += "    cmpl " + firstOp.getOffset() + "(%ebp), %eax\n";
+			if(firstOp.getOffset()>=0){
+				result += "    cmpl " + (firstOp.getOffset()+8) + "(%ebp), %eax\n";
+			}else{
+				result += "    cmpl " + firstOp.getOffset() + "(%ebp), %eax\n";
+			}
+			
 		}else{
 			result += "    cmpl " + t.getFirstDir() + "(%ebp), %eax\n";
 		}
@@ -1090,9 +1197,19 @@ public class AssemblyCodeGenerator{
 			int label3=OrAndlabelInt;
 			incLabelOrAnd();
 
-			result += "    cmpl	$0, " + op1.getOffset() + "(%ebp)\n";
+			if(op1.getOffset()>=0){
+				result += "    cmpl	$0, " + (op1.getOffset()+8) + "(%ebp)\n";	
+			}else{
+				result += "    cmpl	$0, " + op1.getOffset() + "(%ebp)\n";
+			}
+			
 			result += "    jne .L" +label1  + "\n";		
-			result += "    cmpl	$0, " + op2.getOffset() + "(%ebp)\n";
+			if(op2.getOffset()>=0){
+				result += "    cmpl	$0, " + (op2.getOffset()+8) + "(%ebp)\n";	
+			}else{
+				result += "    cmpl	$0, " + op2.getOffset() + "(%ebp)\n";
+			}
+			
 			result += "    je .L" + label1 + "\n";
 			result += "    movl	$1, %eax\n";
 			result += "    jmp .L" + label2 + "\n";
@@ -1122,9 +1239,19 @@ public class AssemblyCodeGenerator{
 			int label3=OrAndlabelInt;
 			incLabelOrAnd();
 
-			result += "    cmpl	$0, " + op1.getOffset() + "(%ebp)\n";
+			if(op1.getOffset()>=0){
+				result += "    cmpl	$0, " + (op1.getOffset()+8) + "(%ebp)\n";
+			}else{
+				result += "    cmpl	$0, " + op1.getOffset() + "(%ebp)\n";	
+			}
+			
 			result += "    je .L" +label1  + "\n";		
-			result += "    cmpl	$0, " + op2.getOffset() + "(%ebp)\n";
+			if(op2.getOffset()>=0){
+				result += "    cmpl	$0, " + (op2.getOffset()+8) + "(%ebp)\n";
+			}else{
+				result += "    cmpl	$0, " + op2.getOffset() + "(%ebp)\n";
+			}
+			
 			result += "    je .L" + label1 + "\n";
 			result += "    movl	$1, %eax\n";
 			result += "    jmp .L" + label2 + "\n";
@@ -1143,7 +1270,6 @@ public class AssemblyCodeGenerator{
 
 	//registro de parametros de llamada a metodo
 	public void ASM_Params(TripletCode t){
-		System.out.println(t);
 		//obtenemos la lista de parametros del metodo llamado
     	LinkedList<Expression> params=(LinkedList<Expression>) t.getResult();
     	//si tiene parametros
@@ -1151,18 +1277,16 @@ public class AssemblyCodeGenerator{
 
     		//los parametros de agregan en orden inverso
 	    	for(int i=params.size()-1; i>=0; i--){
-
-	    		System.out.println(params.get(i)+" , "+params.get(i).getClass());
 	    		//si el parametro es una VarLocation obtenemos su offset
 	    		if(params.get(i) instanceof VarLocation){
 	    			VarLocation v=(VarLocation) params.get(i);
-	    			if(i!=0){
-	    				result+="    movl "+v.getOffset()+"(%esp) , %eax\n";		
+	    			//if(i!=0){
+	    				result+="    movl "+v.getOffset()+"(%esp), %eax\n";		
 	    				result+="    movl %eax,"+(i*4)+"(%esp)\n";
-	    			}else{
-	    				result+="    movl "+v.getOffset()+"(%esp) , %eax\n";	
+	    			/*}else{
+	    				result+="    movl "+v.getOffset()+"(%esp), %eax\n";	
 	    				result+="    movl %eax, 0(%esp)";
-	    			}
+	    			}*/
 	    			
 	    		}else{//sino, debe ser un Literal o una llamada a metodo
 	    			//si no es una llamada a metodo (deberia ser un literal entonces)
@@ -1171,32 +1295,32 @@ public class AssemblyCodeGenerator{
 	    				if(params.get(i) instanceof IntLiteral){
 	    					IntLiteral p=(IntLiteral) params.get(i);
 	   
-	    					if(i!=0){
-	    						result+="    movl $"+evaluateExpression(p.toString())+" , "+(i*4)+"(%esp)\n";	
-	    					}else{
-	    						result+="    movl $"+evaluateExpression(p.toString())+" , 0(%esp)\n";	
-	    					}
+	    					//if(i!=0){
+	    						result+="    movl $"+evaluateExpression(p.toString())+", "+(i*4)+"(%esp)\n";	
+	    					/*}else{
+	    						result+="    movl $"+evaluateExpression(p.toString())+", 0(%esp)\n";	
+	    					}*/
 	    					
 	    				}else{
 	    					//caso BoolLiteral
 		    				if(params.get(i) instanceof BoolLiteral){
 		   
 		    					BoolLiteral p=(BoolLiteral) params.get(i);
-		    					if(i!=0){
+		    					//if(i!=0){
 		    						if(p.getValue()){
-		    							result+="    movl $"+1+" , "+(i*4)+"(%esp)";		
+		    							result+="    movl $1, "+(i*4)+"(%esp)";		
 		    						}else{
-		    							result+="    movl $"+0+" , "+(i*4)+"(%esp)";	
+		    							result+="    movl $0, "+(i*4)+"(%esp)";	
 		    						}
 		    						
-		    					}else{
+		    					/*}else{
 		    						if(p.getValue()){
-		    							result+="    movl $"+1+" , 0(%esp)";	
+		    							result+="    movl $"+1+", 0(%esp)";	
 		    						}else{
-		    							result+="    movl $"+0+" , 0(%esp)";
+		    							result+="    movl $"+0+", 0(%esp)";
 		    						}
 		    						
-		    					}
+		    					}*/
 		    					
 		    				}else{
 		    					//caso FloatLiteral
@@ -1214,11 +1338,11 @@ public class AssemblyCodeGenerator{
 		    								//la evaluamos
 		    								//System.outprintln("{PARAMS} expr: "+b.toString());
 		    								int opValue=evaluateExpression(b.toString());
-		    								if(i!=0){
-					    						result+="    movl $"+opValue+" , "+(i*4)+"(%esp)";	
-					    					}else{
-					    						result+="    movl $"+opValue+" , (%esp)";
-					    					}
+		    								//if(i!=0){
+					    						result+="    movl $"+opValue+", "+(i*4)+"(%esp)";	
+					    					/*}else{
+					    						result+="    movl $"+opValue+", (%esp)";
+					    					}*/
 		    							}
 		    						}else{
 		    							//si es una operacion binaria
@@ -1227,11 +1351,11 @@ public class AssemblyCodeGenerator{
 		    								UnaryOpExpr uop=(UnaryOpExpr)params.get(i);
 											if(uop.getType().equals(Type.INT)){
 												int opValue=evaluateExpression(uop.toString());
-												if(i!=0){
-						    						result+="    movl $"+opValue+" , "+(i*4)+"(%esp)";	
-						    					}else{
-						    						result+="    movl $"+opValue+" , (%esp)";
-						    					}
+												//if(i!=0){
+						    						result+="    movl $"+opValue+", "+(i*4)+"(%esp)";	
+						    					/*}else{
+						    						result+="    movl $"+opValue+", (%esp)";
+						    					}*/
 											}else{
 												//System.outprintln("{PARAM} FALTA CASO UnaryOpExpr "+uop.getType());		
 											}				
@@ -1266,7 +1390,12 @@ public class AssemblyCodeGenerator{
     		//si es un VarLocation
     		if(t.getFirstDir() instanceof VarLocation){
     			VarLocation v=(VarLocation) t.getFirstDir();
-    			result+="    movl "+v.getOffset()+"(%ebp), %eax\n";
+    			if(v.getOffset()>=0){
+    				result+="    movl "+(v.getOffset()+8)+"(%ebp), %eax\n";
+    			}else{
+    				result+="    movl "+v.getOffset()+"(%ebp), %eax\n";	
+    			}
+    			
     			result+="    addl %eax, "+res.getOffset()+"(%ebp)\n";
     		}else{
     			//si es una operacion Binaria
@@ -1302,7 +1431,11 @@ public class AssemblyCodeGenerator{
 			//si es un VarLocation
 			if(t.getFirstDir() instanceof VarLocation){
 				VarLocation v=(VarLocation) t.getFirstDir();
-				result+="    movl "+v.getOffset()+"(%ebp), %eax\n";
+				if(v.getOffset()>=0){
+					result+="    movl "+(v.getOffset()+8)+"(%ebp), %eax\n";
+				}else{
+					result+="    movl "+v.getOffset()+"(%ebp), %eax\n";
+				}
 				result+="    subl %eax, "+res.getOffset()+"(%ebp)\n";
 			}else{
 				//si es una operacion Binaria
@@ -1429,7 +1562,7 @@ public class AssemblyCodeGenerator{
 									//buscamos el offset en que se declaro
 									VarLocation res=v.search(arr.getId());
 									if(res!=null){
-										//System.outprintln("{RETURN} ArrayLiteral expr: "+arr.getIndex()+" , "+arr.getIndex().getClass());
+										//System.outprintln("{RETURN} ArrayLiteral expr: "+arr.getIndex()+", "+arr.getIndex().getClass());
 										int index=evaluateExpression(arr.getIndex().getExpr().toString());
 										//System.outprintln("expr evaluada: "+index);
 										offset=(res.getOffset()-((res.getSize()-index)*4));

@@ -1,5 +1,23 @@
-{PARAM, null, null, Result: [VarLocation{name=res, type=int, expr=0, size=0}]}
-VarLocation{name=res, type=int, expr=0, size=0} , class ir.ast.VarLocation
+
+
+    .text
+    .globl	inc
+    .type	inc, @function 
+inc: 
+    enter   $(4), $0 
+    pushl	%ebp
+    movl %esp, %ebp
+
+    movl 8(%ebp), %eax 
+    movl $1, %edx 
+    addl %eax, %edx 
+    movl %edx,-8(%ebp) 
+
+    movl -8(%ebp), %eax
+
+    leave
+    ret
+
 
 
     .text
@@ -13,21 +31,28 @@ main:
 
     movl $4,-8(%ebp)
 
-    movl -4(%ebp) , %eax 
+    movl -4(%ebp), %eax 
     movl -8(%ebp), %edx 
     addl %eax, %edx 
-    movl %edx,-28(%ebp) 
+    movl %edx,-32(%ebp) 
 
-    movl -28(%ebp),%eax
+    movl -32(%ebp),%eax
     movl %eax, -12(%ebp)
 
-    movl -12(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl $2, 0(%esp)
+
+    call inc
+
+    movl %eax,-20(%ebp)
+
+    movl -20(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
     movl %eax,-16(%ebp) 
 
-    movl $10, %eax
+    movl -16(%ebp), %eax
 
     leave
     ret

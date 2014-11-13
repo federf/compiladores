@@ -1,7 +1,3 @@
-{PARAM, null, null, Result: [5]}
-5 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [VarLocation{name=factorLabel14, type=int, expr=MethodCallExpr{name=aritmTest, args=[5]}, size=0}]}
-VarLocation{name=factorLabel14, type=int, expr=MethodCallExpr{name=aritmTest, args=[5]}, size=0} , class ir.ast.VarLocation
 
 
     .text
@@ -24,7 +20,7 @@ aritmTest:
     movl -24(%ebp),%eax
     movl %eax, -4(%ebp)
 
-    movl -4(%ebp) , %eax 
+    movl -4(%ebp), %eax 
     movl $2, %edx 
     addl %eax, %edx 
     movl %edx,-32(%ebp) 
@@ -32,8 +28,8 @@ aritmTest:
     movl -32(%ebp),%eax
     movl %eax, -8(%ebp)
 
-    movl -4(%ebp) , %eax 
-    movl 8(%ebp) , %ecx
+    movl -4(%ebp), %eax 
+    movl 8(%ebp), %ecx
 	 cltd
     idiv %ecx
     movl %ecx,-36(%ebp) 
@@ -55,7 +51,7 @@ aritmTest:
     movl -52(%ebp), %eax
     subl %eax, -4(%ebp)
 
-    movl 8(%ebp), %eax
+    movl 0(%ebp), %eax
 
     leave
     ret
@@ -69,12 +65,13 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $5 , 0(%esp)
+    movl $5, 0(%esp)
 
     call aritmTest
 
-    movl -8(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl -8(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
     leave

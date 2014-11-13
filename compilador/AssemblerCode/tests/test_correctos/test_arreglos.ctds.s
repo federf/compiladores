@@ -1,10 +1,4 @@
 Error: Method pruArreglos must return int
-{PARAM, null, null, Result: [4, 8]}
-8 , class ir.ast.IntLiteral
-4 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [VarLocation{name=factorLabel60, type=int, expr=MethodCallExpr{name=pruArreglos, args=[4, 8]}, size=0}]}
-VarLocation{name=factorLabel60, type=int, expr=MethodCallExpr{name=pruArreglos, args=[4, 8]}, size=0} , class ir.ast.VarLocation
-{PARAM, null, null, Result: []}
 
     .comm A,2356
 
@@ -33,7 +27,7 @@ pruArreglos:
     jne elseCondLabel2
 
     movl $1, %eax 
-    movl 12(%ebp) , %edx 
+    movl 12(%ebp), %edx 
     subl %eax, %edx 
     movl %eax,-56(%ebp) 
 
@@ -58,11 +52,11 @@ pruArreglos:
     jne elseCondLabel8
 
     movl $1, %eax 
-    movl $1 , %edx 
+    movl $1, %edx 
     subl %eax, %edx 
     movl %eax,-72(%ebp) 
 
-    movl 8(%ebp) , %eax 
+    movl 8(%ebp), %eax 
     movl $5, %edx 
     imull %edx, %eax 
     movl %eax,-80(%ebp) 
@@ -74,8 +68,8 @@ pruArreglos:
 
 .elseCondLabel8:
 
-    movl 8(%ebp) , %eax 
-    movl 8(%ebp) , %edx 
+    movl 8(%ebp), %eax 
+    movl 8(%ebp), %edx 
     subl %eax, %edx 
     movl %eax,-84(%ebp) 
 
@@ -99,7 +93,7 @@ pruArreglos:
 
     jne EndWhileLabel20
 
-    movl -40(%ebp) , %eax 
+    movl -40(%ebp), %eax 
     movl $2, %edx 
     imull %edx, %eax 
     movl %eax,-104(%ebp) 
@@ -129,12 +123,12 @@ pruArreglos:
 
     jne EndWhileLabel28
 
-    movl -40(%ebp) , %eax 
+    movl -40(%ebp), %eax 
     movl $2, %edx 
     imull %edx, %eax 
     movl %eax,-128(%ebp) 
 
-    movl -128(%ebp) , %eax 
+    movl -128(%ebp), %eax 
     movl $8, %edx 
     addl %eax, %edx 
     movl %edx,-136(%ebp) 
@@ -156,13 +150,13 @@ pruArreglos:
 
     movl $0,-40(%ebp)
 
-    movl $5 , %eax 
+    movl $5, %eax 
     movl $9, %edx 
     imull %edx, %eax 
     movl %eax,-168(%ebp) 
 
-    movl -168(%ebp) , %eax 
-    movl $40 , %edx 
+    movl -168(%ebp), %eax 
+    movl $40, %edx 
     subl %eax, %edx 
     movl %eax,-176(%ebp) 
 
@@ -179,12 +173,12 @@ pruArreglos:
 
     jne EndWhileLabel45
 
-    movl -40(%ebp) , %eax 
+    movl -40(%ebp), %eax 
     movl $2, %edx 
     imull %edx, %eax 
     movl %eax,-188(%ebp) 
 
-    movl -188(%ebp) , %eax 
+    movl -188(%ebp), %eax 
     movl $8, %edx 
     addl %eax, %edx 
     movl %edx,-196(%ebp) 
@@ -198,7 +192,7 @@ pruArreglos:
     movl -208(%ebp),%eax
     movl %eax, -2632(%ebp)
 
-    movl -40(%ebp) , %eax 
+    movl -40(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-216(%ebp) 
@@ -222,13 +216,14 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $8 , 4(%esp)
-    movl $4 , 0(%esp)
+    movl $8, 4(%esp)
+    movl $4, 0(%esp)
 
     call pruArreglos
 
-    movl -12(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl -12(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
 

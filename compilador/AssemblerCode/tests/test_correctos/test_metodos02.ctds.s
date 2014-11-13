@@ -1,11 +1,3 @@
-{PARAM, null, null, Result: [true, 0]}
-0 , class ir.ast.IntLiteral
-true , class ir.ast.BoolLiteral
-{PARAM, null, null, Result: [0]}
-0 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [false, 0]}
-0 , class ir.ast.IntLiteral
-false , class ir.ast.BoolLiteral
 
     .comm c,4
 
@@ -19,11 +11,11 @@ alo:
     movl %esp, %ebp
 
     movl $ 1, %eax
-    cmpl 16(%ebp), %eax
+    cmpl 24(%ebp), %eax
 
     jne elseCondLabel1
 
-    movl 12(%ebp) , %eax 
+    movl 20(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-8(%ebp) 
@@ -35,8 +27,8 @@ alo:
 
 .elseCondLabel1:
 
-    movl 12(%ebp) , %eax 
-    movl $1 , %edx 
+    movl 20(%ebp), %eax 
+    movl $1, %edx 
     subl %eax, %edx 
     movl %eax,-16(%ebp) 
 
@@ -71,11 +63,11 @@ alo2:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $0 , 4(%esp)
-    movl $1 , 0(%esp)
+    movl $0, 4(%esp)
+    movl $1, 0(%esp)
     call alo
 
-    movl 8(%ebp) , %eax 
+    movl 8(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-12(%ebp) 
@@ -83,7 +75,7 @@ alo2:
     movl -12(%ebp),%eax
     movl %eax, 0(%ebp)
 
-    movl 8(%ebp), %eax
+    movl 0(%ebp), %eax
 
     leave
     ret
@@ -101,22 +93,22 @@ main:
 
     movl $8.0,-4(%ebp)
 
-    movl $0 , 0(%esp)
+    movl $0, 0(%esp)
 
     call alo2
 
     movl %eax,-4(%ebp)
 
-    movl $3 , %eax 
-    movl -4(%ebp) , %edx 
+    movl $3, %eax 
+    movl -4(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-28(%ebp) 
 
     movl -28(%ebp),%eax
     movl %eax, -8(%ebp)
 
-    movl $0 , 4(%esp)
-    movl $0 , 0(%esp)
+    movl $0, 4(%esp)
+    movl $0, 0(%esp)
     call alo
 
     leave

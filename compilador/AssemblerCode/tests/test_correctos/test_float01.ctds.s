@@ -1,9 +1,3 @@
-{PARAM, null, null, Result: [0.0, 2]}
-2 , class ir.ast.IntLiteral
-0.0 , class ir.ast.FloatLiteral
-{PARAM, null, null, Result: [StringLiteral{value="%f"}, VarLocation{name=f, type=float, expr=0.0, size=0}]}
-VarLocation{name=f, type=float, expr=0.0, size=0} , class ir.ast.VarLocation
-StringLiteral{value="%f"} , class ir.ast.StringLiteral
 
 
     .text
@@ -65,15 +59,15 @@ potencia:
 
     jne EndWhileLabel12
 
-    movl -12(%ebp) , %eax 
-    movl 8(%ebp) , %edx 
+    movl -12(%ebp), %eax 
+    movl 8(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-48(%ebp) 
 
     movl -48(%ebp),%eax
     movl %eax, -12(%ebp)
 
-    movl -4(%ebp) , %eax 
+    movl -4(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-56(%ebp) 
@@ -100,8 +94,8 @@ potencia:
 
     jne elseCondLabel18
 
-    movl $1.0 , %eax 
-    movl -12(%ebp) , %ecx
+    movl $1.0, %eax 
+    movl -12(%ebp), %ecx
 	 cltd
     idiv %ecx
     movl %ecx,-72(%ebp) 
@@ -136,13 +130,13 @@ main:
 
     movl $8.0,-8(%ebp)
 
-    movl $2 , 4(%esp)
+    movl $2, 4(%esp)
 
     call potencia
 
     movl %eax,-4(%ebp)
 
-    movl -4(%esp) , %eax
+    movl -4(%esp), %eax
     movl %eax,4(%esp)
 
     call imprimir

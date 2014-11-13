@@ -1,8 +1,3 @@
-{PARAM, null, null, Result: [5]}
-5 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [0, 10.2]}
-10.2 , class ir.ast.FloatLiteral
-0 , class ir.ast.IntLiteral
 
     .comm res,4
 
@@ -15,7 +10,7 @@ inc:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl 8(%ebp) , %eax 
+    movl 8(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-8(%ebp) 
@@ -35,7 +30,7 @@ resto:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $3 , %eax 
+    movl $3, %eax 
     movl $2, %edx 
     imull %edx, %eax 
     movl %eax,-16(%ebp) 
@@ -51,8 +46,8 @@ resto:
 
     jne elseCondLabel7
 
-    movl 8(%ebp) , %eax 
-    movl $3 , %ecx
+    movl 8(%ebp), %eax 
+    movl $3, %ecx
 	 cltd
     idiv %ecx
     movl %ecx,-28(%ebp) 
@@ -66,7 +61,7 @@ resto:
 
     movl	-32(%ebp), %eax 
     cltd
-    idivl 8(%ebp)
+    idivl 0(%ebp)
     movl	%edx, -36(%ebp)
 
     movl -36(%ebp),%eax
@@ -90,13 +85,13 @@ main:
 
     movl $0,-4(%ebp)
 
-    movl $5 , 0(%esp)
+    movl $5, 0(%esp)
 
     call inc
 
     movl %eax,-4(%ebp)
 
-    movl $0 , 0(%esp)
+    movl $0, 0(%esp)
 
     call resto
 

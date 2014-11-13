@@ -1,7 +1,3 @@
-{PARAM, null, null, Result: [9]}
-9 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [VarLocation{name=factorLabel44, type=int, expr=MethodCallExpr{name=id, args=[9]}, size=0}]}
-VarLocation{name=factorLabel44, type=int, expr=MethodCallExpr{name=id, args=[9]}, size=0} , class ir.ast.VarLocation
 
 
     .text
@@ -78,8 +74,8 @@ id:
 
     jne elseCondLabel15
 
-    movl 8(%ebp) , %eax 
-    movl $1 , %edx 
+    movl 8(%ebp), %eax 
+    movl $1, %edx 
     subl %eax, %edx 
     movl %eax,-64(%ebp) 
 
@@ -90,7 +86,7 @@ id:
 
 .elseCondLabel15:
 
-    movl 8(%ebp) , %eax 
+    movl 8(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-72(%ebp) 
@@ -147,7 +143,7 @@ id:
 
     jne elseCondLabel27
 
-    movl 8(%ebp) , %eax 
+    movl 8(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-96(%ebp) 
@@ -170,27 +166,27 @@ id:
 
     jne elseCondLabel32
 
-    movl 8(%ebp) , %eax 
-    movl $1 , %edx 
+    movl 8(%ebp), %eax 
+    movl $1, %edx 
     subl %eax, %edx 
     movl %eax,-108(%ebp) 
 
-    movl -8(%ebp) , %eax 
-    movl 8(%ebp) , %edx 
+    movl -8(%ebp), %eax 
+    movl 8(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-112(%ebp) 
 
-    movl -8(%ebp) , %eax 
-    movl 8(%ebp) , %edx 
+    movl -8(%ebp), %eax 
+    movl 8(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-116(%ebp) 
 
-    movl -112(%ebp) , %eax 
-    movl -116(%ebp) , %edx 
+    movl -112(%ebp), %eax 
+    movl -116(%ebp), %edx 
     subl %eax, %edx 
     movl %eax,-120(%ebp) 
 
-    movl -108(%ebp) , %eax 
+    movl -108(%ebp), %eax 
     movl -120(%ebp), %edx 
     addl %eax, %edx 
     movl %edx,-124(%ebp) 
@@ -213,7 +209,7 @@ id:
     movl -12(%ebp),%eax
     movl %eax, 0(%ebp)
 
-    movl -8(%ebp) , %eax 
+    movl -8(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-132(%ebp) 
@@ -225,7 +221,7 @@ id:
 
 .EndWhileLabel5:
 
-    movl 8(%ebp), %eax
+    movl 0(%ebp), %eax
 
     leave
     ret
@@ -239,12 +235,13 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $9 , 0(%esp)
+    movl $9, 0(%esp)
 
     call id
 
-    movl -8(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl -8(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
     leave

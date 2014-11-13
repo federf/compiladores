@@ -1,7 +1,3 @@
-{PARAM, null, null, Result: [3]}
-3 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [VarLocation{name=factorLabel11, type=int, expr=MethodCallExpr{name=factorial, args=[3]}, size=0}]}
-VarLocation{name=factorLabel11, type=int, expr=MethodCallExpr{name=factorial, args=[3]}, size=0} , class ir.ast.VarLocation
 
 
     .text
@@ -30,16 +26,16 @@ factorial:
 
     jne EndWhileLabel5
 
-    movl -8(%ebp) , %eax 
-    movl -4(%ebp) , %edx 
+    movl -8(%ebp), %eax 
+    movl -4(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-24(%ebp) 
 
     movl -24(%ebp),%eax
     movl %eax, -8(%ebp)
 
-    movl -4(%ebp) , %eax 
-    movl $1 , %edx 
+    movl -4(%ebp), %eax 
+    movl $1, %edx 
     subl %eax, %edx 
     movl %eax,-32(%ebp) 
 
@@ -64,12 +60,13 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $3 , 0(%esp)
+    movl $3, 0(%esp)
 
     call factorial
 
-    movl -8(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl -8(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
     leave

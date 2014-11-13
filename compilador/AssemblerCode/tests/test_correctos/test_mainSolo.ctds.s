@@ -1,5 +1,3 @@
-{PARAM, null, null, Result: [VarLocation{name=c, type=boolean, expr=false, size=0}]}
-VarLocation{name=c, type=boolean, expr=false, size=0} , class ir.ast.VarLocation
 
 
     .text
@@ -53,8 +51,9 @@ main:
     movl -40(%ebp),%eax
     movl %eax, -12(%ebp)
 
-    movl -12(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl -12(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
     leave

@@ -1,11 +1,5 @@
 buscado: A
 actual VarLocation{name=A, type=int[], expr=null, size=5}
-{PARAM, null, null, Result: [4, 8]}
-8 , class ir.ast.IntLiteral
-4 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [StringLiteral{value="%d resultado : "}, VarLocation{name=factorLabel15, type=int, expr=MethodCallExpr{name=pruArreglos, args=[4, 8]}, size=0}]}
-VarLocation{name=factorLabel15, type=int, expr=MethodCallExpr{name=pruArreglos, args=[4, 8]}, size=0} , class ir.ast.VarLocation
-StringLiteral{value="%d resultado : "} , class ir.ast.StringLiteral
 
     .comm A,20
 
@@ -26,7 +20,7 @@ pruArreglos:
 
     movl -40(%ebp), %eax
 
-    movl -4(%ebp) , %eax 
+    movl -4(%ebp), %eax 
     movl $10, %edx 
     imull %edx, %eax 
     movl %eax,-32(%ebp) 
@@ -38,7 +32,7 @@ pruArreglos:
 
     jnl EndForLabel9
 
-    movl -4(%ebp) , %eax 
+    movl -4(%ebp), %eax 
     movl $2, %edx 
     addl %eax, %edx 
     movl %edx,-40(%ebp) 
@@ -67,12 +61,12 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $8 , 4(%esp)
-    movl $4 , 0(%esp)
+    movl $8, 4(%esp)
+    movl $4, 0(%esp)
 
     call pruArreglos
 
-    movl -12(%esp) , %eax
+    movl -12(%esp), %eax
     movl %eax,4(%esp)
 
     call imprimir

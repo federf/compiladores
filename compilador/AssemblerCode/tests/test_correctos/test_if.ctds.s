@@ -1,20 +1,4 @@
 Error: Method pruAritmetica must return int
-{PARAM, null, null, Result: [4, 8]}
-8 , class ir.ast.IntLiteral
-4 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [VarLocation{name=factorLabel14, type=int, expr=MethodCallExpr{name=pruAritmetica, args=[4, 8]}, size=0}]}
-VarLocation{name=factorLabel14, type=int, expr=MethodCallExpr{name=pruAritmetica, args=[4, 8]}, size=0} , class ir.ast.VarLocation
-{PARAM, null, null, Result: []}
-{PARAM, null, null, Result: [4, 4]}
-4 , class ir.ast.IntLiteral
-4 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [VarLocation{name=factorLabel20, type=int, expr=MethodCallExpr{name=pruAritmetica, args=[4, 4]}, size=0}]}
-VarLocation{name=factorLabel20, type=int, expr=MethodCallExpr{name=pruAritmetica, args=[4, 4]}, size=0} , class ir.ast.VarLocation
-{PARAM, null, null, Result: [8, 5]}
-5 , class ir.ast.IntLiteral
-8 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [VarLocation{name=factorLabel25, type=int, expr=MethodCallExpr{name=pruAritmetica, args=[8, 5]}, size=0}]}
-VarLocation{name=factorLabel25, type=int, expr=MethodCallExpr{name=pruAritmetica, args=[8, 5]}, size=0} , class ir.ast.VarLocation
 
 
     .text
@@ -36,8 +20,8 @@ pruAritmetica:
 
     jne elseCondLabel2
 
-    movl 8(%ebp) , %eax 
-    movl 12(%ebp) , %edx 
+    movl 8(%ebp), %eax 
+    movl 12(%ebp), %edx 
     subl %eax, %edx 
     movl %eax,-12(%ebp) 
 
@@ -61,7 +45,7 @@ pruAritmetica:
 
     jne elseCondLabel6
 
-    movl 8(%ebp) , %eax 
+    movl 8(%ebp), %eax 
     movl $5, %edx 
     imull %edx, %eax 
     movl %eax,-24(%ebp) 
@@ -73,8 +57,8 @@ pruAritmetica:
 
 .elseCondLabel6:
 
-    movl 12(%ebp) , %eax 
-    movl 8(%ebp) , %edx 
+    movl 12(%ebp), %eax 
+    movl 8(%ebp), %edx 
     subl %eax, %edx 
     movl %eax,-28(%ebp) 
 
@@ -95,34 +79,37 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $8 , 4(%esp)
-    movl $4 , 0(%esp)
+    movl $8, 4(%esp)
+    movl $4, 0(%esp)
 
     call pruAritmetica
 
-    movl -12(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl -12(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
 
     call imprimir
 
-    movl $4 , 4(%esp)
-    movl $4 , 0(%esp)
+    movl $4, 4(%esp)
+    movl $4, 0(%esp)
 
     call pruAritmetica
 
-    movl -24(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl -24(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
-    movl $5 , 4(%esp)
-    movl $8 , 0(%esp)
+    movl $5, 4(%esp)
+    movl $8, 0(%esp)
 
     call pruAritmetica
 
-    movl -36(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl -36(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
     leave

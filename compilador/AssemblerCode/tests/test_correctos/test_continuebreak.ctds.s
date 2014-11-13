@@ -1,8 +1,3 @@
-{PARAM, null, null, Result: [3.0, 2]}
-2 , class ir.ast.IntLiteral
-3.0 , class ir.ast.FloatLiteral
-{PARAM, null, null, Result: [VarLocation{name=factorLabel30, type=float, expr=MethodCallExpr{name=pruContinue, args=[3.0, 2]}, size=0}]}
-VarLocation{name=factorLabel30, type=float, expr=MethodCallExpr{name=pruContinue, args=[3.0, 2]}, size=0} , class ir.ast.VarLocation
 
 
     .text
@@ -37,8 +32,8 @@ pruContinue:
 
     jne EndWhileLabel8
 
-    movl -4(%ebp) , %eax 
-    movl $1 , %edx 
+    movl -4(%ebp), %eax 
+    movl $1, %edx 
     subl %eax, %edx 
     movl %eax,-44(%ebp) 
 
@@ -67,13 +62,13 @@ pruContinue:
 
     jne elseCondLabel16
 
-    movl -12(%ebp) , %eax 
-    movl 8(%ebp) , %edx 
+    movl -12(%ebp), %eax 
+    movl 8(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-60(%ebp) 
 
-    movl -60(%ebp) , %eax 
-    movl 12(%ebp) , %edx 
+    movl -60(%ebp), %eax 
+    movl 12(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-64(%ebp) 
 
@@ -96,7 +91,7 @@ pruContinue:
     negl	%eax 
     movl	%eax, -72(%ebp) 
 
-    movl -72(%ebp) , %eax 
+    movl -72(%ebp), %eax 
     movl $6752, %edx 
     addl %eax, %edx 
     movl %edx,-80(%ebp) 
@@ -116,8 +111,8 @@ pruContinue:
     negl	%eax 
     movl	%eax, -88(%ebp) 
 
-    movl -88(%ebp) , %eax 
-    movl -12(%ebp) , %edx 
+    movl -88(%ebp), %eax 
+    movl -12(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-92(%ebp) 
 
@@ -135,12 +130,13 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $2 , 4(%esp)
+    movl $2, 4(%esp)
 
     call pruContinue
 
-    movl -12(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl -12(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
     leave

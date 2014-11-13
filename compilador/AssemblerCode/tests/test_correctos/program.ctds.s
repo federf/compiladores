@@ -1,11 +1,3 @@
-{PARAM, null, null, Result: []}
-{PARAM, null, null, Result: [0]}
-0 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [StringLiteral{value="y==1\n"}]}
-StringLiteral{value="y==1\n"} , class ir.ast.StringLiteral
-{PARAM, null, null, Result: [StringLiteral{value="y==%d\n"}, VarLocation{name=y, type=int, expr=0, size=0}]}
-VarLocation{name=y, type=int, expr=0, size=0} , class ir.ast.VarLocation
-StringLiteral{value="y==%d\n"} , class ir.ast.StringLiteral
 
 
     .text
@@ -16,7 +8,7 @@ inc:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl 8(%ebp) , %eax 
+    movl 8(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-8(%ebp) 
@@ -40,7 +32,7 @@ main:
 
     movl %eax,-8(%ebp) 
 
-    movl $0 , 0(%esp)
+    movl $0, 0(%esp)
 
     call inc
 
@@ -64,7 +56,7 @@ main:
 
 .elseCondLabel9:
 
-    movl -4(%esp) , %eax
+    movl -4(%esp), %eax
     movl %eax,4(%esp)
 
     call imprimir

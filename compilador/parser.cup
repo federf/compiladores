@@ -39,7 +39,7 @@
     LinkedList<String> IfsStack;
 
     //int del ultimo offset leido
-    int ultOffsetLeido=0;
+    int ultOffsetLeido=-1;
     //nombre de la ultima variable buscada (vendria a ser la que tiene el ultimo offset leido)
     String ultVarLeida="";
 
@@ -1315,10 +1315,10 @@
 
     factor::=literal:l {: 
             //si se leyo algun offset, es decir, se busco una variable ya declarada
-            if(ultOffsetLeido!=0){
+            if(ultOffsetLeido!=-1){
                 VarLocation res=new VarLocation(ultVarLeida,l.getType(),l,0,ultOffsetLeido); 
                 RESULT = res;
-                ultOffsetLeido=0;
+                ultOffsetLeido=-1;
                 ultVarLeida="";
             }else{
                 VarLocation res;
@@ -1398,12 +1398,7 @@
                                 //calculamos su offset
                                 //cantidad de parametros del metodo
                                 int cantParams=ult_metodo.getParametros().size();
-                                
-                                if(paramIndex==0){
-                                    ultOffsetLeido=8;
-                                }else{
-                                    ultOffsetLeido=(((cantParams)-paramIndex)+2)*4;    
-                                }
+                                ultOffsetLeido=paramIndex*4;
                                 
                                 
                             }else{

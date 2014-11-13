@@ -1,8 +1,4 @@
 Error: Method pruebaLogica must return int
-{PARAM, null, null, Result: [false]}
-false , class ir.ast.BoolLiteral
-{PARAM, null, null, Result: [VarLocation{name=factorLabel11, type=int, expr=MethodCallExpr{name=pruebaLogica, args=[false]}, size=0}]}
-VarLocation{name=factorLabel11, type=int, expr=MethodCallExpr{name=pruebaLogica, args=[false]}, size=0} , class ir.ast.VarLocation
 
 
     .text
@@ -76,11 +72,12 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $0 , 0(%esp)
+    movl $0, 0(%esp)
     call pruebaLogica
 
-    movl -8(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl -8(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
     leave

@@ -1,9 +1,3 @@
-{PARAM, null, null, Result: [0]}
-0 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [0]}
-0 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [0]}
-0 , class ir.ast.IntLiteral
 
     .comm c,4
 
@@ -16,7 +10,7 @@ alo:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl 12(%ebp) , %eax 
+    movl 20(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-8(%ebp) 
@@ -37,11 +31,11 @@ alo2:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $0 , 0(%esp)
+    movl $0, 0(%esp)
 
     call alo
 
-    movl 8(%ebp) , %eax 
+    movl 8(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-8(%ebp) 
@@ -49,7 +43,7 @@ alo2:
     movl -8(%ebp),%eax
     movl %eax, 0(%ebp)
 
-    movl 8(%ebp), %eax
+    movl 0(%ebp), %eax
 
     leave
     ret
@@ -67,21 +61,21 @@ main:
 
     movl $8.0,-4(%ebp)
 
-    movl $0 , 0(%esp)
+    movl $0, 0(%esp)
 
     call alo2
 
     movl %eax,-4(%ebp)
 
-    movl $3 , %eax 
-    movl -4(%ebp) , %edx 
+    movl $3, %eax 
+    movl -4(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-28(%ebp) 
 
     movl -28(%ebp),%eax
     movl %eax, -8(%ebp)
 
-    movl $0 , 0(%esp)
+    movl $0, 0(%esp)
 
     call alo2
 

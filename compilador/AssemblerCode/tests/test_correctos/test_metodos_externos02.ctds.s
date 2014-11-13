@@ -1,11 +1,3 @@
-{PARAM, null, null, Result: [6, 9]}
-9 , class ir.ast.IntLiteral
-6 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [StringLiteral{value="%d%f"}, StringLiteral{value="mcd"}, VarLocation{name=factorLabel14, type=int, expr=MethodCallExpr{name=maxcomdiv, args=[6, 9]}, size=0}, VarLocation{name=MINUSLabel20, type=float, expr=VarLocation{name=MULTIPLYLabel16, type=float, expr=VarLocation{name=factorLabel15, type=float, expr=3.5, size=0}*VarLocation{name=a, type=int, expr=0, size=0}, size=0}-VarLocation{name=DIVIDELabel19, type=int, expr=VarLocation{name=factorLabel17, type=int, expr=7, size=0}/VarLocation{name=factorLabel18, type=int, expr=6, size=0}, size=0}, size=0}]}
-VarLocation{name=MINUSLabel20, type=float, expr=VarLocation{name=MULTIPLYLabel16, type=float, expr=VarLocation{name=factorLabel15, type=float, expr=3.5, size=0}*VarLocation{name=a, type=int, expr=0, size=0}, size=0}-VarLocation{name=DIVIDELabel19, type=int, expr=VarLocation{name=factorLabel17, type=int, expr=7, size=0}/VarLocation{name=factorLabel18, type=int, expr=6, size=0}, size=0}, size=0} , class ir.ast.VarLocation
-VarLocation{name=factorLabel14, type=int, expr=MethodCallExpr{name=maxcomdiv, args=[6, 9]}, size=0} , class ir.ast.VarLocation
-StringLiteral{value="mcd"} , class ir.ast.StringLiteral
-StringLiteral{value="%d%f"} , class ir.ast.StringLiteral
 
 
     .text
@@ -94,30 +86,30 @@ main:
 
     movl $10000,-4(%ebp)
 
-    movl $9 , 4(%esp)
-    movl $6 , 0(%esp)
+    movl $9, 4(%esp)
+    movl $6, 0(%esp)
 
     call maxcomdiv
 
-    movl $3.5 , %eax 
-    movl -4(%ebp) , %edx 
+    movl $3.5, %eax 
+    movl -4(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-28(%ebp) 
 
-    movl $7 , %eax 
-    movl $6 , %ecx
+    movl $7, %eax 
+    movl $6, %ecx
 	 cltd
     idiv %ecx
     movl %ecx,-40(%ebp) 
 
-    movl -28(%ebp) , %eax 
-    movl -40(%ebp) , %edx 
+    movl -28(%ebp), %eax 
+    movl -40(%ebp), %edx 
     subl %eax, %edx 
     movl %eax,-44(%ebp) 
 
-    movl -44(%esp) , %eax
+    movl -44(%esp), %eax
     movl %eax,12(%esp)
-    movl -20(%esp) , %eax
+    movl -20(%esp), %eax
     movl %eax,8(%esp)
 
     call imprimir

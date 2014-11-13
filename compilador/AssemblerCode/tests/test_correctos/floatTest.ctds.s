@@ -1,21 +1,3 @@
-{PARAM, null, null, Result: [0.0, 0.0]}
-0.0 , class ir.ast.FloatLiteral
-0.0 , class ir.ast.FloatLiteral
-{PARAM, null, null, Result: [0.0, 0.0]}
-0.0 , class ir.ast.FloatLiteral
-0.0 , class ir.ast.FloatLiteral
-{PARAM, null, null, Result: [-VarLocation{name=y, type=float, expr=0.0, size=0}, 0.0]}
-0.0 , class ir.ast.FloatLiteral
--VarLocation{name=y, type=float, expr=0.0, size=0} , class ir.ast.UnaryOpExpr
-{PARAM, null, null, Result: [0.0, 0.0]}
-0.0 , class ir.ast.FloatLiteral
-0.0 , class ir.ast.FloatLiteral
-{PARAM, null, null, Result: [0.0, 0.0]}
-0.0 , class ir.ast.FloatLiteral
-0.0 , class ir.ast.FloatLiteral
-{PARAM, null, null, Result: [StringLiteral{value="anidandoFloatTest"}, VarLocation{name=factorLabel20, type=float, expr=MethodCallExpr{name=sum, args=[0.0, 0.0]}, size=0}]}
-VarLocation{name=factorLabel20, type=float, expr=MethodCallExpr{name=sum, args=[0.0, 0.0]}, size=0} , class ir.ast.VarLocation
-StringLiteral{value="anidandoFloatTest"} , class ir.ast.StringLiteral
 
 
     .text
@@ -26,8 +8,8 @@ div:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl 8(%ebp) , %eax 
-    movl 12(%ebp) , %ecx
+    movl 8(%ebp), %eax 
+    movl 12(%ebp), %ecx
 	 cltd
     idiv %ecx
     movl %ecx,-4(%ebp) 
@@ -47,8 +29,8 @@ resta:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl 8(%ebp) , %eax 
-    movl 12(%ebp) , %edx 
+    movl 8(%ebp), %eax 
+    movl 12(%ebp), %edx 
     subl %eax, %edx 
     movl %eax,-4(%ebp) 
 
@@ -67,7 +49,7 @@ sum:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl 8(%ebp) , %eax 
+    movl 8(%ebp), %eax 
     movl 12(%ebp), %edx 
     addl %eax, %edx 
     movl %edx,-4(%ebp) 
@@ -87,8 +69,8 @@ mult:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl 8(%ebp) , %eax 
-    movl 12(%ebp) , %edx 
+    movl 8(%ebp), %eax 
+    movl 12(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-4(%ebp) 
 
@@ -149,7 +131,7 @@ main:
 
     call sum
 
-    movl -72(%esp) , %eax
+    movl -72(%esp), %eax
     movl %eax,4(%esp)
 
     call imprimir

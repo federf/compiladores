@@ -1,8 +1,3 @@
-{PARAM, null, null, Result: [4, 9]}
-9 , class ir.ast.IntLiteral
-4 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [VarLocation{name=factorLabel16, type=int, expr=MethodCallExpr{name=suma, args=[4, 9]}, size=0}]}
-VarLocation{name=factorLabel16, type=int, expr=MethodCallExpr{name=suma, args=[4, 9]}, size=0} , class ir.ast.VarLocation
 
 
     .text
@@ -24,7 +19,7 @@ suma:
 
     jne elseCondLabel3
 
-    movl 12(%ebp), %eax
+    movl 4(%ebp), %eax
 
     jmp endIfLabel4
 
@@ -41,13 +36,13 @@ suma:
 
     jne elseCondLabel7
 
-    movl 8(%ebp), %eax
+    movl 0(%ebp), %eax
 
     jmp endIfLabel8
 
 .elseCondLabel7:
 
-    movl 8(%ebp) , %eax 
+    movl 8(%ebp), %eax 
     movl 12(%ebp), %edx 
     addl %eax, %edx 
     movl %edx,-20(%ebp) 
@@ -80,13 +75,14 @@ main:
     movl -4(%ebp), %eax
     addl %eax, -8(%ebp)
 
-    movl $9 , 4(%esp)
-    movl $4 , 0(%esp)
+    movl $9, 4(%esp)
+    movl $4, 0(%esp)
 
     call suma
 
-    movl -32(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl -32(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
     leave

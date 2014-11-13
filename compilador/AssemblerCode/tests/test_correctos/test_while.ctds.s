@@ -1,9 +1,3 @@
-{PARAM, null, null, Result: [6, 9]}
-9 , class ir.ast.IntLiteral
-6 , class ir.ast.IntLiteral
-{PARAM, null, null, Result: [StringLiteral{value="%dMcd"}, VarLocation{name=factorLabel18, type=int, expr=MethodCallExpr{name=maxcomdiv, args=[6, 9]}, size=0}]}
-VarLocation{name=factorLabel18, type=int, expr=MethodCallExpr{name=maxcomdiv, args=[6, 9]}, size=0} , class ir.ast.VarLocation
-StringLiteral{value="%dMcd"} , class ir.ast.StringLiteral
 
 
     .text
@@ -96,12 +90,12 @@ main:
     pushl	%ebp
     movl %esp, %ebp
 
-    movl $9 , 4(%esp)
-    movl $6 , 0(%esp)
+    movl $9, 4(%esp)
+    movl $6, 0(%esp)
 
     call maxcomdiv
 
-    movl -12(%esp) , %eax
+    movl -12(%esp), %eax
     movl %eax,4(%esp)
 
     call imprimir

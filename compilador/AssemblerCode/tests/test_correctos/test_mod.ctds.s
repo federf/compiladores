@@ -1,5 +1,3 @@
-{PARAM, null, null, Result: [VarLocation{name=factorLabel5, type=int, expr=MethodCallExpr{name=pruAritmetica, args=[]}, size=0}]}
-VarLocation{name=factorLabel5, type=int, expr=MethodCallExpr{name=pruAritmetica, args=[]}, size=0} , class ir.ast.VarLocation
 
 
     .text
@@ -32,8 +30,9 @@ main:
 
     call pruAritmetica
 
-    movl -4(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl -4(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
     leave

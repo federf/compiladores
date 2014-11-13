@@ -1,15 +1,3 @@
-{PARAM, null, null, Result: [false]}
-false , class ir.ast.BoolLiteral
-{PARAM, null, null, Result: [false, false]}
-false , class ir.ast.BoolLiteral
-false , class ir.ast.BoolLiteral
-{PARAM, null, null, Result: [false]}
-false , class ir.ast.BoolLiteral
-{PARAM, null, null, Result: [false, false]}
-false , class ir.ast.BoolLiteral
-false , class ir.ast.BoolLiteral
-{PARAM, null, null, Result: [VarLocation{name=e, type=boolean, expr=false, size=0}]}
-VarLocation{name=e, type=boolean, expr=false, size=0} , class ir.ast.VarLocation
 
 
     .text
@@ -99,28 +87,29 @@ main:
 
     movl $0,-8(%ebp)
 
-    movl $0 , 0(%esp)
+    movl $0, 0(%esp)
     call neg
 
     movl %eax,-8(%ebp)
 
-    movl $0 , 4(%esp)    movl $0 , 0(%esp)
+    movl $0, 4(%esp)    movl $0, 0(%esp)
     call and
 
     movl %eax,-12(%ebp)
 
-    movl $0 , 0(%esp)
+    movl $0, 0(%esp)
     call neg
 
     movl %eax,-16(%ebp)
 
-    movl $0 , 4(%esp)    movl $0 , 0(%esp)
+    movl $0, 4(%esp)    movl $0, 0(%esp)
     call or
 
     movl %eax,-20(%ebp)
 
-    movl -20(%esp) , %eax
-    movl %eax, 0(%esp)
+    movl -20(%esp), %eax
+    movl %eax,0(%esp)
+
     call imprimir
 
     leave

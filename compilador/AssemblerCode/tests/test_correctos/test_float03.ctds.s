@@ -1,12 +1,3 @@
-{PARAM, null, null, Result: [0.0, 2]}
-2 , class ir.ast.IntLiteral
-0.0 , class ir.ast.FloatLiteral
-{PARAM, null, null, Result: [0.0, VarLocation{name=f, type=float, expr=0.0, size=0}+VarLocation{name=factorLabel109, type=float, expr=2.0, size=0}]}
-VarLocation{name=f, type=float, expr=0.0, size=0}+VarLocation{name=factorLabel109, type=float, expr=2.0, size=0} , class ir.ast.BinOpExpr
-0.0 , class ir.ast.FloatLiteral
-{PARAM, null, null, Result: [StringLiteral{value="%f"}, VarLocation{name=factorLabel112, type=float, expr=MethodCallExpr{name=multiples, args=[0.0, VarLocation{name=f, type=float, expr=0.0, size=0}+VarLocation{name=factorLabel109, type=float, expr=2.0, size=0}]}, size=0}]}
-VarLocation{name=factorLabel112, type=float, expr=MethodCallExpr{name=multiples, args=[0.0, VarLocation{name=f, type=float, expr=0.0, size=0}+VarLocation{name=factorLabel109, type=float, expr=2.0, size=0}]}, size=0} , class ir.ast.VarLocation
-StringLiteral{value="%f"} , class ir.ast.StringLiteral
 
     .comm w,4
 
@@ -87,12 +78,12 @@ potencia:
 
     jne EndWhileLabel14
 
-    movl -12(%ebp) , %eax 
-    movl 8(%ebp) , %edx 
+    movl -12(%ebp), %eax 
+    movl 8(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-56(%ebp) 
 
-    movl -56(%ebp) , %eax 
+    movl -56(%ebp), %eax 
     movl $2, %edx 
     imull %edx, %eax 
     movl %eax,-64(%ebp) 
@@ -100,7 +91,7 @@ potencia:
     movl -64(%ebp),%eax
     movl %eax, -12(%ebp)
 
-    movl -4(%ebp) , %eax 
+    movl -4(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-72(%ebp) 
@@ -127,8 +118,8 @@ potencia:
 
     jne elseCondLabel22
 
-    movl $1.0 , %eax 
-    movl -12(%ebp) , %ecx
+    movl $1.0, %eax 
+    movl -12(%ebp), %ecx
 	 cltd
     idiv %ecx
     movl %ecx,-88(%ebp) 
@@ -190,13 +181,13 @@ multiples:
     movl -72(%ebp),%eax
     movl %eax, -8(%ebp)
 
-    movl -4(%ebp) , %eax 
-    movl -8(%ebp) , %edx 
+    movl -4(%ebp), %eax 
+    movl -8(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-76(%ebp) 
 
-    movl -76(%ebp) , %eax 
-    movl -16(%ebp) , %edx 
+    movl -76(%ebp), %eax 
+    movl -16(%ebp), %edx 
     subl %eax, %edx 
     movl %eax,-80(%ebp) 
 
@@ -318,7 +309,7 @@ multiples:
 
     jne elseCondLabel61
 
-    movl -24(%ebp) , %eax 
+    movl -24(%ebp), %eax 
     movl $2.0, %edx 
     addl %eax, %edx 
     movl %edx,-140(%ebp) 
@@ -330,14 +321,14 @@ multiples:
 
 .elseCondLabel61:
 
-    movl $10.0 , %eax 
-    movl $2.0 , %ecx
+    movl $10.0, %eax 
+    movl $2.0, %ecx
 	 cltd
     idiv %ecx
     movl %ecx,-152(%ebp) 
 
-    movl -24(%ebp) , %eax 
-    movl -152(%ebp) , %edx 
+    movl -24(%ebp), %eax 
+    movl -152(%ebp), %edx 
     subl %eax, %edx 
     movl %eax,-156(%ebp) 
 
@@ -383,8 +374,8 @@ multiples:
 
     jne elseCondLabel74
 
-    movl $4.0 , %eax 
-    movl -24(%ebp) , %edx 
+    movl $4.0, %eax 
+    movl -24(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-188(%ebp) 
 
@@ -393,8 +384,8 @@ multiples:
     addl %eax, %edx 
     movl %edx,-192(%ebp) 
 
-    movl -192(%ebp) , %eax 
-    movl $498.0 , %edx 
+    movl -192(%ebp), %eax 
+    movl $498.0, %edx 
     subl %eax, %edx 
     movl %eax,-200(%ebp) 
 
@@ -406,12 +397,12 @@ multiples:
 .elseCondLabel74:
 
     movl $3.2, %eax 
-    movl -24(%ebp) , %edx 
+    movl -24(%ebp), %edx 
     subl %eax, %edx 
     movl %eax,-208(%ebp) 
 
-    movl -208(%ebp) , %eax 
-    movl $12345.356 , %edx 
+    movl -208(%ebp), %eax 
+    movl $12345.356, %edx 
     subl %eax, %edx 
     movl %eax,-216(%ebp) 
 
@@ -420,7 +411,7 @@ multiples:
 
 .endIfLabel75:
 
-    movl -32(%ebp) , %eax 
+    movl -32(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-224(%ebp) 
@@ -436,28 +427,28 @@ multiples:
     negl	%eax 
     movl	%eax, -228(%ebp) 
 
-    movl -24(%ebp) , %eax 
-    movl -228(%ebp) , %edx 
+    movl -24(%ebp), %eax 
+    movl -228(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-232(%ebp) 
 
-    movl $23.0 , %eax 
-    movl 12(%ebp) , %edx 
+    movl $23.0, %eax 
+    movl 12(%ebp), %edx 
     imull %edx, %eax 
     movl %eax,-240(%ebp) 
 
-    movl -232(%ebp) , %eax 
+    movl -232(%ebp), %eax 
     movl -240(%ebp), %edx 
     addl %eax, %edx 
     movl %edx,-244(%ebp) 
 
-    movl $2.0 , %eax 
-    movl $4.0 , %ecx
+    movl $2.0, %eax 
+    movl $4.0, %ecx
 	 cltd
     idiv %ecx
     movl %ecx,-256(%ebp) 
 
-    movl -244(%ebp) , %eax 
+    movl -244(%ebp), %eax 
     movl -256(%ebp), %edx 
     addl %eax, %edx 
     movl %edx,-260(%ebp) 
@@ -465,7 +456,7 @@ multiples:
     movl -260(%ebp),%eax
     movl %eax, -24(%ebp)
 
-    movl -28(%ebp) , %eax 
+    movl -28(%ebp), %eax 
     movl $1, %edx 
     addl %eax, %edx 
     movl %edx,-268(%ebp) 
@@ -515,13 +506,13 @@ main:
     movl -32(%ebp),%eax
     movl %eax, -20(%ebp)
 
-    movl $2 , 4(%esp)
+    movl $2, 4(%esp)
 
     call potencia
 
     movl %eax,-4(%ebp)
 
-    movl -4(%ebp) , %eax 
+    movl -4(%ebp), %eax 
     movl $2.0, %edx 
     addl %eax, %edx 
     movl %edx,-48(%ebp) 
@@ -529,7 +520,7 @@ main:
 
     call multiples
 
-    movl -52(%esp) , %eax
+    movl -52(%esp), %eax
     movl %eax,4(%esp)
 
     call imprimir
