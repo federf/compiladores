@@ -1,5 +1,3 @@
-buscado: A
-actual VarLocation{name=A, type=int[], expr=null, size=5}
 
     .comm A,20
 

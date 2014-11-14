@@ -823,9 +823,9 @@ public class AssemblyCodeGenerator{
         	//obtenemos sus offset y con el mismo trabajamos
         	int resOffSet=res.getOffset();
         	if (op.toString().equals("true")){//por convencion tomaremos 1 como true y 0 como false
-        		result += "    cmpl $0, " + 1 + "(%ebp) \n";	//CORREGIR°!!!!!
+        		result += "    cmpl $0, " + 1 + " \n";
         	}else{
-        		result += "    cmpl $0, " + 0 + "(%ebp) \n";
+        		result += "    cmpl $0, " + 0 + " \n";
         	}
 	        
 			result += "    sete	%al \n";
@@ -1081,9 +1081,8 @@ public class AssemblyCodeGenerator{
 								ArrayLiteral arr=(ArrayLiteral) t.getFirstDir();
 								//buscamos el offset de la declaracion del arreglo
 								VarLocation v=res.search(arr.getId());
-								//System.outprintln("{ASSIGN} ArrayLiteral expr: "+arr.getIndex()+", "+arr.getIndex().getClass());
 								int index=evaluateExpression(arr.getIndex().getExpr().toString());
-								//System.outprintln("expr evaluada: "+index);
+								
 								result=result+"    movl " +(v.getOffset()-((v.getSize()-index)*4))+ "(%ebp), %eax\n";
 								result=result+"    movl %eax,"+res.getOffset()+"(%ebp)\n";
 							}else{//sino
@@ -1280,13 +1279,8 @@ public class AssemblyCodeGenerator{
 	    		//si el parametro es una VarLocation obtenemos su offset
 	    		if(params.get(i) instanceof VarLocation){
 	    			VarLocation v=(VarLocation) params.get(i);
-	    			//if(i!=0){
-	    				result+="    movl "+v.getOffset()+"(%esp), %eax\n";		
-	    				result+="    movl %eax,"+(i*4)+"(%esp)\n";
-	    			/*}else{
-	    				result+="    movl "+v.getOffset()+"(%esp), %eax\n";	
-	    				result+="    movl %eax, 0(%esp)";
-	    			}*/
+	    			result+="    movl "+v.getOffset()+"(%esp), %eax\n";		
+	    			result+="    movl %eax,"+(i*4)+"(%esp)\n";
 	    			
 	    		}else{//sino, debe ser un Literal o una llamada a metodo
 	    			//si no es una llamada a metodo (deberia ser un literal entonces)
@@ -1294,33 +1288,18 @@ public class AssemblyCodeGenerator{
 	    				//caso IntLiteral
 	    				if(params.get(i) instanceof IntLiteral){
 	    					IntLiteral p=(IntLiteral) params.get(i);
-	   
-	    					//if(i!=0){
-	    						result+="    movl $"+evaluateExpression(p.toString())+", "+(i*4)+"(%esp)\n";	
-	    					/*}else{
-	    						result+="    movl $"+evaluateExpression(p.toString())+", 0(%esp)\n";	
-	    					}*/
+	    					result+="    movl $"+evaluateExpression(p.toString())+", "+(i*4)+"(%esp)\n";
 	    					
 	    				}else{
 	    					//caso BoolLiteral
 		    				if(params.get(i) instanceof BoolLiteral){
 		   
 		    					BoolLiteral p=(BoolLiteral) params.get(i);
-		    					//if(i!=0){
-		    						if(p.getValue()){
-		    							result+="    movl $1, "+(i*4)+"(%esp)";		
-		    						}else{
-		    							result+="    movl $0, "+(i*4)+"(%esp)";	
-		    						}
-		    						
-		    					/*}else{
-		    						if(p.getValue()){
-		    							result+="    movl $"+1+", 0(%esp)";	
-		    						}else{
-		    							result+="    movl $"+0+", 0(%esp)";
-		    						}
-		    						
-		    					}*/
+	    						if(p.getValue()){
+	    							result+="    movl $1, "+(i*4)+"(%esp)";		
+	    						}else{
+	    							result+="    movl $0, "+(i*4)+"(%esp)";	
+	    						}
 		    					
 		    				}else{
 		    					//caso FloatLiteral
@@ -1336,13 +1315,9 @@ public class AssemblyCodeGenerator{
 		    							//si es una binaria entre enteros
 		    							if(firstOp.getType().equals(Type.INT) && secOp.getType().equals(Type.INT)){
 		    								//la evaluamos
-		    								//System.outprintln("{PARAMS} expr: "+b.toString());
+		    								
 		    								int opValue=evaluateExpression(b.toString());
-		    								//if(i!=0){
-					    						result+="    movl $"+opValue+", "+(i*4)+"(%esp)";	
-					    					/*}else{
-					    						result+="    movl $"+opValue+", (%esp)";
-					    					}*/
+					    					result+="    movl $"+opValue+", "+(i*4)+"(%esp)";	
 		    							}
 		    						}else{
 		    							//si es una operacion binaria
@@ -1351,11 +1326,7 @@ public class AssemblyCodeGenerator{
 		    								UnaryOpExpr uop=(UnaryOpExpr)params.get(i);
 											if(uop.getType().equals(Type.INT)){
 												int opValue=evaluateExpression(uop.toString());
-												//if(i!=0){
-						    						result+="    movl $"+opValue+", "+(i*4)+"(%esp)";	
-						    					/*}else{
-						    						result+="    movl $"+opValue+", (%esp)";
-						    					}*/
+						    					result+="    movl $"+opValue+", "+(i*4)+"(%esp)";	
 											}else{
 												//System.outprintln("{PARAM} FALTA CASO UnaryOpExpr "+uop.getType());		
 											}				
@@ -1463,8 +1434,6 @@ public class AssemblyCodeGenerator{
 	public String generate(LinkedList<TripletCode> list){
 		OrAndlabelInt=0;
 		for(TripletCode t: list){
-			//System.outprintln("");
-			//System.outprintln("procesando: "+t);
 			switch(t.getOperator()){
 				
 				case PLUS:
@@ -1562,9 +1531,9 @@ public class AssemblyCodeGenerator{
 									//buscamos el offset en que se declaro
 									VarLocation res=v.search(arr.getId());
 									if(res!=null){
-										//System.outprintln("{RETURN} ArrayLiteral expr: "+arr.getIndex()+", "+arr.getIndex().getClass());
+										
 										int index=evaluateExpression(arr.getIndex().getExpr().toString());
-										//System.outprintln("expr evaluada: "+index);
+										
 										offset=(res.getOffset()-((res.getSize()-index)*4));
 										result += "    movl " + offset + "(%ebp), %eax\n";
 									}else{	
@@ -1649,12 +1618,11 @@ public class AssemblyCodeGenerator{
 			   				result+="    .comm "+t.getSecondDir()+","+(4*y)+"\n";
 			   			}	   			
 		   			}else{
-		   				//System.outprintln("{GLOBAL} "+t);
+		   				
 		   				//System.outprintln("{GLOBAL} FALTA CASO "+t.getResult().getClass());
 		   			}
 		   			break;
 			}
-			//System.outprintln("finalizado");
 		}
 		return result;
 	}

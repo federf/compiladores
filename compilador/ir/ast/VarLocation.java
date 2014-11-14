@@ -141,9 +141,7 @@ public class VarLocation extends Location {
 
     //metodo que dado el nombre de una varlocation busca su declaracion
     public VarLocation search(String id){
-        System.out.println("buscado: "+id);
         for(VarLocation v : vars){
-            System.out.println("actual "+v);
             //si el id es el mismo y es una definicion
             if(v.getId().equals(id) && v.getExpr()==null){
                 return v;
